@@ -41,6 +41,10 @@ android {
     }
 
     defaultConfig {
+<<<<<<< HEAD
+=======
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+>>>>>>> e6aaf95 (set up multiple flavor for iOS)
         applicationId "com.axonivy"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.

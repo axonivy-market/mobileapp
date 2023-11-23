@@ -499,7 +499,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy.dev;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy;
+>>>>>>> e6aaf95 (set up multiple flavor for iOS)
 				PRODUCT_MODULE_NAME = "Axon Ivy Dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -597,7 +601,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy.dev;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy;
+>>>>>>> e6aaf95 (set up multiple flavor for iOS)
 				PRODUCT_MODULE_NAME = "Axon Ivy Dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -690,7 +698,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy.dev;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy;
+>>>>>>> e6aaf95 (set up multiple flavor for iOS)
 				PRODUCT_MODULE_NAME = "Axon Ivy Dev";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -841,7 +853,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy.prod;
+>>>>>>> e6aaf95 (set up multiple flavor for iOS)
 				PRODUCT_MODULE_NAME = "Axon Ivy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -869,7 +885,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.axonivy.prod;
+>>>>>>> e6aaf95 (set up multiple flavor for iOS)
 				PRODUCT_MODULE_NAME = "Axon Ivy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
