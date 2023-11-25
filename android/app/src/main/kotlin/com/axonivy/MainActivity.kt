@@ -1,4 +1,4 @@
-package com.example.axon_ivy
+package com.axonivy
 
 import io.flutter.embedding.android.FlutterActivity
 
