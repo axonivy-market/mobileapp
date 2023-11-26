@@ -14,7 +14,7 @@
         "type": "dart",
         "program": "lib/main.dart",
         "args": ["--flavor", "Prod", "--target", "lib/main.dart" ]
-      },
+      }
     ],
     "compounds": []
   }
