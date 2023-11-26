@@ -14,10 +14,10 @@ dependencies:
 
   # For Architecture
   bloc: ^8.1.1
-  flutter_bloc: ^8.1.2
 
   # For Networking
   dio: ^5.3.4
+  connectivity_plus: ^5.0.2
 
   # For Assets
   google_fonts: ^6.1.0
