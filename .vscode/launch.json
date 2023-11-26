@@ -2,7 +2,7 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": " Dev",
+        "name": "Dev",
         "request": "launch",
         "type": "dart",
         "program": "lib/main_dev.dart",
@@ -14,7 +14,7 @@
         "type": "dart",
         "program": "lib/main.dart",
         "args": ["--flavor", "Prod", "--target", "lib/main.dart" ]
-      }
+      },
     ],
     "compounds": []
   }
