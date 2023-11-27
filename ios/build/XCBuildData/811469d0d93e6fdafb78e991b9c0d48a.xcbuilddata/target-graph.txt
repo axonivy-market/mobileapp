@@ -1,4 +1,0 @@
-Target dependency graph (2 targets)
-Target 'RunnerTests' in project 'Runner'
-➜ Explicit dependency on target 'Runner' in project 'Runner'
-Target 'Runner' in project 'Runner' (no dependencies)

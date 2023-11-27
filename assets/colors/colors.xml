@@ -1,0 +1,25 @@
+<!-- Using link blow to naming color -->
+<!-- https://colornamer.robertcooper.me/ -->
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- LIGHT -->
+    <color name="WHITE">#FFFFFF</color>
+    <color name="BABY TALK GREY">#BABABA</color>
+    <color name="ARGENT">#888888</color>
+    <color name="TROLLEY GREY">#828282</color>
+    <color name="WELDED IRON">#6E6E6E</color>
+
+    <!-- DARK -->
+    <color name="BLACK">#000000</color>
+    <color name="EERIE BLACK">#1B1B1B</color>
+    <color name="LEAD">#202020</color>
+    <color name="SHOE WAX">#2C2C2C</color>
+
+    <!-- HIGHLIGHT-->
+    <color name="BLUE RIBBON">#0065FF</color>
+    <color name="MIMESIA BLUE">#2968C7</color>
+
+    <color name="SALMON">#FF796F</color>
+</resources>
+
+

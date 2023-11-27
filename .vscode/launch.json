@@ -2,14 +2,14 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": " iOS Dev",
+        "name": "Dev",
         "request": "launch",
         "type": "dart",
         "program": "lib/main_dev.dart",
         "args": ["--flavor", "dev", "--target", "lib/main_dev.dart" ]
       },
       {
-        "name": " iOS Prod",
+        "name": "Prod",
         "request": "launch",
         "type": "dart",
         "program": "lib/main.dart",
