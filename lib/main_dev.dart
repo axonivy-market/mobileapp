@@ -1,92 +1,37 @@
-import 'dart:async';
-import 'dart:developer' as developer;
-
-import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:axon_ivy/presentation/util/resources/routes_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+  final appRouter = AppRouter();
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [Locale('en')],
+      path: 'assets/translations',
+      startLocale: const Locale('en'),
+      fallbackLocale: const Locale('en'),
+      child: MyApp(
+        appRouter: appRouter,
+      ),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
+  const MyApp({super.key, required this.appRouter});
+  final AppRouter appRouter;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
+    final appRouter = AppRouter();
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: appRouter.router,
       theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
-        colorSchemeSeed: const Color(0x9f4376f8),
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  ConnectivityResult _connectionStatus = ConnectivityResult.none;
-  final Connectivity _connectivity = Connectivity();
-  late StreamSubscription<ConnectivityResult> _connectivitySubscription;
-
-  @override
-  void initState() {
-    super.initState();
-    initConnectivity();
-
-    _connectivitySubscription =
-        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
-  }
-
-  @override
-  void dispose() {
-    _connectivitySubscription.cancel();
-    super.dispose();
-  }
-
-  // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> initConnectivity() async {
-    late ConnectivityResult result;
-    // Platform messages may fail, so we use a try/catch PlatformException.
-    try {
-      result = await _connectivity.checkConnectivity();
-    } on PlatformException catch (e) {
-      developer.log('Couldn\'t check connectivity status', error: e);
-      return;
-    }
-    if (!mounted) {
-      return Future.value(null);
-    }
-
-    return _updateConnectionStatus(result);
-  }
-
-  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
-    setState(() {
-      _connectionStatus = result;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Connectivity example app'),
-        elevation: 4,
-      ),
-      body: Center(
-          child: Text('Connection Status: ${_connectionStatus.toString()}')),
     );
   }
 }
