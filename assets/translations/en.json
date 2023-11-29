@@ -1,9 +1,9 @@
 {
     "BottomTabBar": {
-      "Task": "Tasks",
+      "Tasks": "Tasks",
       "Processes": "Processes",
       "Search": "Search",
-      "Settings": "Settings"
+      "Profile": "Profile"
     }
   }
   

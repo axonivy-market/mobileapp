@@ -1,6 +1,6 @@
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/search/view/search_view.dart';
-import 'package:axon_ivy/presentation/setting/view/settings_view.dart';
+import 'package:axon_ivy/presentation/profile/view/profile_view.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -35,9 +35,9 @@ class AppRouter {
             pageBuilder: (_, __) => const NoTransitionPage(child: SearchView()),
           ),
           GoRoute(
-            path: '/settings',
+            path: '/profile',
             pageBuilder: (context, state) =>
-                const NoTransitionPage(child: SettingsView()),
+                const NoTransitionPage(child: ProfileView()),
           )
         ],
       )

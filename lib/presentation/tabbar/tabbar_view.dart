@@ -30,13 +30,13 @@ class _TabBarScreenState extends State<TabBarScreen> {
     BottomBarTabItem(
       initialLocation: '/task',
       icon: AppAssets.icons.taskBottomBar.svg(
-          height: 15,
+          height: 20,
           colorFilter: const ColorFilter.mode(
             AppColors.babyTalkGrey,
             BlendMode.srcIn,
           )),
       activeIcon: AppAssets.icons.taskBottomBar.svg(
-        height: 15,
+        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.blueRibbon,
           BlendMode.srcIn,
@@ -46,9 +46,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: '/processes',
-      icon: AppAssets.icons.processBottomBar.svg(height: 15),
+      icon: AppAssets.icons.processBottomBar.svg(
+        height: 20,
+      ),
       activeIcon: AppAssets.icons.processBottomBar.svg(
-        height: 15,
+        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.blueRibbon,
           BlendMode.srcIn,
@@ -58,9 +60,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: '/search',
-      icon: AppAssets.icons.searchBottomBar.svg(height: 15),
+      icon: AppAssets.icons.searchBottomBar.svg(
+        height: 20,
+      ),
       activeIcon: AppAssets.icons.searchBottomBar.svg(
-        height: 15,
+        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.blueRibbon,
           BlendMode.srcIn,
@@ -69,16 +73,18 @@ class _TabBarScreenState extends State<TabBarScreen> {
       label: tr('Search'),
     ),
     BottomBarTabItem(
-      initialLocation: '/settings',
-      icon: AppAssets.icons.settingBottomBar.svg(height: 15),
+      initialLocation: '/profile',
+      icon: AppAssets.icons.settingBottomBar.svg(
+        height: 20,
+      ),
       activeIcon: AppAssets.icons.settingBottomBar.svg(
-        height: 15,
+        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.blueRibbon,
           BlendMode.srcIn,
         ),
       ),
-      label: tr('Settings'),
+      label: tr('Profile'),
     )
   ];
 

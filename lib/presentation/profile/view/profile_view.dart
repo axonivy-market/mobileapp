@@ -2,8 +2,8 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:flutter/material.dart';
 
-class ProcessesView extends StatelessWidget {
-  const ProcessesView({super.key});
+class ProfileView extends StatelessWidget {
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class ProcessesView extends StatelessWidget {
           const Expanded(
             child: Center(
               child: Text(
-                "Processes View",
+                "Profile View",
                 style: TextStyle(fontSize: 30),
               ),
             ),
