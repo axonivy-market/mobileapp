@@ -33,6 +33,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   easy_localization: ^3.0.3
   device_preview: ^1.1.0
+  webview_flutter: ^4.4.2
 
 dev_dependencies:
   flutter_test:
