@@ -10,8 +10,8 @@
 import 'package:flutter/painting.dart';
 import 'package:flutter/material.dart';
 
-class ColorName {
-  ColorName._();
+class AppColors {
+  AppColors._();
 
   /// Color: #888888
   static const Color argent = Color(0xFF888888);
