@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Build IOS App
+      - name: Build iOS App
         uses: yukiarrr/ios-build-action@v1.11.0
         with:
           project-path: ios/Runner.xcodeproj
@@ -29,3 +29,4 @@ jobs:
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           workspace-path: ios/Runner.xcworkspace
           scheme: Dev
+          configuration: Release-Dev
