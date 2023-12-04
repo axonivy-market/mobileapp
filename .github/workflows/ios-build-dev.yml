@@ -1,0 +1,32 @@
+name: Build iOS Develop
+
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: macOS-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.9'
+          channel: 'stable'
+          cache: true
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build iOS App
+        uses: yukiarrr/ios-build-action@v1.11.0
+        with:
+          project-path: ios/Runner.xcodeproj
+          code-signing-identity: 'iPhone Distribution'
+          p12-base64: ${{ secrets.IOS_P12_BASE64 }}
+          mobileprovision-base64: ${{ secrets.IOS_MOBILE_PROVISION_BASE64 }}
+          export-method: app-store
+          team-id: ${{ secrets.IOS_TEAM_ID }}
+          certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
+          workspace-path: ios/Runner.xcworkspace
+          scheme: Dev
+          configuration: Release-Dev

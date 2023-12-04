@@ -2,6 +2,8 @@ import 'package:axon_ivy/presentation/util/resources/routes_manager.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
 }
 
