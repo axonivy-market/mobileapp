@@ -1,4 +1,4 @@
-name: Build Android Develop
+name: Build & Deploy Android Development to Google Play store
 
 on:
   workflow_dispatch:

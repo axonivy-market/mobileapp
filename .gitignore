@@ -63,6 +63,7 @@ flutter_*.png
 linked_*.ds
 unlinked.ds
 unlinked_spec.ds
+lib/core/generated/
 
 # Android related
 **/android/**/gradle-wrapper.jar
@@ -104,6 +105,7 @@ DerivedData
 **/ios/**/DerivedData/
 **/ios/**/Icon?
 **/ios/**/Pods/
+**/ios/**/Podfile.lock
 **/ios/**/.symlinks/
 **/ios/**/profile
 **/ios/**/xcuserdata
