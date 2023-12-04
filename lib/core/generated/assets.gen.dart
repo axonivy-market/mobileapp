@@ -14,8 +14,18 @@ import 'package:flutter/services.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/app_icon.png
+  AssetGenImage get appIcon => const AssetGenImage('assets/icons/app_icon.png');
+
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
+
+  /// File path: assets/icons/notification.svg
+  SvgGenImage get notification =>
+      const SvgGenImage('assets/icons/notification.svg');
+
+  /// File path: assets/icons/offline.svg
+  SvgGenImage get offline => const SvgGenImage('assets/icons/offline.svg');
 
   /// File path: assets/icons/process_bottom_bar.svg
   SvgGenImage get processBottomBar =>
@@ -34,8 +44,11 @@ class $AssetsIconsGen {
       const SvgGenImage('assets/icons/task_bottom_bar.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<dynamic> get values => [
+        appIcon,
         logo,
+        notification,
+        offline,
         processBottomBar,
         searchBottomBar,
         settingBottomBar,

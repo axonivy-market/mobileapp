@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -63,11 +64,22 @@ class _TasksViewState extends State<TasksView> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 AppAssets.icons.logo.svg(),
-                const Column(
+                Expanded(child: Container()),
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text("you are offline"),
-                    Text("updated 30 min ago")
+                    const Text(
+                      'last updated 20:17',
+                      style: TextStyle(color: AppColors.babyTalkGrey),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    AppAssets.icons.offline.svg(),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    AppAssets.icons.notification.svg()
                   ],
                 ),
               ],
