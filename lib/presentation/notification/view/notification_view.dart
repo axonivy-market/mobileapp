@@ -2,8 +2,8 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:flutter/material.dart';
 
-class SearchView extends StatelessWidget {
-  const SearchView({super.key});
+class NotificationView extends StatelessWidget {
+  const NotificationView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class SearchView extends StatelessWidget {
           const Expanded(
             child: Center(
               child: Text(
-                "Search View",
+                "Notification View",
                 style: TextStyle(fontSize: 30),
               ),
             ),

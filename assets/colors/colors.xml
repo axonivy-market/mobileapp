@@ -20,6 +20,18 @@
     <color name="MIMESIA BLUE">#2968C7</color>
 
     <color name="SALMON">#FF796F</color>
+
+    <!-- NEW COLORS -->
+
+    <!-- Highlight container-->
+    <color name="TROPIC SEA">#007095</color>
+    <!-- back ground container-->
+    <color name="BLEACHED SILK">#F3F3F3</color>
+    <!-- Primary color-->
+    <color name="WATERMELONADE">#EE4A52</color>
+    <!-- Text normal color -->
+    <color name="SONIC SILVER">#757575</color>
+
 </resources>
 
 
