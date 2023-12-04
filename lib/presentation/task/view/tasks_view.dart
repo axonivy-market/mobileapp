@@ -1,6 +1,8 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
+import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class TasksView extends StatelessWidget {
   const TasksView({super.key});
@@ -40,11 +42,114 @@ class TasksView extends StatelessWidget {
         child: Column(
           children: [
             Row(
-              children: [],
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 86,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10.0),
+                            bottomLeft: Radius.circular(10.0),
+                          ),
+                          color: AppColors.tropicSea),
+                      child: SizedBox(
+                        child: Center(
+                          child: Text(
+                            "All",
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      height: 40,
+                      width: 86,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10.0),
+                            bottomRight: Radius.circular(10.0),
+                          ),
+                          color: AppColors.bleachedSilk),
+                      child: SizedBox(
+                        child: Center(
+                          child: Text(
+                            "Expired",
+                            style: GoogleFonts.inter(
+                              textStyle: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.sonicSilver),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Container()
+              ],
             ),
             Expanded(
               child: ListView(
-                children: const [],
+                padding: const EdgeInsets.symmetric(vertical: 15),
+                children: const [
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  TaskItemWidget(),
+                ],
               ),
             ),
           ],
