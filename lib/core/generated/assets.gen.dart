@@ -14,12 +14,48 @@ import 'package:flutter/services.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/app_icon.png
+  AssetGenImage get appIcon => const AssetGenImage('assets/icons/app_icon.png');
+
+  /// File path: assets/icons/camera.svg
+  SvgGenImage get camera => const SvgGenImage('assets/icons/camera.svg');
+
+  /// File path: assets/icons/filter.svg
+  SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
+
+  /// File path: assets/icons/list.svg
+  SvgGenImage get list => const SvgGenImage('assets/icons/list.svg');
+
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
+
+  /// File path: assets/icons/notification.svg
+  SvgGenImage get notification =>
+      const SvgGenImage('assets/icons/notification.svg');
+
+  /// File path: assets/icons/offline.svg
+  SvgGenImage get offline => const SvgGenImage('assets/icons/offline.svg');
+
+  /// File path: assets/icons/paperclip.svg
+  SvgGenImage get paperclip => const SvgGenImage('assets/icons/paperclip.svg');
+
+  /// File path: assets/icons/priority_high.svg
+  SvgGenImage get priorityHigh =>
+      const SvgGenImage('assets/icons/priority_high.svg');
+
+  /// File path: assets/icons/priority_low.svg
+  SvgGenImage get priorityLow =>
+      const SvgGenImage('assets/icons/priority_low.svg');
+
+  /// File path: assets/icons/process.svg
+  SvgGenImage get process => const SvgGenImage('assets/icons/process.svg');
 
   /// File path: assets/icons/process_bottom_bar.svg
   SvgGenImage get processBottomBar =>
       const SvgGenImage('assets/icons/process_bottom_bar.svg');
+
+  /// File path: assets/icons/search.svg
+  SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
   /// File path: assets/icons/search_bottom_bar.svg
   SvgGenImage get searchBottomBar =>
@@ -29,17 +65,36 @@ class $AssetsIconsGen {
   SvgGenImage get settingBottomBar =>
       const SvgGenImage('assets/icons/setting_bottom_bar.svg');
 
+  /// File path: assets/icons/sorting.svg
+  SvgGenImage get sorting => const SvgGenImage('assets/icons/sorting.svg');
+
   /// File path: assets/icons/task_bottom_bar.svg
   SvgGenImage get taskBottomBar =>
       const SvgGenImage('assets/icons/task_bottom_bar.svg');
 
+  /// File path: assets/icons/user.svg
+  SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
+
   /// List of all assets
-  List<SvgGenImage> get values => [
+  List<dynamic> get values => [
+        appIcon,
+        camera,
+        filter,
+        list,
         logo,
+        notification,
+        offline,
+        paperclip,
+        priorityHigh,
+        priorityLow,
+        process,
         processBottomBar,
+        search,
         searchBottomBar,
         settingBottomBar,
-        taskBottomBar
+        sorting,
+        taskBottomBar,
+        user
       ];
 }
 

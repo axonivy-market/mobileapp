@@ -22,6 +22,9 @@ class AppColors {
   /// Color: #000000
   static const Color black = Color(0xFF000000);
 
+  /// Color: #F3F3F3
+  static const Color bleachedSilk = Color(0xFFF3F3F3);
+
   /// Color: #0065FF
   static const Color blueRibbon = Color(0xFF0065FF);
 
@@ -40,8 +43,17 @@ class AppColors {
   /// Color: #2C2C2C
   static const Color shoeWax = Color(0xFF2C2C2C);
 
+  /// Color: #757575
+  static const Color sonicSilver = Color(0xFF757575);
+
   /// Color: #828282
   static const Color trolleyGrey = Color(0xFF828282);
+
+  /// Color: #007095
+  static const Color tropicSea = Color(0xFF007095);
+
+  /// Color: #EE4A52
+  static const Color watermelonade = Color(0xFFEE4A52);
 
   /// Color: #6E6E6E
   static const Color weldedIron = Color(0xFF6E6E6E);
