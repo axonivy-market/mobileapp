@@ -1,4 +1,4 @@
-name: Build & Deploy iOS Development to TestFlight
+name: Build & Deploy iOS Production to TestFlight
 
 on:
   workflow_dispatch:
@@ -36,8 +36,8 @@ jobs:
           team-id: ${{ secrets.IOS_TEAM_ID }}
           certificate-password: ${{ secrets.IOS_CERTIFICATE_PASSWORD }}
           workspace-path: ios/Runner.xcworkspace
-          scheme: dev
-          configuration: Release-dev
+          scheme: prod
+          configuration: Release-prod
 
       - name: 'Upload app to TestFlight'
         uses: apple-actions/upload-testflight-build@v1
