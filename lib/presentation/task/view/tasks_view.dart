@@ -104,7 +104,7 @@ class _TasksViewState extends State<TasksView> {
                   key: webViewKey,
                   initialUrlRequest: URLRequest(
                       url: Uri.parse(
-                          "http://172.26.208.1:8081/designer/pro/Test\$1/18C154AFAF114D6A/18C154AFAF114D6A-f3/TaskA.ivp?taskId=2")),
+                          "http://172.26.208.1:8081/designer/pro/Test\$1/18C154AFAF114D6A/18C154AFAF114D6A-f3/TaskA.ivp?taskId=23")),
                   initialOptions: options,
                   pullToRefreshController: pullToRefreshController,
                   onWebViewCreated: (controller) {
@@ -163,7 +163,7 @@ class _TasksViewState extends State<TasksView> {
                     }
                     setState(() {
                       this.progress = progress / 100;
-                      urlController.text = this.url;
+                      urlController.text = url;
                     });
                   },
                   onUpdateVisitedHistory: (controller, url, androidIsReload) {
@@ -177,7 +177,10 @@ class _TasksViewState extends State<TasksView> {
                   },
                 ),
                 progress < 1.0
-                    ? LinearProgressIndicator(value: progress)
+                    ? LinearProgressIndicator(
+                        value: progress,
+                        color: Color.fromRGBO(41, 104, 199, 1),
+                      )
                     : Container(),
               ],
             ),
