@@ -15,16 +15,19 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.9'
+          flutter-version: '3.16.2'
           channel: 'stable'
           cache: true
-          
+
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Generator assets
+        run: dart run build_runner build
+
       - name: Install Pods
         run: pod install --repo-update
-        
+
       - name: Build iOS App
         uses: yukiarrr/ios-build-action@v1.11.0
         with:
