@@ -2,6 +2,7 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../core/generated/colors.gen.dart';
 import '../util/widgets/bottom_tab_bar_item.dart';
 
@@ -29,16 +30,13 @@ class _TabBarScreenState extends State<TabBarScreen> {
   final tabs = [
     BottomBarTabItem(
       initialLocation: '/task',
-      icon: AppAssets.icons.taskBottomBar.svg(
-          height: 15,
-          colorFilter: const ColorFilter.mode(
-            AppColors.babyTalkGrey,
-            BlendMode.srcIn,
-          )),
-      activeIcon: AppAssets.icons.taskBottomBar.svg(
-        height: 15,
+      icon: AppAssets.icons.list.svg(
+        height: 20,
+      ),
+      activeIcon: AppAssets.icons.list.svg(
+        height: 20,
         colorFilter: const ColorFilter.mode(
-          AppColors.blueRibbon,
+          AppColors.tropicSea,
           BlendMode.srcIn,
         ),
       ),
@@ -46,11 +44,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: '/processes',
-      icon: AppAssets.icons.processBottomBar.svg(height: 15),
-      activeIcon: AppAssets.icons.processBottomBar.svg(
-        height: 15,
+      icon: AppAssets.icons.process.svg(height: 20),
+      activeIcon: AppAssets.icons.process.svg(
+        height: 20,
         colorFilter: const ColorFilter.mode(
-          AppColors.blueRibbon,
+          AppColors.tropicSea,
           BlendMode.srcIn,
         ),
       ),
@@ -58,11 +56,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: '/search',
-      icon: AppAssets.icons.searchBottomBar.svg(height: 15),
-      activeIcon: AppAssets.icons.searchBottomBar.svg(
-        height: 15,
+      icon: AppAssets.icons.search.svg(height: 20),
+      activeIcon: AppAssets.icons.search.svg(
+        height: 20,
         colorFilter: const ColorFilter.mode(
-          AppColors.blueRibbon,
+          AppColors.tropicSea,
           BlendMode.srcIn,
         ),
       ),
@@ -70,15 +68,15 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: '/settings',
-      icon: AppAssets.icons.settingBottomBar.svg(height: 15),
-      activeIcon: AppAssets.icons.settingBottomBar.svg(
-        height: 15,
+      icon: AppAssets.icons.user.svg(height: 20),
+      activeIcon: AppAssets.icons.user.svg(
+        height: 20,
         colorFilter: const ColorFilter.mode(
-          AppColors.blueRibbon,
+          AppColors.tropicSea,
           BlendMode.srcIn,
         ),
       ),
-      label: tr('Settings'),
+      label: tr('Profile'),
     )
   ];
 
@@ -106,11 +104,14 @@ class _TabBarScreenState extends State<TabBarScreen> {
     return Scaffold(
       body: widget.child,
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 1,
         type: BottomNavigationBarType.fixed,
-        selectedFontSize: 11,
-        unselectedFontSize: 11,
+        selectedLabelStyle:
+            GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
+        unselectedLabelStyle:
+            GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w400),
         currentIndex: _currentIndex,
-        selectedItemColor: AppColors.blueRibbon,
+        selectedItemColor: AppColors.tropicSea,
         items: tabs,
         onTap: (index) => _onItemTapped(context, index),
       ),
