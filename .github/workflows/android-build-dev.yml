@@ -39,6 +39,7 @@ jobs:
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           packageName: com.axonivy.dev
-          releaseFiles: ${{steps.sign_app.outputs.signedReleaseFile}}
-          mappingFile: ./build/app/outputs/mapping/release/mapping.txt
-          track: beta
+          releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab
+          mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
+          track: internal
+          changesNotSentForReview: true
