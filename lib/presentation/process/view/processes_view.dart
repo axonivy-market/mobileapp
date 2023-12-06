@@ -1,5 +1,5 @@
-import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
+import 'package:axon_ivy/presentation/process/view/widgets/process_item_widget.dart';
+// import 'package:axon_ivy/presentation/util/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
 
 class ProcessesView extends StatelessWidget {
@@ -7,47 +7,33 @@ class ProcessesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+        child: ListView.builder(
+          itemCount: 1,
+          itemBuilder: (BuildContext context, int index) {
+            return Column(
               children: [
-                AppAssets.icons.logo.svg(),
-                Expanded(child: Container()),
-                Expanded(child: Container()),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Text(
-                      'last updated 20:17',
-                      style: TextStyle(color: AppColors.babyTalkGrey),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    AppAssets.icons.offline.svg(),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    AppAssets.icons.notification.svg()
-                  ],
-                )
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    return const Column(
+                      children: [
+                        ProcessItemWidget(),
+                        SizedBox(height: 10),
+                      ],
+                    );
+                  },
+                ),
               ],
-            ),
-          ),
-          const Expanded(
-            child: Center(
-              child: Text(
-                "Proccesses View",
-                style: TextStyle(fontSize: 30),
-              ),
-            ),
-          )
-        ],
+            );
+          },
+        ),
       ),
     );
   }
