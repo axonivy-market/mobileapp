@@ -87,12 +87,17 @@ class TaskItemWidget extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Elevator Maintenance for Axon Ivy",
-                style: GoogleFonts.inter(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w600,
-                    color: AppColors.eerieBlack),
+              SizedBox(
+                width: MediaQuery.of(context).size.width - 21 - 42 - 20,
+                child: Text(
+                  "Elevator Maintenance for Axon Ivy Elevator Maintenance for Axon Ivy",
+                  style: GoogleFonts.inter(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.eerieBlack),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -101,12 +106,14 @@ class TaskItemWidget extends StatelessWidget {
                     // max width,
                     width: MediaQuery.of(context).size.width - 42 - 92 - 10,
                     child: Text(
-                      "Elevator #14574 at Axon Active needs to be maintained. Date:10/11/2023, Time: ",
+                      "Elevator #14574 at Axon Ivy needs to be maintained. Date:10/11/2023, Time: Elevator #14574 at Axon Ivy needs to be maintained. Date:10/11/2023, Time: ",
                       style: GoogleFonts.inter(
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
                         color: AppColors.sonicSilver,
                       ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
                     ),
                   ),
                   getDateTimeTaskWidget(getRandomDateTimeTaskType())

@@ -14,7 +14,7 @@ class TasksView extends StatelessWidget {
       appBar: const HomeAppBar(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-        child: false
+        child: true
             ? ListView.builder(
                 padding: const EdgeInsets.only(top: 20),
                 itemCount: 1,
