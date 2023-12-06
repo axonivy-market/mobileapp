@@ -6,7 +6,6 @@ import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/util/widgets/loading_widget.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';

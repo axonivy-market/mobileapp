@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../../util/widgets/home_appbar.dart';
 
-class SearchView extends StatelessWidget {
-  const SearchView({super.key});
+class ProfileView extends StatelessWidget {
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class SearchView extends StatelessWidget {
           Expanded(
             child: Center(
               child: Text(
-                "Search View",
+                "Profile View",
                 style: TextStyle(fontSize: 30),
               ),
             ),

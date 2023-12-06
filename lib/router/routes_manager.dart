@@ -1,8 +1,8 @@
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/search/view/search_view.dart';
-import 'package:axon_ivy/presentation/setting/view/profile_view.dart';
 import 'package:axon_ivy/presentation/splash/splash_view.dart';
 import 'package:axon_ivy/presentation/tabbar/tabbar_view.dart';
+import 'package:axon_ivy/presentation/profile/view/profile_view.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
