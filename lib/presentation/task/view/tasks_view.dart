@@ -1,3 +1,4 @@
+import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -13,31 +14,33 @@ class TasksView extends StatelessWidget {
       appBar: const HomeAppBar(),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-        child: ListView.builder(
-          padding: const EdgeInsets.only(top: 20),
-          itemCount: 1,
-          itemBuilder: (BuildContext context, int index) {
-            return Column(
-              children: [
-                const FilterWidget(),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  itemCount: 10,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Column(
-                      children: [
-                        TaskItemWidget(),
-                        const SizedBox(height: 10),
-                      ],
-                    );
-                  },
-                ),
-              ],
-            );
-          },
-        ),
+        child: false
+            ? ListView.builder(
+                padding: const EdgeInsets.only(top: 20),
+                itemCount: 1,
+                itemBuilder: (BuildContext context, int index) {
+                  return Column(
+                    children: [
+                      const FilterWidget(),
+                      ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        itemCount: 10,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Column(
+                            children: [
+                              TaskItemWidget(),
+                              const SizedBox(height: 10),
+                            ],
+                          );
+                        },
+                      ),
+                    ],
+                  );
+                },
+              )
+            : const TaskEmptyWidget(),
       ),
     );
   }
