@@ -7,18 +7,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 enum DateTimeTaskType { normal, expired }
 
-enum PriorityTaskType { normal, critical }
+enum PriorityTaskType { exception, high, normal, low }
 
 Widget getIconPriority(PriorityTaskType priorityTaskType) {
   switch (priorityTaskType) {
-    case PriorityTaskType.critical:
-      return AppAssets.icons.priorityHigh.svg(
-        colorFilter: const ColorFilter.mode(
-          AppColors.watermelonade,
-          BlendMode.srcIn,
-        ),
-      );
+    case PriorityTaskType.exception:
+      return AppAssets.icons.priorityException.svg();
+    case PriorityTaskType.high:
+      return AppAssets.icons.priorityHigh.svg();
     case PriorityTaskType.normal:
+      return const SizedBox.square();
+    case PriorityTaskType.low:
       return AppAssets.icons.priorityLow.svg();
   }
 }
@@ -68,7 +67,7 @@ class TaskItemWidget extends StatelessWidget {
   }
 
   DateTimeTaskType getRandomDateTimeTaskType() {
-    final int randomIndex = _random.nextInt(PriorityTaskType.values.length);
+    final int randomIndex = _random.nextInt(DateTimeTaskType.values.length);
     return DateTimeTaskType.values[randomIndex];
   }
 
@@ -83,14 +82,24 @@ class TaskItemWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          getIconPriority(getRandomPriorityType()),
+          Column(
+            children: [
+              SizedBox(
+                height: 24,
+                width: 24,
+                child: getIconPriority(getRandomPriorityType()),
+              ),
+            ],
+          ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width - 21 - 42 - 20,
                 child: Text(
-                  "Elevator Maintenance for Axon Ivy Elevator Maintenance for Axon Ivy",
+                  (Random().nextBool())
+                      ? "Elevator Maintenance for Axon Ivy"
+                      : "Elevator Maintenance for Axon Ivy Elevator Maintenance for Axon Ivy",
                   style: GoogleFonts.inter(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
@@ -106,7 +115,9 @@ class TaskItemWidget extends StatelessWidget {
                     // max width,
                     width: MediaQuery.of(context).size.width - 42 - 92 - 10,
                     child: Text(
-                      "Elevator #14574 at Axon Ivy needs to be maintained. Date:10/11/2023, Time: Elevator #14574 at Axon Ivy needs to be maintained. Date:10/11/2023, Time: ",
+                      (Random().nextBool())
+                          ? "Elevator #14574 at Axon Active needs to be maintained."
+                          : "Elevator #14574 at Axon Active needs to be maintained. Pertains to the scheduled upkeep and inspection of an elevator situated at Axon Ivy. This routine maintenance involves thorough examinations, safety feature testing, and addressing any identified issues.",
                       style: GoogleFonts.inter(
                         fontSize: 13,
                         fontWeight: FontWeight.w400,

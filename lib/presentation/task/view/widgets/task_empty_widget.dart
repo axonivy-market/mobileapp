@@ -16,9 +16,9 @@ class TaskEmptyWidget extends StatelessWidget {
           Positioned(
             bottom: -15,
             child: SizedBox(
-              width: 230,
+              width: 240,
               child: Text(
-                'Nice Work! You don\'t have any tasks at the moment',
+                'Nice work! You don\'t have any tasks at the moment',
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
                     fontSize: 17,
