@@ -53,27 +53,24 @@ class ProcessItemWidget extends StatelessWidget {
                       color: AppColors.eerieBlack),
                   overflow: TextOverflow.ellipsis,
                 ),
-                SizedBox(
-                  height: 40,
-                  child: Text(
-                    _randomizer.nextInt(2) == 0
-                        ? "Here is the placeholder for description of this process. Here is the placeholder for description of this process. Here is the placeholder for description of this process"
-                        : "No description",
-                    style: GoogleFonts.inter(
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.sonicSilver,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
+                Text(
+                  _randomizer.nextInt(2) == 0
+                      ? "Here is the placeholder for description of this process. Here is the placeholder for description of this process. Here is the placeholder for description of this process"
+                      : "No description",
+                  style: GoogleFonts.inter(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.sonicSilver,
                   ),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
                 ),
               ],
             ),
           ),
           SizedBox.square(
             dimension: 21,
-            child: AppAssets.icons.priorityHigh.svg(),
+            child: AppAssets.icons.chevronRight.svg(),
           )
         ],
       ),
