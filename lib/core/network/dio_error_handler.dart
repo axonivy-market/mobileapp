@@ -1,8 +1,8 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:axon_ivy/core/network/failure.dart';
+import 'package:axon_ivy/util/resources/resources.dart';
 import 'package:dio/dio.dart';
-import '../../presentation/util/resources/string_manager.dart';
 
 class AppError implements Exception {
   late Failure failure;

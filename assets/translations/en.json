@@ -1,9 +1,10 @@
 {
-    "BottomTabBar": {
-      "Tasks": "Tasks",
-      "Processes": "Processes",
-      "Search": "Search",
-      "Profile": "Profile"
-    }
-  }
+  "bottomTabBar": {
+    "tasks": "Tasks",
+    "processes": "Processes",
+    "search": "Search",
+    "profile": "Profile"
+  },
+  "splashCopyright": "© Axon Ivy – Version {version}"
+}
   
