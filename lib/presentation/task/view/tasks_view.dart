@@ -111,6 +111,7 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
         },
         child: Scaffold(
           appBar: const HomeAppBar(),
+<<<<<<< HEAD
           body: Padding(
             padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
             child: ListView.builder(
@@ -125,6 +126,16 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
                       physics: const NeverScrollableScrollPhysics(),
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       itemCount: 10,
+=======
+          body: RefreshIndicator(
+            onRefresh: _onRefresh,
+            child: Random().nextBool()
+                ? Padding(
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                    child: ListView.builder(
+                      padding: const EdgeInsets.only(top: 20),
+                      itemCount: 1,
+>>>>>>> 895bde9 (feature/MIVY-892-display-task)
                       itemBuilder: (BuildContext context, int index) {
                         return Column(
                           children: [
@@ -133,11 +144,23 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
                           ],
                         );
                       },
+<<<<<<< HEAD
                     ),
                   ],
                 );
               },
             ),
+=======
+                    ))
+                : ListView(
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: TaskEmptyWidget(),
+                      ),
+                    ],
+                  ),
+>>>>>>> 895bde9 (feature/MIVY-892-display-task)
           ),
 >>>>>>> e7517ab (MIVY-923-956-set-up-api-service)
         ),
