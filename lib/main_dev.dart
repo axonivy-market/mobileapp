@@ -1,3 +1,5 @@
+import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/presentation/util/resources/routes_manager.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +7,9 @@ import 'package:flutter/material.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  await AppConfig.loadEnv(Environment.dev);
   final appRouter = AppRouter();
+  configureDependencies();
   runApp(
     EasyLocalization(
       supportedLocales: const [Locale('en')],

@@ -4,10 +4,10 @@ import 'package:axon_ivy/core/network/failure.dart';
 import 'package:dio/dio.dart';
 import '../../presentation/util/resources/string_manager.dart';
 
-class ErrorHandler implements Exception {
+class AppError implements Exception {
   late Failure failure;
 
-  ErrorHandler.handle(dynamic error) {
+  AppError.handle(dynamic error) {
     if (error is DioException) {
       // dio error so its an error from response of the API or from dio itself
       failure = _handleError(error);
