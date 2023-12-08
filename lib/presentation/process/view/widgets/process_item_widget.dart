@@ -28,7 +28,8 @@ class ProcessItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+      height: 80,
+      padding: const EdgeInsets.fromLTRB(5, 8, 5, 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.bleachedSilk,
@@ -36,13 +37,17 @@ class ProcessItemWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox.square(
-            dimension: 21,
-            child: getProcessIcon(),
+          Padding(
+            padding: const EdgeInsets.only(top: 0),
+            child: SizedBox.square(
+              dimension: 21,
+              child: getProcessIcon(),
+            ),
           ),
           const SizedBox(width: 5),
           Expanded(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -53,6 +58,7 @@ class ProcessItemWidget extends StatelessWidget {
                       color: AppColors.eerieBlack),
                   overflow: TextOverflow.ellipsis,
                 ),
+                const SizedBox(height: 2),
                 Text(
                   _randomizer.nextInt(2) == 0
                       ? "Here is the placeholder for description of this process. Here is the placeholder for description of this process. Here is the placeholder for description of this process"
@@ -68,8 +74,9 @@ class ProcessItemWidget extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox.square(
-            dimension: 21,
+          const SizedBox(width: 5),
+          Align(
+            alignment: Alignment.bottomLeft,
             child: AppAssets.icons.chevronRight.svg(),
           )
         ],

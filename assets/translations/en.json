@@ -5,6 +5,9 @@
     "search": "Search",
     "profile": "Profile"
   },
-  "splashCopyright": "© Axon Ivy – Version {version}"
+  "splashCopyright": "© Axon Ivy – Version {version}",
+  "process": {
+    "emptyList": "You don’t have any processes at the moment..."
+  }
 }
   

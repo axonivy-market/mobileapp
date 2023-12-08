@@ -1,13 +1,8 @@
 import 'dart:math';
 
-import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
-import 'package:axon_ivy/presentation/process/view/widgets/process_item_widget.dart';
+import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/presentation/util/widgets/home_appbar.dart';
-// import 'package:axon_ivy/presentation/util/widgets/home_appbar.dart';
 import 'package:flutter/material.dart';
-
-import 'widgets/process_empty_widget.dart';
 
 class ProcessesView extends StatelessWidget {
   const ProcessesView({super.key});
