@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
@@ -40,7 +42,7 @@ class _TasksViewState extends State<TasksView> {
         color: AppColors.blueRibbon,
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-          child: items.isNotEmpty
+          child: Random().nextBool()
               ? ListView.builder(
                   padding: const EdgeInsets.only(top: 20),
                   itemCount: 1,
