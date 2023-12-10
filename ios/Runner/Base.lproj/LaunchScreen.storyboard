@@ -21,29 +21,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
-                                <rect key="frame" x="65" y="406" width="263" height="40"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="196.33333333333334" y="425.66666666666669" width="0.33333333333334281" height="0.66666666666668561"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62N-kl-cCp">
-                                <rect key="frame" x="129.66666666666669" y="803.66666666666663" width="133.66666666666669" height="14.333333333333371"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="©Axon Ivy – Version 1.0">
-                                        <attributes>
-                                            <color key="NSColor" red="0.47843140360000003" green="0.47843140360000003" blue="0.47843140360000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                            <font key="NSFont" metaFont="cellTitle"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1a2-6s-vTC"/>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
-                            <constraint firstItem="xbc-2k-c8Z" firstAttribute="top" secondItem="62N-kl-cCp" secondAttribute="bottom" id="nM5-yA-AYp"/>
-                            <constraint firstItem="62N-kl-cCp" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="rbU-MG-q83"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -53,7 +37,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchImage" width="263" height="40"/>
+        <image name="LaunchImage" width="0.3333333432674408" height="0.3333333432674408"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

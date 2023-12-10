@@ -1,5 +1,5 @@
+import 'package:axon_ivy/util/widgets/bot_toast_helper.dart';
 import 'package:flutter/material.dart';
-import '../util/widgets/bot_toast_helper.dart';
 
 abstract class BasePageScreen extends StatefulWidget {
   const BasePageScreen({Key? key}) : super(key: key);
