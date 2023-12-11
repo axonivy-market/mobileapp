@@ -8,7 +8,9 @@ class TaskEmptyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          vertical: MediaQuery.of(context).size.height / 4),
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.center,

@@ -1,7 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'dart:math';
 
 import 'package:axon_ivy/core/generated/colors.gen.dart';
+=======
+import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
+>>>>>>> d07b7ce (MIVY-959-mapping-data-to-ui)
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 =======
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
@@ -40,7 +45,6 @@ class _TasksViewState extends State<TasksView> {
 =======
 import '../../../core/di/di_setup.dart';
 import '../../base_view/base_view.dart';
-import '../../util/widgets/bot_toast_helper.dart';
 
 class TasksView extends BasePageScreen {
   const TasksView({super.key});
@@ -56,7 +60,11 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
   void initState() {
     super.initState();
     _taskBloc = getIt<TaskBloc>();
+<<<<<<< HEAD
 >>>>>>> e7517ab (MIVY-923-956-set-up-api-service)
+=======
+    _taskBloc.add(const TaskEvent.getTasks());
+>>>>>>> d07b7ce (MIVY-959-mapping-data-to-ui)
   }
 
   @override
@@ -98,16 +106,68 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
               : const TaskEmptyWidget(),
 =======
     return BlocProvider(
-      create: (context) => _taskBloc..add(const TaskEvent.getTasks()),
-      child: BlocListener<TaskBloc, TaskState>(
-        listener: (context, state) {
+      create: (context) => _taskBloc,
+      child: Scaffold(
+        appBar: const HomeAppBar(),
+        body: BlocBuilder<TaskBloc, TaskState>(
+            builder: (BuildContext context, TaskState state) {
           if (state is TaskLoadingState) {
-            if (state.isShowLoading) {
-              showAppLoading();
-            } else {
-              hideLoading();
-            }
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is TaskErrorState) {
+            return const Center(
+              child: Text("Error"),
+            );
+          } else if (state is TaskSuccessState) {
+            List<TaskIvy> tasks = state.tasks;
+            return RefreshIndicator(
+              onRefresh: () async {
+                tasks = [];
+                _taskBloc.add(const TaskEvent.getTasks());
+              },
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(top: 20),
+                  itemCount: 1,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        const FilterWidget(),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          itemCount: tasks.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Column(
+                              children: [
+                                TaskItemWidget(
+                                  name: tasks[index].name,
+                                  description: tasks[index].description,
+                                  priority: tasks[index].priority,
+                                ),
+                                const SizedBox(height: 10),
+                              ],
+                            );
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+            );
+          } else {
+            return Expanded(
+              child: Center(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: const [TaskEmptyWidget()],
+                ),
+              ),
+            );
           }
+<<<<<<< HEAD
         },
         child: Scaffold(
           appBar: const HomeAppBar(),
@@ -164,6 +224,9 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
           ),
 >>>>>>> e7517ab (MIVY-923-956-set-up-api-service)
         ),
+=======
+        }),
+>>>>>>> d07b7ce (MIVY-959-mapping-data-to-ui)
       ),
     );
   }

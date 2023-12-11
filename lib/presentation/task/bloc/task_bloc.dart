@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:axon_ivy/core/shared/extensions/list_ext.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -17,14 +18,14 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<_GetTasks>(_getTasks);
   }
 
-  late final List<TaskIvy> tasks;
+  List<TaskIvy> tasks = [];
 
   FutureOr<void> _getTasks(event, Emitter emit) async {
     emit(const TaskState.loading(true));
 
     try {
       final tasks = await _taskRepository.getTasks();
-      print("----> $tasks");
+
       tasks.fold(
         (l) => emit(TaskState.error(l)),
         (r) {
