@@ -114,8 +114,8 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
           if (state is TaskLoadingState) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is TaskErrorState) {
-            return const Center(
-              child: Text("Error"),
+            return Center(
+              child: Text(state.error.toString()),
             );
           } else if (state is TaskSuccessState) {
             List<TaskIvy> tasks = state.tasks;

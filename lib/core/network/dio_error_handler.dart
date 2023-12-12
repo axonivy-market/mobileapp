@@ -9,10 +9,8 @@ class AppError implements Exception {
 
   AppError.handle(dynamic error) {
     if (error is DioException) {
-      // dio error so its an error from response of the API or from dio itself
       failure = _handleError(error);
     } else {
-      // default error
       failure = DataSource.DEFAULT.getFailure();
     }
   }
@@ -37,6 +35,8 @@ Failure _handleError(DioException error) {
       }
     case DioExceptionType.cancel:
       return DataSource.CANCEL.getFailure();
+    case DioExceptionType.connectionError:
+      return DataSource.CONNECTION_ERROR.getFailure();
     default:
       return DataSource.DEFAULT.getFailure();
   }
@@ -56,6 +56,7 @@ enum DataSource {
   SEND_TIMEOUT,
   CACHE_ERROR,
   NO_INTERNET_CONNECTION,
+  CONNECTION_ERROR,
   DEFAULT
 }
 
@@ -92,6 +93,9 @@ extension DataSourceExtension on DataSource {
       case DataSource.NO_INTERNET_CONNECTION:
         return Failure(ResponseCode.NO_INTERNET_CONNECTION,
             ResponseMessage.NO_INTERNET_CONNECTION);
+      case DataSource.CONNECTION_ERROR:
+        return Failure(
+            ResponseCode.CONNECTION_ERROR, ResponseMessage.CONNECTION_ERROR);
       case DataSource.DEFAULT:
         return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT);
     }
@@ -114,7 +118,8 @@ class ResponseCode {
   static const int SEND_TIMEOUT = -4;
   static const int CACHE_ERROR = -5;
   static const int NO_INTERNET_CONNECTION = -6;
-  static const int DEFAULT = -7;
+  static const int CONNECTION_ERROR = -7;
+  static const int DEFAULT = -8;
 }
 
 class ResponseMessage {
@@ -139,6 +144,7 @@ class ResponseMessage {
   static const String SEND_TIMEOUT = AppStrings.strTimeoutError;
   static const String CACHE_ERROR = AppStrings.strCacheError;
   static const String NO_INTERNET_CONNECTION = AppStrings.strNoInternetError;
+  static const String CONNECTION_ERROR = AppStrings.strConnectionError;
   static const String DEFAULT = AppStrings.strDefaultError;
 }
 

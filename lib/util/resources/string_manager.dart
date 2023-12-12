@@ -16,4 +16,5 @@ class AppStrings {
   static const String strDefaultError = "default_error";
   static const String strCacheError = "cache_error";
   static const String strNoInternetError = "no_internet_error";
+  static const String strConnectionError = "connection_error";
 }
