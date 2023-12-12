@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:dio/dio.dart';
+import 'package:axon_ivy/core/network/dio_error_handler.dart';
+import 'package:axon_ivy/core/shared/extensions/list_ext.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import '../../../core/network/dio_error_handler.dart';
 import '../../../data/models/task/task.dart';
 import '../../../data/repositories/task_repository.dart';
 
@@ -19,40 +19,49 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   FutureOr<void> _getTasks(event, Emitter emit) async {
-    print('----> loading...');
     emit(const TaskState.loading(true));
 
     try {
-      print("----> try to fetch");
       final tasks = await _taskRepository.getTasks();
 
       tasks.fold(
         (l) {
-          emit(TaskState.error(AppError.handle(l)));
+          emit(TaskState.error(l.message));
         },
         (r) {
-          emit(TaskState.success(_sortDefaultTasks(r)));
+          if (r.isNotEmptyOrNull) {
+            emit(TaskState.success(_sortDefaultTasks(r)));
+          } else {
+            emit(const TaskState.empty());
+          }
         },
       );
-    } on AppError catch (e) {
-      emit(TaskState.error(e));
+    } catch (e) {
+      emit(TaskState.error(AppError.handle(e).failure.message));
     }
   }
 
   List<TaskIvy> _sortDefaultTasks(List<TaskIvy> tasks) {
-    List<TaskIvy> sortedTasks = [];
-    List<TaskIvy> exceptionTasks =
-        tasks.where((task) => task.priority == 4).toList();
-    List<TaskIvy> highTasks =
-        tasks.where((task) => task.priority == 3).toList();
-    List<TaskIvy> normalTasks =
-        tasks.where((task) => task.priority == 2).toList();
-    List<TaskIvy> lowTasks = tasks.where((task) => task.priority == 1).toList();
+    tasks.sort((l, r) => r.priority.compareTo(l.priority));
 
-    sortedTasks.addAll(exceptionTasks);
-    sortedTasks.addAll(highTasks);
-    sortedTasks.addAll(normalTasks);
-    sortedTasks.addAll(lowTasks);
-    return sortedTasks;
+    for (int i = 0; i < tasks.length; i++) {
+      int j = i + 1;
+      while (j < tasks.length && tasks[j].priority == tasks[i].priority) {
+        j++;
+      }
+      tasks.sublist(i, j).sort(
+        (l, r) {
+          if (l.expiredTimeStamp != null && r.expiredTimeStamp != null) {
+            return r.expiredTimeStamp!.compareTo(l.expiredTimeStamp!);
+          } else if (l.expiredTimeStamp != null && r.expiredTimeStamp == null) {
+            return 1; // null sắp sau
+          } else {
+            return 0; // cả hai đều null
+          }
+        },
+      );
+      i = j - 1;
+    }
+    return tasks;
   }
 }
