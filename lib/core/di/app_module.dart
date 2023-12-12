@@ -10,5 +10,5 @@ abstract class AppModule {
   Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
 
   @singleton
-  Dio get dio => AppDio(baseUrl: AppConfig.baseUrl);
+  Dio get dio => AppDio();
 }

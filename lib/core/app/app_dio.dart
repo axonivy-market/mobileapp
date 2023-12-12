@@ -23,7 +23,7 @@ class AuthInterceptor extends Interceptor {
 }
 
 class AppDio with DioMixin implements Dio {
-  AppDio({required String baseUrl}) {
+  AppDio() {
     String platform = '';
     if (Platform.isAndroid) {
       platform = 'Android';
@@ -31,7 +31,6 @@ class AppDio with DioMixin implements Dio {
       platform = 'iOS';
     }
     options = BaseOptions(
-      baseUrl: baseUrl,
       connectTimeout: const Duration(seconds: 60),
       sendTimeout: const Duration(seconds: 60),
       receiveTimeout: const Duration(seconds: 60),
