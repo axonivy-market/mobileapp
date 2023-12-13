@@ -42,7 +42,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   List<TaskIvy> _sortDefaultTasks(List<TaskIvy> tasks) {
-    tasks.sort((l, r) => r.priority.compareTo(l.priority));
+    tasks.sort((l, r) => l.priority.compareTo(r.priority));
 
     for (int i = 0; i < tasks.length; i++) {
       int j = i + 1;

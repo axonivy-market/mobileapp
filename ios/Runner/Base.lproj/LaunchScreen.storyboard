@@ -26,8 +26,6 @@
                         <constraints>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="N5S-7P-oIh" secondAttribute="centerX" id="1a2-6s-vTC"/>
                             <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
-                            <constraint firstItem="N5S-7P-oIh" firstAttribute="bottom" secondItem="62N-kl-cCp" secondAttribute="bottom" constant="1.1368683772161603e-13" id="QgX-sc-DUY"/>
-                            <constraint firstItem="62N-kl-cCp" firstAttribute="centerX" secondItem="N5S-7P-oIh" secondAttribute="centerX" id="rbU-MG-q83"/>
                         </constraints>
                     </view>
                 </viewController>

@@ -1,5 +1,6 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
+import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +12,7 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
         SizedBox(
           width: 50,
           child: Text(
-            'No expiry date',
+            "",
             style: GoogleFonts.inter(
               fontSize: 13,
               fontWeight: FontWeight.w400,
@@ -31,7 +32,7 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
     return Row(
       children: [
         Text(
-          "Expired".tr(),
+          "expired".tr(),
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w400,
@@ -67,12 +68,15 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
 
 Widget getIconPriority(int priorityNumber) {
   switch (priorityNumber) {
-    case 4:
+    case 0:
       return AppAssets.icons.priorityException.svg();
-    case 3:
+    case 1:
       return AppAssets.icons.priorityHigh.svg();
     case 2:
-      return const SizedBox.square();
+      return const SizedBox(
+        width: 21,
+        height: 21,
+      );
     default:
       return AppAssets.icons.priorityLow.svg();
   }
@@ -105,29 +109,22 @@ class TaskItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+      padding: const EdgeInsets.fromLTRB(5, 10, 0, 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.bleachedSilk,
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            children: [
-              SizedBox(
-                height: 24,
-                width: 24,
-                child: getIconPriority(priority),
-              ),
-            ],
-          ),
+          getIconPriority(priority),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width - 21 - 42 - 20,
                 child: Text(
-                  name,
+                  name.isEmptyOrNull ? "tasksView.noTaskName".tr() : name,
                   style: GoogleFonts.inter(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
@@ -143,7 +140,9 @@ class TaskItemWidget extends StatelessWidget {
                     // max width,
                     width: MediaQuery.of(context).size.width - 42 - 92 - 10,
                     child: Text(
-                      description,
+                      description.isEmptyOrNull
+                          ? "tasksView.noTaskDescription".tr()
+                          : description,
                       style: GoogleFonts.inter(
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
