@@ -1,46 +1,67 @@
-import 'dart:math';
-
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-enum DateTimeTaskType { normal, expired }
-
-Widget getDateTimeTaskWidget(DateTimeTaskType dateTimeTaskType) {
-  switch (dateTimeTaskType) {
-    case DateTimeTaskType.expired:
-      return Row(
-        children: [
-          Text(
-            "Expired".tr(),
-            style: GoogleFonts.inter(
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
-              color: AppColors.watermelonade,
-            ),
-          ),
-          AppAssets.icons.chevronRight.svg(
-            colorFilter: const ColorFilter.mode(
-                AppColors.watermelonade, BlendMode.srcIn),
-          ),
-        ],
-      );
-    case DateTimeTaskType.normal:
-      return Row(
-        children: [
-          Text(
-            "10.11.23",
+Widget getDateTimeTaskWidget(DateTime? dateTime) {
+  if (dateTime == null) {
+    return Row(
+      children: [
+        SizedBox(
+          width: 50,
+          child: Text(
+            'No expiry date',
             style: GoogleFonts.inter(
               fontSize: 13,
               fontWeight: FontWeight.w400,
               color: AppColors.sonicSilver,
             ),
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
           ),
-          AppAssets.icons.chevronRight.svg()
-        ],
-      );
+        ),
+        AppAssets.icons.chevronRight.svg()
+      ],
+    );
+  }
+
+  DateTime now = DateTime.now().toUtc();
+  if (dateTime.isBefore(now)) {
+    return Row(
+      children: [
+        Text(
+          "Expired".tr(),
+          style: GoogleFonts.inter(
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+            color: AppColors.watermelonade,
+          ),
+          overflow: TextOverflow.ellipsis,
+          softWrap: true,
+        ),
+        AppAssets.icons.chevronRight.svg(
+          colorFilter:
+              const ColorFilter.mode(AppColors.watermelonade, BlendMode.srcIn),
+        ),
+      ],
+    );
+  } else {
+    return Row(
+      children: [
+        Text(
+          formatDate(dateTime),
+          style: GoogleFonts.inter(
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+            color: AppColors.sonicSilver,
+          ),
+          overflow: TextOverflow.ellipsis,
+          softWrap: true,
+        ),
+        AppAssets.icons.chevronRight.svg()
+      ],
+    );
   }
 }
 
@@ -57,33 +78,39 @@ Widget getIconPriority(int priorityNumber) {
   }
 }
 
+String formatDate(DateTime dateTime) {
+  String formattedDate =
+      "${_twoDigits(dateTime.day)}.${_twoDigits(dateTime.month)}.${_twoDigits(dateTime.year % 100)}";
+  return formattedDate;
+}
+
+String _twoDigits(int n) {
+  if (n >= 10) return "$n";
+  return "0$n";
+}
+
 class TaskItemWidget extends StatelessWidget {
-  TaskItemWidget(
-      {super.key,
-      required this.name,
-      required this.description,
-      required this.priority});
+  const TaskItemWidget({
+    super.key,
+    required this.name,
+    required this.description,
+    required this.priority,
+    required this.expiryTimeStamp,
+  });
   final String name;
   final String description;
   final int priority;
-
-  final Random _random = Random();
-
-  DateTimeTaskType getRandomDateTimeTaskType() {
-    final int randomIndex = _random.nextInt(DateTimeTaskType.values.length);
-    return DateTimeTaskType.values[randomIndex];
-  }
+  final DateTime? expiryTimeStamp;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.fromLTRB(5, 10, 5, 10),
+      padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.bleachedSilk,
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Column(
             children: [
@@ -126,7 +153,7 @@ class TaskItemWidget extends StatelessWidget {
                       maxLines: 2,
                     ),
                   ),
-                  getDateTimeTaskWidget(getRandomDateTimeTaskType())
+                  getDateTimeTaskWidget(expiryTimeStamp)
                 ],
               )
             ],

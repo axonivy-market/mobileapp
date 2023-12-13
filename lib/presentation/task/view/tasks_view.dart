@@ -70,6 +70,8 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
                                     name: tasks[index].name,
                                     description: tasks[index].description,
                                     priority: tasks[index].priority,
+                                    expiryTimeStamp:
+                                        tasks[index].expiredTimeStamp,
                                   ),
                                   const SizedBox(height: 10),
                                 ],
@@ -83,8 +85,11 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
                 ),
               );
             } else {
-              return Expanded(
-                child: Center(
+              return Center(
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    _taskBloc.add(const TaskEvent.getTasks());
+                  },
                   child: ListView(
                     shrinkWrap: true,
                     children: const [TaskEmptyWidget()],
