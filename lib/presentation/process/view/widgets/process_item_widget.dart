@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
+import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/data/models/processes/process.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -23,7 +26,9 @@ Widget getProcessIcon() {
 }
 
 class ProcessItemWidget extends StatelessWidget {
-  const ProcessItemWidget({super.key});
+  const ProcessItemWidget({super.key, required this.process});
+
+  final Process process;
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,9 @@ class ProcessItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Master data management. This could be a long text",
+                  process.name.isEmptyOrNull
+                      ? 'process.nameNotAvailable'.tr()
+                      : process.name,
                   style: GoogleFonts.inter(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
@@ -60,9 +67,9 @@ class ProcessItemWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  _randomizer.nextInt(2) == 0
-                      ? "Here is the placeholder for description of this process. Here is the placeholder for description of this process. Here is the placeholder for description of this process"
-                      : "No description",
+                  process.description.isEmptyOrNull
+                      ? 'process.noDescription'.tr()
+                      : process.description,
                   style: GoogleFonts.inter(
                     fontSize: 13,
                     fontWeight: FontWeight.w400,

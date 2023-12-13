@@ -6,13 +6,16 @@ import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/data/repositories/process_repository.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-part 'process_bloc.freezed.dart';
 part 'process_event.dart';
+
 part 'process_state.dart';
+
+part 'process_bloc.freezed.dart';
 
 @injectable
 class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
@@ -27,15 +30,23 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
   }
 
   Future<void> _getProcesses(event, Emitter emitter) async {
-    print("_getProcesses");
-    emit(const ProcessState.loading(true));
+    emitter(const ProcessState.loading(true));
     try {
-      final processes = await _processRepository.getProcesses();
-      print("----> $processes");
-      processes.fold(
-        (l) => emit(ProcessState.error(l)),
-        (r) {},
+      final response = await _processRepository.getProcesses();
+      response.fold(
+        (error) {
+          emitter(const ProcessState.loading(false));
+          emitter(ProcessState.error(error));
+        },
+        (processes) {
+          emitter(const ProcessState.loading(false));
+          emitter(ProcessState.success(processes));
+        },
       );
-    } on AppError catch (e) {}
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
   }
 }

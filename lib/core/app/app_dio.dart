@@ -1,12 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import '../utils/shared_preference.dart';
 
 class AuthInterceptor extends Interceptor {
   static const String _username = "Developer";

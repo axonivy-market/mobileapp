@@ -62,6 +62,7 @@ class ProfileForm extends StatefulWidget {
 
 class _ProfileFormState extends State<ProfileForm> {
   final baseUrlController = TextEditingController();
+
   @override
   void initState() {
     baseUrlController.text = SharedPrefs.getBaseUrl ?? '';
@@ -82,14 +83,14 @@ class _ProfileFormState extends State<ProfileForm> {
         TextFormField(
           controller: baseUrlController,
           decoration: const InputDecoration(
-            hintText: 'Base URL like http://10.0.2.2:8081/api',
+            hintText: 'Server URL like http://127.0.0.1:8081',
           ),
         ),
         const SizedBox(height: 16),
         OutlinedButton(
           onPressed: () {
             if (baseUrlController.text.isNotEmptyOrNull) {
-              SharedPrefs.setBaseUrl(baseUrlController.text);
+              SharedPrefs.setBaseUrl("${baseUrlController.text}/api");
             }
           },
           child: Text(

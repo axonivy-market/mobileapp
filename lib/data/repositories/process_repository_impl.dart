@@ -16,7 +16,7 @@ class ProcessRepositoryImpl extends ProcessRepository {
     try {
       final result = await _processRemoteDataSource.getProcesses();
       return right(result);
-    } on AppError catch (exception) {
+    } catch (exception) {
       return left(AppError.handle(exception));
     }
   }
