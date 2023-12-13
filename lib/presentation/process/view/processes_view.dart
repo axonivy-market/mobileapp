@@ -6,8 +6,10 @@ import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/util/widgets/loading_widget.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProcessesView extends StatefulWidget {
   const ProcessesView({super.key});
@@ -32,27 +34,19 @@ class _ProcessesViewState extends State<ProcessesView> {
       create: (context) => _processBloc,
       child: Scaffold(
         appBar: const HomeAppBar(),
-        body: BlocConsumer<ProcessBloc, ProcessState>(
-          listener: (context, state) {
-            if (state is ProcessErrorState) {
-              showDialog<String>(
-                context: context,
-                builder: (BuildContext context) => AlertDialog(
-                  title: const Text('Connection error'),
-                  content: Text(state.error.failure.message),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () => Navigator.pop(context, 'OK'),
-                      child: const Text('OK'),
-                    ),
-                  ],
-                ),
-              );
-            }
-          },
+        body: BlocBuilder<ProcessBloc, ProcessState>(
           builder: (context, state) {
             if (state is ProcessLoadingState) {
               return const LoadingWidget();
+            }
+            if (state is ProcessErrorState) {
+              return Center(
+                child: Text(
+                  state.error.failure.message.tr(),
+                  style: GoogleFonts.inter(
+                      fontSize: 17, fontWeight: FontWeight.w600),
+                ),
+              );
             }
             if (state is ProcessSuccessState) {
               final processes = state.processes;
