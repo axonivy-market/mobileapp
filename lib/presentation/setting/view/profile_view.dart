@@ -83,14 +83,14 @@ class _ProfileFormState extends State<ProfileForm> {
         TextFormField(
           controller: baseUrlController,
           decoration: const InputDecoration(
-            hintText: 'Server URL like http://127.0.0.1:8081',
+            hintText: 'Server URL like http://127.0.0.1:8081/api',
           ),
         ),
         const SizedBox(height: 16),
         OutlinedButton(
           onPressed: () {
             if (baseUrlController.text.isNotEmptyOrNull) {
-              SharedPrefs.setBaseUrl("${baseUrlController.text}/api");
+              SharedPrefs.setBaseUrl(baseUrlController.text);
             }
           },
           child: Text(
