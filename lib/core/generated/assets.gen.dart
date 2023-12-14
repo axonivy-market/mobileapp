@@ -53,6 +53,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/paperclip.svg
   SvgGenImage get paperclip => const SvgGenImage('assets/icons/paperclip.svg');
 
+  /// File path: assets/icons/priority_exception.svg
+  SvgGenImage get priorityException =>
+      const SvgGenImage('assets/icons/priority_exception.svg');
+
   /// File path: assets/icons/priority_high.svg
   SvgGenImage get priorityHigh =>
       const SvgGenImage('assets/icons/priority_high.svg');
@@ -103,6 +107,7 @@ class $AssetsIconsGen {
         notification,
         offline,
         paperclip,
+        priorityException,
         priorityHigh,
         priorityLow,
         process,
@@ -120,12 +125,16 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/koala_with_passion_fruit.svg
+  SvgGenImage get koalaWithPassionFruit =>
+      const SvgGenImage('assets/images/koala_with_passion_fruit.svg');
+
   /// File path: assets/images/splash_axon_ivy_logo.svg
   SvgGenImage get splashAxonIvyLogo =>
       const SvgGenImage('assets/images/splash_axon_ivy_logo.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [splashAxonIvyLogo];
+  List<SvgGenImage> get values => [koalaWithPassionFruit, splashAxonIvyLogo];
 }
 
 class $AssetsTranslationsGen {

@@ -168,22 +168,25 @@ mixin _$TaskState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
-    required TResult Function(AppError error) error,
+    required TResult Function(String error) error,
     required TResult Function(List<TaskIvy> tasks) success,
+    required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
-    TResult? Function(AppError error)? error,
+    TResult? Function(String error)? error,
     TResult? Function(List<TaskIvy> tasks)? success,
+    TResult? Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
-    TResult Function(AppError error)? error,
+    TResult Function(String error)? error,
     TResult Function(List<TaskIvy> tasks)? success,
+    TResult Function()? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -192,6 +195,7 @@ mixin _$TaskState {
     required TResult Function(TaskLoadingState value) loading,
     required TResult Function(TaskErrorState value) error,
     required TResult Function(TaskSuccessState value) success,
+    required TResult Function(TaskEmptyState value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -199,6 +203,7 @@ mixin _$TaskState {
     TResult? Function(TaskLoadingState value)? loading,
     TResult? Function(TaskErrorState value)? error,
     TResult? Function(TaskSuccessState value)? success,
+    TResult? Function(TaskEmptyState value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -206,6 +211,7 @@ mixin _$TaskState {
     TResult Function(TaskLoadingState value)? loading,
     TResult Function(TaskErrorState value)? error,
     TResult Function(TaskSuccessState value)? success,
+    TResult Function(TaskEmptyState value)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -295,8 +301,9 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
-    required TResult Function(AppError error) error,
+    required TResult Function(String error) error,
     required TResult Function(List<TaskIvy> tasks) success,
+    required TResult Function() empty,
   }) {
     return loading(isShowLoading);
   }
@@ -305,8 +312,9 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
-    TResult? Function(AppError error)? error,
+    TResult? Function(String error)? error,
     TResult? Function(List<TaskIvy> tasks)? success,
+    TResult? Function()? empty,
   }) {
     return loading?.call(isShowLoading);
   }
@@ -315,8 +323,9 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
-    TResult Function(AppError error)? error,
+    TResult Function(String error)? error,
     TResult Function(List<TaskIvy> tasks)? success,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -331,6 +340,7 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
     required TResult Function(TaskLoadingState value) loading,
     required TResult Function(TaskErrorState value) error,
     required TResult Function(TaskSuccessState value) success,
+    required TResult Function(TaskEmptyState value) empty,
   }) {
     return loading(this);
   }
@@ -341,6 +351,7 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
     TResult? Function(TaskLoadingState value)? loading,
     TResult? Function(TaskErrorState value)? error,
     TResult? Function(TaskSuccessState value)? success,
+    TResult? Function(TaskEmptyState value)? empty,
   }) {
     return loading?.call(this);
   }
@@ -351,6 +362,7 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
     TResult Function(TaskLoadingState value)? loading,
     TResult Function(TaskErrorState value)? error,
     TResult Function(TaskSuccessState value)? success,
+    TResult Function(TaskEmptyState value)? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -376,7 +388,7 @@ abstract class _$$TaskErrorStateImplCopyWith<$Res> {
           $Res Function(_$TaskErrorStateImpl) then) =
       __$$TaskErrorStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({AppError error});
+  $Res call({String error});
 }
 
 /// @nodoc
@@ -396,7 +408,7 @@ class __$$TaskErrorStateImplCopyWithImpl<$Res>
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as AppError,
+              as String,
     ));
   }
 }
@@ -407,7 +419,7 @@ class _$TaskErrorStateImpl implements TaskErrorState {
   const _$TaskErrorStateImpl(this.error);
 
   @override
-  final AppError error;
+  final String error;
 
   @override
   String toString() {
@@ -436,8 +448,9 @@ class _$TaskErrorStateImpl implements TaskErrorState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
-    required TResult Function(AppError error) error,
+    required TResult Function(String error) error,
     required TResult Function(List<TaskIvy> tasks) success,
+    required TResult Function() empty,
   }) {
     return error(this.error);
   }
@@ -446,8 +459,9 @@ class _$TaskErrorStateImpl implements TaskErrorState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
-    TResult? Function(AppError error)? error,
+    TResult? Function(String error)? error,
     TResult? Function(List<TaskIvy> tasks)? success,
+    TResult? Function()? empty,
   }) {
     return error?.call(this.error);
   }
@@ -456,8 +470,9 @@ class _$TaskErrorStateImpl implements TaskErrorState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
-    TResult Function(AppError error)? error,
+    TResult Function(String error)? error,
     TResult Function(List<TaskIvy> tasks)? success,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -472,6 +487,7 @@ class _$TaskErrorStateImpl implements TaskErrorState {
     required TResult Function(TaskLoadingState value) loading,
     required TResult Function(TaskErrorState value) error,
     required TResult Function(TaskSuccessState value) success,
+    required TResult Function(TaskEmptyState value) empty,
   }) {
     return error(this);
   }
@@ -482,6 +498,7 @@ class _$TaskErrorStateImpl implements TaskErrorState {
     TResult? Function(TaskLoadingState value)? loading,
     TResult? Function(TaskErrorState value)? error,
     TResult? Function(TaskSuccessState value)? success,
+    TResult? Function(TaskEmptyState value)? empty,
   }) {
     return error?.call(this);
   }
@@ -492,6 +509,7 @@ class _$TaskErrorStateImpl implements TaskErrorState {
     TResult Function(TaskLoadingState value)? loading,
     TResult Function(TaskErrorState value)? error,
     TResult Function(TaskSuccessState value)? success,
+    TResult Function(TaskEmptyState value)? empty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -502,9 +520,9 @@ class _$TaskErrorStateImpl implements TaskErrorState {
 }
 
 abstract class TaskErrorState implements TaskState {
-  const factory TaskErrorState(final AppError error) = _$TaskErrorStateImpl;
+  const factory TaskErrorState(final String error) = _$TaskErrorStateImpl;
 
-  AppError get error;
+  String get error;
   @JsonKey(ignore: true)
   _$$TaskErrorStateImplCopyWith<_$TaskErrorStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -582,8 +600,9 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
-    required TResult Function(AppError error) error,
+    required TResult Function(String error) error,
     required TResult Function(List<TaskIvy> tasks) success,
+    required TResult Function() empty,
   }) {
     return success(tasks);
   }
@@ -592,8 +611,9 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
-    TResult? Function(AppError error)? error,
+    TResult? Function(String error)? error,
     TResult? Function(List<TaskIvy> tasks)? success,
+    TResult? Function()? empty,
   }) {
     return success?.call(tasks);
   }
@@ -602,8 +622,9 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
-    TResult Function(AppError error)? error,
+    TResult Function(String error)? error,
     TResult Function(List<TaskIvy> tasks)? success,
+    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -618,6 +639,7 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     required TResult Function(TaskLoadingState value) loading,
     required TResult Function(TaskErrorState value) error,
     required TResult Function(TaskSuccessState value) success,
+    required TResult Function(TaskEmptyState value) empty,
   }) {
     return success(this);
   }
@@ -628,6 +650,7 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     TResult? Function(TaskLoadingState value)? loading,
     TResult? Function(TaskErrorState value)? error,
     TResult? Function(TaskSuccessState value)? success,
+    TResult? Function(TaskEmptyState value)? empty,
   }) {
     return success?.call(this);
   }
@@ -638,6 +661,7 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     TResult Function(TaskLoadingState value)? loading,
     TResult Function(TaskErrorState value)? error,
     TResult Function(TaskSuccessState value)? success,
+    TResult Function(TaskEmptyState value)? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -655,4 +679,118 @@ abstract class TaskSuccessState implements TaskState {
   @JsonKey(ignore: true)
   _$$TaskSuccessStateImplCopyWith<_$TaskSuccessStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$TaskEmptyStateImplCopyWith<$Res> {
+  factory _$$TaskEmptyStateImplCopyWith(_$TaskEmptyStateImpl value,
+          $Res Function(_$TaskEmptyStateImpl) then) =
+      __$$TaskEmptyStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TaskEmptyStateImplCopyWithImpl<$Res>
+    extends _$TaskStateCopyWithImpl<$Res, _$TaskEmptyStateImpl>
+    implements _$$TaskEmptyStateImplCopyWith<$Res> {
+  __$$TaskEmptyStateImplCopyWithImpl(
+      _$TaskEmptyStateImpl _value, $Res Function(_$TaskEmptyStateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$TaskEmptyStateImpl implements TaskEmptyState {
+  const _$TaskEmptyStateImpl();
+
+  @override
+  String toString() {
+    return 'TaskState.empty()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$TaskEmptyStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isShowLoading) loading,
+    required TResult Function(String error) error,
+    required TResult Function(List<TaskIvy> tasks) success,
+    required TResult Function() empty,
+  }) {
+    return empty();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(List<TaskIvy> tasks)? success,
+    TResult? Function()? empty,
+  }) {
+    return empty?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isShowLoading)? loading,
+    TResult Function(String error)? error,
+    TResult Function(List<TaskIvy> tasks)? success,
+    TResult Function()? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TaskLoadingState value) loading,
+    required TResult Function(TaskErrorState value) error,
+    required TResult Function(TaskSuccessState value) success,
+    required TResult Function(TaskEmptyState value) empty,
+  }) {
+    return empty(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TaskLoadingState value)? loading,
+    TResult? Function(TaskErrorState value)? error,
+    TResult? Function(TaskSuccessState value)? success,
+    TResult? Function(TaskEmptyState value)? empty,
+  }) {
+    return empty?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TaskLoadingState value)? loading,
+    TResult Function(TaskErrorState value)? error,
+    TResult Function(TaskSuccessState value)? success,
+    TResult Function(TaskEmptyState value)? empty,
+    required TResult orElse(),
+  }) {
+    if (empty != null) {
+      return empty(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TaskEmptyState implements TaskState {
+  const factory TaskEmptyState() = _$TaskEmptyStateImpl;
 }

@@ -1,3 +1,4 @@
+import 'package:axon_ivy/core/network/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,12 +14,12 @@ class TaskRepositoryImpl extends TaskRepository {
   final TaskRemoteDataSource _remoteDataSource;
 
   @override
-  Future<Either<AppError, List<TaskIvy>>> getTasks() async {
+  Future<Either<Failure, List<TaskIvy>>> getTasks() async {
     try {
       final result = await _remoteDataSource.getTasks();
       return right(result);
-    } on AppError catch (exception) {
-      return left(AppError.handle(exception));
+    } catch (e) {
+      return left(AppError.handle(e).failure);
     }
   }
 }

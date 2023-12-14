@@ -2,7 +2,7 @@ import 'package:axon_ivy/util/widgets/bot_toast_helper.dart';
 import 'package:flutter/material.dart';
 
 abstract class BasePageScreen extends StatefulWidget {
-  const BasePageScreen({Key? key}) : super(key: key);
+  const BasePageScreen({super.key});
 }
 
 abstract class BasePageScreenState<Page extends BasePageScreen>

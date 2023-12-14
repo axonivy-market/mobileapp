@@ -104,17 +104,23 @@ class _TabBarScreenState extends State<TabBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: widget.child,
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 1,
-        type: BottomNavigationBarType.fixed,
-        selectedLabelStyle:
-            GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
-        unselectedLabelStyle:
-            GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w400),
-        currentIndex: _currentIndex,
-        selectedItemColor: AppColors.tropicSea,
-        items: tabs,
-        onTap: (index) => _onItemTapped(context, index),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(color: AppColors.mercury, width: 1.0),
+          ),
+        ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle:
+              GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
+          unselectedLabelStyle:
+              GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w400),
+          currentIndex: _currentIndex,
+          selectedItemColor: AppColors.tropicSea,
+          items: tabs,
+          onTap: (index) => _onItemTapped(context, index),
+        ),
       ),
     );
   }

@@ -26,7 +26,7 @@ mixin _$TaskIvy {
   String get fullRequestPath => throw _privateConstructorUsedError;
   bool get offline => throw _privateConstructorUsedError;
   DateTime get startTimeStamp => throw _privateConstructorUsedError;
-  DateTime? get expiredTimeStamp => throw _privateConstructorUsedError;
+  DateTime? get expiryTimeStamp => throw _privateConstructorUsedError;
   int get priority => throw _privateConstructorUsedError;
   int get state => throw _privateConstructorUsedError;
   String get activatorName => throw _privateConstructorUsedError;
@@ -48,7 +48,7 @@ abstract class $TaskIvyCopyWith<$Res> {
       String fullRequestPath,
       bool offline,
       DateTime startTimeStamp,
-      DateTime? expiredTimeStamp,
+      DateTime? expiryTimeStamp,
       int priority,
       int state,
       String activatorName});
@@ -73,7 +73,7 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
     Object? fullRequestPath = null,
     Object? offline = null,
     Object? startTimeStamp = null,
-    Object? expiredTimeStamp = freezed,
+    Object? expiryTimeStamp = freezed,
     Object? priority = null,
     Object? state = null,
     Object? activatorName = null,
@@ -103,9 +103,9 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
           ? _value.startTimeStamp
           : startTimeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      expiredTimeStamp: freezed == expiredTimeStamp
-          ? _value.expiredTimeStamp
-          : expiredTimeStamp // ignore: cast_nullable_to_non_nullable
+      expiryTimeStamp: freezed == expiryTimeStamp
+          ? _value.expiryTimeStamp
+          : expiryTimeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       priority: null == priority
           ? _value.priority
@@ -137,7 +137,7 @@ abstract class _$$TaskIvyImplCopyWith<$Res> implements $TaskIvyCopyWith<$Res> {
       String fullRequestPath,
       bool offline,
       DateTime startTimeStamp,
-      DateTime? expiredTimeStamp,
+      DateTime? expiryTimeStamp,
       int priority,
       int state,
       String activatorName});
@@ -160,7 +160,7 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
     Object? fullRequestPath = null,
     Object? offline = null,
     Object? startTimeStamp = null,
-    Object? expiredTimeStamp = freezed,
+    Object? expiryTimeStamp = freezed,
     Object? priority = null,
     Object? state = null,
     Object? activatorName = null,
@@ -190,9 +190,9 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
           ? _value.startTimeStamp
           : startTimeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      expiredTimeStamp: freezed == expiredTimeStamp
-          ? _value.expiredTimeStamp
-          : expiredTimeStamp // ignore: cast_nullable_to_non_nullable
+      expiryTimeStamp: freezed == expiryTimeStamp
+          ? _value.expiryTimeStamp
+          : expiryTimeStamp // ignore: cast_nullable_to_non_nullable
               as DateTime?,
       priority: null == priority
           ? _value.priority
@@ -220,7 +220,7 @@ class _$TaskIvyImpl implements _TaskIvy {
       this.fullRequestPath = "",
       this.offline = false,
       required this.startTimeStamp,
-      this.expiredTimeStamp = null,
+      this.expiryTimeStamp = null,
       this.priority = 0,
       this.state = 0,
       this.activatorName = ""});
@@ -246,7 +246,7 @@ class _$TaskIvyImpl implements _TaskIvy {
   final DateTime startTimeStamp;
   @override
   @JsonKey()
-  final DateTime? expiredTimeStamp;
+  final DateTime? expiryTimeStamp;
   @override
   @JsonKey()
   final int priority;
@@ -259,7 +259,7 @@ class _$TaskIvyImpl implements _TaskIvy {
 
   @override
   String toString() {
-    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiredTimeStamp: $expiredTimeStamp, priority: $priority, state: $state, activatorName: $activatorName)';
+    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiryTimeStamp: $expiryTimeStamp, priority: $priority, state: $state, activatorName: $activatorName)';
   }
 
   @override
@@ -276,8 +276,8 @@ class _$TaskIvyImpl implements _TaskIvy {
             (identical(other.offline, offline) || other.offline == offline) &&
             (identical(other.startTimeStamp, startTimeStamp) ||
                 other.startTimeStamp == startTimeStamp) &&
-            (identical(other.expiredTimeStamp, expiredTimeStamp) ||
-                other.expiredTimeStamp == expiredTimeStamp) &&
+            (identical(other.expiryTimeStamp, expiryTimeStamp) ||
+                other.expiryTimeStamp == expiryTimeStamp) &&
             (identical(other.priority, priority) ||
                 other.priority == priority) &&
             (identical(other.state, state) || other.state == state) &&
@@ -295,7 +295,7 @@ class _$TaskIvyImpl implements _TaskIvy {
       fullRequestPath,
       offline,
       startTimeStamp,
-      expiredTimeStamp,
+      expiryTimeStamp,
       priority,
       state,
       activatorName);
@@ -322,7 +322,7 @@ abstract class _TaskIvy implements TaskIvy {
       final String fullRequestPath,
       final bool offline,
       required final DateTime startTimeStamp,
-      final DateTime? expiredTimeStamp,
+      final DateTime? expiryTimeStamp,
       final int priority,
       final int state,
       final String activatorName}) = _$TaskIvyImpl;
@@ -342,7 +342,7 @@ abstract class _TaskIvy implements TaskIvy {
   @override
   DateTime get startTimeStamp;
   @override
-  DateTime? get expiredTimeStamp;
+  DateTime? get expiryTimeStamp;
   @override
   int get priority;
   @override

@@ -55,7 +55,6 @@ dev_dependencies:
   json_serializable: ^6.7.1
   injectable_generator: ^2.4.1
   retrofit_generator: ^8.0.5
-
 flutter_gen:
   output: lib/core/generated/
   integrations:

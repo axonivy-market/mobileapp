@@ -37,6 +37,9 @@ class AppColors {
   /// Color: #202020
   static const Color lead = Color(0xFF202020);
 
+  /// Color: #EBEBEB
+  static const Color mercury = Color(0xFFEBEBEB);
+
   /// Color: #2968C7
   static const Color mimesiaBlue = Color(0xFF2968C7);
 
