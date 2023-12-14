@@ -175,21 +175,21 @@ mixin _$ProcessState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
-    required TResult Function(AppError error) error,
+    required TResult Function(String error) error,
     required TResult Function(List<Process> processes) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
-    TResult? Function(AppError error)? error,
+    TResult? Function(String error)? error,
     TResult? Function(List<Process> processes)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
-    TResult Function(AppError error)? error,
+    TResult Function(String error)? error,
     TResult Function(List<Process> processes)? success,
     required TResult orElse(),
   }) =>
@@ -313,7 +313,7 @@ class _$ProcessLoadingStateImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
-    required TResult Function(AppError error) error,
+    required TResult Function(String error) error,
     required TResult Function(List<Process> processes) success,
   }) {
     return loading(isShowLoading);
@@ -323,7 +323,7 @@ class _$ProcessLoadingStateImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
-    TResult? Function(AppError error)? error,
+    TResult? Function(String error)? error,
     TResult? Function(List<Process> processes)? success,
   }) {
     return loading?.call(isShowLoading);
@@ -333,7 +333,7 @@ class _$ProcessLoadingStateImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
-    TResult Function(AppError error)? error,
+    TResult Function(String error)? error,
     TResult Function(List<Process> processes)? success,
     required TResult orElse(),
   }) {
@@ -394,7 +394,7 @@ abstract class _$$ProcessErrorStateImplCopyWith<$Res> {
           $Res Function(_$ProcessErrorStateImpl) then) =
       __$$ProcessErrorStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({AppError error});
+  $Res call({String error});
 }
 
 /// @nodoc
@@ -414,7 +414,7 @@ class __$$ProcessErrorStateImplCopyWithImpl<$Res>
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as AppError,
+              as String,
     ));
   }
 }
@@ -427,7 +427,7 @@ class _$ProcessErrorStateImpl
   const _$ProcessErrorStateImpl(this.error);
 
   @override
-  final AppError error;
+  final String error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -464,7 +464,7 @@ class _$ProcessErrorStateImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
-    required TResult Function(AppError error) error,
+    required TResult Function(String error) error,
     required TResult Function(List<Process> processes) success,
   }) {
     return error(this.error);
@@ -474,7 +474,7 @@ class _$ProcessErrorStateImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
-    TResult? Function(AppError error)? error,
+    TResult? Function(String error)? error,
     TResult? Function(List<Process> processes)? success,
   }) {
     return error?.call(this.error);
@@ -484,7 +484,7 @@ class _$ProcessErrorStateImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
-    TResult Function(AppError error)? error,
+    TResult Function(String error)? error,
     TResult Function(List<Process> processes)? success,
     required TResult orElse(),
   }) {
@@ -530,10 +530,9 @@ class _$ProcessErrorStateImpl
 }
 
 abstract class ProcessErrorState implements ProcessState {
-  const factory ProcessErrorState(final AppError error) =
-      _$ProcessErrorStateImpl;
+  const factory ProcessErrorState(final String error) = _$ProcessErrorStateImpl;
 
-  AppError get error;
+  String get error;
   @JsonKey(ignore: true)
   _$$ProcessErrorStateImplCopyWith<_$ProcessErrorStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -623,7 +622,7 @@ class _$ProcessSuccessStateImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
-    required TResult Function(AppError error) error,
+    required TResult Function(String error) error,
     required TResult Function(List<Process> processes) success,
   }) {
     return success(processes);
@@ -633,7 +632,7 @@ class _$ProcessSuccessStateImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
-    TResult? Function(AppError error)? error,
+    TResult? Function(String error)? error,
     TResult? Function(List<Process> processes)? success,
   }) {
     return success?.call(processes);
@@ -643,7 +642,7 @@ class _$ProcessSuccessStateImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
-    TResult Function(AppError error)? error,
+    TResult Function(String error)? error,
     TResult Function(List<Process> processes)? success,
     required TResult orElse(),
   }) {

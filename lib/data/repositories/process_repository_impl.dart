@@ -5,6 +5,8 @@ import 'package:axon_ivy/data/repositories/process_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../core/network/failure.dart';
+
 @Injectable(as: ProcessRepository)
 class ProcessRepositoryImpl extends ProcessRepository {
   ProcessRepositoryImpl(this._processRemoteDataSource);
@@ -12,12 +14,12 @@ class ProcessRepositoryImpl extends ProcessRepository {
   final ProcessRemoteDataSource _processRemoteDataSource;
 
   @override
-  Future<Either<AppError, List<Process>>> getProcesses() async {
+  Future<Either<Failure, List<Process>>> getProcesses() async {
     try {
       final result = await _processRemoteDataSource.getProcesses();
       return right(result);
     } catch (exception) {
-      return left(AppError.handle(exception));
+      return left(AppError.handle(exception).failure);
     }
   }
 }
