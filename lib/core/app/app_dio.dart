@@ -1,12 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import '../utils/shared_preference.dart';
 
 class AuthInterceptor extends Interceptor {
   static const String _username = "Developer";
@@ -23,7 +20,7 @@ class AuthInterceptor extends Interceptor {
 }
 
 class AppDio with DioMixin implements Dio {
-  AppDio({required String baseUrl}) {
+  AppDio() {
     String platform = '';
     if (Platform.isAndroid) {
       platform = 'Android';
@@ -31,7 +28,6 @@ class AppDio with DioMixin implements Dio {
       platform = 'iOS';
     }
     options = BaseOptions(
-      baseUrl: baseUrl,
       connectTimeout: const Duration(seconds: 60),
       sendTimeout: const Duration(seconds: 60),
       receiveTimeout: const Duration(seconds: 60),

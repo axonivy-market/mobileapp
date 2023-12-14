@@ -30,6 +30,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/camera.svg
   SvgGenImage get camera => const SvgGenImage('assets/icons/camera.svg');
 
+  /// File path: assets/icons/chevron_right.svg
+  SvgGenImage get chevronRight =>
+      const SvgGenImage('assets/icons/chevron_right.svg');
+
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
 
@@ -64,6 +68,10 @@ class $AssetsIconsGen {
   SvgGenImage get processBottomBar =>
       const SvgGenImage('assets/icons/process_bottom_bar.svg');
 
+  /// File path: assets/icons/process_empty.svg
+  SvgGenImage get processEmpty =>
+      const SvgGenImage('assets/icons/process_empty.svg');
+
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
@@ -88,6 +96,7 @@ class $AssetsIconsGen {
   /// List of all assets
   List<SvgGenImage> get values => [
         camera,
+        chevronRight,
         filter,
         list,
         logo,
@@ -98,6 +107,7 @@ class $AssetsIconsGen {
         priorityLow,
         process,
         processBottomBar,
+        processEmpty,
         search,
         searchBottomBar,
         settingBottomBar,

@@ -1,53 +1,96 @@
-import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
+import 'package:axon_ivy/data/models/processes/process.dart';
+import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
+import 'package:axon_ivy/presentation/process/process.dart';
+import 'package:axon_ivy/util/widgets/loading_widget.dart';
+import 'package:axon_ivy/util/widgets/widgets.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class ProcessesView extends StatelessWidget {
+class ProcessesView extends StatefulWidget {
   const ProcessesView({super.key});
 
   @override
+  State<ProcessesView> createState() => _ProcessesViewState();
+}
+
+class _ProcessesViewState extends State<ProcessesView> {
+  late final ProcessBloc _processBloc;
+
+  @override
+  void initState() {
+    super.initState();
+    _processBloc = getIt<ProcessBloc>();
+    _processBloc.add(const ProcessEvent.getProcess());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                AppAssets.icons.logo.svg(),
-                Expanded(child: Container()),
-                Expanded(child: Container()),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Text(
-                      'last updated 20:17',
-                      style: TextStyle(color: AppColors.babyTalkGrey),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    AppAssets.icons.offline.svg(),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    AppAssets.icons.notification.svg()
-                  ],
-                )
-              ],
-            ),
-          ),
-          const Expanded(
-            child: Center(
-              child: Text(
-                "Proccesses View",
-                style: TextStyle(fontSize: 30),
+    return BlocProvider(
+      create: (context) => _processBloc,
+      child: Scaffold(
+        appBar: const HomeAppBar(),
+        body: BlocBuilder<ProcessBloc, ProcessState>(
+          builder: (context, state) {
+            if (state is ProcessLoadingState) {
+              return const LoadingWidget();
+            }
+            if (state is ProcessErrorState) {
+              return Center(
+                child: Text(
+                  state.error.failure.message.tr(),
+                  style: GoogleFonts.inter(
+                      fontSize: 17, fontWeight: FontWeight.w600),
+                ),
+              );
+            }
+            if (state is ProcessSuccessState) {
+              final processes = state.processes;
+              return RefreshIndicator(
+                color: AppColors.tropicSea,
+                onRefresh: () async {
+                  _processBloc.add(const ProcessEvent.getProcess());
+                },
+                child: processes.isEmpty
+                    ? SingleChildScrollView(
+                        physics: const AlwaysScrollableScrollPhysics(),
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height -
+                              Constants.appBarHeight -
+                              Constants.bottomNavigationBarHeight,
+                          child: const ProcessEmptyWidget(),
+                        ),
+                      )
+                    : _processList(processes),
+              );
+            }
+            return Container();
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _processList(List<Process> processes) {
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: ListView.builder(
+        itemCount: processes.length,
+        itemBuilder: (context, index) {
+          final process = processes[index];
+          return Column(
+            children: [
+              ProcessItemWidget(
+                process: process,
               ),
-            ),
-          )
-        ],
+              const SizedBox(height: 10),
+            ],
+          );
+        },
       ),
     );
   }
