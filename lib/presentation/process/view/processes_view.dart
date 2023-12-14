@@ -42,7 +42,7 @@ class _ProcessesViewState extends State<ProcessesView> {
             if (state is ProcessErrorState) {
               return Center(
                 child: Text(
-                  state.error.failure.message.tr(),
+                  state.error,
                 ),
               );
             }

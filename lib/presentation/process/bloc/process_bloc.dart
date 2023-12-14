@@ -36,7 +36,7 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
       response.fold(
         (error) {
           emitter(const ProcessState.loading(false));
-          emitter(ProcessState.error(error));
+          emitter(ProcessState.error(error.message));
         },
         (processes) {
           emitter(const ProcessState.loading(false));
@@ -44,6 +44,7 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
         },
       );
     } catch (e) {
+      emitter(ProcessState.error(AppError.handle(e).failure.message));
       if (kDebugMode) {
         print(e);
       }
