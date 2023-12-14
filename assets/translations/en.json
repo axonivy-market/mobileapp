@@ -8,8 +8,7 @@
   "splashCopyright": "© Axon Ivy – Version {version}",
   "process": {
     "emptyList": "You don’t have any processes at the moment...",
-    "noDescription": "No description",
-    "nameNotAvailable": "[Process name not available]"
+    "noDescription": "No description"
   }
 }
   

@@ -57,7 +57,7 @@ class ProcessItemWidget extends StatelessWidget {
               children: [
                 Text(
                   process.name.isEmptyOrNull
-                      ? 'process.nameNotAvailable'.tr()
+                      ? process.fullRequestPath.split('/').last
                       : process.name,
                   style: GoogleFonts.inter(
                       fontSize: 17,
