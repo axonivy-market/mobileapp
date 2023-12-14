@@ -32,7 +32,7 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
     return Row(
       children: [
         Text(
-          "expired".tr(),
+          "tasksView.expired".tr(),
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w400,

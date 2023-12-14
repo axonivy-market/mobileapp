@@ -1,3 +1,4 @@
+import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/di/di_setup.dart';
+import '../../../core/generated/colors.gen.dart';
 import '../../../util/widgets/filter_widget.dart';
 import '../../../util/widgets/home_appbar.dart';
 
@@ -44,6 +46,7 @@ class _TasksViewState extends State<TasksView> {
             } else if (state is TaskSuccessState) {
               List<TaskIvy> tasks = state.tasks;
               return RefreshIndicator(
+                color: AppColors.tropicSea,
                 onRefresh: () async {
                   tasks = [];
                   _taskBloc.add(const TaskEvent.getTasks());
@@ -86,6 +89,7 @@ class _TasksViewState extends State<TasksView> {
             } else {
               return Center(
                 child: RefreshIndicator(
+                  color: AppColors.tropicSea,
                   onRefresh: () async {
                     _taskBloc.add(const TaskEvent.getTasks());
                   },

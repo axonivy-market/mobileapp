@@ -1,9 +1,14 @@
 import 'dart:async';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/shared/extensions/list_ext.dart';
+import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import '../../../core/app/app_config.dart';
+import '../../../core/di/di_setup.dart';
+import '../../../core/utils/shared_preference.dart';
 import '../../../data/models/task/task.dart';
 import '../../../data/repositories/task_repository.dart';
 
@@ -16,6 +21,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final TaskRepository _taskRepository;
   TaskBloc(this._taskRepository) : super(const TaskState.loading(false)) {
     on<_GetTasks>(_getTasks);
+    getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
+        ? AppConfig.baseUrl
+        : SharedPrefs.getBaseUrl!;
   }
 
   FutureOr<void> _getTasks(event, Emitter emit) async {
