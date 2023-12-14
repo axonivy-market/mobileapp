@@ -141,7 +141,8 @@ class TaskItemWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width - 42 - 92 - 10,
                     child: Text(
                       description.isEmptyOrNull
-                          ? "tasksView.noTaskDescription".tr()
+                          // ignore: prefer_interpolation_to_compose_strings
+                          ? "tasksView.noTaskDescription".tr() + "\n"
                           : description,
                       style: GoogleFonts.inter(
                         fontSize: 13,
