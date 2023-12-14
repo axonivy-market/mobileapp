@@ -9,16 +9,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/di/di_setup.dart';
 import '../../../util/widgets/filter_widget.dart';
 import '../../../util/widgets/home_appbar.dart';
-import '../../base_view/base_view.dart';
 
-class TasksView extends BasePageScreen {
+class TasksView extends StatefulWidget {
   const TasksView({super.key});
 
   @override
   State<TasksView> createState() => _TasksViewState();
 }
 
-class _TasksViewState extends BasePageScreenState<TasksView> {
+class _TasksViewState extends State<TasksView> {
   late final TaskBloc _taskBloc;
 
   @override
@@ -71,7 +70,7 @@ class _TasksViewState extends BasePageScreenState<TasksView> {
                                     description: tasks[index].description,
                                     priority: tasks[index].priority,
                                     expiryTimeStamp:
-                                        tasks[index].expiredTimeStamp,
+                                        tasks[index].expiryTimeStamp,
                                   ),
                                   const SizedBox(height: 10),
                                 ],

@@ -12,7 +12,7 @@ class TaskIvy with _$TaskIvy {
     @Default("") String fullRequestPath,
     @Default(false) bool offline,
     required DateTime startTimeStamp,
-    @Default(null) DateTime? expiredTimeStamp,
+    @Default(null) DateTime? expiryTimeStamp,
     @Default(0) int priority,
     @Default(0) int state,
     @Default("") String activatorName,

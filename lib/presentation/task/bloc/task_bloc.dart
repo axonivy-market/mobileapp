@@ -51,12 +51,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       }
       tasks.sublist(i, j).sort(
         (l, r) {
-          if (l.expiredTimeStamp != null && r.expiredTimeStamp != null) {
-            return r.expiredTimeStamp!.compareTo(l.expiredTimeStamp!);
-          } else if (l.expiredTimeStamp != null && r.expiredTimeStamp == null) {
-            return 1; // null sắp sau
+          if (l.expiryTimeStamp != null && r.expiryTimeStamp != null) {
+            return r.expiryTimeStamp!.compareTo(l.expiryTimeStamp!);
+          } else if (l.expiryTimeStamp != null && r.expiryTimeStamp == null) {
+            return 1;
           } else {
-            return 0; // cả hai đều null
+            return 0;
           }
         },
       );

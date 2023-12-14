@@ -14,9 +14,9 @@ _$TaskIvyImpl _$$TaskIvyImplFromJson(Map<String, dynamic> json) =>
       fullRequestPath: json['fullRequestPath'] as String? ?? "",
       offline: json['offline'] as bool? ?? false,
       startTimeStamp: DateTime.parse(json['startTimeStamp'] as String),
-      expiredTimeStamp: json['expiredTimeStamp'] == null
+      expiryTimeStamp: json['expiryTimeStamp'] == null
           ? null
-          : DateTime.parse(json['expiredTimeStamp'] as String),
+          : DateTime.parse(json['expiryTimeStamp'] as String),
       priority: json['priority'] as int? ?? 0,
       state: json['state'] as int? ?? 0,
       activatorName: json['activatorName'] as String? ?? "",
@@ -30,7 +30,7 @@ Map<String, dynamic> _$$TaskIvyImplToJson(_$TaskIvyImpl instance) =>
       'fullRequestPath': instance.fullRequestPath,
       'offline': instance.offline,
       'startTimeStamp': instance.startTimeStamp.toIso8601String(),
-      'expiredTimeStamp': instance.expiredTimeStamp?.toIso8601String(),
+      'expiryTimeStamp': instance.expiryTimeStamp?.toIso8601String(),
       'priority': instance.priority,
       'state': instance.state,
       'activatorName': instance.activatorName,
