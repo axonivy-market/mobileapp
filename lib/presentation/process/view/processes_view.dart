@@ -43,8 +43,6 @@ class _ProcessesViewState extends State<ProcessesView> {
               return Center(
                 child: Text(
                   state.error.failure.message.tr(),
-                  style: GoogleFonts.inter(
-                      fontSize: 17, fontWeight: FontWeight.w600),
                 ),
               );
             }
