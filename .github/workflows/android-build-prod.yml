@@ -38,7 +38,7 @@ jobs:
         working-directory: android
 
       - name: Build abb release file
-        run: flutter build appbundle --flavor prod --build-name ${{ env.VersionName }} --build-number ${{github.run_number}}
+        run: flutter build appbundle --flavor prod --target lib/main.dart --build-name ${{ env.VersionName }} --build-number ${{github.run_number}}
 
       - name: Upload to Play Store (Internal Testing)
         uses: r0adkll/upload-google-play@v1.1.2
