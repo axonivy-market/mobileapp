@@ -1,9 +1,38 @@
 {
-    "BottomTabBar": {
-      "Tasks": "Tasks",
-      "Processes": "Processes",
-      "Search": "Search",
-      "Profile": "Profile"
-    }
-  }
+  "bottomTabBar": {
+    "tasks": "Tasks",
+    "processes": "Processes",
+    "search": "Search",
+    "profile": "Profile"
+  },
+  "splashCopyright": "© Axon Ivy – Version {version}",
+  "process": {
+    "emptyList": "You don’t have any processes at the moment...",
+    "noDescription": "No description"
   
+  },
+  "tasksView": {
+    "expired" : "Expired",
+    "emptyTask": "Nice work! You don't have any tasks at the moment",
+    "noExpiryDate": "No expiry date",
+    "noTaskName": "[Task name is not available]",
+    "noTaskDescription": "No description"
+  },
+    
+  "appName": "Error handler",
+  "noRouteFound": "No Route Found",
+  "success": "success",
+  "badRequestError": "bad request. try again later",
+  "noContent": "success with not content",
+  "forbiddenError": "forbidden request. try again later",
+  "unauthorizedError": "user unauthorized, try again later",
+  "notFoundError": "url not found, try again later",
+  "conflictError": "conflict found, try again later",
+  "internalServerError": "some thing went wrong, try again later",
+  "unknownError": "some thing went wrong, try again later",
+  "timeoutError": "time out, try again late",
+  "defaultError": "some thing went wrong, try again later",
+  "cacheError": "cache error, try again later",
+  "noInternetError": "Please check your internet connection",
+  "connectionError": "Please check your base url"
+}

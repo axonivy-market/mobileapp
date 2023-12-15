@@ -7,13 +7,19 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+
+      - name: JSON to variables
+        uses: antifree/json-to-variables@v1.1.1
+        with:
+          filename: 'config/development_version.json'
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.13.9'
+          flutter-version: '3.16.2'
           channel: 'stable'
           cache: true
+
       - name: Install dependencies
         run: flutter pub get
 
@@ -32,9 +38,9 @@ jobs:
         working-directory: android
 
       - name: Build abb release file
-        run: flutter build appbundle --flavor dev
+        run: flutter build appbundle --flavor dev --target lib/main_dev.dart --build-name ${{ env.VersionName }} --build-number ${{github.run_number}}
 
-      - name: Upload to Play Store (Beta Testing)
+      - name: Upload to Play Store (Internal Testing)
         uses: r0adkll/upload-google-play@v1.1.2
         with:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
@@ -42,4 +48,3 @@ jobs:
           releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab
           mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
           track: internal
-          changesNotSentForReview: true

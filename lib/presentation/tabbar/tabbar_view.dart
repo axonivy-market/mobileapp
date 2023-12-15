@@ -1,10 +1,11 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/router/app_router.dart';
+import 'package:axon_ivy/util/widgets/bottom_tab_bar_item.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/generated/colors.gen.dart';
-import '../util/widgets/bottom_tab_bar_item.dart';
 
 extension GoRouterExtension on GoRouter {
   String location() {
@@ -18,7 +19,7 @@ extension GoRouterExtension on GoRouter {
 }
 
 class TabBarScreen extends StatefulWidget {
-  const TabBarScreen({Key? key, required this.child}) : super(key: key);
+  const TabBarScreen({super.key, required this.child});
 
   final Widget child;
 
@@ -29,7 +30,7 @@ class TabBarScreen extends StatefulWidget {
 class _TabBarScreenState extends State<TabBarScreen> {
   final tabs = [
     BottomBarTabItem(
-      initialLocation: '/task',
+      initialLocation: AppRoutes.task,
       icon: AppAssets.icons.list.svg(
         height: 20,
       ),
@@ -40,10 +41,10 @@ class _TabBarScreenState extends State<TabBarScreen> {
           BlendMode.srcIn,
         ),
       ),
-      label: tr("Tasks"),
+      label: tr("bottomTabBar.tasks"),
     ),
     BottomBarTabItem(
-      initialLocation: '/processes',
+      initialLocation: AppRoutes.processes,
       icon: AppAssets.icons.process.svg(height: 20),
       activeIcon: AppAssets.icons.process.svg(
         height: 20,
@@ -52,10 +53,10 @@ class _TabBarScreenState extends State<TabBarScreen> {
           BlendMode.srcIn,
         ),
       ),
-      label: tr('Processes'),
+      label: tr('bottomTabBar.processes'),
     ),
     BottomBarTabItem(
-      initialLocation: '/search',
+      initialLocation: AppRoutes.search,
       icon: AppAssets.icons.search.svg(height: 20),
       activeIcon: AppAssets.icons.search.svg(
         height: 20,
@@ -64,10 +65,10 @@ class _TabBarScreenState extends State<TabBarScreen> {
           BlendMode.srcIn,
         ),
       ),
-      label: tr('Search'),
+      label: tr('bottomTabBar.search'),
     ),
     BottomBarTabItem(
-      initialLocation: '/settings',
+      initialLocation: AppRoutes.profile,
       icon: AppAssets.icons.user.svg(height: 20),
       activeIcon: AppAssets.icons.user.svg(
         height: 20,
@@ -76,7 +77,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
           BlendMode.srcIn,
         ),
       ),
-      label: tr('Profile'),
+      label: tr('bottomTabBar.profile'),
     )
   ];
 
@@ -103,17 +104,23 @@ class _TabBarScreenState extends State<TabBarScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: widget.child,
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 1,
-        type: BottomNavigationBarType.fixed,
-        selectedLabelStyle:
-            GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
-        unselectedLabelStyle:
-            GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w400),
-        currentIndex: _currentIndex,
-        selectedItemColor: AppColors.tropicSea,
-        items: tabs,
-        onTap: (index) => _onItemTapped(context, index),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(color: AppColors.mercury, width: 1.0),
+          ),
+        ),
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedLabelStyle:
+              GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
+          unselectedLabelStyle:
+              GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w400),
+          currentIndex: _currentIndex,
+          selectedItemColor: AppColors.tropicSea,
+          items: tabs,
+          onTap: (index) => _onItemTapped(context, index),
+        ),
       ),
     );
   }
