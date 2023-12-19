@@ -101,6 +101,7 @@ class TaskItemWidget extends StatelessWidget {
     required this.priority,
     required this.expiryTimeStamp,
   });
+
   final String name;
   final String description;
   final int priority;
@@ -109,6 +110,7 @@ class TaskItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.fromLTRB(5, 10, 0, 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),

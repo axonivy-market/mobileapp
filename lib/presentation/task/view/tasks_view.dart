@@ -1,16 +1,15 @@
-import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
+import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/di/di_setup.dart';
 import '../../../core/generated/colors.gen.dart';
 import '../../../util/widgets/filter_widget.dart';
-import '../../../util/widgets/home_appbar.dart';
 
 class TasksView extends StatefulWidget {
   const TasksView({super.key});
@@ -38,7 +37,7 @@ class _TasksViewState extends State<TasksView> {
         body: BlocBuilder<TaskBloc, TaskState>(
           builder: (BuildContext context, TaskState state) {
             if (state is TaskLoadingState) {
-              return const Center(child: CircularProgressIndicator());
+              return const LoadingWidget();
             } else if (state is TaskErrorState) {
               return Center(
                 child: Text(state.error),
@@ -66,17 +65,11 @@ class _TasksViewState extends State<TasksView> {
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             itemCount: tasks.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return Column(
-                                children: [
-                                  TaskItemWidget(
-                                    name: tasks[index].name,
-                                    description: tasks[index].description,
-                                    priority: tasks[index].priority,
-                                    expiryTimeStamp:
-                                        tasks[index].expiryTimeStamp,
-                                  ),
-                                  const SizedBox(height: 10),
-                                ],
+                              return TaskItemWidget(
+                                name: tasks[index].name,
+                                description: tasks[index].description,
+                                priority: tasks[index].priority,
+                                expiryTimeStamp: tasks[index].expiryTimeStamp,
                               );
                             },
                           ),

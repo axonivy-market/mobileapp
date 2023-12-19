@@ -4,12 +4,9 @@ import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
-import 'package:axon_ivy/util/widgets/loading_widget.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ProcessesView extends StatefulWidget {
   const ProcessesView({super.key});
@@ -74,22 +71,15 @@ class _ProcessesViewState extends State<ProcessesView> {
   }
 
   Widget _processList(List<Process> processes) {
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: ListView.builder(
-        itemCount: processes.length,
-        itemBuilder: (context, index) {
-          final process = processes[index];
-          return Column(
-            children: [
-              ProcessItemWidget(
-                process: process,
-              ),
-              const SizedBox(height: 10),
-            ],
-          );
-        },
-      ),
+    return ListView.builder(
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      itemCount: processes.length,
+      itemBuilder: (context, index) {
+        final process = processes[index];
+        return ProcessItemWidget(
+          process: process,
+        );
+      },
     );
   }
 }
