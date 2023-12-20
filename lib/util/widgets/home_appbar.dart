@@ -3,9 +3,13 @@ import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:flutter/material.dart';
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const HomeAppBar({super.key, this.isShowLastUpdated = false});
+  const HomeAppBar(
+      {super.key,
+      this.isShowLastUpdated = false,
+      this.scrolledUnderElevation = 1.0});
 
   final bool isShowLastUpdated;
+  final double scrolledUnderElevation;
 
   @override
   Size get preferredSize => const Size.fromHeight(50);
@@ -13,7 +17,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      scrolledUnderElevation: 1,
+      scrolledUnderElevation: scrolledUnderElevation,
       shadowColor: AppColors.mercury,
       surfaceTintColor: Colors.white,
       elevation: 0,

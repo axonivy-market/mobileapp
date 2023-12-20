@@ -34,12 +34,27 @@ class $AssetsIconsGen {
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
 
+  /// File path: assets/icons/ic_close.svg
+  SvgGenImage get icClose => const SvgGenImage('assets/icons/ic_close.svg');
+
   /// File path: assets/icons/ic_database.svg
   SvgGenImage get icDatabase =>
       const SvgGenImage('assets/icons/ic_database.svg');
 
   /// File path: assets/icons/ic_note.svg
   SvgGenImage get icNote => const SvgGenImage('assets/icons/ic_note.svg');
+
+  /// File path: assets/icons/ic_search_initial.svg
+  SvgGenImage get icSearchInitial =>
+      const SvgGenImage('assets/icons/ic_search_initial.svg');
+
+  /// File path: assets/icons/ic_search_not_found.svg
+  SvgGenImage get icSearchNotFound =>
+      const SvgGenImage('assets/icons/ic_search_not_found.svg');
+
+  /// File path: assets/icons/ic_search_text.svg
+  SvgGenImage get icSearchText =>
+      const SvgGenImage('assets/icons/ic_search_text.svg');
 
   /// File path: assets/icons/ic_trigger.svg
   SvgGenImage get icTrigger => const SvgGenImage('assets/icons/ic_trigger.svg');
@@ -89,10 +104,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
-  /// File path: assets/icons/search_bottom_bar.svg
-  SvgGenImage get searchBottomBar =>
-      const SvgGenImage('assets/icons/search_bottom_bar.svg');
-
   /// File path: assets/icons/setting_bottom_bar.svg
   SvgGenImage get settingBottomBar =>
       const SvgGenImage('assets/icons/setting_bottom_bar.svg');
@@ -111,8 +122,12 @@ class $AssetsIconsGen {
   List<SvgGenImage> get values => [
         chevronRight,
         filter,
+        icClose,
         icDatabase,
         icNote,
+        icSearchInitial,
+        icSearchNotFound,
+        icSearchText,
         icTrigger,
         icUsers,
         list,
@@ -127,7 +142,6 @@ class $AssetsIconsGen {
         processBottomBar,
         processEmpty,
         search,
-        searchBottomBar,
         settingBottomBar,
         sorting,
         taskBottomBar,

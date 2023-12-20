@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/core/shared/extensions/task_ext.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,7 +15,9 @@ import '../../../data/repositories/task_repository.dart';
 import '../../../util/resources/constants.dart';
 
 part 'task_event.dart';
+
 part 'task_state.dart';
+
 part 'task_bloc.freezed.dart';
 
 @injectable
@@ -57,7 +60,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           emit(TaskState.error(l.message));
         },
         (r) {
-          emit(TaskState.success(_sortDefaultTasks(r, event.activeFilter)));
+          emit(TaskState.success(
+              _filterTasksServer(event.activeFilter, r.sortDefaultTasks)));
         },
       );
     } catch (e) {
@@ -68,31 +72,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   List<TaskIvy> _filterExpiredTasks(List<TaskIvy> tasks) {
     if (tasks.isEmpty) return tasks;
     return tasks.where((task) => task.expiryTimeStamp.isExpired).toList();
-  }
-
-  List<TaskIvy> _sortDefaultTasks(List<TaskIvy> tasks, FilterType filterType) {
-    if (tasks.isEmpty) return tasks;
-    tasks.sort((l, r) => l.priority.compareTo(r.priority));
-
-    for (int i = 0; i < tasks.length; i++) {
-      int j = i + 1;
-      while (j < tasks.length && tasks[j].priority == tasks[i].priority) {
-        j++;
-      }
-      tasks.sublist(i, j).sort(
-        (l, r) {
-          if (l.expiryTimeStamp != null && r.expiryTimeStamp != null) {
-            return r.expiryTimeStamp!.compareTo(l.expiryTimeStamp!);
-          } else if (l.expiryTimeStamp != null && r.expiryTimeStamp == null) {
-            return 1;
-          } else {
-            return 0;
-          }
-        },
-      );
-      i = j - 1;
-    }
-    return _filterTasksServer(filterType, tasks);
   }
 
   List<TaskIvy> _filterTasksServer(FilterType filterType, List<TaskIvy> tasks) {
