@@ -4,6 +4,7 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
+import 'package:axon_ivy/util/resources/resources.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,12 +12,10 @@ import 'package:google_fonts/google_fonts.dart';
 final _randomizer = Random();
 
 final _sampleImages = [
-  AppAssets.icons.process,
-  AppAssets.icons.camera,
-  AppAssets.icons.paperclip,
-  AppAssets.icons.filter,
-  AppAssets.icons.list,
-  AppAssets.icons.notification
+  AppAssets.icons.icDatabase,
+  AppAssets.icons.icTrigger,
+  AppAssets.icons.icNote,
+  AppAssets.icons.icUsers,
 ];
 
 Widget getProcessIcon() {
@@ -33,8 +32,9 @@ class ProcessItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 80,
-      padding: const EdgeInsets.fromLTRB(5, 8, 5, 8),
+      margin: const EdgeInsets.only(bottom: 10),
+      height: AppSize.s80,
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.bleachedSilk,
@@ -42,13 +42,7 @@ class ProcessItemWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 0),
-            child: SizedBox.square(
-              dimension: 21,
-              child: getProcessIcon(),
-            ),
-          ),
+          getProcessIcon(),
           const SizedBox(width: 5),
           Expanded(
             child: Column(

@@ -27,15 +27,25 @@ class $AssetsEnvGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/camera.svg
-  SvgGenImage get camera => const SvgGenImage('assets/icons/camera.svg');
-
   /// File path: assets/icons/chevron_right.svg
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/icons/chevron_right.svg');
 
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
+
+  /// File path: assets/icons/ic_database.svg
+  SvgGenImage get icDatabase =>
+      const SvgGenImage('assets/icons/ic_database.svg');
+
+  /// File path: assets/icons/ic_note.svg
+  SvgGenImage get icNote => const SvgGenImage('assets/icons/ic_note.svg');
+
+  /// File path: assets/icons/ic_trigger.svg
+  SvgGenImage get icTrigger => const SvgGenImage('assets/icons/ic_trigger.svg');
+
+  /// File path: assets/icons/ic_users.svg
+  SvgGenImage get icUsers => const SvgGenImage('assets/icons/ic_users.svg');
 
   /// File path: assets/icons/list.svg
   SvgGenImage get list => const SvgGenImage('assets/icons/list.svg');
@@ -99,9 +109,12 @@ class $AssetsIconsGen {
 
   /// List of all assets
   List<SvgGenImage> get values => [
-        camera,
         chevronRight,
         filter,
+        icDatabase,
+        icNote,
+        icTrigger,
+        icUsers,
         list,
         logo,
         notification,
