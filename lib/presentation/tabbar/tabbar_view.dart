@@ -31,11 +31,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
   final tabs = [
     BottomBarTabItem(
       initialLocation: AppRoutes.task,
-      icon: AppAssets.icons.list.svg(
-        height: 20,
-      ),
+      icon: AppAssets.icons.list.svg(),
       activeIcon: AppAssets.icons.list.svg(
-        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.tropicSea,
           BlendMode.srcIn,
@@ -45,9 +42,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: AppRoutes.processes,
-      icon: AppAssets.icons.process.svg(height: 20),
+      icon: AppAssets.icons.process.svg(),
       activeIcon: AppAssets.icons.process.svg(
-        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.tropicSea,
           BlendMode.srcIn,
@@ -57,9 +53,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: AppRoutes.search,
-      icon: AppAssets.icons.search.svg(height: 20),
+      icon: AppAssets.icons.search.svg(),
       activeIcon: AppAssets.icons.search.svg(
-        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.tropicSea,
           BlendMode.srcIn,
@@ -69,9 +64,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: AppRoutes.profile,
-      icon: AppAssets.icons.user.svg(height: 20),
+      icon: AppAssets.icons.user.svg(),
       activeIcon: AppAssets.icons.user.svg(
-        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.tropicSea,
           BlendMode.srcIn,
