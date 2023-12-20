@@ -12,18 +12,16 @@ import 'package:google_fonts/google_fonts.dart';
 final _randomizer = Random();
 
 final _sampleImages = [
-  AppAssets.icons.process,
-  AppAssets.icons.camera,
-  AppAssets.icons.paperclip,
-  AppAssets.icons.filter,
-  AppAssets.icons.list,
-  AppAssets.icons.notification
+  AppAssets.icons.icDatabase,
+  AppAssets.icons.icTrigger,
+  AppAssets.icons.icNote,
+  AppAssets.icons.icUsers,
 ];
 
 Widget getProcessIcon() {
   return _sampleImages
       .elementAt(_randomizer.nextInt(_sampleImages.length))
-      .svg(height: 18, width: 18);
+      .svg();
 }
 
 class ProcessItemWidget extends StatelessWidget {

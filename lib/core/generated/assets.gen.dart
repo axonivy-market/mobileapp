@@ -37,6 +37,19 @@ class $AssetsIconsGen {
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
 
+  /// File path: assets/icons/ic_database.svg
+  SvgGenImage get icDatabase =>
+      const SvgGenImage('assets/icons/ic_database.svg');
+
+  /// File path: assets/icons/ic_note.svg
+  SvgGenImage get icNote => const SvgGenImage('assets/icons/ic_note.svg');
+
+  /// File path: assets/icons/ic_trigger.svg
+  SvgGenImage get icTrigger => const SvgGenImage('assets/icons/ic_trigger.svg');
+
+  /// File path: assets/icons/ic_users.svg
+  SvgGenImage get icUsers => const SvgGenImage('assets/icons/ic_users.svg');
+
   /// File path: assets/icons/list.svg
   SvgGenImage get list => const SvgGenImage('assets/icons/list.svg');
 
@@ -102,6 +115,10 @@ class $AssetsIconsGen {
         camera,
         chevronRight,
         filter,
+        icDatabase,
+        icNote,
+        icTrigger,
+        icUsers,
         list,
         logo,
         notification,
