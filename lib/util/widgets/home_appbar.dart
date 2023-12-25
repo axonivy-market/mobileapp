@@ -13,7 +13,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      scrolledUnderElevation: 0,
+      scrolledUnderElevation: 1,
+      shadowColor: AppColors.mercury,
+      surfaceTintColor: Colors.white,
+      elevation: 0,
       leadingWidth: 120,
       leading: Padding(
         padding: const EdgeInsets.only(left: 15),

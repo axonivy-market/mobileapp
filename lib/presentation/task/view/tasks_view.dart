@@ -7,13 +7,13 @@ import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
+import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/di/di_setup.dart';
 import '../../../core/generated/colors.gen.dart';
 import '../../../util/widgets/filter_widget.dart';
-import '../../../util/widgets/home_appbar.dart';
 
 class TasksView extends StatefulWidget {
   const TasksView({super.key});
@@ -41,7 +41,7 @@ class _TasksViewState extends State<TasksView> {
         body: BlocBuilder<TaskBloc, TaskState>(
           builder: (BuildContext context, TaskState state) {
             if (state is TaskLoadingState) {
-              return const Center(child: CircularProgressIndicator());
+              return const LoadingWidget();
             } else if (state is TaskErrorState) {
               return Center(
                 child: Text(state.error),
