@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
+import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
@@ -68,12 +71,17 @@ class _TasksViewState extends State<TasksView> {
                             itemBuilder: (BuildContext context, int index) {
                               return Column(
                                 children: [
-                                  TaskItemWidget(
-                                    name: tasks[index].name,
-                                    description: tasks[index].description,
-                                    priority: tasks[index].priority,
-                                    expiryTimeStamp:
-                                        tasks[index].expiryTimeStamp,
+                                  GestureDetector(
+                                    onLongPress: () {
+                                      _showDetails(context, tasks[index]);
+                                    },
+                                    child: TaskItemWidget(
+                                      name: tasks[index].name,
+                                      description: tasks[index].description,
+                                      priority: tasks[index].priority,
+                                      expiryTimeStamp:
+                                          tasks[index].expiryTimeStamp,
+                                    ),
                                   ),
                                   const SizedBox(height: 10),
                                 ],
@@ -103,6 +111,20 @@ class _TasksViewState extends State<TasksView> {
           },
         ),
       ),
+    );
+  }
+
+  void _showDetails(BuildContext context, TaskIvy task) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return TaskDetailsWidget(task: task);
+      },
     );
   }
 }
