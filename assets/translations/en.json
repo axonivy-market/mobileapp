@@ -18,6 +18,22 @@
     "noTaskName": "[Task name is not available]",
     "noTaskDescription": "No description"
   },
+    "taskDetails":{
+      "attactments":"Attachments",
+      "expiryDate":"Expiry date",
+      "creationDate":"Creation date",
+      "category":"Category",
+      "priority":"Priority",
+      "responsible":"responsible",
+      "startTask":"Start Task",
+      "na":"N/A"
+  },
+  "priority":{
+    "exception":"Exception",
+    "high":"High",
+    "normal":"Normal",
+    "low":"Low"
+  },
     
   "appName": "Error handler",
   "noRouteFound": "No Route Found",

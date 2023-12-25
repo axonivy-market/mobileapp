@@ -72,13 +72,13 @@ class TaskDetailsWidget extends StatelessWidget {
                     _buildAttachmentsRow(),
                     _buildDivider(),
                     _buildDateTimeRow(
-                      label: "Expiry date",
+                      label: "taskDetails.expiryDate".tr(),
                       dateTime: task.expiryTimeStamp,
                       icon: AppAssets.icons.clock.svg(height: 16),
                     ),
                     _buildDivider(),
                     _buildDateTimeRow(
-                      label: "Creation date",
+                      label: "taskDetails.creationDate".tr(),
                       dateTime: task.startTimeStamp,
                       icon: AppAssets.icons.calendar.svg(height: 16),
                     ),
@@ -158,7 +158,7 @@ class TaskDetailsWidget extends StatelessWidget {
             AppAssets.icons.paperclip.svg(height: 16),
             const SizedBox(width: 5),
             Text(
-              "Attachments",
+              "taskDetails.attactments".tr(),
               style: GoogleFonts.inter(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -222,7 +222,7 @@ class TaskDetailsWidget extends StatelessWidget {
             AppAssets.icons.category2.svg(height: 16),
             const SizedBox(width: 5),
             Text(
-              "Category",
+              "taskDetails.category".tr(),
               style: GoogleFonts.inter(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -234,7 +234,9 @@ class TaskDetailsWidget extends StatelessWidget {
         Row(
           children: [
             Text(
-              task.category,
+              task.category.isNotEmptyOrNull
+                  ? task.category
+                  : "taskDetails.na".tr(),
               style: GoogleFonts.inter(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
@@ -255,7 +257,7 @@ class TaskDetailsWidget extends StatelessWidget {
             AppAssets.icons.priorityHighBlack.svg(height: 16),
             const SizedBox(width: 5),
             Text(
-              "Priority",
+              "taskDetails.priority".tr(),
               style: GoogleFonts.inter(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -282,7 +284,7 @@ class TaskDetailsWidget extends StatelessWidget {
             AppAssets.icons.users.svg(height: 16),
             const SizedBox(width: 5),
             Text(
-              "Responsible",
+              "taskDetails.responsible".tr(),
               style: GoogleFonts.inter(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
@@ -334,7 +336,7 @@ class TaskDetailsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Start task",
+                "taskDetails.startTask".tr(),
                 style: GoogleFonts.inter(
                   fontSize: 17,
                   fontWeight: FontWeight.w500,
@@ -358,9 +360,8 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
     return Row(
       children: [
         SizedBox(
-          width: 50,
           child: Text(
-            "",
+            "taskDetails.na".tr(),
             style: GoogleFonts.inter(
               fontSize: 13,
               fontWeight: FontWeight.w500,
@@ -406,7 +407,7 @@ Widget getPriorityName(int priorityNumber) {
   switch (priorityNumber) {
     case 0:
       return Text(
-        "Exception",
+        "priority.exception".tr(),
         style: GoogleFonts.inter(
           fontSize: 13,
           fontWeight: FontWeight.w500,
@@ -415,7 +416,7 @@ Widget getPriorityName(int priorityNumber) {
       );
     case 1:
       return Text(
-        "High",
+        "priority.high".tr(),
         style: GoogleFonts.inter(
           fontSize: 13,
           fontWeight: FontWeight.w500,
@@ -424,7 +425,7 @@ Widget getPriorityName(int priorityNumber) {
       );
     case 2:
       return Text(
-        "Normal",
+        "priority.normal".tr(),
         style: GoogleFonts.inter(
           fontSize: 13,
           fontWeight: FontWeight.w500,
@@ -433,7 +434,7 @@ Widget getPriorityName(int priorityNumber) {
       );
     default:
       return Text(
-        "Low",
+        "priority.low".tr(),
         style: GoogleFonts.inter(
           fontSize: 13,
           fontWeight: FontWeight.w500,
