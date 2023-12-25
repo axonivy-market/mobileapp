@@ -110,7 +110,7 @@ class TaskItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 10),
+      height: 82,
       padding: const EdgeInsets.fromLTRB(5, 10, 0, 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -120,46 +120,38 @@ class TaskItemWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           getIconPriority(priority),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 21 - 42 - 20,
-                child: Text(
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
                   name.isEmptyOrNull ? "tasksView.noTaskName".tr() : name,
                   style: GoogleFonts.inter(
                       fontSize: 17,
                       fontWeight: FontWeight.w600,
                       color: AppColors.eerieBlack),
                   overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
                 ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(
-                    // max width,
-                    height: 34,
-                    width: MediaQuery.of(context).size.width - 42 - 92 - 10,
-                    child: Text(
-                      description.isEmptyOrNull
-                          ? "tasksView.noTaskDescription".tr()
-                          : description,
-                      style: GoogleFonts.inter(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.sonicSilver,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
+                Text(
+                  description.isEmptyOrNull
+                      ? "tasksView.noTaskDescription".tr()
+                      : description,
+                  style: GoogleFonts.inter(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.sonicSilver,
                   ),
-                  getDateTimeTaskWidget(expiryTimeStamp)
-                ],
-              )
-            ],
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
+              ],
+            ),
           ),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: getDateTimeTaskWidget(expiryTimeStamp),
+          )
         ],
       ),
     );
