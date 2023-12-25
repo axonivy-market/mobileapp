@@ -61,8 +61,8 @@ class _TasksViewState extends State<TasksView> {
                       onRefresh: () async {
                         final filterState =
                             BlocProvider.of<FilterBloc>(context).state;
-                        _taskBloc.add(
-                            TaskEvent.filterTasks(filterState.activeFilter));
+                        _taskBloc
+                            .add(TaskEvent.getTasks(filterState.activeFilter));
                       },
                     ),
                     if (tasks.isNotEmpty)
@@ -87,16 +87,11 @@ class _TasksViewState extends State<TasksView> {
                     if (tasks.isNotEmpty)
                       SliverList(
                         delegate: SliverChildBuilderDelegate((context, index) {
-                          return Column(
-                            children: [
-                              TaskItemWidget(
-                                name: tasks[index].name,
-                                description: tasks[index].description,
-                                priority: tasks[index].priority,
-                                expiryTimeStamp: tasks[index].expiryTimeStamp,
-                              ),
-                              const SizedBox(height: 10),
-                            ],
+                          return TaskItemWidget(
+                            name: tasks[index].name,
+                            description: tasks[index].description,
+                            priority: tasks[index].priority,
+                            expiryTimeStamp: tasks[index].expiryTimeStamp,
                           );
                         }, childCount: tasks.length),
                       ),

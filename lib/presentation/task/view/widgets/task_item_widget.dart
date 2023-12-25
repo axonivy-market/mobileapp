@@ -110,6 +110,7 @@ class TaskItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 10),
       height: 82,
       padding: const EdgeInsets.fromLTRB(5, 10, 0, 10),
       decoration: BoxDecoration(
@@ -151,7 +152,8 @@ class TaskItemWidget extends StatelessWidget {
           Align(
             alignment: Alignment.bottomLeft,
             child: getDateTimeTaskWidget(expiryTimeStamp),
-          )
+          ),
+          const SizedBox(width: 5),
         ],
       ),
     );

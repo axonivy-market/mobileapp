@@ -1,5 +1,6 @@
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_event.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_state.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
@@ -23,6 +24,6 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
   @override
   void onChange(Change<FilterState> change) {
     super.onChange(change);
-    print(change);
+    debugPrint('debug: $change');
   }
 }

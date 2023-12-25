@@ -57,7 +57,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           emit(TaskState.error(l.message));
         },
         (r) {
-          emit(TaskState.success(_sortDefaultTasks(r)));
+          emit(TaskState.success(_sortDefaultTasks(r, event.activeFilter)));
         },
       );
     } catch (e) {
@@ -65,17 +65,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     }
   }
 
-  bool isExpired(DateTime dateTime) {
-    DateTime now = DateTime.now().toUtc();
-    return dateTime.isBefore(now);
-  }
-
   List<TaskIvy> _filterExpiredTasks(List<TaskIvy> tasks) {
     if (tasks.isEmpty) return tasks;
     return tasks.where((task) => task.expiryTimeStamp.isExpired).toList();
   }
 
-  List<TaskIvy> _sortDefaultTasks(List<TaskIvy> tasks) {
+  List<TaskIvy> _sortDefaultTasks(List<TaskIvy> tasks, FilterType filterType) {
     if (tasks.isEmpty) return tasks;
     tasks.sort((l, r) => l.priority.compareTo(r.priority));
 
@@ -97,7 +92,19 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       );
       i = j - 1;
     }
-    this.tasks = tasks;
-    return tasks;
+    return _filterTasksServer(filterType, tasks);
+  }
+
+  List<TaskIvy> _filterTasksServer(FilterType filterType, List<TaskIvy> tasks) {
+    if (filterType == FilterType.all) {
+      this.tasks = tasks;
+      return tasks;
+    } else {
+      expiredTasks = tasks
+          .where((task) =>
+              task.expiryTimeStamp != null && task.expiryTimeStamp.isExpired)
+          .toList();
+      return expiredTasks;
+    }
   }
 }
