@@ -122,17 +122,18 @@ class TaskDetailsWidget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).pop();
       },
-      child: Center(
-        child: Material(
-          color: Colors.transparent,
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
-            child: Stack(
-              clipBehavior: Clip.none,
-              alignment: Alignment.center,
-              children: [
-                Builder(builder: (context) {
-                  return Dialog(
+      child: Material(
+        color: Colors.transparent,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+          child: Builder(
+            builder: (context) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Dialog(
+                    insetPadding: const EdgeInsets.symmetric(horizontal: 15),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                     ),
@@ -428,11 +429,9 @@ class TaskDetailsWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                  );
-                }),
-                Positioned(
-                  bottom: 150,
-                  child: Dialog(
+                  ),
+                  Dialog(
+                    insetPadding: const EdgeInsets.fromLTRB(128, 20, 128, 0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -468,9 +467,9 @@ class TaskDetailsWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
+                ],
+              );
+            },
           ),
         ),
       ),

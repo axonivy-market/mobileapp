@@ -27,12 +27,25 @@ class $AssetsEnvGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/arrow-right.svg
+  SvgGenImage get arrowRight =>
+      const SvgGenImage('assets/icons/arrow-right.svg');
+
+  /// File path: assets/icons/calendar.svg
+  SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
+
   /// File path: assets/icons/camera.svg
   SvgGenImage get camera => const SvgGenImage('assets/icons/camera.svg');
+
+  /// File path: assets/icons/category-2.svg
+  SvgGenImage get category2 => const SvgGenImage('assets/icons/category-2.svg');
 
   /// File path: assets/icons/chevron_right.svg
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/icons/chevron_right.svg');
+
+  /// File path: assets/icons/clock.svg
+  SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
 
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
@@ -52,6 +65,10 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/paperclip.svg
   SvgGenImage get paperclip => const SvgGenImage('assets/icons/paperclip.svg');
+
+  /// File path: assets/icons/priority-high-black.svg
+  SvgGenImage get priorityHighBlack =>
+      const SvgGenImage('assets/icons/priority-high-black.svg');
 
   /// File path: assets/icons/priority_exception.svg
   SvgGenImage get priorityException =>
@@ -97,16 +114,24 @@ class $AssetsIconsGen {
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
+  /// File path: assets/icons/users.svg
+  SvgGenImage get users => const SvgGenImage('assets/icons/users.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
+        arrowRight,
+        calendar,
         camera,
+        category2,
         chevronRight,
+        clock,
         filter,
         list,
         logo,
         notification,
         offline,
         paperclip,
+        priorityHighBlack,
         priorityException,
         priorityHigh,
         priorityLow,
@@ -118,7 +143,8 @@ class $AssetsIconsGen {
         settingBottomBar,
         sorting,
         taskBottomBar,
-        user
+        user,
+        users
       ];
 }
 

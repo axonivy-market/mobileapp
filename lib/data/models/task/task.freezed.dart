@@ -30,6 +30,8 @@ mixin _$TaskIvy {
   int get priority => throw _privateConstructorUsedError;
   int get state => throw _privateConstructorUsedError;
   String get activatorName => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
+  List<Document> get documents => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,7 +53,9 @@ abstract class $TaskIvyCopyWith<$Res> {
       DateTime? expiryTimeStamp,
       int priority,
       int state,
-      String activatorName});
+      String activatorName,
+      String category,
+      List<Document> documents});
 }
 
 /// @nodoc
@@ -77,6 +81,8 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
     Object? priority = null,
     Object? state = null,
     Object? activatorName = null,
+    Object? category = null,
+    Object? documents = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -119,6 +125,14 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
           ? _value.activatorName
           : activatorName // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      documents: null == documents
+          ? _value.documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<Document>,
     ) as $Val);
   }
 }
@@ -140,7 +154,9 @@ abstract class _$$TaskIvyImplCopyWith<$Res> implements $TaskIvyCopyWith<$Res> {
       DateTime? expiryTimeStamp,
       int priority,
       int state,
-      String activatorName});
+      String activatorName,
+      String category,
+      List<Document> documents});
 }
 
 /// @nodoc
@@ -164,6 +180,8 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
     Object? priority = null,
     Object? state = null,
     Object? activatorName = null,
+    Object? category = null,
+    Object? documents = null,
   }) {
     return _then(_$TaskIvyImpl(
       id: null == id
@@ -206,6 +224,14 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
           ? _value.activatorName
           : activatorName // ignore: cast_nullable_to_non_nullable
               as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      documents: null == documents
+          ? _value._documents
+          : documents // ignore: cast_nullable_to_non_nullable
+              as List<Document>,
     ));
   }
 }
@@ -223,7 +249,10 @@ class _$TaskIvyImpl implements _TaskIvy {
       this.expiryTimeStamp = null,
       this.priority = 0,
       this.state = 0,
-      this.activatorName = ""});
+      this.activatorName = "",
+      this.category = "",
+      final List<Document> documents = const []})
+      : _documents = documents;
 
   factory _$TaskIvyImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskIvyImplFromJson(json);
@@ -256,10 +285,21 @@ class _$TaskIvyImpl implements _TaskIvy {
   @override
   @JsonKey()
   final String activatorName;
+  @override
+  @JsonKey()
+  final String category;
+  final List<Document> _documents;
+  @override
+  @JsonKey()
+  List<Document> get documents {
+    if (_documents is EqualUnmodifiableListView) return _documents;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_documents);
+  }
 
   @override
   String toString() {
-    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiryTimeStamp: $expiryTimeStamp, priority: $priority, state: $state, activatorName: $activatorName)';
+    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiryTimeStamp: $expiryTimeStamp, priority: $priority, state: $state, activatorName: $activatorName, category: $category, documents: $documents)';
   }
 
   @override
@@ -282,7 +322,11 @@ class _$TaskIvyImpl implements _TaskIvy {
                 other.priority == priority) &&
             (identical(other.state, state) || other.state == state) &&
             (identical(other.activatorName, activatorName) ||
-                other.activatorName == activatorName));
+                other.activatorName == activatorName) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            const DeepCollectionEquality()
+                .equals(other._documents, _documents));
   }
 
   @JsonKey(ignore: true)
@@ -298,7 +342,9 @@ class _$TaskIvyImpl implements _TaskIvy {
       expiryTimeStamp,
       priority,
       state,
-      activatorName);
+      activatorName,
+      category,
+      const DeepCollectionEquality().hash(_documents));
 
   @JsonKey(ignore: true)
   @override
@@ -325,7 +371,9 @@ abstract class _TaskIvy implements TaskIvy {
       final DateTime? expiryTimeStamp,
       final int priority,
       final int state,
-      final String activatorName}) = _$TaskIvyImpl;
+      final String activatorName,
+      final String category,
+      final List<Document> documents}) = _$TaskIvyImpl;
 
   factory _TaskIvy.fromJson(Map<String, dynamic> json) = _$TaskIvyImpl.fromJson;
 
@@ -349,6 +397,10 @@ abstract class _TaskIvy implements TaskIvy {
   int get state;
   @override
   String get activatorName;
+  @override
+  String get category;
+  @override
+  List<Document> get documents;
   @override
   @JsonKey(ignore: true)
   _$$TaskIvyImplCopyWith<_$TaskIvyImpl> get copyWith =>

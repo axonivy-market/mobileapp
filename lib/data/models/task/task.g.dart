@@ -20,6 +20,11 @@ _$TaskIvyImpl _$$TaskIvyImplFromJson(Map<String, dynamic> json) =>
       priority: json['priority'] as int? ?? 0,
       state: json['state'] as int? ?? 0,
       activatorName: json['activatorName'] as String? ?? "",
+      category: json['category'] as String? ?? "",
+      documents: (json['documents'] as List<dynamic>?)
+              ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$$TaskIvyImplToJson(_$TaskIvyImpl instance) =>
@@ -34,4 +39,6 @@ Map<String, dynamic> _$$TaskIvyImplToJson(_$TaskIvyImpl instance) =>
       'priority': instance.priority,
       'state': instance.state,
       'activatorName': instance.activatorName,
+      'category': instance.category,
+      'documents': instance.documents,
     };
