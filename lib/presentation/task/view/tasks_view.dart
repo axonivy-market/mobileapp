@@ -84,25 +84,20 @@ class _TasksViewState extends State<TasksView> {
                               ),
                             )),
                       ),
-                    if (tasks.isNotEmpty)
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate((context, index) {
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        if (tasks.isEmpty) {
+                          return const TaskEmptyWidget();
+                        } else {
                           return TaskItemWidget(
                             name: tasks[index].name,
                             description: tasks[index].description,
                             priority: tasks[index].priority,
                             expiryTimeStamp: tasks[index].expiryTimeStamp,
                           );
-                        }, childCount: tasks.length),
-                      ),
-                    if (tasks.isEmpty)
-                      SliverList(
-                        delegate: SliverChildBuilderDelegate((context, index) {
-                          return const Column(
-                            children: [TaskEmptyWidget()],
-                          );
-                        }, childCount: 1),
-                      )
+                        }
+                      }, childCount: tasks.isEmpty ? 1 : tasks.length),
+                    )
                   ],
                 ),
               );
