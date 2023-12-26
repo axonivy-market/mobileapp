@@ -321,7 +321,7 @@ class TaskDetailsWidget extends StatelessWidget {
 
   Widget _buildStartTaskButton(BuildContext context) {
     double dialogWidth =
-        MediaQuery.of(context).size.width * 0.4; // Adjust the width as needed
+        MediaQuery.of(context).size.width * 0.37; // Adjust the width as needed
 
     return Material(
       color: Colors.transparent,
@@ -348,7 +348,7 @@ class TaskDetailsWidget extends StatelessWidget {
                       color: AppColors.tropicSea,
                     ),
                   ),
-                  const SizedBox(height: 5),
+                  const SizedBox(width: 5),
                   AppAssets.icons.arrowRight.svg(
                     height: 21,
                   ),
