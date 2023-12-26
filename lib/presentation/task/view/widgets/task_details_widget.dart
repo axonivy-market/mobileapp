@@ -2,10 +2,13 @@ import 'dart:ui';
 
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
+import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
+import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskDetailsWidget extends StatelessWidget {
@@ -48,54 +51,61 @@ class TaskDetailsWidget extends StatelessWidget {
   }
 
   Widget _buildDialog(BuildContext context) {
-    return Dialog(
-      insetPadding: const EdgeInsets.symmetric(horizontal: 15),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      child: GestureDetector(
-        onTap: () {},
-        child: Container(
-          padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
-          decoration: BoxDecoration(
-            color: AppColors.bleachedSilk,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildTaskHeader(),
-              const SizedBox(height: 15),
-              Container(
-                padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
-                child: Column(
-                  children: [
-                    _buildAttachmentsRow(),
-                    _buildDivider(),
-                    _buildDateTimeRow(
-                      label: "taskDetails.expiryDate".tr(),
-                      dateTime: task.expiryTimeStamp,
-                      icon: AppAssets.icons.clock.svg(height: 16),
-                    ),
-                    _buildDivider(),
-                    _buildDateTimeRow(
-                      label: "taskDetails.creationDate".tr(),
-                      dateTime: task.startTimeStamp,
-                      icon: AppAssets.icons.calendar.svg(height: 16),
-                    ),
-                    _buildDivider(),
-                    _buildCategoryRow(),
-                    _buildDivider(),
-                    _buildPriorityRow(),
-                    _buildDivider(),
-                    _buildResponsibleRow(),
-                  ],
-                ),
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
+        decoration: BoxDecoration(
+          color: AppColors.bleachedSilk,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildTaskHeader(),
+            const SizedBox(height: 15),
+            Container(
+              padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
+              child: Column(
+                children: [
+                  _buildRow(
+                    AppAssets.icons.paperclip.svg(height: 16),
+                    "taskDetails.attactments".tr(),
+                    "${task.documents.length} documents",
+                  ),
+                  _buildDivider(),
+                  _buildDateTimeRow(
+                    label: "taskDetails.expiryDate".tr(),
+                    dateTime: task.expiryTimeStamp,
+                    icon: AppAssets.icons.clock.svg(height: 16),
+                  ),
+                  _buildDivider(),
+                  _buildDateTimeRow(
+                    label: "taskDetails.creationDate".tr(),
+                    dateTime: task.startTimeStamp,
+                    icon: AppAssets.icons.calendar.svg(height: 16),
+                  ),
+                  _buildDivider(),
+                  _buildRow(
+                    AppAssets.icons.category2.svg(height: 16),
+                    "taskDetails.category".tr(),
+                    task.category.isNotEmptyOrNull
+                        ? task.category
+                        : "taskDetails.na".tr(),
+                  ),
+                  _buildDivider(),
+                  _buildPriorityRow(),
+                  _buildDivider(),
+                  _buildRow(
+                    AppAssets.icons.users.svg(height: 16),
+                    "taskDetails.responsible".tr(),
+                    task.activatorName,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -109,7 +119,7 @@ class TaskDetailsWidget extends StatelessWidget {
           padding: const EdgeInsets.only(top: 0),
           child: SizedBox.square(
             dimension: 21,
-            child: getIconPriority(task.priority),
+            child: task.priority.getPriorityIcon(),
           ),
         ),
         const SizedBox(width: 5),
@@ -152,34 +162,32 @@ class TaskDetailsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildAttachmentsRow() {
+  Widget _buildRow(SvgPicture icon, String title, String value) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
-          children: [
-            AppAssets.icons.paperclip.svg(height: 16),
-            const SizedBox(width: 5),
-            Text(
-              "taskDetails.attactments".tr(),
-              style: GoogleFonts.inter(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.eerieBlack,
-              ),
-            ),
-          ],
+        icon,
+        const SizedBox(
+          width: 5,
         ),
-        Row(
-          children: [
-            Text(
-              "${task.documents.length} documents",
+        Text(
+          title,
+          style: GoogleFonts.inter(
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+            color: AppColors.eerieBlack,
+          ),
+        ),
+        Expanded(
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Text(
+              value,
               style: GoogleFonts.inter(
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                   color: AppColors.sonicSilver),
-            )
-          ],
+            ),
+          ),
         ),
       ],
     );
@@ -216,41 +224,6 @@ class TaskDetailsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildCategoryRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            AppAssets.icons.category2.svg(height: 16),
-            const SizedBox(width: 5),
-            Text(
-              "taskDetails.category".tr(),
-              style: GoogleFonts.inter(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.eerieBlack,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              task.category.isNotEmptyOrNull
-                  ? task.category
-                  : "taskDetails.na".tr(),
-              style: GoogleFonts.inter(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.sonicSilver),
-            )
-          ],
-        ),
-      ],
-    );
-  }
-
   Widget _buildPriorityRow() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -271,40 +244,7 @@ class TaskDetailsWidget extends StatelessWidget {
         ),
         Row(
           children: [
-            getPriorityName(task.priority),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildResponsibleRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            AppAssets.icons.users.svg(height: 16),
-            const SizedBox(width: 5),
-            Text(
-              "taskDetails.responsible".tr(),
-              style: GoogleFonts.inter(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.eerieBlack,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            Text(
-              task.activatorName,
-              style: GoogleFonts.inter(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.sonicSilver),
-            )
+            task.priority.getPriorityName(),
           ],
         ),
       ],
@@ -320,15 +260,12 @@ class TaskDetailsWidget extends StatelessWidget {
   }
 
   Widget _buildStartTaskButton(BuildContext context) {
-    double dialogWidth =
-        MediaQuery.of(context).size.width * 0.37; // Adjust the width as needed
-
     return Material(
       color: Colors.transparent,
       child: Center(
         child: Container(
-          width: dialogWidth,
-          padding: const EdgeInsets.fromLTRB(15, 11.5, 15, 11.5),
+          width: 136,
+          height: 44,
           decoration: BoxDecoration(
             color: AppColors.bleachedSilk,
             borderRadius: BorderRadius.circular(8),
@@ -359,8 +296,8 @@ class TaskDetailsWidget extends StatelessWidget {
         ),
       ),
     );
-  }  
-}
+  }
+
 
 Widget getDateTimeTaskWidget(DateTime? dateTime) {
   if (dateTime == null) {
@@ -382,82 +319,15 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
     return Row(
       children: [
         Text(
-          formatDate(dateTime),
+            dateTime.formatDateYearWithFourNumber(),
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w500,
             color: AppColors.sonicSilver,
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
+    }
   }
-}
-
-Widget getIconPriority(int priorityNumber) {
-  switch (priorityNumber) {
-    case 0:
-      return AppAssets.icons.priorityException.svg();
-    case 1:
-      return AppAssets.icons.priorityHigh.svg();
-    case 2:
-      return const SizedBox(
-        width: 21,
-        height: 21,
-      );
-    default:
-      return AppAssets.icons.priorityLow.svg();
-  }
-}
-
-Widget getPriorityName(int priorityNumber) {
-  switch (priorityNumber) {
-    case 0:
-      return Text(
-        "priority.exception".tr(),
-        style: GoogleFonts.inter(
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-          color: AppColors.sonicSilver,
-        ),
-      );
-    case 1:
-      return Text(
-        "priority.high".tr(),
-        style: GoogleFonts.inter(
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-          color: AppColors.sonicSilver,
-        ),
-      );
-    case 2:
-      return Text(
-        "priority.normal".tr(),
-        style: GoogleFonts.inter(
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-          color: AppColors.sonicSilver,
-        ),
-      );
-    default:
-      return Text(
-        "priority.low".tr(),
-        style: GoogleFonts.inter(
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
-          color: AppColors.sonicSilver,
-        ),
-      );
-  }
-}
-
-String formatDate(DateTime dateTime) {
-  String formattedDate =
-      "${_twoDigits(dateTime.day)}.${_twoDigits(dateTime.month)}.${dateTime.year}";
-  return formattedDate;
-}
-
-String _twoDigits(int n) {
-  if (n >= 10) return "$n";
-  return "0$n";
 }
