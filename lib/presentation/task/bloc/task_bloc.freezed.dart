@@ -16,37 +16,48 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TaskEvent {
+  FilterType get activeFilter => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getTasks,
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getTasks,
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getTasks,
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $TaskEventCopyWith<TaskEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -54,6 +65,8 @@ mixin _$TaskEvent {
 abstract class $TaskEventCopyWith<$Res> {
   factory $TaskEventCopyWith(TaskEvent value, $Res Function(TaskEvent) then) =
       _$TaskEventCopyWithImpl<$Res, TaskEvent>;
+  @useResult
+  $Res call({FilterType activeFilter});
 }
 
 /// @nodoc
@@ -65,13 +78,30 @@ class _$TaskEventCopyWithImpl<$Res, $Val extends TaskEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeFilter = null,
+  }) {
+    return _then(_value.copyWith(
+      activeFilter: null == activeFilter
+          ? _value.activeFilter
+          : activeFilter // ignore: cast_nullable_to_non_nullable
+              as FilterType,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$GetTasksImplCopyWith<$Res> {
+abstract class _$$GetTasksImplCopyWith<$Res>
+    implements $TaskEventCopyWith<$Res> {
   factory _$$GetTasksImplCopyWith(
           _$GetTasksImpl value, $Res Function(_$GetTasksImpl) then) =
       __$$GetTasksImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({FilterType activeFilter});
 }
 
 /// @nodoc
@@ -81,51 +111,79 @@ class __$$GetTasksImplCopyWithImpl<$Res>
   __$$GetTasksImplCopyWithImpl(
       _$GetTasksImpl _value, $Res Function(_$GetTasksImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeFilter = null,
+  }) {
+    return _then(_$GetTasksImpl(
+      null == activeFilter
+          ? _value.activeFilter
+          : activeFilter // ignore: cast_nullable_to_non_nullable
+              as FilterType,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$GetTasksImpl implements _GetTasks {
-  const _$GetTasksImpl();
+  const _$GetTasksImpl(this.activeFilter);
+
+  @override
+  final FilterType activeFilter;
 
   @override
   String toString() {
-    return 'TaskEvent.getTasks()';
+    return 'TaskEvent.getTasks(activeFilter: $activeFilter)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$GetTasksImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$GetTasksImpl &&
+            (identical(other.activeFilter, activeFilter) ||
+                other.activeFilter == activeFilter));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, activeFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetTasksImplCopyWith<_$GetTasksImpl> get copyWith =>
+      __$$GetTasksImplCopyWithImpl<_$GetTasksImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() getTasks,
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
   }) {
-    return getTasks();
+    return getTasks(activeFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? getTasks,
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
   }) {
-    return getTasks?.call();
+    return getTasks?.call(activeFilter);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? getTasks,
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
-      return getTasks();
+      return getTasks(activeFilter);
     }
     return orElse();
   }
@@ -134,6 +192,7 @@ class _$GetTasksImpl implements _GetTasks {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
   }) {
     return getTasks(this);
   }
@@ -142,6 +201,7 @@ class _$GetTasksImpl implements _GetTasks {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
   }) {
     return getTasks?.call(this);
   }
@@ -150,6 +210,7 @@ class _$GetTasksImpl implements _GetTasks {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
@@ -160,7 +221,152 @@ class _$GetTasksImpl implements _GetTasks {
 }
 
 abstract class _GetTasks implements TaskEvent {
-  const factory _GetTasks() = _$GetTasksImpl;
+  const factory _GetTasks(final FilterType activeFilter) = _$GetTasksImpl;
+
+  @override
+  FilterType get activeFilter;
+  @override
+  @JsonKey(ignore: true)
+  _$$GetTasksImplCopyWith<_$GetTasksImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$FilterTasksImplCopyWith<$Res>
+    implements $TaskEventCopyWith<$Res> {
+  factory _$$FilterTasksImplCopyWith(
+          _$FilterTasksImpl value, $Res Function(_$FilterTasksImpl) then) =
+      __$$FilterTasksImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({FilterType activeFilter});
+}
+
+/// @nodoc
+class __$$FilterTasksImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$FilterTasksImpl>
+    implements _$$FilterTasksImplCopyWith<$Res> {
+  __$$FilterTasksImplCopyWithImpl(
+      _$FilterTasksImpl _value, $Res Function(_$FilterTasksImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeFilter = null,
+  }) {
+    return _then(_$FilterTasksImpl(
+      null == activeFilter
+          ? _value.activeFilter
+          : activeFilter // ignore: cast_nullable_to_non_nullable
+              as FilterType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$FilterTasksImpl implements _FilterTasks {
+  const _$FilterTasksImpl(this.activeFilter);
+
+  @override
+  final FilterType activeFilter;
+
+  @override
+  String toString() {
+    return 'TaskEvent.filterTasks(activeFilter: $activeFilter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FilterTasksImpl &&
+            (identical(other.activeFilter, activeFilter) ||
+                other.activeFilter == activeFilter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, activeFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$FilterTasksImplCopyWith<_$FilterTasksImpl> get copyWith =>
+      __$$FilterTasksImplCopyWithImpl<_$FilterTasksImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
+  }) {
+    return filterTasks(activeFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
+  }) {
+    return filterTasks?.call(activeFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
+    required TResult orElse(),
+  }) {
+    if (filterTasks != null) {
+      return filterTasks(activeFilter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
+  }) {
+    return filterTasks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
+  }) {
+    return filterTasks?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
+    required TResult orElse(),
+  }) {
+    if (filterTasks != null) {
+      return filterTasks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _FilterTasks implements TaskEvent {
+  const factory _FilterTasks(final FilterType activeFilter) = _$FilterTasksImpl;
+
+  @override
+  FilterType get activeFilter;
+  @override
+  @JsonKey(ignore: true)
+  _$$FilterTasksImplCopyWith<_$FilterTasksImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -170,7 +376,6 @@ mixin _$TaskState {
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
     required TResult Function(List<TaskIvy> tasks) success,
-    required TResult Function() empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -178,7 +383,6 @@ mixin _$TaskState {
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
     TResult? Function(List<TaskIvy> tasks)? success,
-    TResult? Function()? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -186,7 +390,6 @@ mixin _$TaskState {
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
     TResult Function(List<TaskIvy> tasks)? success,
-    TResult Function()? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -195,7 +398,6 @@ mixin _$TaskState {
     required TResult Function(TaskLoadingState value) loading,
     required TResult Function(TaskErrorState value) error,
     required TResult Function(TaskSuccessState value) success,
-    required TResult Function(TaskEmptyState value) empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -203,7 +405,6 @@ mixin _$TaskState {
     TResult? Function(TaskLoadingState value)? loading,
     TResult? Function(TaskErrorState value)? error,
     TResult? Function(TaskSuccessState value)? success,
-    TResult? Function(TaskEmptyState value)? empty,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -211,7 +412,6 @@ mixin _$TaskState {
     TResult Function(TaskLoadingState value)? loading,
     TResult Function(TaskErrorState value)? error,
     TResult Function(TaskSuccessState value)? success,
-    TResult Function(TaskEmptyState value)? empty,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -303,7 +503,6 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
     required TResult Function(List<TaskIvy> tasks) success,
-    required TResult Function() empty,
   }) {
     return loading(isShowLoading);
   }
@@ -314,7 +513,6 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
     TResult? Function(List<TaskIvy> tasks)? success,
-    TResult? Function()? empty,
   }) {
     return loading?.call(isShowLoading);
   }
@@ -325,7 +523,6 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
     TResult Function(List<TaskIvy> tasks)? success,
-    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -340,7 +537,6 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
     required TResult Function(TaskLoadingState value) loading,
     required TResult Function(TaskErrorState value) error,
     required TResult Function(TaskSuccessState value) success,
-    required TResult Function(TaskEmptyState value) empty,
   }) {
     return loading(this);
   }
@@ -351,7 +547,6 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
     TResult? Function(TaskLoadingState value)? loading,
     TResult? Function(TaskErrorState value)? error,
     TResult? Function(TaskSuccessState value)? success,
-    TResult? Function(TaskEmptyState value)? empty,
   }) {
     return loading?.call(this);
   }
@@ -362,7 +557,6 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
     TResult Function(TaskLoadingState value)? loading,
     TResult Function(TaskErrorState value)? error,
     TResult Function(TaskSuccessState value)? success,
-    TResult Function(TaskEmptyState value)? empty,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -450,7 +644,6 @@ class _$TaskErrorStateImpl implements TaskErrorState {
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
     required TResult Function(List<TaskIvy> tasks) success,
-    required TResult Function() empty,
   }) {
     return error(this.error);
   }
@@ -461,7 +654,6 @@ class _$TaskErrorStateImpl implements TaskErrorState {
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
     TResult? Function(List<TaskIvy> tasks)? success,
-    TResult? Function()? empty,
   }) {
     return error?.call(this.error);
   }
@@ -472,7 +664,6 @@ class _$TaskErrorStateImpl implements TaskErrorState {
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
     TResult Function(List<TaskIvy> tasks)? success,
-    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -487,7 +678,6 @@ class _$TaskErrorStateImpl implements TaskErrorState {
     required TResult Function(TaskLoadingState value) loading,
     required TResult Function(TaskErrorState value) error,
     required TResult Function(TaskSuccessState value) success,
-    required TResult Function(TaskEmptyState value) empty,
   }) {
     return error(this);
   }
@@ -498,7 +688,6 @@ class _$TaskErrorStateImpl implements TaskErrorState {
     TResult? Function(TaskLoadingState value)? loading,
     TResult? Function(TaskErrorState value)? error,
     TResult? Function(TaskSuccessState value)? success,
-    TResult? Function(TaskEmptyState value)? empty,
   }) {
     return error?.call(this);
   }
@@ -509,7 +698,6 @@ class _$TaskErrorStateImpl implements TaskErrorState {
     TResult Function(TaskLoadingState value)? loading,
     TResult Function(TaskErrorState value)? error,
     TResult Function(TaskSuccessState value)? success,
-    TResult Function(TaskEmptyState value)? empty,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -602,7 +790,6 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
     required TResult Function(List<TaskIvy> tasks) success,
-    required TResult Function() empty,
   }) {
     return success(tasks);
   }
@@ -613,7 +800,6 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
     TResult? Function(List<TaskIvy> tasks)? success,
-    TResult? Function()? empty,
   }) {
     return success?.call(tasks);
   }
@@ -624,7 +810,6 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
     TResult Function(List<TaskIvy> tasks)? success,
-    TResult Function()? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -639,7 +824,6 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     required TResult Function(TaskLoadingState value) loading,
     required TResult Function(TaskErrorState value) error,
     required TResult Function(TaskSuccessState value) success,
-    required TResult Function(TaskEmptyState value) empty,
   }) {
     return success(this);
   }
@@ -650,7 +834,6 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     TResult? Function(TaskLoadingState value)? loading,
     TResult? Function(TaskErrorState value)? error,
     TResult? Function(TaskSuccessState value)? success,
-    TResult? Function(TaskEmptyState value)? empty,
   }) {
     return success?.call(this);
   }
@@ -661,7 +844,6 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     TResult Function(TaskLoadingState value)? loading,
     TResult Function(TaskErrorState value)? error,
     TResult Function(TaskSuccessState value)? success,
-    TResult Function(TaskEmptyState value)? empty,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -679,118 +861,4 @@ abstract class TaskSuccessState implements TaskState {
   @JsonKey(ignore: true)
   _$$TaskSuccessStateImplCopyWith<_$TaskSuccessStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TaskEmptyStateImplCopyWith<$Res> {
-  factory _$$TaskEmptyStateImplCopyWith(_$TaskEmptyStateImpl value,
-          $Res Function(_$TaskEmptyStateImpl) then) =
-      __$$TaskEmptyStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$TaskEmptyStateImplCopyWithImpl<$Res>
-    extends _$TaskStateCopyWithImpl<$Res, _$TaskEmptyStateImpl>
-    implements _$$TaskEmptyStateImplCopyWith<$Res> {
-  __$$TaskEmptyStateImplCopyWithImpl(
-      _$TaskEmptyStateImpl _value, $Res Function(_$TaskEmptyStateImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$TaskEmptyStateImpl implements TaskEmptyState {
-  const _$TaskEmptyStateImpl();
-
-  @override
-  String toString() {
-    return 'TaskState.empty()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$TaskEmptyStateImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
-    required TResult Function(String error) error,
-    required TResult Function(List<TaskIvy> tasks) success,
-    required TResult Function() empty,
-  }) {
-    return empty();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(List<TaskIvy> tasks)? success,
-    TResult? Function()? empty,
-  }) {
-    return empty?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
-    TResult Function(String error)? error,
-    TResult Function(List<TaskIvy> tasks)? success,
-    TResult Function()? empty,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TaskLoadingState value) loading,
-    required TResult Function(TaskErrorState value) error,
-    required TResult Function(TaskSuccessState value) success,
-    required TResult Function(TaskEmptyState value) empty,
-  }) {
-    return empty(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskLoadingState value)? loading,
-    TResult? Function(TaskErrorState value)? error,
-    TResult? Function(TaskSuccessState value)? success,
-    TResult? Function(TaskEmptyState value)? empty,
-  }) {
-    return empty?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TaskLoadingState value)? loading,
-    TResult Function(TaskErrorState value)? error,
-    TResult Function(TaskSuccessState value)? success,
-    TResult Function(TaskEmptyState value)? empty,
-    required TResult orElse(),
-  }) {
-    if (empty != null) {
-      return empty(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TaskEmptyState implements TaskState {
-  const factory TaskEmptyState() = _$TaskEmptyStateImpl;
 }

@@ -1,0 +1,1 @@
+enum FilterType { all, expired }

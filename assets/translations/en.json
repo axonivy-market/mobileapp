@@ -12,6 +12,7 @@
   
   },
   "tasksView": {
+    "all": "All",
     "expired" : "Expired",
     "emptyTask": "Nice work! You don't have any tasks at the moment",
     "noExpiryDate": "No expiry date",
