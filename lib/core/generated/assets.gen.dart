@@ -34,9 +34,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/calendar.svg
   SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
 
-  /// File path: assets/icons/camera.svg
-  SvgGenImage get camera => const SvgGenImage('assets/icons/camera.svg');
-
   /// File path: assets/icons/category-2.svg
   SvgGenImage get category2 => const SvgGenImage('assets/icons/category-2.svg');
 
@@ -134,7 +131,6 @@ class $AssetsIconsGen {
   List<SvgGenImage> get values => [
         arrowRight,
         calendar,
-        camera,
         category2,
         chevronRight,
         clock,

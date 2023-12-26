@@ -33,7 +33,10 @@ class TaskDetailsWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     _buildDialog(context),
-                    _buildStartTaskButton(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    _buildStartTaskButton(context),
                   ],
                 ),
               );
@@ -316,43 +319,47 @@ class TaskDetailsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildStartTaskButton() {
-    return Dialog(
-      insetPadding: const EdgeInsets.fromLTRB(128, 20, 128, 0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
-      ),
-      elevation: 0,
-      backgroundColor: Colors.transparent,
-      child: GestureDetector(
-        onTap: () {},
+  Widget _buildStartTaskButton(BuildContext context) {
+    double dialogWidth =
+        MediaQuery.of(context).size.width * 0.4; // Adjust the width as needed
+
+    return Material(
+      color: Colors.transparent,
+      child: Center(
         child: Container(
-          padding: const EdgeInsets.fromLTRB(1, 15, 1, 15),
+          width: dialogWidth,
+          padding: const EdgeInsets.fromLTRB(15, 11.5, 15, 11.5),
           decoration: BoxDecoration(
             color: AppColors.bleachedSilk,
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "taskDetails.startTask".tr(),
-                style: GoogleFonts.inter(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.tropicSea,
-                ),
+          child: GestureDetector(
+            onTap: () {},
+            child: Center(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Your dialog content here
+                  Text(
+                    "taskDetails.startTask".tr(),
+                    style: GoogleFonts.inter(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.tropicSea,
+                    ),
+                  ),
+                  const SizedBox(height: 5),
+                  AppAssets.icons.arrowRight.svg(
+                    height: 21,
+                  ),
+                ],
               ),
-              const SizedBox(width: 5),
-              AppAssets.icons.arrowRight.svg(
-                height: 21,
-              ),
-            ],
+            ),
           ),
         ),
       ),
     );
-  }
+  }  
 }
 
 Widget getDateTimeTaskWidget(DateTime? dateTime) {
