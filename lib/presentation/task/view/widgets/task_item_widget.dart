@@ -100,15 +100,19 @@ class TaskItemWidget extends StatelessWidget {
     required this.description,
     required this.priority,
     required this.expiryTimeStamp,
+    this.query = '',
   });
 
   final String name;
   final String description;
   final int priority;
   final DateTime? expiryTimeStamp;
+  final String query;
 
   @override
   Widget build(BuildContext context) {
+    int startNameIndex = name.toLowerCase().indexOf(query.toLowerCase());
+    int startDescIndex = description.toLowerCase().indexOf(query.toLowerCase());
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       height: 82,
@@ -126,26 +130,42 @@ class TaskItemWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  name.isEmptyOrNull ? "tasksView.noTaskName".tr() : name,
-                  style: GoogleFonts.inter(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.eerieBlack),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Text(
-                  description.isEmptyOrNull
-                      ? "tasksView.noTaskDescription".tr()
-                      : description,
-                  style: GoogleFonts.inter(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.sonicSilver,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                ),
+                query.isEmptyOrNull || startNameIndex == -1
+                    ? Text(
+                        name.isEmptyOrNull ? "tasksView.noTaskName".tr() : name,
+                        style: GoogleFonts.inter(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: query.isEmptyOrNull
+                                ? AppColors.eerieBlack
+                                : AppColors.darkSouls),
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    : _taskNameRichText(
+                        text: name,
+                        startIndex: startNameIndex,
+                        maxLine: 1,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600),
+                query.isEmptyOrNull || startDescIndex == -1
+                    ? Text(
+                        description.isEmptyOrNull
+                            ? "tasksView.noTaskDescription".tr()
+                            : description,
+                        style: GoogleFonts.inter(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.sonicSilver,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      )
+                    : _taskNameRichText(
+                        text: description,
+                        startIndex: startDescIndex,
+                        maxLine: 2,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400),
               ],
             ),
           ),
@@ -154,6 +174,41 @@ class TaskItemWidget extends StatelessWidget {
             child: getDateTimeTaskWidget(expiryTimeStamp),
           ),
           const SizedBox(width: 5),
+        ],
+      ),
+    );
+  }
+
+  Widget _taskNameRichText({
+    required String text,
+    required int startIndex,
+    required int maxLine,
+    required double fontSize,
+    required FontWeight fontWeight,
+  }) {
+    return RichText(
+      maxLines: maxLine,
+      overflow: TextOverflow.ellipsis,
+      text: TextSpan(
+        text: text.substring(0, startIndex),
+        style: GoogleFonts.inter(
+            color: AppColors.darkSouls,
+            fontWeight: fontWeight,
+            fontSize: fontSize),
+        children: [
+          TextSpan(
+            text: text.substring(startIndex, startIndex + query.length),
+            style: GoogleFonts.inter(
+                color: AppColors.eerieBlack,
+                fontWeight: fontWeight,
+                fontSize: fontSize),
+          ),
+          TextSpan(
+              text: text.substring(startIndex + query.length),
+              style: GoogleFonts.inter(
+                  color: AppColors.darkSouls,
+                  fontWeight: fontWeight,
+                  fontSize: fontSize)),
         ],
       ),
     );

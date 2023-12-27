@@ -1,11 +1,13 @@
-import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProcessEmptyWidget extends StatelessWidget {
-  const ProcessEmptyWidget({super.key});
+class DataEmptyWidget extends StatelessWidget {
+  const DataEmptyWidget({super.key, required this.message, required this.icon});
+
+  final String message;
+  final Widget icon;
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +16,12 @@ class ProcessEmptyWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          AppAssets.icons.processEmpty.svg(),
+          icon,
           const SizedBox(height: 10),
           SizedBox(
-            width: 260,
+            width: 250,
             child: Text(
-              'process.emptyList'.tr(),
+              message.tr(),
               textAlign: TextAlign.center,
               style: GoogleFonts.inter(
                 fontSize: 17,

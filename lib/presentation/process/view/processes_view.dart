@@ -1,5 +1,6 @@
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
@@ -57,7 +58,10 @@ class _ProcessesViewState extends State<ProcessesView> {
                           height: MediaQuery.of(context).size.height -
                               Constants.appBarHeight -
                               Constants.bottomNavigationBarHeight,
-                          child: const ProcessEmptyWidget(),
+                          child: DataEmptyWidget(
+                            message: 'process.emptyList',
+                            icon: AppAssets.icons.processEmpty.svg(),
+                          ),
                         ),
                       )
                     : _processList(processes),
