@@ -1,6 +1,3 @@
-import 'dart:ui';
-
-import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
@@ -69,22 +66,16 @@ class _TasksViewState extends State<TasksView> {
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             itemCount: tasks.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return Column(
-                                children: [
-                                  GestureDetector(
-                                    onLongPress: () {
-                                      _showDetails(context, tasks[index]);
-                                    },
-                                    child: TaskItemWidget(
-                                      name: tasks[index].name,
-                                      description: tasks[index].description,
-                                      priority: tasks[index].priority,
-                                      expiryTimeStamp:
-                                          tasks[index].expiryTimeStamp,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 10),
-                                ],
+                              return GestureDetector(
+                                onLongPress: () {
+                                  _showDetails(context, tasks[index]);
+                                },
+                                child: TaskItemWidget(
+                                  name: tasks[index].name,
+                                  description: tasks[index].description,
+                                  priority: tasks[index].priority,
+                                  expiryTimeStamp: tasks[index].expiryTimeStamp,
+                                ),
                               );
                             },
                           ),

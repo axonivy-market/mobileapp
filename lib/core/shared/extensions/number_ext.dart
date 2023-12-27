@@ -5,44 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 extension PriorityNumberExtension on int {
-  Widget getPriorityName() {
+  String getPriorityName() {
     switch (this) {
       case 0:
-        return Text(
-          "priority.exception".tr(),
-          style: GoogleFonts.inter(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: AppColors.sonicSilver,
-          ),
-        );
+        return "priority.exception".tr();
       case 1:
-        return Text(
-          "priority.high".tr(),
-          style: GoogleFonts.inter(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: AppColors.sonicSilver,
-          ),
-        );
+        return "priority.high".tr();
       case 2:
-        return Text(
-          "priority.normal".tr(),
-          style: GoogleFonts.inter(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: AppColors.sonicSilver,
-          ),
-        );
+        return "priority.normal".tr();
       default:
-        return Text(
-          "priority.low".tr(),
-          style: GoogleFonts.inter(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: AppColors.sonicSilver,
-          ),
-        );
+        return "priority.low".tr();
     }
   }
 }

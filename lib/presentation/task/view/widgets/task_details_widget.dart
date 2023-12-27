@@ -9,6 +9,7 @@ import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskDetailsWidget extends StatelessWidget {
@@ -23,7 +24,7 @@ class TaskDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pop();
+        context.pop();
       },
       child: Material(
         color: Colors.transparent,
@@ -66,25 +67,27 @@ class TaskDetailsWidget extends StatelessWidget {
             _buildTaskHeader(),
             const SizedBox(height: 15),
             Container(
-              padding: const EdgeInsets.fromLTRB(21, 0, 21, 0),
+              padding: const EdgeInsets.symmetric(horizontal: 21),
               child: Column(
                 children: [
                   _buildRow(
                     AppAssets.icons.paperclip.svg(height: 16),
                     "taskDetails.attactments".tr(),
-                    "${task.documents.length} documents",
+                    "taskDetails.documents".plural(task.documents.length),
                   ),
                   _buildDivider(),
-                  _buildDateTimeRow(
-                    label: "taskDetails.expiryDate".tr(),
-                    dateTime: task.expiryTimeStamp,
-                    icon: AppAssets.icons.clock.svg(height: 16),
+                  _buildRow(
+                    AppAssets.icons.clock.svg(height: 16),
+                    "taskDetails.expiryDate".tr(),
+                    task.expiryTimeStamp == null
+                        ? "taskDetails.na".tr()
+                        : task.expiryTimeStamp!.formatDateYearWithFourNumber(),
                   ),
                   _buildDivider(),
-                  _buildDateTimeRow(
-                    label: "taskDetails.creationDate".tr(),
-                    dateTime: task.startTimeStamp,
-                    icon: AppAssets.icons.calendar.svg(height: 16),
+                  _buildRow(
+                    AppAssets.icons.calendar.svg(height: 16),
+                    "taskDetails.creationDate".tr(),
+                    task.startTimeStamp.formatDateYearWithFourNumber(),
                   ),
                   _buildDivider(),
                   _buildRow(
@@ -95,7 +98,11 @@ class TaskDetailsWidget extends StatelessWidget {
                         : "taskDetails.na".tr(),
                   ),
                   _buildDivider(),
-                  _buildPriorityRow(),
+                  _buildRow(
+                    AppAssets.icons.priorityHighBlack.svg(height: 16),
+                    "taskDetails.priority".tr(),
+                    task.priority.getPriorityName(),
+                  ),
                   _buildDivider(),
                   _buildRow(
                     AppAssets.icons.users.svg(height: 16),
@@ -115,17 +122,13 @@ class TaskDetailsWidget extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(top: 0),
-          child: SizedBox.square(
-            dimension: 21,
-            child: task.priority.getPriorityIcon(),
-          ),
+        SizedBox.square(
+          dimension: 21,
+          child: task.priority.getPriorityIcon(),
         ),
         const SizedBox(width: 5),
         Expanded(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
@@ -148,16 +151,15 @@ class TaskDetailsWidget extends StatelessWidget {
                   color: AppColors.sonicSilver,
                 ),
               ),
-              const SizedBox(height: 15),
+              const SizedBox.square(
+                dimension: 21,
+              ),
             ],
           ),
         ),
-        const Padding(
-          padding: EdgeInsets.only(top: 0),
-          child: SizedBox.square(
-            dimension: 21,
-          ),
-        ),
+        const SizedBox(
+          width: 21,
+        )
       ],
     );
   }
@@ -193,64 +195,6 @@ class TaskDetailsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildDateTimeRow({
-    required String label,
-    required DateTime? dateTime,
-    required Widget icon,
-  }) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            icon,
-            const SizedBox(width: 5),
-            Text(
-              label,
-              style: GoogleFonts.inter(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.eerieBlack,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            getDateTimeTaskWidget(dateTime),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildPriorityRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            AppAssets.icons.priorityHighBlack.svg(height: 16),
-            const SizedBox(width: 5),
-            Text(
-              "taskDetails.priority".tr(),
-              style: GoogleFonts.inter(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: AppColors.eerieBlack,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            task.priority.getPriorityName(),
-          ],
-        ),
-      ],
-    );
-  }
-
   Widget _buildDivider() {
     return Container(
       height: 0.5,
@@ -260,7 +204,7 @@ class TaskDetailsWidget extends StatelessWidget {
   }
 
   Widget _buildStartTaskButton(BuildContext context) {
-    return Material(
+    return Container(
       color: Colors.transparent,
       child: Center(
         child: Container(
@@ -298,32 +242,31 @@ class TaskDetailsWidget extends StatelessWidget {
     );
   }
 
-
-Widget getDateTimeTaskWidget(DateTime? dateTime) {
-  if (dateTime == null) {
-    return Row(
-      children: [
-        SizedBox(
-          child: Text(
-            "taskDetails.na".tr(),
+  Widget getDateTimeTaskWidget(DateTime? dateTime) {
+    if (dateTime == null) {
+      return Row(
+        children: [
+          SizedBox(
+            child: Text(
+              "taskDetails.na".tr(),
+              style: GoogleFonts.inter(
+                fontSize: 13,
+                fontWeight: FontWeight.w500,
+                color: AppColors.sonicSilver,
+              ),
+            ),
+          ),
+        ],
+      );
+    } else {
+      return Row(
+        children: [
+          Text(
+            dateTime.formatDateYearWithFourNumber(),
             style: GoogleFonts.inter(
               fontSize: 13,
               fontWeight: FontWeight.w500,
               color: AppColors.sonicSilver,
-            ),
-          ),
-        ),
-      ],
-    );
-  } else {
-    return Row(
-      children: [
-        Text(
-            dateTime.formatDateYearWithFourNumber(),
-          style: GoogleFonts.inter(
-            fontSize: 13,
-            fontWeight: FontWeight.w500,
-            color: AppColors.sonicSilver,
             ),
           ),
         ],

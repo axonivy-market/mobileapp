@@ -26,7 +26,12 @@
       "priority":"Priority",
       "responsible":"Responsible",
       "startTask":"Start Task",
-      "na":"N/A"
+      "na":"N/A",
+      "documents": {
+        "zero": "{} document",
+        "one": "{} document",
+        "other": "{} documents"
+      }      
   },
   "priority":{
     "exception":"Exception",
