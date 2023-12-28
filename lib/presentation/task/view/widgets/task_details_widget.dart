@@ -81,13 +81,13 @@ class TaskDetailsWidget extends StatelessWidget {
                     "taskDetails.expiryDate".tr(),
                     task.expiryTimeStamp == null
                         ? "taskDetails.na".tr()
-                        : task.expiryTimeStamp!.formatDateYearWithFourNumber(),
+                        : task.expiryTimeStamp!.formatDateYearWithFourNumber,
                   ),
                   _buildDivider(),
                   _buildRow(
                     AppAssets.icons.calendar.svg(height: 16),
                     "taskDetails.creationDate".tr(),
-                    task.startTimeStamp.formatDateYearWithFourNumber(),
+                    task.startTimeStamp.formatDateYearWithFourNumber,
                   ),
                   _buildDivider(),
                   _buildRow(
@@ -101,7 +101,7 @@ class TaskDetailsWidget extends StatelessWidget {
                   _buildRow(
                     AppAssets.icons.priorityHighBlack.svg(height: 16),
                     "taskDetails.priority".tr(),
-                    task.priority.getPriorityName(),
+                    task.priority.priorityName,
                   ),
                   _buildDivider(),
                   _buildRow(
@@ -124,7 +124,7 @@ class TaskDetailsWidget extends StatelessWidget {
       children: [
         SizedBox.square(
           dimension: 21,
-          child: task.priority.getPriorityIcon(),
+          child: task.priority.priorityIcon,
         ),
         const SizedBox(width: 5),
         Expanded(
@@ -205,9 +205,6 @@ class TaskDetailsWidget extends StatelessWidget {
 
   Widget _buildStartTaskButton(BuildContext context) {
     return Container(
-      color: Colors.transparent,
-      child: Center(
-        child: Container(
           width: 136,
           height: 44,
           decoration: BoxDecoration(
@@ -236,41 +233,7 @@ class TaskDetailsWidget extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ),
       ),
-    );
-  }
-
-  Widget getDateTimeTaskWidget(DateTime? dateTime) {
-    if (dateTime == null) {
-      return Row(
-        children: [
-          SizedBox(
-            child: Text(
-              "taskDetails.na".tr(),
-              style: GoogleFonts.inter(
-                fontSize: 13,
-                fontWeight: FontWeight.w500,
-                color: AppColors.sonicSilver,
-              ),
-            ),
-          ),
-        ],
-      );
-    } else {
-      return Row(
-        children: [
-          Text(
-            dateTime.formatDateYearWithFourNumber(),
-            style: GoogleFonts.inter(
-              fontSize: 13,
-              fontWeight: FontWeight.w500,
-              color: AppColors.sonicSilver,
-            ),
-          ),
-        ],
-      );
-    }
+    ); 
   }
 }

@@ -1,11 +1,9 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 extension PriorityNumberExtension on int {
-  String getPriorityName() {
+  String get priorityName {
     switch (this) {
       case 0:
         return "priority.exception".tr();
@@ -20,7 +18,7 @@ extension PriorityNumberExtension on int {
 }
 
 extension PriorityIconExtension on int {
-  Widget getPriorityIcon() {
+  Widget get priorityIcon {
     switch (this) {
       case 0:
         return AppAssets.icons.priorityException.svg();

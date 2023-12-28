@@ -94,7 +94,7 @@ class TaskItemWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          priority.getPriorityIcon(),
+          priority.priorityIcon,
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

@@ -1,5 +1,5 @@
 extension DateTimeFormatting on DateTime {
-  String formatDateYearWithFourNumber() {
+  String get formatDateYearWithFourNumber {
     return "${_twoDigits(day)}.${_twoDigits(month)}.$year";
   }
 
