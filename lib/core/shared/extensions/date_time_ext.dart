@@ -1,3 +1,7 @@
+extension DateTimeExt on DateTime? {
+  bool get isExpired => this?.isBefore(DateTime.now().toUtc()) ?? false;
+}
+
 extension DateTimeFormatting on DateTime {
   String get formatDateYearWithFourNumber {
     return "${_twoDigits(day)}.${_twoDigits(month)}.$year";

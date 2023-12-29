@@ -31,6 +31,9 @@ class AppColors {
   /// Color: #0065FF
   static const Color blueRibbon = Color(0xFF0065FF);
 
+  /// Color: #A3A3A3
+  static const Color darkSouls = Color(0xFFA3A3A3);
+
   /// Color: #1B1B1B
   static const Color eerieBlack = Color(0xFF1B1B1B);
 

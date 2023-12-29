@@ -151,15 +151,9 @@ class TaskDetailsWidget extends StatelessWidget {
                   color: AppColors.sonicSilver,
                 ),
               ),
-              const SizedBox.square(
-                dimension: 21,
-              ),
             ],
           ),
-        ),
-        const SizedBox(
-          width: 21,
-        )
+        ),    
       ],
     );
   }
