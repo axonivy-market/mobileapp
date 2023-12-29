@@ -1,3 +1,4 @@
+import 'package:axon_ivy/data/models/task/documents/document.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task.freezed.dart';
@@ -16,6 +17,8 @@ class TaskIvy with _$TaskIvy {
     @Default(0) int priority,
     @Default(0) int state,
     @Default("") String activatorName,
+    @Default("") String category,
+    @Default([]) List<Document> documents,
   }) = _TaskIvy;
 
   factory TaskIvy.fromJson(Map<String, dynamic> json) =>

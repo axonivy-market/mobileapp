@@ -1,5 +1,7 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
+import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
+import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +53,7 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
     return Row(
       children: [
         Text(
-          formatDate(dateTime),
+          dateTime.formatDateYearWithTwoNumber(dateTime),
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w400,
@@ -64,33 +66,6 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
       ],
     );
   }
-}
-
-Widget getIconPriority(int priorityNumber) {
-  switch (priorityNumber) {
-    case 0:
-      return AppAssets.icons.priorityException.svg();
-    case 1:
-      return AppAssets.icons.priorityHigh.svg();
-    case 2:
-      return const SizedBox(
-        width: 21,
-        height: 21,
-      );
-    default:
-      return AppAssets.icons.priorityLow.svg();
-  }
-}
-
-String formatDate(DateTime dateTime) {
-  String formattedDate =
-      "${_twoDigits(dateTime.day)}.${_twoDigits(dateTime.month)}.${_twoDigits(dateTime.year % 100)}";
-  return formattedDate;
-}
-
-String _twoDigits(int n) {
-  if (n >= 10) return "$n";
-  return "0$n";
 }
 
 class TaskItemWidget extends StatelessWidget {
@@ -124,7 +99,7 @@ class TaskItemWidget extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          getIconPriority(priority),
+          priority.priorityIcon,
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

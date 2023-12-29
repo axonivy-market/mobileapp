@@ -18,6 +18,28 @@
     "noTaskName": "[Task name is not available]",
     "noTaskDescription": "No description"
   },
+    "taskDetails":{
+      "attactments":"Attachments",
+      "expiryDate":"Expiry date",
+      "creationDate":"Creation date",
+      "category":"Category",
+      "priority":"Priority",
+      "responsible":"Responsible",
+      "startTask":"Start Task",
+      "na":"N/A",
+      "documents": {
+        "zero": "{} document",
+        "one": "{} document",
+        "other": "{} documents"
+      }      
+  },
+  "priority":{
+    "exception":"Exception",
+    "high":"High",
+    "normal":"Normal",
+    "low":"Low"
+  },
+    
   "appName": "Error handler",
   "noRouteFound": "No Route Found",
   "success": "success",

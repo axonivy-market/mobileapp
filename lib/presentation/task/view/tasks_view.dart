@@ -3,6 +3,7 @@ import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_event.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_state.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
+import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
@@ -89,11 +90,16 @@ class _TasksViewState extends State<TasksView> {
                         if (tasks.isEmpty) {
                           return const TaskEmptyWidget();
                         } else {
-                          return TaskItemWidget(
-                            name: tasks[index].name,
-                            description: tasks[index].description,
-                            priority: tasks[index].priority,
-                            expiryTimeStamp: tasks[index].expiryTimeStamp,
+                          return GestureDetector(
+                            onLongPress: () {
+                              _showDetails(context, tasks[index]);
+                            },
+                            child: TaskItemWidget(
+                              name: tasks[index].name,
+                              description: tasks[index].description,
+                              priority: tasks[index].priority,
+                              expiryTimeStamp: tasks[index].expiryTimeStamp,
+                            ),
                           );
                         }
                       }, childCount: tasks.isEmpty ? 1 : tasks.length),
@@ -107,6 +113,20 @@ class _TasksViewState extends State<TasksView> {
           },
         ),
       ),
+    );
+  }
+
+  void _showDetails(BuildContext context, TaskIvy task) {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+      barrierColor: Colors.black.withOpacity(0.5),
+      transitionDuration: const Duration(milliseconds: 200),
+      pageBuilder: (BuildContext buildContext, Animation animation,
+          Animation secondaryAnimation) {
+        return TaskDetailsWidget(task: task);
+      },
     );
   }
 }
