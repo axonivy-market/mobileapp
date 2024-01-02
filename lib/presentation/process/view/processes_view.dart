@@ -17,7 +17,6 @@ class ProcessesView extends StatefulWidget {
 
 class _ProcessesViewState extends State<ProcessesView> {
   late final ProcessBloc _processBloc;
-  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -50,17 +49,9 @@ class _ProcessesViewState extends State<ProcessesView> {
                 physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics(),
                 ),
-                controller: _scrollController,
                 slivers: [
                   CupertinoSliverRefreshControl(
                     onRefresh: () async {
-                      await Future.delayed(const Duration(seconds: 1));
-                      // Complete the refresh
-                      _scrollController.animateTo(
-                        0.0,
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeOut,
-                      );
                       _processBloc.add(const ProcessEvent.getProcess());
                     },
                   ),
