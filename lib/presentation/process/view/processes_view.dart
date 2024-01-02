@@ -1,11 +1,10 @@
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
-import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,44 +45,49 @@ class _ProcessesViewState extends State<ProcessesView> {
             }
             if (state is ProcessSuccessState) {
               final processes = state.processes;
-              return RefreshIndicator(
-                color: AppColors.tropicSea,
-                onRefresh: () async {
-                  _processBloc.add(const ProcessEvent.getProcess());
-                },
-                child: processes.isEmpty
-                    ? SingleChildScrollView(
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        child: SizedBox(
-                          height: MediaQuery.of(context).size.height -
-                              Constants.appBarHeight -
-                              Constants.bottomNavigationBarHeight,
-                          child: DataEmptyWidget(
-                            message: 'process.emptyList',
-                            icon: AppAssets.icons.processEmpty.svg(),
-                          ),
-                        ),
-                      )
-                    : _processList(processes),
+              return CustomScrollView(
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
+                ),
+                slivers: [
+                  CupertinoSliverRefreshControl(
+                    onRefresh: () async {
+                      _processBloc.add(const ProcessEvent.getProcess());
+                    },
+                  ),
+                  SliverPadding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 15, vertical: 20),
+                    sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          if (processes.isEmpty) {
+                            return SizedBox(
+                              height: MediaQuery.of(context).size.height -
+                                  Constants.appBarHeight -
+                                  Constants.bottomNavigationBarHeight,
+                              child: DataEmptyWidget(
+                                message: 'process.emptyList',
+                                icon: AppAssets.icons.processEmpty.svg(),
+                              ),
+                            );
+                          }
+
+                          return ProcessItemWidget(
+                            process: processes[index],
+                          );
+                        },
+                        childCount: processes.isEmpty ? 1 : processes.length,
+                      ),
+                    ),
+                  ),
+                ],
               );
             }
             return Container();
           },
         ),
       ),
-    );
-  }
-
-  Widget _processList(List<Process> processes) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-      itemCount: processes.length,
-      itemBuilder: (context, index) {
-        final process = processes[index];
-        return ProcessItemWidget(
-          process: process,
-        );
-      },
     );
   }
 }
