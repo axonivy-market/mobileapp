@@ -34,6 +34,9 @@ class AppColors {
   /// Color: #A3A3A3
   static const Color darkSouls = Color(0xFFA3A3A3);
 
+  /// Color: #FAFAFA
+  static const Color drwhite = Color(0xFFFAFAFA);
+
   /// Color: #1B1B1B
   static const Color eerieBlack = Color(0xFF1B1B1B);
 

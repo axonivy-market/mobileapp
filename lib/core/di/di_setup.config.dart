@@ -70,4 +70,4 @@ Future<_i1.GetIt> $initGetIt(
   return getIt;
 }
 
-class _$AppModule extends _i22.AppModule {}
+class _$AppModule extends _i23.AppModule {}

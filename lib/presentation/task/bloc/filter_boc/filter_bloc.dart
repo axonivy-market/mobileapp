@@ -24,6 +24,6 @@ class FilterBloc extends Bloc<FilterEvent, FilterState> {
   @override
   void onChange(Change<FilterState> change) {
     super.onChange(change);
-    debugPrint('debug: $change');
+    debugPrint('debug filterState: $change');
   }
 }
