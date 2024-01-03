@@ -1,4 +1,6 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/presentation/process/view/processes_view.dart';
+import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
 import 'package:axon_ivy/util/widgets/bottom_tab_bar_item.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -6,10 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/generated/colors.gen.dart';
-import '../process/view/processes_view.dart';
 import '../profile/view/profile_view.dart';
 import '../search/view/search_view.dart';
-import '../task/view/tasks_view.dart';
 
 extension GoRouterExtension on GoRouter {
   String location() {

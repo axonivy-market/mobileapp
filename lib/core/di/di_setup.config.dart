@@ -13,24 +13,25 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 import 'package:shared_preferences/shared_preferences.dart' as _i7;
 
-import '../../data/data_sources/process_remote_data_source.dart' as _i9;
-import '../../data/data_sources/process_remote_date_source_impl.dart' as _i10;
-import '../../data/data_sources/task_remote_data_source.dart' as _i13;
-import '../../data/data_sources/task_remote_date_source_impl.dart' as _i14;
-import '../../data/repositories/process_repository.dart' as _i11;
-import '../../data/repositories/process_repository_impl.dart' as _i12;
-import '../../data/repositories/search_repository.dart' as _i18;
-import '../../data/repositories/search_repository_impl.dart' as _i19;
-import '../../data/repositories/task_repository.dart' as _i15;
-import '../../data/repositories/task_repository_impl.dart' as _i16;
+import '../../data/data_sources/process_remote_data_source.dart' as _i10;
+import '../../data/data_sources/process_remote_date_source_impl.dart' as _i11;
+import '../../data/data_sources/task_remote_data_source.dart' as _i14;
+import '../../data/data_sources/task_remote_date_source_impl.dart' as _i15;
+import '../../data/repositories/process_repository.dart' as _i12;
+import '../../data/repositories/process_repository_impl.dart' as _i13;
+import '../../data/repositories/search_repository.dart' as _i19;
+import '../../data/repositories/search_repository_impl.dart' as _i20;
+import '../../data/repositories/task_repository.dart' as _i16;
+import '../../data/repositories/task_repository_impl.dart' as _i17;
 import '../../data/services/process/process_service.dart' as _i5;
-import '../../data/services/task/task_service.dart' as _i8;
-import '../../presentation/process/bloc/process_bloc.dart' as _i17;
-import '../../presentation/search/bloc/search_bloc.dart' as _i21;
+import '../../data/services/task/task_service.dart' as _i9;
+import '../../presentation/process/bloc/process_bloc.dart' as _i18;
+import '../../presentation/search/bloc/search_bloc.dart' as _i22;
 import '../../presentation/search/bloc/search_filter_cubit.dart' as _i6;
 import '../../presentation/task/bloc/filter_boc/filter_bloc.dart' as _i4;
-import '../../presentation/task/bloc/task_bloc.dart' as _i20;
-import 'app_module.dart' as _i22;
+import '../../presentation/task/bloc/sort_bloc/sort_bloc.dart' as _i8;
+import '../../presentation/task/bloc/task_bloc.dart' as _i21;
+import 'app_module.dart' as _i23;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 Future<_i1.GetIt> $initGetIt(
@@ -52,23 +53,24 @@ Future<_i1.GetIt> $initGetIt(
     () => appModule.prefs,
     preResolve: true,
   );
-  gh.factory<_i8.TaskService>(() => _i8.TaskService(gh<_i3.Dio>()));
-  gh.factory<_i9.ProcessRemoteDataSource>(
-      () => _i10.ProcessRemoteDataSourceImpl(gh<_i5.ProcessService>()));
-  gh.factory<_i11.ProcessRepository>(
-      () => _i12.ProcessRepositoryImpl(gh<_i9.ProcessRemoteDataSource>()));
-  gh.factory<_i13.TaskRemoteDataSource>(
-      () => _i14.TaskRemoteDataSourceImpl(gh<_i8.TaskService>()));
-  gh.factory<_i15.TaskRepository>(
-      () => _i16.TaskRepositoryImpl(gh<_i13.TaskRemoteDataSource>()));
-  gh.factory<_i17.ProcessBloc>(
-      () => _i17.ProcessBloc(gh<_i11.ProcessRepository>()));
-  gh.factory<_i18.SearchRepository>(
-      () => _i19.SearchRepositoryImpl(gh<_i13.TaskRemoteDataSource>()));
-  gh.factory<_i20.TaskBloc>(() => _i20.TaskBloc(gh<_i15.TaskRepository>()));
-  gh.factory<_i21.SearchBloc>(
-      () => _i21.SearchBloc(gh<_i18.SearchRepository>()));
+  gh.factory<_i8.SortBloc>(() => _i8.SortBloc());
+  gh.factory<_i9.TaskService>(() => _i9.TaskService(gh<_i3.Dio>()));
+  gh.factory<_i10.ProcessRemoteDataSource>(
+      () => _i11.ProcessRemoteDataSourceImpl(gh<_i5.ProcessService>()));
+  gh.factory<_i12.ProcessRepository>(
+      () => _i13.ProcessRepositoryImpl(gh<_i10.ProcessRemoteDataSource>()));
+  gh.factory<_i14.TaskRemoteDataSource>(
+      () => _i15.TaskRemoteDataSourceImpl(gh<_i9.TaskService>()));
+  gh.factory<_i16.TaskRepository>(
+      () => _i17.TaskRepositoryImpl(gh<_i14.TaskRemoteDataSource>()));
+  gh.factory<_i18.ProcessBloc>(
+      () => _i18.ProcessBloc(gh<_i12.ProcessRepository>()));
+  gh.factory<_i19.SearchRepository>(
+      () => _i20.SearchRepositoryImpl(gh<_i14.TaskRemoteDataSource>()));
+  gh.factory<_i21.TaskBloc>(() => _i21.TaskBloc(gh<_i16.TaskRepository>()));
+  gh.factory<_i22.SearchBloc>(
+      () => _i22.SearchBloc(gh<_i19.SearchRepository>()));
   return getIt;
 }
 
-class _$AppModule extends _i22.AppModule {}
+class _$AppModule extends _i23.AppModule {}
