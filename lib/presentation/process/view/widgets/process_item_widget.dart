@@ -33,8 +33,8 @@ class ProcessItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      height: AppSize.s80,
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 5),
+      height: AppSize.s82,
+      padding: const EdgeInsets.only(left: 5, right: 5, top: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.bleachedSilk,
@@ -76,9 +76,12 @@ class ProcessItemWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 5),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: AppAssets.icons.chevronRight.svg(),
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: AppAssets.icons.chevronRight.svg(),
+            ),
           )
         ],
       ),
