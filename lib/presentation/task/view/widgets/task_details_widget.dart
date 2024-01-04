@@ -9,7 +9,6 @@ import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskDetailsWidget extends StatelessWidget {
@@ -24,7 +23,7 @@ class TaskDetailsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pop();
+        Navigator.of(context).pop();
       },
       child: Material(
         color: Colors.transparent,
@@ -153,7 +152,7 @@ class TaskDetailsWidget extends StatelessWidget {
               ),
             ],
           ),
-        ),    
+        ),
       ],
     );
   }
@@ -199,35 +198,35 @@ class TaskDetailsWidget extends StatelessWidget {
 
   Widget _buildStartTaskButton(BuildContext context) {
     return Container(
-          width: 136,
-          height: 44,
-          decoration: BoxDecoration(
-            color: AppColors.bleachedSilk,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: GestureDetector(
-            onTap: () {},
-            child: Center(
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Your dialog content here
-                  Text(
-                    "taskDetails.startTask".tr(),
-                    style: GoogleFonts.inter(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.tropicSea,
-                    ),
-                  ),
-                  const SizedBox(width: 5),
-                  AppAssets.icons.arrowRight.svg(
-                    height: 21,
-                  ),
-                ],
-              ),
-            ),
+      width: 136,
+      height: 44,
+      decoration: BoxDecoration(
+        color: AppColors.bleachedSilk,
+        borderRadius: BorderRadius.circular(8),
       ),
-    ); 
+      child: GestureDetector(
+        onTap: () {},
+        child: Center(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Your dialog content here
+              Text(
+                "taskDetails.startTask".tr(),
+                style: GoogleFonts.inter(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                  color: AppColors.tropicSea,
+                ),
+              ),
+              const SizedBox(width: 5),
+              AppAssets.icons.arrowRight.svg(
+                height: 21,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
