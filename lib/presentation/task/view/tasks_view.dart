@@ -26,7 +26,7 @@ class TasksView extends StatefulWidget {
 class _TasksViewState extends State<TasksView> {
   late final TaskBloc _taskBloc;
   late final FilterBloc _filterBloc;
-
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -57,11 +57,20 @@ class _TasksViewState extends State<TasksView> {
               return Padding(
                 padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
                 child: CustomScrollView(
+                  physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics(),
+                  ),
                   slivers: [
                     CupertinoSliverRefreshControl(
                       onRefresh: () async {
                         final filterState =
                             BlocProvider.of<FilterBloc>(context).state;
+                        await Future.delayed(const Duration(seconds: 1));
+                        _scrollController.animateTo(
+                          0.0,
+                          duration: const Duration(milliseconds: 500),
+                          curve: Curves.easeOut,
+                        );
                         _taskBloc
                             .add(TaskEvent.getTasks(filterState.activeFilter));
                       },
