@@ -54,21 +54,38 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       }
       switch (event.type) {
         case SearchType.all:
-          final tasks = _taskResults(event.query.toLowerCase().trim());
-          emit(SearchState.loaded(tasks, query));
+          final results = _allSearchResults(event.query.toLowerCase().trim());
+          if (results.isEmpty) {
+            emit(const SearchState.loaded(
+                emptyMessage: "search.noMatchingResults"));
+          } else {
+            emit(SearchState.loaded(items: results, query: query));
+          }
           break;
         case SearchType.tasks:
-          final tasks = _taskResults(event.query.toLowerCase().trim());
-          emit(SearchState.loaded(tasks, query));
+          final tasks = _taskSearchResults(event.query.toLowerCase().trim());
+          if (tasks.isEmpty) {
+            emit(
+                const SearchState.loaded(emptyMessage: "search.noTaskResults"));
+          } else {
+            emit(SearchState.loaded(items: tasks, query: query));
+          }
           break;
         case SearchType.processes:
-          emit(const SearchState.loaded([], ""));
+          final processes =
+              _processSearchResults(event.query.toLowerCase().trim());
+          if (processes.isEmpty) {
+            emit(const SearchState.loaded(
+                emptyMessage: "search.noProcessResults"));
+          } else {
+            emit(SearchState.loaded(items: processes, query: query));
+          }
           break;
       }
     }
   }
 
-  List<SearchResult> _taskResults(String query) {
+  List<SearchResult> _taskSearchResults(String query) {
     if (query.isEmpty) {
       return List.empty();
     }
@@ -82,5 +99,30 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       tasks.insert(0, const SearchResult.sectionHeader('generalTasks'));
     }
     return tasks;
+  }
+
+  List<SearchResult> _allSearchResults(String query) {
+    if (query.isEmpty) {
+      return List.empty();
+    }
+    final tasks = _taskSearchResults(query);
+    final processes = _processSearchResults(query);
+    return tasks + processes;
+  }
+
+  List<SearchResult> _processSearchResults(String query) {
+    if (query.isEmpty) {
+      return List.empty();
+    }
+    final processes = _searchResults
+        .where((item) =>
+            item is ProcessItem &&
+            (item.process.name.toLowerCase().contains(query) ||
+                item.process.description.toLowerCase().contains(query)))
+        .toList();
+    if (processes.isNotEmpty) {
+      processes.insert(0, const SearchResult.sectionHeader('generalProcesses'));
+    }
+    return processes;
   }
 }

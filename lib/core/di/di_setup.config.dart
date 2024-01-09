@@ -63,8 +63,10 @@ Future<_i1.GetIt> $initGetIt(
       () => _i16.TaskRepositoryImpl(gh<_i13.TaskRemoteDataSource>()));
   gh.factory<_i17.ProcessBloc>(
       () => _i17.ProcessBloc(gh<_i11.ProcessRepository>()));
-  gh.factory<_i18.SearchRepository>(
-      () => _i19.SearchRepositoryImpl(gh<_i13.TaskRemoteDataSource>()));
+  gh.factory<_i18.SearchRepository>(() => _i19.SearchRepositoryImpl(
+        gh<_i13.TaskRemoteDataSource>(),
+        gh<_i9.ProcessRemoteDataSource>(),
+      ));
   gh.factory<_i20.TaskBloc>(() => _i20.TaskBloc(gh<_i15.TaskRepository>()));
   gh.factory<_i21.SearchBloc>(
       () => _i21.SearchBloc(gh<_i18.SearchRepository>()));

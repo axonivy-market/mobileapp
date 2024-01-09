@@ -342,21 +342,27 @@ mixin _$SearchState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<SearchItem> items) getTaskProcess,
-    required TResult Function(List<SearchResult> items, String query) loaded,
+    required TResult Function(
+            List<SearchResult>? items, String? emptyMessage, String query)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(List<SearchItem> items)? getTaskProcess,
-    TResult? Function(List<SearchResult> items, String query)? loaded,
+    TResult? Function(
+            List<SearchResult>? items, String? emptyMessage, String query)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(List<SearchItem> items)? getTaskProcess,
-    TResult Function(List<SearchResult> items, String query)? loaded,
+    TResult Function(
+            List<SearchResult>? items, String? emptyMessage, String query)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -448,7 +454,9 @@ class _$InitialStateImpl with DiagnosticableTreeMixin implements InitialState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<SearchItem> items) getTaskProcess,
-    required TResult Function(List<SearchResult> items, String query) loaded,
+    required TResult Function(
+            List<SearchResult>? items, String? emptyMessage, String query)
+        loaded,
   }) {
     return initial();
   }
@@ -458,7 +466,9 @@ class _$InitialStateImpl with DiagnosticableTreeMixin implements InitialState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(List<SearchItem> items)? getTaskProcess,
-    TResult? Function(List<SearchResult> items, String query)? loaded,
+    TResult? Function(
+            List<SearchResult>? items, String? emptyMessage, String query)?
+        loaded,
   }) {
     return initial?.call();
   }
@@ -468,7 +478,9 @@ class _$InitialStateImpl with DiagnosticableTreeMixin implements InitialState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(List<SearchItem> items)? getTaskProcess,
-    TResult Function(List<SearchResult> items, String query)? loaded,
+    TResult Function(
+            List<SearchResult>? items, String? emptyMessage, String query)?
+        loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -602,7 +614,9 @@ class _$TaskProcessLoadedStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<SearchItem> items) getTaskProcess,
-    required TResult Function(List<SearchResult> items, String query) loaded,
+    required TResult Function(
+            List<SearchResult>? items, String? emptyMessage, String query)
+        loaded,
   }) {
     return getTaskProcess(items);
   }
@@ -612,7 +626,9 @@ class _$TaskProcessLoadedStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(List<SearchItem> items)? getTaskProcess,
-    TResult? Function(List<SearchResult> items, String query)? loaded,
+    TResult? Function(
+            List<SearchResult>? items, String? emptyMessage, String query)?
+        loaded,
   }) {
     return getTaskProcess?.call(items);
   }
@@ -622,7 +638,9 @@ class _$TaskProcessLoadedStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(List<SearchItem> items)? getTaskProcess,
-    TResult Function(List<SearchResult> items, String query)? loaded,
+    TResult Function(
+            List<SearchResult>? items, String? emptyMessage, String query)?
+        loaded,
     required TResult orElse(),
   }) {
     if (getTaskProcess != null) {
@@ -682,7 +700,7 @@ abstract class _$$SearchResultStateImplCopyWith<$Res> {
           $Res Function(_$SearchResultStateImpl) then) =
       __$$SearchResultStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<SearchResult> items, String query});
+  $Res call({List<SearchResult>? items, String? emptyMessage, String query});
 }
 
 /// @nodoc
@@ -696,15 +714,20 @@ class __$$SearchResultStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? items = null,
+    Object? items = freezed,
+    Object? emptyMessage = freezed,
     Object? query = null,
   }) {
     return _then(_$SearchResultStateImpl(
-      null == items
+      items: freezed == items
           ? _value._items
           : items // ignore: cast_nullable_to_non_nullable
-              as List<SearchResult>,
-      null == query
+              as List<SearchResult>?,
+      emptyMessage: freezed == emptyMessage
+          ? _value.emptyMessage
+          : emptyMessage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      query: null == query
           ? _value.query
           : query // ignore: cast_nullable_to_non_nullable
               as String,
@@ -717,23 +740,29 @@ class __$$SearchResultStateImplCopyWithImpl<$Res>
 class _$SearchResultStateImpl
     with DiagnosticableTreeMixin
     implements SearchResultState {
-  const _$SearchResultStateImpl(final List<SearchResult> items, this.query)
+  const _$SearchResultStateImpl(
+      {final List<SearchResult>? items, this.emptyMessage, this.query = ""})
       : _items = items;
 
-  final List<SearchResult> _items;
+  final List<SearchResult>? _items;
   @override
-  List<SearchResult> get items {
+  List<SearchResult>? get items {
+    final value = _items;
+    if (value == null) return null;
     if (_items is EqualUnmodifiableListView) return _items;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_items);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
+  final String? emptyMessage;
+  @override
+  @JsonKey()
   final String query;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'SearchState.loaded(items: $items, query: $query)';
+    return 'SearchState.loaded(items: $items, emptyMessage: $emptyMessage, query: $query)';
   }
 
   @override
@@ -742,6 +771,7 @@ class _$SearchResultStateImpl
     properties
       ..add(DiagnosticsProperty('type', 'SearchState.loaded'))
       ..add(DiagnosticsProperty('items', items))
+      ..add(DiagnosticsProperty('emptyMessage', emptyMessage))
       ..add(DiagnosticsProperty('query', query));
   }
 
@@ -751,12 +781,14 @@ class _$SearchResultStateImpl
         (other.runtimeType == runtimeType &&
             other is _$SearchResultStateImpl &&
             const DeepCollectionEquality().equals(other._items, _items) &&
+            (identical(other.emptyMessage, emptyMessage) ||
+                other.emptyMessage == emptyMessage) &&
             (identical(other.query, query) || other.query == query));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_items), query);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_items), emptyMessage, query);
 
   @JsonKey(ignore: true)
   @override
@@ -770,9 +802,11 @@ class _$SearchResultStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function(List<SearchItem> items) getTaskProcess,
-    required TResult Function(List<SearchResult> items, String query) loaded,
+    required TResult Function(
+            List<SearchResult>? items, String? emptyMessage, String query)
+        loaded,
   }) {
-    return loaded(items, query);
+    return loaded(items, emptyMessage, query);
   }
 
   @override
@@ -780,9 +814,11 @@ class _$SearchResultStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function(List<SearchItem> items)? getTaskProcess,
-    TResult? Function(List<SearchResult> items, String query)? loaded,
+    TResult? Function(
+            List<SearchResult>? items, String? emptyMessage, String query)?
+        loaded,
   }) {
-    return loaded?.call(items, query);
+    return loaded?.call(items, emptyMessage, query);
   }
 
   @override
@@ -790,11 +826,13 @@ class _$SearchResultStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function(List<SearchItem> items)? getTaskProcess,
-    TResult Function(List<SearchResult> items, String query)? loaded,
+    TResult Function(
+            List<SearchResult>? items, String? emptyMessage, String query)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(items, query);
+      return loaded(items, emptyMessage, query);
     }
     return orElse();
   }
@@ -836,10 +874,12 @@ class _$SearchResultStateImpl
 
 abstract class SearchResultState implements SearchState {
   const factory SearchResultState(
-          final List<SearchResult> items, final String query) =
-      _$SearchResultStateImpl;
+      {final List<SearchResult>? items,
+      final String? emptyMessage,
+      final String query}) = _$SearchResultStateImpl;
 
-  List<SearchResult> get items;
+  List<SearchResult>? get items;
+  String? get emptyMessage;
   String get query;
   @JsonKey(ignore: true)
   _$$SearchResultStateImplCopyWith<_$SearchResultStateImpl> get copyWith =>

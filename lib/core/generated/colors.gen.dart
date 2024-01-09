@@ -37,6 +37,9 @@ class AppColors {
   /// Color: #1B1B1B
   static const Color eerieBlack = Color(0xFF1B1B1B);
 
+  /// Color: #DFDFDF
+  static const Color kinglyCloud = Color(0xFFDFDFDF);
+
   /// Color: #202020
   static const Color lead = Color(0xFF202020);
 

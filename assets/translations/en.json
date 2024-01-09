@@ -18,28 +18,27 @@
     "noTaskName": "[Task name is not available]",
     "noTaskDescription": "No description"
   },
-    "taskDetails":{
-      "attactments":"Attachments",
-      "expiryDate":"Expiry date",
-      "creationDate":"Creation date",
-      "category":"Category",
-      "priority":"Priority",
-      "responsible":"Responsible",
-      "startTask":"Start Task",
-      "na":"N/A",
-      "documents": {
-        "zero": "{} document",
-        "one": "{} document",
-        "other": "{} documents"
-      }      
+  "taskDetails": {
+    "attachments": "Attachments",
+    "expiryDate": "Expiry date",
+    "creationDate": "Creation date",
+    "category": "Category",
+    "priority": "Priority",
+    "responsible": "Responsible",
+    "startTask": "Start Task",
+    "na": "N/A",
+    "documents": {
+      "zero": "{} document",
+      "one": "{} document",
+      "other": "{} documents"
+    }
   },
-  "priority":{
-    "exception":"Exception",
-    "high":"High",
-    "normal":"Normal",
-    "low":"Low"
+  "priority": {
+    "exception": "Exception",
+    "high": "High",
+    "normal": "Normal",
+    "low": "Low"
   },
-    
   "appName": "Error handler",
   "noRouteFound": "No Route Found",
   "success": "success",
@@ -62,6 +61,8 @@
   "generalProcesses": "Processes",
   "search": {
     "nothingThereYet": "Nothing there yet... Search for a specific task or process",
-    "noMatchingResults": "There are no matching results to your search..."
+    "noMatchingResults": "There are no matching results to your search...",
+    "noProcessResults": "There are no processes named after your search...",
+    "noTaskResults": "There are no tasks named after your search..."
   }
 }

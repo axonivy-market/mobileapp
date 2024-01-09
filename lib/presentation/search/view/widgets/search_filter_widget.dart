@@ -1,3 +1,4 @@
+import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/data/models/entity/entity.dart';
 import 'package:axon_ivy/data/models/enums/search_type.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
@@ -38,7 +39,12 @@ class SearchFilterWidget extends StatelessWidget {
                           topLeft: Radius.circular(10.0),
                           bottomLeft: Radius.circular(10.0),
                         ),
-                      ),
+                        border: state.type == SearchType.processes
+                            ? const Border(
+                                right: BorderSide(
+                                    color: AppColors.kinglyCloud, width: 0.5),
+                              )
+                            : null),
               ),
             ),
             Expanded(
@@ -86,7 +92,12 @@ class SearchFilterWidget extends StatelessWidget {
                           topRight: Radius.circular(10.0),
                           bottomRight: Radius.circular(10.0),
                         ),
-                      ),
+                        border: state.type == SearchType.all
+                            ? const Border(
+                                left: BorderSide(
+                                    color: AppColors.kinglyCloud, width: 0.5),
+                              )
+                            : null),
               ),
             ),
           ],

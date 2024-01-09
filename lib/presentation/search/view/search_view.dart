@@ -1,6 +1,8 @@
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/core/shared/extensions/list_ext.dart';
 import 'package:axon_ivy/data/models/search/search.dart';
+import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_filter_cubit.dart';
 import 'package:axon_ivy/presentation/search/view/widgets/widgets.dart';
@@ -60,13 +62,13 @@ class _SearchViewState extends State<SearchView> {
                       children: [
                         const Padding(
                           padding:
-                              EdgeInsets.only(left: 16, right: 16, top: 20),
+                              EdgeInsets.only(left: 16, right: 16, top: 10),
                           child: SearchFilterWidget(),
                         ),
                         Expanded(
-                            child: state.items.isEmpty
+                            child: state.items.isEmptyOrNull
                                 ? DataEmptyWidget(
-                                    message: 'search.noMatchingResults'.tr(),
+                                    message: state.emptyMessage!.tr(),
                                     icon:
                                         AppAssets.icons.icSearchNotFound.svg(),
                                   )
@@ -92,9 +94,9 @@ class _SearchViewState extends State<SearchView> {
     return CustomScrollView(
       slivers: [
         const SliverAppBar(
-          toolbarHeight: 20,
+          toolbarHeight: 10,
           pinned: true,
-          scrolledUnderElevation: 1,
+          scrolledUnderElevation: 0.2,
           shadowColor: AppColors.mercury,
           surfaceTintColor: Colors.white,
           elevation: 0,
@@ -102,11 +104,11 @@ class _SearchViewState extends State<SearchView> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
-              final item = state.items[index];
+              final item = state.items![index];
               if (item is SectionHeader) {
                 return Padding(
-                  padding:
-                      const EdgeInsets.only(left: 16, right: 16, bottom: 10),
+                  padding: const EdgeInsets.only(
+                      left: 16, right: 16, bottom: 10, top: 10),
                   child: Text(
                     item.title.tr(),
                     style: GoogleFonts.inter(
@@ -127,10 +129,18 @@ class _SearchViewState extends State<SearchView> {
                     query: state.query.trim(),
                   ),
                 );
+              } else if (item is ProcessItem) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ProcessItemWidget(
+                    process: item.process,
+                    query: state.query.trim(),
+                  ),
+                );
               }
               return null;
             },
-            childCount: state.items.length,
+            childCount: state.items!.length,
           ),
         ),
       ],
