@@ -13,6 +13,8 @@
   "tasksView": {
     "all": "@:generalAll",
     "expired": "Expired",
+    "sort": "Sort",
+    "emptyTaskExpired": "There are no expired tasks",
     "emptyTask": "Nice work! You don't have any tasks at the moment",
     "noExpiryDate": "No expiry date",
     "noTaskName": "[Task name is not available]",
@@ -87,6 +89,22 @@
     "noMatchingResults": "There are no matching results to your search...",
     "noProcessResults": "There are no processes named after your search...",
     "noTaskResults": "There are no tasks named after your search..."
-  }
+  },
+    "noMatchingResults": "There are no matching results to your search...",
+  "sortType": {
+    "priority": "Priority",
+    "name": "Name",
+    "expiryDate" : "Expiry date",
+    "creationDate": "Creation date",
+    "aToZ": "A to Z",
+    "zToA": "Z to A",
+    "mostImportant": "Most important",
+    "leastImportant": "Least important",
+    "mostUrgent": "Most urgent",
+    "leastUrgent": "Least urgent",
+    "newest": "Newest",
+    "oldest": "Oldest"
 
+  }
+  
 }
