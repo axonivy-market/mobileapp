@@ -142,6 +142,9 @@ class $AssetsIconsGen {
   SvgGenImage get taskBottomBar =>
       const SvgGenImage('assets/icons/task_bottom_bar.svg');
 
+  /// File path: assets/icons/tool.svg
+  SvgGenImage get tool => const SvgGenImage('assets/icons/tool.svg');
+
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
@@ -183,6 +186,7 @@ class $AssetsIconsGen {
         settingBottomBar,
         sorting,
         taskBottomBar,
+        tool,
         user,
         users
       ];

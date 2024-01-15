@@ -1,5 +1,6 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
+import 'package:axon_ivy/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,7 @@ class LoginWidget extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       if (!(SharedPrefs.isLogin ?? false)) {
-                        context.push("/login").then(
+                        context.push(AppRoutes.login).then(
                               (value) => context.read<ProfileBloc>().add(
                                     ProfileEvent.loggedIn(value as bool),
                                   ),

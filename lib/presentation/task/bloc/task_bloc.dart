@@ -5,7 +5,6 @@ import 'package:axon_ivy/core/shared/extensions/sort_type_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/task_ext.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -125,9 +124,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
       tasks.fold(
         (l) {
-          emit(TaskState.error(l.message));
+          emit(
+            TaskState.error(l.message),
+          );
         },
         (r) {
+          SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
           this.tasks = r;
           sortDefaultTasks = r.sortDefaultTasks;
           expiredTasks = _filterExpiredTasks(this.tasks);
@@ -137,7 +139,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         },
       );
     } catch (e) {
-      emit(TaskState.error(AppError.handle(e).failure.message));
+      emit(
+        TaskState.error(AppError.handle(e).failure.message),
+      );
     }
   }
 
