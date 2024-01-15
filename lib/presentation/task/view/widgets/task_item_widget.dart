@@ -1,30 +1,16 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
+import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
+import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/util/resources/resources.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Widget getDateTimeTaskWidget(DateTime? dateTime) {
   if (dateTime == null) {
-    return Row(
-      children: [
-        SizedBox(
-          width: 50,
-          child: Text(
-            "",
-            style: GoogleFonts.inter(
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
-              color: AppColors.sonicSilver,
-            ),
-            overflow: TextOverflow.ellipsis,
-            softWrap: true,
-          ),
-        ),
-        AppAssets.icons.chevronRight.svg()
-      ],
-    );
+    return AppAssets.icons.chevronRight.svg();
   }
 
   DateTime now = DateTime.now().toUtc();
@@ -51,7 +37,7 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
     return Row(
       children: [
         Text(
-          formatDate(dateTime),
+          dateTime.formatDateYearWithTwoNumber(dateTime),
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w400,
@@ -66,33 +52,6 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
   }
 }
 
-Widget getIconPriority(int priorityNumber) {
-  switch (priorityNumber) {
-    case 0:
-      return AppAssets.icons.priorityException.svg();
-    case 1:
-      return AppAssets.icons.priorityHigh.svg();
-    case 2:
-      return const SizedBox(
-        width: 21,
-        height: 21,
-      );
-    default:
-      return AppAssets.icons.priorityLow.svg();
-  }
-}
-
-String formatDate(DateTime dateTime) {
-  String formattedDate =
-      "${_twoDigits(dateTime.day)}.${_twoDigits(dateTime.month)}.${_twoDigits(dateTime.year % 100)}";
-  return formattedDate;
-}
-
-String _twoDigits(int n) {
-  if (n >= 10) return "$n";
-  return "0$n";
-}
-
 class TaskItemWidget extends StatelessWidget {
   const TaskItemWidget({
     super.key,
@@ -100,64 +59,134 @@ class TaskItemWidget extends StatelessWidget {
     required this.description,
     required this.priority,
     required this.expiryTimeStamp,
+    this.query = '',
   });
+
   final String name;
   final String description;
   final int priority;
   final DateTime? expiryTimeStamp;
+  final String query;
 
   @override
   Widget build(BuildContext context) {
+    int startNameIndex = name.toLowerCase().indexOf(query.toLowerCase());
+    int startDescIndex = description.toLowerCase().indexOf(query.toLowerCase());
     return Container(
-      padding: const EdgeInsets.fromLTRB(5, 10, 0, 10),
+      margin: const EdgeInsets.only(bottom: 10),
+      height: AppSize.s82,
+      padding: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.bleachedSilk,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          getIconPriority(priority),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                width: MediaQuery.of(context).size.width - 21 - 42 - 20,
-                child: Text(
-                  name.isEmptyOrNull ? "tasksView.noTaskName".tr() : name,
-                  style: GoogleFonts.inter(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.eerieBlack),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                ),
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
+      child: Center(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            priority.priorityIcon,
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(
-                    // max width,
-                    height: 34,
-                    width: MediaQuery.of(context).size.width - 42 - 92 - 10,
-                    child: Text(
-                      description.isEmptyOrNull
-                          ? "tasksView.noTaskDescription".tr()
-                          : description,
-                      style: GoogleFonts.inter(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w400,
-                        color: AppColors.sonicSilver,
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                    ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: query.isEmptyOrNull || startNameIndex == -1
+                        ? Text(
+                            name.isEmptyOrNull
+                                ? "tasksView.noTaskName".tr()
+                                : name,
+                            style: GoogleFonts.inter(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                                color: query.isEmptyOrNull
+                                    ? AppColors.eerieBlack
+                                    : AppColors.darkSouls),
+                            overflow: TextOverflow.ellipsis,
+                          )
+                        : _taskNameRichText(
+                            text: name,
+                            startIndex: startNameIndex,
+                            maxLine: 1,
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                          ),
                   ),
-                  getDateTimeTaskWidget(expiryTimeStamp)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: query.isEmptyOrNull || startDescIndex == -1
+                            ? Text(
+                                description.isEmptyOrNull
+                                    ? "tasksView.noTaskDescription".tr()
+                                    : description,
+                                style: GoogleFonts.inter(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                  color: AppColors.sonicSilver,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 2,
+                              )
+                            : _taskNameRichText(
+                                text: description,
+                                startIndex: startDescIndex,
+                                maxLine: 2,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w400,
+                              ),
+                      ),
+                      SizedBox(
+                        height: 34,
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: getDateTimeTaskWidget(expiryTimeStamp),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
-              )
-            ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _taskNameRichText({
+    required String text,
+    required int startIndex,
+    required int maxLine,
+    required double fontSize,
+    required FontWeight fontWeight,
+  }) {
+    return RichText(
+      maxLines: maxLine,
+      overflow: TextOverflow.ellipsis,
+      text: TextSpan(
+        text: text.substring(0, startIndex),
+        style: GoogleFonts.inter(
+            color: AppColors.darkSouls,
+            fontWeight: fontWeight,
+            fontSize: fontSize),
+        children: [
+          TextSpan(
+            text: text.substring(startIndex, startIndex + query.length),
+            style: GoogleFonts.inter(
+                color: AppColors.eerieBlack,
+                fontWeight: fontWeight,
+                fontSize: fontSize),
           ),
+          TextSpan(
+              text: text.substring(startIndex + query.length),
+              style: GoogleFonts.inter(
+                  color: AppColors.darkSouls,
+                  fontWeight: fontWeight,
+                  fontSize: fontSize)),
         ],
       ),
     );

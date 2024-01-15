@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/generated/colors.gen.dart';
+import '../process/view/processes_view.dart';
+import '../profile/view/profile_view.dart';
+import '../search/view/search_view.dart';
+import '../task/view/tasks_view.dart';
 
 extension GoRouterExtension on GoRouter {
   String location() {
@@ -28,14 +32,12 @@ class TabBarScreen extends StatefulWidget {
 }
 
 class _TabBarScreenState extends State<TabBarScreen> {
+  int _selectedIndex = 0;
   final tabs = [
     BottomBarTabItem(
       initialLocation: AppRoutes.task,
-      icon: AppAssets.icons.list.svg(
-        height: 20,
-      ),
+      icon: AppAssets.icons.list.svg(),
       activeIcon: AppAssets.icons.list.svg(
-        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.tropicSea,
           BlendMode.srcIn,
@@ -45,9 +47,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: AppRoutes.processes,
-      icon: AppAssets.icons.process.svg(height: 20),
+      icon: AppAssets.icons.process.svg(),
       activeIcon: AppAssets.icons.process.svg(
-        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.tropicSea,
           BlendMode.srcIn,
@@ -57,9 +58,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: AppRoutes.search,
-      icon: AppAssets.icons.search.svg(height: 20),
+      icon: AppAssets.icons.search.svg(),
       activeIcon: AppAssets.icons.search.svg(
-        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.tropicSea,
           BlendMode.srcIn,
@@ -69,9 +69,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
     ),
     BottomBarTabItem(
       initialLocation: AppRoutes.profile,
-      icon: AppAssets.icons.user.svg(height: 20),
+      icon: AppAssets.icons.user.svg(),
       activeIcon: AppAssets.icons.user.svg(
-        height: 20,
         colorFilter: const ColorFilter.mode(
           AppColors.tropicSea,
           BlendMode.srcIn,
@@ -95,6 +94,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   // callback used to navigate to the desired tab
   void _onItemTapped(BuildContext context, int tabIndex) {
     if (tabIndex != _currentIndex) {
+      _selectedIndex = tabIndex;
       // go to the initial location of the selected tab (by index)
       context.go(tabs[tabIndex].initialLocation);
     }
@@ -103,7 +103,15 @@ class _TabBarScreenState extends State<TabBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child,
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: const [
+          TasksView(),
+          ProcessesView(),
+          SearchView(),
+          ProfileView()
+        ],
+      ),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
           border: Border(

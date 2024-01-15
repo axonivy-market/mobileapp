@@ -1,22 +1,43 @@
 {
   "bottomTabBar": {
-    "tasks": "Tasks",
-    "processes": "Processes",
-    "search": "Search",
+    "tasks": "@:generalTasks",
+    "processes": "@:generalProcesses",
+    "search": "@:generalSearch",
     "profile": "Profile"
   },
   "splashCopyright": "© Axon Ivy – Version {version}",
   "process": {
     "emptyList": "You don’t have any processes at the moment...",
     "noDescription": "No description"
-  
   },
   "tasksView": {
-    "expired" : "Expired",
+    "all": "@:generalAll",
+    "expired": "Expired",
     "emptyTask": "Nice work! You don't have any tasks at the moment",
     "noExpiryDate": "No expiry date",
     "noTaskName": "[Task name is not available]",
     "noTaskDescription": "No description"
+  },
+    "taskDetails":{
+      "attactments":"Attachments",
+      "expiryDate":"Expiry date",
+      "creationDate":"Creation date",
+      "category":"Category",
+      "priority":"Priority",
+      "responsible":"Responsible",
+      "startTask":"Start Task",
+      "na":"N/A",
+      "documents": {
+        "zero": "{} document",
+        "one": "{} document",
+        "other": "{} documents"
+      }      
+  },
+  "priority":{
+    "exception":"Exception",
+    "high":"High",
+    "normal":"Normal",
+    "low":"Low"
   },
     
   "appName": "Error handler",
@@ -34,5 +55,13 @@
   "defaultError": "some thing went wrong, try again later",
   "cacheError": "cache error, try again later",
   "noInternetError": "Please check your internet connection",
-  "connectionError": "Please check your base url"
+  "connectionError": "Please check your base url",
+  "generalSearch": "Search",
+  "generalAll": "All",
+  "generalTasks": "Tasks",
+  "generalProcesses": "Processes",
+  "search": {
+    "nothingThereYet": "Nothing there yet... Search for a specific task or process",
+    "noMatchingResults": "There are no matching results to your search..."
+  }
 }

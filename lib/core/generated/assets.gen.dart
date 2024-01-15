@@ -27,15 +27,53 @@ class $AssetsEnvGen {
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
-  /// File path: assets/icons/camera.svg
-  SvgGenImage get camera => const SvgGenImage('assets/icons/camera.svg');
+  /// File path: assets/icons/arrow-right.svg
+  SvgGenImage get arrowRight =>
+      const SvgGenImage('assets/icons/arrow-right.svg');
+
+  /// File path: assets/icons/calendar.svg
+  SvgGenImage get calendar => const SvgGenImage('assets/icons/calendar.svg');
+
+  /// File path: assets/icons/category-2.svg
+  SvgGenImage get category2 => const SvgGenImage('assets/icons/category-2.svg');
 
   /// File path: assets/icons/chevron_right.svg
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/icons/chevron_right.svg');
 
+  /// File path: assets/icons/clock.svg
+  SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
+
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
+
+  /// File path: assets/icons/ic_close.svg
+  SvgGenImage get icClose => const SvgGenImage('assets/icons/ic_close.svg');
+
+  /// File path: assets/icons/ic_database.svg
+  SvgGenImage get icDatabase =>
+      const SvgGenImage('assets/icons/ic_database.svg');
+
+  /// File path: assets/icons/ic_note.svg
+  SvgGenImage get icNote => const SvgGenImage('assets/icons/ic_note.svg');
+
+  /// File path: assets/icons/ic_search_initial.svg
+  SvgGenImage get icSearchInitial =>
+      const SvgGenImage('assets/icons/ic_search_initial.svg');
+
+  /// File path: assets/icons/ic_search_not_found.svg
+  SvgGenImage get icSearchNotFound =>
+      const SvgGenImage('assets/icons/ic_search_not_found.svg');
+
+  /// File path: assets/icons/ic_search_text.svg
+  SvgGenImage get icSearchText =>
+      const SvgGenImage('assets/icons/ic_search_text.svg');
+
+  /// File path: assets/icons/ic_trigger.svg
+  SvgGenImage get icTrigger => const SvgGenImage('assets/icons/ic_trigger.svg');
+
+  /// File path: assets/icons/ic_users.svg
+  SvgGenImage get icUsers => const SvgGenImage('assets/icons/ic_users.svg');
 
   /// File path: assets/icons/list.svg
   SvgGenImage get list => const SvgGenImage('assets/icons/list.svg');
@@ -52,6 +90,10 @@ class $AssetsIconsGen {
 
   /// File path: assets/icons/paperclip.svg
   SvgGenImage get paperclip => const SvgGenImage('assets/icons/paperclip.svg');
+
+  /// File path: assets/icons/priority-high-black.svg
+  SvgGenImage get priorityHighBlack =>
+      const SvgGenImage('assets/icons/priority-high-black.svg');
 
   /// File path: assets/icons/priority_exception.svg
   SvgGenImage get priorityException =>
@@ -79,10 +121,6 @@ class $AssetsIconsGen {
   /// File path: assets/icons/search.svg
   SvgGenImage get search => const SvgGenImage('assets/icons/search.svg');
 
-  /// File path: assets/icons/search_bottom_bar.svg
-  SvgGenImage get searchBottomBar =>
-      const SvgGenImage('assets/icons/search_bottom_bar.svg');
-
   /// File path: assets/icons/setting_bottom_bar.svg
   SvgGenImage get settingBottomBar =>
       const SvgGenImage('assets/icons/setting_bottom_bar.svg');
@@ -97,16 +135,31 @@ class $AssetsIconsGen {
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
+  /// File path: assets/icons/users.svg
+  SvgGenImage get users => const SvgGenImage('assets/icons/users.svg');
+
   /// List of all assets
   List<SvgGenImage> get values => [
-        camera,
+        arrowRight,
+        calendar,
+        category2,
         chevronRight,
+        clock,
         filter,
+        icClose,
+        icDatabase,
+        icNote,
+        icSearchInitial,
+        icSearchNotFound,
+        icSearchText,
+        icTrigger,
+        icUsers,
         list,
         logo,
         notification,
         offline,
         paperclip,
+        priorityHighBlack,
         priorityException,
         priorityHigh,
         priorityLow,
@@ -114,11 +167,11 @@ class $AssetsIconsGen {
         processBottomBar,
         processEmpty,
         search,
-        searchBottomBar,
         settingBottomBar,
         sorting,
         taskBottomBar,
-        user
+        user,
+        users
       ];
 }
 
