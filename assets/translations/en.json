@@ -8,7 +8,9 @@
   "splashCopyright": "© Axon Ivy – Version {version}",
   "process": {
     "emptyList": "You don’t have any processes at the moment...",
-    "noDescription": "No description"
+    "noDescription": "No description",
+    "you_are_offline": "You are offline!",
+    "offline_description": "Processes can only be started when connected to the process engine. \nTry again later..."
   },
   "tasksView": {
     "all": "@:generalAll",
