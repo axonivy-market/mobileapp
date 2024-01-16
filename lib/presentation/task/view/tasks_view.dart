@@ -24,29 +24,26 @@ class TasksView extends StatefulWidget {
 }
 
 class _TasksViewState extends State<TasksView> {
-  late final TaskBloc _taskBloc;
   late final FilterBloc _filterBloc;
-  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
     _filterBloc = getIt<FilterBloc>();
     _filterBloc.add(FilterEvent(FilterType.all));
-    _taskBloc = getIt<TaskBloc>();
-    _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => _taskBloc),
         BlocProvider(create: (context) => _filterBloc),
       ],
       child: Scaffold(
         appBar: const HomeAppBar(),
         body: Builder(
           builder: (context) {
+            final taskBloc = BlocProvider.of<TaskBloc>(context);
             final taskState = context.watch<TaskBloc>().state;
             if (taskState is TaskErrorState) {
               return Center(
@@ -66,12 +63,7 @@ class _TasksViewState extends State<TasksView> {
                         final filterState =
                             BlocProvider.of<FilterBloc>(context).state;
                         await Future.delayed(const Duration(seconds: 1));
-                        _scrollController.animateTo(
-                          0.0,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeOut,
-                        );
-                        _taskBloc
+                        taskBloc
                             .add(TaskEvent.getTasks(filterState.activeFilter));
                       },
                     ),

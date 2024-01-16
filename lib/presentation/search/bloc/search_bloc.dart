@@ -1,5 +1,7 @@
 import 'package:axon_ivy/data/models/enums/search_type.dart';
+import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/data/models/search/search.dart';
+import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/data/repositories/search_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,6 +45,15 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         print(e);
       }
     }
+  }
+
+  void combineSearchItems(List<TaskIvy> tasks, List<Process> processes) {
+    _searchResults.clear();
+    final List<SearchResult> allItems = [
+      ...tasks.map((task) => SearchResult.task(task)),
+      ...processes.map((process) => SearchResult.process(process)),
+    ];
+    _searchResults.addAll(allItems);
   }
 
   Future<void> _searchItems(event, Emitter emit) async {

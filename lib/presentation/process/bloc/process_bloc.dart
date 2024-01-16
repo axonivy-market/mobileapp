@@ -20,6 +20,7 @@ part 'process_bloc.freezed.dart';
 @injectable
 class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
   final ProcessRepository _processRepository;
+  List<Process> processes = [];
 
   ProcessBloc(this._processRepository)
       : super(const ProcessState.loading(false)) {
@@ -39,6 +40,7 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
           emitter(ProcessState.error(error.message));
         },
         (processes) {
+          this.processes = processes;
           emitter(const ProcessState.loading(false));
           emitter(ProcessState.success(processes));
         },

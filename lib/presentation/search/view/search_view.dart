@@ -23,26 +23,10 @@ class SearchView extends StatefulWidget {
 }
 
 class _SearchViewState extends State<SearchView> {
-  late SearchBloc _searchBloc;
-
-  @override
-  void initState() {
-    super.initState();
-    _searchBloc = getIt<SearchBloc>();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) =>
-              _searchBloc..add(const SearchEvent.getTaskProcess()),
-        ),
-        BlocProvider<SearchFilterCubit>(
-          create: (context) => getIt<SearchFilterCubit>(),
-        ),
-      ],
+    return BlocProvider(
+      create: (context) => getIt<SearchFilterCubit>(),
       child: Scaffold(
         appBar: const HomeAppBar(
           scrolledUnderElevation: 0,
