@@ -2,7 +2,6 @@ import 'package:axon_ivy/data/models/enums/search_type.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/data/models/search/search.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
-import 'package:axon_ivy/data/repositories/search_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,44 +15,21 @@ part 'search_bloc.freezed.dart';
 
 @injectable
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
-  late List<SearchResult> _searchResults;
+  late List<SearchResult> _searchData;
   String query = '';
-  final SearchRepository _searchRepository;
 
-  SearchBloc(this._searchRepository) : super(const SearchState.initial()) {
-    _searchResults = [];
-    on<_GetTaskProcess>(_getTaskProcess);
+  SearchBloc() : super(const SearchState.initial()) {
+    _searchData = [];
     on<SearchItem>(_searchItems);
   }
 
-  Future<void> _getTaskProcess(event, Emitter emit) async {
-    try {
-      final searchItems = await _searchRepository.getSearchItems();
-
-      searchItems.fold(
-        (l) {
-          if (kDebugMode) {
-            print(l.message);
-          }
-        },
-        (r) {
-          _searchResults.addAll(r);
-        },
-      );
-    } catch (e) {
-      if (kDebugMode) {
-        print(e);
-      }
-    }
-  }
-
   void combineSearchItems(List<TaskIvy> tasks, List<Process> processes) {
-    _searchResults.clear();
+    _searchData.clear();
     final List<SearchResult> allItems = [
       ...tasks.map((task) => SearchResult.task(task)),
       ...processes.map((process) => SearchResult.process(process)),
     ];
-    _searchResults.addAll(allItems);
+    _searchData.addAll(allItems);
   }
 
   Future<void> _searchItems(event, Emitter emit) async {
@@ -100,7 +76,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     if (query.isEmpty) {
       return List.empty();
     }
-    final tasks = _searchResults
+    final tasks = _searchData
         .where((item) =>
             item is TaskItem &&
             (item.task.name.toLowerCase().contains(query) ||
@@ -125,7 +101,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     if (query.isEmpty) {
       return List.empty();
     }
-    final processes = _searchResults
+    final processes = _searchData
         .where((item) =>
             item is ProcessItem &&
             (item.process.name.toLowerCase().contains(query) ||
