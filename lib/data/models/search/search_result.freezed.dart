@@ -20,6 +20,8 @@ SearchResult _$SearchResultFromJson(Map<String, dynamic> json) {
       return SectionHeader.fromJson(json);
     case 'task':
       return TaskItem.fromJson(json);
+    case 'process':
+      return ProcessItem.fromJson(json);
 
     default:
       throw CheckedFromJsonException(json, 'runtimeType', 'SearchResult',
@@ -33,18 +35,21 @@ mixin _$SearchResult {
   TResult when<TResult extends Object?>({
     required TResult Function(String title) sectionHeader,
     required TResult Function(TaskIvy task) task,
+    required TResult Function(Process process) process,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title)? sectionHeader,
     TResult? Function(TaskIvy task)? task,
+    TResult? Function(Process process)? process,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title)? sectionHeader,
     TResult Function(TaskIvy task)? task,
+    TResult Function(Process process)? process,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,18 +57,21 @@ mixin _$SearchResult {
   TResult map<TResult extends Object?>({
     required TResult Function(SectionHeader value) sectionHeader,
     required TResult Function(TaskItem value) task,
+    required TResult Function(ProcessItem value) process,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SectionHeader value)? sectionHeader,
     TResult? Function(TaskItem value)? task,
+    TResult? Function(ProcessItem value)? process,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SectionHeader value)? sectionHeader,
     TResult Function(TaskItem value)? task,
+    TResult Function(ProcessItem value)? process,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -162,6 +170,7 @@ class _$SectionHeaderImpl implements SectionHeader {
   TResult when<TResult extends Object?>({
     required TResult Function(String title) sectionHeader,
     required TResult Function(TaskIvy task) task,
+    required TResult Function(Process process) process,
   }) {
     return sectionHeader(title);
   }
@@ -171,6 +180,7 @@ class _$SectionHeaderImpl implements SectionHeader {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title)? sectionHeader,
     TResult? Function(TaskIvy task)? task,
+    TResult? Function(Process process)? process,
   }) {
     return sectionHeader?.call(title);
   }
@@ -180,6 +190,7 @@ class _$SectionHeaderImpl implements SectionHeader {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title)? sectionHeader,
     TResult Function(TaskIvy task)? task,
+    TResult Function(Process process)? process,
     required TResult orElse(),
   }) {
     if (sectionHeader != null) {
@@ -193,6 +204,7 @@ class _$SectionHeaderImpl implements SectionHeader {
   TResult map<TResult extends Object?>({
     required TResult Function(SectionHeader value) sectionHeader,
     required TResult Function(TaskItem value) task,
+    required TResult Function(ProcessItem value) process,
   }) {
     return sectionHeader(this);
   }
@@ -202,6 +214,7 @@ class _$SectionHeaderImpl implements SectionHeader {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SectionHeader value)? sectionHeader,
     TResult? Function(TaskItem value)? task,
+    TResult? Function(ProcessItem value)? process,
   }) {
     return sectionHeader?.call(this);
   }
@@ -211,6 +224,7 @@ class _$SectionHeaderImpl implements SectionHeader {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SectionHeader value)? sectionHeader,
     TResult Function(TaskItem value)? task,
+    TResult Function(ProcessItem value)? process,
     required TResult orElse(),
   }) {
     if (sectionHeader != null) {
@@ -323,6 +337,7 @@ class _$TaskItemImpl implements TaskItem {
   TResult when<TResult extends Object?>({
     required TResult Function(String title) sectionHeader,
     required TResult Function(TaskIvy task) task,
+    required TResult Function(Process process) process,
   }) {
     return task(this.task);
   }
@@ -332,6 +347,7 @@ class _$TaskItemImpl implements TaskItem {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String title)? sectionHeader,
     TResult? Function(TaskIvy task)? task,
+    TResult? Function(Process process)? process,
   }) {
     return task?.call(this.task);
   }
@@ -341,6 +357,7 @@ class _$TaskItemImpl implements TaskItem {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String title)? sectionHeader,
     TResult Function(TaskIvy task)? task,
+    TResult Function(Process process)? process,
     required TResult orElse(),
   }) {
     if (task != null) {
@@ -354,6 +371,7 @@ class _$TaskItemImpl implements TaskItem {
   TResult map<TResult extends Object?>({
     required TResult Function(SectionHeader value) sectionHeader,
     required TResult Function(TaskItem value) task,
+    required TResult Function(ProcessItem value) process,
   }) {
     return task(this);
   }
@@ -363,6 +381,7 @@ class _$TaskItemImpl implements TaskItem {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(SectionHeader value)? sectionHeader,
     TResult? Function(TaskItem value)? task,
+    TResult? Function(ProcessItem value)? process,
   }) {
     return task?.call(this);
   }
@@ -372,6 +391,7 @@ class _$TaskItemImpl implements TaskItem {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SectionHeader value)? sectionHeader,
     TResult Function(TaskItem value)? task,
+    TResult Function(ProcessItem value)? process,
     required TResult orElse(),
   }) {
     if (task != null) {
@@ -397,5 +417,172 @@ abstract class TaskItem implements SearchResult {
   TaskIvy get task;
   @JsonKey(ignore: true)
   _$$TaskItemImplCopyWith<_$TaskItemImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ProcessItemImplCopyWith<$Res> {
+  factory _$$ProcessItemImplCopyWith(
+          _$ProcessItemImpl value, $Res Function(_$ProcessItemImpl) then) =
+      __$$ProcessItemImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Process process});
+
+  $ProcessCopyWith<$Res> get process;
+}
+
+/// @nodoc
+class __$$ProcessItemImplCopyWithImpl<$Res>
+    extends _$SearchResultCopyWithImpl<$Res, _$ProcessItemImpl>
+    implements _$$ProcessItemImplCopyWith<$Res> {
+  __$$ProcessItemImplCopyWithImpl(
+      _$ProcessItemImpl _value, $Res Function(_$ProcessItemImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? process = null,
+  }) {
+    return _then(_$ProcessItemImpl(
+      null == process
+          ? _value.process
+          : process // ignore: cast_nullable_to_non_nullable
+              as Process,
+    ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProcessCopyWith<$Res> get process {
+    return $ProcessCopyWith<$Res>(_value.process, (value) {
+      return _then(_value.copyWith(process: value));
+    });
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ProcessItemImpl implements ProcessItem {
+  _$ProcessItemImpl(this.process, {final String? $type})
+      : $type = $type ?? 'process';
+
+  factory _$ProcessItemImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProcessItemImplFromJson(json);
+
+  @override
+  final Process process;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  @override
+  String toString() {
+    return 'SearchResult.process(process: $process)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ProcessItemImpl &&
+            (identical(other.process, process) || other.process == process));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, process);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ProcessItemImplCopyWith<_$ProcessItemImpl> get copyWith =>
+      __$$ProcessItemImplCopyWithImpl<_$ProcessItemImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String title) sectionHeader,
+    required TResult Function(TaskIvy task) task,
+    required TResult Function(Process process) process,
+  }) {
+    return process(this.process);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String title)? sectionHeader,
+    TResult? Function(TaskIvy task)? task,
+    TResult? Function(Process process)? process,
+  }) {
+    return process?.call(this.process);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String title)? sectionHeader,
+    TResult Function(TaskIvy task)? task,
+    TResult Function(Process process)? process,
+    required TResult orElse(),
+  }) {
+    if (process != null) {
+      return process(this.process);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SectionHeader value) sectionHeader,
+    required TResult Function(TaskItem value) task,
+    required TResult Function(ProcessItem value) process,
+  }) {
+    return process(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SectionHeader value)? sectionHeader,
+    TResult? Function(TaskItem value)? task,
+    TResult? Function(ProcessItem value)? process,
+  }) {
+    return process?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(SectionHeader value)? sectionHeader,
+    TResult Function(TaskItem value)? task,
+    TResult Function(ProcessItem value)? process,
+    required TResult orElse(),
+  }) {
+    if (process != null) {
+      return process(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ProcessItemImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class ProcessItem implements SearchResult {
+  factory ProcessItem(final Process process) = _$ProcessItemImpl;
+
+  factory ProcessItem.fromJson(Map<String, dynamic> json) =
+      _$ProcessItemImpl.fromJson;
+
+  Process get process;
+  @JsonKey(ignore: true)
+  _$$ProcessItemImplCopyWith<_$ProcessItemImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

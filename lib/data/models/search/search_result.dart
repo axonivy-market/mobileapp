@@ -1,3 +1,4 @@
+import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -11,7 +12,7 @@ class SearchResult with _$SearchResult {
 
   const factory SearchResult.task(TaskIvy task) = TaskItem;
 
-  // factory SearchItem.process(Process process) = _SearchItemProcess;
+  factory SearchResult.process(Process process) = ProcessItem;
 
   factory SearchResult.fromJson(Map<String, dynamic> json) =>
       _$SearchResultFromJson(json);
