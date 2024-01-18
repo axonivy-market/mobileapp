@@ -78,6 +78,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/list.svg
   SvgGenImage get list => const SvgGenImage('assets/icons/list.svg');
 
+  /// File path: assets/icons/login.svg
+  SvgGenImage get login => const SvgGenImage('assets/icons/login.svg');
+
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
 
@@ -155,6 +158,7 @@ class $AssetsIconsGen {
         icTrigger,
         icUsers,
         list,
+        login,
         logo,
         notification,
         offline,

@@ -39,6 +39,29 @@
     "normal": "Normal",
     "low": "Low"
   },
+  "validator": { 
+    "url": "Please enter the url",
+    "password": "Please enter the password",
+    "username": "Please enter the username",
+    "error": "Please check your login information again!"
+  },
+  "profile": {
+    "noServer": "No server has been configured yet...",
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "url": "Url",
+    "username": "Username",
+    "yourPassword": "Your password",
+    "loginSuccess": "Login success"
+  },
+  "qr": {
+    "title": "Scan the QR",
+    "noPermission": "No permission"
+  },
+  "dialog": {
+    "cancel": "Cancel",
+    "ok": "OK"
+  },
   "appName": "Error handler",
   "noRouteFound": "No Route Found",
   "success": "success",
@@ -65,4 +88,5 @@
     "noProcessResults": "There are no processes named after your search...",
     "noTaskResults": "There are no tasks named after your search..."
   }
+
 }

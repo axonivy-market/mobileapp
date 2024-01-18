@@ -23,12 +23,13 @@ import '../../data/repositories/task_repository.dart' as _i16;
 import '../../data/repositories/task_repository_impl.dart' as _i17;
 import '../../data/services/process/process_service.dart' as _i5;
 import '../../data/services/task/task_service.dart' as _i9;
-import '../../presentation/process/bloc/process_bloc.dart' as _i18;
+import '../../presentation/login/bloc/login_bloc.dart' as _i18;
+import '../../presentation/process/bloc/process_bloc.dart' as _i19;
 import '../../presentation/search/bloc/search_bloc.dart' as _i6;
 import '../../presentation/search/bloc/search_filter_cubit.dart' as _i7;
 import '../../presentation/task/bloc/filter_boc/filter_bloc.dart' as _i4;
-import '../../presentation/task/bloc/task_bloc.dart' as _i19;
-import 'app_module.dart' as _i20;
+import '../../presentation/task/bloc/task_bloc.dart' as _i20;
+import 'app_module.dart' as _i21;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 Future<_i1.GetIt> $initGetIt(
@@ -60,10 +61,11 @@ Future<_i1.GetIt> $initGetIt(
       () => _i15.TaskRemoteDataSourceImpl(gh<_i9.TaskService>()));
   gh.factory<_i16.TaskRepository>(
       () => _i17.TaskRepositoryImpl(gh<_i14.TaskRemoteDataSource>()));
-  gh.factory<_i18.ProcessBloc>(
-      () => _i18.ProcessBloc(gh<_i12.ProcessRepository>()));
-  gh.factory<_i19.TaskBloc>(() => _i19.TaskBloc(gh<_i16.TaskRepository>()));
+  gh.factory<_i18.LoginBloc>(() => _i18.LoginBloc(gh<_i16.TaskRepository>()));
+  gh.factory<_i19.ProcessBloc>(
+      () => _i19.ProcessBloc(gh<_i12.ProcessRepository>()));
+  gh.factory<_i20.TaskBloc>(() => _i20.TaskBloc(gh<_i16.TaskRepository>()));
   return getIt;
 }
 
-class _$AppModule extends _i20.AppModule {}
+class _$AppModule extends _i21.AppModule {}

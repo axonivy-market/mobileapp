@@ -8,4 +8,8 @@ class AppRoutes {
   static const profile = "/profile";
 
   static const splash = "/splash";
+
+  static const login = "/login";
+
+  static const qr = "/qr";
 }
