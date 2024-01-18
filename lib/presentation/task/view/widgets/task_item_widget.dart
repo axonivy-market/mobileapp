@@ -4,6 +4,7 @@ import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/util/resources/resources.dart';
+import 'package:axon_ivy/util/widgets/text_highlight_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -106,9 +107,10 @@ class TaskItemWidget extends StatelessWidget {
                                     : AppColors.darkSouls),
                             overflow: TextOverflow.ellipsis,
                           )
-                        : _taskNameRichText(
+                        : TextHighlightWidget(
                             text: name,
                             startIndex: startNameIndex,
+                            endIndex: query.length,
                             maxLine: 1,
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
@@ -131,9 +133,10 @@ class TaskItemWidget extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
                               )
-                            : _taskNameRichText(
+                            : TextHighlightWidget(
                                 text: description,
                                 startIndex: startDescIndex,
+                                endIndex: query.length,
                                 maxLine: 2,
                                 fontSize: 13,
                                 fontWeight: FontWeight.w400,
@@ -153,41 +156,6 @@ class TaskItemWidget extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _taskNameRichText({
-    required String text,
-    required int startIndex,
-    required int maxLine,
-    required double fontSize,
-    required FontWeight fontWeight,
-  }) {
-    return RichText(
-      maxLines: maxLine,
-      overflow: TextOverflow.ellipsis,
-      text: TextSpan(
-        text: text.substring(0, startIndex),
-        style: GoogleFonts.inter(
-            color: AppColors.darkSouls,
-            fontWeight: fontWeight,
-            fontSize: fontSize),
-        children: [
-          TextSpan(
-            text: text.substring(startIndex, startIndex + query.length),
-            style: GoogleFonts.inter(
-                color: AppColors.eerieBlack,
-                fontWeight: fontWeight,
-                fontSize: fontSize),
-          ),
-          TextSpan(
-              text: text.substring(startIndex + query.length),
-              style: GoogleFonts.inter(
-                  color: AppColors.darkSouls,
-                  fontWeight: fontWeight,
-                  fontSize: fontSize)),
-        ],
       ),
     );
   }

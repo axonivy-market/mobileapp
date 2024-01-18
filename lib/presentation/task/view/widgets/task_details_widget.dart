@@ -71,7 +71,7 @@ class TaskDetailsWidget extends StatelessWidget {
                 children: [
                   _buildRow(
                     AppAssets.icons.paperclip.svg(height: 16),
-                    "taskDetails.attactments".tr(),
+                    "taskDetails.attachments".tr(),
                     "taskDetails.documents".plural(task.documents.length),
                   ),
                   _buildDivider(),

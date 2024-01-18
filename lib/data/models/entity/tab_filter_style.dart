@@ -7,37 +7,46 @@ abstract class TabFilterStyle {
   final Color textColor;
   final FontWeight fontWeight;
   final String textButton;
+  final BoxBorder? boxBorder;
 
-  TabFilterStyle(
-      {required this.borderRadius,
-      required this.backgroundColor,
-      required this.textColor,
-      required this.fontWeight,
-      required this.textButton});
+  TabFilterStyle({
+    required this.borderRadius,
+    required this.backgroundColor,
+    required this.textColor,
+    required this.fontWeight,
+    required this.textButton,
+    this.boxBorder,
+  });
 }
 
 class TabSelected extends TabFilterStyle {
   final String name;
   final BorderRadius radius;
+  final BoxBorder? border;
 
-  TabSelected({required this.name, required this.radius})
+  TabSelected({required this.name, required this.radius, this.border})
       : super(
-            borderRadius: radius,
-            backgroundColor: AppColors.tropicSea,
-            textColor: Colors.white,
-            fontWeight: FontWeight.w500,
-            textButton: name);
+          borderRadius: radius,
+          backgroundColor: AppColors.tropicSea,
+          textColor: Colors.white,
+          fontWeight: FontWeight.w500,
+          textButton: name,
+          boxBorder: border,
+        );
 }
 
 class TabUnSelected extends TabFilterStyle {
   final String name;
   final BorderRadius radius;
+  final BoxBorder? border;
 
-  TabUnSelected({required this.name, required this.radius})
+  TabUnSelected({required this.name, required this.radius, this.border})
       : super(
-            borderRadius: radius,
-            backgroundColor: AppColors.bleachedSilk,
-            textColor: AppColors.sonicSilver,
-            fontWeight: FontWeight.w400,
-            textButton: name);
+          borderRadius: radius,
+          backgroundColor: AppColors.bleachedSilk,
+          textColor: AppColors.sonicSilver,
+          fontWeight: FontWeight.w400,
+          textButton: name,
+          boxBorder: border,
+        );
 }

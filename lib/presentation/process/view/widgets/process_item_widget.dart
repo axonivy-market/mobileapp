@@ -5,6 +5,7 @@ import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/util/resources/resources.dart';
+import 'package:axon_ivy/util/widgets/text_highlight_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,64 +26,90 @@ Widget getProcessIcon() {
 }
 
 class ProcessItemWidget extends StatelessWidget {
-  const ProcessItemWidget({super.key, required this.process});
+  const ProcessItemWidget({
+    super.key,
+    required this.process,
+    this.query = '',
+  });
 
   final Process process;
+  final String query;
 
   @override
   Widget build(BuildContext context) {
+    int startNameIndex =
+        process.name.toLowerCase().indexOf(query.toLowerCase());
+    int startDescIndex =
+        process.description.toLowerCase().indexOf(query.toLowerCase());
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      height: AppSize.s82,
-      padding: const EdgeInsets.only(left: 5, right: 5, top: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      constraints: const BoxConstraints(minHeight: AppSize.s82),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: AppColors.bleachedSilk,
       ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
           getProcessIcon(),
-          const SizedBox(width: 5),
-          Expanded(
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 26),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                Text(
-                  process.name.isEmptyOrNull
-                      ? process.fullRequestPath.split('/').last
-                      : process.name,
-                  style: GoogleFonts.inter(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.eerieBlack),
-                  overflow: TextOverflow.ellipsis,
-                ),
+                query.isEmptyOrNull || startNameIndex == -1
+                    ? Text(
+                        process.name.isEmptyOrNull
+                            ? process.fullRequestPath.split('/').last
+                            : process.name,
+                        style: GoogleFonts.inter(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: query.isEmptyOrNull
+                                ? AppColors.eerieBlack
+                                : AppColors.darkSouls),
+                        overflow: TextOverflow.ellipsis,
+                      )
+                    : TextHighlightWidget(
+                        text: process.name,
+                        startIndex: startNameIndex,
+                        endIndex: query.length,
+                        maxLine: 1,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                      ),
                 const SizedBox(height: 2),
-                Text(
-                  process.description.isEmptyOrNull
-                      ? 'process.noDescription'.tr()
-                      : process.description,
-                  style: GoogleFonts.inter(
-                    fontSize: 13,
-                    fontWeight: FontWeight.w400,
-                    color: AppColors.sonicSilver,
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 2,
-                ),
+                query.isEmptyOrNull || startDescIndex == -1
+                    ? Text(
+                        process.description.isEmptyOrNull
+                            ? 'process.noDescription'.tr()
+                            : process.description,
+                        style: GoogleFonts.inter(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.sonicSilver,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      )
+                    : TextHighlightWidget(
+                        text: process.description,
+                        startIndex: startDescIndex,
+                        endIndex: query.length,
+                        maxLine: 2,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                      ),
               ],
             ),
           ),
-          const SizedBox(width: 5),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: Align(
-              alignment: Alignment.bottomLeft,
-              child: AppAssets.icons.chevronRight.svg(),
-            ),
-          )
+          Positioned(
+            bottom: 0,
+            right: 0,
+            child: AppAssets.icons.chevronRight.svg(),
+          ),
         ],
       ),
     );

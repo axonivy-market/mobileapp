@@ -1,8 +1,14 @@
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
+import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
+import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/router/app_router.dart';
+import 'package:axon_ivy/util/resources/constants.dart';
 import 'package:axon_ivy/util/widgets/bottom_tab_bar_item.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/generated/colors.gen.dart';
@@ -33,6 +39,9 @@ class TabBarScreen extends StatefulWidget {
 
 class _TabBarScreenState extends State<TabBarScreen> {
   int _selectedIndex = 0;
+  late final TaskBloc _taskBloc;
+  late final ProcessBloc _processBloc;
+  late final SearchBloc _searchBloc;
   final tabs = [
     BottomBarTabItem(
       initialLocation: AppRoutes.task,
@@ -98,36 +107,67 @@ class _TabBarScreenState extends State<TabBarScreen> {
       // go to the initial location of the selected tab (by index)
       context.go(tabs[tabIndex].initialLocation);
     }
+    switch (tabIndex) {
+      case 1:
+        _processBloc.add(const ProcessEvent.getProcess());
+        break;
+      case 2:
+        _searchBloc.combineSearchItems(
+            _taskBloc.sortDefaultTasks, _processBloc.processes);
+        break;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _taskBloc = getIt<TaskBloc>();
+    _processBloc = getIt<ProcessBloc>();
+    _searchBloc = getIt<SearchBloc>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: const [
-          TasksView(),
-          ProcessesView(),
-          SearchView(),
-          ProfileView()
-        ],
-      ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          border: Border(
-            top: BorderSide(color: AppColors.mercury, width: 1.0),
-          ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) =>
+              _taskBloc..add(const TaskEvent.getTasks(FilterType.all)),
         ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle:
-              GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
-          unselectedLabelStyle:
-              GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w400),
-          currentIndex: _currentIndex,
-          selectedItemColor: AppColors.tropicSea,
-          items: tabs,
-          onTap: (index) => _onItemTapped(context, index),
+        BlocProvider(
+          create: (context) => _processBloc,
+        ),
+        BlocProvider(
+          create: (context) => _searchBloc,
+        ),
+      ],
+      child: Scaffold(
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: const [
+            TasksView(),
+            ProcessesView(),
+            SearchView(),
+            ProfileView()
+          ],
+        ),
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              top: BorderSide(color: AppColors.mercury, width: 1.0),
+            ),
+          ),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedLabelStyle:
+                GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
+            unselectedLabelStyle:
+                GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w400),
+            currentIndex: _currentIndex,
+            selectedItemColor: AppColors.tropicSea,
+            items: tabs,
+            onTap: (index) => _onItemTapped(context, index),
+          ),
         ),
       ),
     );

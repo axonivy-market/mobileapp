@@ -24,6 +24,7 @@ part 'task_bloc.freezed.dart';
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final TaskRepository _taskRepository;
   List<TaskIvy> tasks = [];
+  List<TaskIvy> sortDefaultTasks = [];
   List<TaskIvy> expiredTasks = [];
 
   TaskBloc(this._taskRepository) : super(const TaskState.loading(false)) {
@@ -60,8 +61,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           emit(TaskState.error(l.message));
         },
         (r) {
+          sortDefaultTasks = r.sortDefaultTasks;
           emit(TaskState.success(
-              _filterTasksServer(event.activeFilter, r.sortDefaultTasks)));
+              _filterTasksServer(event.activeFilter, sortDefaultTasks)));
         },
       );
     } catch (e) {
