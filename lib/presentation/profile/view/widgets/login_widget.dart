@@ -65,43 +65,6 @@ class LoginWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 5),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: () {
-                      SharedPrefs.clear();
-                      context.read<ProfileBloc>().add(
-                            const ProfileEvent.loggedIn(false),
-                          );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          backgroundColor: AppColors.salmon,
-                          content: Text(
-                            "Logout success",
-                            style: GoogleFonts.inter(
-                                color: AppColors.white, fontSize: 17),
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      decoration: const BoxDecoration(
-                        color: AppColors.placebo,
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8),
-                        ),
-                      ),
-                      child: Text(
-                        "profile.signOut".tr(),
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.inter(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            color: AppColors.tropicSea),
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
           ],

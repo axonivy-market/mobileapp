@@ -1,18 +1,8 @@
-import 'package:equatable/equatable.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+part of 'splash_cubit.dart';
 
-abstract class SplashState extends Equatable {
-  @override
-  List<Object?> get props => [];
-}
+@freezed
+class SplashState with _$SplashState {
+  const factory SplashState.appStarted() = AppStarted;
 
-class AppStarted extends SplashState {}
-
-class AppInfo extends SplashState {
-  final PackageInfo packageInfo;
-
-  AppInfo({required this.packageInfo});
-
-  @override
-  List<Object?> get props => [packageInfo];
+  const factory SplashState.appInfo(PackageInfo packageInfo) = AppInfo;
 }

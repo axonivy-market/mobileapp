@@ -1,8 +1,11 @@
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
+import 'package:axon_ivy/presentation/profile/view/profile_logged_in_widget.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
@@ -32,6 +35,7 @@ class ProfileForm extends StatefulWidget {
 class _ProfileFormState extends State<ProfileForm> {
   final baseUrlController = TextEditingController();
   String appVersionNumber = "1.0.1";
+
   @override
   void initState() {
     baseUrlController.text = SharedPrefs.getBaseUrl ?? '';
@@ -54,25 +58,24 @@ class _ProfileFormState extends State<ProfileForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 75),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const SizedBox(),
-          const LoginWidget(),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
-            child: Text(
-              'splashCopyright',
-              style:
-                  GoogleFonts.inter(fontSize: 12, color: AppColors.blackMana),
-            ).tr(
-              namedArgs: {'version': appVersionNumber},
-            ),
-          )
-        ],
-      ),
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (context, state) {
+        return Stack(
+          children: [
+            (SharedPrefs.isLogin ?? false)
+                ? const ProfileLoggedInWidget()
+                : const LoginWidget(),
+            Positioned(
+              bottom: 15,
+              right: 0,
+              left: 0,
+              child: VersionNameWidget(
+                versionName: appVersionNumber,
+              ),
+            )
+          ],
+        );
+      },
     );
   }
 }

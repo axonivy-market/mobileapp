@@ -5,3 +5,5 @@ export 'filter_text_button_widget.dart';
 export 'data_empty_widget.dart';
 export 'loading_widget.dart';
 export 'text_highlight_widget.dart';
+export 'switch_widget.dart';
+export 'version_name_widget.dart';

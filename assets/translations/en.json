@@ -41,7 +41,7 @@
     "normal": "Normal",
     "low": "Low"
   },
-  "validator": { 
+  "validator": {
     "url": "Please enter the url",
     "password": "Please enter the password",
     "username": "Please enter the username",
@@ -54,7 +54,8 @@
     "url": "Url",
     "username": "Username",
     "yourPassword": "Your password",
-    "loginSuccess": "Login success"
+    "demoMode": "Demo mode",
+    "language": "Language"
   },
   "qr": {
     "title": "Scan the QR",
@@ -103,7 +104,5 @@
     "leastUrgent": "Least urgent",
     "newest": "Newest first",
     "oldest": "Oldest first"
-
   }
-  
 }
