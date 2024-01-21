@@ -55,7 +55,6 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
         child: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state.status == LoginStatus.success) {
-              hideLoading();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   backgroundColor: AppColors.tropicSea,
@@ -76,8 +75,6 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
                     title: "Error",
                     message: state.error?.message ?? "validator.error".tr());
               }
-            } else {
-              showLoading();
             }
           },
           child: ListView(
