@@ -9,19 +9,13 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../core/generated/assets.gen.dart';
 import '../../../../util/resources/constants.dart';
-import '../../bloc/filter_boc/filter_state.dart';
 import '../../bloc/sort_bloc/sort_bloc.dart';
 import '../../bloc/sort_bloc/sort_event.dart';
-import '../../bloc/sort_bloc/sort_state.dart';
 
 class FilterWidget extends StatefulWidget {
   const FilterWidget({
     super.key,
-    required this.filterState,
-    required this.sortState,
   });
-  final FilterState filterState;
-  final SortState sortState;
   @override
   State<FilterWidget> createState() => _FilterWidgetState();
 }

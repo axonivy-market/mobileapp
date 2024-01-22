@@ -28,6 +28,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   List<TaskIvy> tasks = [];
   List<TaskIvy> expiredTasks = [];
   FilterType activeFilter = FilterType.all;
+  bool isFirstTimeFetch = true;
+
   List<SortType> activeSortType = [
     MainSortType.priority,
     SubSortType.mostImportant
@@ -126,10 +128,17 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           emit(TaskState.error(l.message));
         },
         (r) {
-          if (activeSortType.contains(MainSortType.priority) &&
-              activeSortType.contains(SubSortType.mostImportant)) {
+          if (isFirstTimeFetch) {
+            this.tasks = r;
             emit(TaskState.success(
                 _filterTasksServer(event.activeFilter, r.sortDefaultTasks)));
+            isFirstTimeFetch = false;
+          } else if (event.isRefresh) {
+            this.tasks = r;
+            emit(TaskState.success(_filterTasksServer(
+                event.activeFilter,
+                _sortTasksLocal(activeSortType.getMainSortType()!,
+                    activeSortType.getSubTypeActive()!))));
           } else {
             emit(TaskState.success(_sortTasksLocal(
                 activeSortType.getMainSortType()!,

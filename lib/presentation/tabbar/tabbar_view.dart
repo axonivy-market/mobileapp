@@ -2,14 +2,22 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
+import 'package:axon_ivy/util/resources/constants.dart';
 import 'package:axon_ivy/util/widgets/bottom_tab_bar_item.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../core/di/di_setup.dart';
 import '../../core/generated/colors.gen.dart';
 import '../profile/view/profile_view.dart';
 import '../search/view/search_view.dart';
+import '../task/bloc/filter_boc/filter_bloc.dart';
+import '../task/bloc/filter_boc/filter_event.dart';
+import '../task/bloc/sort_bloc/sort_bloc.dart';
+import '../task/bloc/sort_bloc/sort_event.dart';
+import '../task/bloc/task_bloc.dart';
 
 extension GoRouterExtension on GoRouter {
   String location() {
@@ -32,6 +40,11 @@ class TabBarScreen extends StatefulWidget {
 }
 
 class _TabBarScreenState extends State<TabBarScreen> {
+  late TaskBloc _taskBloc;
+  late FilterBloc _filterBloc;
+  late SortBloc _sortBloc;
+  late bool shouldFetchTaskData = false;
+
   int _selectedIndex = 0;
   final tabs = [
     BottomBarTabItem(
@@ -101,33 +114,62 @@ class _TabBarScreenState extends State<TabBarScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    _filterBloc = getIt<FilterBloc>();
+    _sortBloc = getIt<SortBloc>();
+    _taskBloc = getIt<TaskBloc>();
+    shouldFetchTaskData = true;
+    fetchTaskData(shouldFetchTaskData);
+  }
+
+  void fetchTaskData(bool shouldFetchTaskData) {
+    if (shouldFetchTaskData) {
+      _taskBloc.add(const TaskEvent.getTasks(FilterType.all, false));
+      _sortBloc
+          .add(SortEvent([MainSortType.priority, SubSortType.mostImportant]));
+      _filterBloc.add(FilterEvent(FilterType.all));
+    }
+    setState(() {
+      this.shouldFetchTaskData = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(
-        index: _selectedIndex,
-        children: const [
-          TasksView(),
-          ProcessesView(),
-          SearchView(),
-          ProfileView()
-        ],
-      ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          border: Border(
-            top: BorderSide(color: AppColors.mercury, width: 1.0),
-          ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(value: _taskBloc),
+        BlocProvider.value(value: _filterBloc),
+        BlocProvider.value(value: _sortBloc),
+      ],
+      child: Scaffold(
+        body: IndexedStack(
+          index: _selectedIndex,
+          children: const [
+            TasksView(),
+            ProcessesView(),
+            SearchView(),
+            ProfileView()
+          ],
         ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedLabelStyle:
-              GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
-          unselectedLabelStyle:
-              GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w400),
-          currentIndex: _currentIndex,
-          selectedItemColor: AppColors.tropicSea,
-          items: tabs,
-          onTap: (index) => _onItemTapped(context, index),
+        bottomNavigationBar: Container(
+          decoration: const BoxDecoration(
+            border: Border(
+              top: BorderSide(color: AppColors.mercury, width: 1.0),
+            ),
+          ),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedLabelStyle:
+                GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w600),
+            unselectedLabelStyle:
+                GoogleFonts.inter(fontSize: 13, fontWeight: FontWeight.w400),
+            currentIndex: _currentIndex,
+            selectedItemColor: AppColors.tropicSea,
+            items: tabs,
+            onTap: (index) => _onItemTapped(context, index),
+          ),
         ),
       ),
     );

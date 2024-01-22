@@ -77,26 +77,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       },
                     ),
                   ],
-                  child: MultiBlocProvider(
-                    providers: [
-                      BlocProvider(
-                          create: (context) =>
-                              BlocProvider.of<FilterBloc>(context)),
-                      BlocProvider(
-                          create: (context) =>
-                              BlocProvider.of<SortBloc>(context)),
-                    ],
-                    child: Builder(
-                      builder: (context) {
-                        final filterState = context.watch<FilterBloc>().state;
-                        final sortState = context.watch<SortBloc>().state;
-                        return FilterWidget(
-                          filterState: filterState,
-                          sortState: sortState,
-                        );
-                      },
-                    ),
-                  ),
+                  child: FilterWidget(),
                 ),
               ),
             )
