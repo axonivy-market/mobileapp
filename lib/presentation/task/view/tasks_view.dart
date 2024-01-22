@@ -1,7 +1,5 @@
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
-import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_event.dart';
-import 'package:axon_ivy/presentation/task/bloc/sort_bloc/sort_event.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
@@ -11,27 +9,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/di/di_setup.dart';
 import '../../../util/resources/constants.dart';
-import '../bloc/sort_bloc/sort_bloc.dart';
 import '../../../util/widgets/home_appbar.dart';
+import '../bloc/sort_bloc/sort_bloc.dart';
 
 class TasksView extends StatelessWidget {
   const TasksView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final filterBloc = getIt<FilterBloc>()..add(FilterEvent(FilterType.all));
-    final sortBloc = getIt<SortBloc>()
-      ..add(SortEvent([MainSortType.priority, SubSortType.mostImportant]));
-    final taskBloc = getIt<TaskBloc>()
-      ..add(const TaskEvent.getTasks(FilterType.all));
-
     return MultiBlocProvider(
       providers: [
-        BlocProvider.value(value: taskBloc),
-        BlocProvider.value(value: filterBloc),
-        BlocProvider.value(value: sortBloc),
+        BlocProvider.value(value: BlocProvider.of<TaskBloc>(context)),
+        BlocProvider.value(value: BlocProvider.of<FilterBloc>(context)),
+        BlocProvider.value(value: BlocProvider.of<SortBloc>(context)),
       ],
       child: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, taskState) {
@@ -96,7 +87,7 @@ class TasksViewContent extends StatelessWidget {
     final taskBloc = context.read<TaskBloc>();
     final filterState = context.read<FilterBloc>().state;
     await Future.delayed(const Duration(seconds: 1));
-    taskBloc.add(TaskEvent.getTasks(filterState.activeFilter));
+    taskBloc.add(TaskEvent.getTasks(filterState.activeFilter, true));
   }
 
   Widget _buildTaskItem(BuildContext context, List<TaskIvy> tasks,

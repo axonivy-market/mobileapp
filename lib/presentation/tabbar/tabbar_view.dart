@@ -20,6 +20,8 @@ import '../profile/view/profile_view.dart';
 import '../search/view/search_view.dart';
 import '../task/bloc/filter_boc/filter_bloc.dart';
 import '../task/bloc/filter_boc/filter_event.dart';
+import '../task/bloc/sort_bloc/sort_bloc.dart';
+import '../task/bloc/sort_bloc/sort_event.dart';
 
 extension GoRouterExtension on GoRouter {
   String location() {
@@ -47,8 +49,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final SearchBloc _searchBloc;
   late final FilterBloc _filterBloc;
   late final ProfileBloc _profileBloc;
-  int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
+  late SortBloc _sortBloc;
+
   late bool shouldFetchTaskData = false;
+
+  int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
 
   // callback used to navigate to the desired tab
   void _onItemTapped(BuildContext context, int tabIndex) {
@@ -79,16 +84,18 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _processBloc = getIt<ProcessBloc>();
     _searchBloc = getIt<SearchBloc>();
     _profileBloc = getIt<ProfileBloc>();
+    _sortBloc = getIt<SortBloc>();
     if (SharedPrefs.isLogin ?? false) {
-      _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
+      shouldFetchTaskData = true;
+      fetchTaskData(shouldFetchTaskData);
     }
-
-    shouldFetchTaskData = true;
   }
 
   void fetchTaskData(bool shouldFetchTaskData) {
     if (shouldFetchTaskData) {
-      _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
+      _taskBloc.add(const TaskEvent.getTasks(FilterType.all, false));
+      _sortBloc
+          .add(SortEvent([MainSortType.priority, SubSortType.mostImportant]));
       _filterBloc.add(FilterEvent(FilterType.all));
     }
     setState(() {
@@ -107,7 +114,6 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _profileBloc),
       ],
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: IndexedStack(
           index: selectedIndex,
           children: const [
