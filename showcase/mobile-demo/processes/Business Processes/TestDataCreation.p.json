@@ -81,6 +81,7 @@
       "config" : {
         "signature" : "start3",
         "request" : {
+          "name" : "Task with Exception Priority",
           "description" : "Task with Exception Priority"
         },
         "task" : {
@@ -259,7 +260,7 @@
       "name" : "Test Task",
       "config" : {
         "task" : {
-          "name" : "Task With Long Long Name And Description",
+          "name" : "Task with long name and description",
           "description" : "This is a task with very long long long long long name and descriptionnnnnnnnnnnnn"
         }
       },
@@ -286,12 +287,12 @@
     }, {
       "id" : "f35",
       "type" : "RequestStart",
-      "name" : "Task with long name and description",
+      "name" : "taskWithNoNameNoDescription",
       "config" : {
-        "signature" : "start52",
+        "signature" : "taskWithNoNameNoDescription",
         "request" : {
-          "name" : "Task with no name and description Task with long name and description",
-          "description" : "Task with long name and description Task with long name and description"
+          "name" : "Task with no name and no description",
+          "description" : "Task with no name and no description"
         },
         "task" : {
           "description" : "Task with long name and description Task with long name and descriptionTask with long name and description Task with long name and descriptionTask with long name and description Task with long name and description"
@@ -312,16 +313,8 @@
     }, {
       "id" : "f37",
       "type" : "TaskSwitchEvent",
-      "name" : "Test Task",
-      "config" : {
-        "task" : {
-          "name" : "Task With Long Long Name And Description",
-          "description" : "This is a task with very long long long long long name and descriptionnnnnnnnnnnnn"
-        }
-      },
       "visual" : {
         "at" : { "x" : 272, "y" : 528 },
-        "labelOffset" : { "x" : 14, "y" : 34 },
         "description" : "Test Description"
       },
       "connect" : [
@@ -342,15 +335,12 @@
     }, {
       "id" : "f42",
       "type" : "RequestStart",
-      "name" : "Task with expired time",
+      "name" : "taskWithExpiredTime",
       "config" : {
-        "signature" : "start522",
+        "signature" : "taskWithExpiredTime",
         "request" : {
-          "name" : "Task with no name and description Task with long name and description",
-          "description" : "Task with long name and description Task with long name and description"
-        },
-        "task" : {
-          "description" : "Task with long name and description Task with long name and descriptionTask with long name and description Task with long name and descriptionTask with long name and description Task with long name and description"
+          "name" : "Task with expired time",
+          "description" : "Task with expired time example"
         }
       },
       "visual" : {
@@ -368,7 +358,6 @@
     }, {
       "id" : "f44",
       "type" : "TaskSwitchEvent",
-      "name" : "Test Task with expired time",
       "config" : {
         "task" : {
           "name" : "Task with expried time",
@@ -378,8 +367,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 272, "y" : 616 },
-        "labelOffset" : { "x" : 14, "y" : 34 }
+        "at" : { "x" : 272, "y" : 616 }
       },
       "connect" : [
         { "id" : "f48", "to" : "f45" }
