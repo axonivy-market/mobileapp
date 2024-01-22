@@ -46,7 +46,7 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
         title: Text("profile.signIn".tr()),
         leading: BackButton(
           onPressed: () {
-            context.pop();
+            context.pop(false);
           },
         ),
       ),
@@ -65,7 +65,7 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
                   ),
                 ),
               );
-              Navigator.pop(context);
+              context.pop(true);
             } else if (state.status == LoginStatus.error) {
               if (state.error?.code == 401) {
                 showConfirmDialog(
