@@ -1,7 +1,14 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import '../di/di_setup.dart';
 
-enum SharedPreferencesItem { accessToken, baseUrl, username, password, isLogin }
+enum SharedPreferencesItem {
+  accessToken,
+  baseUrl,
+  username,
+  password,
+  isLogin,
+  shouldFetchNewData
+}
 
 class SharedPrefs {
   static final _pref = getIt<SharedPreferences>();
@@ -28,10 +35,16 @@ class SharedPrefs {
   static Future setIsLogin(bool value) =>
       _pref.setBool(SharedPreferencesItem.isLogin.name, value);
 
+  static bool? get shouldFetchNewData =>
+      _pref.getBool(SharedPreferencesItem.shouldFetchNewData.name);
+  static Future setShouldFetchNewData(bool value) =>
+      _pref.setBool(SharedPreferencesItem.shouldFetchNewData.name, value);
+
   static void clear() {
     _pref.remove(SharedPreferencesItem.baseUrl.name);
     _pref.remove(SharedPreferencesItem.username.name);
     _pref.remove(SharedPreferencesItem.password.name);
     _pref.remove(SharedPreferencesItem.isLogin.name);
+    _pref.remove(SharedPreferencesItem.shouldFetchNewData.name);
   }
 }

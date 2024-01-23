@@ -67,14 +67,9 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
               );
               context.pop(true);
             } else if (state.status == LoginStatus.error) {
-              if (state.error?.code == 401) {
-                showConfirmDialog(
-                    title: "Error", message: "validator.error".tr());
-              } else {
-                showConfirmDialog(
-                    title: "Error",
-                    message: state.error?.message ?? "validator.error".tr());
-              }
+              showConfirmDialog(
+                  title: "Error",
+                  message: state.error?.message ?? "notFoundError".tr());
             }
           },
           child: ListView(

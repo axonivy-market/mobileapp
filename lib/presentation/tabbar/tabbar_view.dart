@@ -1,11 +1,11 @@
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
+import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
-import 'package:axon_ivy/core/utils/shared_preference.dart';
-import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
 import 'package:axon_ivy/util/resources/constants.dart';
@@ -15,6 +15,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../core/generated/colors.gen.dart';
 import '../profile/view/profile_view.dart';
 import '../search/view/search_view.dart';
@@ -50,28 +51,23 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final FilterBloc _filterBloc;
   late final ProfileBloc _profileBloc;
   late final SortBloc _sortBloc;
-
-  late bool shouldFetchTaskData = false;
-
+  bool shouldFetchData = true;
   int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
 
-  // callback used to navigate to the desired tab
   void _onItemTapped(BuildContext context, int tabIndex) {
-    if (SharedPrefs.isLogin ?? false) {
-      if (tabIndex != selectedIndex) {
-        setState(() {
-          selectedIndex = tabIndex;
-        });
-        switch (tabIndex) {
-          case 1:
-            _processBloc.add(const ProcessEvent.getProcess());
-            break;
-          case 2:
-            _searchBloc.combineSearchItems(
-                _taskBloc.sortDefaultTasks, _processBloc.processes);
-            break;
-        }
-        fetchData(shouldFetchTaskData);
+    fetchData(shouldFetchData && (SharedPrefs.shouldFetchNewData ?? false));
+    if (tabIndex != selectedIndex) {
+      setState(() {
+        selectedIndex = tabIndex;
+      });
+      switch (tabIndex) {
+        case 1:
+          _processBloc.add(const ProcessEvent.getProcess());
+          break;
+        case 2:
+          _searchBloc.combineSearchItems(
+              _taskBloc.sortDefaultTasks, _processBloc.processes);
+          break;
       }
     }
   }
@@ -85,15 +81,17 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _processBloc = getIt<ProcessBloc>();
     _searchBloc = getIt<SearchBloc>();
     _profileBloc = getIt<ProfileBloc>();
-
     if (SharedPrefs.isLogin ?? false) {
-      shouldFetchTaskData = true;
-      fetchData(shouldFetchTaskData);
+      _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
+      _processBloc.add(const ProcessEvent.getProcess());
+      setState(() {
+        shouldFetchData = false;
+      });
     }
   }
 
-  void fetchData(bool shouldFetchTaskData) {
-    if (shouldFetchTaskData) {
+  void fetchData(bool shouldFetchData) {
+    if (shouldFetchData) {
       _sortBloc
           .add(SortEvent([MainSortType.priority, SubSortType.mostImportant]));
       _filterBloc.add(FilterEvent(FilterType.all));
@@ -101,7 +99,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
       _processBloc.add(const ProcessEvent.getProcess());
     }
     setState(() {
-      this.shouldFetchTaskData = false;
+      this.shouldFetchData = false;
     });
   }
 
