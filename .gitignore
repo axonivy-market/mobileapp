@@ -20,8 +20,8 @@
 .idea/
 
 # Visual Studio Code related
-.classpath
-.project
+#.classpath #for ivy project
+#.project #for ivy project
 .settings/
 .vscode/*
 
