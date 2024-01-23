@@ -73,7 +73,7 @@
   "conflictError": "conflict found, try again later",
   "internalServerError": "some thing went wrong, try again later",
   "unknownError": "some thing went wrong, try again later",
-  "timeoutError": "time out, try again late",
+  "timeoutError": "time out, try again later",
   "defaultError": "some thing went wrong, try again later",
   "cacheError": "cache error, try again later",
   "noInternetError": "Please check your internet connection",

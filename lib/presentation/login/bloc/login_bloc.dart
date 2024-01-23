@@ -53,12 +53,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
         ? AppConfig.baseUrl
         : SharedPrefs.getBaseUrl!;
-    Uri? uri = Uri.tryParse(getIt<Dio>().options.baseUrl);
 
-    if (uri!.host.isEmptyOrNull) {
-      emit(LoginState(
-          status: LoginStatus.error, error: Failure(400, "Invalid URL")));
-    }
     final invalidUrlMessage =
         Validators.validateNotEmpty(event.url, FieldType.url);
     final invalidPasswordMessage =

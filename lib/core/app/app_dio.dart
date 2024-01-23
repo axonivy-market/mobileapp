@@ -44,10 +44,8 @@ class AppDio with DioMixin implements Dio {
           debugPrint('Headers: ${options.headers}');
           return handler.next(options);
         },
-        onError: (error, handler) {
-          if (error.response != null) {
-            handler.next(error);
-          }
+        onError: (DioException e, ErrorInterceptorHandler handler) {
+          return handler.next(e);
         },
       ),
     );
