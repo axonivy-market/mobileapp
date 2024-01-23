@@ -16,23 +16,25 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TaskEvent {
-  FilterType get activeFilter => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,24 +42,23 @@ mixin _$TaskEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $TaskEventCopyWith<TaskEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -65,8 +66,6 @@ mixin _$TaskEvent {
 abstract class $TaskEventCopyWith<$Res> {
   factory $TaskEventCopyWith(TaskEvent value, $Res Function(TaskEvent) then) =
       _$TaskEventCopyWithImpl<$Res, TaskEvent>;
-  @useResult
-  $Res call({FilterType activeFilter});
 }
 
 /// @nodoc
@@ -78,28 +77,13 @@ class _$TaskEventCopyWithImpl<$Res, $Val extends TaskEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? activeFilter = null,
-  }) {
-    return _then(_value.copyWith(
-      activeFilter: null == activeFilter
-          ? _value.activeFilter
-          : activeFilter // ignore: cast_nullable_to_non_nullable
-              as FilterType,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$GetTasksImplCopyWith<$Res>
-    implements $TaskEventCopyWith<$Res> {
+abstract class _$$GetTasksImplCopyWith<$Res> {
   factory _$$GetTasksImplCopyWith(
           _$GetTasksImpl value, $Res Function(_$GetTasksImpl) then) =
       __$$GetTasksImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({FilterType activeFilter});
 }
@@ -162,6 +146,7 @@ class _$GetTasksImpl implements _GetTasks {
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
   }) {
     return getTasks(activeFilter);
   }
@@ -171,6 +156,7 @@ class _$GetTasksImpl implements _GetTasks {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
   }) {
     return getTasks?.call(activeFilter);
   }
@@ -180,6 +166,7 @@ class _$GetTasksImpl implements _GetTasks {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
@@ -193,6 +180,7 @@ class _$GetTasksImpl implements _GetTasks {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
   }) {
     return getTasks(this);
   }
@@ -202,6 +190,7 @@ class _$GetTasksImpl implements _GetTasks {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
   }) {
     return getTasks?.call(this);
   }
@@ -211,6 +200,7 @@ class _$GetTasksImpl implements _GetTasks {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
@@ -223,21 +213,17 @@ class _$GetTasksImpl implements _GetTasks {
 abstract class _GetTasks implements TaskEvent {
   const factory _GetTasks(final FilterType activeFilter) = _$GetTasksImpl;
 
-  @override
   FilterType get activeFilter;
-  @override
   @JsonKey(ignore: true)
   _$$GetTasksImplCopyWith<_$GetTasksImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$FilterTasksImplCopyWith<$Res>
-    implements $TaskEventCopyWith<$Res> {
+abstract class _$$FilterTasksImplCopyWith<$Res> {
   factory _$$FilterTasksImplCopyWith(
           _$FilterTasksImpl value, $Res Function(_$FilterTasksImpl) then) =
       __$$FilterTasksImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({FilterType activeFilter});
 }
@@ -300,6 +286,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
   }) {
     return filterTasks(activeFilter);
   }
@@ -309,6 +296,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
   }) {
     return filterTasks?.call(activeFilter);
   }
@@ -318,6 +306,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
     required TResult orElse(),
   }) {
     if (filterTasks != null) {
@@ -331,6 +320,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
   }) {
     return filterTasks(this);
   }
@@ -340,6 +330,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
   }) {
     return filterTasks?.call(this);
   }
@@ -349,6 +340,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
     required TResult orElse(),
   }) {
     if (filterTasks != null) {
@@ -361,11 +353,157 @@ class _$FilterTasksImpl implements _FilterTasks {
 abstract class _FilterTasks implements TaskEvent {
   const factory _FilterTasks(final FilterType activeFilter) = _$FilterTasksImpl;
 
-  @override
   FilterType get activeFilter;
-  @override
   @JsonKey(ignore: true)
   _$$FilterTasksImplCopyWith<_$FilterTasksImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SortTasksImplCopyWith<$Res> {
+  factory _$$SortTasksImplCopyWith(
+          _$SortTasksImpl value, $Res Function(_$SortTasksImpl) then) =
+      __$$SortTasksImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<SortType> activeSortType});
+}
+
+/// @nodoc
+class __$$SortTasksImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$SortTasksImpl>
+    implements _$$SortTasksImplCopyWith<$Res> {
+  __$$SortTasksImplCopyWithImpl(
+      _$SortTasksImpl _value, $Res Function(_$SortTasksImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeSortType = null,
+  }) {
+    return _then(_$SortTasksImpl(
+      null == activeSortType
+          ? _value._activeSortType
+          : activeSortType // ignore: cast_nullable_to_non_nullable
+              as List<SortType>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SortTasksImpl implements _SortTasks {
+  const _$SortTasksImpl(final List<SortType> activeSortType)
+      : _activeSortType = activeSortType;
+
+  final List<SortType> _activeSortType;
+  @override
+  List<SortType> get activeSortType {
+    if (_activeSortType is EqualUnmodifiableListView) return _activeSortType;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_activeSortType);
+  }
+
+  @override
+  String toString() {
+    return 'TaskEvent.sortTasks(activeSortType: $activeSortType)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SortTasksImpl &&
+            const DeepCollectionEquality()
+                .equals(other._activeSortType, _activeSortType));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_activeSortType));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SortTasksImplCopyWith<_$SortTasksImpl> get copyWith =>
+      __$$SortTasksImplCopyWithImpl<_$SortTasksImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
+  }) {
+    return sortTasks(activeSortType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
+  }) {
+    return sortTasks?.call(activeSortType);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
+    required TResult orElse(),
+  }) {
+    if (sortTasks != null) {
+      return sortTasks(activeSortType);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
+  }) {
+    return sortTasks(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
+  }) {
+    return sortTasks?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
+    required TResult orElse(),
+  }) {
+    if (sortTasks != null) {
+      return sortTasks(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SortTasks implements TaskEvent {
+  const factory _SortTasks(final List<SortType> activeSortType) =
+      _$SortTasksImpl;
+
+  List<SortType> get activeSortType;
+  @JsonKey(ignore: true)
+  _$$SortTasksImplCopyWith<_$SortTasksImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

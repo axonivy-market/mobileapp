@@ -5,6 +5,8 @@ import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/presentation/process/view/processes_view.dart';
+import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
 import 'package:axon_ivy/util/resources/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -14,12 +16,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../core/generated/colors.gen.dart';
-import '../process/view/processes_view.dart';
 import '../profile/view/profile_view.dart';
 import '../search/view/search_view.dart';
 import '../task/bloc/filter_boc/filter_bloc.dart';
 import '../task/bloc/filter_boc/filter_event.dart';
-import '../task/view/tasks_view.dart';
+import '../task/bloc/sort_bloc/sort_bloc.dart';
+import '../task/bloc/sort_bloc/sort_event.dart';
 
 extension GoRouterExtension on GoRouter {
   String location() {
@@ -47,8 +49,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final SearchBloc _searchBloc;
   late final FilterBloc _filterBloc;
   late final ProfileBloc _profileBloc;
-  int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
+  late final SortBloc _sortBloc;
+
   late bool shouldFetchTaskData = false;
+
+  int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
 
   // callback used to navigate to the desired tab
   void _onItemTapped(BuildContext context, int tabIndex) {
@@ -66,7 +71,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                 _taskBloc.sortDefaultTasks, _processBloc.processes);
             break;
         }
-        fetchTaskData(shouldFetchTaskData);
+        fetchData(shouldFetchTaskData);
       }
     }
   }
@@ -74,22 +79,26 @@ class _TabBarScreenState extends State<TabBarScreen> {
   @override
   void initState() {
     super.initState();
+    _sortBloc = getIt<SortBloc>();
     _filterBloc = getIt<FilterBloc>();
     _taskBloc = getIt<TaskBloc>();
     _processBloc = getIt<ProcessBloc>();
     _searchBloc = getIt<SearchBloc>();
     _profileBloc = getIt<ProfileBloc>();
-    if (SharedPrefs.isLogin ?? false) {
-      _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
-    }
 
-    shouldFetchTaskData = true;
+    if (SharedPrefs.isLogin ?? false) {
+      shouldFetchTaskData = true;
+      fetchData(shouldFetchTaskData);
+    }
   }
 
-  void fetchTaskData(bool shouldFetchTaskData) {
+  void fetchData(bool shouldFetchTaskData) {
     if (shouldFetchTaskData) {
-      _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
+      _sortBloc
+          .add(SortEvent([MainSortType.priority, SubSortType.mostImportant]));
       _filterBloc.add(FilterEvent(FilterType.all));
+      _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
+      _processBloc.add(const ProcessEvent.getProcess());
     }
     setState(() {
       this.shouldFetchTaskData = false;
@@ -105,9 +114,9 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _taskBloc),
         BlocProvider(create: (context) => _filterBloc),
         BlocProvider(create: (context) => _profileBloc),
+        BlocProvider(create: (context) => _sortBloc),
       ],
       child: Scaffold(
-        backgroundColor: Colors.white,
         body: IndexedStack(
           index: selectedIndex,
           children: const [

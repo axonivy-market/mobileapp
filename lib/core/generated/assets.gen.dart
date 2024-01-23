@@ -84,6 +84,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
 
+  /// File path: assets/icons/no_expired_task.svg
+  SvgGenImage get noExpiredTask =>
+      const SvgGenImage('assets/icons/no_expired_task.svg');
+
   /// File path: assets/icons/notification.svg
   SvgGenImage get notification =>
       const SvgGenImage('assets/icons/notification.svg');
@@ -160,6 +164,7 @@ class $AssetsIconsGen {
         list,
         login,
         logo,
+        noExpiredTask,
         notification,
         offline,
         paperclip,
