@@ -49,6 +49,9 @@ class AppColors {
   /// Color: #2968C7
   static const Color mimesiaBlue = Color(0xFF2968C7);
 
+  /// Color: #E7E7E7
+  static const Color placebo = Color(0xFFE7E7E7);
+
   /// Color: #FF796F
   static const Color salmon = Color(0xFFFF796F);
 

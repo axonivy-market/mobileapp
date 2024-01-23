@@ -30,7 +30,7 @@ Failure _handleError(DioException error) {
           error.response?.statusCode != null &&
           error.response?.statusMessage != null) {
         return Failure(error.response?.statusCode ?? 0,
-            error.response?.data["message"] ?? "");
+            error.response?.data["errorMessage"] ?? "");
       } else {
         return DataSource.DEFAULT.getFailure();
       }
@@ -38,6 +38,8 @@ Failure _handleError(DioException error) {
       return DataSource.CANCEL.getFailure();
     case DioExceptionType.connectionError:
       return DataSource.CONNECTION_ERROR.getFailure();
+    case DioExceptionType.unknown:
+      return DataSource.DEFAULT.getFailure();
     default:
       return DataSource.DEFAULT.getFailure();
   }
@@ -58,6 +60,7 @@ enum DataSource {
   CACHE_ERROR,
   NO_INTERNET_CONNECTION,
   CONNECTION_ERROR,
+  UNKNOWN,
   DEFAULT
 }
 
@@ -102,6 +105,8 @@ extension DataSourceExtension on DataSource {
       case DataSource.CONNECTION_ERROR:
         return Failure(ResponseCode.CONNECTION_ERROR,
             ResponseMessage.CONNECTION_ERROR.tr());
+      case DataSource.UNKNOWN:
+        return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT.tr());
       case DataSource.DEFAULT:
         return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT.tr());
     }
