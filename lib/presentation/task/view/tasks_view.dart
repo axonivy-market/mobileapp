@@ -87,7 +87,7 @@ class TasksViewContent extends StatelessWidget {
     final taskBloc = context.read<TaskBloc>();
     final filterState = context.read<FilterBloc>().state;
     await Future.delayed(const Duration(seconds: 1));
-    taskBloc.add(TaskEvent.getTasks(filterState.activeFilter, true));
+    taskBloc.add(TaskEvent.getTasks(filterState.activeFilter));
   }
 
   Widget _buildTaskItem(BuildContext context, List<TaskIvy> tasks,

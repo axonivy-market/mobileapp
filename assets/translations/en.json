@@ -74,9 +74,9 @@
   "notFoundError": "url not found, try again later",
   "conflictError": "conflict found, try again later",
   "internalServerError": "some thing went wrong, try again later",
-  "unknownError": "some thing went wrong, try again later",
+  "unknownError": "something went wrong, try again later",
   "timeoutError": "time out, try again later",
-  "defaultError": "some thing went wrong, try again later",
+  "defaultError": "something went wrong, try again later",
   "cacheError": "cache error, try again later",
   "noInternetError": "Please check your internet connection",
   "connectionError": "Please check your base url",
@@ -90,7 +90,7 @@
     "noProcessResults": "There are no processes named after your search...",
     "noTaskResults": "There are no tasks named after your search..."
   },
-    "noMatchingResults": "There are no matching results to your search...",
+  "noMatchingResults": "There are no matching results to your search...",
   "sortType": {
     "priority": "Priority",
     "name": "Name",
@@ -102,8 +102,8 @@
     "leastImportant": "Least important",
     "mostUrgent": "Most urgent",
     "leastUrgent": "Least urgent",
-    "newest": "Newest",
-    "oldest": "Oldest"
+    "newest": "Newest first",
+    "oldest": "Oldest first"
 
   }
   

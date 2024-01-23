@@ -60,8 +60,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         activeFilter == FilterType.all ? tasks : expiredTasks;
     switch (mainType) {
       case MainSortType.priority:
-        List<TaskIvy> priorityTasks = List.from(sortedTasks)
-          ..sort((l, r) => l.priority.compareTo(r.priority));
+        List<TaskIvy> priorityTasks = sortedTasks.sortDefaultTasks;
         return subType == SubSortType.mostImportant
             ? priorityTasks
             : priorityTasks.reversed.toList();
@@ -73,7 +72,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
             : nameTasks.reversed.toList();
       case MainSortType.creationDate:
         List<TaskIvy> creationDateTasks = List.from(sortedTasks)
-          ..sort((l, r) => l.startTimeStamp.compareTo(r.startTimeStamp));
+          ..sort((l, r) => r.startTimeStamp.compareTo(l.startTimeStamp));
         return subType == SubSortType.newest
             ? creationDateTasks
             : creationDateTasks.reversed.toList();
@@ -129,22 +128,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           emit(TaskState.error(l.message));
         },
         (r) {
-          if (isFirstTimeFetch) {
-            this.tasks = r;
-            emit(TaskState.success(
-                _filterTasksServer(event.activeFilter, r.sortDefaultTasks)));
-            isFirstTimeFetch = false;
-          } else if (event.isRefresh) {
-            this.tasks = r;
-            emit(TaskState.success(_filterTasksServer(
-                event.activeFilter,
-                _sortTasksLocal(activeSortType.getMainSortType()!,
-                    activeSortType.getSubTypeActive()!))));
-          } else {
-            emit(TaskState.success(_sortTasksLocal(
-                activeSortType.getMainSortType()!,
-                activeSortType.getSubTypeActive()!)));
-          }
+          this.tasks = r;
+          sortDefaultTasks = r.sortDefaultTasks;
+          expiredTasks = _filterExpiredTasks(this.tasks);
+          emit(TaskState.success(_sortTasksLocal(
+              activeSortType.getMainSortType()!,
+              activeSortType.getSubTypeActive()!)));
         },
       );
     } catch (e) {
@@ -155,18 +144,5 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   List<TaskIvy> _filterExpiredTasks(List<TaskIvy> tasks) {
     if (tasks.isEmpty) return tasks;
     return tasks.where((task) => task.expiryTimeStamp.isExpired).toList();
-  }
-
-  List<TaskIvy> _filterTasksServer(FilterType filterType, List<TaskIvy> tasks) {
-    if (filterType == FilterType.all) {
-      this.tasks = tasks;
-      return tasks;
-    } else {
-      expiredTasks = tasks
-          .where((task) =>
-              task.expiryTimeStamp != null && task.expiryTimeStamp.isExpired)
-          .toList();
-      return expiredTasks;
-    }
   }
 }

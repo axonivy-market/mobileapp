@@ -49,7 +49,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final SearchBloc _searchBloc;
   late final FilterBloc _filterBloc;
   late final ProfileBloc _profileBloc;
-  late SortBloc _sortBloc;
+  late final SortBloc _sortBloc;
 
   late bool shouldFetchTaskData = false;
 
@@ -71,7 +71,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
                 _taskBloc.sortDefaultTasks, _processBloc.processes);
             break;
         }
-        fetchTaskData(shouldFetchTaskData);
+        fetchData(shouldFetchTaskData);
       }
     }
   }
@@ -79,24 +79,26 @@ class _TabBarScreenState extends State<TabBarScreen> {
   @override
   void initState() {
     super.initState();
+    _sortBloc = getIt<SortBloc>();
     _filterBloc = getIt<FilterBloc>();
     _taskBloc = getIt<TaskBloc>();
     _processBloc = getIt<ProcessBloc>();
     _searchBloc = getIt<SearchBloc>();
     _profileBloc = getIt<ProfileBloc>();
-    _sortBloc = getIt<SortBloc>();
+
     if (SharedPrefs.isLogin ?? false) {
       shouldFetchTaskData = true;
-      fetchTaskData(shouldFetchTaskData);
+      fetchData(shouldFetchTaskData);
     }
   }
 
-  void fetchTaskData(bool shouldFetchTaskData) {
+  void fetchData(bool shouldFetchTaskData) {
     if (shouldFetchTaskData) {
-      _taskBloc.add(const TaskEvent.getTasks(FilterType.all, false));
       _sortBloc
           .add(SortEvent([MainSortType.priority, SubSortType.mostImportant]));
       _filterBloc.add(FilterEvent(FilterType.all));
+      _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
+      _processBloc.add(const ProcessEvent.getProcess());
     }
     setState(() {
       this.shouldFetchTaskData = false;
@@ -112,6 +114,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _taskBloc),
         BlocProvider(create: (context) => _filterBloc),
         BlocProvider(create: (context) => _profileBloc),
+        BlocProvider(create: (context) => _sortBloc),
       ],
       child: Scaffold(
         body: IndexedStack(
