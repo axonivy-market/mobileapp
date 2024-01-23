@@ -5,9 +5,11 @@ import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
+import 'package:axon_ivy/router/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../util/resources/constants.dart';
 import '../../../util/widgets/home_appbar.dart';
@@ -40,6 +42,7 @@ class TasksView extends StatelessWidget {
 
 class TasksViewContent extends StatelessWidget {
   const TasksViewContent({super.key, required this.showAppBar});
+
   final bool showAppBar;
 
   @override
@@ -99,6 +102,18 @@ class TasksViewContent extends StatelessWidget {
     } else {
       final task = tasks[index];
       return GestureDetector(
+        onTap: () {
+          context
+              .push(AppRoutes.taskActivity, extra: tasks[index])
+              .then((value) {
+            if (value != null) {
+              final filterState = context.read<FilterBloc>().state;
+              context
+                  .read<TaskBloc>()
+                  .add(TaskEvent.getTasks(filterState.activeFilter));
+            }
+          });
+        },
         onLongPress: () => _showDetails(context, task),
         child: TaskItemWidget(
           name: task.name,

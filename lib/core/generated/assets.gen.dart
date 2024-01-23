@@ -37,6 +37,14 @@ class $AssetsIconsGen {
   /// File path: assets/icons/category-2.svg
   SvgGenImage get category2 => const SvgGenImage('assets/icons/category-2.svg');
 
+  /// File path: assets/icons/chevron_down.svg
+  SvgGenImage get chevronDown =>
+      const SvgGenImage('assets/icons/chevron_down.svg');
+
+  /// File path: assets/icons/chevron_left.svg
+  SvgGenImage get chevronLeft =>
+      const SvgGenImage('assets/icons/chevron_left.svg');
+
   /// File path: assets/icons/chevron_right.svg
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/icons/chevron_right.svg');
@@ -153,6 +161,8 @@ class $AssetsIconsGen {
         arrowRight,
         calendar,
         category2,
+        chevronDown,
+        chevronLeft,
         chevronRight,
         clock,
         cloudOff,

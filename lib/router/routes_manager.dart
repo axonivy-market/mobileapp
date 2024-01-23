@@ -1,11 +1,12 @@
-import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/presentation/login/login_view.dart';
+import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/search/view/search_view.dart';
 import 'package:axon_ivy/presentation/splash/splash_view.dart';
 import 'package:axon_ivy/presentation/tabbar/tabbar_view.dart';
 import 'package:axon_ivy/presentation/profile/view/profile_view.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
+import 'package:axon_ivy/presentation/task_activity/task_activity.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../presentation/qr/qr_view.dart';
@@ -22,6 +23,17 @@ class AppRouter {
       GoRoute(
         path: AppRoutes.splash,
         builder: (_, __) => const SplashView(),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.taskActivity,
+        pageBuilder: (_, state) => CustomTransitionPage(
+          child: TaskActivityWidget(
+            taskIvy: state.extra as TaskIvy,
+          ),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              iosTransition(context, animation, secondaryAnimation, child),
+        ),
       ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,

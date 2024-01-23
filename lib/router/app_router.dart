@@ -12,4 +12,6 @@ class AppRoutes {
   static const login = "/login";
 
   static const qr = "/qr";
+
+  static const taskActivity = "/taskActivity";
 }
