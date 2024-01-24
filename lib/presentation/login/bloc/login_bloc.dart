@@ -3,6 +3,7 @@ import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -53,6 +54,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
         ? AppConfig.baseUrl
         : SharedPrefs.getBaseUrl!;
+    Uri? uri = Uri.tryParse(getIt<Dio>().options.baseUrl);
+
+    if (uri!.host.isEmptyOrNull) {
+      emit(LoginState(
+          status: LoginStatus.error,
+          error: Failure(400, "notFoundError".tr())));
+      return;
+    }
 
     final invalidUrlMessage =
         Validators.validateNotEmpty(event.url, FieldType.url);
@@ -78,6 +87,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           },
           (r) {
             SharedPrefs.setIsLogin(true);
+            SharedPrefs.setShouldFetchNewData(true);
             emit(const LoginState(status: LoginStatus.success));
           },
         );
