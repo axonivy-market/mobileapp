@@ -106,7 +106,7 @@ class TasksViewContent extends StatelessWidget {
           context
               .push(AppRoutes.taskActivity, extra: tasks[index])
               .then((value) {
-            if (value != null) {
+            if (value as bool) {
               final filterState = context.read<FilterBloc>().state;
               context
                   .read<TaskBloc>()

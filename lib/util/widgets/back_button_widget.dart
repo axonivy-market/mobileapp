@@ -14,7 +14,7 @@ class BackButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pop();
+        context.pop(false);
       },
       child: Container(
         color: Colors.white,
