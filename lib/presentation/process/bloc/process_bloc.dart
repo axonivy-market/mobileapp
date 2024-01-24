@@ -1,6 +1,5 @@
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
@@ -23,33 +22,31 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
   List<Process> processes = [];
 
   ProcessBloc(this._processRepository)
-      : super(const ProcessState.loading(false)) {
-    on<_GetProcess>(_getProcesses);
+      : super(const ProcessState.initial()) {
+    on<GetProcess>(_getProcesses);
     getIt<Dio>().options.baseUrl = (SharedPrefs.getBaseUrl.isEmptyOrNull
         ? AppConfig.baseUrl
         : SharedPrefs.getBaseUrl)!;
   }
 
-  Future<void> _getProcesses(event, Emitter emitter) async {
+  Future<void> _getProcesses(GetProcess event, Emitter emitter) async {
+    if (state is ProcessLoadingState) {
+      return;
+    }
     emitter(const ProcessState.loading(true));
     try {
       final response = await _processRepository.getProcesses();
       response.fold(
         (error) {
-          emitter(const ProcessState.loading(false));
-          emitter(ProcessState.error(error.message));
+          emitter(ProcessState.success(processes: processes, isOnline: false));
         },
         (processes) {
           this.processes = processes;
-          emitter(const ProcessState.loading(false));
-          emitter(ProcessState.success(processes));
+          emitter(ProcessState.success(processes: processes));
         },
       );
     } catch (e) {
-      emitter(ProcessState.error(AppError.handle(e).failure.message));
-      if (kDebugMode) {
-        print(e);
-      }
+      emitter(ProcessState.success(processes: processes, isOnline: false));
     }
   }
 }

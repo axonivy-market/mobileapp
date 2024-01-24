@@ -44,6 +44,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
 
+  /// File path: assets/icons/cloud-off.svg
+  SvgGenImage get cloudOff => const SvgGenImage('assets/icons/cloud-off.svg');
+
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
 
@@ -152,6 +155,7 @@ class $AssetsIconsGen {
         category2,
         chevronRight,
         clock,
+        cloudOff,
         filter,
         icClose,
         icDatabase,
