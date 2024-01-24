@@ -1,0 +1,49 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.2.2/process.json",
+  "id" : "18C6679C75C72D72",
+  "config" : {
+    "data" : "com.axonivy.mobile.mobiledemo.Data"
+  },
+  "elements" : [ {
+      "id" : "f42",
+      "type" : "RequestStart",
+      "name" : "processNoDescription",
+      "config" : {
+        "signature" : "processNoDescription",
+        "request" : {
+          "name" : "Process with No Description"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 112 }
+      },
+      "connect" : [
+        { "id" : "f44", "to" : "f43" }
+      ]
+    }, {
+      "id" : "f43",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 488, "y" : 112 }
+      }
+    }, {
+      "id" : "f45",
+      "type" : "RequestStart",
+      "name" : "processNoNameNoDescription",
+      "config" : {
+        "signature" : "processNoNameNoDescription"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 184 }
+      },
+      "connect" : [
+        { "id" : "f47", "to" : "f46" }
+      ]
+    }, {
+      "id" : "f46",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 488, "y" : 184 }
+      }
+    } ]
+}
