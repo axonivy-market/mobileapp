@@ -55,16 +55,6 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
         child: BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
             if (state.status == LoginStatus.success) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  backgroundColor: AppColors.tropicSea,
-                  content: Text(
-                    "profile.loginSuccess".tr(),
-                    style:
-                        GoogleFonts.inter(color: AppColors.white, fontSize: 17),
-                  ),
-                ),
-              );
               context.pop(true);
             } else if (state.status == LoginStatus.error) {
               showConfirmDialog(

@@ -1,13 +1,11 @@
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/presentation/splash/splash_cubit.dart';
-import 'package:axon_ivy/presentation/splash/splash_state.dart';
 import 'package:axon_ivy/router/app_router.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:axon_ivy/util/widgets/version_name_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({super.key});
@@ -15,7 +13,7 @@ class SplashView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SplashCubit()
+      create: (context) => getIt<SplashCubit>()
         ..goToHomeScreen()
         ..initPackageInfo(),
       child: BlocConsumer<SplashCubit, SplashState>(listener: (_, state) {
@@ -31,13 +29,7 @@ class SplashView extends StatelessWidget {
                   child:
                       Center(child: AppAssets.images.splashAxonIvyLogo.svg()),
                 ),
-                Text(
-                  'splashCopyright',
-                  style: GoogleFonts.inter(
-                      fontSize: 12, color: AppColors.blackMana),
-                ).tr(
-                  namedArgs: {'version': state.packageInfo.version},
-                ),
+                VersionNameWidget(versionName: state.packageInfo.version),
                 const SizedBox(height: 25),
               ],
             ),

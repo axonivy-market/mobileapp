@@ -61,6 +61,12 @@ class AppColors {
   /// Color: #2C2C2C
   static const Color shoeWax = Color(0xFF2C2C2C);
 
+  /// Color: #BFBFBF
+  static const Color silver = Color(0xFFBFBFBF);
+
+  /// Color: #96C4D4
+  static const Color skyBus = Color(0xFF96C4D4);
+
   /// Color: #757575
   static const Color sonicSilver = Color(0xFF757575);
 
