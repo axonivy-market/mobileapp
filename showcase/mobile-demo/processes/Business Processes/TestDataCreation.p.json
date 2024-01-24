@@ -1,0 +1,453 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.2.2/process.json",
+  "id" : "18C5CF13801EF103",
+  "description" : "This is a Test Process",
+  "config" : {
+    "data" : "com.axonivy.mobile.mobiledemo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "Task with Normal Priority",
+      "config" : {
+        "signature" : "start",
+        "request" : {
+          "name" : "Task with Normal Priority"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 64 }
+      }
+    }, {
+      "id" : "f5",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 408, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f6", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "RequestStart",
+      "name" : "Task with High Priority",
+      "config" : {
+        "signature" : "",
+        "request" : {
+          "name" : "Task with High Priority",
+          "description" : "Task with High Priority"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 152 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f19" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 152 }
+      }
+    }, {
+      "id" : "f10",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 408, "y" : 152 }
+      },
+      "connect" : [
+        { "id" : "f13", "to" : "f8" }
+      ]
+    }, {
+      "id" : "f14",
+      "type" : "RequestStart",
+      "name" : "Task with Exception Priority",
+      "config" : {
+        "signature" : "start3",
+        "request" : {
+          "name" : "Task with Exception Priority",
+          "description" : "Task with Exception Priority"
+        },
+        "task" : {
+          "expiry" : {
+            "priority" : {
+              "level" : "EXCEPTION"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 248 }
+      },
+      "connect" : [
+        { "id" : "f11", "to" : "f24" }
+      ]
+    }, {
+      "id" : "f15",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 248 }
+      }
+    }, {
+      "id" : "f17",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 408, "y" : 248 }
+      },
+      "connect" : [
+        { "id" : "f20", "to" : "f15" }
+      ]
+    }, {
+      "id" : "f21",
+      "type" : "RequestStart",
+      "name" : "Task with Low Priority",
+      "config" : {
+        "signature" : "start4",
+        "request" : {
+          "name" : "Task with Low Priority",
+          "description" : "Task with Low Priority"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 336 }
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f26" }
+      ]
+    }, {
+      "id" : "f22",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 336 }
+      }
+    }, {
+      "id" : "f16",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 408, "y" : 336 },
+        "description" : "Test Description"
+      },
+      "connect" : [
+        { "id" : "f18", "to" : "f22" }
+      ]
+    }, {
+      "id" : "f3",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Task with Normal Priority",
+          "description" : "This is a task with normal priority",
+          "expiry" : {
+            "timeout" : "ivy.cal.getWorkDayIn(new DateTime(), 1).getDurationFromNow()"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 272, "y" : 64 },
+        "description" : "Test Description"
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f5" }
+      ]
+    }, {
+      "id" : "f19",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Task with High Priority",
+          "description" : "This is a test with high priority",
+          "priority" : {
+            "level" : "HIGH"
+          },
+          "expiry" : {
+            "timeout" : "ivy.cal.getWorkDayIn(new DateTime(), 0).getDurationFromNow()"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 272, "y" : 152 }
+      },
+      "connect" : [
+        { "id" : "f23", "to" : "f10" }
+      ]
+    }, {
+      "id" : "f24",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Task with Exception Priority",
+          "description" : "This is task with exception priority",
+          "priority" : {
+            "level" : "EXCEPTION"
+          },
+          "expiry" : {
+            "timeout" : "ivy.cal.getWorkDayIn(new DateTime(), 1).getDurationFromNow()"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 272, "y" : 248 }
+      },
+      "connect" : [
+        { "id" : "f25", "to" : "f17" }
+      ]
+    }, {
+      "id" : "f26",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Task with Low Priority",
+          "description" : "This is a task with low priority",
+          "priority" : {
+            "level" : "LOW"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 272, "y" : 336 }
+      },
+      "connect" : [
+        { "id" : "f27", "to" : "f16" }
+      ]
+    }, {
+      "id" : "f28",
+      "type" : "RequestStart",
+      "name" : "Task with long name and description",
+      "config" : {
+        "signature" : "start5",
+        "request" : {
+          "name" : "Task with long name and description Task with long name and description",
+          "description" : "Task with long name and description Task with long name and description"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 432 }
+      },
+      "connect" : [
+        { "id" : "f32", "to" : "f30" }
+      ]
+    }, {
+      "id" : "f29",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 432 }
+      }
+    }, {
+      "id" : "f30",
+      "type" : "TaskSwitchEvent",
+      "name" : "Test Task",
+      "config" : {
+        "task" : {
+          "name" : "Task with long name and description",
+          "description" : "This is a task with very long long long long long name and descriptionnnnnnnnnnnnn"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 272, "y" : 432 },
+        "labelOffset" : { "x" : 14, "y" : 34 },
+        "description" : "Test Description"
+      },
+      "connect" : [
+        { "id" : "f33", "to" : "f31" }
+      ]
+    }, {
+      "id" : "f31",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 408, "y" : 432 }
+      },
+      "connect" : [
+        { "id" : "f34", "to" : "f29" }
+      ]
+    }, {
+      "id" : "f35",
+      "type" : "RequestStart",
+      "name" : "taskWithNoNameNoDescription",
+      "config" : {
+        "signature" : "taskWithNoNameNoDescription",
+        "request" : {
+          "name" : "Task with no name and no description",
+          "description" : "Task with no name and no description"
+        },
+        "task" : {
+          "description" : "Task with long name and description Task with long name and descriptionTask with long name and description Task with long name and descriptionTask with long name and description Task with long name and description"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 528 }
+      },
+      "connect" : [
+        { "id" : "f41", "to" : "f37" }
+      ]
+    }, {
+      "id" : "f36",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 528 }
+      }
+    }, {
+      "id" : "f37",
+      "type" : "TaskSwitchEvent",
+      "visual" : {
+        "at" : { "x" : 272, "y" : 528 },
+        "description" : "Test Description"
+      },
+      "connect" : [
+        { "id" : "f39", "to" : "f38" }
+      ]
+    }, {
+      "id" : "f38",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 408, "y" : 528 }
+      },
+      "connect" : [
+        { "id" : "f40", "to" : "f36" }
+      ]
+    }, {
+      "id" : "f42",
+      "type" : "RequestStart",
+      "name" : "taskWithExpiredTime",
+      "config" : {
+        "signature" : "taskWithExpiredTime",
+        "request" : {
+          "name" : "Task with expired time",
+          "description" : "Task with expired time example"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f46", "to" : "f44" }
+      ]
+    }, {
+      "id" : "f43",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 616 }
+      }
+    }, {
+      "id" : "f44",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Task with expried time",
+          "expiry" : {
+            "timeout" : "new Duration(0,0,0,0,0,1)"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 272, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f48", "to" : "f45" }
+      ]
+    }, {
+      "id" : "f45",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 408, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f47", "to" : "f43" }
+      ]
+    }, {
+      "id" : "f49",
+      "type" : "RequestStart",
+      "name" : "skipTaskList",
+      "config" : {
+        "signature" : "skipTaskList",
+        "request" : {
+          "name" : "Task with skip task list"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 720 }
+      },
+      "connect" : [
+        { "id" : "f51", "to" : "f52" }
+      ]
+    }, {
+      "id" : "f52",
+      "type" : "DialogCall",
+      "name" : "SampleDialog",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 272, "y" : 720 }
+      },
+      "connect" : [
+        { "id" : "f55", "to" : "f54" }
+      ]
+    }, {
+      "id" : "f54",
+      "type" : "TaskSwitchEvent",
+      "name" : "Skip task list",
+      "config" : {
+        "task" : {
+          "name" : "Skip task list",
+          "skipTasklist" : true
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 408, "y" : 720 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f57", "to" : "f56" }
+      ]
+    }, {
+      "id" : "f56",
+      "type" : "DialogCall",
+      "name" : "SampleDialog",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 544, "y" : 720 }
+      },
+      "connect" : [
+        { "id" : "f59", "to" : "f58" }
+      ]
+    }, {
+      "id" : "f58",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 672, "y" : 720 }
+      }
+    } ]
+}

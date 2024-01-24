@@ -1,0 +1,45 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.2.2/process.json",
+  "id" : "18C62F083DC673AC",
+  "config" : {
+    "data" : "com.axonivy.mobile.mobiledemo.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "start",
+      "config" : {
+        "signature" : "start",
+        "request" : {
+          "name" : "Adaptive Workflow Enhancement",
+          "description" : "Adaptive Workflow Enhancement is a process designed to evolve and optimize workflows based on changing business requirements and technological advancements. It ensures that workflows remain flexible, efficient, and aligned with organizational goals."
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f3" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Adaptive Workflow Enhancement"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f1" }
+      ]
+    } ]
+}
