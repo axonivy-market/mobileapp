@@ -5,6 +5,7 @@ import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
+import 'package:axon_ivy/util/widgets/loading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -40,6 +41,7 @@ class TasksView extends StatelessWidget {
 
 class TasksViewContent extends StatelessWidget {
   const TasksViewContent({super.key, required this.showAppBar});
+
   final bool showAppBar;
 
   @override
@@ -53,7 +55,7 @@ class TasksViewContent extends StatelessWidget {
           } else if (taskState is TaskSuccessState) {
             return _buildTaskList(context, taskState.tasks);
           } else {
-            return const Center(child: CircularProgressIndicator());
+            return const LoadingWidget();
           }
         },
       ),
