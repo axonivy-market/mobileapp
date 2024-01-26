@@ -154,12 +154,7 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                   Border(top: BorderSide(color: AppColors.mercury, width: 1.0)),
               color: Colors.white,
             ),
-            padding: const EdgeInsets.only(
-              left: 16,
-              right: 16,
-              top: 10,
-              bottom: 16,
-            ),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 GestureDetector(
