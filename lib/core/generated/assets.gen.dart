@@ -37,9 +37,8 @@ class $AssetsIconsGen {
   /// File path: assets/icons/category-2.svg
   SvgGenImage get category2 => const SvgGenImage('assets/icons/category-2.svg');
 
-  /// File path: assets/icons/chevron_down.svg
-  SvgGenImage get chevronDown =>
-      const SvgGenImage('assets/icons/chevron_down.svg');
+  /// File path: assets/icons/chevron-up.svg
+  SvgGenImage get chevronUp => const SvgGenImage('assets/icons/chevron-up.svg');
 
   /// File path: assets/icons/chevron_left.svg
   SvgGenImage get chevronLeft =>
@@ -161,7 +160,7 @@ class $AssetsIconsGen {
         arrowRight,
         calendar,
         category2,
-        chevronDown,
+        chevronUp,
         chevronLeft,
         chevronRight,
         clock,

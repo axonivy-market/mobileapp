@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:go_router/go_router.dart';
@@ -26,12 +29,22 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
   int _previousScrollY = 0;
   int overScrollY = 0;
   bool isOverScrolled = true;
+  String basicAuth = '';
 
   InAppWebViewSettings settings = InAppWebViewSettings(
     supportZoom: false,
     verticalScrollBarEnabled: false,
     useShouldInterceptAjaxRequest: true,
+    iframeAllowFullscreen: true,
   );
+
+  @override
+  void initState() {
+    super.initState();
+    final username = SharedPrefs.getUsername;
+    final password = SharedPrefs.getPassword;
+    basicAuth = 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +60,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
       initialSettings: settings,
       initialUrlRequest: URLRequest(
         url: WebUri(widget.fullRequestPath),
+        headers: {'Authorization': basicAuth},
       ),
       shouldOverrideUrlLoading: (controller, navigationAction) async {
         if (isFinishedTask) {

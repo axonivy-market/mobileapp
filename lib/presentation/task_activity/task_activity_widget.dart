@@ -42,7 +42,7 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
       duration: const Duration(milliseconds: 300),
     );
 
-    _rotationAnimation = Tween<double>(begin: 0.5, end: 0).animate(_controller);
+    _rotationAnimation = Tween<double>(begin: 0, end: 0.5).animate(_controller);
 
     WidgetsBinding.instance.addPostFrameCallback((_) => _appBarHeight());
   }
@@ -85,32 +85,34 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
           )
         ],
       ),
-      body: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(
-                bottom: canScrollVertical | isKeyboardVisible
-                    ? 0
-                    : taskDetailPanelHeight),
-            child: TaskWebViewWidget(
-              fullRequestPath: widget.taskIvy.fullRequestPath,
-              onScrollToTop: _updateScrollingChanged,
-              canScrollVertical: _canScrollVertical,
-              onProgressChanged: _onProgressChanged,
+      body: SafeArea(
+        child: Stack(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: canScrollVertical | isKeyboardVisible
+                      ? 0
+                      : taskDetailPanelHeight),
+              child: TaskWebViewWidget(
+                fullRequestPath: widget.taskIvy.fullRequestPath,
+                onScrollToTop: _updateScrollingChanged,
+                canScrollVertical: _canScrollVertical,
+                onProgressChanged: _onProgressChanged,
+              ),
             ),
-          ),
-          if (isScrollToTop && !isKeyboardVisible) _taskDetailPanel(),
-          if (!isScrollToTop)
-            const Divider(color: AppColors.mercury, height: 1),
-          if (_progress < 1.0)
-            LinearProgressIndicator(
-              minHeight: 2,
-              value: _progress,
-              backgroundColor: AppColors.mercury,
-              valueColor:
-                  const AlwaysStoppedAnimation<Color>(AppColors.tropicSea),
-            ),
-        ],
+            if (isScrollToTop && !isKeyboardVisible) _taskDetailPanel(),
+            if (!isScrollToTop)
+              const Divider(color: AppColors.mercury, height: 1),
+            if (_progress < 1.0)
+              LinearProgressIndicator(
+                minHeight: 2,
+                value: _progress,
+                backgroundColor: AppColors.mercury,
+                valueColor:
+                    const AlwaysStoppedAnimation<Color>(AppColors.tropicSea),
+              ),
+          ],
+        ),
       ),
     );
   }
@@ -152,11 +154,11 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                   Border(top: BorderSide(color: AppColors.mercury, width: 1.0)),
               color: Colors.white,
             ),
-            padding: EdgeInsets.only(
+            padding: const EdgeInsets.only(
               left: 16,
               right: 16,
               top: 10,
-              bottom: MediaQuery.of(context).padding.bottom,
+              bottom: 16,
             ),
             child: Column(
               children: [
@@ -225,7 +227,7 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                                 shape: BoxShape.circle,
                                 color: AppColors.bleachedSilk,
                               ),
-                              child: AppAssets.icons.chevronDown.svg(),
+                              child: AppAssets.icons.chevronUp.svg(),
                             ),
                           ),
                         )
