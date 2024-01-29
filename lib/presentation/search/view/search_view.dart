@@ -49,16 +49,16 @@ class _SearchViewState extends State<SearchView> {
                       children: [
                         const Padding(
                           padding:
-                          EdgeInsets.only(left: 16, right: 16, top: 10),
+                              EdgeInsets.only(left: 16, right: 16, top: 10),
                           child: SearchFilterWidget(),
                         ),
                         Expanded(
                             child: state.items.isEmptyOrNull
                                 ? DataEmptyWidget(
-                              message: state.emptyMessage!.tr(),
-                              icon:
-                              AppAssets.icons.icSearchNotFound.svg(),
-                            )
+                                    message: state.emptyMessage!.tr(),
+                                    icon:
+                                        AppAssets.icons.icSearchNotFound.svg(),
+                                  )
                                 : searchItemList(state)),
                       ],
                     );
@@ -90,7 +90,7 @@ class _SearchViewState extends State<SearchView> {
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
+            (BuildContext context, int index) {
               final item = state.items![index];
               if (item is SectionHeader) {
                 return Padding(
@@ -110,9 +110,10 @@ class _SearchViewState extends State<SearchView> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: GestureDetector(
                     onTap: () {
-                      context
-                          .push(AppRoutes.taskActivity, extra: item.task)
-                          .then((value) {
+                      context.push(AppRoutes.taskActivity, extra: {
+                        'task': item.task,
+                        'path': item.task.fullRequestPath
+                      }).then((value) {
                         if (value as bool) {
                           context.read<TabBarCubit>().navigateTaskList();
                         }

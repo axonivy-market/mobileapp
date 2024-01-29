@@ -12,9 +12,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskActivityWidget extends StatefulWidget {
-  const TaskActivityWidget({super.key, required this.taskIvy});
+  const TaskActivityWidget(
+      {super.key, this.taskIvy, required this.fullRequestPath});
 
-  final TaskIvy taskIvy;
+  final TaskIvy? taskIvy;
+  final String fullRequestPath;
 
   @override
   State<TaskActivityWidget> createState() => _TaskActivityWidgetState();
@@ -94,13 +96,14 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                       ? 0
                       : taskDetailPanelHeight),
               child: TaskWebViewWidget(
-                fullRequestPath: widget.taskIvy.fullRequestPath,
+                fullRequestPath: widget.fullRequestPath,
                 onScrollToTop: _updateScrollingChanged,
                 canScrollVertical: _canScrollVertical,
                 onProgressChanged: _onProgressChanged,
               ),
             ),
-            if (isScrollToTop && !isKeyboardVisible) _taskDetailPanel(),
+            if (isScrollToTop && !isKeyboardVisible && widget.taskIvy != null)
+              _taskDetailPanel(),
             if (!isScrollToTop)
               const Divider(color: AppColors.mercury, height: 1),
             if (_progress < 1.0)
@@ -184,9 +187,9 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                                 maxLines: isExpanded ? null : 1,
                                 overflow:
                                     isExpanded ? null : TextOverflow.ellipsis,
-                                widget.taskIvy.name.isEmptyOrNull
+                                widget.taskIvy!.name.isEmptyOrNull
                                     ? "tasksView.noTaskName".tr()
-                                    : widget.taskIvy.name,
+                                    : widget.taskIvy!.name,
                                 style: GoogleFonts.inter(
                                   color: AppColors.eerieBlack,
                                   fontWeight: FontWeight.w600,
@@ -197,9 +200,9 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                                 maxLines: isExpanded ? null : 2,
                                 overflow:
                                     isExpanded ? null : TextOverflow.ellipsis,
-                                widget.taskIvy.description.isEmptyOrNull
+                                widget.taskIvy!.description.isEmptyOrNull
                                     ? "tasksView.noTaskDescription".tr()
-                                    : widget.taskIvy.description,
+                                    : widget.taskIvy!.description,
                                 style: GoogleFonts.inter(
                                   color: AppColors.sonicSilver,
                                   fontWeight: FontWeight.w400,
@@ -241,39 +244,39 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                           icon: AppAssets.icons.paperclip.svg(height: 16),
                           title: "taskDetails.attachments".tr(),
                           value: "taskDetails.documents"
-                              .plural(widget.taskIvy.documents.length),
+                              .plural(widget.taskIvy!.documents.length),
                         ),
                         TaskInfoRowWidget(
                           icon: AppAssets.icons.clock.svg(height: 16),
                           title: "taskDetails.expiryDate".tr(),
-                          value: widget.taskIvy.expiryTimeStamp == null
+                          value: widget.taskIvy!.expiryTimeStamp == null
                               ? "taskDetails.na".tr()
-                              : widget.taskIvy.expiryTimeStamp!
+                              : widget.taskIvy!.expiryTimeStamp!
                                   .formatDateYearWithFourNumber,
                         ),
                         TaskInfoRowWidget(
                           icon: AppAssets.icons.calendar.svg(height: 16),
                           title: "taskDetails.creationDate".tr(),
-                          value: widget.taskIvy.startTimeStamp
+                          value: widget.taskIvy!.startTimeStamp
                               .formatDateYearWithFourNumber,
                         ),
                         TaskInfoRowWidget(
                           icon: AppAssets.icons.category2.svg(height: 16),
                           title: "taskDetails.category".tr(),
-                          value: widget.taskIvy.category.isNotEmptyOrNull
-                              ? widget.taskIvy.category
+                          value: widget.taskIvy!.category.isNotEmptyOrNull
+                              ? widget.taskIvy!.category
                               : "taskDetails.na".tr(),
                         ),
                         TaskInfoRowWidget(
                           icon:
                               AppAssets.icons.priorityHighBlack.svg(height: 16),
                           title: "taskDetails.priority".tr(),
-                          value: widget.taskIvy.priority.priorityName,
+                          value: widget.taskIvy!.priority.priorityName,
                         ),
                         TaskInfoRowWidget(
                           icon: AppAssets.icons.users.svg(height: 16),
                           title: "taskDetails.responsible".tr(),
-                          value: widget.taskIvy.activatorName,
+                          value: widget.taskIvy!.activatorName,
                           isShowDivider: false,
                         ),
                       ],

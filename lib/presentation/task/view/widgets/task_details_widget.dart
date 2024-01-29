@@ -157,37 +157,37 @@ class TaskDetailsWidget extends StatelessWidget {
   }
 
   Widget _buildStartTaskButton(BuildContext context) {
-    return Container(
-      width: 136,
-      height: 44,
-      decoration: BoxDecoration(
-        color: AppColors.bleachedSilk,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-          context.push(AppRoutes.taskActivity, extra: task);
-        },
-        child: Center(
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // Your dialog content here
-              Text(
-                "taskDetails.startTask".tr(),
-                style: GoogleFonts.inter(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                  color: AppColors.tropicSea,
-                ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.pop(context);
+        context.push(AppRoutes.taskActivity,
+            extra: {'task': task, 'path': task.fullRequestPath});
+      },
+      child: Container(
+        width: 136,
+        height: 44,
+        decoration: BoxDecoration(
+          color: AppColors.bleachedSilk,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Your dialog content here
+            Text(
+              "taskDetails.startTask".tr(),
+              style: GoogleFonts.inter(
+                fontSize: 17,
+                fontWeight: FontWeight.w500,
+                color: AppColors.tropicSea,
               ),
-              const SizedBox(width: 5),
-              AppAssets.icons.arrowRight.svg(
-                height: 21,
-              ),
-            ],
-          ),
+            ),
+            const SizedBox(width: 5),
+            AppAssets.icons.arrowRight.svg(
+              height: 21,
+            ),
+          ],
         ),
       ),
     );

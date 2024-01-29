@@ -104,9 +104,10 @@ class TasksViewContent extends StatelessWidget {
       final task = tasks[index];
       return GestureDetector(
         onTap: () {
-          context
-              .push(AppRoutes.taskActivity, extra: tasks[index])
-              .then((value) {
+          context.push(AppRoutes.taskActivity, extra: {
+            'task': tasks[index],
+            'path': tasks[index].fullRequestPath
+          }).then((value) {
             if (value as bool) {
               final filterState = context.read<FilterBloc>().state;
               context

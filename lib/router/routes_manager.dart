@@ -1,5 +1,4 @@
 import 'package:axon_ivy/presentation/login/login_view.dart';
-import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/search/view/search_view.dart';
 import 'package:axon_ivy/presentation/splash/splash_view.dart';
@@ -29,7 +28,8 @@ class AppRouter {
         path: AppRoutes.taskActivity,
         pageBuilder: (_, state) => CustomTransitionPage(
           child: TaskActivityWidget(
-            taskIvy: state.extra as TaskIvy,
+            taskIvy: (state.extra as Map<String, dynamic>)['task'],
+            fullRequestPath: (state.extra as Map<String, dynamic>)['path'],
           ),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               iosTransition(context, animation, secondaryAnimation, child),
