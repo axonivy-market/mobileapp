@@ -391,7 +391,8 @@
       "config" : {
         "signature" : "skipTaskList",
         "request" : {
-          "name" : "Create Payslip"
+          "name" : "Create Payslip",
+          "description" : "Process to create payslip"
         }
       },
       "visual" : {
