@@ -387,28 +387,28 @@
     }, {
       "id" : "f49",
       "type" : "RequestStart",
-      "name" : "skipTaskList",
+      "name" : "createPayslip",
       "config" : {
         "signature" : "skipTaskList",
         "request" : {
-          "name" : "Task with skip task list"
+          "name" : "Create Payslip"
         }
       },
       "visual" : {
         "at" : { "x" : 88, "y" : 720 }
       },
       "connect" : [
-        { "id" : "f51", "to" : "f52" }
+        { "id" : "f51", "to" : "f65" }
       ]
     }, {
       "id" : "f52",
       "type" : "DialogCall",
-      "name" : "SampleDialog",
+      "name" : "payslipInfomation",
       "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+        "dialog" : "com.axonivy.mobile.mobiledemo.payslipInfomation:start()"
       },
       "visual" : {
-        "at" : { "x" : 272, "y" : 720 }
+        "at" : { "x" : 312, "y" : 720 }
       },
       "connect" : [
         { "id" : "f55", "to" : "f54" }
@@ -419,12 +419,13 @@
       "name" : "Skip task list",
       "config" : {
         "task" : {
-          "name" : "Skip task list",
+          "name" : "Payslip Salary For Thinh Nguyen",
+          "description" : "Task to create payslip for Thinh Nguyen",
           "skipTasklist" : true
         }
       },
       "visual" : {
-        "at" : { "x" : 408, "y" : 720 },
+        "at" : { "x" : 448, "y" : 720 },
         "labelOffset" : { "x" : 14, "y" : 34 }
       },
       "connect" : [
@@ -433,12 +434,12 @@
     }, {
       "id" : "f56",
       "type" : "DialogCall",
-      "name" : "SampleDialog",
+      "name" : "payslipSalary",
       "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+        "dialog" : "com.axonivy.mobile.mobiledemo.payslipSalary:start()"
       },
       "visual" : {
-        "at" : { "x" : 544, "y" : 720 }
+        "at" : { "x" : 584, "y" : 720 }
       },
       "connect" : [
         { "id" : "f59", "to" : "f58" }
@@ -447,7 +448,89 @@
       "id" : "f58",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 672, "y" : 720 }
+        "at" : { "x" : 712, "y" : 720 }
       }
+    }, {
+      "id" : "f50",
+      "type" : "RequestStart",
+      "name" : "createInvoice",
+      "config" : {
+        "signature" : "start6",
+        "request" : {
+          "name" : "Create Invoice",
+          "description" : "Process to create invoice"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 80, "y" : 824 }
+      },
+      "connect" : [
+        { "id" : "f60", "to" : "f61" }
+      ]
+    }, {
+      "id" : "f53",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 648, "y" : 824 }
+      }
+    }, {
+      "id" : "f61",
+      "type" : "TaskSwitchEvent",
+      "name" : "createInvoiceTask",
+      "config" : {
+        "task" : {
+          "name" : "Task To Create Invoice For Thinh Nguyen",
+          "description" : "This task to create invoice for Thinh Nguyen #018299",
+          "priority" : {
+            "level" : "HIGH"
+          },
+          "expiry" : {
+            "timeout" : "new Duration(0, 0, 0, 1, 0, 0)"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 256, "y" : 824 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f62", "to" : "f63" }
+      ]
+    }, {
+      "id" : "f63",
+      "type" : "DialogCall",
+      "name" : "invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 440, "y" : 824 }
+      },
+      "connect" : [
+        { "id" : "f64", "to" : "f53" }
+      ]
+    }, {
+      "id" : "f65",
+      "type" : "TaskSwitchEvent",
+      "name" : "createPayslipTask",
+      "config" : {
+        "task" : {
+          "name" : "Task To Create Payslip For Thinh Nguyen",
+          "description" : "This task to create payslip for Thinh Nguyen #018299",
+          "priority" : {
+            "level" : "HIGH"
+          },
+          "expiry" : {
+            "timeout" : "new Duration(0, 0, 0, 1, 0, 0)"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 184, "y" : 720 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f66", "to" : "f52" }
+      ]
     } ]
 }
