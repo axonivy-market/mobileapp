@@ -4,5 +4,5 @@ part of 'tabbar_cubit.dart';
 class TabBarState with _$TabBarState {
   const factory TabBarState.initial() = Initial;
 
-  const factory TabBarState.navigateTasks() = NavigateTasksState;
+  const factory TabBarState.navigateTasks(int currentTime) = NavigateTasksState;
 }

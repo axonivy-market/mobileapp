@@ -43,7 +43,7 @@ class _SearchViewState extends State<SearchView> {
             ),
             Expanded(
               child: BlocBuilder<SearchBloc, SearchState>(
-                builder: (_, state) {
+                builder: (context, state) {
                   if (state is SearchResultState) {
                     return Column(
                       children: [
@@ -59,7 +59,7 @@ class _SearchViewState extends State<SearchView> {
                                     icon:
                                         AppAssets.icons.icSearchNotFound.svg(),
                                   )
-                                : searchItemList(state)),
+                                : searchItemList(context, state)),
                       ],
                     );
                   } else {
@@ -77,7 +77,7 @@ class _SearchViewState extends State<SearchView> {
     );
   }
 
-  Widget searchItemList(SearchResultState state) {
+  Widget searchItemList(BuildContext context, SearchResultState state) {
     return CustomScrollView(
       slivers: [
         const SliverAppBar(
@@ -90,7 +90,7 @@ class _SearchViewState extends State<SearchView> {
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
+            (BuildContext _, int index) {
               final item = state.items![index];
               if (item is SectionHeader) {
                 return Padding(

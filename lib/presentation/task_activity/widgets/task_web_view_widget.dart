@@ -51,9 +51,9 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
     return InAppWebView(
       onAjaxReadyStateChange: (controller, ajx) async {
         String finishedTask =
-            ajx.responseHeaders?[Constants.iVYFinishedTask] ?? "";
+            ajx.responseHeaders?[Constants.ivyFinishedTask] ?? "";
         String currentRunningTask =
-            ajx.responseHeaders?[Constants.iVYCurrentRunningTask] ?? "";
+            ajx.responseHeaders?[Constants.ivyCurrentRunningTask] ?? "";
         isFinishedTask = finishedTask.isNotEmpty && currentRunningTask.isEmpty;
         return null;
       },

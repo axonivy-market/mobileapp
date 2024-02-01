@@ -11,6 +11,6 @@ class TabBarCubit extends Cubit<TabBarState> {
   TabBarCubit() : super(const TabBarState.initial());
 
   void navigateTaskList() {
-    emit(const TabBarState.navigateTasks());
+    emit(TabBarState.navigateTasks(DateTime.now().millisecondsSinceEpoch));
   }
 }

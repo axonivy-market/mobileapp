@@ -92,7 +92,7 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  bottom: canScrollVertical | isKeyboardVisible
+                  bottom: canScrollVertical || isKeyboardVisible
                       ? 0
                       : taskDetailPanelHeight),
               child: TaskWebViewWidget(
@@ -157,8 +157,9 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                   Border(top: BorderSide(color: AppColors.mercury, width: 1.0)),
               color: Colors.white,
             ),
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.symmetric(vertical: 16),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 GestureDetector(
                   onTap: () {
@@ -174,6 +175,7 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                   child: AnimatedContainer(
                     width: MediaQuery.of(context).size.width,
                     color: Colors.white,
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     duration: const Duration(milliseconds: 300),
                     child: Stack(
                       children: [
@@ -236,8 +238,8 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                 if (isExpanded)
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 15, horizontal: 3),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 18),
                     child: Column(
                       children: [
                         TaskInfoRowWidget(

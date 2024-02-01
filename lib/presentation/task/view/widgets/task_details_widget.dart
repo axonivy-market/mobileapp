@@ -6,20 +6,20 @@ import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
-import 'package:axon_ivy/router/router.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskDetailsWidget extends StatelessWidget {
   const TaskDetailsWidget({
     super.key,
     required this.task,
+    required this.onPressed,
   });
 
   final TaskIvy task;
+  final Function(TaskIvy) onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +31,17 @@ class TaskDetailsWidget extends StatelessWidget {
         color: Colors.transparent,
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 7, sigmaY: 7),
-          child: Builder(
-            builder: (context) {
-              return Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    _buildDialog(context),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    _buildStartTaskButton(context),
-                  ],
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                _buildDialog(context),
+                const SizedBox(
+                  height: 20,
                 ),
-              );
-            },
+                _buildStartTaskButton(context),
+              ],
+            ),
           ),
         ),
       ),
@@ -160,8 +156,7 @@ class TaskDetailsWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pop(context);
-        context.push(AppRoutes.taskActivity,
-            extra: {'task': task, 'path': task.fullRequestPath});
+        onPressed(task);
       },
       child: Container(
         width: 136,
