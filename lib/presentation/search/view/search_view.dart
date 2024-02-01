@@ -114,7 +114,7 @@ class _SearchViewState extends State<SearchView> {
                         'task': item.task,
                         'path': item.task.fullRequestPath
                       }).then((value) {
-                        if (value as bool) {
+                        if (value != null && value as bool) {
                           context.read<TabBarCubit>().navigateTaskList();
                         }
                       });

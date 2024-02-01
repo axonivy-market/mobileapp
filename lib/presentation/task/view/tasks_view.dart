@@ -35,24 +35,21 @@ class TasksView extends StatelessWidget {
         listeners: [
           BlocListener<TaskDetailCubit, TaskDetailState>(
               listener: (context, state) {
-                if (state is StartTaskState) {
-                  context.push(AppRoutes.taskActivity, extra: {
-                    'task': state.taskIvy,
-                    'path': state.taskIvy.fullRequestPath
-                  }).then((value) {
-                    if (value as bool) {
-                      context.read<TabBarCubit>().navigateTaskList();
-                    }
-                  });
+            if (state is StartTaskState) {
+              context.push(AppRoutes.taskActivity, extra: {
+                'task': state.taskIvy,
+                'path': state.taskIvy.fullRequestPath
+              }).then((value) {
+                if (value != null && value as bool) {
+                  context.read<TabBarCubit>().navigateTaskList();
                 }
-              }),
+              });
+            }
+          }),
         ],
         child: BlocBuilder<TaskBloc, TaskState>(
           builder: (context, taskState) {
-            final activeFilter = context
-                .watch<FilterBloc>()
-                .state
-                .activeFilter;
+            final activeFilter = context.watch<FilterBloc>().state.activeFilter;
             final tasksIsEmpty =
                 taskState is TaskSuccessState && taskState.tasks.isEmpty;
             return TasksViewContent(
@@ -90,10 +87,7 @@ class TasksViewContent extends StatelessWidget {
   }
 
   Widget _buildTaskList(BuildContext context, List<TaskIvy> tasks) {
-    final activeFilter = context
-        .watch<FilterBloc>()
-        .state
-        .activeFilter;
+    final activeFilter = context.watch<FilterBloc>().state.activeFilter;
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       child: CustomScrollView(
@@ -105,7 +99,7 @@ class TasksViewContent extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
-                  (context, index) =>
+              (context, index) =>
                   _buildTaskItem(context, tasks, activeFilter, index),
               childCount: tasks.isEmpty ? 1 : tasks.length,
             ),
@@ -117,9 +111,7 @@ class TasksViewContent extends StatelessWidget {
 
   Future<void> _onRefresh(BuildContext context) async {
     final taskBloc = context.read<TaskBloc>();
-    final filterState = context
-        .read<FilterBloc>()
-        .state;
+    final filterState = context.read<FilterBloc>().state;
     await Future.delayed(const Duration(seconds: 1));
     taskBloc.add(TaskEvent.getTasks(filterState.activeFilter));
   }
@@ -151,9 +143,7 @@ class TasksViewContent extends StatelessWidget {
     showGeneralDialog(
       context: context,
       barrierDismissible: true,
-      barrierLabel: MaterialLocalizations
-          .of(context)
-          .modalBarrierDismissLabel,
+      barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       barrierColor: Colors.black.withOpacity(0.5),
       transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (BuildContext buildContext, Animation animation,
@@ -171,7 +161,7 @@ class TasksViewContent extends StatelessWidget {
       'task': taskIvy,
       'path': taskIvy.fullRequestPath
     }).then((value) {
-      if (value as bool) {
+      if (value != null && value as bool) {
         context.read<TabBarCubit>().navigateTaskList();
       }
     });
