@@ -110,6 +110,7 @@ class _SearchViewState extends State<SearchView> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: GestureDetector(
                     onTap: () {
+                      WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
                       context.push(AppRoutes.taskActivity, extra: {
                         'task': item.task,
                         'path': item.task.fullRequestPath

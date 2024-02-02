@@ -179,7 +179,7 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
                     duration: const Duration(milliseconds: 300),
                     child: Stack(
                       children: [
-                        AppAssets.icons.priorityHigh.svg(),
+                        widget.taskIvy!.priority.priorityIcon,
                         Padding(
                           padding: const EdgeInsets.only(left: 26, right: 35),
                           child: Column(

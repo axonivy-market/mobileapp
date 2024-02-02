@@ -93,9 +93,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         widget.canScrollVertical(canScroll);
       },
       onProgressChanged: (controller, newProgress) {
-        setState(() {
-          widget.onProgressChanged(newProgress / 100);
-        });
+        widget.onProgressChanged(newProgress / 100);
       },
     );
   }

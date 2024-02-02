@@ -50,7 +50,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
   Widget build(BuildContext context) {
     return BlocBuilder<SearchBloc, SearchState>(
       builder: (_, state) => BlocListener<TabBarCubit, TabBarState>(
-        listener: (context, state) {
+        listener: (_, state) {
           if (state is NavigateTasksState) {
             _clearText();
           }
