@@ -1,14 +1,19 @@
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
+import 'package:axon_ivy/presentation/task/bloc/task_detail_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
 import 'package:axon_ivy/util/widgets/loading_widget.dart';
+import 'package:axon_ivy/router/router.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../util/resources/constants.dart';
 import '../../../util/widgets/home_appbar.dart';
@@ -24,16 +29,34 @@ class TasksView extends StatelessWidget {
         BlocProvider.value(value: BlocProvider.of<TaskBloc>(context)),
         BlocProvider.value(value: BlocProvider.of<FilterBloc>(context)),
         BlocProvider.value(value: BlocProvider.of<SortBloc>(context)),
+        BlocProvider(create: (context) => getIt<TaskDetailCubit>()),
       ],
-      child: BlocBuilder<TaskBloc, TaskState>(
-        builder: (context, taskState) {
-          final activeFilter = context.watch<FilterBloc>().state.activeFilter;
-          final tasksIsEmpty =
-              taskState is TaskSuccessState && taskState.tasks.isEmpty;
-          return TasksViewContent(
-            showAppBar: !tasksIsEmpty || activeFilter == FilterType.expired,
-          );
-        },
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<TaskDetailCubit, TaskDetailState>(
+              listener: (context, state) {
+            if (state is StartTaskState) {
+              context.push(AppRoutes.taskActivity, extra: {
+                'task': state.taskIvy,
+                'path': state.taskIvy.fullRequestPath
+              }).then((value) {
+                if (value != null && value as bool) {
+                  context.read<TabBarCubit>().navigateTaskList();
+                }
+              });
+            }
+          }),
+        ],
+        child: BlocBuilder<TaskBloc, TaskState>(
+          builder: (context, taskState) {
+            final activeFilter = context.watch<FilterBloc>().state.activeFilter;
+            final tasksIsEmpty =
+                taskState is TaskSuccessState && taskState.tasks.isEmpty;
+            return TasksViewContent(
+              showAppBar: !tasksIsEmpty || activeFilter == FilterType.expired,
+            );
+          },
+        ),
       ),
     );
   }
@@ -43,6 +66,7 @@ class TasksViewContent extends StatelessWidget {
   const TasksViewContent({super.key, required this.showAppBar});
 
   final bool showAppBar;
+  final TaskIvy? taskSelecting = null;
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +125,9 @@ class TasksViewContent extends StatelessWidget {
     } else {
       final task = tasks[index];
       return GestureDetector(
+        onTap: () {
+          _navigateTaskActivity(context, tasks[index]);
+        },
         onLongPress: () => _showDetails(context, task),
         child: TaskItemWidget(
           name: task.name,
@@ -121,8 +148,22 @@ class TasksViewContent extends StatelessWidget {
       transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
-        return TaskDetailsWidget(task: task);
+        return TaskDetailsWidget(
+          task: task,
+          onPressed: (task) => context.read<TaskDetailCubit>().startTask(task),
+        );
       },
     );
+  }
+
+  void _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
+    context.push(AppRoutes.taskActivity, extra: {
+      'task': taskIvy,
+      'path': taskIvy.fullRequestPath
+    }).then((value) {
+      if (value != null && value as bool) {
+        context.read<TabBarCubit>().navigateTaskList();
+      }
+    });
   }
 }

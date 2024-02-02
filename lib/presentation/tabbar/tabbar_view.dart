@@ -5,6 +5,7 @@ import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
@@ -51,6 +52,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final FilterBloc _filterBloc;
   late final ProfileBloc _profileBloc;
   late final SortBloc _sortBloc;
+  late final TabBarCubit _tabBarCubit;
   bool shouldFetchData = true;
   int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
 
@@ -81,6 +83,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _processBloc = getIt<ProcessBloc>();
     _searchBloc = getIt<SearchBloc>();
     _profileBloc = getIt<ProfileBloc>();
+    _tabBarCubit = getIt<TabBarCubit>();
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
@@ -113,72 +116,84 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _filterBloc),
         BlocProvider(create: (context) => _profileBloc),
         BlocProvider(create: (context) => _sortBloc),
+        BlocProvider(create: (context) => _tabBarCubit),
       ],
-      child: Scaffold(
-        body: IndexedStack(
-          index: selectedIndex,
-          children: const [
-            TasksView(),
-            ProcessesView(),
-            SearchView(),
-            ProfileView()
-          ],
-        ),
-        bottomNavigationBar: SafeArea(
-          child: Container(
-            padding: const EdgeInsets.only(top: 14, bottom: 14),
-            decoration: const BoxDecoration(
-              border: Border(
-                top: BorderSide(color: AppColors.mercury, width: 1.0),
+      child: BlocListener<TabBarCubit, TabBarState>(
+        listener: (context, state) {
+          if (state is NavigateTasksState) {
+            _onItemTapped(context, 0);
+            final filterState = context.read<FilterBloc>().state;
+            context
+                .read<TaskBloc>()
+                .add(TaskEvent.getTasks(filterState.activeFilter));
+          }
+        },
+        child: Scaffold(
+          body: IndexedStack(
+            index: selectedIndex,
+            children: const [
+              TasksView(),
+              ProcessesView(),
+              SearchView(),
+              ProfileView()
+            ],
+          ),
+          bottomNavigationBar: SafeArea(
+            child: Container(
+              padding: const EdgeInsets.only(top: 14, bottom: 14),
+              decoration: const BoxDecoration(
+                border: Border(
+                  top: BorderSide(color: AppColors.mercury, width: 1.0),
+                ),
               ),
-            ),
-            child: Row(
-              children: [
-                Expanded(
-                  child: customNavItem(
-                    svgPath: AppAssets.icons.list.path,
-                    label: tr("bottomTabBar.tasks"),
-                    index: 0,
-                    onPressed: () {
-                      _onItemTapped(context, 0);
-                      context.go(AppRoutes.task);
-                    },
+              child: Row(
+                children: [
+                  Expanded(
+                    child: customNavItem(
+                      svgPath: AppAssets.icons.list.path,
+                      label: tr("bottomTabBar.tasks"),
+                      index: 0,
+                      onPressed: () {
+                        _onItemTapped(context, 0);
+                        context.go(AppRoutes.task);
+                      },
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: customNavItem(
-                    svgPath: AppAssets.icons.process.path,
-                    label: tr('bottomTabBar.processes'),
-                    index: 1,
-                    onPressed: () {
-                      _onItemTapped(context, 1);
-                      context.go(AppRoutes.processes);
-                    },
+                  Expanded(
+                    child: customNavItem(
+                      svgPath: AppAssets.icons.process.path,
+                      label: tr('bottomTabBar.processes'),
+                      index: 1,
+                      onPressed: () {
+                        _onItemTapped(context, 1);
+                        context.go(AppRoutes.processes);
+                      },
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: customNavItem(
-                    svgPath: AppAssets.icons.search.path,
-                    label: tr('bottomTabBar.search'),
-                    index: 2,
-                    onPressed: () {
-                      _onItemTapped(context, 2);
-                      context.go(AppRoutes.search);
-                    },
+                  Expanded(
+                    child: customNavItem(
+                      svgPath: AppAssets.icons.search.path,
+                      label: tr('bottomTabBar.search'),
+                      index: 2,
+                      onPressed: () {
+                        _onItemTapped(context, 2);
+                        context.go(AppRoutes.search);
+                      },
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: customNavItem(
-                    svgPath: AppAssets.icons.user.path,
-                    label: tr('bottomTabBar.profile'),
-                    index: 3,
-                    onPressed: () {
-                      _onItemTapped(context, 3);
-                      context.go(AppRoutes.profile);
-                    },
+                  Expanded(
+                    child: customNavItem(
+                      svgPath: AppAssets.icons.user.path,
+                      label: tr('bottomTabBar.profile'),
+                      index: 3,
+                      onPressed: () {
+                        _onItemTapped(context, 3);
+                        context.go(AppRoutes.profile);
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

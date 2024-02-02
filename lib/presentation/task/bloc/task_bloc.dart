@@ -1,20 +1,16 @@
 import 'dart:async';
+import 'package:axon_ivy/core/di/di.dart';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
-import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
-import 'package:axon_ivy/core/shared/extensions/sort_type_ext.dart';
-import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
-import 'package:axon_ivy/core/shared/extensions/task_ext.dart';
+import 'package:axon_ivy/core/shared/extensions/extensions.dart';
+import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import '../../../core/app/app_config.dart';
-import '../../../core/di/di_setup.dart';
+import '../../../core/app/app.dart';
 import '../../../core/utils/shared_preference.dart';
-import '../../../data/models/task/task.dart';
 import '../../../data/repositories/task_repository.dart';
-import '../../../util/resources/constants.dart';
+import '../../../util/resources/resources.dart';
 
 part 'task_event.dart';
 

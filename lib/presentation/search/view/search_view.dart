@@ -6,11 +6,14 @@ import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_filter_cubit.dart';
 import 'package:axon_ivy/presentation/search/view/widgets/widgets.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
+import 'package:axon_ivy/router/router.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../core/generated/colors.gen.dart';
@@ -40,7 +43,7 @@ class _SearchViewState extends State<SearchView> {
             ),
             Expanded(
               child: BlocBuilder<SearchBloc, SearchState>(
-                builder: (_, state) {
+                builder: (context, state) {
                   if (state is SearchResultState) {
                     return Column(
                       children: [
@@ -56,7 +59,7 @@ class _SearchViewState extends State<SearchView> {
                                     icon:
                                         AppAssets.icons.icSearchNotFound.svg(),
                                   )
-                                : searchItemList(state)),
+                                : searchItemList(context, state)),
                       ],
                     );
                   } else {
@@ -74,7 +77,7 @@ class _SearchViewState extends State<SearchView> {
     );
   }
 
-  Widget searchItemList(SearchResultState state) {
+  Widget searchItemList(BuildContext context, SearchResultState state) {
     return CustomScrollView(
       slivers: [
         const SliverAppBar(
@@ -87,7 +90,7 @@ class _SearchViewState extends State<SearchView> {
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
+            (BuildContext _, int index) {
               final item = state.items![index];
               if (item is SectionHeader) {
                 return Padding(
@@ -105,12 +108,25 @@ class _SearchViewState extends State<SearchView> {
               } else if (item is TaskItem) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: TaskItemWidget(
-                    name: item.task.name,
-                    description: item.task.description,
-                    priority: item.task.priority,
-                    expiryTimeStamp: item.task.expiryTimeStamp,
-                    query: state.query.trim(),
+                  child: GestureDetector(
+                    onTap: () {
+                      WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+                      context.push(AppRoutes.taskActivity, extra: {
+                        'task': item.task,
+                        'path': item.task.fullRequestPath
+                      }).then((value) {
+                        if (value != null && value as bool) {
+                          context.read<TabBarCubit>().navigateTaskList();
+                        }
+                      });
+                    },
+                    child: TaskItemWidget(
+                      name: item.task.name,
+                      description: item.task.description,
+                      priority: item.task.priority,
+                      expiryTimeStamp: item.task.expiryTimeStamp,
+                      query: state.query.trim(),
+                    ),
                   ),
                 );
               } else if (item is ProcessItem) {

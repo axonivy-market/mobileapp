@@ -14,9 +14,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
     super.key,
     this.isShowLastUpdated = false,
-    this.scrolledUnderElevation = 1.0,
+    this.scrolledUnderElevation = 0.2,
     this.isTaskScreen = false,
   });
+
   final bool isShowLastUpdated;
   final double scrolledUnderElevation;
   final bool isTaskScreen;
