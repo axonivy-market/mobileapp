@@ -26,7 +26,8 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
   final _passwordTextController = TextEditingController();
   final _passwordFocusNode = FocusNode();
 
-  final _urlTextController = TextEditingController(text: 'https://mobile-demo-server.ivy-cloud.com/api');
+  final _urlTextController = TextEditingController(
+      text: 'https://mobile-demo-server.ivy-cloud.com/api');
   final _urlFocusNode = FocusNode();
 
   dynamic model;

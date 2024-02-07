@@ -3,16 +3,18 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/data/models/profile/profile.dart';
+import 'package:axon_ivy/presentation/base_view/base_view.dart';
 import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfileLoggedInWidget extends StatefulWidget {
+class ProfileLoggedInWidget extends BasePageScreen {
   const ProfileLoggedInWidget({super.key});
 
   final Profile profileTest = const Profile(
@@ -22,8 +24,47 @@ class ProfileLoggedInWidget extends StatefulWidget {
   State<ProfileLoggedInWidget> createState() => _ProfileLoggedInWidgetState();
 }
 
-class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
+class _ProfileLoggedInWidgetState
+    extends BasePageScreenState<ProfileLoggedInWidget> {
   late final LoggedInCubit loggedInCubit;
+
+  Future<void> uploadFile() async {
+    FilePickerResult? result;
+
+    result = await FilePicker.platform.pickFiles(
+      type: FileType.any,
+      allowMultiple: true,
+    );
+
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      debugPrint("----> file name ${file.name}");
+      debugPrint("----> file size ${file.size / 1000000} MB");
+      debugPrint("----> file extension ${file.extension}");
+      debugPrint("----> file path ${file.path}");
+    } else {
+      debugPrint("----> null file");
+    }
+  }
+
+  Future<void> uploadImage() async {
+    FilePickerResult? result;
+
+    result = await FilePicker.platform.pickFiles(
+      type: FileType.image,
+      allowMultiple: true,
+    );
+
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      debugPrint("----> image name ${file.name}");
+      debugPrint("----> image size ${file.size / 1000000} MB");
+      debugPrint("----> image extension ${file.extension}");
+      debugPrint("----> image path ${file.path}");
+    } else {
+      debugPrint("----> null file");
+    }
+  }
 
   @override
   void initState() {
@@ -44,6 +85,22 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             const SizedBox(height: 25),
             _buildDemo(),
             _buildLanguage(),
+            const SizedBox(height: 40),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      uploadFile();
+                    },
+                    child: const Text("Attach file")),
+                ElevatedButton(
+                    onPressed: () {
+                      uploadImage();
+                    },
+                    child: const Text("Attach picture")),
+              ],
+            ),
             const Spacer(),
             _buildSignOutButton(),
             const SizedBox(height: 30),

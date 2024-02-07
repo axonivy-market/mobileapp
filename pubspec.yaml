@@ -41,6 +41,7 @@ dependencies:
   cached_network_image: ^3.3.1
   crypto: ^3.0.3
   flutter_inappwebview: ^6.0.0
+  file_picker: ^6.1.1
 
 dev_dependencies:
   flutter_test:
