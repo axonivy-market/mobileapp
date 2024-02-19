@@ -549,7 +549,7 @@
       "config" : {
         "signature" : "elevatorMaintainance",
         "request" : {
-          "name" : "Elevator Mainatainance"
+          "name" : "Elevator Maintainance"
         }
       },
       "visual" : {
@@ -561,7 +561,7 @@
     }, {
       "id" : "f70",
       "type" : "UserTask",
-      "name" : "Elevator Mainatainance",
+      "name" : "Elevator Maintainance",
       "config" : {
         "dialog" : "com.axonivy.mobile.mobiledemo.ElevatorMainatainance:start()",
         "task" : {
