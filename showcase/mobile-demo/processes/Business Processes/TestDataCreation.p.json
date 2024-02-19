@@ -54,13 +54,13 @@
         "at" : { "x" : 88, "y" : 152 }
       },
       "connect" : [
-        { "id" : "f9", "to" : "f19" }
+        { "id" : "f9", "to" : "f67" }
       ]
     }, {
       "id" : "f8",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 544, "y" : 152 }
+        "at" : { "x" : 616, "y" : 152 }
       }
     }, {
       "id" : "f10",
@@ -69,7 +69,7 @@
         "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
       },
       "visual" : {
-        "at" : { "x" : 408, "y" : 152 }
+        "at" : { "x" : 480, "y" : 152 }
       },
       "connect" : [
         { "id" : "f13", "to" : "f8" }
@@ -187,7 +187,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 272, "y" : 152 }
+        "at" : { "x" : 344, "y" : 152 }
       },
       "connect" : [
         { "id" : "f23", "to" : "f10" }
@@ -533,5 +533,52 @@
       "connect" : [
         { "id" : "f66", "to" : "f52" }
       ]
+    }, {
+      "id" : "f67",
+      "type" : "UserTask",
+      "visual" : {
+        "at" : { "x" : 216, "y" : 152 }
+      },
+      "connect" : [
+        { "id" : "f68", "to" : "f19" }
+      ]
+    }, {
+      "id" : "f69",
+      "type" : "RequestStart",
+      "name" : "elevatorMaintainance",
+      "config" : {
+        "signature" : "elevatorMaintainance",
+        "request" : {
+          "name" : "Elevator Mainatainance"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 72, "y" : 928 }
+      },
+      "connect" : [
+        { "id" : "f71", "to" : "f70" }
+      ]
+    }, {
+      "id" : "f70",
+      "type" : "UserTask",
+      "name" : "Elevator Mainatainance",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.ElevatorMainatainance:start()",
+        "task" : {
+          "name" : "Elevator Maintainance"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 416, "y" : 928 }
+      },
+      "connect" : [
+        { "id" : "f73", "to" : "f72" }
+      ]
+    }, {
+      "id" : "f72",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 544, "y" : 928 }
+      }
     } ]
 }
