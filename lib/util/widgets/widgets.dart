@@ -7,3 +7,5 @@ export 'loading_widget.dart';
 export 'text_highlight_widget.dart';
 export 'switch_widget.dart';
 export 'version_name_widget.dart';
+export 'back_button_widget.dart';
+export 'task_info_row_widget.dart';
