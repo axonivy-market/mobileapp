@@ -113,4 +113,62 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
       },
     );
   }
+
+  void showUploadedDialog(
+      {required String message,
+      Function()? onCancel,
+      String? title,
+      String? confirmTitle,
+      Function()? onConfirm,
+      bool barrierDismissible = true,
+      bool needShowCancel = false}) {
+    showDialog(
+      context: context,
+      barrierDismissible: barrierDismissible,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            title ?? "",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.inter(
+                color: AppColors.black,
+                fontSize: 17,
+                fontWeight: FontWeight.w500),
+          ),
+          content: Text(
+            message,
+            textAlign: TextAlign.left,
+            style: GoogleFonts.inter(color: AppColors.black, fontSize: 14),
+          ),
+          actions: [
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+                onConfirm?.call();
+              },
+              child: Center(
+                child: Container(
+                  width: 70,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: AppColors.tropicSea),
+                  child: Center(
+                    child: Text(
+                      confirmTitle ?? "dialog.ok".tr(),
+                      style: GoogleFonts.inter(
+                          color: AppColors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }

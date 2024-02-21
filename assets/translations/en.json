@@ -108,5 +108,10 @@
     "newest": "Newest first",
     "oldest": "Oldest first"
   },
-  "generalBack": "Back"
+  "generalBack": "Back",
+  "uploadFile": {
+    "fileTooLarge": "File {fileName} has size too large!\n",
+    "cannotSelectFiles": "Cannot select files!",
+    "failUpload": "Fail to upload {fileName}\n"
+  }
 }

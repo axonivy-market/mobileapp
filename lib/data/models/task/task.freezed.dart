@@ -31,7 +31,8 @@ mixin _$TaskIvy {
   int get state => throw _privateConstructorUsedError;
   String get activatorName => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
-  List<Document> get documents => throw _privateConstructorUsedError;
+  @JsonKey(name: 'case', defaultValue: null)
+  CaseTask? get caseTask => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -55,7 +56,9 @@ abstract class $TaskIvyCopyWith<$Res> {
       int state,
       String activatorName,
       String category,
-      List<Document> documents});
+      @JsonKey(name: 'case', defaultValue: null) CaseTask? caseTask});
+
+  $CaseTaskCopyWith<$Res>? get caseTask;
 }
 
 /// @nodoc
@@ -82,7 +85,7 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
     Object? state = null,
     Object? activatorName = null,
     Object? category = null,
-    Object? documents = null,
+    Object? caseTask = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -129,11 +132,23 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
-      documents: null == documents
-          ? _value.documents
-          : documents // ignore: cast_nullable_to_non_nullable
-              as List<Document>,
+      caseTask: freezed == caseTask
+          ? _value.caseTask
+          : caseTask // ignore: cast_nullable_to_non_nullable
+              as CaseTask?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CaseTaskCopyWith<$Res>? get caseTask {
+    if (_value.caseTask == null) {
+      return null;
+    }
+
+    return $CaseTaskCopyWith<$Res>(_value.caseTask!, (value) {
+      return _then(_value.copyWith(caseTask: value) as $Val);
+    });
   }
 }
 
@@ -156,7 +171,10 @@ abstract class _$$TaskIvyImplCopyWith<$Res> implements $TaskIvyCopyWith<$Res> {
       int state,
       String activatorName,
       String category,
-      List<Document> documents});
+      @JsonKey(name: 'case', defaultValue: null) CaseTask? caseTask});
+
+  @override
+  $CaseTaskCopyWith<$Res>? get caseTask;
 }
 
 /// @nodoc
@@ -181,7 +199,7 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
     Object? state = null,
     Object? activatorName = null,
     Object? category = null,
-    Object? documents = null,
+    Object? caseTask = freezed,
   }) {
     return _then(_$TaskIvyImpl(
       id: null == id
@@ -228,10 +246,10 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as String,
-      documents: null == documents
-          ? _value._documents
-          : documents // ignore: cast_nullable_to_non_nullable
-              as List<Document>,
+      caseTask: freezed == caseTask
+          ? _value.caseTask
+          : caseTask // ignore: cast_nullable_to_non_nullable
+              as CaseTask?,
     ));
   }
 }
@@ -241,18 +259,17 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
 class _$TaskIvyImpl implements _TaskIvy {
   const _$TaskIvyImpl(
       {required this.id,
-      this.name = "",
-      this.description = "",
-      this.fullRequestPath = "",
+      this.name = '',
+      this.description = '',
+      this.fullRequestPath = '',
       this.offline = false,
       required this.startTimeStamp,
       this.expiryTimeStamp = null,
       this.priority = 0,
       this.state = 0,
-      this.activatorName = "",
-      this.category = "",
-      final List<Document> documents = const []})
-      : _documents = documents;
+      this.activatorName = '',
+      this.category = '',
+      @JsonKey(name: 'case', defaultValue: null) this.caseTask = null});
 
   factory _$TaskIvyImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskIvyImplFromJson(json);
@@ -288,22 +305,17 @@ class _$TaskIvyImpl implements _TaskIvy {
   @override
   @JsonKey()
   final String category;
-  final List<Document> _documents;
   @override
-  @JsonKey()
-  List<Document> get documents {
-    if (_documents is EqualUnmodifiableListView) return _documents;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_documents);
-  }
+  @JsonKey(name: 'case', defaultValue: null)
+  final CaseTask? caseTask;
 
   @override
   String toString() {
-    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiryTimeStamp: $expiryTimeStamp, priority: $priority, state: $state, activatorName: $activatorName, category: $category, documents: $documents)';
+    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiryTimeStamp: $expiryTimeStamp, priority: $priority, state: $state, activatorName: $activatorName, category: $category, caseTask: $caseTask)';
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskIvyImpl &&
@@ -325,8 +337,8 @@ class _$TaskIvyImpl implements _TaskIvy {
                 other.activatorName == activatorName) &&
             (identical(other.category, category) ||
                 other.category == category) &&
-            const DeepCollectionEquality()
-                .equals(other._documents, _documents));
+            (identical(other.caseTask, caseTask) ||
+                other.caseTask == caseTask));
   }
 
   @JsonKey(ignore: true)
@@ -344,7 +356,7 @@ class _$TaskIvyImpl implements _TaskIvy {
       state,
       activatorName,
       category,
-      const DeepCollectionEquality().hash(_documents));
+      caseTask);
 
   @JsonKey(ignore: true)
   @override
@@ -373,7 +385,8 @@ abstract class _TaskIvy implements TaskIvy {
       final int state,
       final String activatorName,
       final String category,
-      final List<Document> documents}) = _$TaskIvyImpl;
+      @JsonKey(name: 'case', defaultValue: null)
+      final CaseTask? caseTask}) = _$TaskIvyImpl;
 
   factory _TaskIvy.fromJson(Map<String, dynamic> json) = _$TaskIvyImpl.fromJson;
 
@@ -400,7 +413,8 @@ abstract class _TaskIvy implements TaskIvy {
   @override
   String get category;
   @override
-  List<Document> get documents;
+  @JsonKey(name: 'case', defaultValue: null)
+  CaseTask? get caseTask;
   @override
   @JsonKey(ignore: true)
   _$$TaskIvyImplCopyWith<_$TaskIvyImpl> get copyWith =>

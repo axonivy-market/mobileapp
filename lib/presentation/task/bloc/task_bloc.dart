@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:axon_ivy/core/di/di.dart';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/shared/extensions/extensions.dart';
@@ -7,16 +8,15 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+
 import '../../../core/app/app.dart';
 import '../../../core/utils/shared_preference.dart';
-import '../../../data/repositories/task_repository.dart';
+import '../../../data/repositories/task/task_repository.dart';
 import '../../../util/resources/resources.dart';
 
-part 'task_event.dart';
-
-part 'task_state.dart';
-
 part 'task_bloc.freezed.dart';
+part 'task_event.dart';
+part 'task_state.dart';
 
 @injectable
 class TaskBloc extends Bloc<TaskEvent, TaskState> {

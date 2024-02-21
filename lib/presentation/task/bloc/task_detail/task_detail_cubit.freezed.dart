@@ -101,7 +101,7 @@ class _$InitialStateImpl implements InitialState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialStateImpl);
   }
@@ -238,7 +238,7 @@ class _$StartTaskStateImpl implements StartTaskState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$StartTaskStateImpl &&

@@ -109,7 +109,7 @@ class _$GetTaskProcessImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$GetTaskProcessImpl);
   }
@@ -245,7 +245,7 @@ class _$SearchItemImpl with DiagnosticableTreeMixin implements SearchItem {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchItemImpl &&
@@ -441,7 +441,7 @@ class _$InitialStateImpl with DiagnosticableTreeMixin implements InitialState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialStateImpl);
   }
@@ -591,7 +591,7 @@ class _$TaskProcessLoadedStateImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskProcessLoadedStateImpl &&
@@ -776,7 +776,7 @@ class _$SearchResultStateImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SearchResultStateImpl &&

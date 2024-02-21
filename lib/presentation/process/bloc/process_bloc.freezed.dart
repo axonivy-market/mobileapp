@@ -101,7 +101,7 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements GetProcess {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$GetProcessImpl);
   }
@@ -275,7 +275,7 @@ class _$InitialStateImpl with DiagnosticableTreeMixin implements InitialState {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialStateImpl);
   }
@@ -417,7 +417,7 @@ class _$ProcessLoadingStateImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProcessLoadingStateImpl &&
@@ -575,7 +575,7 @@ class _$ProcessErrorStateImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProcessErrorStateImpl &&
@@ -748,7 +748,7 @@ class _$ProcessSuccessStateImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProcessSuccessStateImpl &&

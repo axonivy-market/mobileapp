@@ -85,6 +85,16 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_users.svg
   SvgGenImage get icUsers => const SvgGenImage('assets/icons/ic_users.svg');
 
+  /// File path: assets/icons/icon_camera.svg
+  SvgGenImage get iconCamera =>
+      const SvgGenImage('assets/icons/icon_camera.svg');
+
+  /// File path: assets/icons/icon_file.svg
+  SvgGenImage get iconFile => const SvgGenImage('assets/icons/icon_file.svg');
+
+  /// File path: assets/icons/icon_image.svg
+  SvgGenImage get iconImage => const SvgGenImage('assets/icons/icon_image.svg');
+
   /// File path: assets/icons/list.svg
   SvgGenImage get list => const SvgGenImage('assets/icons/list.svg');
 
@@ -177,6 +187,9 @@ class $AssetsIconsGen {
         icSearchText,
         icTrigger,
         icUsers,
+        iconCamera,
+        iconFile,
+        iconImage,
         list,
         login,
         logo,

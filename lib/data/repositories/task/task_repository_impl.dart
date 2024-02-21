@@ -1,11 +1,11 @@
 import 'package:axon_ivy/core/network/failure.dart';
+import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../core/network/dio_error_handler.dart';
-import '../data_sources/task_remote_data_source.dart';
+import '../../../core/network/dio_error_handler.dart';
+import '../../data_sources/task/task_remote_data_source.dart';
 import 'task_repository.dart';
-import 'package:axon_ivy/data/models/task/task.dart';
 
 @Injectable(as: TaskRepository)
 class TaskRepositoryImpl extends TaskRepository {
