@@ -1,13 +1,17 @@
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/presentation/process/view/widgets/process_offline_indicator_widget.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
+import 'package:axon_ivy/router/app_router.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ProcessesView extends StatelessWidget {
   const ProcessesView({super.key});
@@ -47,21 +51,7 @@ class ProcessesView extends StatelessWidget {
                       sliver: SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (_, index) {
-                            if (processes.isEmpty) {
-                              return SizedBox(
-                                height: MediaQuery.of(context).size.height -
-                                    Constants.appBarHeight -
-                                    Constants.bottomNavigationBarHeight,
-                                child: DataEmptyWidget(
-                                  message: 'process.emptyList',
-                                  icon: AppAssets.icons.processEmpty.svg(),
-                                ),
-                              );
-                            }
-
-                            return ProcessItemWidget(
-                              process: processes[index],
-                            );
+                            return _buildProcessItem(processes, context, index);
                           },
                           childCount: processes.isEmpty ? 1 : processes.length,
                         ),
@@ -80,5 +70,38 @@ class ProcessesView extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget _buildProcessItem(
+      List<Process> processes, BuildContext context, int index) {
+    if (processes.isEmpty) {
+      return SizedBox(
+        height: MediaQuery.of(context).size.height -
+            Constants.appBarHeight -
+            Constants.bottomNavigationBarHeight,
+        child: DataEmptyWidget(
+          message: 'process.emptyList',
+          icon: AppAssets.icons.processEmpty.svg(),
+        ),
+      );
+    }
+
+    return GestureDetector(
+      onTap: () {
+        _navigateProcessActivity(context, processes[index]);
+      },
+      child: ProcessItemWidget(
+        process: processes[index],
+      ),
+    );
+  }
+
+  void _navigateProcessActivity(BuildContext context, Process process) {
+    context.push(AppRoutes.taskActivity,
+        extra: {'path': process.fullRequestPath}).then((value) {
+      if (value != null && value as bool) {
+        context.read<TabBarCubit>().navigateTaskList();
+      }
+    });
   }
 }
