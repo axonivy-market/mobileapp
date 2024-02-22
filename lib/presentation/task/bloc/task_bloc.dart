@@ -121,9 +121,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
       tasks.fold(
         (l) {
-          emit(TaskState.error(l.message));
+          emit(
+            TaskState.error(l.message),
+          );
         },
         (r) {
+          SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
           this.tasks = r;
           sortDefaultTasks = r.sortDefaultTasks;
           expiredTasks = _filterExpiredTasks(this.tasks);
@@ -133,7 +136,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         },
       );
     } catch (e) {
-      emit(TaskState.error(AppError.handle(e).failure.message));
+      emit(
+        TaskState.error(AppError.handle(e).failure.message),
+      );
     }
   }
 

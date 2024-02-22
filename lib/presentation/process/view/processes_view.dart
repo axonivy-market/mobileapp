@@ -3,6 +3,7 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/presentation/process/view/widgets/process_offline_indicator_widget.dart';
+import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProcessesView extends StatelessWidget {
   const ProcessesView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const HomeAppBar(),
-      body: BlocBuilder<ProcessBloc, ProcessState>(
+      body: BlocConsumer<ProcessBloc, ProcessState>(
+        listener: (context, state) {
+          context.read<OfflineIndicatorCubit>().showOfflineIndicator(
+              state is ProcessSuccessState && !state.isOnline);
+        },
         builder: (context, state) {
           final processBloc = BlocProvider.of<ProcessBloc>(context);
           if (state is ProcessLoadingState) {
@@ -40,7 +46,7 @@ class ProcessesView extends StatelessWidget {
                           horizontal: 15, vertical: 20),
                       sliver: SliverList(
                         delegate: SliverChildBuilderDelegate(
-                              (_, index) {
+                          (_, index) {
                             if (processes.isEmpty) {
                               return SizedBox(
                                 height: MediaQuery.of(context).size.height -
@@ -57,8 +63,7 @@ class ProcessesView extends StatelessWidget {
                               process: processes[index],
                             );
                           },
-                          childCount:
-                          processes.isEmpty ? 1 : processes.length,
+                          childCount: processes.isEmpty ? 1 : processes.length,
                         ),
                       ),
                     ),

@@ -1,22 +1,24 @@
+import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
+import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_detail_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
-import 'package:axon_ivy/util/widgets/loading_widget.dart';
 import 'package:axon_ivy/router/router.dart';
+import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../util/resources/constants.dart';
-import '../../../util/widgets/home_appbar.dart';
 import '../bloc/sort_bloc/sort_bloc.dart';
 
 class TasksView extends StatelessWidget {
@@ -46,14 +48,20 @@ class TasksView extends StatelessWidget {
               });
             }
           }),
+          BlocListener<TaskBloc, TaskState>(listener: (context, state) {
+            context
+                .read<OfflineIndicatorCubit>()
+                .showOfflineIndicator(state is TaskErrorState);
+          }),
         ],
         child: BlocBuilder<TaskBloc, TaskState>(
           builder: (context, taskState) {
             final activeFilter = context.watch<FilterBloc>().state.activeFilter;
             final tasksIsEmpty =
-                taskState is TaskSuccessState && taskState.tasks.isEmpty;
+                taskState is TaskSuccessState && taskState.tasks.isNotEmpty;
             return TasksViewContent(
-              showAppBar: !tasksIsEmpty || activeFilter == FilterType.expired,
+              isShowFilterBar:
+                  tasksIsEmpty || activeFilter == FilterType.expired,
             );
           },
         ),
@@ -63,19 +71,22 @@ class TasksView extends StatelessWidget {
 }
 
 class TasksViewContent extends StatelessWidget {
-  const TasksViewContent({super.key, required this.showAppBar});
+  const TasksViewContent({super.key, required this.isShowFilterBar});
 
-  final bool showAppBar;
   final TaskIvy? taskSelecting = null;
+  final bool isShowFilterBar;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar(isTaskScreen: showAppBar),
+      appBar: HomeAppBar(
+        isShowFilterBar: isShowFilterBar,
+        isShowLastUpdated: true,
+      ),
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, taskState) {
           if (taskState is TaskErrorState) {
-            return Center(child: Text(taskState.error));
+            return _buildErrorView(context, taskState);
           } else if (taskState is TaskSuccessState) {
             return _buildTaskList(context, taskState.tasks);
           } else {
@@ -83,6 +94,32 @@ class TasksViewContent extends StatelessWidget {
           }
         },
       ),
+    );
+  }
+
+  Widget _buildErrorView(BuildContext context, TaskErrorState taskState) {
+    return CustomScrollView(
+      physics:
+          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      slivers: [
+        CupertinoSliverRefreshControl(
+          onRefresh: () async => _onRefresh(context),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => SizedBox(
+              height: MediaQuery.of(context).size.height -
+                  Constants.appBarHeight -
+                  Constants.bottomNavigationBarHeight,
+              child: DataEmptyWidget(
+                message: taskState.error,
+                icon: AppAssets.icons.tool.svg(),
+              ),
+            ),
+            childCount: 1,
+          ),
+        ),
+      ],
     );
   }
 

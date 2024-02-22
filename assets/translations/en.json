@@ -20,7 +20,8 @@
     "emptyTask": "Nice work! You don't have any tasks at the moment",
     "noExpiryDate": "No expiry date",
     "noTaskName": "[Task name is not available]",
-    "noTaskDescription": "No description"
+    "noTaskDescription": "No description",
+    "lastUpdated": "last updated {time}"
   },
   "taskDetails": {
     "attachments": "Attachments",
@@ -81,7 +82,7 @@
   "defaultError": "Something went wrong, try again later",
   "cacheError": "Cache error, try again later",
   "noInternetError": "Please check your internet connection",
-  "connectionError": "Please check your base url",
+  "connectionError": "Error - You cannot access this screen.",
   "generalSearch": "Search",
   "generalAll": "All",
   "generalTasks": "Tasks",

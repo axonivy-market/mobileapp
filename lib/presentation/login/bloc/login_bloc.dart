@@ -16,7 +16,9 @@ import '../../../data/repositories/task_repository.dart';
 import '../../../util/resources/validators.dart';
 
 part 'login_bloc.freezed.dart';
+
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 @injectable
@@ -84,8 +86,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
             emit(LoginState(status: LoginStatus.error, error: l));
           },
           (r) {
+            SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
             SharedPrefs.setIsLogin(true);
-            SharedPrefs.setShouldFetchNewData(true);
             emit(const LoginState(status: LoginStatus.success));
           },
         );

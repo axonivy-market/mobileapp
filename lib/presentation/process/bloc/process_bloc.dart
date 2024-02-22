@@ -21,8 +21,7 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
   final ProcessRepository _processRepository;
   List<Process> processes = [];
 
-  ProcessBloc(this._processRepository)
-      : super(const ProcessState.initial()) {
+  ProcessBloc(this._processRepository) : super(const ProcessState.initial()) {
     on<GetProcess>(_getProcesses);
     getIt<Dio>().options.baseUrl = (SharedPrefs.getBaseUrl.isEmptyOrNull
         ? AppConfig.baseUrl
@@ -41,6 +40,7 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
           emitter(ProcessState.success(processes: processes, isOnline: false));
         },
         (processes) {
+          SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
           this.processes = processes;
           emitter(ProcessState.success(processes: processes));
         },
