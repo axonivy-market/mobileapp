@@ -3,7 +3,7 @@
   "id" : "18D5DDBC77042E95",
   "kind" : "HTML_DIALOG",
   "config" : {
-    "data" : "com.axonivy.mobile.mobiledemo.payslipSalary.payslipSalaryData"
+    "data" : "com.axonivy.mobile.mobiledemo.PayslipSalary.PayslipSalaryData"
   },
   "elements" : [ {
       "id" : "f0",

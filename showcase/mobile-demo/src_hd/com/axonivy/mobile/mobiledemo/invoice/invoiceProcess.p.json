@@ -3,7 +3,7 @@
   "id" : "18D5D878179ED303",
   "kind" : "HTML_DIALOG",
   "config" : {
-    "data" : "com.axonivy.mobile.mobiledemo.invoice.invoiceData"
+    "data" : "com.axonivy.mobile.mobiledemo.Invoice.InvoiceData"
   },
   "elements" : [ {
       "id" : "f0",

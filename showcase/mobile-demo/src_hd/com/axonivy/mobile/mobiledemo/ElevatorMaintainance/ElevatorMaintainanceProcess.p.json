@@ -3,7 +3,7 @@
   "id" : "18DC10AB3E3FDFA5",
   "kind" : "HTML_DIALOG",
   "config" : {
-    "data" : "com.axonivy.mobile.mobiledemo.ElevatorMainatainance.ElevatorMainatainanceData"
+    "data" : "com.axonivy.mobile.mobiledemo.ElevatorMaintainance.ElevatorMaintainanceData"
   },
   "elements" : [ {
       "id" : "f0",
