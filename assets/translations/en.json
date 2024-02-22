@@ -82,7 +82,8 @@
   "defaultError": "Something went wrong, try again later",
   "cacheError": "Cache error, try again later",
   "noInternetError": "Please check your internet connection",
-  "connectionError": "Error - You cannot access this screen.",
+  "connectionError": "Please check your base url",
+  "errorCanNotAccessScreen": "Error - You cannot access this screen.",
   "generalSearch": "Search",
   "generalAll": "All",
   "generalTasks": "Tasks",
@@ -97,7 +98,7 @@
   "sortType": {
     "priority": "Priority",
     "name": "Name",
-    "expiryDate" : "Expiry date",
+    "expiryDate": "Expiry date",
     "creationDate": "Creation date",
     "aToZ": "A to Z",
     "zToA": "Z to A",
