@@ -110,7 +110,8 @@ class _SearchViewState extends State<SearchView> {
                   padding: const EdgeInsets.symmetric(horizontal: 16),
                   child: GestureDetector(
                     onTap: () {
-                      WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+                      WidgetsBinding.instance.focusManager.primaryFocus
+                          ?.unfocus();
                       context.push(AppRoutes.taskActivity, extra: {
                         'task': item.task,
                         'path': item.task.fullRequestPath
@@ -132,9 +133,22 @@ class _SearchViewState extends State<SearchView> {
               } else if (item is ProcessItem) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: ProcessItemWidget(
-                    process: item.process,
-                    query: state.query.trim(),
+                  child: GestureDetector(
+                    onTap: () {
+                      WidgetsBinding.instance.focusManager.primaryFocus
+                          ?.unfocus();
+                      context.push(AppRoutes.taskActivity, extra: {
+                        'path': item.process.fullRequestPath
+                      }).then((value) {
+                        if (value != null && value as bool) {
+                          context.read<TabBarCubit>().navigateTaskList();
+                        }
+                      });
+                    },
+                    child: ProcessItemWidget(
+                      process: item.process,
+                      query: state.query.trim(),
+                    ),
                   ),
                 );
               }

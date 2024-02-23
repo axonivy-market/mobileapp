@@ -1,2 +1,2 @@
-invoiceData #class
-com.axonivy.mobile.mobiledemo.invoice #namespace
+InvoiceData #class
+com.axonivy.mobile.mobiledemo.Invoice #namespace
