@@ -4,5 +4,5 @@ part of 'profile_bloc.dart';
 class ProfileState with _$ProfileState {
   const factory ProfileState.initial() = Initial;
 
-  const factory ProfileState.loggedIn(bool isLoggedIn) = LoggedInState;
+  const factory ProfileState.profileInfo(Profile profile) = ProfileInfo;
 }

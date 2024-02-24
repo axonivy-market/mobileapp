@@ -20,8 +20,10 @@ Profile _$ProfileFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Profile {
+  String get uuid => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
+  String get fullName => throw _privateConstructorUsedError;
+  String get emailAddress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +35,7 @@ abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
       _$ProfileCopyWithImpl<$Res, Profile>;
   @useResult
-  $Res call({String name, String email});
+  $Res call({String uuid, String name, String fullName, String emailAddress});
 }
 
 /// @nodoc
@@ -49,17 +51,27 @@ class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uuid = null,
     Object? name = null,
-    Object? email = null,
+    Object? fullName = null,
+    Object? emailAddress = null,
   }) {
     return _then(_value.copyWith(
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailAddress: null == emailAddress
+          ? _value.emailAddress
+          : emailAddress // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -72,7 +84,7 @@ abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       __$$ProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, String email});
+  $Res call({String uuid, String name, String fullName, String emailAddress});
 }
 
 /// @nodoc
@@ -86,17 +98,27 @@ class __$$ProfileImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? uuid = null,
     Object? name = null,
-    Object? email = null,
+    Object? fullName = null,
+    Object? emailAddress = null,
   }) {
     return _then(_$ProfileImpl(
+      uuid: null == uuid
+          ? _value.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      fullName: null == fullName
+          ? _value.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailAddress: null == emailAddress
+          ? _value.emailAddress
+          : emailAddress // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -105,19 +127,31 @@ class __$$ProfileImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$ProfileImpl implements _Profile {
-  const _$ProfileImpl({required this.name, required this.email});
+  const _$ProfileImpl(
+      {this.uuid = "",
+      this.name = "",
+      this.fullName = "",
+      this.emailAddress = ""});
 
   factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProfileImplFromJson(json);
 
   @override
+  @JsonKey()
+  final String uuid;
+  @override
+  @JsonKey()
   final String name;
   @override
-  final String email;
+  @JsonKey()
+  final String fullName;
+  @override
+  @JsonKey()
+  final String emailAddress;
 
   @override
   String toString() {
-    return 'Profile(name: $name, email: $email)';
+    return 'Profile(uuid: $uuid, name: $name, fullName: $fullName, emailAddress: $emailAddress)';
   }
 
   @override
@@ -125,13 +159,18 @@ class _$ProfileImpl implements _Profile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProfileImpl &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.email, email) || other.email == email));
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.emailAddress, emailAddress) ||
+                other.emailAddress == emailAddress));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, email);
+  int get hashCode =>
+      Object.hash(runtimeType, uuid, name, fullName, emailAddress);
 
   @JsonKey(ignore: true)
   @override
@@ -149,15 +188,21 @@ class _$ProfileImpl implements _Profile {
 
 abstract class _Profile implements Profile {
   const factory _Profile(
-      {required final String name,
-      required final String email}) = _$ProfileImpl;
+      {final String uuid,
+      final String name,
+      final String fullName,
+      final String emailAddress}) = _$ProfileImpl;
 
   factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
 
   @override
+  String get uuid;
+  @override
   String get name;
   @override
-  String get email;
+  String get fullName;
+  @override
+  String get emailAddress;
   @override
   @JsonKey(ignore: true)
   _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>

@@ -1,4 +1,5 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -40,9 +41,9 @@ class LoginWidget extends StatelessWidget {
                     onTap: () {
                       if (!(SharedPrefs.isLogin ?? false)) {
                         context.push(AppRoutes.login).then(
-                              (value) => context.read<ProfileBloc>().add(
-                                    ProfileEvent.loggedIn(value as bool),
-                                  ),
+                              (value) => context
+                                  .read<LoggedInCubit>()
+                                  .loggedIn(value as bool),
                             );
                       }
                     },
