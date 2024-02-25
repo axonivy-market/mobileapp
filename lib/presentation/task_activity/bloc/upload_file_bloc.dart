@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path/path.dart' as path;
 
 part 'upload_file_bloc.freezed.dart';
 part 'upload_file_event.dart';
@@ -26,23 +27,51 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   final UploadFileRepository _uploadFileRepository;
   String uploadMessage = "";
   int maxFileSize = 10000000;
+  var filePath = "";
+  var fileName = "";
+  var caseId = 0;
+  var fileType = "";
+  File? cameraFile;
+
   UploadFileBloc(this._uploadFileRepository)
       : super(const UploadFileState.loading(false)) {
     on<_UploadFiles>(_uploadFile);
+    on<_ChangeFileName>(_changeFileName);
 
     getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
         ? AppConfig.baseUrl
         : SharedPrefs.getBaseUrl!;
   }
 
-  Future<void> _uploadFile(event, Emitter<UploadFileState> emit) async {
-    UploadFileType type;
-    if (event is UploadFileEvent) {
-      type = event.type;
+  Future<void> _changeFileName(
+      _ChangeFileName event, Emitter<UploadFileState> emit) async {
+    final newFileName = "${event.fileName}.$fileType";
+
+    if (fileName != newFileName) {
+      String dir = path.dirname(filePath);
+      String newName = path.join(dir, newFileName);
+      File file = cameraFile!.renameSync(newName);
+      emit(const UploadFileState.loading(true));
+      await uploadFiles(
+          caseId: caseId, file: file, emit: emit, fileName: newFileName);
     } else {
-      return;
+      emit(const UploadFileState.loading(true));
+
+      await uploadFiles(
+          caseId: caseId, file: cameraFile!, emit: emit, fileName: fileName);
     }
 
+    cameraFile = null;
+    emit(UploadFileState.success(uploadMessage));
+    uploadMessage = "";
+    return;
+  }
+
+  Future<void> _uploadFile(
+      _UploadFiles event, Emitter<UploadFileState> emit) async {
+    UploadFileType type;
+    type = event.type;
+    caseId = event.caseId;
     switch (type) {
       case UploadFileType.recent:
         await getFileRecent(caseId: event.caseId, emit: emit);
@@ -66,24 +95,21 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
 
     result = await FilePicker.platform.pickFiles(
       type: FileType.any,
-      allowMultiple: true,
     );
-    emit(const UploadFileState.loading(true));
     if (result != null) {
-      for (var file in result.files) {
-        if (file.size < maxFileSize) {
-          // 10MB
-          File fileUpload = File(file.path!);
+      PlatformFile platformFile = result.files.first;
+      if (platformFile.size < maxFileSize) {
+        File fileUpload = File(platformFile.path!);
+        emit(const UploadFileState.loading(true));
 
-          await uploadFiles(
-              caseId: caseId,
-              file: fileUpload,
-              emit: emit,
-              fileName: file.name);
-        } else {
-          uploadMessage +=
-              "uploadFile.fileTooLarge".tr(namedArgs: {'fileName': file.name});
-        }
+        await uploadFiles(
+            caseId: caseId,
+            file: fileUpload,
+            emit: emit,
+            fileName: platformFile.name);
+      } else {
+        uploadMessage += "uploadFile.fileTooLarge"
+            .tr(namedArgs: {'fileName': platformFile.name});
       }
       if (uploadMessage.contains("successfully")) {
         emit(UploadFileState.success(uploadMessage));
@@ -91,7 +117,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
         emit(UploadErrorState(uploadMessage));
       }
     } else {
-      emit(UploadErrorState('uploadFile.cannotSelectFiles'.tr()));
+      return;
     }
   }
 
@@ -99,7 +125,6 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       {required int caseId,
       required File file,
       required Emitter emit,
-      bool isUsingCamera = false,
       required String fileName}) async {
     try {
       FormData data = FormData.fromMap(
@@ -134,52 +159,58 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
 
     result = await FilePicker.platform.pickFiles(
       type: FileType.image,
-      allowMultiple: true,
     );
 
-    emit(const UploadFileState.loading(true));
     if (result != null) {
-      for (var file in result.files) {
-        if (file.size < maxFileSize) {
-          // 10MB
-          File fileUpload = File(file.path!);
+      PlatformFile platformFile = result.files.first;
+      if (platformFile.size < maxFileSize) {
+        // 10MB
+        File fileUpload = File(platformFile.path!);
+        emit(const UploadFileState.loading(true));
 
-          await uploadFiles(
-              caseId: caseId,
-              file: fileUpload,
-              emit: emit,
-              fileName: file.name);
-        } else {
-          uploadMessage +=
-              "uploadFile.fileTooLarge".tr(namedArgs: {'fileName': file.name});
-        }
+        await uploadFiles(
+            caseId: caseId,
+            file: fileUpload,
+            emit: emit,
+            fileName: platformFile.name);
+      } else {
+        uploadMessage += "uploadFile.fileTooLarge"
+            .tr(namedArgs: {'fileName': platformFile.name});
       }
+
       if (uploadMessage.contains("successfully")) {
         emit(UploadFileState.success(uploadMessage));
       } else {
         emit(UploadErrorState(uploadMessage));
       }
     } else {
-      emit(UploadErrorState('uploadFile.cannotSelectFiles'.tr()));
+      return;
     }
   }
 
   Future<void> usingCamera({required int caseId, required Emitter emit}) async {
     final image = await ImagePicker().pickImage(source: ImageSource.camera);
     if (image == null) {
-      emit(UploadFileState.error(uploadMessage));
       return;
     }
-    emit(const UploadFileState.loading(true));
     File file = File(image.path);
+    List<String> imageFileName = image.path.split(".");
+    String shortName =
+        "${DateTime.now().millisecondsSinceEpoch}.${imageFileName.last}";
+    String nameNoSuffix = "${DateTime.now().millisecondsSinceEpoch}";
+    fileType = imageFileName.last;
     if (file.lengthSync() < maxFileSize) {
-      await uploadFiles(
-          caseId: caseId, file: file, emit: emit, fileName: image.name);
-      emit(UploadFileState.success(uploadMessage));
+      String dir = path.dirname(image.path);
+      String newName = path.join(dir, shortName);
+      File fileWithShortName = File(image.path).renameSync(newName);
+
+      cameraFile = fileWithShortName;
+      filePath = fileWithShortName.path;
+      fileName = shortName;
+      emit(UploadChangeFileNameState(nameNoSuffix));
     } else {
       uploadMessage +=
-          "uploadFile.fileTooLarge".tr(namedArgs: {'fileName': image.name});
-      emit(UploadFileState.error(uploadMessage));
+          "uploadFile.fileTooLarge".tr(namedArgs: {'fileName': shortName});
     }
   }
 }

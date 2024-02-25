@@ -11,7 +11,6 @@ import 'package:axon_ivy/presentation/task_activity/widgets/task_web_view_widget
 import 'package:axon_ivy/util/widgets/measure_size_widget.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -75,14 +74,18 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
     return BlocProvider(
       create: (context) => _uploadFileBloc,
       child: BlocListener<UploadFileBloc, UploadFileState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is UploadSuccessState) {
+            hideLoading();
             showUploadedDialog(
                 title: "Success process", message: state.fileNames);
           } else if (state is UploadErrorState) {
+            hideLoading();
             showConfirmDialog(title: "Error", message: state.error);
+          } else if (state is UploadChangeFileNameState) {
+            await displayTextInputDialog(context, state.fileName);
           } else {
-            const CupertinoActivityIndicator();
+            showLoading();
           }
         },
         child: Scaffold(
@@ -214,16 +217,6 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
                     onProgressChanged: _onProgressChanged,
                   ),
                 ),
-                BlocBuilder<UploadFileBloc, UploadFileState>(
-                    builder: (context, state) {
-                  final shouldLoading = state is UploadLoadingState &&
-                      (state.isShowLoading == true);
-                  if (shouldLoading) {
-                    return const LoadingWidget();
-                  } else {
-                    return const SizedBox();
-                  }
-                }),
                 if (isScrollToTop &&
                     !isKeyboardVisible &&
                     widget.taskIvy != null)

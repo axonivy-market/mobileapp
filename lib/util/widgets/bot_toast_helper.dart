@@ -36,14 +36,7 @@ class AppLoadingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      decoration: const BoxDecoration(
-        color: Colors.black54,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
-      child: const CupertinoActivityIndicator(),
-    );
+    return const CupertinoActivityIndicator(radius: 15);
   }
 }
 

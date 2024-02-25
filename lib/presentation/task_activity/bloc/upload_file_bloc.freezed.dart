@@ -16,43 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UploadFileEvent {
-  int get caseId => throw _privateConstructorUsedError;
-  UploadFileType get type => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int caseId, UploadFileType type) uploadFiles,
+    required TResult Function(String fileName) changeFileName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int caseId, UploadFileType type)? uploadFiles,
+    TResult? Function(String fileName)? changeFileName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int caseId, UploadFileType type)? uploadFiles,
+    TResult Function(String fileName)? changeFileName,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_UploadFiles value) uploadFiles,
+    required TResult Function(_ChangeFileName value) changeFileName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_UploadFiles value)? uploadFiles,
+    TResult? Function(_ChangeFileName value)? changeFileName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_UploadFiles value)? uploadFiles,
+    TResult Function(_ChangeFileName value)? changeFileName,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $UploadFileEventCopyWith<UploadFileEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -61,8 +61,6 @@ abstract class $UploadFileEventCopyWith<$Res> {
   factory $UploadFileEventCopyWith(
           UploadFileEvent value, $Res Function(UploadFileEvent) then) =
       _$UploadFileEventCopyWithImpl<$Res, UploadFileEvent>;
-  @useResult
-  $Res call({int caseId, UploadFileType type});
 }
 
 /// @nodoc
@@ -74,33 +72,13 @@ class _$UploadFileEventCopyWithImpl<$Res, $Val extends UploadFileEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? caseId = null,
-    Object? type = null,
-  }) {
-    return _then(_value.copyWith(
-      caseId: null == caseId
-          ? _value.caseId
-          : caseId // ignore: cast_nullable_to_non_nullable
-              as int,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as UploadFileType,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$UploadFilesImplCopyWith<$Res>
-    implements $UploadFileEventCopyWith<$Res> {
+abstract class _$$UploadFilesImplCopyWith<$Res> {
   factory _$$UploadFilesImplCopyWith(
           _$UploadFilesImpl value, $Res Function(_$UploadFilesImpl) then) =
       __$$UploadFilesImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int caseId, UploadFileType type});
 }
@@ -178,6 +156,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int caseId, UploadFileType type) uploadFiles,
+    required TResult Function(String fileName) changeFileName,
   }) {
     return uploadFiles(caseId, type);
   }
@@ -186,6 +165,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int caseId, UploadFileType type)? uploadFiles,
+    TResult? Function(String fileName)? changeFileName,
   }) {
     return uploadFiles?.call(caseId, type);
   }
@@ -194,6 +174,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int caseId, UploadFileType type)? uploadFiles,
+    TResult Function(String fileName)? changeFileName,
     required TResult orElse(),
   }) {
     if (uploadFiles != null) {
@@ -206,6 +187,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_UploadFiles value) uploadFiles,
+    required TResult Function(_ChangeFileName value) changeFileName,
   }) {
     return uploadFiles(this);
   }
@@ -214,6 +196,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_UploadFiles value)? uploadFiles,
+    TResult? Function(_ChangeFileName value)? changeFileName,
   }) {
     return uploadFiles?.call(this);
   }
@@ -222,6 +205,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_UploadFiles value)? uploadFiles,
+    TResult Function(_ChangeFileName value)? changeFileName,
     required TResult orElse(),
   }) {
     if (uploadFiles != null) {
@@ -235,13 +219,155 @@ abstract class _UploadFiles implements UploadFileEvent {
   const factory _UploadFiles(final int caseId, final UploadFileType type) =
       _$UploadFilesImpl;
 
-  @override
   int get caseId;
-  @override
   UploadFileType get type;
-  @override
   @JsonKey(ignore: true)
   _$$UploadFilesImplCopyWith<_$UploadFilesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ChangeFileNameImplCopyWith<$Res> {
+  factory _$$ChangeFileNameImplCopyWith(_$ChangeFileNameImpl value,
+          $Res Function(_$ChangeFileNameImpl) then) =
+      __$$ChangeFileNameImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String fileName});
+}
+
+/// @nodoc
+class __$$ChangeFileNameImplCopyWithImpl<$Res>
+    extends _$UploadFileEventCopyWithImpl<$Res, _$ChangeFileNameImpl>
+    implements _$$ChangeFileNameImplCopyWith<$Res> {
+  __$$ChangeFileNameImplCopyWithImpl(
+      _$ChangeFileNameImpl _value, $Res Function(_$ChangeFileNameImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fileName = null,
+  }) {
+    return _then(_$ChangeFileNameImpl(
+      null == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangeFileNameImpl
+    with DiagnosticableTreeMixin
+    implements _ChangeFileName {
+  const _$ChangeFileNameImpl(this.fileName);
+
+  @override
+  final String fileName;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UploadFileEvent.changeFileName(fileName: $fileName)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UploadFileEvent.changeFileName'))
+      ..add(DiagnosticsProperty('fileName', fileName));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeFileNameImpl &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fileName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeFileNameImplCopyWith<_$ChangeFileNameImpl> get copyWith =>
+      __$$ChangeFileNameImplCopyWithImpl<_$ChangeFileNameImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int caseId, UploadFileType type) uploadFiles,
+    required TResult Function(String fileName) changeFileName,
+  }) {
+    return changeFileName(fileName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int caseId, UploadFileType type)? uploadFiles,
+    TResult? Function(String fileName)? changeFileName,
+  }) {
+    return changeFileName?.call(fileName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int caseId, UploadFileType type)? uploadFiles,
+    TResult Function(String fileName)? changeFileName,
+    required TResult orElse(),
+  }) {
+    if (changeFileName != null) {
+      return changeFileName(fileName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UploadFiles value) uploadFiles,
+    required TResult Function(_ChangeFileName value) changeFileName,
+  }) {
+    return changeFileName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UploadFiles value)? uploadFiles,
+    TResult? Function(_ChangeFileName value)? changeFileName,
+  }) {
+    return changeFileName?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UploadFiles value)? uploadFiles,
+    TResult Function(_ChangeFileName value)? changeFileName,
+    required TResult orElse(),
+  }) {
+    if (changeFileName != null) {
+      return changeFileName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangeFileName implements UploadFileEvent {
+  const factory _ChangeFileName(final String fileName) = _$ChangeFileNameImpl;
+
+  String get fileName;
+  @JsonKey(ignore: true)
+  _$$ChangeFileNameImplCopyWith<_$ChangeFileNameImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -252,6 +378,7 @@ mixin _$UploadFileState {
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
     required TResult Function(String fileNames) success,
+    required TResult Function(String fileName) changeFileName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -259,6 +386,7 @@ mixin _$UploadFileState {
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
     TResult? Function(String fileNames)? success,
+    TResult? Function(String fileName)? changeFileName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -266,6 +394,7 @@ mixin _$UploadFileState {
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
     TResult Function(String fileNames)? success,
+    TResult Function(String fileName)? changeFileName,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -274,6 +403,7 @@ mixin _$UploadFileState {
     required TResult Function(UploadLoadingState value) loading,
     required TResult Function(UploadErrorState value) error,
     required TResult Function(UploadSuccessState value) success,
+    required TResult Function(UploadChangeFileNameState value) changeFileName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -281,6 +411,7 @@ mixin _$UploadFileState {
     TResult? Function(UploadLoadingState value)? loading,
     TResult? Function(UploadErrorState value)? error,
     TResult? Function(UploadSuccessState value)? success,
+    TResult? Function(UploadChangeFileNameState value)? changeFileName,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -288,6 +419,7 @@ mixin _$UploadFileState {
     TResult Function(UploadLoadingState value)? loading,
     TResult Function(UploadErrorState value)? error,
     TResult Function(UploadSuccessState value)? success,
+    TResult Function(UploadChangeFileNameState value)? changeFileName,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -390,6 +522,7 @@ class _$UploadLoadingStateImpl
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
     required TResult Function(String fileNames) success,
+    required TResult Function(String fileName) changeFileName,
   }) {
     return loading(isShowLoading);
   }
@@ -400,6 +533,7 @@ class _$UploadLoadingStateImpl
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
     TResult? Function(String fileNames)? success,
+    TResult? Function(String fileName)? changeFileName,
   }) {
     return loading?.call(isShowLoading);
   }
@@ -410,6 +544,7 @@ class _$UploadLoadingStateImpl
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
     TResult Function(String fileNames)? success,
+    TResult Function(String fileName)? changeFileName,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -424,6 +559,7 @@ class _$UploadLoadingStateImpl
     required TResult Function(UploadLoadingState value) loading,
     required TResult Function(UploadErrorState value) error,
     required TResult Function(UploadSuccessState value) success,
+    required TResult Function(UploadChangeFileNameState value) changeFileName,
   }) {
     return loading(this);
   }
@@ -434,6 +570,7 @@ class _$UploadLoadingStateImpl
     TResult? Function(UploadLoadingState value)? loading,
     TResult? Function(UploadErrorState value)? error,
     TResult? Function(UploadSuccessState value)? success,
+    TResult? Function(UploadChangeFileNameState value)? changeFileName,
   }) {
     return loading?.call(this);
   }
@@ -444,6 +581,7 @@ class _$UploadLoadingStateImpl
     TResult Function(UploadLoadingState value)? loading,
     TResult Function(UploadErrorState value)? error,
     TResult Function(UploadSuccessState value)? success,
+    TResult Function(UploadChangeFileNameState value)? changeFileName,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -541,6 +679,7 @@ class _$UploadErrorStateImpl
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
     required TResult Function(String fileNames) success,
+    required TResult Function(String fileName) changeFileName,
   }) {
     return error(this.error);
   }
@@ -551,6 +690,7 @@ class _$UploadErrorStateImpl
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
     TResult? Function(String fileNames)? success,
+    TResult? Function(String fileName)? changeFileName,
   }) {
     return error?.call(this.error);
   }
@@ -561,6 +701,7 @@ class _$UploadErrorStateImpl
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
     TResult Function(String fileNames)? success,
+    TResult Function(String fileName)? changeFileName,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -575,6 +716,7 @@ class _$UploadErrorStateImpl
     required TResult Function(UploadLoadingState value) loading,
     required TResult Function(UploadErrorState value) error,
     required TResult Function(UploadSuccessState value) success,
+    required TResult Function(UploadChangeFileNameState value) changeFileName,
   }) {
     return error(this);
   }
@@ -585,6 +727,7 @@ class _$UploadErrorStateImpl
     TResult? Function(UploadLoadingState value)? loading,
     TResult? Function(UploadErrorState value)? error,
     TResult? Function(UploadSuccessState value)? success,
+    TResult? Function(UploadChangeFileNameState value)? changeFileName,
   }) {
     return error?.call(this);
   }
@@ -595,6 +738,7 @@ class _$UploadErrorStateImpl
     TResult Function(UploadLoadingState value)? loading,
     TResult Function(UploadErrorState value)? error,
     TResult Function(UploadSuccessState value)? success,
+    TResult Function(UploadChangeFileNameState value)? changeFileName,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -692,6 +836,7 @@ class _$UploadSuccessStateImpl
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
     required TResult Function(String fileNames) success,
+    required TResult Function(String fileName) changeFileName,
   }) {
     return success(fileNames);
   }
@@ -702,6 +847,7 @@ class _$UploadSuccessStateImpl
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
     TResult? Function(String fileNames)? success,
+    TResult? Function(String fileName)? changeFileName,
   }) {
     return success?.call(fileNames);
   }
@@ -712,6 +858,7 @@ class _$UploadSuccessStateImpl
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
     TResult Function(String fileNames)? success,
+    TResult Function(String fileName)? changeFileName,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -726,6 +873,7 @@ class _$UploadSuccessStateImpl
     required TResult Function(UploadLoadingState value) loading,
     required TResult Function(UploadErrorState value) error,
     required TResult Function(UploadSuccessState value) success,
+    required TResult Function(UploadChangeFileNameState value) changeFileName,
   }) {
     return success(this);
   }
@@ -736,6 +884,7 @@ class _$UploadSuccessStateImpl
     TResult? Function(UploadLoadingState value)? loading,
     TResult? Function(UploadErrorState value)? error,
     TResult? Function(UploadSuccessState value)? success,
+    TResult? Function(UploadChangeFileNameState value)? changeFileName,
   }) {
     return success?.call(this);
   }
@@ -746,6 +895,7 @@ class _$UploadSuccessStateImpl
     TResult Function(UploadLoadingState value)? loading,
     TResult Function(UploadErrorState value)? error,
     TResult Function(UploadSuccessState value)? success,
+    TResult Function(UploadChangeFileNameState value)? changeFileName,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -763,4 +913,164 @@ abstract class UploadSuccessState implements UploadFileState {
   @JsonKey(ignore: true)
   _$$UploadSuccessStateImplCopyWith<_$UploadSuccessStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UploadChangeFileNameStateImplCopyWith<$Res> {
+  factory _$$UploadChangeFileNameStateImplCopyWith(
+          _$UploadChangeFileNameStateImpl value,
+          $Res Function(_$UploadChangeFileNameStateImpl) then) =
+      __$$UploadChangeFileNameStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String fileName});
+}
+
+/// @nodoc
+class __$$UploadChangeFileNameStateImplCopyWithImpl<$Res>
+    extends _$UploadFileStateCopyWithImpl<$Res, _$UploadChangeFileNameStateImpl>
+    implements _$$UploadChangeFileNameStateImplCopyWith<$Res> {
+  __$$UploadChangeFileNameStateImplCopyWithImpl(
+      _$UploadChangeFileNameStateImpl _value,
+      $Res Function(_$UploadChangeFileNameStateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fileName = null,
+  }) {
+    return _then(_$UploadChangeFileNameStateImpl(
+      null == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UploadChangeFileNameStateImpl
+    with DiagnosticableTreeMixin
+    implements UploadChangeFileNameState {
+  const _$UploadChangeFileNameStateImpl(this.fileName);
+
+  @override
+  final String fileName;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UploadFileState.changeFileName(fileName: $fileName)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'UploadFileState.changeFileName'))
+      ..add(DiagnosticsProperty('fileName', fileName));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UploadChangeFileNameStateImpl &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fileName);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UploadChangeFileNameStateImplCopyWith<_$UploadChangeFileNameStateImpl>
+      get copyWith => __$$UploadChangeFileNameStateImplCopyWithImpl<
+          _$UploadChangeFileNameStateImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(bool isShowLoading) loading,
+    required TResult Function(String error) error,
+    required TResult Function(String fileNames) success,
+    required TResult Function(String fileName) changeFileName,
+  }) {
+    return changeFileName(fileName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(String fileNames)? success,
+    TResult? Function(String fileName)? changeFileName,
+  }) {
+    return changeFileName?.call(fileName);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(bool isShowLoading)? loading,
+    TResult Function(String error)? error,
+    TResult Function(String fileNames)? success,
+    TResult Function(String fileName)? changeFileName,
+    required TResult orElse(),
+  }) {
+    if (changeFileName != null) {
+      return changeFileName(fileName);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UploadLoadingState value) loading,
+    required TResult Function(UploadErrorState value) error,
+    required TResult Function(UploadSuccessState value) success,
+    required TResult Function(UploadChangeFileNameState value) changeFileName,
+  }) {
+    return changeFileName(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UploadLoadingState value)? loading,
+    TResult? Function(UploadErrorState value)? error,
+    TResult? Function(UploadSuccessState value)? success,
+    TResult? Function(UploadChangeFileNameState value)? changeFileName,
+  }) {
+    return changeFileName?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(UploadLoadingState value)? loading,
+    TResult Function(UploadErrorState value)? error,
+    TResult Function(UploadSuccessState value)? success,
+    TResult Function(UploadChangeFileNameState value)? changeFileName,
+    required TResult orElse(),
+  }) {
+    if (changeFileName != null) {
+      return changeFileName(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UploadChangeFileNameState implements UploadFileState {
+  const factory UploadChangeFileNameState(final String fileName) =
+      _$UploadChangeFileNameStateImpl;
+
+  String get fileName;
+  @JsonKey(ignore: true)
+  _$$UploadChangeFileNameStateImplCopyWith<_$UploadChangeFileNameStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
