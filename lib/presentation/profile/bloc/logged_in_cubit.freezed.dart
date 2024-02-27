@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'tabbar_cubit.dart';
+part of 'logged_in_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,58 +15,58 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TabBarState {
+mixin _$LoggedInState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int currentTime) navigateTasks,
+    required TResult Function(bool isLoggedIn) loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int currentTime)? navigateTasks,
+    TResult? Function(bool isLoggedIn)? loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int currentTime)? navigateTasks,
+    TResult Function(bool isLoggedIn)? loggedIn,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(NavigateTasksState value) navigateTasks,
+    required TResult Function(LoggedInSuccessState value) loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(NavigateTasksState value)? navigateTasks,
+    TResult? Function(LoggedInSuccessState value)? loggedIn,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(NavigateTasksState value)? navigateTasks,
+    TResult Function(LoggedInSuccessState value)? loggedIn,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TabBarStateCopyWith<$Res> {
-  factory $TabBarStateCopyWith(
-          TabBarState value, $Res Function(TabBarState) then) =
-      _$TabBarStateCopyWithImpl<$Res, TabBarState>;
+abstract class $LoggedInStateCopyWith<$Res> {
+  factory $LoggedInStateCopyWith(
+          LoggedInState value, $Res Function(LoggedInState) then) =
+      _$LoggedInStateCopyWithImpl<$Res, LoggedInState>;
 }
 
 /// @nodoc
-class _$TabBarStateCopyWithImpl<$Res, $Val extends TabBarState>
-    implements $TabBarStateCopyWith<$Res> {
-  _$TabBarStateCopyWithImpl(this._value, this._then);
+class _$LoggedInStateCopyWithImpl<$Res, $Val extends LoggedInState>
+    implements $LoggedInStateCopyWith<$Res> {
+  _$LoggedInStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -83,7 +83,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$TabBarStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$LoggedInStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -97,7 +97,7 @@ class _$InitialImpl implements Initial {
 
   @override
   String toString() {
-    return 'TabBarState.initial()';
+    return 'LoggedInState.initial()';
   }
 
   @override
@@ -113,7 +113,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int currentTime) navigateTasks,
+    required TResult Function(bool isLoggedIn) loggedIn,
   }) {
     return initial();
   }
@@ -122,7 +122,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int currentTime)? navigateTasks,
+    TResult? Function(bool isLoggedIn)? loggedIn,
   }) {
     return initial?.call();
   }
@@ -131,7 +131,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int currentTime)? navigateTasks,
+    TResult Function(bool isLoggedIn)? loggedIn,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -144,7 +144,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(NavigateTasksState value) navigateTasks,
+    required TResult Function(LoggedInSuccessState value) loggedIn,
   }) {
     return initial(this);
   }
@@ -153,7 +153,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(NavigateTasksState value)? navigateTasks,
+    TResult? Function(LoggedInSuccessState value)? loggedIn,
   }) {
     return initial?.call(this);
   }
@@ -162,7 +162,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(NavigateTasksState value)? navigateTasks,
+    TResult Function(LoggedInSuccessState value)? loggedIn,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -172,100 +172,101 @@ class _$InitialImpl implements Initial {
   }
 }
 
-abstract class Initial implements TabBarState {
+abstract class Initial implements LoggedInState {
   const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$NavigateTasksStateImplCopyWith<$Res> {
-  factory _$$NavigateTasksStateImplCopyWith(_$NavigateTasksStateImpl value,
-          $Res Function(_$NavigateTasksStateImpl) then) =
-      __$$NavigateTasksStateImplCopyWithImpl<$Res>;
+abstract class _$$LoggedInSuccessStateImplCopyWith<$Res> {
+  factory _$$LoggedInSuccessStateImplCopyWith(_$LoggedInSuccessStateImpl value,
+          $Res Function(_$LoggedInSuccessStateImpl) then) =
+      __$$LoggedInSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int currentTime});
+  $Res call({bool isLoggedIn});
 }
 
 /// @nodoc
-class __$$NavigateTasksStateImplCopyWithImpl<$Res>
-    extends _$TabBarStateCopyWithImpl<$Res, _$NavigateTasksStateImpl>
-    implements _$$NavigateTasksStateImplCopyWith<$Res> {
-  __$$NavigateTasksStateImplCopyWithImpl(_$NavigateTasksStateImpl _value,
-      $Res Function(_$NavigateTasksStateImpl) _then)
+class __$$LoggedInSuccessStateImplCopyWithImpl<$Res>
+    extends _$LoggedInStateCopyWithImpl<$Res, _$LoggedInSuccessStateImpl>
+    implements _$$LoggedInSuccessStateImplCopyWith<$Res> {
+  __$$LoggedInSuccessStateImplCopyWithImpl(_$LoggedInSuccessStateImpl _value,
+      $Res Function(_$LoggedInSuccessStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? currentTime = null,
+    Object? isLoggedIn = null,
   }) {
-    return _then(_$NavigateTasksStateImpl(
-      null == currentTime
-          ? _value.currentTime
-          : currentTime // ignore: cast_nullable_to_non_nullable
-              as int,
+    return _then(_$LoggedInSuccessStateImpl(
+      null == isLoggedIn
+          ? _value.isLoggedIn
+          : isLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
 
 /// @nodoc
 
-class _$NavigateTasksStateImpl implements NavigateTasksState {
-  const _$NavigateTasksStateImpl(this.currentTime);
+class _$LoggedInSuccessStateImpl implements LoggedInSuccessState {
+  const _$LoggedInSuccessStateImpl(this.isLoggedIn);
 
   @override
-  final int currentTime;
+  final bool isLoggedIn;
 
   @override
   String toString() {
-    return 'TabBarState.navigateTasks(currentTime: $currentTime)';
+    return 'LoggedInState.loggedIn(isLoggedIn: $isLoggedIn)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NavigateTasksStateImpl &&
-            (identical(other.currentTime, currentTime) ||
-                other.currentTime == currentTime));
+            other is _$LoggedInSuccessStateImpl &&
+            (identical(other.isLoggedIn, isLoggedIn) ||
+                other.isLoggedIn == isLoggedIn));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentTime);
+  int get hashCode => Object.hash(runtimeType, isLoggedIn);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NavigateTasksStateImplCopyWith<_$NavigateTasksStateImpl> get copyWith =>
-      __$$NavigateTasksStateImplCopyWithImpl<_$NavigateTasksStateImpl>(
-          this, _$identity);
+  _$$LoggedInSuccessStateImplCopyWith<_$LoggedInSuccessStateImpl>
+      get copyWith =>
+          __$$LoggedInSuccessStateImplCopyWithImpl<_$LoggedInSuccessStateImpl>(
+              this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int currentTime) navigateTasks,
+    required TResult Function(bool isLoggedIn) loggedIn,
   }) {
-    return navigateTasks(currentTime);
+    return loggedIn(isLoggedIn);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int currentTime)? navigateTasks,
+    TResult? Function(bool isLoggedIn)? loggedIn,
   }) {
-    return navigateTasks?.call(currentTime);
+    return loggedIn?.call(isLoggedIn);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int currentTime)? navigateTasks,
+    TResult Function(bool isLoggedIn)? loggedIn,
     required TResult orElse(),
   }) {
-    if (navigateTasks != null) {
-      return navigateTasks(currentTime);
+    if (loggedIn != null) {
+      return loggedIn(isLoggedIn);
     }
     return orElse();
   }
@@ -274,40 +275,40 @@ class _$NavigateTasksStateImpl implements NavigateTasksState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(NavigateTasksState value) navigateTasks,
+    required TResult Function(LoggedInSuccessState value) loggedIn,
   }) {
-    return navigateTasks(this);
+    return loggedIn(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(NavigateTasksState value)? navigateTasks,
+    TResult? Function(LoggedInSuccessState value)? loggedIn,
   }) {
-    return navigateTasks?.call(this);
+    return loggedIn?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(NavigateTasksState value)? navigateTasks,
+    TResult Function(LoggedInSuccessState value)? loggedIn,
     required TResult orElse(),
   }) {
-    if (navigateTasks != null) {
-      return navigateTasks(this);
+    if (loggedIn != null) {
+      return loggedIn(this);
     }
     return orElse();
   }
 }
 
-abstract class NavigateTasksState implements TabBarState {
-  const factory NavigateTasksState(final int currentTime) =
-      _$NavigateTasksStateImpl;
+abstract class LoggedInSuccessState implements LoggedInState {
+  const factory LoggedInSuccessState(final bool isLoggedIn) =
+      _$LoggedInSuccessStateImpl;
 
-  int get currentTime;
+  bool get isLoggedIn;
   @JsonKey(ignore: true)
-  _$$NavigateTasksStateImplCopyWith<_$NavigateTasksStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$LoggedInSuccessStateImplCopyWith<_$LoggedInSuccessStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

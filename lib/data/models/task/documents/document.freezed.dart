@@ -153,7 +153,7 @@ class _$DocumentImpl implements _Document {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DocumentImpl &&

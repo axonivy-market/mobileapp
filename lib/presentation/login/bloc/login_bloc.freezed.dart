@@ -133,7 +133,7 @@ class _$UrlOnChangedImpl implements _UrlOnChanged {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UrlOnChangedImpl &&
@@ -280,7 +280,7 @@ class _$UsernameOnChangedImpl implements _UsernameOnChanged {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UsernameOnChangedImpl &&
@@ -429,7 +429,7 @@ class _$PasswordOnChangedImpl implements _PasswordOnChanged {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PasswordOnChangedImpl &&
@@ -592,7 +592,7 @@ class _$SubmitLoginImpl implements _SubmitLogin {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SubmitLoginImpl &&
@@ -898,7 +898,7 @@ class _$InitialImpl implements _Initial {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$InitialImpl &&

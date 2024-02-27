@@ -148,7 +148,7 @@ class _$SectionHeaderImpl implements SectionHeader {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SectionHeaderImpl &&
@@ -315,7 +315,7 @@ class _$TaskItemImpl implements TaskItem {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskItemImpl &&
@@ -482,7 +482,7 @@ class _$ProcessItemImpl implements ProcessItem {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProcessItemImpl &&

@@ -180,7 +180,7 @@ class _$ProcessImpl implements _Process {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ProcessImpl &&

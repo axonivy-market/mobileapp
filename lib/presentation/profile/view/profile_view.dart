@@ -1,4 +1,5 @@
 import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/presentation/profile/view/profile_logged_in_widget.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
@@ -55,7 +56,10 @@ class _ProfileFormState extends State<ProfileForm> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProfileBloc, ProfileState>(
+    return BlocConsumer<LoggedInCubit, LoggedInState>(
+      listener: (context, state) {
+        context.read<ProfileBloc>().add(const ProfileEvent.fetchProfile());
+      },
       builder: (context, state) {
         return Stack(
           children: [

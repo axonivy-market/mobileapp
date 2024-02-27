@@ -1,8 +1,6 @@
-import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
-import 'package:axon_ivy/data/models/profile/profile.dart';
 import 'package:axon_ivy/presentation/base_view/base_view.dart';
 import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
@@ -16,42 +14,40 @@ import 'package:google_fonts/google_fonts.dart';
 class ProfileLoggedInWidget extends BasePageScreen {
   const ProfileLoggedInWidget({super.key});
 
-  final Profile profileTest = const Profile(
-      name: "Developer User", email: "tung.leminh@axonactive.com");
-
   @override
   State<ProfileLoggedInWidget> createState() => _ProfileLoggedInWidgetState();
 }
 
-class _ProfileLoggedInWidgetState
-    extends BasePageScreenState<ProfileLoggedInWidget> {
-  late final LoggedInCubit loggedInCubit;
-
+class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
   @override
   void initState() {
     super.initState();
-    loggedInCubit = getIt<LoggedInCubit>();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => loggedInCubit,
-      child: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildUserInfo(),
-            const SizedBox(height: 25),
-            _buildDemo(),
-            _buildLanguage(),
-            const SizedBox(height: 40),
-            const Spacer(),
-            _buildSignOutButton(),
-            const SizedBox(height: 30),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BlocBuilder<ProfileBloc, ProfileState>(builder: (context, state) {
+            final profile = SharedPrefs.getProfileInfo();
+            String fullName = profile?.fullName ?? "";
+            String email = profile?.emailAddress ?? "";
+            if (state is ProfileInfo) {
+              fullName = state.profile.fullName;
+              email = state.profile.emailAddress;
+            }
+            return _buildUserInfo(fullName, email);
+          }),
+          const SizedBox(height: 25),
+          _buildDemo(),
+          _buildLanguage(),
+          const Spacer(),
+          _buildSignOutButton(),
+          const SizedBox(height: 30),
+        ],
       ),
     );
   }
@@ -60,9 +56,7 @@ class _ProfileLoggedInWidgetState
     return ElevatedButton(
       onPressed: () {
         SharedPrefs.clear();
-        context.read<ProfileBloc>().add(
-              const ProfileEvent.loggedIn(false),
-            );
+        context.read<LoggedInCubit>().loggedIn(false);
       },
       style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
@@ -86,7 +80,7 @@ class _ProfileLoggedInWidgetState
     );
   }
 
-  Row _buildUserInfo() {
+  Row _buildUserInfo(String fullName, String emailAddress) {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -99,13 +93,14 @@ class _ProfileLoggedInWidgetState
               image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
             ),
           ),
-          imageUrl: loggedInCubit.getGravatarUrl(widget.profileTest.email),
+          imageUrl: context.read<LoggedInCubit>().getGravatarUrl(emailAddress),
           errorWidget: (context, url, error) => CircleAvatar(
             radius: 30,
             backgroundColor: AppColors.bleachedSilk,
             child: Text(
-              loggedInCubit
-                  .displayShortNameAvatar(widget.profileTest.name)
+              context
+                  .read<LoggedInCubit>()
+                  .displayShortNameAvatar(fullName)
                   .toUpperCase(),
               style: GoogleFonts.inter(
                 fontWeight: FontWeight.w600,
@@ -121,7 +116,7 @@ class _ProfileLoggedInWidgetState
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.profileTest.name,
+                fullName,
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.w600,
                   fontSize: 17,
@@ -131,16 +126,17 @@ class _ProfileLoggedInWidgetState
                 overflow: TextOverflow.ellipsis,
               ),
               const SizedBox(height: 5),
-              Text(
-                widget.profileTest.email,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: GoogleFonts.inter(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 13,
-                  color: AppColors.eerieBlack,
+              if (emailAddress.isNotEmpty)
+                Text(
+                  emailAddress,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.inter(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 13,
+                    color: AppColors.eerieBlack,
+                  ),
                 ),
-              ),
             ],
           ),
         )

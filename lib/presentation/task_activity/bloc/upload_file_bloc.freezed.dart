@@ -135,7 +135,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadFilesImpl &&
@@ -281,7 +281,7 @@ class _$ChangeFileNameImpl
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChangeFileNameImpl &&
@@ -498,7 +498,7 @@ class _$UploadLoadingStateImpl
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadLoadingStateImpl &&
@@ -656,7 +656,7 @@ class _$UploadErrorStateImpl
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadErrorStateImpl &&
@@ -812,7 +812,7 @@ class _$UploadSuccessStateImpl
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadSuccessStateImpl &&
@@ -972,7 +972,7 @@ class _$UploadChangeFileNameStateImpl
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$UploadChangeFileNameStateImpl &&

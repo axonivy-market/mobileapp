@@ -101,7 +101,7 @@ class _$AppStartedImpl implements AppStarted {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$AppStartedImpl);
   }
@@ -221,7 +221,7 @@ class _$AppInfoImpl implements AppInfo {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AppInfoImpl &&

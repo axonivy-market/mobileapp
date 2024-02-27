@@ -124,7 +124,7 @@ class _$GetTasksImpl implements _GetTasks {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetTasksImpl &&
@@ -264,7 +264,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$FilterTasksImpl &&
@@ -410,7 +410,7 @@ class _$SortTasksImpl implements _SortTasks {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SortTasksImpl &&
@@ -617,7 +617,7 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskLoadingStateImpl &&
@@ -759,7 +759,7 @@ class _$TaskErrorStateImpl implements TaskErrorState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskErrorStateImpl &&
@@ -904,7 +904,7 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
   }
 
   @override
-  bool operator ==(Object other) {
+  bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskSuccessStateImpl &&
