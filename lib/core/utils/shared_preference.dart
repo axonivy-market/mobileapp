@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:axon_ivy/data/models/profile/profile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../di/di_setup.dart';
 
@@ -8,6 +11,7 @@ enum SharedPreferencesItem {
   password,
   isLogin,
   keyLastUpdatedTime,
+  profileInfo,
 }
 
 class SharedPrefs {
@@ -48,11 +52,25 @@ class SharedPrefs {
   static Future setLastUpdated(int value) =>
       _pref.setInt(SharedPreferencesItem.keyLastUpdatedTime.name, value);
 
+  static Future<bool> setProfileInfo(Profile profile) {
+    final jsonString = json.encode(profile.toJson());
+    return _pref.setString(SharedPreferencesItem.profileInfo.name, jsonString);
+  }
+
+  static Profile? getProfileInfo() {
+    final jsonString = _pref.getString(SharedPreferencesItem.profileInfo.name);
+    if (jsonString == null) {
+      return null;
+    }
+    return Profile.fromJson(json.decode(jsonString));
+  }
+
   static void clear() {
     _pref.remove(SharedPreferencesItem.baseUrl.name);
     _pref.remove(SharedPreferencesItem.username.name);
     _pref.remove(SharedPreferencesItem.password.name);
     _pref.remove(SharedPreferencesItem.isLogin.name);
     _pref.remove(SharedPreferencesItem.keyLastUpdatedTime.name);
+    _pref.remove(SharedPreferencesItem.profileInfo.name);
   }
 }
