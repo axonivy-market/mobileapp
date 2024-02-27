@@ -72,7 +72,7 @@ class _TaskActivityWidgetState extends State<TaskActivityWidget>
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         surfaceTintColor: Colors.white,
-        leadingWidth: 80,
+        leadingWidth: 100,
         leading: const Padding(
           padding: EdgeInsets.only(left: 15),
           child: BackButtonWidget(),
