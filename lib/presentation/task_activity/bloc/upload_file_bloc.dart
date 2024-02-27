@@ -43,7 +43,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
         : SharedPrefs.getBaseUrl!;
   }
 
-  Future<void> _changeFileName(
+  Future _changeFileName(
       _ChangeFileName event, Emitter<UploadFileState> emit) async {
     final newFileName = "${event.fileName}.$fileType";
 
@@ -64,11 +64,11 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     cameraFile = null;
     emit(UploadFileState.success(uploadMessage));
     uploadMessage = "";
+    FilePicker.platform.clearTemporaryFiles();
     return;
   }
 
-  Future<void> _uploadFile(
-      _UploadFiles event, Emitter<UploadFileState> emit) async {
+  Future _uploadFile(_UploadFiles event, Emitter<UploadFileState> emit) async {
     UploadFileType type;
     type = event.type;
     caseId = event.caseId;
@@ -76,21 +76,22 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       case UploadFileType.recent:
         await getFileRecent(caseId: event.caseId, emit: emit);
         uploadMessage = "";
+        FilePicker.platform.clearTemporaryFiles();
         break;
       case UploadFileType.images:
         await getImages(caseId: event.caseId, emit: emit);
         uploadMessage = "";
+        FilePicker.platform.clearTemporaryFiles();
+
         break;
       case UploadFileType.camera:
         await usingCamera(caseId: event.caseId, emit: emit);
-        uploadMessage = "";
         break;
     }
     return;
   }
 
-  Future<void> getFileRecent(
-      {required int caseId, required Emitter emit}) async {
+  Future getFileRecent({required int caseId, required Emitter emit}) async {
     FilePickerResult? result;
 
     result = await FilePicker.platform.pickFiles(
@@ -98,9 +99,9 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     );
     if (result != null) {
       PlatformFile platformFile = result.files.first;
+      emit(const UploadFileState.loading(true));
       if (platformFile.size < maxFileSize) {
         File fileUpload = File(platformFile.path!);
-        emit(const UploadFileState.loading(true));
 
         await uploadFiles(
             caseId: caseId,
@@ -121,7 +122,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     }
   }
 
-  Future<void> uploadFiles(
+  Future uploadFiles(
       {required int caseId,
       required File file,
       required Emitter emit,
@@ -154,7 +155,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     }
   }
 
-  Future<void> getImages({required int caseId, required Emitter emit}) async {
+  Future getImages({required int caseId, required Emitter emit}) async {
     FilePickerResult? result;
 
     result = await FilePicker.platform.pickFiles(
@@ -163,10 +164,10 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
 
     if (result != null) {
       PlatformFile platformFile = result.files.first;
+      emit(const UploadFileState.loading(true));
       if (platformFile.size < maxFileSize) {
         // 10MB
         File fileUpload = File(platformFile.path!);
-        emit(const UploadFileState.loading(true));
 
         await uploadFiles(
             caseId: caseId,
@@ -188,7 +189,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     }
   }
 
-  Future<void> usingCamera({required int caseId, required Emitter emit}) async {
+  Future usingCamera({required int caseId, required Emitter emit}) async {
     final image = await ImagePicker().pickImage(source: ImageSource.camera);
     if (image == null) {
       return;
