@@ -9,9 +9,9 @@ part of 'task.dart';
 _$TaskIvyImpl _$$TaskIvyImplFromJson(Map<String, dynamic> json) =>
     _$TaskIvyImpl(
       id: json['id'] as int,
-      name: json['name'] as String? ?? "",
-      description: json['description'] as String? ?? "",
-      fullRequestPath: json['fullRequestPath'] as String? ?? "",
+      name: json['name'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      fullRequestPath: json['fullRequestPath'] as String? ?? '',
       offline: json['offline'] as bool? ?? false,
       startTimeStamp: DateTime.parse(json['startTimeStamp'] as String),
       expiryTimeStamp: json['expiryTimeStamp'] == null
@@ -19,12 +19,11 @@ _$TaskIvyImpl _$$TaskIvyImplFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['expiryTimeStamp'] as String),
       priority: json['priority'] as int? ?? 0,
       state: json['state'] as int? ?? 0,
-      activatorName: json['activatorName'] as String? ?? "",
-      category: json['category'] as String? ?? "",
-      documents: (json['documents'] as List<dynamic>?)
-              ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      activatorName: json['activatorName'] as String? ?? '',
+      category: json['category'] as String? ?? '',
+      caseTask: json['case'] == null
+          ? null
+          : CaseTask.fromJson(json['case'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$TaskIvyImplToJson(_$TaskIvyImpl instance) =>
@@ -40,5 +39,5 @@ Map<String, dynamic> _$$TaskIvyImplToJson(_$TaskIvyImpl instance) =>
       'state': instance.state,
       'activatorName': instance.activatorName,
       'category': instance.category,
-      'documents': instance.documents,
+      'case': instance.caseTask,
     };

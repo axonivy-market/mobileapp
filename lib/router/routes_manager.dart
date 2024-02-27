@@ -6,6 +6,7 @@ import 'package:axon_ivy/presentation/splash/splash_view.dart';
 import 'package:axon_ivy/presentation/tabbar/tabbar_view.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/presentation/task_activity/task_activity.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -19,6 +20,7 @@ class AppRouter {
   late final router = GoRouter(
     navigatorKey: _rootNavigatorKey,
     initialLocation: AppRoutes.splash,
+    observers: [BotToastNavigatorObserver()],
     routes: [
       GoRoute(
         path: AppRoutes.splash,

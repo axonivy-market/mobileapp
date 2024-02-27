@@ -1,6 +1,7 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/presentation/base_view/base_view.dart';
 import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProfileLoggedInWidget extends StatefulWidget {
+class ProfileLoggedInWidget extends BasePageScreen {
   const ProfileLoggedInWidget({super.key});
 
   @override

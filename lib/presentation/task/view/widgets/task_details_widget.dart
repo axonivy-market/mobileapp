@@ -70,8 +70,8 @@ class TaskDetailsWidget extends StatelessWidget {
                   TaskInfoRowWidget(
                     icon: AppAssets.icons.paperclip.svg(height: 16),
                     title: "taskDetails.attachments".tr(),
-                    value:
-                        "taskDetails.documents".plural(task.documents.length),
+                    value: "taskDetails.documents"
+                        .plural(task.caseTask?.documents.length ?? 0),
                   ),
                   TaskInfoRowWidget(
                     icon: AppAssets.icons.clock.svg(height: 16),

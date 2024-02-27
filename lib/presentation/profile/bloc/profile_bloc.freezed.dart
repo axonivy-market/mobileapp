@@ -86,12 +86,20 @@ class __$$fetchProfileEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$fetchProfileEventImpl implements fetchProfileEvent {
+class _$fetchProfileEventImpl
+    with DiagnosticableTreeMixin
+    implements fetchProfileEvent {
   const _$fetchProfileEventImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileEvent.fetchProfile()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ProfileEvent.fetchProfile'));
   }
 
   @override
@@ -242,12 +250,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
   const _$InitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ProfileState.initial'));
   }
 
   @override
@@ -369,15 +383,23 @@ class __$$ProfileInfoImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ProfileInfoImpl implements ProfileInfo {
+class _$ProfileInfoImpl with DiagnosticableTreeMixin implements ProfileInfo {
   const _$ProfileInfoImpl(this.profile);
 
   @override
   final Profile profile;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.profileInfo(profile: $profile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.profileInfo'))
+      ..add(DiagnosticsProperty('profile', profile));
   }
 
   @override

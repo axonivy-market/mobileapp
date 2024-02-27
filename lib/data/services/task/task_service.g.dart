@@ -32,7 +32,7 @@ class _TaskService implements TaskService {
     )
             .compose(
               _dio.options,
-              '/workflow/tasks',
+              '/api/workflow/tasks',
               queryParameters: queryParameters,
               data: _data,
             )
