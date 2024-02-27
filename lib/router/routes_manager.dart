@@ -31,7 +31,8 @@ class AppRouter {
         path: AppRoutes.taskActivity,
         pageBuilder: (_, state) => CustomTransitionPage(
           child: TaskActivityWidget(
-            taskIvy: (state.extra as Map<String, dynamic>)['task'],
+            taskIvy: (state.extra as Map<String, dynamic>)[
+                'task'], // if starting process, taskIvy would be null
             fullRequestPath: (state.extra as Map<String, dynamic>)['path'],
           ),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>

@@ -12,6 +12,7 @@ import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
 import 'package:axon_ivy/router/router.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -111,7 +112,7 @@ class TasksViewContent extends StatelessWidget {
                   Constants.appBarHeight -
                   Constants.bottomNavigationBarHeight,
               child: DataEmptyWidget(
-                message: taskState.error,
+                message: "errorCanNotAccessScreen".tr(),
                 icon: AppAssets.icons.tool.svg(),
               ),
             ),

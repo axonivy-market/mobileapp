@@ -1,9 +1,9 @@
 {
   "$schema" : "https://json-schema.axonivy.com/process/11.2.2/process.json",
-  "id" : "18D5D999A7CA4DEE",
+  "id" : "18DC10AB3E3FDFA5",
   "kind" : "HTML_DIALOG",
   "config" : {
-    "data" : "com.axonivy.mobile.mobiledemo.payslipInfomation.payslipInfomationData"
+    "data" : "com.axonivy.mobile.mobiledemo.ElevatorMaintainance.ElevatorMaintainanceData"
   },
   "elements" : [ {
       "id" : "f0",
@@ -11,7 +11,7 @@
       "name" : "start()",
       "config" : {
         "signature" : "start",
-        "guid" : "18D5D999A7E32938"
+        "guid" : "18DC10AB3E76C3F7"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
@@ -30,7 +30,7 @@
       "type" : "HtmlDialogEventStart",
       "name" : "close",
       "config" : {
-        "guid" : "18D5D999A80B5E90"
+        "guid" : "18DC10AB3EA58152"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 160 }

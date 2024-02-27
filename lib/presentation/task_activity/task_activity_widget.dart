@@ -95,7 +95,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
             backgroundColor: Colors.white,
             automaticallyImplyLeading: false,
             surfaceTintColor: Colors.white,
-            leadingWidth: 80,
+            leadingWidth: 100,
             leading: const Padding(
               padding: EdgeInsets.only(left: 15),
               child: BackButtonWidget(),

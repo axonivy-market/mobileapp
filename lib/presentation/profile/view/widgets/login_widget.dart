@@ -20,8 +20,9 @@ class LoginWidget extends StatelessWidget {
     return Center(
       child: SizedBox(
         width: 242,
-        height: 181,
+        height: 210,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             AppAssets.icons.login.svg(),
             Text(
