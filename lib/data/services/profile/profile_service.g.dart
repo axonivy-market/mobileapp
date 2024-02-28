@@ -32,7 +32,7 @@ class _ProfileService implements ProfileService {
     )
             .compose(
               _dio.options,
-              '/me',
+              '/api/me',
               queryParameters: queryParameters,
               data: _data,
             )
