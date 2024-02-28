@@ -1,4 +1,4 @@
-import 'package:axon_ivy/data/data_sources/process_remote_data_source.dart';
+import 'package:axon_ivy/data/data_sources/process/process_remote_data_source.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/data/services/process/process_service.dart';
 import 'package:injectable/injectable.dart';

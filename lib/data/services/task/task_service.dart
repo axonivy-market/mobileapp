@@ -11,6 +11,6 @@ abstract class TaskService {
   @factoryMethod
   factory TaskService(Dio dio) = _TaskService;
 
-  @GET('/workflow/tasks')
+  @GET('/api/workflow/tasks')
   Future<List<TaskIvy>> getTasks();
 }

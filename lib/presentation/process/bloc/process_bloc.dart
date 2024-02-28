@@ -3,18 +3,16 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
-import 'package:axon_ivy/data/repositories/process_repository.dart';
+import 'package:axon_ivy/data/repositories/process/process_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-part 'process_event.dart';
-
-part 'process_state.dart';
-
 part 'process_bloc.freezed.dart';
+part 'process_event.dart';
+part 'process_state.dart';
 
 @injectable
 class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {

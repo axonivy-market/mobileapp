@@ -1,5 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 
+class APIHeader {
+  static String contentType = 'multipart/form-data';
+  static String requestBy = 'ivy';
+}
+
 enum FilterType { all, expired }
 
 mixin class SortType {}

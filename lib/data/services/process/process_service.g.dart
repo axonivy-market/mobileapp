@@ -32,7 +32,7 @@ class _ProcessService implements ProcessService {
     )
             .compose(
               _dio.options,
-              '/workflow/processstarts',
+              '/api/workflow/processstarts',
               queryParameters: queryParameters,
               data: _data,
             )

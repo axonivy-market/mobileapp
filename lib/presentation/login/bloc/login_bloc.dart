@@ -12,7 +12,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/app/app_config.dart';
 import '../../../core/di/di_setup.dart';
 import '../../../core/utils/shared_preference.dart';
-import '../../../data/repositories/task_repository.dart';
+import '../../../data/repositories/task/task_repository.dart';
 import '../../../util/resources/validators.dart';
 
 part 'login_bloc.freezed.dart';

@@ -16,42 +16,37 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ProfileEvent {
-  bool get isLogged => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLogged) loggedIn,
+    required TResult Function() fetchProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isLogged)? loggedIn,
+    TResult? Function()? fetchProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLogged)? loggedIn,
+    TResult Function()? fetchProfile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LoggedInEvent value) loggedIn,
+    required TResult Function(fetchProfileEvent value) fetchProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoggedInEvent value)? loggedIn,
+    TResult? Function(fetchProfileEvent value)? fetchProfile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoggedInEvent value)? loggedIn,
+    TResult Function(fetchProfileEvent value)? fetchProfile,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $ProfileEventCopyWith<ProfileEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,8 +55,6 @@ abstract class $ProfileEventCopyWith<$Res> {
   factory $ProfileEventCopyWith(
           ProfileEvent value, $Res Function(ProfileEvent) then) =
       _$ProfileEventCopyWithImpl<$Res, ProfileEvent>;
-  @useResult
-  $Res call({bool isLogged});
 }
 
 /// @nodoc
@@ -73,109 +66,75 @@ class _$ProfileEventCopyWithImpl<$Res, $Val extends ProfileEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLogged = null,
-  }) {
-    return _then(_value.copyWith(
-      isLogged: null == isLogged
-          ? _value.isLogged
-          : isLogged // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$LoggedInEventImplCopyWith<$Res>
-    implements $ProfileEventCopyWith<$Res> {
-  factory _$$LoggedInEventImplCopyWith(
-          _$LoggedInEventImpl value, $Res Function(_$LoggedInEventImpl) then) =
-      __$$LoggedInEventImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({bool isLogged});
+abstract class _$$fetchProfileEventImplCopyWith<$Res> {
+  factory _$$fetchProfileEventImplCopyWith(_$fetchProfileEventImpl value,
+          $Res Function(_$fetchProfileEventImpl) then) =
+      __$$fetchProfileEventImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$LoggedInEventImplCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$LoggedInEventImpl>
-    implements _$$LoggedInEventImplCopyWith<$Res> {
-  __$$LoggedInEventImplCopyWithImpl(
-      _$LoggedInEventImpl _value, $Res Function(_$LoggedInEventImpl) _then)
+class __$$fetchProfileEventImplCopyWithImpl<$Res>
+    extends _$ProfileEventCopyWithImpl<$Res, _$fetchProfileEventImpl>
+    implements _$$fetchProfileEventImplCopyWith<$Res> {
+  __$$fetchProfileEventImplCopyWithImpl(_$fetchProfileEventImpl _value,
+      $Res Function(_$fetchProfileEventImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLogged = null,
-  }) {
-    return _then(_$LoggedInEventImpl(
-      null == isLogged
-          ? _value.isLogged
-          : isLogged // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$LoggedInEventImpl implements LoggedInEvent {
-  const _$LoggedInEventImpl(this.isLogged);
+class _$fetchProfileEventImpl
+    with DiagnosticableTreeMixin
+    implements fetchProfileEvent {
+  const _$fetchProfileEventImpl();
 
   @override
-  final bool isLogged;
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileEvent.fetchProfile()';
+  }
 
   @override
-  String toString() {
-    return 'ProfileEvent.loggedIn(isLogged: $isLogged)';
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ProfileEvent.fetchProfile'));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$LoggedInEventImpl &&
-            (identical(other.isLogged, isLogged) ||
-                other.isLogged == isLogged));
+        (other.runtimeType == runtimeType && other is _$fetchProfileEventImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLogged);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$LoggedInEventImplCopyWith<_$LoggedInEventImpl> get copyWith =>
-      __$$LoggedInEventImplCopyWithImpl<_$LoggedInEventImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isLogged) loggedIn,
+    required TResult Function() fetchProfile,
   }) {
-    return loggedIn(isLogged);
+    return fetchProfile();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isLogged)? loggedIn,
+    TResult? Function()? fetchProfile,
   }) {
-    return loggedIn?.call(isLogged);
+    return fetchProfile?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isLogged)? loggedIn,
+    TResult Function()? fetchProfile,
     required TResult orElse(),
   }) {
-    if (loggedIn != null) {
-      return loggedIn(isLogged);
+    if (fetchProfile != null) {
+      return fetchProfile();
     }
     return orElse();
   }
@@ -183,41 +142,34 @@ class _$LoggedInEventImpl implements LoggedInEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(LoggedInEvent value) loggedIn,
+    required TResult Function(fetchProfileEvent value) fetchProfile,
   }) {
-    return loggedIn(this);
+    return fetchProfile(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(LoggedInEvent value)? loggedIn,
+    TResult? Function(fetchProfileEvent value)? fetchProfile,
   }) {
-    return loggedIn?.call(this);
+    return fetchProfile?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(LoggedInEvent value)? loggedIn,
+    TResult Function(fetchProfileEvent value)? fetchProfile,
     required TResult orElse(),
   }) {
-    if (loggedIn != null) {
-      return loggedIn(this);
+    if (fetchProfile != null) {
+      return fetchProfile(this);
     }
     return orElse();
   }
 }
 
-abstract class LoggedInEvent implements ProfileEvent {
-  const factory LoggedInEvent(final bool isLogged) = _$LoggedInEventImpl;
-
-  @override
-  bool get isLogged;
-  @override
-  @JsonKey(ignore: true)
-  _$$LoggedInEventImplCopyWith<_$LoggedInEventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+abstract class fetchProfileEvent implements ProfileEvent {
+  const factory fetchProfileEvent() = _$fetchProfileEventImpl;
 }
 
 /// @nodoc
@@ -225,38 +177,38 @@ mixin _$ProfileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoggedIn) loggedIn,
+    required TResult Function(Profile profile) profileInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isLoggedIn)? loggedIn,
+    TResult? Function(Profile profile)? profileInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoggedIn)? loggedIn,
+    TResult Function(Profile profile)? profileInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(LoggedInState value) loggedIn,
+    required TResult Function(ProfileInfo value) profileInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(LoggedInState value)? loggedIn,
+    TResult? Function(ProfileInfo value)? profileInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(LoggedInState value)? loggedIn,
+    TResult Function(ProfileInfo value)? profileInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -298,12 +250,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
   const _$InitialImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ProfileState.initial'));
   }
 
   @override
@@ -319,7 +277,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoggedIn) loggedIn,
+    required TResult Function(Profile profile) profileInfo,
   }) {
     return initial();
   }
@@ -328,7 +286,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isLoggedIn)? loggedIn,
+    TResult? Function(Profile profile)? profileInfo,
   }) {
     return initial?.call();
   }
@@ -337,7 +295,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoggedIn)? loggedIn,
+    TResult Function(Profile profile)? profileInfo,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -350,7 +308,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(LoggedInState value) loggedIn,
+    required TResult Function(ProfileInfo value) profileInfo,
   }) {
     return initial(this);
   }
@@ -359,7 +317,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(LoggedInState value)? loggedIn,
+    TResult? Function(ProfileInfo value)? profileInfo,
   }) {
     return initial?.call(this);
   }
@@ -368,7 +326,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(LoggedInState value)? loggedIn,
+    TResult Function(ProfileInfo value)? profileInfo,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -383,94 +341,111 @@ abstract class Initial implements ProfileState {
 }
 
 /// @nodoc
-abstract class _$$LoggedInStateImplCopyWith<$Res> {
-  factory _$$LoggedInStateImplCopyWith(
-          _$LoggedInStateImpl value, $Res Function(_$LoggedInStateImpl) then) =
-      __$$LoggedInStateImplCopyWithImpl<$Res>;
+abstract class _$$ProfileInfoImplCopyWith<$Res> {
+  factory _$$ProfileInfoImplCopyWith(
+          _$ProfileInfoImpl value, $Res Function(_$ProfileInfoImpl) then) =
+      __$$ProfileInfoImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool isLoggedIn});
+  $Res call({Profile profile});
+
+  $ProfileCopyWith<$Res> get profile;
 }
 
 /// @nodoc
-class __$$LoggedInStateImplCopyWithImpl<$Res>
-    extends _$ProfileStateCopyWithImpl<$Res, _$LoggedInStateImpl>
-    implements _$$LoggedInStateImplCopyWith<$Res> {
-  __$$LoggedInStateImplCopyWithImpl(
-      _$LoggedInStateImpl _value, $Res Function(_$LoggedInStateImpl) _then)
+class __$$ProfileInfoImplCopyWithImpl<$Res>
+    extends _$ProfileStateCopyWithImpl<$Res, _$ProfileInfoImpl>
+    implements _$$ProfileInfoImplCopyWith<$Res> {
+  __$$ProfileInfoImplCopyWithImpl(
+      _$ProfileInfoImpl _value, $Res Function(_$ProfileInfoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoggedIn = null,
+    Object? profile = null,
   }) {
-    return _then(_$LoggedInStateImpl(
-      null == isLoggedIn
-          ? _value.isLoggedIn
-          : isLoggedIn // ignore: cast_nullable_to_non_nullable
-              as bool,
+    return _then(_$ProfileInfoImpl(
+      null == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as Profile,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ProfileCopyWith<$Res> get profile {
+    return $ProfileCopyWith<$Res>(_value.profile, (value) {
+      return _then(_value.copyWith(profile: value));
+    });
   }
 }
 
 /// @nodoc
 
-class _$LoggedInStateImpl implements LoggedInState {
-  const _$LoggedInStateImpl(this.isLoggedIn);
+class _$ProfileInfoImpl with DiagnosticableTreeMixin implements ProfileInfo {
+  const _$ProfileInfoImpl(this.profile);
 
   @override
-  final bool isLoggedIn;
+  final Profile profile;
 
   @override
-  String toString() {
-    return 'ProfileState.loggedIn(isLoggedIn: $isLoggedIn)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.profileInfo(profile: $profile)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.profileInfo'))
+      ..add(DiagnosticsProperty('profile', profile));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoggedInStateImpl &&
-            (identical(other.isLoggedIn, isLoggedIn) ||
-                other.isLoggedIn == isLoggedIn));
+            other is _$ProfileInfoImpl &&
+            (identical(other.profile, profile) || other.profile == profile));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoggedIn);
+  int get hashCode => Object.hash(runtimeType, profile);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$LoggedInStateImplCopyWith<_$LoggedInStateImpl> get copyWith =>
-      __$$LoggedInStateImplCopyWithImpl<_$LoggedInStateImpl>(this, _$identity);
+  _$$ProfileInfoImplCopyWith<_$ProfileInfoImpl> get copyWith =>
+      __$$ProfileInfoImplCopyWithImpl<_$ProfileInfoImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(bool isLoggedIn) loggedIn,
+    required TResult Function(Profile profile) profileInfo,
   }) {
-    return loggedIn(isLoggedIn);
+    return profileInfo(profile);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(bool isLoggedIn)? loggedIn,
+    TResult? Function(Profile profile)? profileInfo,
   }) {
-    return loggedIn?.call(isLoggedIn);
+    return profileInfo?.call(profile);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(bool isLoggedIn)? loggedIn,
+    TResult Function(Profile profile)? profileInfo,
     required TResult orElse(),
   }) {
-    if (loggedIn != null) {
-      return loggedIn(isLoggedIn);
+    if (profileInfo != null) {
+      return profileInfo(profile);
     }
     return orElse();
   }
@@ -479,39 +454,39 @@ class _$LoggedInStateImpl implements LoggedInState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(LoggedInState value) loggedIn,
+    required TResult Function(ProfileInfo value) profileInfo,
   }) {
-    return loggedIn(this);
+    return profileInfo(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(LoggedInState value)? loggedIn,
+    TResult? Function(ProfileInfo value)? profileInfo,
   }) {
-    return loggedIn?.call(this);
+    return profileInfo?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(LoggedInState value)? loggedIn,
+    TResult Function(ProfileInfo value)? profileInfo,
     required TResult orElse(),
   }) {
-    if (loggedIn != null) {
-      return loggedIn(this);
+    if (profileInfo != null) {
+      return profileInfo(this);
     }
     return orElse();
   }
 }
 
-abstract class LoggedInState implements ProfileState {
-  const factory LoggedInState(final bool isLoggedIn) = _$LoggedInStateImpl;
+abstract class ProfileInfo implements ProfileState {
+  const factory ProfileInfo(final Profile profile) = _$ProfileInfoImpl;
 
-  bool get isLoggedIn;
+  Profile get profile;
   @JsonKey(ignore: true)
-  _$$LoggedInStateImplCopyWith<_$LoggedInStateImpl> get copyWith =>
+  _$$ProfileInfoImplCopyWith<_$ProfileInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

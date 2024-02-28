@@ -3,6 +3,7 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
+import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
@@ -55,6 +56,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final SortBloc _sortBloc;
   late final OfflineIndicatorCubit _offlineIndicatorCubit;
   late final TabBarCubit _tabBarCubit;
+  late final LoggedInCubit _loggedInCubit;
   bool shouldFetchData = true;
   int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
 
@@ -86,6 +88,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _profileBloc = getIt<ProfileBloc>();
     _offlineIndicatorCubit = getIt<OfflineIndicatorCubit>();
     _tabBarCubit = getIt<TabBarCubit>();
+    _loggedInCubit = getIt<LoggedInCubit>();
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
@@ -112,12 +115,13 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _sortBloc),
         BlocProvider(create: (context) => _offlineIndicatorCubit),
         BlocProvider(create: (context) => _tabBarCubit),
+        BlocProvider(create: (context) => _loggedInCubit),
       ],
       child: MultiBlocListener(
         listeners: [
-          BlocListener<ProfileBloc, ProfileState>(
+          BlocListener<LoggedInCubit, LoggedInState>(
             listener: (context, state) {
-              if (state is LoggedInState && state.isLoggedIn) {
+              if (state is LoggedInSuccessState && state.isLoggedIn) {
                 fetchData();
               }
             },
