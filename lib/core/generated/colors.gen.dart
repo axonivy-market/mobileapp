@@ -34,8 +34,14 @@ class AppColors {
   /// Color: #A3A3A3
   static const Color darkSouls = Color(0xFFA3A3A3);
 
+  /// Color: #FAFAFA
+  static const Color drwhite = Color(0xFFFAFAFA);
+
   /// Color: #1B1B1B
   static const Color eerieBlack = Color(0xFF1B1B1B);
+
+  /// Color: #DFDFDF
+  static const Color kinglyCloud = Color(0xFFDFDFDF);
 
   /// Color: #202020
   static const Color lead = Color(0xFF202020);
@@ -46,11 +52,20 @@ class AppColors {
   /// Color: #2968C7
   static const Color mimesiaBlue = Color(0xFF2968C7);
 
+  /// Color: #E7E7E7
+  static const Color placebo = Color(0xFFE7E7E7);
+
   /// Color: #FF796F
   static const Color salmon = Color(0xFFFF796F);
 
   /// Color: #2C2C2C
   static const Color shoeWax = Color(0xFF2C2C2C);
+
+  /// Color: #BFBFBF
+  static const Color silver = Color(0xFFBFBFBF);
+
+  /// Color: #96C4D4
+  static const Color skyBus = Color(0xFF96C4D4);
 
   /// Color: #757575
   static const Color sonicSilver = Color(0xFF757575);

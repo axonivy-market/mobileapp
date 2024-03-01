@@ -37,12 +37,22 @@ class $AssetsIconsGen {
   /// File path: assets/icons/category-2.svg
   SvgGenImage get category2 => const SvgGenImage('assets/icons/category-2.svg');
 
+  /// File path: assets/icons/chevron-up.svg
+  SvgGenImage get chevronUp => const SvgGenImage('assets/icons/chevron-up.svg');
+
+  /// File path: assets/icons/chevron_left.svg
+  SvgGenImage get chevronLeft =>
+      const SvgGenImage('assets/icons/chevron_left.svg');
+
   /// File path: assets/icons/chevron_right.svg
   SvgGenImage get chevronRight =>
       const SvgGenImage('assets/icons/chevron_right.svg');
 
   /// File path: assets/icons/clock.svg
   SvgGenImage get clock => const SvgGenImage('assets/icons/clock.svg');
+
+  /// File path: assets/icons/cloud-off.svg
+  SvgGenImage get cloudOff => const SvgGenImage('assets/icons/cloud-off.svg');
 
   /// File path: assets/icons/filter.svg
   SvgGenImage get filter => const SvgGenImage('assets/icons/filter.svg');
@@ -75,11 +85,28 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_users.svg
   SvgGenImage get icUsers => const SvgGenImage('assets/icons/ic_users.svg');
 
+  /// File path: assets/icons/icon_camera.svg
+  SvgGenImage get iconCamera =>
+      const SvgGenImage('assets/icons/icon_camera.svg');
+
+  /// File path: assets/icons/icon_file.svg
+  SvgGenImage get iconFile => const SvgGenImage('assets/icons/icon_file.svg');
+
+  /// File path: assets/icons/icon_image.svg
+  SvgGenImage get iconImage => const SvgGenImage('assets/icons/icon_image.svg');
+
   /// File path: assets/icons/list.svg
   SvgGenImage get list => const SvgGenImage('assets/icons/list.svg');
 
+  /// File path: assets/icons/login.svg
+  SvgGenImage get login => const SvgGenImage('assets/icons/login.svg');
+
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
+
+  /// File path: assets/icons/no_expired_task.svg
+  SvgGenImage get noExpiredTask =>
+      const SvgGenImage('assets/icons/no_expired_task.svg');
 
   /// File path: assets/icons/notification.svg
   SvgGenImage get notification =>
@@ -132,6 +159,9 @@ class $AssetsIconsGen {
   SvgGenImage get taskBottomBar =>
       const SvgGenImage('assets/icons/task_bottom_bar.svg');
 
+  /// File path: assets/icons/tool.svg
+  SvgGenImage get tool => const SvgGenImage('assets/icons/tool.svg');
+
   /// File path: assets/icons/user.svg
   SvgGenImage get user => const SvgGenImage('assets/icons/user.svg');
 
@@ -143,8 +173,11 @@ class $AssetsIconsGen {
         arrowRight,
         calendar,
         category2,
+        chevronUp,
+        chevronLeft,
         chevronRight,
         clock,
+        cloudOff,
         filter,
         icClose,
         icDatabase,
@@ -154,8 +187,13 @@ class $AssetsIconsGen {
         icSearchText,
         icTrigger,
         icUsers,
+        iconCamera,
+        iconFile,
+        iconImage,
         list,
+        login,
         logo,
+        noExpiredTask,
         notification,
         offline,
         paperclip,
@@ -170,6 +208,7 @@ class $AssetsIconsGen {
         settingBottomBar,
         sorting,
         taskBottomBar,
+        tool,
         user,
         users
       ];

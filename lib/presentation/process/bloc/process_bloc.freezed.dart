@@ -34,17 +34,17 @@ mixin _$ProcessEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetProcess value) getProcess,
+    required TResult Function(GetProcess value) getProcess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetProcess value)? getProcess,
+    TResult? Function(GetProcess value)? getProcess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetProcess value)? getProcess,
+    TResult Function(GetProcess value)? getProcess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -86,7 +86,7 @@ class __$$GetProcessImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetProcessImpl with DiagnosticableTreeMixin implements _GetProcess {
+class _$GetProcessImpl with DiagnosticableTreeMixin implements GetProcess {
   const _$GetProcessImpl();
 
   @override
@@ -140,7 +140,7 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements _GetProcess {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(_GetProcess value) getProcess,
+    required TResult Function(GetProcess value) getProcess,
   }) {
     return getProcess(this);
   }
@@ -148,7 +148,7 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements _GetProcess {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetProcess value)? getProcess,
+    TResult? Function(GetProcess value)? getProcess,
   }) {
     return getProcess?.call(this);
   }
@@ -156,7 +156,7 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements _GetProcess {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetProcess value)? getProcess,
+    TResult Function(GetProcess value)? getProcess,
     required TResult orElse(),
   }) {
     if (getProcess != null) {
@@ -166,36 +166,40 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements _GetProcess {
   }
 }
 
-abstract class _GetProcess implements ProcessEvent {
-  const factory _GetProcess() = _$GetProcessImpl;
+abstract class GetProcess implements ProcessEvent {
+  const factory GetProcess() = _$GetProcessImpl;
 }
 
 /// @nodoc
 mixin _$ProcessState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Process> processes) success,
+    required TResult Function(List<Process> processes, bool isOnline) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<Process> processes)? success,
+    TResult? Function(List<Process> processes, bool isOnline)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Process> processes)? success,
+    TResult Function(List<Process> processes, bool isOnline)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitialState value) initial,
     required TResult Function(ProcessLoadingState value) loading,
     required TResult Function(ProcessErrorState value) error,
     required TResult Function(ProcessSuccessState value) success,
@@ -203,6 +207,7 @@ mixin _$ProcessState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitialState value)? initial,
     TResult? Function(ProcessLoadingState value)? loading,
     TResult? Function(ProcessErrorState value)? error,
     TResult? Function(ProcessSuccessState value)? success,
@@ -210,6 +215,7 @@ mixin _$ProcessState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialState value)? initial,
     TResult Function(ProcessLoadingState value)? loading,
     TResult Function(ProcessErrorState value)? error,
     TResult Function(ProcessSuccessState value)? success,
@@ -234,6 +240,126 @@ class _$ProcessStateCopyWithImpl<$Res, $Val extends ProcessState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+}
+
+/// @nodoc
+abstract class _$$InitialStateImplCopyWith<$Res> {
+  factory _$$InitialStateImplCopyWith(
+          _$InitialStateImpl value, $Res Function(_$InitialStateImpl) then) =
+      __$$InitialStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$InitialStateImplCopyWithImpl<$Res>
+    extends _$ProcessStateCopyWithImpl<$Res, _$InitialStateImpl>
+    implements _$$InitialStateImplCopyWith<$Res> {
+  __$$InitialStateImplCopyWithImpl(
+      _$InitialStateImpl _value, $Res Function(_$InitialStateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$InitialStateImpl with DiagnosticableTreeMixin implements InitialState {
+  const _$InitialStateImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProcessState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ProcessState.initial'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$InitialStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(bool isShowLoading) loading,
+    required TResult Function(String error) error,
+    required TResult Function(List<Process> processes, bool isOnline) success,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(List<Process> processes, bool isOnline)? success,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(bool isShowLoading)? loading,
+    TResult Function(String error)? error,
+    TResult Function(List<Process> processes, bool isOnline)? success,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(InitialState value) initial,
+    required TResult Function(ProcessLoadingState value) loading,
+    required TResult Function(ProcessErrorState value) error,
+    required TResult Function(ProcessSuccessState value) success,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitialState value)? initial,
+    TResult? Function(ProcessLoadingState value)? loading,
+    TResult? Function(ProcessErrorState value)? error,
+    TResult? Function(ProcessSuccessState value)? success,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialState value)? initial,
+    TResult Function(ProcessLoadingState value)? loading,
+    TResult Function(ProcessErrorState value)? error,
+    TResult Function(ProcessSuccessState value)? success,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InitialState implements ProcessState {
+  const factory InitialState() = _$InitialStateImpl;
 }
 
 /// @nodoc
@@ -312,9 +438,10 @@ class _$ProcessLoadingStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Process> processes) success,
+    required TResult Function(List<Process> processes, bool isOnline) success,
   }) {
     return loading(isShowLoading);
   }
@@ -322,9 +449,10 @@ class _$ProcessLoadingStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<Process> processes)? success,
+    TResult? Function(List<Process> processes, bool isOnline)? success,
   }) {
     return loading?.call(isShowLoading);
   }
@@ -332,9 +460,10 @@ class _$ProcessLoadingStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Process> processes)? success,
+    TResult Function(List<Process> processes, bool isOnline)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -346,6 +475,7 @@ class _$ProcessLoadingStateImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitialState value) initial,
     required TResult Function(ProcessLoadingState value) loading,
     required TResult Function(ProcessErrorState value) error,
     required TResult Function(ProcessSuccessState value) success,
@@ -356,6 +486,7 @@ class _$ProcessLoadingStateImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitialState value)? initial,
     TResult? Function(ProcessLoadingState value)? loading,
     TResult? Function(ProcessErrorState value)? error,
     TResult? Function(ProcessSuccessState value)? success,
@@ -366,6 +497,7 @@ class _$ProcessLoadingStateImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialState value)? initial,
     TResult Function(ProcessLoadingState value)? loading,
     TResult Function(ProcessErrorState value)? error,
     TResult Function(ProcessSuccessState value)? success,
@@ -463,9 +595,10 @@ class _$ProcessErrorStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Process> processes) success,
+    required TResult Function(List<Process> processes, bool isOnline) success,
   }) {
     return error(this.error);
   }
@@ -473,9 +606,10 @@ class _$ProcessErrorStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<Process> processes)? success,
+    TResult? Function(List<Process> processes, bool isOnline)? success,
   }) {
     return error?.call(this.error);
   }
@@ -483,9 +617,10 @@ class _$ProcessErrorStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Process> processes)? success,
+    TResult Function(List<Process> processes, bool isOnline)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -497,6 +632,7 @@ class _$ProcessErrorStateImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitialState value) initial,
     required TResult Function(ProcessLoadingState value) loading,
     required TResult Function(ProcessErrorState value) error,
     required TResult Function(ProcessSuccessState value) success,
@@ -507,6 +643,7 @@ class _$ProcessErrorStateImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitialState value)? initial,
     TResult? Function(ProcessLoadingState value)? loading,
     TResult? Function(ProcessErrorState value)? error,
     TResult? Function(ProcessSuccessState value)? success,
@@ -517,6 +654,7 @@ class _$ProcessErrorStateImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialState value)? initial,
     TResult Function(ProcessLoadingState value)? loading,
     TResult Function(ProcessErrorState value)? error,
     TResult Function(ProcessSuccessState value)? success,
@@ -544,7 +682,7 @@ abstract class _$$ProcessSuccessStateImplCopyWith<$Res> {
           $Res Function(_$ProcessSuccessStateImpl) then) =
       __$$ProcessSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Process> processes});
+  $Res call({List<Process> processes, bool isOnline});
 }
 
 /// @nodoc
@@ -559,12 +697,17 @@ class __$$ProcessSuccessStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? processes = null,
+    Object? isOnline = null,
   }) {
     return _then(_$ProcessSuccessStateImpl(
-      null == processes
+      processes: null == processes
           ? _value._processes
           : processes // ignore: cast_nullable_to_non_nullable
               as List<Process>,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -574,7 +717,8 @@ class __$$ProcessSuccessStateImplCopyWithImpl<$Res>
 class _$ProcessSuccessStateImpl
     with DiagnosticableTreeMixin
     implements ProcessSuccessState {
-  const _$ProcessSuccessStateImpl(final List<Process> processes)
+  const _$ProcessSuccessStateImpl(
+      {required final List<Process> processes, this.isOnline = true})
       : _processes = processes;
 
   final List<Process> _processes;
@@ -586,8 +730,12 @@ class _$ProcessSuccessStateImpl
   }
 
   @override
+  @JsonKey()
+  final bool isOnline;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProcessState.success(processes: $processes)';
+    return 'ProcessState.success(processes: $processes, isOnline: $isOnline)';
   }
 
   @override
@@ -595,7 +743,8 @@ class _$ProcessSuccessStateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ProcessState.success'))
-      ..add(DiagnosticsProperty('processes', processes));
+      ..add(DiagnosticsProperty('processes', processes))
+      ..add(DiagnosticsProperty('isOnline', isOnline));
   }
 
   @override
@@ -604,12 +753,14 @@ class _$ProcessSuccessStateImpl
         (other.runtimeType == runtimeType &&
             other is _$ProcessSuccessStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._processes, _processes));
+                .equals(other._processes, _processes) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_processes));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_processes), isOnline);
 
   @JsonKey(ignore: true)
   @override
@@ -621,33 +772,36 @@ class _$ProcessSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() initial,
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Process> processes) success,
+    required TResult Function(List<Process> processes, bool isOnline) success,
   }) {
-    return success(processes);
+    return success(processes, isOnline);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<Process> processes)? success,
+    TResult? Function(List<Process> processes, bool isOnline)? success,
   }) {
-    return success?.call(processes);
+    return success?.call(processes, isOnline);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Process> processes)? success,
+    TResult Function(List<Process> processes, bool isOnline)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(processes);
+      return success(processes, isOnline);
     }
     return orElse();
   }
@@ -655,6 +809,7 @@ class _$ProcessSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(InitialState value) initial,
     required TResult Function(ProcessLoadingState value) loading,
     required TResult Function(ProcessErrorState value) error,
     required TResult Function(ProcessSuccessState value) success,
@@ -665,6 +820,7 @@ class _$ProcessSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(InitialState value)? initial,
     TResult? Function(ProcessLoadingState value)? loading,
     TResult? Function(ProcessErrorState value)? error,
     TResult? Function(ProcessSuccessState value)? success,
@@ -675,6 +831,7 @@ class _$ProcessSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(InitialState value)? initial,
     TResult Function(ProcessLoadingState value)? loading,
     TResult Function(ProcessErrorState value)? error,
     TResult Function(ProcessSuccessState value)? success,
@@ -688,10 +845,12 @@ class _$ProcessSuccessStateImpl
 }
 
 abstract class ProcessSuccessState implements ProcessState {
-  const factory ProcessSuccessState(final List<Process> processes) =
-      _$ProcessSuccessStateImpl;
+  const factory ProcessSuccessState(
+      {required final List<Process> processes,
+      final bool isOnline}) = _$ProcessSuccessStateImpl;
 
   List<Process> get processes;
+  bool get isOnline;
   @JsonKey(ignore: true)
   _$$ProcessSuccessStateImplCopyWith<_$ProcessSuccessStateImpl> get copyWith =>
       throw _privateConstructorUsedError;

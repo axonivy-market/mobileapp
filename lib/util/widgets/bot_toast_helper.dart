@@ -1,4 +1,5 @@
 import 'package:bot_toast/bot_toast.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Function() showAppLoading({
@@ -31,21 +32,11 @@ Function() showAppLoading({
 }
 
 class AppLoadingWidget extends StatelessWidget {
-  const AppLoadingWidget({Key? key}) : super(key: key);
+  const AppLoadingWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(15),
-      decoration: const BoxDecoration(
-        color: Colors.black54,
-        borderRadius: BorderRadius.all(Radius.circular(8)),
-      ),
-      child: const CircularProgressIndicator(
-        color: Colors.red,
-        backgroundColor: Colors.green,
-      ),
-    );
+    return const CupertinoActivityIndicator(radius: 15);
   }
 }
 
@@ -53,8 +44,7 @@ class FadeAnimation extends StatefulWidget {
   final Widget? child;
   final AnimationController controller;
 
-  const FadeAnimation({Key? key, this.child, required this.controller})
-      : super(key: key);
+  const FadeAnimation({super.key, this.child, required this.controller});
 
   @override
   FadeAnimationState createState() => FadeAnimationState();

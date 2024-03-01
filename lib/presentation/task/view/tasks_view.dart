@@ -1,128 +1,179 @@
+import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
-import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_event.dart';
-import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_state.dart';
+import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
+import 'package:axon_ivy/presentation/task/bloc/task_detail/task_detail_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
-
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
+import 'package:axon_ivy/router/router.dart';
+import 'package:axon_ivy/util/widgets/widgets.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../core/di/di_setup.dart';
 import '../../../util/resources/constants.dart';
-import 'widgets/filter_widget.dart';
-import '../../../util/widgets/home_appbar.dart';
+import '../bloc/sort_bloc/sort_bloc.dart';
 
-class TasksView extends StatefulWidget {
+class TasksView extends StatelessWidget {
   const TasksView({super.key});
-
-  @override
-  State<TasksView> createState() => _TasksViewState();
-}
-
-class _TasksViewState extends State<TasksView> {
-  late final TaskBloc _taskBloc;
-  late final FilterBloc _filterBloc;
-  final ScrollController _scrollController = ScrollController();
-  @override
-  void initState() {
-    super.initState();
-    _filterBloc = getIt<FilterBloc>();
-    _filterBloc.add(FilterEvent(FilterType.all));
-    _taskBloc = getIt<TaskBloc>();
-    _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
-  }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => _taskBloc),
-        BlocProvider(create: (context) => _filterBloc),
+        BlocProvider.value(value: BlocProvider.of<TaskBloc>(context)),
+        BlocProvider.value(value: BlocProvider.of<FilterBloc>(context)),
+        BlocProvider.value(value: BlocProvider.of<SortBloc>(context)),
+        BlocProvider(create: (context) => getIt<TaskDetailCubit>()),
       ],
-      child: Scaffold(
-        appBar: const HomeAppBar(),
-        body: Builder(
-          builder: (context) {
-            final taskState = context.watch<TaskBloc>().state;
-            if (taskState is TaskErrorState) {
-              return Center(
-                child: Text(taskState.error),
-              );
-            } else if (taskState is TaskSuccessState) {
-              List<TaskIvy> tasks = taskState.tasks;
-              return Padding(
-                padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                child: CustomScrollView(
-                  physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics(),
-                  ),
-                  slivers: [
-                    CupertinoSliverRefreshControl(
-                      onRefresh: () async {
-                        final filterState =
-                            BlocProvider.of<FilterBloc>(context).state;
-                        await Future.delayed(const Duration(seconds: 1));
-                        _scrollController.animateTo(
-                          0.0,
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeOut,
-                        );
-                        _taskBloc
-                            .add(TaskEvent.getTasks(filterState.activeFilter));
-                      },
-                    ),
-                    if (tasks.isNotEmpty)
-                      SliverToBoxAdapter(
-                        child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: BlocListener<FilterBloc, FilterState>(
-                              listener: (context, filterState) {
-                                context.read<TaskBloc>().add(
-                                    TaskEvent.filterTasks(
-                                        filterState.activeFilter));
-                              },
-                              child: BlocBuilder<FilterBloc, FilterState>(
-                                builder: (context, filterState) {
-                                  return FilterWidget(
-                                    state: filterState,
-                                  );
-                                },
-                              ),
-                            )),
-                      ),
-                    SliverList(
-                      delegate: SliverChildBuilderDelegate((context, index) {
-                        if (tasks.isEmpty) {
-                          return const TaskEmptyWidget();
-                        } else {
-                          return GestureDetector(
-                            onLongPress: () {
-                              _showDetails(context, tasks[index]);
-                            },
-                            child: TaskItemWidget(
-                              name: tasks[index].name,
-                              description: tasks[index].description,
-                              priority: tasks[index].priority,
-                              expiryTimeStamp: tasks[index].expiryTimeStamp,
-                            ),
-                          );
-                        }
-                      }, childCount: tasks.isEmpty ? 1 : tasks.length),
-                    )
-                  ],
-                ),
-              );
-            } else {
-              return const Center(child: CircularProgressIndicator());
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<TaskDetailCubit, TaskDetailState>(
+              listener: (context, state) {
+            if (state is StartTaskState) {
+              context.push(AppRoutes.taskActivity, extra: {
+                'task': state.taskIvy,
+                'path': state.taskIvy.fullRequestPath
+              }).then((value) {
+                if (value != null && value as bool) {
+                  context.read<TabBarCubit>().navigateTaskList();
+                }
+              });
             }
+          }),
+          BlocListener<TaskBloc, TaskState>(listener: (context, state) {
+            context
+                .read<OfflineIndicatorCubit>()
+                .showOfflineIndicator(state is TaskErrorState);
+          }),
+        ],
+        child: BlocBuilder<TaskBloc, TaskState>(
+          builder: (context, taskState) {
+            final activeFilter = context.watch<FilterBloc>().state.activeFilter;
+            final tasksIsEmpty =
+                taskState is TaskSuccessState && taskState.tasks.isNotEmpty;
+            return TasksViewContent(
+              isShowFilterBar:
+                  tasksIsEmpty || activeFilter == FilterType.expired,
+            );
           },
         ),
       ),
     );
+  }
+}
+
+class TasksViewContent extends StatelessWidget {
+  const TasksViewContent({super.key, required this.isShowFilterBar});
+
+  final TaskIvy? taskSelecting = null;
+  final bool isShowFilterBar;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: HomeAppBar(
+        isShowFilterBar: isShowFilterBar,
+        isShowLastUpdated: true,
+      ),
+      body: BlocBuilder<TaskBloc, TaskState>(
+        builder: (context, taskState) {
+          if (taskState is TaskErrorState) {
+            return _buildErrorView(context, taskState);
+          } else if (taskState is TaskSuccessState) {
+            return _buildTaskList(context, taskState.tasks);
+          } else {
+            return const LoadingWidget();
+          }
+        },
+      ),
+    );
+  }
+
+  Widget _buildErrorView(BuildContext context, TaskErrorState taskState) {
+    return CustomScrollView(
+      physics:
+          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      slivers: [
+        CupertinoSliverRefreshControl(
+          onRefresh: () async => _onRefresh(context),
+        ),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (context, index) => SizedBox(
+              height: MediaQuery.of(context).size.height -
+                  Constants.appBarHeight -
+                  Constants.bottomNavigationBarHeight,
+              child: DataEmptyWidget(
+                message: "errorCanNotAccessScreen".tr(),
+                icon: AppAssets.icons.tool.svg(),
+              ),
+            ),
+            childCount: 1,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTaskList(BuildContext context, List<TaskIvy> tasks) {
+    final activeFilter = context.watch<FilterBloc>().state.activeFilter;
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
+        slivers: [
+          CupertinoSliverRefreshControl(
+            onRefresh: () async => _onRefresh(context),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) =>
+                  _buildTaskItem(context, tasks, activeFilter, index),
+              childCount: tasks.isEmpty ? 1 : tasks.length,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _onRefresh(BuildContext context) async {
+    final taskBloc = context.read<TaskBloc>();
+    final filterState = context.read<FilterBloc>().state;
+    await Future.delayed(const Duration(seconds: 1));
+    taskBloc.add(TaskEvent.getTasks(filterState.activeFilter));
+  }
+
+  Widget _buildTaskItem(BuildContext context, List<TaskIvy> tasks,
+      FilterType activeFilter, int index) {
+    if (tasks.isEmpty && activeFilter == FilterType.expired) {
+      return TaskEmptyWidget(activeFilter: activeFilter);
+    } else if (tasks.isEmpty) {
+      return TaskEmptyWidget(activeFilter: activeFilter);
+    } else {
+      final task = tasks[index];
+      return GestureDetector(
+        onTap: () {
+          _navigateTaskActivity(context, tasks[index]);
+        },
+        onLongPress: () => _showDetails(context, task),
+        child: TaskItemWidget(
+          name: task.name,
+          description: task.description,
+          priority: task.priority,
+          expiryTimeStamp: task.expiryTimeStamp,
+        ),
+      );
+    }
   }
 
   void _showDetails(BuildContext context, TaskIvy task) {
@@ -134,8 +185,22 @@ class _TasksViewState extends State<TasksView> {
       transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {
-        return TaskDetailsWidget(task: task);
+        return TaskDetailsWidget(
+          task: task,
+          onPressed: (task) => context.read<TaskDetailCubit>().startTask(task),
+        );
       },
     );
+  }
+
+  void _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
+    context.push(AppRoutes.taskActivity, extra: {
+      'task': taskIvy,
+      'path': taskIvy.fullRequestPath
+    }).then((value) {
+      if (value != null && value as bool) {
+        context.read<TabBarCubit>().navigateTaskList();
+      }
+    });
   }
 }

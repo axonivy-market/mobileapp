@@ -9,6 +9,7 @@
     <color name="TROLLEY GREY">#828282</color>
     <color name="WELDED IRON">#6E6E6E</color>
 
+    <color name="PLACEBO">#E7E7E7</color>
     <!-- DARK -->
     <color name="BLACK">#000000</color>
     <color name="EERIE BLACK">#1B1B1B</color>
@@ -38,8 +39,14 @@
     <color name="EERIE BLACK">#1B1B1B</color>
 
     <color name="DARK SOULS">#A3A3A3</color>
+    <color name="KINGLY CLOUD">#DFDFDF</color>
+    <color name="SKY BUS">#96C4D4</color>
+    <color name="SILVER">#BFBFBF</color>
+    <color name="PLACEBO">#E7E7E7</color>
 
 
+    <!-- Popup menu item-->
+    <color name="DRWHITE">#FAFAFA</color>
 </resources>
 
 

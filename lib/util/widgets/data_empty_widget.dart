@@ -12,25 +12,27 @@ class DataEmptyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          icon,
-          const SizedBox(height: 10),
-          SizedBox(
-            width: 250,
-            child: Text(
-              message.tr(),
-              textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
-                fontSize: 17,
-                fontWeight: FontWeight.w600,
-                color: AppColors.eerieBlack,
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            icon,
+            const SizedBox(height: 10),
+            SizedBox(
+              width: 250,
+              child: Text(
+                message.tr(),
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.eerieBlack,
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

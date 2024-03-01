@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:ic="http://ivyteam.ch/jsf/component"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+    <ui:composition template="/layouts/frame-10.xhtml">
+        <ui:define name="title">InvoiceDetails</ui:define>
+        <ui:define name="content">
+        <h:form id="form">
+            <div class="card ui-g" >
+                <div class="ui-g-12 p-d-flex p-jc-center">
+                    <h2>Payslip Salary</h2>
+                </div>
+                <div>
+                     <p:panel header="Employee Information">
+            <p:outputLabel value="Employee Name:" />
+            <p:inputText value="Nguyen Hung Thinh" />
+
+            <p:outputLabel value="Employee ID:" />
+            <p:inputText value="#018299" />
+            
+            <p:outputLabel value="Employee Phone Number:" />
+            <p:inputText value="+84 0123456789" />
+            
+            <p:outputLabel value="Employee Email:" />
+            <p:inputText value="thinh.abc.xyz@xxx.mail.com" />
+
+			<p:outputLabel value="Employee Address:" />
+            <p:inputText value="Musterstraße 123 12345 Musterstadt Deutschland" />
+        </p:panel>
+                <br />
+        
+
+        <p:panel header="Earnings">
+            <p:dataTable var="earning" value="#{[
+            {'type': 'Basic Salary', 'amount': '$5,000'},
+            {'type': 'Overtime', 'amount': '$800'},
+            {'type': 'Bonus', 'amount': '$1,200'},
+            {'type': 'Commission', 'amount': '$500'},
+            {'type': 'Allowance', 'amount': '$300'}
+        ]}">
+            <p:column headerText="Earning Type">
+                #{earning.type}
+            </p:column>
+            <p:column headerText="Amount">
+                #{earning.amount}
+            </p:column>
+        </p:dataTable>
+        </p:panel>
+                <br />
+        
+
+        <p:panel header="Deductions">
+            <p:dataTable var="deduction" value="#{[
+            {'type': 'Tax', 'amount': '$200'},
+            {'type': 'Insurance', 'amount': '$50'},
+            {'type': '401(k)', 'amount': '$100'},
+            {'type': 'Union Dues', 'amount': '$25'},
+            {'type': 'Other Deduction', 'amount': '$75'}
+        ]}">
+            <p:column headerText="Deduction Type">
+                #{deduction.type}
+            </p:column>
+            <p:column headerText="Amount">
+                #{deduction.amount}
+            </p:column>
+                    </p:dataTable>
+        </p:panel>
+                <br />
+        
+
+        <h:outputText value="Total Earnings: $7,800" />
+        <br />
+        <h:outputText value="Total Deductions: $450" />
+        <br />
+        <h:outputText value="Net Salary: $7,350" />
+
+                </div>
+            </div>
+           <div class="command-btns">
+                <p:commandLink id="cancel" actionListener="#{ivyWorkflowView.cancel()}" value="Cancel" />
+                <p:commandButton id="proceed" actionListener="#{logic.close}" value="Proceed" update="form" icon="pi pi-check" />
+            </div>
+                    <h:outputText id="netSalaryOutput" value="" />
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

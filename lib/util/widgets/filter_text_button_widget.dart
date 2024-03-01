@@ -22,7 +22,8 @@ class FilterTextButton extends StatelessWidget {
         height: 40,
         decoration: BoxDecoration(
             borderRadius: filterButtonStyle.borderRadius,
-            color: filterButtonStyle.backgroundColor),
+            color: filterButtonStyle.backgroundColor,
+            border: filterButtonStyle.boxBorder),
         child: Center(
           child: Text(
             filterButtonStyle.textButton.tr(),
