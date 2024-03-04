@@ -1,15 +1,18 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/presentation/base_view/base_view.dart';
-import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
+import 'package:axon_ivy/theme/bloc/theme_event.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:axon_ivy/core/generated/colors.gen.dart';
+import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:axon_ivy/theme/bloc/theme_bloc.dart'; // Import the ThemeBloc
+import 'package:axon_ivy/theme/theme.dart'; // Import your theme data
 
 class ProfileLoggedInWidget extends BasePageScreen {
   const ProfileLoggedInWidget({super.key});
@@ -19,6 +22,9 @@ class ProfileLoggedInWidget extends BasePageScreen {
 }
 
 class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
+  bool _isDarkMode = false;
+  bool _isDemoMode = false;
+
   @override
   void initState() {
     super.initState();
@@ -43,6 +49,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
           }),
           const SizedBox(height: 25),
           _buildDemo(),
+          _buildDarkMode(),
           _buildLanguage(),
           const Spacer(),
           _buildSignOutButton(),
@@ -203,7 +210,59 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 fontSize: 17,
                 color: AppColors.eerieBlack),
           ),
-          const SwitchWidget(),
+          SwitchWidget(
+            isDarkMode: false,
+            isDemoMode: _isDemoMode,
+            onThemeChanged: (value) {},
+            onDemoModeChanged: (value) {
+              setState(() {
+                _isDemoMode = value;
+              });
+              // You can put your logic for demo mode change here
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDarkMode() {
+    return Container(
+      height: 44,
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      margin: const EdgeInsets.only(bottom: 10),
+      decoration: BoxDecoration(
+        color: AppColors.bleachedSilk,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            "profile.darkMode".tr(),
+            style: GoogleFonts.inter(
+                fontWeight: FontWeight.w400,
+                fontSize: 17,
+                color: AppColors.eerieBlack),
+          ),
+          SwitchWidget(
+            isDarkMode: _isDarkMode,
+            isDemoMode: false,
+            onThemeChanged: (value) {
+              setState(() {
+                _isDarkMode = value;
+              });
+              // Dispatch the event to change the theme
+              context
+                  .read<ThemeBloc>()
+                  .add(ThemeEvent.changeTheme(value ? darkMode : lightMode));
+            },
+            onDemoModeChanged: (value) {
+              setState(() {
+                _isDemoMode = value;
+              });
+            },
+          ),
         ],
       ),
     );

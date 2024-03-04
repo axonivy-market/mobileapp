@@ -84,4 +84,7 @@ class AppColors {
 
   /// Color: #FFFFFF
   static const Color white = Color(0xFFFFFFFF);
+
+  /// Color: #4A4A4A
+  static const Color gray = Color(0xFF4A4A4A);
 }
