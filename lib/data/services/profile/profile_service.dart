@@ -12,6 +12,6 @@ abstract class ProfileService {
   @factoryMethod
   factory ProfileService(Dio dio) = _ProfileService;
 
-  @GET('/me')
+  @GET('/api/me')
   Future<Profile> getProfileInfo();
 }

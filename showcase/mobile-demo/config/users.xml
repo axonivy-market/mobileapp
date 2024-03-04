@@ -4,5 +4,12 @@
         <username>demo</username>
         <password>demo</password>
         <fullName>Demo User</fullName>
+        <emailAddress>portal2.axonivy@gmail.com</emailAddress>
+    </user>
+    <user>
+        <username>admin</username>
+        <password>admin</password>
+        <fullName>Admin User</fullName>
+        <emailAddress>portal1.axonivy@gmail.com</emailAddress>
     </user>
 </userConfig>
