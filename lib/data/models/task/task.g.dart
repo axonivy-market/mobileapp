@@ -24,6 +24,11 @@ _$TaskIvyImpl _$$TaskIvyImplFromJson(Map<String, dynamic> json) =>
       caseTask: json['case'] == null
           ? null
           : CaseTask.fromJson(json['case'] as Map<String, dynamic>),
+      taskDone: json['taskDone'] as bool? ?? false,
+      submitUrl: json['submitUrl'] as String? ?? '',
+      formHTMLPage: json['formHTMLPage'] as String? ?? '',
+      doneTaskFormDataSerialized:
+          json['doneTaskFormDataSerialized'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$TaskIvyImplToJson(_$TaskIvyImpl instance) =>
@@ -40,4 +45,8 @@ Map<String, dynamic> _$$TaskIvyImplToJson(_$TaskIvyImpl instance) =>
       'activatorName': instance.activatorName,
       'category': instance.category,
       'case': instance.caseTask,
+      'taskDone': instance.taskDone,
+      'submitUrl': instance.submitUrl,
+      'formHTMLPage': instance.formHTMLPage,
+      'doneTaskFormDataSerialized': instance.doneTaskFormDataSerialized,
     };

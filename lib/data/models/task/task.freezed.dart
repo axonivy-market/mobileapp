@@ -33,6 +33,10 @@ mixin _$TaskIvy {
   String get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'case', defaultValue: null)
   CaseTask? get caseTask => throw _privateConstructorUsedError;
+  bool get taskDone => throw _privateConstructorUsedError;
+  String get submitUrl => throw _privateConstructorUsedError;
+  String get formHTMLPage => throw _privateConstructorUsedError;
+  String get doneTaskFormDataSerialized => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -56,7 +60,11 @@ abstract class $TaskIvyCopyWith<$Res> {
       int state,
       String activatorName,
       String category,
-      @JsonKey(name: 'case', defaultValue: null) CaseTask? caseTask});
+      @JsonKey(name: 'case', defaultValue: null) CaseTask? caseTask,
+      bool taskDone,
+      String submitUrl,
+      String formHTMLPage,
+      String doneTaskFormDataSerialized});
 
   $CaseTaskCopyWith<$Res>? get caseTask;
 }
@@ -86,6 +94,10 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
     Object? activatorName = null,
     Object? category = null,
     Object? caseTask = freezed,
+    Object? taskDone = null,
+    Object? submitUrl = null,
+    Object? formHTMLPage = null,
+    Object? doneTaskFormDataSerialized = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -136,6 +148,22 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
           ? _value.caseTask
           : caseTask // ignore: cast_nullable_to_non_nullable
               as CaseTask?,
+      taskDone: null == taskDone
+          ? _value.taskDone
+          : taskDone // ignore: cast_nullable_to_non_nullable
+              as bool,
+      submitUrl: null == submitUrl
+          ? _value.submitUrl
+          : submitUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      formHTMLPage: null == formHTMLPage
+          ? _value.formHTMLPage
+          : formHTMLPage // ignore: cast_nullable_to_non_nullable
+              as String,
+      doneTaskFormDataSerialized: null == doneTaskFormDataSerialized
+          ? _value.doneTaskFormDataSerialized
+          : doneTaskFormDataSerialized // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -171,7 +199,11 @@ abstract class _$$TaskIvyImplCopyWith<$Res> implements $TaskIvyCopyWith<$Res> {
       int state,
       String activatorName,
       String category,
-      @JsonKey(name: 'case', defaultValue: null) CaseTask? caseTask});
+      @JsonKey(name: 'case', defaultValue: null) CaseTask? caseTask,
+      bool taskDone,
+      String submitUrl,
+      String formHTMLPage,
+      String doneTaskFormDataSerialized});
 
   @override
   $CaseTaskCopyWith<$Res>? get caseTask;
@@ -200,6 +232,10 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
     Object? activatorName = null,
     Object? category = null,
     Object? caseTask = freezed,
+    Object? taskDone = null,
+    Object? submitUrl = null,
+    Object? formHTMLPage = null,
+    Object? doneTaskFormDataSerialized = null,
   }) {
     return _then(_$TaskIvyImpl(
       id: null == id
@@ -250,6 +286,22 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
           ? _value.caseTask
           : caseTask // ignore: cast_nullable_to_non_nullable
               as CaseTask?,
+      taskDone: null == taskDone
+          ? _value.taskDone
+          : taskDone // ignore: cast_nullable_to_non_nullable
+              as bool,
+      submitUrl: null == submitUrl
+          ? _value.submitUrl
+          : submitUrl // ignore: cast_nullable_to_non_nullable
+              as String,
+      formHTMLPage: null == formHTMLPage
+          ? _value.formHTMLPage
+          : formHTMLPage // ignore: cast_nullable_to_non_nullable
+              as String,
+      doneTaskFormDataSerialized: null == doneTaskFormDataSerialized
+          ? _value.doneTaskFormDataSerialized
+          : doneTaskFormDataSerialized // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -269,7 +321,11 @@ class _$TaskIvyImpl implements _TaskIvy {
       this.state = 0,
       this.activatorName = '',
       this.category = '',
-      @JsonKey(name: 'case', defaultValue: null) this.caseTask = null});
+      @JsonKey(name: 'case', defaultValue: null) this.caseTask = null,
+      this.taskDone = false,
+      this.submitUrl = '',
+      this.formHTMLPage = '',
+      this.doneTaskFormDataSerialized = ''});
 
   factory _$TaskIvyImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskIvyImplFromJson(json);
@@ -308,10 +364,22 @@ class _$TaskIvyImpl implements _TaskIvy {
   @override
   @JsonKey(name: 'case', defaultValue: null)
   final CaseTask? caseTask;
+  @override
+  @JsonKey()
+  final bool taskDone;
+  @override
+  @JsonKey()
+  final String submitUrl;
+  @override
+  @JsonKey()
+  final String formHTMLPage;
+  @override
+  @JsonKey()
+  final String doneTaskFormDataSerialized;
 
   @override
   String toString() {
-    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiryTimeStamp: $expiryTimeStamp, priority: $priority, state: $state, activatorName: $activatorName, category: $category, caseTask: $caseTask)';
+    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiryTimeStamp: $expiryTimeStamp, priority: $priority, state: $state, activatorName: $activatorName, category: $category, caseTask: $caseTask, taskDone: $taskDone, submitUrl: $submitUrl, formHTMLPage: $formHTMLPage, doneTaskFormDataSerialized: $doneTaskFormDataSerialized)';
   }
 
   @override
@@ -338,7 +406,17 @@ class _$TaskIvyImpl implements _TaskIvy {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.caseTask, caseTask) ||
-                other.caseTask == caseTask));
+                other.caseTask == caseTask) &&
+            (identical(other.taskDone, taskDone) ||
+                other.taskDone == taskDone) &&
+            (identical(other.submitUrl, submitUrl) ||
+                other.submitUrl == submitUrl) &&
+            (identical(other.formHTMLPage, formHTMLPage) ||
+                other.formHTMLPage == formHTMLPage) &&
+            (identical(other.doneTaskFormDataSerialized,
+                    doneTaskFormDataSerialized) ||
+                other.doneTaskFormDataSerialized ==
+                    doneTaskFormDataSerialized));
   }
 
   @JsonKey(ignore: true)
@@ -356,7 +434,11 @@ class _$TaskIvyImpl implements _TaskIvy {
       state,
       activatorName,
       category,
-      caseTask);
+      caseTask,
+      taskDone,
+      submitUrl,
+      formHTMLPage,
+      doneTaskFormDataSerialized);
 
   @JsonKey(ignore: true)
   @override
@@ -385,8 +467,11 @@ abstract class _TaskIvy implements TaskIvy {
       final int state,
       final String activatorName,
       final String category,
-      @JsonKey(name: 'case', defaultValue: null)
-      final CaseTask? caseTask}) = _$TaskIvyImpl;
+      @JsonKey(name: 'case', defaultValue: null) final CaseTask? caseTask,
+      final bool taskDone,
+      final String submitUrl,
+      final String formHTMLPage,
+      final String doneTaskFormDataSerialized}) = _$TaskIvyImpl;
 
   factory _TaskIvy.fromJson(Map<String, dynamic> json) = _$TaskIvyImpl.fromJson;
 
@@ -415,6 +500,14 @@ abstract class _TaskIvy implements TaskIvy {
   @override
   @JsonKey(name: 'case', defaultValue: null)
   CaseTask? get caseTask;
+  @override
+  bool get taskDone;
+  @override
+  String get submitUrl;
+  @override
+  String get formHTMLPage;
+  @override
+  String get doneTaskFormDataSerialized;
   @override
   @JsonKey(ignore: true)
   _$$TaskIvyImplCopyWith<_$TaskIvyImpl> get copyWith =>

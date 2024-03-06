@@ -194,10 +194,8 @@ class TasksViewContent extends StatelessWidget {
   }
 
   void _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
-    context.push(AppRoutes.taskActivity, extra: {
-      'task': taskIvy,
-      'path': taskIvy.fullRequestPath
-    }).then((value) {
+    context.push(AppRoutes.taskActivity,
+        extra: {'task': taskIvy, 'path': taskIvy.formHTMLPage}).then((value) {
       if (value != null && value as bool) {
         context.read<TabBarCubit>().navigateTaskList();
       }

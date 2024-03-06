@@ -41,6 +41,9 @@ dependencies:
   cached_network_image: ^3.3.1
   crypto: ^3.0.3
   flutter_inappwebview: ^6.0.0
+  http: 1.1.0
+  html: ^0.15.4
+  connectivity_plus: ^5.0.2
 
   file_picker: ^5.3.3
   file_picker_pro: ^1.5.0

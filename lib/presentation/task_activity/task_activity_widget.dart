@@ -6,6 +6,7 @@ import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/base_view/base_view.dart';
+import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task_activity/bloc/upload_file_bloc.dart';
 import 'package:axon_ivy/presentation/task_activity/widgets/task_web_view_widget.dart';
 import 'package:axon_ivy/util/widgets/measure_size_widget.dart';
@@ -13,6 +14,7 @@ import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskActivityWidget extends BasePageScreen {
@@ -212,9 +214,22 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
                           : taskDetailPanelHeight),
                   child: TaskWebViewWidget(
                     fullRequestPath: widget.fullRequestPath,
+                    taskIvy: widget.taskIvy,
                     onScrollToTop: _updateScrollingChanged,
                     canScrollVertical: _canScrollVertical,
                     onProgressChanged: _onProgressChanged,
+                    endTaskOffline: (value) {
+                      final task = widget.taskIvy!.copyWith(taskDone: true);
+                      final tasks = TaskBloc.tasks.map((obj) {
+                        if (widget.taskIvy?.id == obj.id) {
+                          return task;
+                        } else {
+                          return obj;
+                        }
+                      }).toList();
+                      TaskBloc.tasks = tasks;
+                      // context.pop(true);
+                    },
                   ),
                 ),
                 if (isScrollToTop &&

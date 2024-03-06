@@ -2,6 +2,7 @@ import 'package:axon_ivy/data/models/task/case/case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'task.freezed.dart';
+
 part 'task.g.dart';
 
 @freezed
@@ -21,6 +22,10 @@ class TaskIvy with _$TaskIvy {
     @Default(null)
     @JsonKey(name: 'case', defaultValue: null)
     CaseTask? caseTask,
+    @Default(false) bool taskDone,
+    @Default('') String submitUrl,
+    @Default('') String formHTMLPage,
+    @Default('') String doneTaskFormDataSerialized,
   }) = _TaskIvy;
 
   factory TaskIvy.fromJson(Map<String, dynamic> json) =>
