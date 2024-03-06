@@ -14,15 +14,9 @@ Please refrain from publicly disclosing the vulnerability until it has been addr
 
 ## Response Time
 
-We strive to respond to security vulnerability reports as quickly as possible. Upon receiving your report, we will acknowledge it within 48 hours and provide an estimated timeline for resolution. We will keep you updated on the progress of the resolution.
+We strive to respond to security vulnerability reports as quickly as possible. Upon receiving your report, we will acknowledge it within 72 hours and we will release a patch as soon as possible depending on complexity, but historically within a few days.
+Please report (suspected) security vulnerabilities at https://support.axonivy.com/ . 
 
-## Security Measures
-
-Our team is committed to ensuring the security of our software. We employ the following security measures:
-
-- Regular security assessments and code reviews
-- Implementation of industry best practices for secure development
-- Prompt release of security patches and updates in response to identified vulnerabilities
 
 ## Responsible Disclosure
 
