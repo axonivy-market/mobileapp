@@ -38,4 +38,4 @@ If you have any questions or need further assistance, you can contact us via [em
 
 Thank you for your interest in contributing to the Axon Ivy Mobile Application! 🚀
 
-[issue tracker]: https://www.contributor-covenant.org/version/2/0/code_of_conduct.html
+[issue tracker]: https://github.com/axonivy-market/mobileapp/issues
