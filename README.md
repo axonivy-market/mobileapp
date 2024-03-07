@@ -1,17 +1,24 @@
 # Axon Ivy Mobile Application
+![Logo image for Mobile App](doc\images\overview\logo_mobile_image.png)
+[Getting Started](#getting-started) | [Feedback and Support](#feedback-and-support) | [Contributing to Axon Ivy Mobile Application](#contributing) 
 
-Welcome to the Axon Ivy Mobile Application! This app provides mobile access to your Axon Ivy installation, empowering process users to efficiently manage their tasks on the go. Whether you're in the office or out in the field, this app ensures that you stay connected and productive.
 
-## Features
+## About
 
-- **Display Processes**: View all available processes within your Axon Ivy installation.
-- **Display Tasks**: Browse and view tasks assigned to you or available in your inbox.
-- **Start Tasks**: Initiate tasks directly from the app.
-- **Work on Tasks**: Seamlessly work on tasks, including offline functionality.
-- **Sort Tasks**: Sort tasks based on various criteria for better organization.
-- **My Profile (Preferences)**: Access and manage your profile and preferences.
-- **Configuration**: Customize app settings to suit your workflow.
-- **Dark Mode / Light Mode**: Choose between dark and light modes for optimal viewing.
+Welcome to the Axon Ivy Mobile Application! This app provides mobile access to your [Axon Ivy platform][axon-ivy-link], empowering process users to efficiently manage their tasks on the go. Whether you're in the office or out in the field, this app ensures that you stay connected and productive.
+
+
+| Feature                           | Description                                                                                         |
+|-----------------------------------|-----------------------------------------------------------------------------------------------------|
+| Display Processes                 | View all available processes within your Axon Ivy installation.                                     |
+| Display Tasks                     | Browse and view tasks assigned to you or available in your inbox.                                   |
+| Start Tasks                       | Initiate tasks directly from the app.                                                               |
+| Work on Tasks                     | Seamlessly work on tasks, including offline functionality.                                          |
+| Sort Tasks                        | Sort tasks based on various criteria for better organization.                                       |
+| My Profile (Preferences)          | Access and manage your profile and preferences.                                                     |
+| Configuration                     | Customize app settings to suit your workflow.                                                       |
+| Dark Mode / Light Mode            | Choose between dark and light modes for optimal viewing.                                            |
+
 
 ## Getting Started
 
@@ -42,3 +49,5 @@ This project is licensed under the [GNU General Public License (GPL)](LICENSE).
 ---
 
 Thank you for choosing the Axon Ivy Mobile Application. We hope it enhances your workflow and productivity. If you have any questions or need assistance, feel free to contact us. Happy task managing! 🚀
+
+[axon-ivy-link]: https://www.axonivy.com/

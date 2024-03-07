@@ -20,7 +20,7 @@ class LoginView extends BasePageScreen {
 }
 
 class _LoginViewState extends BasePageScreenState<LoginView> {
-  final _usernameTextController = TextEditingController(text: 'Developer');
+  final _usernameTextController = TextEditingController();
   final _usernameFocusNode = FocusNode();
 
   final _passwordTextController = TextEditingController();
