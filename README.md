@@ -1,5 +1,5 @@
 # Axon Ivy Mobile Application
-![Logo image for Mobile App](doc\images\overview\logo_mobile_image.png)
+![Logo image for Mobile App](doc/images/overview/logo_mobile_image.png)
 [Getting Started](#getting-started) | [Feedback and Support](#feedback-and-support) | [Contributing to Axon Ivy Mobile Application](#contributing) 
 
 
