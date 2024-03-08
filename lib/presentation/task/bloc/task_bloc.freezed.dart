@@ -21,6 +21,7 @@ mixin _$TaskEvent {
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$TaskEvent {
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$TaskEvent {
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,8 @@ mixin _$TaskEvent {
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +55,7 @@ mixin _$TaskEvent {
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +63,7 @@ mixin _$TaskEvent {
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -147,6 +154,7 @@ class _$GetTasksImpl implements _GetTasks {
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
   }) {
     return getTasks(activeFilter);
   }
@@ -157,6 +165,7 @@ class _$GetTasksImpl implements _GetTasks {
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
   }) {
     return getTasks?.call(activeFilter);
   }
@@ -167,6 +176,7 @@ class _$GetTasksImpl implements _GetTasks {
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
@@ -181,6 +191,8 @@ class _$GetTasksImpl implements _GetTasks {
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
   }) {
     return getTasks(this);
   }
@@ -191,6 +203,7 @@ class _$GetTasksImpl implements _GetTasks {
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
   }) {
     return getTasks?.call(this);
   }
@@ -201,6 +214,7 @@ class _$GetTasksImpl implements _GetTasks {
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
@@ -287,6 +301,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
   }) {
     return filterTasks(activeFilter);
   }
@@ -297,6 +312,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
   }) {
     return filterTasks?.call(activeFilter);
   }
@@ -307,6 +323,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (filterTasks != null) {
@@ -321,6 +338,8 @@ class _$FilterTasksImpl implements _FilterTasks {
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
   }) {
     return filterTasks(this);
   }
@@ -331,6 +350,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
   }) {
     return filterTasks?.call(this);
   }
@@ -341,6 +361,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (filterTasks != null) {
@@ -434,6 +455,7 @@ class _$SortTasksImpl implements _SortTasks {
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
   }) {
     return sortTasks(activeSortType);
   }
@@ -444,6 +466,7 @@ class _$SortTasksImpl implements _SortTasks {
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
   }) {
     return sortTasks?.call(activeSortType);
   }
@@ -454,6 +477,7 @@ class _$SortTasksImpl implements _SortTasks {
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (sortTasks != null) {
@@ -468,6 +492,8 @@ class _$SortTasksImpl implements _SortTasks {
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
   }) {
     return sortTasks(this);
   }
@@ -478,6 +504,7 @@ class _$SortTasksImpl implements _SortTasks {
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
   }) {
     return sortTasks?.call(this);
   }
@@ -488,6 +515,7 @@ class _$SortTasksImpl implements _SortTasks {
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (sortTasks != null) {
@@ -508,26 +536,176 @@ abstract class _SortTasks implements TaskEvent {
 }
 
 /// @nodoc
+abstract class _$$ShowOfflinePopupEventImplCopyWith<$Res> {
+  factory _$$ShowOfflinePopupEventImplCopyWith(
+          _$ShowOfflinePopupEventImpl value,
+          $Res Function(_$ShowOfflinePopupEventImpl) then) =
+      __$$ShowOfflinePopupEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isConnected});
+}
+
+/// @nodoc
+class __$$ShowOfflinePopupEventImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$ShowOfflinePopupEventImpl>
+    implements _$$ShowOfflinePopupEventImplCopyWith<$Res> {
+  __$$ShowOfflinePopupEventImplCopyWithImpl(_$ShowOfflinePopupEventImpl _value,
+      $Res Function(_$ShowOfflinePopupEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isConnected = null,
+  }) {
+    return _then(_$ShowOfflinePopupEventImpl(
+      null == isConnected
+          ? _value.isConnected
+          : isConnected // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
+  const _$ShowOfflinePopupEventImpl(this.isConnected);
+
+  @override
+  final bool isConnected;
+
+  @override
+  String toString() {
+    return 'TaskEvent.showOfflinePopupEvent(isConnected: $isConnected)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShowOfflinePopupEventImpl &&
+            (identical(other.isConnected, isConnected) ||
+                other.isConnected == isConnected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isConnected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShowOfflinePopupEventImplCopyWith<_$ShowOfflinePopupEventImpl>
+      get copyWith => __$$ShowOfflinePopupEventImplCopyWithImpl<
+          _$ShowOfflinePopupEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent(isConnected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent?.call(isConnected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
+    required TResult orElse(),
+  }) {
+    if (showOfflinePopupEvent != null) {
+      return showOfflinePopupEvent(isConnected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    required TResult orElse(),
+  }) {
+    if (showOfflinePopupEvent != null) {
+      return showOfflinePopupEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowOfflinePopupEvent implements TaskEvent {
+  const factory ShowOfflinePopupEvent(final bool isConnected) =
+      _$ShowOfflinePopupEventImpl;
+
+  bool get isConnected;
+  @JsonKey(ignore: true)
+  _$$ShowOfflinePopupEventImplCopyWith<_$ShowOfflinePopupEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$TaskState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
-    required TResult Function(List<TaskIvy> tasks) success,
+    required TResult Function(List<TaskIvy> tasks, bool isOnline) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<TaskIvy> tasks)? success,
+    TResult? Function(List<TaskIvy> tasks, bool isOnline)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
-    TResult Function(List<TaskIvy> tasks)? success,
+    TResult Function(List<TaskIvy> tasks, bool isOnline)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -640,7 +818,7 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
-    required TResult Function(List<TaskIvy> tasks) success,
+    required TResult Function(List<TaskIvy> tasks, bool isOnline) success,
   }) {
     return loading(isShowLoading);
   }
@@ -650,7 +828,7 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<TaskIvy> tasks)? success,
+    TResult? Function(List<TaskIvy> tasks, bool isOnline)? success,
   }) {
     return loading?.call(isShowLoading);
   }
@@ -660,7 +838,7 @@ class _$TaskLoadingStateImpl implements TaskLoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
-    TResult Function(List<TaskIvy> tasks)? success,
+    TResult Function(List<TaskIvy> tasks, bool isOnline)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -781,7 +959,7 @@ class _$TaskErrorStateImpl implements TaskErrorState {
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
-    required TResult Function(List<TaskIvy> tasks) success,
+    required TResult Function(List<TaskIvy> tasks, bool isOnline) success,
   }) {
     return error(this.error);
   }
@@ -791,7 +969,7 @@ class _$TaskErrorStateImpl implements TaskErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<TaskIvy> tasks)? success,
+    TResult? Function(List<TaskIvy> tasks, bool isOnline)? success,
   }) {
     return error?.call(this.error);
   }
@@ -801,7 +979,7 @@ class _$TaskErrorStateImpl implements TaskErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
-    TResult Function(List<TaskIvy> tasks)? success,
+    TResult Function(List<TaskIvy> tasks, bool isOnline)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -860,7 +1038,7 @@ abstract class _$$TaskSuccessStateImplCopyWith<$Res> {
           $Res Function(_$TaskSuccessStateImpl) then) =
       __$$TaskSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TaskIvy> tasks});
+  $Res call({List<TaskIvy> tasks, bool isOnline});
 }
 
 /// @nodoc
@@ -875,12 +1053,17 @@ class __$$TaskSuccessStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? tasks = null,
+    Object? isOnline = null,
   }) {
     return _then(_$TaskSuccessStateImpl(
-      null == tasks
+      tasks: null == tasks
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<TaskIvy>,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -888,7 +1071,9 @@ class __$$TaskSuccessStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TaskSuccessStateImpl implements TaskSuccessState {
-  const _$TaskSuccessStateImpl(final List<TaskIvy> tasks) : _tasks = tasks;
+  const _$TaskSuccessStateImpl(
+      {required final List<TaskIvy> tasks, this.isOnline = true})
+      : _tasks = tasks;
 
   final List<TaskIvy> _tasks;
   @override
@@ -899,8 +1084,12 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
   }
 
   @override
+  @JsonKey()
+  final bool isOnline;
+
+  @override
   String toString() {
-    return 'TaskState.success(tasks: $tasks)';
+    return 'TaskState.success(tasks: $tasks, isOnline: $isOnline)';
   }
 
   @override
@@ -908,12 +1097,14 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TaskSuccessStateImpl &&
-            const DeepCollectionEquality().equals(other._tasks, _tasks));
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_tasks));
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_tasks), isOnline);
 
   @JsonKey(ignore: true)
   @override
@@ -927,9 +1118,9 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
   TResult when<TResult extends Object?>({
     required TResult Function(bool isShowLoading) loading,
     required TResult Function(String error) error,
-    required TResult Function(List<TaskIvy> tasks) success,
+    required TResult Function(List<TaskIvy> tasks, bool isOnline) success,
   }) {
-    return success(tasks);
+    return success(tasks, isOnline);
   }
 
   @override
@@ -937,9 +1128,9 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(bool isShowLoading)? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<TaskIvy> tasks)? success,
+    TResult? Function(List<TaskIvy> tasks, bool isOnline)? success,
   }) {
-    return success?.call(tasks);
+    return success?.call(tasks, isOnline);
   }
 
   @override
@@ -947,11 +1138,11 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(bool isShowLoading)? loading,
     TResult Function(String error)? error,
-    TResult Function(List<TaskIvy> tasks)? success,
+    TResult Function(List<TaskIvy> tasks, bool isOnline)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(tasks);
+      return success(tasks, isOnline);
     }
     return orElse();
   }
@@ -992,10 +1183,12 @@ class _$TaskSuccessStateImpl implements TaskSuccessState {
 }
 
 abstract class TaskSuccessState implements TaskState {
-  const factory TaskSuccessState(final List<TaskIvy> tasks) =
-      _$TaskSuccessStateImpl;
+  const factory TaskSuccessState(
+      {required final List<TaskIvy> tasks,
+      final bool isOnline}) = _$TaskSuccessStateImpl;
 
   List<TaskIvy> get tasks;
+  bool get isOnline;
   @JsonKey(ignore: true)
   _$$TaskSuccessStateImplCopyWith<_$TaskSuccessStateImpl> get copyWith =>
       throw _privateConstructorUsedError;

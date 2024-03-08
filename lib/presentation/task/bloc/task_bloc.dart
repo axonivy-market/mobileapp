@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:axon_ivy/core/di/di.dart';
-import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/shared/extensions/extensions.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:dio/dio.dart';
@@ -15,7 +14,9 @@ import '../../../data/repositories/task/task_repository.dart';
 import '../../../util/resources/resources.dart';
 
 part 'task_bloc.freezed.dart';
+
 part 'task_event.dart';
+
 part 'task_state.dart';
 
 @injectable
@@ -36,6 +37,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<_GetTasks>(_getTasks);
     on<_FilterTasks>(_filterTasks);
     on<_SortTasks>(_sortTasks);
+    on<ShowOfflinePopupEvent>(_showOfflinePopupEvent);
 
     getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
         ? AppConfig.baseUrl
@@ -47,7 +49,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     activeSortType = event.activeSortType;
     if (tasks.isNotEmpty) {
       emit(TaskState.success(
-          _sortTasksLocal(event.activeSortType[0], event.activeSortType[1])));
+          tasks: _sortTasksLocal(
+              event.activeSortType[0], event.activeSortType[1])));
     }
   }
 
@@ -95,25 +98,29 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     switch (event.activeFilter) {
       case FilterType.all:
         if (tasks.isNotEmpty) {
-          emit(TaskState.success(_sortTasksLocal(
-              activeSortType.getMainSortType()!,
-              activeSortType.getSubTypeActive()!)));
+          emit(TaskState.success(
+              tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
+                  activeSortType.getSubTypeActive()!)));
         }
       case FilterType.expired:
         if (expiredTasks.isNotEmpty) {
-          emit(TaskState.success(_sortTasksLocal(
-              activeSortType.getMainSortType()!,
-              activeSortType.getSubTypeActive()!)));
+          emit(TaskState.success(
+              tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
+                  activeSortType.getSubTypeActive()!)));
         } else {
           expiredTasks = _filterExpiredTasks(tasks);
-          emit(TaskState.success(_sortTasksLocal(
-              activeSortType.getMainSortType()!,
-              activeSortType.getSubTypeActive()!)));
+          emit(TaskState.success(
+              tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
+                  activeSortType.getSubTypeActive()!)));
         }
     }
   }
 
   FutureOr<void> _getTasks(event, Emitter emit) async {
+    if (state is TaskLoadingState &&
+        (state as TaskLoadingState).isShowLoading) {
+      return;
+    }
     emit(const TaskState.loading(true));
 
     try {
@@ -121,29 +128,38 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
       tasks.fold(
         (l) {
-          emit(
-            TaskState.error(l.message),
-          );
+          emit(TaskState.success(
+              tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
+                  activeSortType.getSubTypeActive()!),
+              isOnline: false));
         },
         (r) {
           SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
           this.tasks = r;
           sortDefaultTasks = r.sortDefaultTasks;
           expiredTasks = _filterExpiredTasks(this.tasks);
-          emit(TaskState.success(_sortTasksLocal(
-              activeSortType.getMainSortType()!,
-              activeSortType.getSubTypeActive()!)));
+          emit(TaskState.success(
+              tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
+                  activeSortType.getSubTypeActive()!)));
         },
       );
     } catch (e) {
-      emit(
-        TaskState.error(AppError.handle(e).failure.message),
-      );
+      emit(TaskState.success(
+          tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
+              activeSortType.getSubTypeActive()!),
+          isOnline: false));
     }
   }
 
   List<TaskIvy> _filterExpiredTasks(List<TaskIvy> tasks) {
     if (tasks.isEmpty) return tasks;
     return tasks.where((task) => task.expiryTimeStamp.isExpired).toList();
+  }
+
+  void _showOfflinePopupEvent(event, Emitter emit) {
+    emit(TaskState.success(
+        tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
+            activeSortType.getSubTypeActive()!),
+        isOnline: event.isConnected));
   }
 }

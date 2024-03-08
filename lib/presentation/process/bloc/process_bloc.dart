@@ -11,7 +11,9 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 part 'process_bloc.freezed.dart';
+
 part 'process_event.dart';
+
 part 'process_state.dart';
 
 @injectable
@@ -21,6 +23,7 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
 
   ProcessBloc(this._processRepository) : super(const ProcessState.initial()) {
     on<GetProcess>(_getProcesses);
+    on<ShowOfflinePopupEvent>(_showOfflinePopupEvent);
     getIt<Dio>().options.baseUrl = (SharedPrefs.getBaseUrl.isEmptyOrNull
         ? AppConfig.baseUrl
         : SharedPrefs.getBaseUrl)!;
@@ -46,5 +49,10 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
     } catch (e) {
       emitter(ProcessState.success(processes: processes, isOnline: false));
     }
+  }
+
+  void _showOfflinePopupEvent(event, Emitter emit) {
+    emit(ProcessState.success(
+        processes: processes, isOnline: event.isConnected));
   }
 }

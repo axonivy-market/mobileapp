@@ -6,5 +6,8 @@ class TaskState with _$TaskState {
 
   const factory TaskState.error(String error) = TaskErrorState;
 
-  const factory TaskState.success(List<TaskIvy> tasks) = TaskSuccessState;
+  const factory TaskState.success({
+    required List<TaskIvy> tasks,
+    @Default(true) bool isOnline,
+  }) = TaskSuccessState;
 }
