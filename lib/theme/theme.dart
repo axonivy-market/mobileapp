@@ -4,10 +4,14 @@ import 'package:flutter/material.dart';
 ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
-      background: AppColors.white,
-      primary: AppColors.tropicSea,
-      secondary: AppColors.bleachedSilk,
-      tertiary: AppColors.skyBus),
+    primary: AppColors.tropicSea,
+    tertiaryContainer: AppColors.skyBus,
+    background: AppColors.white,
+    primaryContainer: AppColors.bleachedSilk,
+    outline: AppColors.mercury,
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(backgroundColor: AppColors.bleachedSilk)),
   useMaterial3: true,
 );
 
@@ -15,8 +19,14 @@ ThemeData darkMode = ThemeData(
   brightness: Brightness.dark,
   colorScheme: const ColorScheme.dark(
     background: AppColors.shoeWax,
-    primary: AppColors.gray,
-    tertiary: AppColors.sonicSilver,
+    primary: AppColors.drwhite,
+    tertiaryContainer: AppColors.agedMoustacheGrey,
+    onTertiary: AppColors.kinglyCloud,
+    primaryContainer: AppColors.kettleman,
+    outline: AppColors.shadowedSteel,
   ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(backgroundColor: AppColors.kettleman)),
+      
   useMaterial3: true,
 );

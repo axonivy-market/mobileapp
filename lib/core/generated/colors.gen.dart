@@ -13,6 +13,9 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
+  /// Color: #7E7E7E
+  static const Color agedMoustacheGrey = Color(0xFF7E7E7E);
+
   /// Color: #888888
   static const Color argent = Color(0xFF888888);
 
@@ -31,6 +34,9 @@ class AppColors {
   /// Color: #0065FF
   static const Color blueRibbon = Color(0xFF0065FF);
 
+  /// Color: #4F4E4E
+  static const Color blackOak = Color(0xFF4F4E4E);
+
   /// Color: #A3A3A3
   static const Color darkSouls = Color(0xFFA3A3A3);
 
@@ -40,11 +46,23 @@ class AppColors {
   /// Color: #1B1B1B
   static const Color eerieBlack = Color(0xFF1B1B1B);
 
+  /// Color: #B4E7C2
+  static const Color galucousGreen = Color(0xFFB4E7C2);
+
+  /// Color: #47C46B
+  static const Color iridescentGreen = Color(0xFF47C46B);
+
+  /// Color: #606060
+  static const Color kettleman = Color(0xFF606060);
+
   /// Color: #DFDFDF
   static const Color kinglyCloud = Color(0xFFDFDFDF);
 
   /// Color: #202020
   static const Color lead = Color(0xFF202020);
+
+  /// Color: #383838
+  static const Color lacqueredLiquorice = Color(0xFF383838);
 
   /// Color: #EBEBEB
   static const Color mercury = Color(0xFFEBEBEB);
@@ -57,6 +75,9 @@ class AppColors {
 
   /// Color: #FF796F
   static const Color salmon = Color(0xFFFF796F);
+
+  /// Color: #4a4a4a
+  static const Color shadowedSteel = Color(0xFF4A4A4A);
 
   /// Color: #2C2C2C
   static const Color shoeWax = Color(0xFF2C2C2C);
@@ -84,7 +105,4 @@ class AppColors {
 
   /// Color: #FFFFFF
   static const Color white = Color(0xFFFFFFFF);
-
-  /// Color: #4A4A4A
-  static const Color gray = Color(0xFF4A4A4A);
 }

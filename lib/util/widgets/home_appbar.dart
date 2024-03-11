@@ -34,6 +34,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       scrolledUnderElevation: scrolledUnderElevation,
+      backgroundColor: Theme.of(context).colorScheme.background,
       shadowColor: AppColors.mercury,
       surfaceTintColor: Colors.white,
       elevation: 0,

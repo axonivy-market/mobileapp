@@ -69,8 +69,8 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          elevation: 0,
-          backgroundColor: AppColors.placebo),
+        elevation: 0, 
+      ),
       child: SizedBox(
         width: double.infinity,
         child: Center(
@@ -156,7 +156,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
       height: 44,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        color: AppColors.bleachedSilk,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -197,7 +197,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: AppColors.bleachedSilk,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -232,7 +232,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: AppColors.bleachedSilk,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(

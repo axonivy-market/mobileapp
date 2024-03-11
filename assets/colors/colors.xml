@@ -15,11 +15,13 @@
     <color name="EERIE BLACK">#1B1B1B</color>
     <color name="LEAD">#202020</color>
     <color name="SHOE WAX">#2C2C2C</color>
+    <color name="Lacquered Liquorice">#383838</color>
+    <color name="Black Oak">#4F4E4E</color>
+
 
     <!-- HIGHLIGHT-->
     <color name="BLUE RIBBON">#0065FF</color>
     <color name="MIMESIA BLUE">#2968C7</color>
-
     <color name="SALMON">#FF796F</color>
 
     <!-- NEW COLORS -->
@@ -35,18 +37,28 @@
     <color name="BLACK MANA">#858585</color>
     <!-- Tabbar color -->
     <color name="MERCURY">#EBEBEB</color>
+    <color name="SHADOWED STEEL">#4a4a4a</color>
     <!-- Text title task color -->
     <color name="EERIE BLACK">#1B1B1B</color>
 
     <color name="DARK SOULS">#A3A3A3</color>
     <color name="KINGLY CLOUD">#DFDFDF</color>
+    <color name="KETTLEMAN">#606060</color>
     <color name="SKY BUS">#96C4D4</color>
+    <color name="AGED MOUSTACHE GREY">#7E7E7E</color>
     <color name="SILVER">#BFBFBF</color>
     <color name="PLACEBO">#E7E7E7</color>
 
-
     <!-- Popup menu item-->
     <color name="DRWHITE">#FAFAFA</color>
+
+    <!-- Erorr/Delete-->
+    <color name="WATERMELONADE">#EE4A54</color>
+
+    <!-- Success-->
+    <color name="GALUCOUS GREEN">#B4E7C2</color>
+    <color name="IRIDESCENT GREEN">#47C46B</color>
+
 </resources>
 
 

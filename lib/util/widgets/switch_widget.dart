@@ -30,7 +30,7 @@ class SwitchWidget extends StatelessWidget {
         height: 30.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
-          color: Theme.of(context).colorScheme.tertiary,
+          color: Theme.of(context).colorScheme.tertiaryContainer,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 2),
         alignment: isDarkMode || isDemoMode
