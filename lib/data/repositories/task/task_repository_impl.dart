@@ -22,4 +22,14 @@ class TaskRepositoryImpl extends TaskRepository {
       return left(AppError.handle(e).failure);
     }
   }
+
+  @override
+  Future<Either<Failure, TaskIvy>> getTaskDetail(int taskId) async {
+    try {
+      final result = await _remoteDataSource.getTaskDetail(taskId);
+      return right(result);
+    } catch (e) {
+      return left(AppError.handle(e).failure);
+    }
+  }
 }

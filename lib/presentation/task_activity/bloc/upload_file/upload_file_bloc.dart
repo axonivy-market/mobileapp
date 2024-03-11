@@ -4,7 +4,7 @@ import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
-import 'package:axon_ivy/data/repositories/upload_file/upload_file_repository.dart';
+import 'package:axon_ivy/data/repositories/file/file_repository.dart';
 import 'package:axon_ivy/util/resources/constants.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -24,7 +24,7 @@ enum UploadFileType { recent, images, camera }
 
 @injectable
 class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
-  final UploadFileRepository _uploadFileRepository;
+  final FileRepository _uploadFileRepository;
   String uploadMessage = "";
   int maxFileSize = 10000000;
   var filePath = "";

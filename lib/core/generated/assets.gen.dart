@@ -85,9 +85,21 @@ class $AssetsIconsGen {
   /// File path: assets/icons/ic_users.svg
   SvgGenImage get icUsers => const SvgGenImage('assets/icons/ic_users.svg');
 
+  /// File path: assets/icons/icon_add_attachment.svg
+  SvgGenImage get iconAddAttachment =>
+      const SvgGenImage('assets/icons/icon_add_attachment.svg');
+
+  /// File path: assets/icons/icon_arrow_right.svg
+  SvgGenImage get iconArrowRight =>
+      const SvgGenImage('assets/icons/icon_arrow_right.svg');
+
   /// File path: assets/icons/icon_camera.svg
   SvgGenImage get iconCamera =>
       const SvgGenImage('assets/icons/icon_camera.svg');
+
+  /// File path: assets/icons/icon_delete.svg
+  SvgGenImage get iconDelete =>
+      const SvgGenImage('assets/icons/icon_delete.svg');
 
   /// File path: assets/icons/icon_file.svg
   SvgGenImage get iconFile => const SvgGenImage('assets/icons/icon_file.svg');
@@ -187,7 +199,10 @@ class $AssetsIconsGen {
         icSearchText,
         icTrigger,
         icUsers,
+        iconAddAttachment,
+        iconArrowRight,
         iconCamera,
+        iconDelete,
         iconFile,
         iconImage,
         list,
@@ -217,6 +232,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/icon_paperclip_empty.png
+  AssetGenImage get iconPaperclipEmpty =>
+      const AssetGenImage('assets/images/icon_paperclip_empty.png');
+
   /// File path: assets/images/koala_with_passion_fruit.svg
   SvgGenImage get koalaWithPassionFruit =>
       const SvgGenImage('assets/images/koala_with_passion_fruit.svg');
@@ -226,7 +245,8 @@ class $AssetsImagesGen {
       const SvgGenImage('assets/images/splash_axon_ivy_logo.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values => [koalaWithPassionFruit, splashAxonIvyLogo];
+  List<dynamic> get values =>
+      [iconPaperclipEmpty, koalaWithPassionFruit, splashAxonIvyLogo];
 }
 
 class $AssetsTranslationsGen {

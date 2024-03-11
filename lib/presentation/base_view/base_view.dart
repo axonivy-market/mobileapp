@@ -1,5 +1,5 @@
 import 'package:axon_ivy/core/generated/colors.gen.dart';
-import 'package:axon_ivy/presentation/task_activity/bloc/upload_file_bloc.dart';
+import 'package:axon_ivy/presentation/task_activity/bloc/upload_file/upload_file_bloc.dart';
 import 'package:axon_ivy/util/widgets/bot_toast_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -123,6 +123,10 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
+          elevation: 0,
+          backgroundColor: AppColors.white,
           title: Text(
             title ?? "",
             textAlign: TextAlign.center,
@@ -131,10 +135,14 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                 fontSize: 17,
                 fontWeight: FontWeight.w500),
           ),
-          content: Text(
-            message,
-            textAlign: TextAlign.center,
-            style: GoogleFonts.inter(color: AppColors.black, fontSize: 14),
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style:
+                  GoogleFonts.inter(color: AppColors.blackMana, fontSize: 17),
+            ),
           ),
           actions: [
             Padding(
@@ -177,23 +185,25 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                       Navigator.of(context).pop();
                       onConfirm?.call();
                     },
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 5),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: AppColors.tropicSea),
-                      child: Center(
-                        child: Text(
-                          confirmTitle ?? "dialog.ok".tr(),
-                          style: GoogleFonts.inter(
-                              color: AppColors.white,
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500),
+                    child: Center(
+                      child: Container(
+                        height: 44,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: AppColors.placebo),
+                        child: Center(
+                          child: Text(
+                            confirmTitle ?? "dialog.ok".tr(),
+                            style: GoogleFonts.inter(
+                                color: AppColors.tropicSea,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -216,6 +226,10 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(8.0))),
+          elevation: 0,
+          backgroundColor: AppColors.white,
           title: Text(
             title ?? "",
             textAlign: TextAlign.center,
@@ -224,10 +238,14 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                 fontSize: 17,
                 fontWeight: FontWeight.w500),
           ),
-          content: Text(
-            message,
-            textAlign: TextAlign.left,
-            style: GoogleFonts.inter(color: AppColors.black, fontSize: 14),
+          content: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: Text(
+              message,
+              textAlign: TextAlign.center,
+              style:
+                  GoogleFonts.inter(color: AppColors.blackMana, fontSize: 17),
+            ),
           ),
           actions: [
             GestureDetector(
@@ -237,18 +255,17 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
               },
               child: Center(
                 child: Container(
-                  width: 70,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  height: 44,
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: AppColors.tropicSea),
+                      borderRadius: BorderRadius.circular(8),
+                      color: AppColors.placebo),
                   child: Center(
                     child: Text(
                       confirmTitle ?? "dialog.ok".tr(),
                       style: GoogleFonts.inter(
-                          color: AppColors.white,
-                          fontSize: 14,
+                          color: AppColors.tropicSea,
+                          fontSize: 17,
                           fontWeight: FontWeight.w500),
                     ),
                   ),

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'upload_file_service.dart';
+part of 'file_services.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,10 +8,11 @@ part of 'upload_file_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
 
-class _UploadFileService implements UploadFileService {
-  _UploadFileService(
-    this._dio,
-  );
+class _FileServices implements FileServices {
+  _FileServices(
+    this._dio, {
+    this.baseUrl,
+  });
 
   final Dio _dio;
 
@@ -42,6 +43,38 @@ class _UploadFileService implements UploadFileService {
             .compose(
               _dio.options,
               '/api/workflow/case/${caseId}/document',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DocumentResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DocumentResponse> deleteFiles(
+    int caseId,
+    int documentId,
+    String requestBy,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'X-Requested-By': requestBy};
+    _headers.removeWhere((k, v) => v == null);
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<DocumentResponse>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/workflow/case/${caseId}/document/${documentId}',
               queryParameters: queryParameters,
               data: _data,
             )

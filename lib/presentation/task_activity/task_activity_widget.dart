@@ -1,4 +1,4 @@
-import 'package:axon_ivy/core/di/di.dart';
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
@@ -6,13 +6,14 @@ import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/base_view/base_view.dart';
-import 'package:axon_ivy/presentation/task_activity/bloc/upload_file_bloc.dart';
+import 'package:axon_ivy/presentation/task_activity/bloc/task_detail/task_detail_bloc.dart';
 import 'package:axon_ivy/presentation/task_activity/widgets/task_web_view_widget.dart';
 import 'package:axon_ivy/util/widgets/measure_size_widget.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskActivityWidget extends BasePageScreen {
@@ -31,9 +32,9 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
   LoadingOverlay loadingOverlay = LoadingOverlay();
   late Animation<double> _rotationAnimation;
   late AnimationController _controller;
+  late TaskDetailBloc taskDetailBloc;
   late double screenHeight;
-  late UploadFileBloc _uploadFileBloc;
-  final GlobalKey _appBartKey = GlobalKey();
+  final GlobalKey _appBarKey = GlobalKey();
   double taskDetailPanelHeight = 0;
   double appBarHeight = 0;
   bool isScrollToTop = true;
@@ -41,7 +42,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
   bool isKeyboardVisible = false;
   double _progress = 0;
   bool isExpanded = false;
-
+  int documentLength = 0;
   @override
   void initState() {
     super.initState();
@@ -49,14 +50,13 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
       vsync: this,
       duration: const Duration(milliseconds: 300),
     );
-    _uploadFileBloc = getIt<UploadFileBloc>();
     _rotationAnimation = Tween<double>(begin: 0, end: 0.5).animate(_controller);
-
+    taskDetailBloc = getIt<TaskDetailBloc>();
     WidgetsBinding.instance.addPostFrameCallback((_) => _appBarHeight());
   }
 
   _appBarHeight() {
-    Size? size = _appBartKey.currentContext?.size;
+    Size? size = _appBarKey.currentContext?.size;
     appBarHeight = size?.height ?? kToolbarHeight;
   }
 
@@ -71,135 +71,50 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
     final mediaQuery = MediaQuery.of(context);
     screenHeight = mediaQuery.size.height;
     isKeyboardVisible = mediaQuery.viewInsets.bottom > 100;
+    TaskIvy? task = widget.taskIvy;
+    documentLength = task?.caseTask?.documents.length ?? 0;
     return BlocProvider(
-      create: (context) => _uploadFileBloc,
-      child: BlocListener<UploadFileBloc, UploadFileState>(
-        listener: (context, state) async {
-          if (state is UploadSuccessState) {
-            hideLoading();
-            showUploadedDialog(
-                title: "Success process", message: state.fileNames);
-          } else if (state is UploadErrorState) {
-            hideLoading();
-            showConfirmDialog(title: "Error", message: state.error);
-          } else if (state is UploadChangeFileNameState) {
-            await displayTextInputDialog(context, state.fileName);
-          } else {
+      create: (context) => taskDetailBloc,
+      child: BlocListener<TaskDetailBloc, TaskDetailState>(
+        listener: (context, state) {
+          if (state is TaskDetailLoadingState) {
             showLoading();
+          } else {
+            hideLoading();
           }
         },
         child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            key: _appBartKey,
+            key: _appBarKey,
             backgroundColor: Colors.white,
             automaticallyImplyLeading: false,
             surfaceTintColor: Colors.white,
             leadingWidth: 100,
-            leading: const Padding(
-              padding: EdgeInsets.only(left: 15),
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 15),
               child: BackButtonWidget(),
             ),
             actions: [
-              if (widget.taskIvy != null)
-                Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: PopupMenuButton<UploadFileType>(
-                    elevation: 0.2,
-                    color: AppColors.white,
-                    position: PopupMenuPosition.under,
-                    onSelected: (value) {
-                      switch (value) {
-                        case UploadFileType.recent:
-                          _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                              widget.taskIvy!.caseTask!.id,
-                              UploadFileType.recent));
-                        case UploadFileType.images:
-                          _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                              widget.taskIvy!.caseTask!.id,
-                              UploadFileType.images));
-                        case UploadFileType.camera:
-                          _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                              widget.taskIvy!.caseTask!.id,
-                              UploadFileType.camera));
-                      }
-                    },
-                    itemBuilder: (BuildContext context) {
-                      return [
-                        PopupMenuItem(
-                          value: UploadFileType.recent,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              AppAssets.icons.iconFile.svg(),
-                              const SizedBox(width: 5),
-                              Expanded(
-                                child: Text(
-                                  "Attach file",
-                                  style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
-                                      fontSize: 17,
-                                      color: AppColors.eerieBlack,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        PopupMenuItem(
-                          value: UploadFileType.images,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              AppAssets.icons.iconImage.svg(),
-                              const SizedBox(width: 5),
-                              Expanded(
-                                child: Text(
-                                  "Attach picture",
-                                  style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
-                                      fontSize: 17,
-                                      color: AppColors.eerieBlack,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        PopupMenuItem(
-                          value: UploadFileType.camera,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              AppAssets.icons.iconCamera.svg(),
-                              const SizedBox(width: 5),
-                              Expanded(
-                                child: Text(
-                                  "Take picture",
-                                  style: GoogleFonts.inter(
-                                    textStyle: const TextStyle(
-                                      fontSize: 17,
-                                      color: AppColors.eerieBlack,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ];
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 15.0),
-                      child: AppAssets.icons.paperclip.svg(),
-                    ),
-                  ),
-                )
+              if (task != null)
+                BlocBuilder<TaskDetailBloc, TaskDetailState>(
+                  builder: (context, state) {
+                    if (state is TaskDetailSuccessState) {
+                      task = state.task;
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: IconButton(
+                        icon: AppAssets.icons.paperclip.svg(),
+                        onPressed: () async {
+                          await context.pushNamed("documentList", extra: task);
+                          taskDetailBloc
+                              .add(TaskDetailEvent.getTaskDetail(task!.id));
+                        },
+                      ),
+                    );
+                  },
+                ),
             ],
           ),
           body: SafeArea(
@@ -220,7 +135,12 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
                 if (isScrollToTop &&
                     !isKeyboardVisible &&
                     widget.taskIvy != null)
-                  _taskDetailPanel(),
+                  BlocBuilder<TaskDetailBloc, TaskDetailState>(
+                    builder: (context, state) {
+                      return _taskDetailPanel(
+                          state is TaskDetailSuccessState ? state.task : task);
+                    },
+                  ),
                 if (!isScrollToTop)
                   const Divider(color: AppColors.mercury, height: 1),
                 if (_progress < 1.0)
@@ -257,7 +177,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
     });
   }
 
-  Widget _taskDetailPanel() {
+  Widget _taskDetailPanel(TaskIvy? task) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -361,11 +281,20 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
                         vertical: 15, horizontal: 18),
                     child: Column(
                       children: [
-                        TaskInfoRowWidget(
-                          icon: AppAssets.icons.paperclip.svg(height: 16),
-                          title: "taskDetails.attachments".tr(),
-                          value: "taskDetails.documents".plural(
-                              widget.taskIvy!.caseTask?.documents.length ?? 0),
+                        GestureDetector(
+                          onTap: () async {
+                            await context.pushNamed("documentList",
+                                extra: task);
+                            taskDetailBloc.add(
+                                TaskDetailEvent.getTaskDetail(task?.id ?? 0));
+                          },
+                          child: TaskInfoRowWidget(
+                            isTitleHighlight: true,
+                            icon: AppAssets.icons.paperclip.svg(height: 16),
+                            title: "taskDetails.attachments".tr(),
+                            value: "taskDetails.documents"
+                                .plural(task?.caseTask?.documents.length ?? 0),
+                          ),
                         ),
                         TaskInfoRowWidget(
                           icon: AppAssets.icons.clock.svg(height: 16),
