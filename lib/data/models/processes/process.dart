@@ -1,3 +1,4 @@
+import 'package:axon_ivy/data/models/processes/customfield/customfield.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'process.freezed.dart';
@@ -7,11 +8,12 @@ part 'process.g.dart';
 @freezed
 class Process with _$Process {
   const factory Process({
-    @Default(0) int id,
+    @Default('') String id,
     @Default("") String name,
     @Default("") String description,
     @Default("") String activatorName,
     @Default("") String fullRequestPath,
+    @Default([]) List<CustomField> customFields,
   }) = _Process;
 
   factory Process.fromJson(Map<String, dynamic> json) =>

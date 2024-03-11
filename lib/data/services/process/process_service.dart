@@ -11,6 +11,6 @@ abstract class ProcessService {
   @factoryMethod
   factory ProcessService(Dio dio) = _ProcessService;
 
-  @GET('/api/workflow/processstarts')
+  @GET('/api/workflow/startables')
   Future<List<Process>> getProcesses();
 }

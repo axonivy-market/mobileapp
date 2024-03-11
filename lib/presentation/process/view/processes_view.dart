@@ -6,8 +6,8 @@ import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/presentation/process/view/widgets/process_offline_indicator_widget.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
-import 'package:axon_ivy/router/app_router.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
+import 'package:axon_ivy/router/app_router.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -115,8 +115,8 @@ class ProcessesView extends StatelessWidget {
   void _navigateProcessActivity(BuildContext context, Process process) {
     context.push(AppRoutes.taskActivity,
         extra: {'path': process.fullRequestPath}).then((value) {
-      if (value != null && value as bool) {
-        context.read<TabBarCubit>().navigateTaskList();
+      if (value != null && value is int) {
+        context.read<TabBarCubit>().navigateTaskList(value);
       }
     });
   }

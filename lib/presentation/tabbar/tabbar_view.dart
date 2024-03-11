@@ -11,7 +11,9 @@ import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
+import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
+import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
 import 'package:axon_ivy/util/resources/constants.dart';
@@ -60,6 +62,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final OfflineIndicatorCubit _offlineIndicatorCubit;
   late final TabBarCubit _tabBarCubit;
   late final LoggedInCubit _loggedInCubit;
+  late final ToastMessageCubit _toastMessageCubit;
   late final ConnectivityBloc _connectivityBloc;
   late final EngineInfoCubit _engineInfoCubit;
 
@@ -98,6 +101,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _offlineIndicatorCubit = getIt<OfflineIndicatorCubit>();
     _tabBarCubit = getIt<TabBarCubit>();
     _loggedInCubit = getIt<LoggedInCubit>();
+    _toastMessageCubit = getIt<ToastMessageCubit>();
     _connectivityBloc = getIt<ConnectivityBloc>();
     _engineInfoCubit = getIt<EngineInfoCubit>();
     if (SharedPrefs.isLogin ?? false) {
@@ -127,6 +131,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _offlineIndicatorCubit),
         BlocProvider(create: (context) => _tabBarCubit),
         BlocProvider(create: (context) => _loggedInCubit),
+        BlocProvider(create: (context) => _toastMessageCubit),
         BlocProvider(create: (context) => _connectivityBloc),
         BlocProvider(create: (context) => _engineInfoCubit),
       ],
@@ -146,6 +151,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
               context
                   .read<TaskBloc>()
                   .add(TaskEvent.getTasks(filterState.activeFilter));
+              context.read<ToastMessageCubit>().showToastMessage(state.taskId);
             }
           }),
         ],
