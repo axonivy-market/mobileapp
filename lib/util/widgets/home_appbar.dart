@@ -73,7 +73,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       },
                     ),
                   ],
-                  child: FilterWidget(),
+                  child: const FilterWidget(),
                 ),
               ),
             )

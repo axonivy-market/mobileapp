@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'tabbar_cubit.dart';
+part of 'toast_message_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,58 +15,58 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$TabBarState {
+mixin _$ToastMessageState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int currentTime, int taskId) navigateTasks,
+    required TResult Function(int currentTime, String taskName) show,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int currentTime, int taskId)? navigateTasks,
+    TResult? Function(int currentTime, String taskName)? show,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int currentTime, int taskId)? navigateTasks,
+    TResult Function(int currentTime, String taskName)? show,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(NavigateTasksState value) navigateTasks,
+    required TResult Function(ShowToastMessageState value) show,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(NavigateTasksState value)? navigateTasks,
+    TResult? Function(ShowToastMessageState value)? show,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(NavigateTasksState value)? navigateTasks,
+    TResult Function(ShowToastMessageState value)? show,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $TabBarStateCopyWith<$Res> {
-  factory $TabBarStateCopyWith(
-          TabBarState value, $Res Function(TabBarState) then) =
-      _$TabBarStateCopyWithImpl<$Res, TabBarState>;
+abstract class $ToastMessageStateCopyWith<$Res> {
+  factory $ToastMessageStateCopyWith(
+          ToastMessageState value, $Res Function(ToastMessageState) then) =
+      _$ToastMessageStateCopyWithImpl<$Res, ToastMessageState>;
 }
 
 /// @nodoc
-class _$TabBarStateCopyWithImpl<$Res, $Val extends TabBarState>
-    implements $TabBarStateCopyWith<$Res> {
-  _$TabBarStateCopyWithImpl(this._value, this._then);
+class _$ToastMessageStateCopyWithImpl<$Res, $Val extends ToastMessageState>
+    implements $ToastMessageStateCopyWith<$Res> {
+  _$ToastMessageStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -83,7 +83,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$TabBarStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$ToastMessageStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -97,7 +97,7 @@ class _$InitialImpl implements Initial {
 
   @override
   String toString() {
-    return 'TabBarState.initial()';
+    return 'ToastMessageState.initial()';
   }
 
   @override
@@ -113,7 +113,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int currentTime, int taskId) navigateTasks,
+    required TResult Function(int currentTime, String taskName) show,
   }) {
     return initial();
   }
@@ -122,7 +122,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int currentTime, int taskId)? navigateTasks,
+    TResult? Function(int currentTime, String taskName)? show,
   }) {
     return initial?.call();
   }
@@ -131,7 +131,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int currentTime, int taskId)? navigateTasks,
+    TResult Function(int currentTime, String taskName)? show,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -144,7 +144,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(NavigateTasksState value) navigateTasks,
+    required TResult Function(ShowToastMessageState value) show,
   }) {
     return initial(this);
   }
@@ -153,7 +153,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(NavigateTasksState value)? navigateTasks,
+    TResult? Function(ShowToastMessageState value)? show,
   }) {
     return initial?.call(this);
   }
@@ -162,7 +162,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(NavigateTasksState value)? navigateTasks,
+    TResult Function(ShowToastMessageState value)? show,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -172,108 +172,110 @@ class _$InitialImpl implements Initial {
   }
 }
 
-abstract class Initial implements TabBarState {
+abstract class Initial implements ToastMessageState {
   const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$NavigateTasksStateImplCopyWith<$Res> {
-  factory _$$NavigateTasksStateImplCopyWith(_$NavigateTasksStateImpl value,
-          $Res Function(_$NavigateTasksStateImpl) then) =
-      __$$NavigateTasksStateImplCopyWithImpl<$Res>;
+abstract class _$$ShowToastMessageStateImplCopyWith<$Res> {
+  factory _$$ShowToastMessageStateImplCopyWith(
+          _$ShowToastMessageStateImpl value,
+          $Res Function(_$ShowToastMessageStateImpl) then) =
+      __$$ShowToastMessageStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int currentTime, int taskId});
+  $Res call({int currentTime, String taskName});
 }
 
 /// @nodoc
-class __$$NavigateTasksStateImplCopyWithImpl<$Res>
-    extends _$TabBarStateCopyWithImpl<$Res, _$NavigateTasksStateImpl>
-    implements _$$NavigateTasksStateImplCopyWith<$Res> {
-  __$$NavigateTasksStateImplCopyWithImpl(_$NavigateTasksStateImpl _value,
-      $Res Function(_$NavigateTasksStateImpl) _then)
+class __$$ShowToastMessageStateImplCopyWithImpl<$Res>
+    extends _$ToastMessageStateCopyWithImpl<$Res, _$ShowToastMessageStateImpl>
+    implements _$$ShowToastMessageStateImplCopyWith<$Res> {
+  __$$ShowToastMessageStateImplCopyWithImpl(_$ShowToastMessageStateImpl _value,
+      $Res Function(_$ShowToastMessageStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? currentTime = null,
-    Object? taskId = null,
+    Object? taskName = null,
   }) {
-    return _then(_$NavigateTasksStateImpl(
+    return _then(_$ShowToastMessageStateImpl(
       null == currentTime
           ? _value.currentTime
           : currentTime // ignore: cast_nullable_to_non_nullable
               as int,
-      null == taskId
-          ? _value.taskId
-          : taskId // ignore: cast_nullable_to_non_nullable
-              as int,
+      null == taskName
+          ? _value.taskName
+          : taskName // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 
-class _$NavigateTasksStateImpl implements NavigateTasksState {
-  const _$NavigateTasksStateImpl(this.currentTime, this.taskId);
+class _$ShowToastMessageStateImpl implements ShowToastMessageState {
+  const _$ShowToastMessageStateImpl(this.currentTime, this.taskName);
 
   @override
   final int currentTime;
   @override
-  final int taskId;
+  final String taskName;
 
   @override
   String toString() {
-    return 'TabBarState.navigateTasks(currentTime: $currentTime, taskId: $taskId)';
+    return 'ToastMessageState.show(currentTime: $currentTime, taskName: $taskName)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NavigateTasksStateImpl &&
+            other is _$ShowToastMessageStateImpl &&
             (identical(other.currentTime, currentTime) ||
                 other.currentTime == currentTime) &&
-            (identical(other.taskId, taskId) || other.taskId == taskId));
+            (identical(other.taskName, taskName) ||
+                other.taskName == taskName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentTime, taskId);
+  int get hashCode => Object.hash(runtimeType, currentTime, taskName);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NavigateTasksStateImplCopyWith<_$NavigateTasksStateImpl> get copyWith =>
-      __$$NavigateTasksStateImplCopyWithImpl<_$NavigateTasksStateImpl>(
-          this, _$identity);
+  _$$ShowToastMessageStateImplCopyWith<_$ShowToastMessageStateImpl>
+      get copyWith => __$$ShowToastMessageStateImplCopyWithImpl<
+          _$ShowToastMessageStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int currentTime, int taskId) navigateTasks,
+    required TResult Function(int currentTime, String taskName) show,
   }) {
-    return navigateTasks(currentTime, taskId);
+    return show(currentTime, taskName);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int currentTime, int taskId)? navigateTasks,
+    TResult? Function(int currentTime, String taskName)? show,
   }) {
-    return navigateTasks?.call(currentTime, taskId);
+    return show?.call(currentTime, taskName);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int currentTime, int taskId)? navigateTasks,
+    TResult Function(int currentTime, String taskName)? show,
     required TResult orElse(),
   }) {
-    if (navigateTasks != null) {
-      return navigateTasks(currentTime, taskId);
+    if (show != null) {
+      return show(currentTime, taskName);
     }
     return orElse();
   }
@@ -282,41 +284,42 @@ class _$NavigateTasksStateImpl implements NavigateTasksState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
-    required TResult Function(NavigateTasksState value) navigateTasks,
+    required TResult Function(ShowToastMessageState value) show,
   }) {
-    return navigateTasks(this);
+    return show(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
-    TResult? Function(NavigateTasksState value)? navigateTasks,
+    TResult? Function(ShowToastMessageState value)? show,
   }) {
-    return navigateTasks?.call(this);
+    return show?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
-    TResult Function(NavigateTasksState value)? navigateTasks,
+    TResult Function(ShowToastMessageState value)? show,
     required TResult orElse(),
   }) {
-    if (navigateTasks != null) {
-      return navigateTasks(this);
+    if (show != null) {
+      return show(this);
     }
     return orElse();
   }
 }
 
-abstract class NavigateTasksState implements TabBarState {
-  const factory NavigateTasksState(final int currentTime, final int taskId) =
-      _$NavigateTasksStateImpl;
+abstract class ShowToastMessageState implements ToastMessageState {
+  const factory ShowToastMessageState(
+          final int currentTime, final String taskName) =
+      _$ShowToastMessageStateImpl;
 
   int get currentTime;
-  int get taskId;
+  String get taskName;
   @JsonKey(ignore: true)
-  _$$NavigateTasksStateImplCopyWith<_$NavigateTasksStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$ShowToastMessageStateImplCopyWith<_$ShowToastMessageStateImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

@@ -7,10 +7,12 @@ import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_detail/task_detail_cubit.dart';
+import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
 import 'package:axon_ivy/router/router.dart';
+import 'package:axon_ivy/util/toast_message.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,8 +44,8 @@ class TasksView extends StatelessWidget {
                 'task': state.taskIvy,
                 'path': state.taskIvy.fullRequestPath
               }).then((value) {
-                if (value != null && value as bool) {
-                  context.read<TabBarCubit>().navigateTaskList();
+                if (value != null && value is int) {
+                  context.read<TabBarCubit>().navigateTaskList(value);
                 }
               });
             }
@@ -52,6 +54,14 @@ class TasksView extends StatelessWidget {
             context
                 .read<OfflineIndicatorCubit>()
                 .showOfflineIndicator(state is TaskErrorState);
+          }),
+          BlocListener<ToastMessageCubit, ToastMessageState>(
+              listener: (context, state) {
+            if (state is ShowToastMessageState) {
+              ToastMessageUtils.showMessage(
+                  'Following task has been completed: "${state.taskName}"',
+                  AppAssets.icons.success);
+            }
           }),
         ],
         child: BlocBuilder<TaskBloc, TaskState>(
@@ -198,8 +208,8 @@ class TasksViewContent extends StatelessWidget {
       'task': taskIvy,
       'path': taskIvy.fullRequestPath
     }).then((value) {
-      if (value != null && value as bool) {
-        context.read<TabBarCubit>().navigateTaskList();
+      if (value != null && value is int) {
+        context.read<TabBarCubit>().navigateTaskList(value);
       }
     });
   }
