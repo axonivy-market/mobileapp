@@ -113,7 +113,11 @@ class TasksViewContent extends StatelessWidget {
                   Constants.bottomNavigationBarHeight,
               child: DataEmptyWidget(
                 message: "errorCanNotAccessScreen".tr(),
-                icon: AppAssets.icons.tool.svg(),
+                icon: AppAssets.icons.tool.svg(
+                    colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.tertiaryContainer,
+                  BlendMode.srcIn,
+                )),
               ),
             ),
             childCount: 1,

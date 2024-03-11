@@ -172,7 +172,7 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
                               style: GoogleFonts.inter(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w500,
-                                  color: AppColors.tropicSea),
+                                  color: Theme.of(context).colorScheme.primary),
                             ),
                           ),
                         ),

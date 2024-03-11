@@ -33,7 +33,7 @@ class TaskInfoRowWidget extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
-                color: AppColors.eerieBlack,
+                color: Theme.of(context).colorScheme.surface,
               ),
             ),
             Expanded(
@@ -44,7 +44,7 @@ class TaskInfoRowWidget extends StatelessWidget {
                   style: GoogleFonts.inter(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
-                      color: AppColors.sonicSilver),
+                      color: Theme.of(context).colorScheme.secondary),
                 ),
               ),
             ),
@@ -52,9 +52,9 @@ class TaskInfoRowWidget extends StatelessWidget {
         ),
         isShowDivider ? const SizedBox(height: 10) : const SizedBox.shrink(),
         isShowDivider
-            ? const Divider(
+            ? Divider(
                 height: 0.5,
-                color: AppColors.kinglyCloud,
+                color: Theme.of(context).colorScheme.outline,
               )
             : const SizedBox.shrink(),
       ],

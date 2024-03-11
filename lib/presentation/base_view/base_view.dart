@@ -37,7 +37,7 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
             "uploadFile.changeFileName".tr(),
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-                color: AppColors.black,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 17,
                 fontWeight: FontWeight.w500),
           ),
@@ -60,9 +60,9 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: AppColors.white,
+                      color: Theme.of(context).colorScheme.background,
                       border: Border.all(
-                        color: AppColors.tropicSea,
+                        color: Theme.of(context).colorScheme.primary,
                         width: 1,
                       ),
                     ),
@@ -70,7 +70,9 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                       child: Text(
                         "dialog.cancel".tr(),
                         style: GoogleFonts.inter(
-                            color: AppColors.black, fontSize: 14),
+                          color: Theme.of(context).colorScheme.surface,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -90,12 +92,12 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                         const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: AppColors.tropicSea),
+                        color: Theme.of(context).colorScheme.background),
                     child: Center(
                       child: Text(
                         "dialog.ok".tr(),
                         style: GoogleFonts.inter(
-                            color: AppColors.white,
+                            color: Theme.of(context).colorScheme.surface,
                             fontSize: 14,
                             fontWeight: FontWeight.w500),
                       ),
@@ -127,14 +129,17 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
             title ?? "",
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-                color: AppColors.black,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 17,
                 fontWeight: FontWeight.w500),
           ),
           content: Text(
             message,
             textAlign: TextAlign.center,
-            style: GoogleFonts.inter(color: AppColors.black, fontSize: 14),
+            style: GoogleFonts.inter(
+              color: Theme.of(context).colorScheme.surface,
+              fontSize: 14,
+            ),
           ),
           actions: [
             Padding(
@@ -153,9 +158,9 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                             horizontal: 20, vertical: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: AppColors.white,
+                          color: Theme.of(context).colorScheme.background,
                           border: Border.all(
-                            color: AppColors.tropicSea,
+                            color: Theme.of(context).colorScheme.primary,
                             width: 1,
                           ),
                         ),
@@ -163,7 +168,9 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                           child: Text(
                             "dialog.cancel".tr(),
                             style: GoogleFonts.inter(
-                                color: AppColors.black, fontSize: 14),
+                              color: Theme.of(context).colorScheme.surface,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ),
@@ -182,12 +189,12 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                           horizontal: 20, vertical: 5),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: AppColors.tropicSea),
+                          color: Theme.of(context).colorScheme.background),
                       child: Center(
                         child: Text(
                           confirmTitle ?? "dialog.ok".tr(),
                           style: GoogleFonts.inter(
-                              color: AppColors.white,
+                              color: Theme.of(context).colorScheme.surface,
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
                         ),
@@ -220,7 +227,7 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
             title ?? "",
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-                color: AppColors.black,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 17,
                 fontWeight: FontWeight.w500),
           ),
@@ -242,12 +249,12 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: AppColors.tropicSea),
+                      color: Theme.of(context).colorScheme.background),
                   child: Center(
                     child: Text(
                       confirmTitle ?? "dialog.ok".tr(),
                       style: GoogleFonts.inter(
-                          color: AppColors.white,
+                          color: Theme.of(context).colorScheme.surface,
                           fontSize: 14,
                           fontWeight: FontWeight.w500),
                     ),

@@ -41,13 +41,20 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       leadingWidth: 120,
       leading: Padding(
         padding: const EdgeInsets.only(left: 15),
-        child: AppAssets.icons.logo.svg(),
+        child: Theme.of(context).brightness == Brightness.light
+            ? AppAssets.icons.logo.svg()
+            : AppAssets.icons.logoDark.svg(),
       ),
       actions: [
         buildLastUpdatedTime(),
         IconButton(
           onPressed: () {},
-          icon: AppAssets.icons.notification.svg(),
+          icon: AppAssets.icons.notification.svg(
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.surface,
+              BlendMode.srcIn,
+            ),
+          ),
         ),
         const SizedBox(
           width: 5,

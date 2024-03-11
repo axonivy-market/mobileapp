@@ -101,6 +101,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/login.svg
   SvgGenImage get login => const SvgGenImage('assets/icons/login.svg');
 
+  /// File path: assets/icons/logo-dark.svg
+  SvgGenImage get logoDark => const SvgGenImage('assets/icons/logo-dark.svg');
+
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
 
@@ -192,6 +195,7 @@ class $AssetsIconsGen {
         iconImage,
         list,
         login,
+        logoDark,
         logo,
         noExpiredTask,
         notification,

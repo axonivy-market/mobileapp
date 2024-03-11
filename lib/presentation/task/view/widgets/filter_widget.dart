@@ -75,6 +75,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                   height: 40,
                   width: 86,
                   decoration: BoxDecoration(
+                      border: Border.all(
+                          color: Theme.of(context).colorScheme.outline),
                       borderRadius: const BorderRadius.only(
                           topRight: Radius.circular(10.0),
                           bottomRight: Radius.circular(10.0)),
@@ -172,16 +174,16 @@ class _FilterWidgetState extends State<FilterWidget> {
                             fontSize: 17,
                             color:
                                 activeSortType.contains(MainSortType.priority)
-                                    ? AppColors.tropicSea
-                                    : AppColors.eerieBlack,
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.secondary,
                             fontWeight: FontWeight.w400,
                           ),
                         ),
                       ),
                       if (activeSortType.contains(MainSortType.priority))
-                        const Icon(
+                        Icon(
                           Icons.check,
-                          color: AppColors.tropicSea,
+                          color: Theme.of(context).colorScheme.primary,
                         ),
                     ],
                   ),
@@ -197,15 +199,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                           textStyle: TextStyle(
                               fontSize: 17,
                               color: activeSortType.contains(MainSortType.name)
-                                  ? AppColors.tropicSea
-                                  : AppColors.eerieBlack,
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
                       if (activeSortType.contains(MainSortType.name))
-                        const Icon(
+                        Icon(
                           Icons.check,
-                          color: AppColors.tropicSea,
+                          color: Theme.of(context).colorScheme.primary,
                         )
                     ],
                   ),
@@ -222,15 +224,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                               fontSize: 17,
                               color: activeSortType
                                       .contains(MainSortType.creationDate)
-                                  ? AppColors.tropicSea
-                                  : AppColors.eerieBlack,
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
                       if (activeSortType.contains(MainSortType.creationDate))
-                        const Icon(
+                        Icon(
                           Icons.check,
-                          color: AppColors.tropicSea,
+                          color: Theme.of(context).colorScheme.primary,
                         )
                     ],
                   ),
@@ -247,15 +249,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                               fontSize: 17,
                               color: activeSortType
                                       .contains(MainSortType.expiryDate)
-                                  ? AppColors.tropicSea
-                                  : AppColors.eerieBlack,
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
                       if (activeSortType.contains(MainSortType.expiryDate))
-                        const Icon(
+                        Icon(
                           Icons.check,
-                          color: AppColors.tropicSea,
+                          color: Theme.of(context).colorScheme.primary,
                         )
                     ],
                   ),
@@ -263,26 +265,29 @@ class _FilterWidgetState extends State<FilterWidget> {
                 const PopupMenuDivider(),
                 PopupMenuItem<SubSortType>(
                   value: activeSortType.getSubTypes()[0],
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        activeSortType.getSubTypes()[0].toString(),
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                              fontSize: 17,
-                              color: activeSortType.isSubTypeActive(0)
-                                  ? AppColors.tropicSea
-                                  : AppColors.eerieBlack,
-                              fontWeight: FontWeight.w400),
+                  child: ColoredBox(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          activeSortType.getSubTypes()[0].toString(),
+                          style: GoogleFonts.inter(
+                            textStyle: TextStyle(
+                                fontSize: 17,
+                                color: activeSortType.isSubTypeActive(0)
+                                    ? Theme.of(context).colorScheme.primary
+                                    : Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.w400),
+                          ),
                         ),
-                      ),
-                      if (activeSortType.isSubTypeActive(0))
-                        const Icon(
-                          Icons.check,
-                          color: AppColors.tropicSea,
-                        )
-                    ],
+                        if (activeSortType.isSubTypeActive(0))
+                          Icon(
+                            Icons.check,
+                            color: Theme.of(context).colorScheme.primary,
+                          )
+                      ],
+                    ),
                   ),
                 ),
                 PopupMenuItem<SortType>(
@@ -296,15 +301,15 @@ class _FilterWidgetState extends State<FilterWidget> {
                           textStyle: TextStyle(
                               fontSize: 17,
                               color: activeSortType.isSubTypeActive(1)
-                                  ? AppColors.tropicSea
-                                  : AppColors.eerieBlack,
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.secondary,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
                       if (activeSortType.isSubTypeActive(1))
-                        const Icon(
+                        Icon(
                           Icons.check,
-                          color: AppColors.tropicSea,
+                          color: Theme.of(context).colorScheme.primary,
                         )
                     ],
                   ),
@@ -315,17 +320,19 @@ class _FilterWidgetState extends State<FilterWidget> {
               clipBehavior: Clip.hardEdge,
               padding: const EdgeInsets.fromLTRB(9, 8, 9, 8),
               decoration: BoxDecoration(
+                  border:
+                      Border.all(color: Theme.of(context).colorScheme.outline),
                   borderRadius: BorderRadius.circular(10),
                   color: isSortButtonTapped
-                      ? AppColors.tropicSea
-                      : AppColors.bleachedSilk),
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.onPrimaryContainer),
               child: Row(
                 children: [
                   AppAssets.icons.filter.svg(
                       colorFilter: ColorFilter.mode(
                           isSortButtonTapped
-                              ? AppColors.white
-                              : AppColors.black,
+                              ? Theme.of(context).colorScheme.onSurface
+                              : Theme.of(context).colorScheme.surface,
                           BlendMode.srcIn)),
                   Text(
                     "tasksView.sort".tr(),
@@ -333,8 +340,9 @@ class _FilterWidgetState extends State<FilterWidget> {
                         fontWeight: FontWeight.w400,
                         fontSize: 17,
                         color: isSortButtonTapped
-                            ? AppColors.white
-                            : AppColors.eerieBlack),
+                          ? Theme.of(context).colorScheme.onSurface
+                          : Theme.of(context).colorScheme.surface,
+                    ),
                   )
                 ],
               ),
@@ -346,10 +354,14 @@ class _FilterWidgetState extends State<FilterWidget> {
   }
 
   Color getFilterColor(bool isCurrentFilterType) {
-    return isCurrentFilterType ? AppColors.tropicSea : AppColors.bleachedSilk;
+    return isCurrentFilterType
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.onPrimaryContainer;
   }
 
   Color getFilterTextColor(bool isCurrentFilterType) {
-    return isCurrentFilterType ? AppColors.white : AppColors.sonicSilver;
+    return isCurrentFilterType
+        ? Theme.of(context).colorScheme.onSurface
+        : Theme.of(context).colorScheme.secondary;
   }
 }

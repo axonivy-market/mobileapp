@@ -35,16 +35,24 @@ class ProcessOfflineIndicatorWidget extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: Colors.white),
+            border: Border.all(
+              color: Theme.of(context).colorScheme.outline,
+            ),
+            borderRadius: BorderRadius.circular(10),
+            color: Theme.of(context).colorScheme.background,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              AppAssets.icons.cloudOff.svg(),
+              AppAssets.icons.cloudOff.svg(
+                  colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.tertiaryContainer,
+                      BlendMode.srcIn)),
               const SizedBox(height: 10),
               Text(
                 "process.you_are_offline".tr(),
                 style: GoogleFonts.inter(
-                  color: AppColors.eerieBlack,
+                  color: Theme.of(context).colorScheme.surface,
                   fontSize: 17,
                   fontWeight: FontWeight.w600,
                 ),
@@ -54,7 +62,7 @@ class ProcessOfflineIndicatorWidget extends StatelessWidget {
                 "process.offline_description".tr(),
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
-                  color: AppColors.sonicSilver,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontSize: 17,
                   fontWeight: FontWeight.w400,
                 ),

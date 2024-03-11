@@ -105,4 +105,7 @@ class AppColors {
 
   /// Color: #FFFFFF
   static const Color white = Color(0xFFFFFFFF);
+
+  /// Color: #F8F8F8
+  static const Color zhenZhuBaiPear = Color(0xFFF8F8F8);
 }

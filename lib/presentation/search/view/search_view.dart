@@ -57,7 +57,13 @@ class _SearchViewState extends State<SearchView> {
                                 ? DataEmptyWidget(
                                     message: state.emptyMessage!.tr(),
                                     icon:
-                                        AppAssets.icons.icSearchNotFound.svg(),
+                                        AppAssets.icons.icSearchNotFound.svg(
+                                        colorFilter: ColorFilter.mode(
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .tertiaryContainer,
+                                      BlendMode.srcIn,
+                                    )),
                                   )
                                 : searchItemList(context, state)),
                       ],
@@ -65,7 +71,12 @@ class _SearchViewState extends State<SearchView> {
                   } else {
                     return DataEmptyWidget(
                       message: 'search.nothingThereYet'.tr(),
-                      icon: AppAssets.icons.icSearchInitial.svg(),
+                      icon: AppAssets.icons.icSearchInitial.svg(
+                        colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.tertiaryContainer,
+                          BlendMode.srcIn,
+                        ),
+                      ),
                     );
                   }
                 },
@@ -80,7 +91,8 @@ class _SearchViewState extends State<SearchView> {
   Widget searchItemList(BuildContext context, SearchResultState state) {
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
+        SliverAppBar(
+          backgroundColor: Theme.of(context).colorScheme.background,
           toolbarHeight: 10,
           pinned: true,
           scrolledUnderElevation: 0.2,
@@ -101,7 +113,7 @@ class _SearchViewState extends State<SearchView> {
                     style: GoogleFonts.inter(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.eerieBlack,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                 );

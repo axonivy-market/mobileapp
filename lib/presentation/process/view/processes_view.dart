@@ -81,7 +81,10 @@ class ProcessesView extends StatelessWidget {
             Constants.bottomNavigationBarHeight,
         child: DataEmptyWidget(
           message: 'process.emptyList',
-          icon: AppAssets.icons.processEmpty.svg(),
+          icon: AppAssets.icons.processEmpty.svg(
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.onTertiaryContainer,
+                  BlendMode.srcIn)),
         ),
       );
     }

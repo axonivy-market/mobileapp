@@ -30,7 +30,7 @@ class TaskEmptyWidget extends StatelessWidget {
                 style: GoogleFonts.inter(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.eerieBlack),
+                    color: Theme.of(context).colorScheme.surface),
               ),
             ),
           ),

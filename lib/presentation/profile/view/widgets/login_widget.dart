@@ -62,7 +62,7 @@ class LoginWidget extends StatelessWidget {
                         style: GoogleFonts.inter(
                             fontSize: 17,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.tropicSea),
+                            color: Theme.of(context).colorScheme.primary),
                       ),
                     ),
                   ),

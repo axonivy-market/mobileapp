@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ThemeState {
-  ThemeData? get themeData => throw _privateConstructorUsedError;
+  ThemeData get themeData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ThemeStateCopyWith<ThemeState> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $ThemeStateCopyWith<$Res> {
           ThemeState value, $Res Function(ThemeState) then) =
       _$ThemeStateCopyWithImpl<$Res, ThemeState>;
   @useResult
-  $Res call({ThemeData? themeData});
+  $Res call({ThemeData themeData});
 }
 
 /// @nodoc
@@ -45,13 +45,13 @@ class _$ThemeStateCopyWithImpl<$Res, $Val extends ThemeState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? themeData = freezed,
+    Object? themeData = null,
   }) {
     return _then(_value.copyWith(
-      themeData: freezed == themeData
+      themeData: null == themeData
           ? _value.themeData
           : themeData // ignore: cast_nullable_to_non_nullable
-              as ThemeData?,
+              as ThemeData,
     ) as $Val);
   }
 }
@@ -64,7 +64,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       __$$InitialImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ThemeData? themeData});
+  $Res call({ThemeData themeData});
 }
 
 /// @nodoc
@@ -78,13 +78,13 @@ class __$$InitialImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? themeData = freezed,
+    Object? themeData = null,
   }) {
     return _then(_$InitialImpl(
-      themeData: freezed == themeData
+      themeData: null == themeData
           ? _value.themeData
           : themeData // ignore: cast_nullable_to_non_nullable
-              as ThemeData?,
+              as ThemeData,
     ));
   }
 }
@@ -92,10 +92,10 @@ class __$$InitialImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$InitialImpl implements _Initial {
-  const _$InitialImpl({this.themeData});
+  const _$InitialImpl({required this.themeData});
 
   @override
-  final ThemeData? themeData;
+  final ThemeData themeData;
 
   @override
   String toString() {
@@ -122,10 +122,10 @@ class _$InitialImpl implements _Initial {
 }
 
 abstract class _Initial implements ThemeState {
-  const factory _Initial({final ThemeData? themeData}) = _$InitialImpl;
+  const factory _Initial({required final ThemeData themeData}) = _$InitialImpl;
 
   @override
-  ThemeData? get themeData;
+  ThemeData get themeData;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

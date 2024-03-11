@@ -125,9 +125,9 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
               Text(
                 fullName,
                 style: GoogleFonts.inter(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   fontSize: 17,
-                  color: AppColors.eerieBlack,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -141,7 +141,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
                     fontSize: 13,
-                    color: AppColors.eerieBlack,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
             ],
@@ -167,7 +167,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.w400,
                 fontSize: 17,
-                color: AppColors.eerieBlack),
+                color: Theme.of(context).colorScheme.surface),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -176,12 +176,12 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 "English",
                 style: GoogleFonts.inter(
                     fontSize: 13,
-                    color: AppColors.eerieBlack,
+                    color: Theme.of(context).colorScheme.surface,
                     fontWeight: FontWeight.w400),
               ),
               AppAssets.icons.chevronRight.svg(
-                  colorFilter: const ColorFilter.mode(
-                AppColors.tropicSea,
+                  colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.primary,
                 BlendMode.srcIn,
               ))
             ],
@@ -208,7 +208,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.w400,
                 fontSize: 17,
-                color: AppColors.eerieBlack),
+                color: Theme.of(context).colorScheme.surface),
           ),
           SwitchWidget(
             isDarkMode: false,
@@ -243,7 +243,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.w400,
                 fontSize: 17,
-                color: AppColors.eerieBlack),
+                color: Theme.of(context).colorScheme.surface),
           ),
           SwitchWidget(
             isDarkMode: _isDarkMode,

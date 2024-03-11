@@ -148,10 +148,11 @@ class _TabBarScreenState extends State<TabBarScreen> {
           ),
           bottomNavigationBar: SafeArea(
             child: Container(
-              padding: const EdgeInsets.only(top: 14, bottom: 14),
-              decoration: const BoxDecoration(
+              padding: EdgeInsets.only(top: 14, bottom: 14),
+              decoration: BoxDecoration(
                 border: Border(
-                  top: BorderSide(color: AppColors.mercury, width: 1.0),
+                  top: BorderSide(
+                      color: Theme.of(context).colorScheme.outline, width: 1.0),
                 ),
               ),
               child: Row(
@@ -227,12 +228,12 @@ class _TabBarScreenState extends State<TabBarScreen> {
               SvgPicture.asset(
                 svgPath,
                 colorFilter: isSelected
-                    ? const ColorFilter.mode(
-                        AppColors.tropicSea,
+                    ? ColorFilter.mode(
+                        Theme.of(context).colorScheme.primary,
                         BlendMode.srcIn,
                       )
-                    : const ColorFilter.mode(
-                        AppColors.sonicSilver,
+                    : ColorFilter.mode(
+                        Theme.of(context).colorScheme.secondary,
                         BlendMode.srcIn,
                       ),
               ),
@@ -240,7 +241,9 @@ class _TabBarScreenState extends State<TabBarScreen> {
                 label,
                 style: GoogleFonts.inter(
                   color:
-                      isSelected ? AppColors.tropicSea : AppColors.sonicSilver,
+                      isSelected
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.secondary,
                   fontSize: 13,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                 ),

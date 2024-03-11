@@ -19,10 +19,12 @@ final _sampleImages = [
   AppAssets.icons.icUsers,
 ];
 
-Widget getProcessIcon() {
+Widget getProcessIcon(BuildContext context) {
   return _sampleImages
       .elementAt(_randomizer.nextInt(_sampleImages.length))
-      .svg();
+      .svg(
+      colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.surface, BlendMode.srcIn));
 }
 
 class ProcessItemWidget extends StatelessWidget {
@@ -46,12 +48,13 @@ class ProcessItemWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       constraints: const BoxConstraints(minHeight: AppSize.s82),
       decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
         borderRadius: BorderRadius.circular(10),
-        color: AppColors.bleachedSilk,
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
       ),
       child: Stack(
         children: [
-          getProcessIcon(),
+          getProcessIcon(context),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 26),
             child: Column(
@@ -68,8 +71,8 @@ class ProcessItemWidget extends StatelessWidget {
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
                             color: query.isEmptyOrNull
-                                ? AppColors.eerieBlack
-                                : AppColors.darkSouls),
+                                ? Theme.of(context).colorScheme.surface
+                                : AppColors.watermelonade),
                         overflow: TextOverflow.ellipsis,
                       )
                     : TextHighlightWidget(
@@ -89,7 +92,7 @@ class ProcessItemWidget extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.sonicSilver,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
@@ -108,7 +111,9 @@ class ProcessItemWidget extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 0,
-            child: AppAssets.icons.chevronRight.svg(),
+            child: AppAssets.icons.chevronRight.svg(
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.surface, BlendMode.srcIn)),
           ),
         ],
       ),

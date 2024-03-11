@@ -60,32 +60,36 @@ class _SearchTextFieldState extends State<SearchTextField> {
           child: TextField(
             controller: _textController,
             style: GoogleFonts.inter(
-                color: AppColors.eerieBlack,
+                color: Theme.of(context).colorScheme.surface,
                 fontWeight: FontWeight.w400,
                 fontSize: 17),
-            cursorColor: AppColors.tropicSea,
+            cursorColor: Theme.of(context).colorScheme.primary,
             decoration: InputDecoration(
               filled: true,
-              fillColor: AppColors.bleachedSilk,
+              fillColor: Theme.of(context).colorScheme.primaryContainer,
               hintText: "generalSearch".tr(),
               hintStyle: GoogleFonts.inter(
-                color: AppColors.sonicSilver,
+                color: Theme.of(context).colorScheme.surface,
                 fontWeight: FontWeight.w400,
                 fontSize: 17,
               ),
               contentPadding: EdgeInsets.zero,
               enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: AppColors.bleachedSilk),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
                 borderRadius: BorderRadius.circular(10),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
-                borderSide: const BorderSide(color: AppColors.bleachedSilk),
+                borderSide: BorderSide(
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                ),
               ),
               prefixIconConstraints: const BoxConstraints(minWidth: 40),
               prefixIcon: AppAssets.icons.icSearchText.svg(
-                colorFilter: const ColorFilter.mode(
-                  AppColors.sonicSilver,
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.secondary,
                   BlendMode.srcIn,
                 ),
               ),
