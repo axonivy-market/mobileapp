@@ -1,12 +1,18 @@
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/presentation/process/view/widgets/process_offline_indicator_widget.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
+import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_state.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
+import 'package:axon_ivy/presentation/task/bloc/sort_bloc/sort_state.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_detail/task_detail_cubit.dart';
+import 'package:axon_ivy/presentation/task/view/widgets/filter_widget.dart';
 import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
@@ -51,10 +57,15 @@ class TasksView extends StatelessWidget {
             }
           }),
           BlocListener<TaskBloc, TaskState>(listener: (context, state) {
-            context
-                .read<OfflineIndicatorCubit>()
-                .showOfflineIndicator(state is TaskErrorState);
+            context.read<OfflineIndicatorCubit>().showOfflineIndicator(
+                state is TaskSuccessState && !state.isOnline);
           }),
+          BlocListener<ConnectivityBloc, ConnectivityState>(
+              listener: (context, state) {
+                context
+                    .read<TaskBloc>()
+                    .add(TaskEvent.showOfflinePopupEvent(state is ConnectedState));
+              }),
           BlocListener<ToastMessageCubit, ToastMessageState>(
               listener: (context, state) {
             if (state is ShowToastMessageState) {
@@ -89,20 +100,55 @@ class TasksViewContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeAppBar(
-        isShowFilterBar: isShowFilterBar,
+      appBar: const HomeAppBar(
         isShowLastUpdated: true,
+        scrolledUnderElevation: 0,
       ),
-      body: BlocBuilder<TaskBloc, TaskState>(
-        builder: (context, taskState) {
-          if (taskState is TaskErrorState) {
-            return _buildErrorView(context, taskState);
-          } else if (taskState is TaskSuccessState) {
-            return _buildTaskList(context, taskState.tasks);
-          } else {
-            return const LoadingWidget();
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<FilterBloc, FilterState>(
+            listener: (context, filterState) {
+              context
+                  .read<TaskBloc>()
+                  .add(TaskEvent.filterTasks(filterState.activeFilter));
+            },
+          ),
+          BlocListener<SortBloc, SortState>(
+            listener: (context, sortState) {
+              context
+                  .read<TaskBloc>()
+                  .add(TaskEvent.sortTasks(sortState.activeSortType));
+            },
+          ),
+        ],
+        child: BlocBuilder<TaskBloc, TaskState>(
+          builder: (context, taskState) {
+            if (taskState is TaskErrorState) {
+              return _buildErrorView(context, taskState);
+            } else if (taskState is TaskSuccessState) {
+              return Stack(
+                children: [
+                  Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: FilterWidget(),
+                      ),
+                      Expanded(child: _buildTaskList(context, taskState.tasks)),
+                    ],
+                  ),
+                  if (!taskState.isOnline)
+                    OfflineIndicatorPopupWidget(
+                      description: "offline.task_description".tr(),
+                      isShowingProcesses: taskState.tasks.isNotEmpty,
+                    ),
+                ],
+              );
+            } else {
+              return const LoadingWidget();
+            }
+          },
+        ),
       ),
     );
   }
@@ -135,24 +181,32 @@ class TasksViewContent extends StatelessWidget {
 
   Widget _buildTaskList(BuildContext context, List<TaskIvy> tasks) {
     final activeFilter = context.watch<FilterBloc>().state.activeFilter;
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics()),
-        slivers: [
-          CupertinoSliverRefreshControl(
-            onRefresh: () async => _onRefresh(context),
-          ),
-          SliverList(
+    return CustomScrollView(
+      physics:
+          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+      slivers: [
+        const SliverAppBar(
+          toolbarHeight: 10,
+          pinned: true,
+          scrolledUnderElevation: 0.2,
+          shadowColor: AppColors.mercury,
+          surfaceTintColor: Colors.white,
+          elevation: 0,
+        ),
+        CupertinoSliverRefreshControl(
+          onRefresh: () async => _onRefresh(context),
+        ),
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+          sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) =>
                   _buildTaskItem(context, tasks, activeFilter, index),
               childCount: tasks.isEmpty ? 1 : tasks.length,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

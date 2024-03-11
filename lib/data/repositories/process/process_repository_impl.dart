@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/network/failure.dart';
 
 @Injectable(as: ProcessRepository)
-class ProcessRepositoryImpl extends ProcessRepository {
+class ProcessRepositoryImpl implements ProcessRepository {
   ProcessRepositoryImpl(this._processRemoteDataSource);
 
   final ProcessRemoteDataSource _processRemoteDataSource;

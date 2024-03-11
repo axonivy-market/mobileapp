@@ -47,6 +47,7 @@ dependencies:
   image_picker: ^1.0.7
   path: ^1.9.0
   font_awesome_flutter: ^10.7.0
+  connectivity_plus: ^5.0.2
 
 dev_dependencies:
   flutter_test:

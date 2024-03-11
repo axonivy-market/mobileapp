@@ -8,7 +8,7 @@ import '../../data_sources/task/task_remote_data_source.dart';
 import 'task_repository.dart';
 
 @Injectable(as: TaskRepository)
-class TaskRepositoryImpl extends TaskRepository {
+class TaskRepositoryImpl implements TaskRepository {
   TaskRepositoryImpl(this._remoteDataSource);
 
   final TaskRemoteDataSource _remoteDataSource;

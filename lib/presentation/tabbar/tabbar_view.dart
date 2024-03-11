@@ -1,3 +1,4 @@
+import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
@@ -5,7 +6,10 @@ import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
+import 'package:axon_ivy/presentation/search/bloc/engine_info_cubit.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
+import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
@@ -59,6 +63,9 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final TabBarCubit _tabBarCubit;
   late final LoggedInCubit _loggedInCubit;
   late final ToastMessageCubit _toastMessageCubit;
+  late final ConnectivityBloc _connectivityBloc;
+  late final EngineInfoCubit _engineInfoCubit;
+
   bool shouldFetchData = true;
   int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
 
@@ -68,12 +75,15 @@ class _TabBarScreenState extends State<TabBarScreen> {
         selectedIndex = tabIndex;
       });
       switch (tabIndex) {
+        case 0:
+          _taskBloc.add(TaskEvent.getTasks(_filterBloc.state.activeFilter));
         case 1:
           _processBloc.add(const ProcessEvent.getProcess());
           break;
         case 2:
           _searchBloc.combineSearchItems(
               _taskBloc.sortDefaultTasks, _processBloc.processes);
+          _engineInfoCubit.getEngineInfo();
           break;
       }
     }
@@ -92,6 +102,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _tabBarCubit = getIt<TabBarCubit>();
     _loggedInCubit = getIt<LoggedInCubit>();
     _toastMessageCubit = getIt<ToastMessageCubit>();
+    _connectivityBloc = getIt<ConnectivityBloc>();
+    _engineInfoCubit = getIt<EngineInfoCubit>();
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
@@ -120,6 +132,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _tabBarCubit),
         BlocProvider(create: (context) => _loggedInCubit),
         BlocProvider(create: (context) => _toastMessageCubit),
+        BlocProvider(create: (context) => _connectivityBloc),
+        BlocProvider(create: (context) => _engineInfoCubit),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -153,7 +167,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
           ),
           bottomNavigationBar: SafeArea(
             child: Container(
-              padding: const EdgeInsets.only(top: 14, bottom: 14),
+              height: Constants.bottomNavigationBarHeight,
               decoration: const BoxDecoration(
                 border: Border(
                   top: BorderSide(color: AppColors.mercury, width: 1.0),
