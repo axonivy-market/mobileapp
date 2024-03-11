@@ -21,6 +21,7 @@ mixin _$TaskEvent {
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +29,7 @@ mixin _$TaskEvent {
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +37,7 @@ mixin _$TaskEvent {
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +46,7 @@ mixin _$TaskEvent {
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +54,7 @@ mixin _$TaskEvent {
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +62,7 @@ mixin _$TaskEvent {
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -147,6 +153,7 @@ class _$GetTasksImpl implements _GetTasks {
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
   }) {
     return getTasks(activeFilter);
   }
@@ -157,6 +164,7 @@ class _$GetTasksImpl implements _GetTasks {
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
   }) {
     return getTasks?.call(activeFilter);
   }
@@ -167,6 +175,7 @@ class _$GetTasksImpl implements _GetTasks {
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
@@ -181,6 +190,7 @@ class _$GetTasksImpl implements _GetTasks {
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
   }) {
     return getTasks(this);
   }
@@ -191,6 +201,7 @@ class _$GetTasksImpl implements _GetTasks {
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
   }) {
     return getTasks?.call(this);
   }
@@ -201,6 +212,7 @@ class _$GetTasksImpl implements _GetTasks {
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
@@ -287,6 +299,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
   }) {
     return filterTasks(activeFilter);
   }
@@ -297,6 +310,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
   }) {
     return filterTasks?.call(activeFilter);
   }
@@ -307,6 +321,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
     required TResult orElse(),
   }) {
     if (filterTasks != null) {
@@ -321,6 +336,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
   }) {
     return filterTasks(this);
   }
@@ -331,6 +347,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
   }) {
     return filterTasks?.call(this);
   }
@@ -341,6 +358,7 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
     required TResult orElse(),
   }) {
     if (filterTasks != null) {
@@ -434,6 +452,7 @@ class _$SortTasksImpl implements _SortTasks {
     required TResult Function(FilterType activeFilter) getTasks,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
   }) {
     return sortTasks(activeSortType);
   }
@@ -444,6 +463,7 @@ class _$SortTasksImpl implements _SortTasks {
     TResult? Function(FilterType activeFilter)? getTasks,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
   }) {
     return sortTasks?.call(activeSortType);
   }
@@ -454,6 +474,7 @@ class _$SortTasksImpl implements _SortTasks {
     TResult Function(FilterType activeFilter)? getTasks,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
     required TResult orElse(),
   }) {
     if (sortTasks != null) {
@@ -468,6 +489,7 @@ class _$SortTasksImpl implements _SortTasks {
     required TResult Function(_GetTasks value) getTasks,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
   }) {
     return sortTasks(this);
   }
@@ -478,6 +500,7 @@ class _$SortTasksImpl implements _SortTasks {
     TResult? Function(_GetTasks value)? getTasks,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
   }) {
     return sortTasks?.call(this);
   }
@@ -488,6 +511,7 @@ class _$SortTasksImpl implements _SortTasks {
     TResult Function(_GetTasks value)? getTasks,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
     required TResult orElse(),
   }) {
     if (sortTasks != null) {
@@ -504,6 +528,151 @@ abstract class _SortTasks implements TaskEvent {
   List<SortType> get activeSortType;
   @JsonKey(ignore: true)
   _$$SortTasksImplCopyWith<_$SortTasksImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetTaskImplCopyWith<$Res> {
+  factory _$$GetTaskImplCopyWith(
+          _$GetTaskImpl value, $Res Function(_$GetTaskImpl) then) =
+      __$$GetTaskImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int id});
+}
+
+/// @nodoc
+class __$$GetTaskImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$GetTaskImpl>
+    implements _$$GetTaskImplCopyWith<$Res> {
+  __$$GetTaskImplCopyWithImpl(
+      _$GetTaskImpl _value, $Res Function(_$GetTaskImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$GetTaskImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetTaskImpl implements _GetTask {
+  const _$GetTaskImpl(this.id);
+
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'TaskEvent.getTask(id: $id)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetTaskImpl &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetTaskImplCopyWith<_$GetTaskImpl> get copyWith =>
+      __$$GetTaskImplCopyWithImpl<_$GetTaskImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
+  }) {
+    return getTask(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
+  }) {
+    return getTask?.call(id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
+    required TResult orElse(),
+  }) {
+    if (getTask != null) {
+      return getTask(id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
+  }) {
+    return getTask(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
+  }) {
+    return getTask?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
+    required TResult orElse(),
+  }) {
+    if (getTask != null) {
+      return getTask(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _GetTask implements TaskEvent {
+  const factory _GetTask(final int id) = _$GetTaskImpl;
+
+  int get id;
+  @JsonKey(ignore: true)
+  _$$GetTaskImplCopyWith<_$GetTaskImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
