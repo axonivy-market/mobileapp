@@ -24,9 +24,9 @@ import '../../data/data_sources/profile/profile_remote_date_source_impl.dart'
 import '../../data/data_sources/task/task_remote_data_source.dart' as _i26;
 import '../../data/data_sources/task/task_remote_date_source_impl.dart' as _i27;
 import '../../data/data_sources/upload_file/upload_file_remote_data_source.dart'
-    as _i30;
-import '../../data/data_sources/upload_file/upload_file_remote_data_source_impl.dart'
     as _i31;
+import '../../data/data_sources/upload_file/upload_file_remote_data_source_impl.dart'
+    as _i32;
 import '../../data/repositories/process/process_repository.dart' as _i20;
 import '../../data/repositories/process/process_repository_impl.dart' as _i21;
 import '../../data/repositories/profile/profile_repository.dart' as _i24;
@@ -34,17 +34,17 @@ import '../../data/repositories/profile/profile_repository_impl.dart' as _i25;
 import '../../data/repositories/task/task_repository.dart' as _i28;
 import '../../data/repositories/task/task_repository_impl.dart' as _i29;
 import '../../data/repositories/upload_file/upload_file_repository.dart'
-    as _i32;
-import '../../data/repositories/upload_file/upload_file_repository_impl.dart'
     as _i33;
+import '../../data/repositories/upload_file/upload_file_repository_impl.dart'
+    as _i34;
 import '../../data/services/process/process_service.dart' as _i7;
 import '../../data/services/profile/profile_service.dart' as _i8;
 import '../../data/services/task/task_service.dart' as _i16;
 import '../../data/services/upload_file/upload_file_service.dart' as _i17;
-import '../../presentation/login/bloc/login_bloc.dart' as _i34;
-import '../../presentation/process/bloc/process_bloc.dart' as _i35;
+import '../../presentation/login/bloc/login_bloc.dart' as _i35;
+import '../../presentation/process/bloc/process_bloc.dart' as _i36;
 import '../../presentation/profile/bloc/logged_in_cubit.dart' as _i5;
-import '../../presentation/profile/bloc/profile_bloc.dart' as _i36;
+import '../../presentation/profile/bloc/profile_bloc.dart' as _i37;
 import '../../presentation/search/bloc/search_bloc.dart' as _i9;
 import '../../presentation/search/bloc/search_filter_cubit.dart' as _i10;
 import '../../presentation/splash/splash_cubit.dart' as _i13;
@@ -52,11 +52,12 @@ import '../../presentation/tabbar/bloc/tabbar_cubit.dart' as _i14;
 import '../../presentation/task/bloc/filter_boc/filter_bloc.dart' as _i4;
 import '../../presentation/task/bloc/offline_indicator_cubit.dart' as _i6;
 import '../../presentation/task/bloc/sort_bloc/sort_bloc.dart' as _i12;
-import '../../presentation/task/bloc/task_bloc.dart' as _i37;
+import '../../presentation/task/bloc/task_bloc.dart' as _i38;
 import '../../presentation/task/bloc/task_detail/task_detail_cubit.dart'
     as _i15;
-import '../../presentation/task_activity/bloc/upload_file_bloc.dart' as _i38;
-import 'app_module.dart' as _i39;
+import '../../presentation/task/bloc/toast_message_cubit.dart' as _i30;
+import '../../presentation/task_activity/bloc/upload_file_bloc.dart' as _i39;
+import 'app_module.dart' as _i40;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 Future<_i1.GetIt> $initGetIt(
@@ -101,19 +102,21 @@ Future<_i1.GetIt> $initGetIt(
       () => _i27.TaskRemoteDataSourceImpl(gh<_i16.TaskService>()));
   gh.factory<_i28.TaskRepository>(
       () => _i29.TaskRepositoryImpl(gh<_i26.TaskRemoteDataSource>()));
-  gh.factory<_i30.UploadFileRemoteDataSource>(
-      () => _i31.UploadFileRemoteDataSourceImpl(gh<_i17.UploadFileService>()));
-  gh.factory<_i32.UploadFileRepository>(() =>
-      _i33.UploadFileRepositoryImpl(gh<_i30.UploadFileRemoteDataSource>()));
-  gh.factory<_i34.LoginBloc>(() => _i34.LoginBloc(gh<_i28.TaskRepository>()));
-  gh.factory<_i35.ProcessBloc>(
-      () => _i35.ProcessBloc(gh<_i20.ProcessRepository>()));
-  gh.factory<_i36.ProfileBloc>(
-      () => _i36.ProfileBloc(gh<_i24.ProfileRepository>()));
-  gh.factory<_i37.TaskBloc>(() => _i37.TaskBloc(gh<_i28.TaskRepository>()));
-  gh.factory<_i38.UploadFileBloc>(
-      () => _i38.UploadFileBloc(gh<_i32.UploadFileRepository>()));
+  gh.factory<_i30.ToastMessageCubit>(
+      () => _i30.ToastMessageCubit(gh<_i28.TaskRepository>()));
+  gh.factory<_i31.UploadFileRemoteDataSource>(
+      () => _i32.UploadFileRemoteDataSourceImpl(gh<_i17.UploadFileService>()));
+  gh.factory<_i33.UploadFileRepository>(() =>
+      _i34.UploadFileRepositoryImpl(gh<_i31.UploadFileRemoteDataSource>()));
+  gh.factory<_i35.LoginBloc>(() => _i35.LoginBloc(gh<_i28.TaskRepository>()));
+  gh.factory<_i36.ProcessBloc>(
+      () => _i36.ProcessBloc(gh<_i20.ProcessRepository>()));
+  gh.factory<_i37.ProfileBloc>(
+      () => _i37.ProfileBloc(gh<_i24.ProfileRepository>()));
+  gh.factory<_i38.TaskBloc>(() => _i38.TaskBloc(gh<_i28.TaskRepository>()));
+  gh.factory<_i39.UploadFileBloc>(
+      () => _i39.UploadFileBloc(gh<_i33.UploadFileRepository>()));
   return getIt;
 }
 
-class _$AppModule extends _i39.AppModule {}
+class _$AppModule extends _i40.AppModule {}

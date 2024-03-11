@@ -1,17 +1,23 @@
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_detail/task_detail_cubit.dart';
+import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart'
+    as toast_message_cubit;
+import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
 import 'package:axon_ivy/router/router.dart';
+import 'package:axon_ivy/util/toast_message.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
+import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -42,8 +48,8 @@ class TasksView extends StatelessWidget {
                 'task': state.taskIvy,
                 'path': state.taskIvy.fullRequestPath
               }).then((value) {
-                if (value != null && value as bool) {
-                  context.read<TabBarCubit>().navigateTaskList();
+                if (value != null) {
+                  context.read<TabBarCubit>().navigateTaskList(value as int);
                 }
               });
             }
@@ -52,6 +58,33 @@ class TasksView extends StatelessWidget {
             context
                 .read<OfflineIndicatorCubit>()
                 .showOfflineIndicator(state is TaskErrorState);
+          }),
+          BlocListener<ToastMessageCubit, ToastMessageState>(
+              listener: (context, state) {
+            if (state is ShowToastMessageState) {
+              ToastMessageUtils.showMessage(
+                  'Following task has been completed: "${state.taskName}"',
+                  AppAssets.icons.success);
+              // BotToast.showNotification(
+              //     leading: (cancel) => SizedBox.fromSize(
+              //         size: const Size(40, 40),
+              //         child: IconButton(
+              //           icon: AppAssets.icons.success.svg(),
+              //           onPressed: cancel,
+              //         )),
+              //     title: (_) => Text(
+              //         'Following task has been completed: ${state.taskName}'),
+              //     enableSlideOff: true,
+              //     backButtonBehavior: BackButtonBehavior.none,
+              //     crossPage: true,
+              //     contentPadding: const EdgeInsets.all(2),
+              //     onlyOne: true,
+              //     animationDuration: const Duration(milliseconds: 200),
+              //     animationReverseDuration: const Duration(milliseconds: 200),
+              //     backgroundColor: AppColors.drwhite,
+              //   duration: const Duration(seconds: 3),
+              // );
+            }
           }),
         ],
         child: BlocBuilder<TaskBloc, TaskState>(
@@ -125,6 +158,8 @@ class TasksViewContent extends StatelessWidget {
 
   Widget _buildTaskList(BuildContext context, List<TaskIvy> tasks) {
     final activeFilter = context.watch<FilterBloc>().state.activeFilter;
+
+    // var cancel = BotToast.showSimpleNotification(title: "init");
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       child: CustomScrollView(
@@ -155,6 +190,9 @@ class TasksViewContent extends StatelessWidget {
 
   Widget _buildTaskItem(BuildContext context, List<TaskIvy> tasks,
       FilterType activeFilter, int index) {
+
+
+
     if (tasks.isEmpty && activeFilter == FilterType.expired) {
       return TaskEmptyWidget(activeFilter: activeFilter);
     } else if (tasks.isEmpty) {
@@ -198,8 +236,8 @@ class TasksViewContent extends StatelessWidget {
       'task': taskIvy,
       'path': taskIvy.fullRequestPath
     }).then((value) {
-      if (value != null && value as bool) {
-        context.read<TabBarCubit>().navigateTaskList();
+      if (value != null) {
+        context.read<TabBarCubit>().navigateTaskList(value as int);
       }
     });
   }
