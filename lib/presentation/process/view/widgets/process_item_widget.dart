@@ -123,7 +123,7 @@ class ProcessItemWidget extends StatelessWidget {
         ? icon
         : Icon(
             icon,
-            size: 13,
+            size: 14,
           );
   }
 }
