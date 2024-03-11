@@ -8,16 +8,14 @@ const String fontStreamlinePrefix = "si";
 
 dynamic getIconUsingPrefix({required String name}) {
   final List<String> parts = name.split(' ');
-
   if (parts.first.contains(fontAwesomePrefix)) {
     parts.removeAt(0);
     final split = parts[0].split('-');
     split.removeAt(0);
     name = convertToCamelCase(split);
     return getFontAwesomeIcon(name: name) ?? getIconDefaultIcon();
-  } else if (parts.first.contains(fontStreamlinePrefix)) {
-    parts.removeAt(0);
-    name = parts.first.substring(3);
+  } else if (parts.any((element) => element.contains(fontStreamlinePrefix))) {
+    name = parts[parts.length - 1].substring(3);
     return getStreamLineIcon(name: name);
   } else {
     return getIconDefaultIcon();
