@@ -4,18 +4,31 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const String fontAwesomePrefix = "fa";
-const String fontStreamlinePrefix = "si";
+const String fontAwesomeIconPrefix = "fa-";
+const String fontStreamlinePrefix = "si-";
 
 dynamic getIconUsingPrefix({required String name}) {
   final List<String> parts = name.split(' ');
-  if (parts.first.contains(fontAwesomePrefix)) {
-    parts.removeAt(0);
-    final split = parts[0].split('-');
+  List<String> faItems =
+      parts.where((item) => item.startsWith(fontAwesomePrefix)).toList();
+  if (faItems.any((element) => element == fontAwesomePrefix)) {
+    var faIcon = faItems.firstWhere(
+        (element) => element.contains(fontAwesomeIconPrefix), orElse: () {
+      return '';
+    });
+    if (faIcon.isEmpty) return getIconDefaultIcon();
+    final split = faIcon.split('-');
     split.removeAt(0);
     name = convertToCamelCase(split);
     return getFontAwesomeIcon(name: name) ?? getIconDefaultIcon();
   } else if (parts.any((element) => element.contains(fontStreamlinePrefix))) {
-    name = parts[parts.length - 1].substring(3);
+    var siIcon = parts.firstWhere(
+        (element) => element.contains(fontStreamlinePrefix), orElse: () {
+      return '';
+    });
+    if (siIcon.isEmpty) return getIconDefaultIcon();
+
+    name = siIcon.substring(3);
     return getStreamLineIcon(name: name);
   } else {
     return getIconDefaultIcon();
@@ -23,7 +36,7 @@ dynamic getIconUsingPrefix({required String name}) {
 }
 
 SvgPicture getIconDefaultIcon() {
-  return AppAssets.streamlines.controlsPlay.svg(height: 12, width: 12);
+  return AppAssets.streamlines.controlsPlay.svg(height: 14, width: 14);
 }
 
 SvgPicture getStreamLineIcon({required String name}) {
@@ -31,7 +44,7 @@ SvgPicture getStreamLineIcon({required String name}) {
       (element) => (element.keyName.split("/")[2].split(".")[0] == name),
       orElse: () {
     return AppAssets.streamlines.controlsPlay;
-  }).svg(height: 12, width: 12);
+  }).svg(height: 14, width: 14);
 }
 
 String convertToCamelCase(List<String> parts) {
