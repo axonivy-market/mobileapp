@@ -1,15 +1,12 @@
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_detail/task_detail_cubit.dart';
-import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart'
-    as toast_message_cubit;
 import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
@@ -17,7 +14,6 @@ import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
 import 'package:axon_ivy/router/router.dart';
 import 'package:axon_ivy/util/toast_message.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
-import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -139,8 +135,6 @@ class TasksViewContent extends StatelessWidget {
 
   Widget _buildTaskList(BuildContext context, List<TaskIvy> tasks) {
     final activeFilter = context.watch<FilterBloc>().state.activeFilter;
-
-    // var cancel = BotToast.showSimpleNotification(title: "init");
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
       child: CustomScrollView(
@@ -171,9 +165,6 @@ class TasksViewContent extends StatelessWidget {
 
   Widget _buildTaskItem(BuildContext context, List<TaskIvy> tasks,
       FilterType activeFilter, int index) {
-
-
-
     if (tasks.isEmpty && activeFilter == FilterType.expired) {
       return TaskEmptyWidget(activeFilter: activeFilter);
     } else if (tasks.isEmpty) {
