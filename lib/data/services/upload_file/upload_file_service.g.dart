@@ -10,9 +10,8 @@ part of 'upload_file_service.dart';
 
 class _UploadFileService implements UploadFileService {
   _UploadFileService(
-    this._dio, {
-    this.baseUrl,
-  });
+    this._dio,
+  );
 
   final Dio _dio;
 
