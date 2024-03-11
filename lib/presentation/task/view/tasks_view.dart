@@ -65,25 +65,6 @@ class TasksView extends StatelessWidget {
               ToastMessageUtils.showMessage(
                   'Following task has been completed: "${state.taskName}"',
                   AppAssets.icons.success);
-              // BotToast.showNotification(
-              //     leading: (cancel) => SizedBox.fromSize(
-              //         size: const Size(40, 40),
-              //         child: IconButton(
-              //           icon: AppAssets.icons.success.svg(),
-              //           onPressed: cancel,
-              //         )),
-              //     title: (_) => Text(
-              //         'Following task has been completed: ${state.taskName}'),
-              //     enableSlideOff: true,
-              //     backButtonBehavior: BackButtonBehavior.none,
-              //     crossPage: true,
-              //     contentPadding: const EdgeInsets.all(2),
-              //     onlyOne: true,
-              //     animationDuration: const Duration(milliseconds: 200),
-              //     animationReverseDuration: const Duration(milliseconds: 200),
-              //     backgroundColor: AppColors.drwhite,
-              //   duration: const Duration(seconds: 3),
-              // );
             }
           }),
         ],
