@@ -117,7 +117,7 @@
   "offline": {
     "popup_title": "You are offline!",
     "process_description": "Processes can only be started when connected to the process engine. \nTry again later...",
-    "task_description": "Tasks can only be started when connected to the process engine. \nTry again later...",
-    "search_description": "Tasks and processes can only be started when connected to the process engine. \nTry again later..."
+    "task_description": "Tasks can only be started when connected to the engine. \nTry again later...",
+    "search_description": "Tasks and processes can only be started when connected to the engine. \nTry again later..."
   }
 }
