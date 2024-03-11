@@ -99,8 +99,8 @@ class ProcessesView extends StatelessWidget {
   void _navigateProcessActivity(BuildContext context, Process process) {
     context.push(AppRoutes.taskActivity,
         extra: {'path': process.fullRequestPath}).then((value) {
-      if (value != null) {
-        context.read<TabBarCubit>().navigateTaskList(value as int);
+      if (value != null && value is int) {
+        context.read<TabBarCubit>().navigateTaskList(value);
       }
     });
   }

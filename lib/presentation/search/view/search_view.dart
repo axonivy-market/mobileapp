@@ -116,10 +116,10 @@ class _SearchViewState extends State<SearchView> {
                         'task': item.task,
                         'path': item.task.fullRequestPath
                       }).then((value) {
-                        if (value != null) {
+                        if (value != null && value is int) {
                           context
                               .read<TabBarCubit>()
-                              .navigateTaskList(value as int);
+                              .navigateTaskList(value);
                         }
                       });
                     },
@@ -142,10 +142,10 @@ class _SearchViewState extends State<SearchView> {
                       context.push(AppRoutes.taskActivity, extra: {
                         'path': item.process.fullRequestPath
                       }).then((value) {
-                        if (value != null) {
+                        if (value != null && value is int) {
                           context
                               .read<TabBarCubit>()
-                              .navigateTaskList(value as int);
+                              .navigateTaskList(value);
                         }
                       });
                     },

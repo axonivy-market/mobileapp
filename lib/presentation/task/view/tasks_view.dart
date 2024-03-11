@@ -44,8 +44,8 @@ class TasksView extends StatelessWidget {
                 'task': state.taskIvy,
                 'path': state.taskIvy.fullRequestPath
               }).then((value) {
-                if (value != null) {
-                  context.read<TabBarCubit>().navigateTaskList(value as int);
+                if (value != null && value is int) {
+                  context.read<TabBarCubit>().navigateTaskList(value);
                 }
               });
             }
@@ -208,8 +208,8 @@ class TasksViewContent extends StatelessWidget {
       'task': taskIvy,
       'path': taskIvy.fullRequestPath
     }).then((value) {
-      if (value != null) {
-        context.read<TabBarCubit>().navigateTaskList(value as int);
+      if (value != null && value is int) {
+        context.read<TabBarCubit>().navigateTaskList(value);
       }
     });
   }
