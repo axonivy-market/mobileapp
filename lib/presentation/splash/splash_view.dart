@@ -27,7 +27,11 @@ class SplashView extends StatelessWidget {
               children: [
                 Expanded(
                   child:
-                      Center(child: AppAssets.images.splashAxonIvyLogo.svg()),
+                      Center(
+                    child: Theme.of(context).brightness == Brightness.light
+                        ? AppAssets.images.splashAxonIvyLogo.svg()
+                        : AppAssets.images.splashAxonIvyLogoDark.svg(),
+                  ),
                 ),
                 VersionNameWidget(versionName: state.packageInfo.version),
                 const SizedBox(height: 25),

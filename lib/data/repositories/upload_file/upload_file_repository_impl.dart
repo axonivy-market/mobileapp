@@ -9,7 +9,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/network/dio_error_handler.dart';
 
 @Injectable(as: UploadFileRepository)
-class UploadFileRepositoryImpl extends UploadFileRepository {
+class UploadFileRepositoryImpl implements UploadFileRepository {
   UploadFileRepositoryImpl(this._remoteDataSource);
 
   final UploadFileRemoteDataSource _remoteDataSource;

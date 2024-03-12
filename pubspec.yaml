@@ -1,6 +1,6 @@
 name: axon_ivy
 description: A new Flutter project.
-version: 1.0.4+1
+version: 1.0.5+1
 
 environment:
   sdk: '>=3.1.5 <4.0.0'
@@ -45,6 +45,9 @@ dependencies:
   file_picker: ^5.3.3
   file_picker_pro: ^1.5.0
   image_picker: ^1.0.7
+  path: ^1.9.0
+  font_awesome_flutter: ^10.7.0
+  connectivity_plus: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -89,3 +92,4 @@ flutter:
     - assets/translations/
     - assets/icons/
     - assets/images/
+    - assets/streamlines/

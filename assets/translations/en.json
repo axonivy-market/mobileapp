@@ -8,9 +8,7 @@
   "splashCopyright": "© Axon Ivy – Version {version}",
   "process": {
     "emptyList": "You don’t have any processes at the moment...",
-    "noDescription": "No description",
-    "you_are_offline": "You are offline!",
-    "offline_description": "Processes can only be started when connected to the process engine. \nTry again later..."
+    "noDescription": "No description"
   },
   "tasksView": {
     "all": "@:generalAll",
@@ -116,5 +114,11 @@
     "cannotSelectFiles": "Cannot select files!",
     "failUpload": "Fail to upload {fileName}\n",
     "changeFileName": "Change image name"
+  },
+  "offline": {
+    "popup_title": "You are offline!",
+    "process_description": "Processes can only be started when connected to the process engine. \nTry again later...",
+    "task_description": "Tasks can only be started when connected to the engine. \nTry again later...",
+    "search_description": "Tasks and processes can only be started when connected to the engine. \nTry again later..."
   }
 }

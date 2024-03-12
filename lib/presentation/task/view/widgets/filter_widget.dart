@@ -1,7 +1,7 @@
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/sort_type_ext.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_event.dart';
+import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_state.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,6 +16,7 @@ class FilterWidget extends StatefulWidget {
   const FilterWidget({
     super.key,
   });
+
   @override
   State<FilterWidget> createState() => _FilterWidgetState();
 }
@@ -23,330 +24,327 @@ class FilterWidget extends StatefulWidget {
 class _FilterWidgetState extends State<FilterWidget> {
   bool isSortButtonTapped = false;
   bool isDropdownOpen = false;
+
   @override
   Widget build(BuildContext context) {
     final filterBloc = BlocProvider.of<FilterBloc>(context);
     final sortBloc = BlocProvider.of<SortBloc>(context);
-    final activeFilter = filterBloc.state.activeFilter;
     final activeSortType = sortBloc.state.activeSortType;
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => filterBloc),
-        BlocProvider(create: (context) => sortBloc)
-      ],
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  filterBloc.add(FilterEvent(FilterType.all));
-                },
-                child: Container(
-                  height: 40,
-                  width: 86,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(10.0),
-                          bottomLeft: Radius.circular(10.0)),
-                      color: getFilterColor(activeFilter == FilterType.all)),
-                  child: Center(
-                    child: Text(
-                      "tasksView.all".tr(),
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                            fontSize: 17,
-                            fontWeight: activeFilter == FilterType.all
-                                ? FontWeight.w500
-                                : FontWeight.w400,
-                            color: getFilterTextColor(
-                                activeFilter == FilterType.all)),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              GestureDetector(
-                onTap: () {
-                  filterBloc.add(FilterEvent(FilterType.expired));
-                },
-                child: Container(
-                  height: 40,
-                  width: 86,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Theme.of(context).colorScheme.outline),
-                      borderRadius: const BorderRadius.only(
-                          topRight: Radius.circular(10.0),
-                          bottomRight: Radius.circular(10.0)),
-                      color:
-                          getFilterColor(activeFilter == FilterType.expired)),
-                  child: Center(
-                    child: Text(
-                      "tasksView.expired".tr(),
-                      style: GoogleFonts.inter(
-                        textStyle: TextStyle(
-                            fontSize: 17,
-                            fontWeight: activeFilter == FilterType.expired
-                                ? FontWeight.w500
-                                : FontWeight.w400,
-                            color: getFilterTextColor(
-                                activeFilter == FilterType.expired)),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          PopupMenuButton<SortType>(
-            elevation: 0.5,
-            shadowColor: Theme.of(context).colorScheme.outline,
-            color: Theme.of(context).colorScheme.onPrimaryContainer,
-            position: PopupMenuPosition.under,
-            onSelected: (value) {
-              switch (value) {
-                case MainSortType.priority:
-                  sortBloc.add(SortEvent(
-                      [MainSortType.priority, SubSortType.mostImportant]));
-                case MainSortType.name:
-                  sortBloc
-                      .add(SortEvent([MainSortType.name, SubSortType.aToZ]));
-                case MainSortType.creationDate:
-                  sortBloc.add(SortEvent(
-                      [MainSortType.creationDate, SubSortType.newest]));
-                case MainSortType.expiryDate:
-                  sortBloc.add(SortEvent(
-                      [MainSortType.expiryDate, SubSortType.mostUrgent]));
-                case SubSortType.newest:
-                  sortBloc.add(SortEvent(
-                      [MainSortType.creationDate, SubSortType.newest]));
-                case SubSortType.oldest:
-                  sortBloc.add(SortEvent(
-                      [MainSortType.creationDate, SubSortType.oldest]));
-                case SubSortType.aToZ:
-                  sortBloc
-                      .add(SortEvent([MainSortType.name, SubSortType.aToZ]));
-                case SubSortType.zToA:
-                  sortBloc
-                      .add(SortEvent([MainSortType.name, SubSortType.zToA]));
-                case SubSortType.mostImportant:
-                  sortBloc.add(SortEvent(
-                      [MainSortType.priority, SubSortType.mostImportant]));
-                case SubSortType.leastImportant:
-                  sortBloc.add(SortEvent(
-                      [MainSortType.priority, SubSortType.leastImportant]));
-                case SubSortType.mostUrgent:
-                  sortBloc.add(SortEvent(
-                      [MainSortType.expiryDate, SubSortType.mostUrgent]));
-                case SubSortType.leastUrgent:
-                  sortBloc.add(SortEvent(
-                      [MainSortType.expiryDate, SubSortType.leastUrgent]));
-              }
-
-              setState(() {
-                isSortButtonTapped = false;
-              });
-            },
-            onCanceled: () {
-              setState(() {
-                isSortButtonTapped = false;
-                isDropdownOpen = false;
-              });
-            },
-            itemBuilder: (BuildContext context) {
-              setState(
-                () {
-                  isSortButtonTapped = true;
-                },
-              );
-              return [
-                PopupMenuItem<SortType>(
-                  value: MainSortType.priority,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        MainSortType.priority.toString(),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        BlocBuilder<FilterBloc, FilterState>(
+          builder: (context, state) {
+            return Row(
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    filterBloc.add(FilterEvent(FilterType.all));
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 86,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.outline),
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10.0),
+                            bottomLeft: Radius.circular(10.0)),
+                        color: getFilterColor(
+                            state.activeFilter == FilterType.all)),
+                    child: Center(
+                      child: Text(
+                        "tasksView.all".tr(),
                         style: GoogleFonts.inter(
                           textStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight: state.activeFilter == FilterType.all
+                                  ? FontWeight.w500
+                                  : FontWeight.w400,
+                              color: getFilterTextColor(
+                                  state.activeFilter == FilterType.all)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    filterBloc.add(FilterEvent(FilterType.expired));
+                  },
+                  child: Container(
+                    height: 40,
+                    width: 86,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.outline),
+                        borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(10.0),
+                            bottomRight: Radius.circular(10.0)),
+                        color: getFilterColor(
+                            state.activeFilter == FilterType.expired)),
+                    child: Center(
+                      child: Text(
+                        "tasksView.expired".tr(),
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                              fontSize: 17,
+                              fontWeight:
+                                  state.activeFilter == FilterType.expired
+                                      ? FontWeight.w500
+                                      : FontWeight.w400,
+                              color: getFilterTextColor(
+                                  state.activeFilter == FilterType.expired)),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+        PopupMenuButton<SortType>(
+          elevation: 0.5,
+          shadowColor: Theme.of(context).colorScheme.outline,
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
+          position: PopupMenuPosition.under,
+          onSelected: (value) {
+            switch (value) {
+              case MainSortType.priority:
+                sortBloc.add(SortEvent(
+                    [MainSortType.priority, SubSortType.mostImportant]));
+              case MainSortType.name:
+                sortBloc.add(SortEvent([MainSortType.name, SubSortType.aToZ]));
+              case MainSortType.creationDate:
+                sortBloc.add(
+                    SortEvent([MainSortType.creationDate, SubSortType.newest]));
+              case MainSortType.expiryDate:
+                sortBloc.add(SortEvent(
+                    [MainSortType.expiryDate, SubSortType.mostUrgent]));
+              case SubSortType.newest:
+                sortBloc.add(
+                    SortEvent([MainSortType.creationDate, SubSortType.newest]));
+              case SubSortType.oldest:
+                sortBloc.add(
+                    SortEvent([MainSortType.creationDate, SubSortType.oldest]));
+              case SubSortType.aToZ:
+                sortBloc.add(SortEvent([MainSortType.name, SubSortType.aToZ]));
+              case SubSortType.zToA:
+                sortBloc.add(SortEvent([MainSortType.name, SubSortType.zToA]));
+              case SubSortType.mostImportant:
+                sortBloc.add(SortEvent(
+                    [MainSortType.priority, SubSortType.mostImportant]));
+              case SubSortType.leastImportant:
+                sortBloc.add(SortEvent(
+                    [MainSortType.priority, SubSortType.leastImportant]));
+              case SubSortType.mostUrgent:
+                sortBloc.add(SortEvent(
+                    [MainSortType.expiryDate, SubSortType.mostUrgent]));
+              case SubSortType.leastUrgent:
+                sortBloc.add(SortEvent(
+                    [MainSortType.expiryDate, SubSortType.leastUrgent]));
+            }
+
+            setState(() {
+              isSortButtonTapped = false;
+            });
+          },
+          onCanceled: () {
+            setState(() {
+              isSortButtonTapped = false;
+              isDropdownOpen = false;
+            });
+          },
+          itemBuilder: (BuildContext context) {
+            setState(
+              () {
+                isSortButtonTapped = true;
+              },
+            );
+            return [
+              PopupMenuItem<SortType>(
+                value: MainSortType.priority,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      MainSortType.priority.toString(),
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontSize: 17,
+                          color: activeSortType.contains(MainSortType.priority)
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ),
+                    if (activeSortType.contains(MainSortType.priority))
+                      Icon(
+                        Icons.check,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                  ],
+                ),
+              ),
+              PopupMenuItem<SortType>(
+                value: MainSortType.name,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      MainSortType.name.toString(),
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                            fontSize: 17,
+                            color: activeSortType.contains(MainSortType.name)
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.secondary,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    if (activeSortType.contains(MainSortType.name))
+                      Icon(
+                        Icons.check,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                  ],
+                ),
+              ),
+              PopupMenuItem<SortType>(
+                value: MainSortType.creationDate,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      MainSortType.creationDate.toString(),
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                            fontSize: 17,
+                            color: activeSortType
+                                    .contains(MainSortType.creationDate)
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.secondary,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    if (activeSortType.contains(MainSortType.creationDate))
+                      Icon(
+                        Icons.check,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                  ],
+                ),
+              ),
+              PopupMenuItem<SortType>(
+                value: MainSortType.expiryDate,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      MainSortType.expiryDate.toString(),
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
                             fontSize: 17,
                             color:
-                                activeSortType.contains(MainSortType.priority)
+                                activeSortType.contains(MainSortType.expiryDate)
                                     ? Theme.of(context).colorScheme.primary
                                     : Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
+                            fontWeight: FontWeight.w400),
                       ),
-                      if (activeSortType.contains(MainSortType.priority))
-                        Icon(
-                          Icons.check,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                    ],
-                  ),
-                ),
-                PopupMenuItem<SortType>(
-                  value: MainSortType.name,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        MainSortType.name.toString(),
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                              fontSize: 17,
-                              color: activeSortType.contains(MainSortType.name)
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                      if (activeSortType.contains(MainSortType.name))
-                        Icon(
-                          Icons.check,
-                          color: Theme.of(context).colorScheme.primary,
-                        )
-                    ],
-                  ),
-                ),
-                PopupMenuItem<SortType>(
-                  value: MainSortType.creationDate,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        MainSortType.creationDate.toString(),
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                              fontSize: 17,
-                              color: activeSortType
-                                      .contains(MainSortType.creationDate)
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                      if (activeSortType.contains(MainSortType.creationDate))
-                        Icon(
-                          Icons.check,
-                          color: Theme.of(context).colorScheme.primary,
-                        )
-                    ],
-                  ),
-                ),
-                PopupMenuItem<SortType>(
-                  value: MainSortType.expiryDate,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        MainSortType.expiryDate.toString(),
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                              fontSize: 17,
-                              color: activeSortType
-                                      .contains(MainSortType.expiryDate)
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                      if (activeSortType.contains(MainSortType.expiryDate))
-                        Icon(
-                          Icons.check,
-                          color: Theme.of(context).colorScheme.primary,
-                        )
-                    ],
-                  ),
-                ),
-                const PopupMenuDivider(),
-                PopupMenuItem<SubSortType>(
-                  value: activeSortType.getSubTypes()[0],
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          activeSortType.getSubTypes()[0].toString(),
-                          style: GoogleFonts.inter(
-                            textStyle: TextStyle(
-                                fontSize: 17,
-                                color: activeSortType.isSubTypeActive(0)
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context).colorScheme.secondary,
-                                fontWeight: FontWeight.w400),
-                          ),
-                        ),
-                        if (activeSortType.isSubTypeActive(0))
-                          Icon(
-                            Icons.check,
-                            color: Theme.of(context).colorScheme.primary,
-                          )
-                      ],
-                  ),
-                ),
-                PopupMenuItem<SortType>(
-                  value: activeSortType.getSubTypes()[1],
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        activeSortType.getSubTypes()[1].toString(),
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                              fontSize: 17,
-                              color: activeSortType.isSubTypeActive(1)
-                                  ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.w400),
-                        ),
-                      ),
-                      if (activeSortType.isSubTypeActive(1))
-                        Icon(
-                          Icons.check,
-                          color: Theme.of(context).colorScheme.primary,
-                        )
-                    ],
-                  ),
-                ),
-              ];
-            },
-            child: Container(
-              clipBehavior: Clip.hardEdge,
-              padding: const EdgeInsets.fromLTRB(9, 8, 9, 8),
-              decoration: BoxDecoration(
-                  border:
-                      Border.all(color: Theme.of(context).colorScheme.outline),
-                  borderRadius: BorderRadius.circular(10),
-                  color: isSortButtonTapped
-                      ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.onPrimaryContainer),
-              child: Row(
-                children: [
-                  AppAssets.icons.filter.svg(
-                      colorFilter: ColorFilter.mode(
-                          isSortButtonTapped
-                              ? Theme.of(context).colorScheme.onSurface
-                              : Theme.of(context).colorScheme.surface,
-                          BlendMode.srcIn)),
-                  Text(
-                    "tasksView.sort".tr(),
-                    style: GoogleFonts.inter(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 17,
-                        color: isSortButtonTapped
-                          ? Theme.of(context).colorScheme.onSurface
-                          : Theme.of(context).colorScheme.surface,
                     ),
-                  )
-                ],
+                    if (activeSortType.contains(MainSortType.expiryDate))
+                      Icon(
+                        Icons.check,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                  ],
+                ),
               ),
+              const PopupMenuDivider(),
+              PopupMenuItem<SubSortType>(
+                value: activeSortType.getSubTypes()[0],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      activeSortType.getSubTypes()[0].toString(),
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                            fontSize: 17,
+                            color: activeSortType.isSubTypeActive(0)
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.secondary,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    if (activeSortType.isSubTypeActive(0))
+                      Icon(
+                        Icons.check,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                  ],
+                ),
+              ),
+              PopupMenuItem<SortType>(
+                value: activeSortType.getSubTypes()[1],
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      activeSortType.getSubTypes()[1].toString(),
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                            fontSize: 17,
+                            color: activeSortType.isSubTypeActive(1)
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context).colorScheme.secondary,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    if (activeSortType.isSubTypeActive(1))
+                      Icon(
+                        Icons.check,
+                        color: Theme.of(context).colorScheme.primary,
+                      )
+                  ],
+                ),
+              ),
+            ];
+          },
+          child: Container(
+            clipBehavior: Clip.hardEdge,
+            padding: const EdgeInsets.fromLTRB(9, 8, 9, 8),
+            decoration: BoxDecoration(
+                border:
+                    Border.all(color: Theme.of(context).colorScheme.outline),
+                borderRadius: BorderRadius.circular(10),
+                color: isSortButtonTapped
+                    ? Theme.of(context).colorScheme.primary
+                    : Theme.of(context).colorScheme.onPrimaryContainer),
+            child: Row(
+              children: [
+                AppAssets.icons.filter.svg(
+                    colorFilter: ColorFilter.mode(
+                        isSortButtonTapped
+                            ? Theme.of(context).colorScheme.background
+                            : Theme.of(context).colorScheme.surface,
+                        BlendMode.srcIn)),
+                Text(
+                  "tasksView.sort".tr(),
+                  style: GoogleFonts.inter(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 17,
+                      color: isSortButtonTapped
+                          ? Theme.of(context).colorScheme.background
+                          : Theme.of(context).colorScheme.surface),
+                )
+              ],
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

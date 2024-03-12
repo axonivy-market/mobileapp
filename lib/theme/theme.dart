@@ -17,6 +17,7 @@ ThemeData lightMode = ThemeData(
     error: AppColors.watermelonade,
   ),
   useMaterial3: true,
+    dividerTheme: const DividerThemeData(color: AppColors.mercury)
 );
 
 ThemeData darkMode = ThemeData(
@@ -36,4 +37,6 @@ ThemeData darkMode = ThemeData(
       error: AppColors.watermelonade
   ),
   useMaterial3: true,
+    dividerTheme: const DividerThemeData(color: AppColors.shadowedSteel)
+
 );

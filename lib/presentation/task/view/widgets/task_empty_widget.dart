@@ -3,6 +3,7 @@ import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/util/resources/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskEmptyWidget extends StatelessWidget {
@@ -35,10 +36,17 @@ class TaskEmptyWidget extends StatelessWidget {
             ),
           ),
           activeFilter == FilterType.all
-              ? AppAssets.images.koalaWithPassionFruit.svg()
+              ? getKoalaImages(context)
               : AppAssets.icons.noExpiredTask.svg(),
         ],
       ),
     );
   }
+
+  SvgPicture getKoalaImages(BuildContext context) =>
+      Theme.of(context).brightness == Brightness.light
+          ? AppAssets.images.koalaWithPassionFruit.svg()
+          : AppAssets.images.koalaWithPassionFruitDark.svg();
+
+
 }

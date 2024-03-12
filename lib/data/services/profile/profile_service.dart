@@ -1,4 +1,3 @@
-import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/data/models/profile/profile.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';

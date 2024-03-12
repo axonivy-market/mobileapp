@@ -3,9 +3,11 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/list_ext.dart';
 import 'package:axon_ivy/data/models/search/search.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
+import 'package:axon_ivy/presentation/search/bloc/engine_info_cubit.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_filter_cubit.dart';
 import 'package:axon_ivy/presentation/search/view/widgets/widgets.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
 import 'package:axon_ivy/router/router.dart';
@@ -16,7 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/generated/colors.gen.dart';
+import '../../process/view/widgets/process_offline_indicator_widget.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -34,55 +36,83 @@ class _SearchViewState extends State<SearchView> {
         appBar: const HomeAppBar(
           scrolledUnderElevation: 0,
         ),
-        body: Column(
-          children: [
-            const SizedBox(height: 16),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: SearchTextField(),
-            ),
-            Expanded(
-              child: BlocBuilder<SearchBloc, SearchState>(
-                builder: (context, state) {
-                  if (state is SearchResultState) {
-                    return Column(
-                      children: [
-                        const Padding(
-                          padding:
-                              EdgeInsets.only(left: 16, right: 16, top: 10),
-                          child: SearchFilterWidget(),
-                        ),
-                        Expanded(
-                            child: state.items.isEmptyOrNull
-                                ? DataEmptyWidget(
-                                    message: state.emptyMessage!.tr(),
-                                    icon:
-                                        AppAssets.icons.icSearchNotFound.svg(
-                                        colorFilter: ColorFilter.mode(
-                                      Theme.of(context)
-                                          .colorScheme
-                                          .tertiaryContainer,
-                                      BlendMode.srcIn,
-                                    )),
-                                  )
-                                : searchItemList(context, state)),
-                      ],
-                    );
-                  } else {
-                    return DataEmptyWidget(
-                      message: 'search.nothingThereYet'.tr(),
-                      icon: AppAssets.icons.icSearchInitial.svg(
-                        colorFilter: ColorFilter.mode(
+        body: BlocListener<EngineInfoCubit, EngineInfoState>(
+          listener: (context, state) {
+            if (state is GetEngineInfo) {
+              if (state.engineInfo != null) {
+                context
+                    .read<ConnectivityBloc>()
+                    .add(const ConnectivityEvent.connectedEvent());
+              } else {
+                context
+                    .read<ConnectivityBloc>()
+                    .add(const ConnectivityEvent.notConnectedEvent());
+              }
+            }
+          },
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                  const SizedBox(height: 16),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: SearchTextField(),
+                  ),
+                  Expanded(
+                    child: BlocBuilder<SearchBloc, SearchState>(
+                      builder: (context, state) {
+                        if (state is SearchResultState) {
+                          return Column(
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.only(
+                                    left: 16, right: 16, top: 10),
+                                child: SearchFilterWidget(),
+                              ),
+                              Expanded(
+                                  child: state.items.isEmptyOrNull
+                                      ? DataEmptyWidget(
+                                          message: state.emptyMessage!.tr(),
+                                          icon: AppAssets.icons.icSearchNotFound
+                                              .svg(
+                                            colorFilter: ColorFilter.mode(
                           Theme.of(context).colorScheme.tertiaryContainer,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    );
-                  }
-                },
+                                              BlendMode.srcIn,
+                                            ),
+                                          )
+                                        )
+                                      : searchItemList(context, state)),
+                            ],
+                          );
+                        } else {
+                          return DataEmptyWidget(
+                            message: 'search.nothingThereYet'.tr(),
+                            icon: AppAssets.icons.icSearchInitial.svg(
+                                colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.tertiaryContainer,
+                                  BlendMode.srcIn,
+                                ),
+                              )
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
+              BlocBuilder<ConnectivityBloc, ConnectivityState>(
+                  builder: (context, state) {
+                if (state is NotConnectedState) {
+                  return OfflineIndicatorPopupWidget(
+                    description: "offline.search_description".tr(),
+                    isShowingProcesses: false,
+                  );
+                }
+                return Container();
+              })
+            ],
+          ),
         ),
       ),
     );
@@ -128,8 +158,10 @@ class _SearchViewState extends State<SearchView> {
                         'task': item.task,
                         'path': item.task.fullRequestPath
                       }).then((value) {
-                        if (value != null && value as bool) {
-                          context.read<TabBarCubit>().navigateTaskList();
+                        if (value != null && value is int) {
+                          context
+                              .read<TabBarCubit>()
+                              .navigateTaskList(value);
                         }
                       });
                     },
@@ -152,8 +184,10 @@ class _SearchViewState extends State<SearchView> {
                       context.push(AppRoutes.taskActivity, extra: {
                         'path': item.process.fullRequestPath
                       }).then((value) {
-                        if (value != null && value as bool) {
-                          context.read<TabBarCubit>().navigateTaskList();
+                        if (value != null && value is int) {
+                          context
+                              .read<TabBarCubit>()
+                              .navigateTaskList(value);
                         }
                       });
                     },

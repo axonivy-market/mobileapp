@@ -7,7 +7,7 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: ProfileRepository)
-class ProfileRepositoryImpl extends ProfileRepository {
+class ProfileRepositoryImpl implements ProfileRepository {
   ProfileRepositoryImpl(this._profileRemoteDataSource);
 
   final ProfileRemoteDataSource _profileRemoteDataSource;
