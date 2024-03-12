@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const String fontAwesomePrefix = "fa";
 const String fontAwesomeIconPrefix = "fa-";
-const String fontStreamlinePrefix = "si-";
+const String fontStreamlineIconPrefix = "si-";
 
 dynamic getIconUsingPrefix({required String name}) {
   final List<String> parts = name.split(' ');
@@ -13,7 +13,7 @@ dynamic getIconUsingPrefix({required String name}) {
       parts.where((item) => item.startsWith(fontAwesomePrefix)).toList();
   if (faItems.any((element) => element == fontAwesomePrefix)) {
     var faIcon = faItems.firstWhere(
-        (element) => element.contains(fontAwesomeIconPrefix), orElse: () {
+        (element) => element.startsWith(fontAwesomeIconPrefix), orElse: () {
       return '';
     });
     if (faIcon.isEmpty) return getIconDefaultIcon();
@@ -21,9 +21,10 @@ dynamic getIconUsingPrefix({required String name}) {
     split.removeAt(0);
     name = convertToCamelCase(split);
     return getFontAwesomeIcon(name: name) ?? getIconDefaultIcon();
-  } else if (parts.any((element) => element.contains(fontStreamlinePrefix))) {
+  } else if (parts
+      .any((element) => element.startsWith(fontStreamlineIconPrefix))) {
     var siIcon = parts.firstWhere(
-        (element) => element.contains(fontStreamlinePrefix), orElse: () {
+        (element) => element.startsWith(fontStreamlineIconPrefix), orElse: () {
       return '';
     });
     if (siIcon.isEmpty) return getIconDefaultIcon();
