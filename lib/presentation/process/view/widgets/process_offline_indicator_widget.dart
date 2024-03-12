@@ -30,7 +30,7 @@ class OfflineIndicatorPopupWidget extends StatelessWidget {
 
   Widget _buildOfflineDialog(BuildContext context) {
     return Container(
-      color: Colors.black26,
+      color: Theme.of(context).colorScheme.background,
       child: Center(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 16),
