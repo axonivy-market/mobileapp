@@ -102,8 +102,8 @@ class _FilterWidgetState extends State<FilterWidget> {
           ),
           PopupMenuButton<SortType>(
             elevation: 0.5,
-            shadowColor: AppColors.babyTalkGrey,
-            color: AppColors.drwhite,
+            shadowColor: Theme.of(context).colorScheme.outline,
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
             position: PopupMenuPosition.under,
             onSelected: (value) {
               switch (value) {
@@ -265,8 +265,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                 const PopupMenuDivider(),
                 PopupMenuItem<SubSortType>(
                   value: activeSortType.getSubTypes()[0],
-                  child: ColoredBox(
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -287,7 +285,6 @@ class _FilterWidgetState extends State<FilterWidget> {
                             color: Theme.of(context).colorScheme.primary,
                           )
                       ],
-                    ),
                   ),
                 ),
                 PopupMenuItem<SortType>(

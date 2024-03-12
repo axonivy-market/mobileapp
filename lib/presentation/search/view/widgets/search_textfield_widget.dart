@@ -66,7 +66,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
             cursorColor: Theme.of(context).colorScheme.primary,
             decoration: InputDecoration(
               filled: true,
-              fillColor: Theme.of(context).colorScheme.primaryContainer,
+              fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hintText: "generalSearch".tr(),
               hintStyle: GoogleFonts.inter(
                 color: Theme.of(context).colorScheme.surface,
@@ -76,14 +76,14 @@ class _SearchTextFieldState extends State<SearchTextField> {
               contentPadding: EdgeInsets.zero,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  color: Theme.of(context).colorScheme.outline,
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10),
                 borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  color: Theme.of(context).colorScheme.outline,
                 ),
               ),
               prefixIconConstraints: const BoxConstraints(minWidth: 40),

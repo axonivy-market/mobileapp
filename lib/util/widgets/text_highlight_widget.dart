@@ -42,7 +42,7 @@ class TextHighlightWidget extends StatelessWidget {
           TextSpan(
               text: text.substring(startIndex + endIndex),
               style: GoogleFonts.inter(
-                  color: AppColors.darkSouls,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontWeight: fontWeight,
                   fontSize: fontSize)),
         ],

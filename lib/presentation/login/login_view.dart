@@ -1,4 +1,3 @@
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/data/models/qr_model/qr_model.dart';
 import 'package:axon_ivy/presentation/base_view/base_view.dart';
@@ -44,8 +43,17 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("profile.signIn".tr()),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).colorScheme.background,
+        title: Text(
+          "profile.signIn".tr(),
+          style: GoogleFonts.inter(
+              color: Theme.of(context).colorScheme.surface,
+              fontSize: 17,
+              fontWeight: FontWeight.w500),
+        ),
         leading: BackButton(
+          color: Theme.of(context).colorScheme.surface,
           onPressed: () {
             context.pop(false);
           },
@@ -79,9 +87,9 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
                           controller: _urlTextController,
                           validator: (_) => state.invalidUrlMessage,
                           autovalidateMode: AutovalidateMode.always,
-                          prefix: const Icon(
+                          prefix: Icon(
                             Icons.web_outlined,
-                            color: AppColors.argent,
+                            color: Theme.of(context).colorScheme.surface,
                           ),
                           hintText: "profile.url".tr(),
                           focusNode: _urlFocusNode,
@@ -103,9 +111,9 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
                           controller: _usernameTextController,
                           autovalidateMode: AutovalidateMode.always,
                           validator: (_) => state.invalidUsernameMessage,
-                          prefix: const Icon(
+                          prefix: Icon(
                             Icons.person_2_outlined,
-                            color: AppColors.argent,
+                            color: Theme.of(context).colorScheme.surface,
                           ),
                           hintText: "profile.username".tr(),
                           focusNode: _usernameFocusNode,
@@ -130,9 +138,9 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
                           controller: _passwordTextController,
                           validator: (_) => state.invalidPasswordMessage,
                           focusNode: _passwordFocusNode,
-                          prefix: const Icon(
+                          prefix: Icon(
                             Icons.lock_outline,
-                            color: AppColors.argent,
+                            color: Theme.of(context).colorScheme.surface,
                           ),
                           onChanged: (value) => context
                               .read<LoginBloc>()
@@ -160,9 +168,11 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
                           },
                           child: Container(
                             padding: const EdgeInsets.symmetric(vertical: 10),
-                            decoration: const BoxDecoration(
-                              color: AppColors.placebo,
-                              borderRadius: BorderRadius.all(
+                            decoration: BoxDecoration(
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .primaryContainer,
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(8),
                               ),
                             ),

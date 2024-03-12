@@ -237,12 +237,13 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
                     widget.taskIvy != null)
                   _taskDetailPanel(),
                 if (!isScrollToTop)
-                  const Divider(color: AppColors.mercury, height: 1),
+                  Divider(
+                      color: Theme.of(context).colorScheme.outline, height: 1),
                 if (_progress < 1.0)
                   LinearProgressIndicator(
                     minHeight: 2,
                     value: _progress,
-                    backgroundColor: AppColors.mercury,
+                    backgroundColor: Theme.of(context).colorScheme.outline,
                     valueColor: AlwaysStoppedAnimation<Color>(
                       Theme.of(context).colorScheme.primary,
                     ),

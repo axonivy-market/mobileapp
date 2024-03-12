@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ThemeState {
-  ThemeData get themeData => throw _privateConstructorUsedError;
+  ThemeData? get themeData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ThemeStateCopyWith<ThemeState> get copyWith =>
@@ -29,7 +29,7 @@ abstract class $ThemeStateCopyWith<$Res> {
           ThemeState value, $Res Function(ThemeState) then) =
       _$ThemeStateCopyWithImpl<$Res, ThemeState>;
   @useResult
-  $Res call({ThemeData themeData});
+  $Res call({ThemeData? themeData});
 }
 
 /// @nodoc
@@ -45,57 +45,57 @@ class _$ThemeStateCopyWithImpl<$Res, $Val extends ThemeState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? themeData = null,
+    Object? themeData = freezed,
   }) {
     return _then(_value.copyWith(
-      themeData: null == themeData
+      themeData: freezed == themeData
           ? _value.themeData
           : themeData // ignore: cast_nullable_to_non_nullable
-              as ThemeData,
+              as ThemeData?,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$InitialImplCopyWith<$Res>
+abstract class _$$ThemeStateImplCopyWith<$Res>
     implements $ThemeStateCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
+  factory _$$ThemeStateImplCopyWith(
+          _$ThemeStateImpl value, $Res Function(_$ThemeStateImpl) then) =
+      __$$ThemeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({ThemeData themeData});
+  $Res call({ThemeData? themeData});
 }
 
 /// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ThemeStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+class __$$ThemeStateImplCopyWithImpl<$Res>
+    extends _$ThemeStateCopyWithImpl<$Res, _$ThemeStateImpl>
+    implements _$$ThemeStateImplCopyWith<$Res> {
+  __$$ThemeStateImplCopyWithImpl(
+      _$ThemeStateImpl _value, $Res Function(_$ThemeStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? themeData = null,
+    Object? themeData = freezed,
   }) {
-    return _then(_$InitialImpl(
-      themeData: null == themeData
+    return _then(_$ThemeStateImpl(
+      themeData: freezed == themeData
           ? _value.themeData
           : themeData // ignore: cast_nullable_to_non_nullable
-              as ThemeData,
+              as ThemeData?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl({required this.themeData});
+class _$ThemeStateImpl implements _ThemeState {
+  const _$ThemeStateImpl({this.themeData});
 
   @override
-  final ThemeData themeData;
+  final ThemeData? themeData;
 
   @override
   String toString() {
@@ -106,7 +106,7 @@ class _$InitialImpl implements _Initial {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$InitialImpl &&
+            other is _$ThemeStateImpl &&
             (identical(other.themeData, themeData) ||
                 other.themeData == themeData));
   }
@@ -117,17 +117,17 @@ class _$InitialImpl implements _Initial {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
-      __$$InitialImplCopyWithImpl<_$InitialImpl>(this, _$identity);
+  _$$ThemeStateImplCopyWith<_$ThemeStateImpl> get copyWith =>
+      __$$ThemeStateImplCopyWithImpl<_$ThemeStateImpl>(this, _$identity);
 }
 
-abstract class _Initial implements ThemeState {
-  const factory _Initial({required final ThemeData themeData}) = _$InitialImpl;
+abstract class _ThemeState implements ThemeState {
+  const factory _ThemeState({final ThemeData? themeData}) = _$ThemeStateImpl;
 
   @override
-  ThemeData get themeData;
+  ThemeData? get themeData;
   @override
   @JsonKey(ignore: true)
-  _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>
+  _$$ThemeStateImplCopyWith<_$ThemeStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

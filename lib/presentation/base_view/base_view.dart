@@ -234,7 +234,8 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
           content: Text(
             message,
             textAlign: TextAlign.left,
-            style: GoogleFonts.inter(color: AppColors.black, fontSize: 14),
+            style: GoogleFonts.inter(
+                color: Theme.of(context).colorScheme.surface, fontSize: 14),
           ),
           actions: [
             GestureDetector(

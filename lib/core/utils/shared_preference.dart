@@ -12,6 +12,7 @@ enum SharedPreferencesItem {
   isLogin,
   keyLastUpdatedTime,
   profileInfo,
+  isDarkMode
 }
 
 class SharedPrefs {
@@ -63,6 +64,16 @@ class SharedPrefs {
       return null;
     }
     return Profile.fromJson(json.decode(jsonString));
+  }
+
+  static Future<void> saveThemePreference(bool isDarkMode) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(SharedPreferencesItem.isDarkMode.name, isDarkMode);
+  }
+
+  Future<bool> getThemePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(SharedPreferencesItem.isDarkMode.name) ?? false;
   }
 
   static void clear() {

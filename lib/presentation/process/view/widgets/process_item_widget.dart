@@ -72,7 +72,7 @@ class ProcessItemWidget extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             color: query.isEmptyOrNull
                                 ? Theme.of(context).colorScheme.surface
-                                : AppColors.watermelonade),
+                                : Theme.of(context).colorScheme.error),
                         overflow: TextOverflow.ellipsis,
                       )
                     : TextHighlightWidget(

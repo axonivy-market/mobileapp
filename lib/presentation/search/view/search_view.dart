@@ -96,8 +96,8 @@ class _SearchViewState extends State<SearchView> {
           toolbarHeight: 10,
           pinned: true,
           scrolledUnderElevation: 0.2,
-          shadowColor: AppColors.mercury,
-          surfaceTintColor: Colors.white,
+          shadowColor: Theme.of(context).colorScheme.outline,
+          surfaceTintColor: Theme.of(context).colorScheme.outline,
           elevation: 0,
         ),
         SliverList(

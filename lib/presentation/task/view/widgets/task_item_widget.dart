@@ -83,8 +83,9 @@ class TaskItemWidget extends StatelessWidget {
       height: AppSize.s82,
       padding: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
         borderRadius: BorderRadius.circular(10),
-        color: Theme.of(context).colorScheme.outline,
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
       ),
       child: Center(
         child: Row(

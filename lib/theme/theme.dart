@@ -4,43 +4,36 @@ import 'package:flutter/material.dart';
 ThemeData lightMode = ThemeData(
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
-    primary: AppColors.tropicSea,
-    tertiaryContainer: AppColors.skyBus,
     background: AppColors.white,
-    primaryContainer: AppColors.bleachedSilk,
+    primary: AppColors.tropicSea,
+    primaryContainer: AppColors.placebo,
+    onPrimaryContainer: AppColors.zhenZhuBaiPear,
+    secondary: AppColors.blackMana,
+    tertiaryContainer: AppColors.skyBus,
     outline: AppColors.mercury,
-      secondary: AppColors.blackMana,
       surface: AppColors.eerieBlack,
       onSurface: AppColors.white,
       onSurfaceVariant: AppColors.eerieBlack,
-      onPrimaryContainer: AppColors.zhenZhuBaiPear,
-      error: AppColors.watermelonade
+    error: AppColors.watermelonade,
   ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(backgroundColor: AppColors.bleachedSilk)),
-  
   useMaterial3: true,
 );
 
 ThemeData darkMode = ThemeData(
   brightness: Brightness.dark,
   colorScheme: const ColorScheme.dark(
-    background: AppColors.shoeWax,
-    primary: AppColors.drwhite,
-    tertiaryContainer: AppColors.agedMoustacheGrey,
-    onTertiary: AppColors.kinglyCloud,
-    primaryContainer: AppColors.kettleman,
-    outline: AppColors.shadowedSteel,
+      background: AppColors.shoeWax,
+      primary: AppColors.drwhite,
+      primaryContainer: AppColors.blackOak,
+      onPrimaryContainer: AppColors.lacqueredLiquorice,
       secondary: AppColors.blackMana,
+      tertiaryContainer: AppColors.agedMoustacheGrey,
+      onTertiary: AppColors.kinglyCloud,
+      outline: AppColors.shadowedSteel,
       surface: AppColors.white,
       onSurfaceVariant: AppColors.white,
       onSurface: AppColors.eerieBlack,
-      onPrimaryContainer: AppColors.lacqueredLiquorice,
       error: AppColors.watermelonade
-
   ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(backgroundColor: AppColors.kettleman)),
-  
   useMaterial3: true,
 );
