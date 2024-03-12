@@ -19,32 +19,39 @@ mixin _$ProcessEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getProcess,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getProcess,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getProcess,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetProcess value) getProcess,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetProcess value)? getProcess,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetProcess value)? getProcess,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,6 +120,7 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements GetProcess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() getProcess,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
   }) {
     return getProcess();
   }
@@ -121,6 +129,7 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements GetProcess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? getProcess,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
   }) {
     return getProcess?.call();
   }
@@ -129,6 +138,7 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements GetProcess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? getProcess,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (getProcess != null) {
@@ -141,6 +151,8 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements GetProcess {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(GetProcess value) getProcess,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
   }) {
     return getProcess(this);
   }
@@ -149,6 +161,7 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements GetProcess {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(GetProcess value)? getProcess,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
   }) {
     return getProcess?.call(this);
   }
@@ -157,6 +170,7 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements GetProcess {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(GetProcess value)? getProcess,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (getProcess != null) {
@@ -168,6 +182,154 @@ class _$GetProcessImpl with DiagnosticableTreeMixin implements GetProcess {
 
 abstract class GetProcess implements ProcessEvent {
   const factory GetProcess() = _$GetProcessImpl;
+}
+
+/// @nodoc
+abstract class _$$ShowOfflinePopupEventImplCopyWith<$Res> {
+  factory _$$ShowOfflinePopupEventImplCopyWith(
+          _$ShowOfflinePopupEventImpl value,
+          $Res Function(_$ShowOfflinePopupEventImpl) then) =
+      __$$ShowOfflinePopupEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isConnected});
+}
+
+/// @nodoc
+class __$$ShowOfflinePopupEventImplCopyWithImpl<$Res>
+    extends _$ProcessEventCopyWithImpl<$Res, _$ShowOfflinePopupEventImpl>
+    implements _$$ShowOfflinePopupEventImplCopyWith<$Res> {
+  __$$ShowOfflinePopupEventImplCopyWithImpl(_$ShowOfflinePopupEventImpl _value,
+      $Res Function(_$ShowOfflinePopupEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isConnected = null,
+  }) {
+    return _then(_$ShowOfflinePopupEventImpl(
+      null == isConnected
+          ? _value.isConnected
+          : isConnected // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ShowOfflinePopupEventImpl
+    with DiagnosticableTreeMixin
+    implements ShowOfflinePopupEvent {
+  const _$ShowOfflinePopupEventImpl(this.isConnected);
+
+  @override
+  final bool isConnected;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProcessEvent.showOfflinePopupEvent(isConnected: $isConnected)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProcessEvent.showOfflinePopupEvent'))
+      ..add(DiagnosticsProperty('isConnected', isConnected));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShowOfflinePopupEventImpl &&
+            (identical(other.isConnected, isConnected) ||
+                other.isConnected == isConnected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isConnected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShowOfflinePopupEventImplCopyWith<_$ShowOfflinePopupEventImpl>
+      get copyWith => __$$ShowOfflinePopupEventImplCopyWithImpl<
+          _$ShowOfflinePopupEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() getProcess,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent(isConnected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? getProcess,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent?.call(isConnected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? getProcess,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
+    required TResult orElse(),
+  }) {
+    if (showOfflinePopupEvent != null) {
+      return showOfflinePopupEvent(isConnected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(GetProcess value) getProcess,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(GetProcess value)? getProcess,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(GetProcess value)? getProcess,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    required TResult orElse(),
+  }) {
+    if (showOfflinePopupEvent != null) {
+      return showOfflinePopupEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowOfflinePopupEvent implements ProcessEvent {
+  const factory ShowOfflinePopupEvent(final bool isConnected) =
+      _$ShowOfflinePopupEventImpl;
+
+  bool get isConnected;
+  @JsonKey(ignore: true)
+  _$$ShowOfflinePopupEventImplCopyWith<_$ShowOfflinePopupEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc

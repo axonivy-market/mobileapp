@@ -1,29 +1,15 @@
-import 'dart:math';
-
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/data/models/processes/customfield/customfield.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
+import 'package:axon_ivy/util/resources/icons_helper.dart';
 import 'package:axon_ivy/util/resources/resources.dart';
 import 'package:axon_ivy/util/widgets/text_highlight_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-final _randomizer = Random();
-
-final _sampleImages = [
-  AppAssets.icons.icDatabase,
-  AppAssets.icons.icTrigger,
-  AppAssets.icons.icNote,
-  AppAssets.icons.icUsers,
-];
-
-Widget getProcessIcon() {
-  return _sampleImages
-      .elementAt(_randomizer.nextInt(_sampleImages.length))
-      .svg();
-}
 
 class ProcessItemWidget extends StatelessWidget {
   const ProcessItemWidget({
@@ -43,7 +29,12 @@ class ProcessItemWidget extends StatelessWidget {
         process.description.toLowerCase().indexOf(query.toLowerCase());
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      padding: const EdgeInsets.only(
+        left: 8,
+        right: 5,
+        top: 10,
+        bottom: 10,
+      ),
       constraints: const BoxConstraints(minHeight: AppSize.s82),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
@@ -51,9 +42,12 @@ class ProcessItemWidget extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          getProcessIcon(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 26),
+            padding: const EdgeInsets.only(top: 4),
+            child: getProcessIcon(process.customFields),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 26),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,5 +107,23 @@ class ProcessItemWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Widget getProcessIcon(List<CustomField> customFields) {
+    final cssIcon = customFields
+        .firstWhere((element) => element.name == "cssIcon",
+            orElse: () => CustomField())
+        .value;
+
+    if (cssIcon.isEmpty) {
+      return getIconDefaultIcon();
+    }
+    final icon = getIconUsingPrefix(name: cssIcon);
+    return icon is SvgPicture
+        ? icon
+        : Icon(
+            icon,
+            size: 14,
+          );
   }
 }
