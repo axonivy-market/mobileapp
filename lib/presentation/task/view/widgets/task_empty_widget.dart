@@ -37,7 +37,10 @@ class TaskEmptyWidget extends StatelessWidget {
           ),
           activeFilter == FilterType.all
               ? getKoalaImages(context)
-              : AppAssets.icons.noExpiredTask.svg(),
+              : AppAssets.icons.noExpiredTask.svg(
+                  colorFilter: ColorFilter.mode(
+                      Theme.of(context).colorScheme.tertiaryContainer,
+                      BlendMode.srcIn)),
         ],
       ),
     );
