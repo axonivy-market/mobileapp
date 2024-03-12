@@ -55,6 +55,7 @@ dev_dependencies:
 
     # For Analyzer
   flutter_lints: ^3.0.1
+  path: ^1.8.3
 
   # For Builder
   build_runner: ^2.4.7
