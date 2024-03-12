@@ -1,4 +1,3 @@
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/presentation/task_activity/bloc/upload_file_bloc.dart';
 import 'package:axon_ivy/util/widgets/bot_toast_helper.dart';
 import 'package:easy_localization/easy_localization.dart';

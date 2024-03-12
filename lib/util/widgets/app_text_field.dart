@@ -95,7 +95,7 @@ class _AppTextFieldState extends State<AppTextField> {
           filled: true,
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
-                color: Theme.of(context).colorScheme.surface, width: 2.0),
+                  color: Theme.of(context).colorScheme.outline, width: 2.0),
             borderRadius: const BorderRadius.all(
               Radius.circular(10),
             ),
@@ -118,11 +118,11 @@ class _AppTextFieldState extends State<AppTextField> {
                   child: widget.prefix,
                 )
               : null,
-          border: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
+            enabledBorder: OutlineInputBorder(
+              borderSide:
+                  BorderSide(color: Theme.of(context).colorScheme.outline),
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+            )
         ),
       ),
     );

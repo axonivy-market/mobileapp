@@ -1,5 +1,4 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/data/models/processes/customfield/customfield.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
@@ -45,7 +44,7 @@ class ProcessItemWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 4),
-            child: getProcessIcon(process.customFields),
+            child: getProcessIcon(process.customFields, context),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 26),
@@ -112,21 +111,29 @@ class ProcessItemWidget extends StatelessWidget {
     );
   }
 
-  Widget getProcessIcon(List<CustomField> customFields) {
+  Widget getProcessIcon(List<CustomField> customFields, BuildContext context) {
     final cssIcon = customFields
         .firstWhere((element) => element.name == "cssIcon",
             orElse: () => CustomField())
         .value;
 
     if (cssIcon.isEmpty) {
-      return getIconDefaultIcon();
+      return getIconDefaultIcon(context);
     }
-    final icon = getIconUsingPrefix(name: cssIcon);
-    return icon is SvgPicture
-        ? icon
-        : Icon(
-            icon,
-            size: 14,
-          );
+
+    final icon = getIconUsingPrefix(name: cssIcon, context: context);
+
+    if (icon is SvgPicture) {
+      return ColorFiltered(
+        colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.surface,
+          BlendMode.srcIn,
+        ),
+        child: icon,
+      );
+  }
+    else {
+      return getIconDefaultIcon(context);
+    }
   }
 }

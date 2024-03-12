@@ -7,7 +7,8 @@ const String fontAwesomePrefix = "fa";
 const String fontAwesomeIconPrefix = "fa-";
 const String fontStreamlinePrefix = "si-";
 
-dynamic getIconUsingPrefix({required String name}) {
+dynamic getIconUsingPrefix(
+    {required String name, required BuildContext context}) {
   final List<String> parts = name.split(' ');
   List<String> faItems =
       parts.where((item) => item.startsWith(fontAwesomePrefix)).toList();
@@ -16,27 +17,31 @@ dynamic getIconUsingPrefix({required String name}) {
         (element) => element.contains(fontAwesomeIconPrefix), orElse: () {
       return '';
     });
-    if (faIcon.isEmpty) return getIconDefaultIcon();
+    if (faIcon.isEmpty) return getIconDefaultIcon(context);
     final split = faIcon.split('-');
     split.removeAt(0);
     name = convertToCamelCase(split);
-    return getFontAwesomeIcon(name: name) ?? getIconDefaultIcon();
+    return getFontAwesomeIcon(name: name) ?? getIconDefaultIcon(context);
   } else if (parts.any((element) => element.contains(fontStreamlinePrefix))) {
     var siIcon = parts.firstWhere(
         (element) => element.contains(fontStreamlinePrefix), orElse: () {
       return '';
     });
-    if (siIcon.isEmpty) return getIconDefaultIcon();
+    if (siIcon.isEmpty) return getIconDefaultIcon(context);
 
     name = siIcon.substring(3);
     return getStreamLineIcon(name: name);
   } else {
-    return getIconDefaultIcon();
+    return getIconDefaultIcon(context);
   }
 }
 
-SvgPicture getIconDefaultIcon() {
-  return AppAssets.streamlines.controlsPlay.svg(height: 14, width: 14);
+SvgPicture getIconDefaultIcon(BuildContext context) {
+  return AppAssets.streamlines.controlsPlay.svg(
+      height: 14,
+      width: 14,
+      colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.surface, BlendMode.srcIn));
 }
 
 SvgPicture getStreamLineIcon({required String name}) {
