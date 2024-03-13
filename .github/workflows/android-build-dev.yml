@@ -16,7 +16,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.2'
+          flutter-version: '3.19.3'
           channel: 'stable'
           cache: true
 
@@ -36,6 +36,16 @@ jobs:
           KEYSTORE_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
         working-directory: android
+
+      - name: Play-Free release
+        run: flutter build apk --flavor dev --target lib/main_dev.dart --build-name ${{ env.VersionName }} --build-number ${{github.run_number}}
+
+      - name: Archive build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: Android app develop APK
+          path: |
+            build/app/outputs/flutter-apk/*.apk
 
       - name: Build abb release file
         run: flutter build appbundle --flavor dev --target lib/main_dev.dart --build-name ${{ env.VersionName }} --build-number ${{github.run_number}}
