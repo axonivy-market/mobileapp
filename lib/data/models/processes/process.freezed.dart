@@ -20,11 +20,12 @@ Process _$ProcessFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Process {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   String get activatorName => throw _privateConstructorUsedError;
   String get fullRequestPath => throw _privateConstructorUsedError;
+  List<CustomField> get customFields => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,11 +38,12 @@ abstract class $ProcessCopyWith<$Res> {
       _$ProcessCopyWithImpl<$Res, Process>;
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String name,
       String description,
       String activatorName,
-      String fullRequestPath});
+      String fullRequestPath,
+      List<CustomField> customFields});
 }
 
 /// @nodoc
@@ -62,12 +64,13 @@ class _$ProcessCopyWithImpl<$Res, $Val extends Process>
     Object? description = null,
     Object? activatorName = null,
     Object? fullRequestPath = null,
+    Object? customFields = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -84,6 +87,10 @@ class _$ProcessCopyWithImpl<$Res, $Val extends Process>
           ? _value.fullRequestPath
           : fullRequestPath // ignore: cast_nullable_to_non_nullable
               as String,
+      customFields: null == customFields
+          ? _value.customFields
+          : customFields // ignore: cast_nullable_to_non_nullable
+              as List<CustomField>,
     ) as $Val);
   }
 }
@@ -96,11 +103,12 @@ abstract class _$$ProcessImplCopyWith<$Res> implements $ProcessCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
+      {String id,
       String name,
       String description,
       String activatorName,
-      String fullRequestPath});
+      String fullRequestPath,
+      List<CustomField> customFields});
 }
 
 /// @nodoc
@@ -119,12 +127,13 @@ class __$$ProcessImplCopyWithImpl<$Res>
     Object? description = null,
     Object? activatorName = null,
     Object? fullRequestPath = null,
+    Object? customFields = null,
   }) {
     return _then(_$ProcessImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -141,6 +150,10 @@ class __$$ProcessImplCopyWithImpl<$Res>
           ? _value.fullRequestPath
           : fullRequestPath // ignore: cast_nullable_to_non_nullable
               as String,
+      customFields: null == customFields
+          ? _value._customFields
+          : customFields // ignore: cast_nullable_to_non_nullable
+              as List<CustomField>,
     ));
   }
 }
@@ -149,18 +162,20 @@ class __$$ProcessImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ProcessImpl implements _Process {
   const _$ProcessImpl(
-      {this.id = 0,
+      {this.id = '',
       this.name = "",
       this.description = "",
       this.activatorName = "",
-      this.fullRequestPath = ""});
+      this.fullRequestPath = "",
+      final List<CustomField> customFields = const []})
+      : _customFields = customFields;
 
   factory _$ProcessImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProcessImplFromJson(json);
 
   @override
   @JsonKey()
-  final int id;
+  final String id;
   @override
   @JsonKey()
   final String name;
@@ -173,10 +188,18 @@ class _$ProcessImpl implements _Process {
   @override
   @JsonKey()
   final String fullRequestPath;
+  final List<CustomField> _customFields;
+  @override
+  @JsonKey()
+  List<CustomField> get customFields {
+    if (_customFields is EqualUnmodifiableListView) return _customFields;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_customFields);
+  }
 
   @override
   String toString() {
-    return 'Process(id: $id, name: $name, description: $description, activatorName: $activatorName, fullRequestPath: $fullRequestPath)';
+    return 'Process(id: $id, name: $name, description: $description, activatorName: $activatorName, fullRequestPath: $fullRequestPath, customFields: $customFields)';
   }
 
   @override
@@ -191,13 +214,21 @@ class _$ProcessImpl implements _Process {
             (identical(other.activatorName, activatorName) ||
                 other.activatorName == activatorName) &&
             (identical(other.fullRequestPath, fullRequestPath) ||
-                other.fullRequestPath == fullRequestPath));
+                other.fullRequestPath == fullRequestPath) &&
+            const DeepCollectionEquality()
+                .equals(other._customFields, _customFields));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, id, name, description, activatorName, fullRequestPath);
+      runtimeType,
+      id,
+      name,
+      description,
+      activatorName,
+      fullRequestPath,
+      const DeepCollectionEquality().hash(_customFields));
 
   @JsonKey(ignore: true)
   @override
@@ -215,16 +246,17 @@ class _$ProcessImpl implements _Process {
 
 abstract class _Process implements Process {
   const factory _Process(
-      {final int id,
+      {final String id,
       final String name,
       final String description,
       final String activatorName,
-      final String fullRequestPath}) = _$ProcessImpl;
+      final String fullRequestPath,
+      final List<CustomField> customFields}) = _$ProcessImpl;
 
   factory _Process.fromJson(Map<String, dynamic> json) = _$ProcessImpl.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get name;
   @override
@@ -233,6 +265,8 @@ abstract class _Process implements Process {
   String get activatorName;
   @override
   String get fullRequestPath;
+  @override
+  List<CustomField> get customFields;
   @override
   @JsonKey(ignore: true)
   _$$ProcessImplCopyWith<_$ProcessImpl> get copyWith =>

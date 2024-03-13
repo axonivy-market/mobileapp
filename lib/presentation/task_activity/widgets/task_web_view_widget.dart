@@ -48,6 +48,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
 
   @override
   Widget build(BuildContext context) {
+    int taskId = -1;
     return InAppWebView(
       onAjaxReadyStateChange: (controller, ajx) async {
         String finishedTask =
@@ -55,6 +56,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         String currentRunningTask =
             ajx.responseHeaders?[Constants.ivyCurrentRunningTask] ?? "";
         isFinishedTask = finishedTask.isNotEmpty && currentRunningTask.isEmpty;
+        taskId = int.parse(finishedTask);
         return null;
       },
       initialSettings: settings,
@@ -64,7 +66,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
       ),
       shouldOverrideUrlLoading: (controller, navigationAction) async {
         if (isFinishedTask) {
-          context.pop(true);
+          context.pop(taskId);
           return NavigationActionPolicy.CANCEL;
         }
         return NavigationActionPolicy.ALLOW;
