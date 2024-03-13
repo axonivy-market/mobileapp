@@ -14,6 +14,9 @@ import 'package:flutter/services.dart';
 class $AssetsEnvGen {
   const $AssetsEnvGen();
 
+  /// File path: assets/env/.env_demo
+  String get envDemo => 'assets/env/.env_demo';
+
   /// File path: assets/env/.env_dev
   String get envDev => 'assets/env/.env_dev';
 
@@ -21,7 +24,7 @@ class $AssetsEnvGen {
   String get envProd => 'assets/env/.env_prod';
 
   /// List of all assets
-  List<String> get values => [envDev, envProd];
+  List<String> get values => [envDemo, envDev, envProd];
 }
 
 class $AssetsIconsGen {
