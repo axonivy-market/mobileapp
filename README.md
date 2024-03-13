@@ -51,4 +51,3 @@ This project is licensed under the [GNU General Public License (GPL)](LICENSE).
 Thank you for choosing the Axon Ivy Mobile Application. We hope it enhances your workflow and productivity. If you have any questions or need assistance, feel free to contact us. Happy task managing! 🚀
 
 [axon-ivy-link]: https://www.axonivy.com/
-test
