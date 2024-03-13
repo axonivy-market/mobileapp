@@ -12,7 +12,7 @@ void main() async {
   await AppConfig.loadEnv(Environment.dev);
   await DemoConfig.loadDemoConfig();
   // TODO for test
-  debugPrint(
+  print(
       "demo config: ${DemoConfig.demoServerUrl} == ${DemoConfig.demoUserName} == ${DemoConfig.demoPassword}");
   final appRouter = AppRouter();
   configureDependencies();
