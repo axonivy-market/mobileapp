@@ -14,4 +14,9 @@ class TaskRemoteDataSourceImpl implements TaskRemoteDataSource {
   Future<List<TaskIvy>> getTasks() {
     return _service.getTasks();
   }
+
+  @override
+  Future<TaskIvy> getTask(int id) {
+    return _service.getTask(id);
+  }
 }
