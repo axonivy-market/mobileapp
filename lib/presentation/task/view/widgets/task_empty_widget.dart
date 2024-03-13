@@ -19,7 +19,7 @@ class TaskEmptyWidget extends StatelessWidget {
         alignment: Alignment.center,
         children: [
           Positioned(
-            bottom: activeFilter == FilterType.all ? -15 : -30,
+            bottom: activeFilter == FilterType.all ? -15 : -60,
             child: SizedBox(
               width: 240,
               child: Text(

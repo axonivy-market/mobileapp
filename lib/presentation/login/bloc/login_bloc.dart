@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/data/repositories/engine/engine_info_repository.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +13,6 @@ import 'package:injectable/injectable.dart';
 import '../../../core/app/app_config.dart';
 import '../../../core/di/di_setup.dart';
 import '../../../core/utils/shared_preference.dart';
-import '../../../data/repositories/task/task_repository.dart';
 import '../../../util/resources/validators.dart';
 
 part 'login_bloc.freezed.dart';
@@ -23,9 +23,9 @@ part 'login_state.dart';
 
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final TaskRepository _taskRepository;
+  final EngineInfoRepository _engineInfoRepository;
 
-  LoginBloc(this._taskRepository) : super(const LoginState()) {
+  LoginBloc(this._engineInfoRepository) : super(const LoginState()) {
     on<_SubmitLogin>(_submitLogin);
     on<_UsernameOnChanged>(_usernameOnChanged);
     on<_PasswordOnChanged>(_passwordOnChanged);
@@ -78,9 +78,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           invalidUsernameMessage: invalidUsernameMessage));
     } else {
       try {
-        final tasks = await _taskRepository.getTasks();
+        final engineInfo = await _engineInfoRepository.getEngineInfo();
 
-        tasks.fold(
+        engineInfo.fold(
           (l) {
             SharedPrefs.clear();
             emit(LoginState(status: LoginStatus.error, error: l));

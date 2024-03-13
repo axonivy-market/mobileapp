@@ -12,7 +12,10 @@
       "config" : {
         "signature" : "start",
         "request" : {
-          "name" : "Task with Normal Priority"
+          "name" : "Task with Normal Priority",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si-view-1" }
+          ]
         }
       },
       "visual" : {
@@ -47,7 +50,10 @@
         "signature" : "",
         "request" : {
           "name" : "Task with High Priority",
-          "description" : "Task with High Priority"
+          "description" : "Task with High Priority",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si-yoga-meditate" }
+          ]
         }
       },
       "visual" : {
@@ -82,7 +88,10 @@
         "signature" : "start3",
         "request" : {
           "name" : "Task with Exception Priority",
-          "description" : "Task with Exception Priority"
+          "description" : "Task with Exception Priority",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si-zip-file" }
+          ]
         },
         "task" : {
           "expiry" : {
@@ -124,7 +133,10 @@
         "signature" : "start4",
         "request" : {
           "name" : "Task with Low Priority",
-          "description" : "Task with Low Priority"
+          "description" : "Task with Low Priority",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si-view-off" }
+          ]
         }
       },
       "visual" : {
@@ -239,7 +251,10 @@
         "signature" : "start5",
         "request" : {
           "name" : "Task with long name and description Task with long name and description",
-          "description" : "Task with long name and description Task with long name and description"
+          "description" : "Task with long name and description Task with long name and description",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "fa fa-anchor" }
+          ]
         }
       },
       "visual" : {
@@ -292,7 +307,10 @@
         "signature" : "taskWithNoNameNoDescription",
         "request" : {
           "name" : "Task with no name and no description",
-          "description" : "Task with no name and no description"
+          "description" : "Task with no name and no description",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "fa fa-archive" }
+          ]
         },
         "task" : {
           "description" : "Task with long name and description Task with long name and descriptionTask with long name and description Task with long name and descriptionTask with long name and description Task with long name and description"
@@ -340,7 +358,10 @@
         "signature" : "taskWithExpiredTime",
         "request" : {
           "name" : "Task with expired time",
-          "description" : "Task with expired time example"
+          "description" : "Task with expired time example",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "fa fa-adjust" }
+          ]
         }
       },
       "visual" : {
@@ -459,7 +480,10 @@
         "signature" : "start6",
         "request" : {
           "name" : "Create Invoice",
-          "description" : "Process to create invoice"
+          "description" : "Process to create invoice",
+          "customFields" : [
+            { "name" : "cssIcon", "value" : "si-coffee-cup-hot" }
+          ]
         }
       },
       "visual" : {

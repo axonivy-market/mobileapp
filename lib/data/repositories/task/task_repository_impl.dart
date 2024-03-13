@@ -8,7 +8,7 @@ import '../../data_sources/task/task_remote_data_source.dart';
 import 'task_repository.dart';
 
 @Injectable(as: TaskRepository)
-class TaskRepositoryImpl extends TaskRepository {
+class TaskRepositoryImpl implements TaskRepository {
   TaskRepositoryImpl(this._remoteDataSource);
 
   final TaskRemoteDataSource _remoteDataSource;
@@ -17,6 +17,16 @@ class TaskRepositoryImpl extends TaskRepository {
   Future<Either<Failure, List<TaskIvy>>> getTasks() async {
     try {
       final result = await _remoteDataSource.getTasks();
+      return right(result);
+    } catch (e) {
+      return left(AppError.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, TaskIvy>> getTask(int id) async {
+    try {
+      final result = await _remoteDataSource.getTask(id);
       return right(result);
     } catch (e) {
       return left(AppError.handle(e).failure);

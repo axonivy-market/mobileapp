@@ -6,13 +6,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProcessOfflineIndicatorWidget extends StatelessWidget {
-  const ProcessOfflineIndicatorWidget({
+class OfflineIndicatorPopupWidget extends StatelessWidget {
+  const OfflineIndicatorPopupWidget({
     super.key,
+    required this.description,
     this.isShowingProcesses = false,
   });
 
   final bool isShowingProcesses;
+  final String description;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class ProcessOfflineIndicatorWidget extends StatelessWidget {
               AppAssets.icons.cloudOff.svg(),
               const SizedBox(height: 10),
               Text(
-                "process.you_are_offline".tr(),
+                "offline.popup_title".tr(),
                 style: GoogleFonts.inter(
                   color: AppColors.eerieBlack,
                   fontSize: 17,
@@ -51,7 +53,7 @@ class ProcessOfflineIndicatorWidget extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               Text(
-                "process.offline_description".tr(),
+                description,
                 textAlign: TextAlign.center,
                 style: GoogleFonts.inter(
                   color: AppColors.sonicSilver,
