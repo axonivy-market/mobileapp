@@ -43,6 +43,7 @@ jobs:
       - name: Archive build artifact
         uses: actions/upload-artifact@v3
         with:
+          name: Android app develop APK
           path: |
             build/app/outputs/flutter-apk/*.apk
 
