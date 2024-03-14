@@ -68,7 +68,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
               fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hintText: "generalSearch".tr(),
               hintStyle: GoogleFonts.inter(
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.secondary,
                 fontWeight: FontWeight.w400,
                 fontSize: 17,
               ),
