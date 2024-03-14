@@ -1,3 +1,4 @@
+import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
@@ -19,7 +20,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double scrolledUnderElevation;
 
   @override
-  Size get preferredSize => const Size.fromHeight(50);
+  Size get preferredSize => const Size.fromHeight(Constants.appBarHeight);
 
   @override
   Widget build(BuildContext context) {
