@@ -45,7 +45,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   void _sortTasks(event, Emitter emit) {
-    emit(const TaskState.loading(true));
     activeSortType = event.activeSortType;
     if (tasks.isNotEmpty) {
       emit(TaskState.success(
@@ -93,7 +92,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   void _filterTasks(event, Emitter emit) {
-    emit(const TaskState.loading(true));
     activeFilter = event.activeFilter;
     switch (event.activeFilter) {
       case FilterType.all:

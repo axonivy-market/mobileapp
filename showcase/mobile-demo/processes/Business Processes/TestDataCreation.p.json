@@ -12,7 +12,7 @@
       "config" : {
         "signature" : "start",
         "request" : {
-          "name" : "Task with Normal Priority",
+          "name" : "Task with Normal Priority Process",
           "customFields" : [
             { "name" : "cssIcon", "value" : "si-view-1" }
           ]
@@ -28,20 +28,8 @@
       "id" : "f1",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 616, "y" : 64 }
+        "at" : { "x" : 632, "y" : 64 }
       }
-    }, {
-      "id" : "f5",
-      "type" : "DialogCall",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 480, "y" : 64 }
-      },
-      "connect" : [
-        { "id" : "f6", "to" : "f1" }
-      ]
     }, {
       "id" : "f7",
       "type" : "RequestStart",
@@ -49,8 +37,8 @@
       "config" : {
         "signature" : "",
         "request" : {
-          "name" : "Task with High Priority",
-          "description" : "Task with High Priority",
+          "name" : "Task with High Priority Process",
+          "description" : "Task with High Priority Process",
           "customFields" : [
             { "name" : "cssIcon", "value" : "si-yoga-meditate" }
           ]
@@ -66,20 +54,8 @@
       "id" : "f8",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 616, "y" : 152 }
+        "at" : { "x" : 632, "y" : 152 }
       }
-    }, {
-      "id" : "f10",
-      "type" : "DialogCall",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 480, "y" : 152 }
-      },
-      "connect" : [
-        { "id" : "f13", "to" : "f8" }
-      ]
     }, {
       "id" : "f14",
       "type" : "RequestStart",
@@ -87,8 +63,8 @@
       "config" : {
         "signature" : "start3",
         "request" : {
-          "name" : "Task with Exception Priority",
-          "description" : "Task with Exception Priority",
+          "name" : "Task with Exception Priority Process",
+          "description" : "Task with Exception Priority Process",
           "customFields" : [
             { "name" : "cssIcon", "value" : "si-zip-file" }
           ]
@@ -111,20 +87,8 @@
       "id" : "f15",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 616, "y" : 248 }
+        "at" : { "x" : 632, "y" : 248 }
       }
-    }, {
-      "id" : "f17",
-      "type" : "DialogCall",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 480, "y" : 248 }
-      },
-      "connect" : [
-        { "id" : "f20", "to" : "f15" }
-      ]
     }, {
       "id" : "f21",
       "type" : "RequestStart",
@@ -132,8 +96,8 @@
       "config" : {
         "signature" : "start4",
         "request" : {
-          "name" : "Task with Low Priority",
-          "description" : "Task with Low Priority",
+          "name" : "Task with Low Priority Process",
+          "description" : "Task with Low Priority Process",
           "customFields" : [
             { "name" : "cssIcon", "value" : "si-view-off" }
           ]
@@ -149,21 +113,8 @@
       "id" : "f22",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 616, "y" : 336 }
+        "at" : { "x" : 632, "y" : 336 }
       }
-    }, {
-      "id" : "f16",
-      "type" : "DialogCall",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 480, "y" : 336 },
-        "description" : "Test Description"
-      },
-      "connect" : [
-        { "id" : "f18", "to" : "f22" }
-      ]
     }, {
       "id" : "f3",
       "type" : "TaskSwitchEvent",
@@ -181,7 +132,7 @@
         "description" : "Test Description"
       },
       "connect" : [
-        { "id" : "f4", "to" : "f5" }
+        { "id" : "f4", "to" : "f39" }
       ]
     }, {
       "id" : "f19",
@@ -202,7 +153,7 @@
         "at" : { "x" : 344, "y" : 152 }
       },
       "connect" : [
-        { "id" : "f23", "to" : "f10" }
+        { "id" : "f23", "to" : "f6" }
       ]
     }, {
       "id" : "f24",
@@ -223,7 +174,7 @@
         "at" : { "x" : 344, "y" : 248 }
       },
       "connect" : [
-        { "id" : "f25", "to" : "f17" }
+        { "id" : "f25", "to" : "f13" }
       ]
     }, {
       "id" : "f26",
@@ -241,7 +192,7 @@
         "at" : { "x" : 344, "y" : 336 }
       },
       "connect" : [
-        { "id" : "f27", "to" : "f16" }
+        { "id" : "f27", "to" : "f20" }
       ]
     }, {
       "id" : "f28",
@@ -261,13 +212,13 @@
         "at" : { "x" : 88, "y" : 432 }
       },
       "connect" : [
-        { "id" : "f32", "to" : "f30" }
+        { "id" : "f32", "to" : "f18" }
       ]
     }, {
       "id" : "f29",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 544, "y" : 432 }
+        "at" : { "x" : 616, "y" : 432 }
       }
     }, {
       "id" : "f30",
@@ -280,7 +231,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 272, "y" : 432 },
+        "at" : { "x" : 344, "y" : 432 },
         "labelOffset" : { "x" : 14, "y" : 34 },
         "description" : "Test Description"
       },
@@ -294,7 +245,7 @@
         "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
       },
       "visual" : {
-        "at" : { "x" : 408, "y" : 432 }
+        "at" : { "x" : 480, "y" : 432 }
       },
       "connect" : [
         { "id" : "f34", "to" : "f29" }
@@ -336,19 +287,7 @@
         "description" : "Test Description"
       },
       "connect" : [
-        { "id" : "f39", "to" : "f38" }
-      ]
-    }, {
-      "id" : "f38",
-      "type" : "DialogCall",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 408, "y" : 528 }
-      },
-      "connect" : [
-        { "id" : "f40", "to" : "f36" }
+        { "id" : "f38", "to" : "f36" }
       ]
     }, {
       "id" : "f42",
@@ -368,13 +307,13 @@
         "at" : { "x" : 88, "y" : 616 }
       },
       "connect" : [
-        { "id" : "f46", "to" : "f44" }
+        { "id" : "f46", "to" : "f84" }
       ]
     }, {
       "id" : "f43",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 544, "y" : 616 }
+        "at" : { "x" : 624, "y" : 616 }
       }
     }, {
       "id" : "f44",
@@ -388,22 +327,10 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 272, "y" : 616 }
+        "at" : { "x" : 344, "y" : 616 }
       },
       "connect" : [
-        { "id" : "f48", "to" : "f45" }
-      ]
-    }, {
-      "id" : "f45",
-      "type" : "DialogCall",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 408, "y" : 616 }
-      },
-      "connect" : [
-        { "id" : "f47", "to" : "f43" }
+        { "id" : "f48", "to" : "f86" }
       ]
     }, {
       "id" : "f49",
@@ -672,6 +599,96 @@
       },
       "connect" : [
         { "id" : "f83", "to" : "f65" }
+      ]
+    }, {
+      "id" : "f84",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 216, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f85", "to" : "f44", "color" : "default" }
+      ]
+    }, {
+      "id" : "f86",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 472, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f45", "to" : "f43" }
+      ]
+    }, {
+      "id" : "f39",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 472, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 472, "y" : 152 }
+      },
+      "connect" : [
+        { "id" : "f10", "to" : "f8" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 472, "y" : 248 }
+      },
+      "connect" : [
+        { "id" : "f17", "to" : "f15" }
+      ]
+    }, {
+      "id" : "f20",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 472, "y" : 336 }
+      },
+      "connect" : [
+        { "id" : "f16", "to" : "f22" }
+      ]
+    }, {
+      "id" : "f18",
+      "type" : "DialogCall",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.SampleDialog:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 216, "y" : 432 }
+      },
+      "connect" : [
+        { "id" : "f40", "to" : "f30", "color" : "default" }
       ]
     } ]
 }
