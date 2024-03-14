@@ -259,7 +259,6 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                   context.read<ThemeBloc>().add(
                         ThemeEvent.changeTheme(value ? darkMode : lightMode),
                       );
-                  SharedPrefs.saveThemePreference(value);
                 },
                 onDemoModeChanged: (value) {
                   // Handle demo mode change here if needed

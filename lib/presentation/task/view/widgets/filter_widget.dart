@@ -45,8 +45,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                     height: 40,
                     width: 86,
                     decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.outline),
+                        border: BorderDirectional(
+                            start: BorderSide(
+                                color: Theme.of(context).colorScheme.outline),
+                            top: BorderSide(
+                                color: Theme.of(context).colorScheme.outline),
+                            bottom: BorderSide(
+                                color: Theme.of(context).colorScheme.outline)),
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(10.0),
                             bottomLeft: Radius.circular(10.0)),
@@ -76,8 +81,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                     height: 40,
                     width: 86,
                     decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.outline),
+                        border: BorderDirectional(
+                            end: BorderSide(
+                                color: Theme.of(context).colorScheme.outline),
+                            top: BorderSide(
+                                color: Theme.of(context).colorScheme.outline),
+                            bottom: BorderSide(
+                                color: Theme.of(context).colorScheme.outline)),
                         borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(10.0),
                             bottomRight: Radius.circular(10.0)),

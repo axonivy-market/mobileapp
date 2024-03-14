@@ -66,15 +66,11 @@ class SharedPrefs {
     return Profile.fromJson(json.decode(jsonString));
   }
 
-  static Future<void> saveThemePreference(bool isDarkMode) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setBool(SharedPreferencesItem.isDarkMode.name, isDarkMode);
-  }
+  static Future setThemeSetting(bool isDarkMode) =>
+      _pref.setBool(SharedPreferencesItem.isDarkMode.name, isDarkMode);
 
-  Future<bool> getThemePreference() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getBool(SharedPreferencesItem.isDarkMode.name) ?? false;
-  }
+  static bool? get themeSetting =>
+      _pref.getBool(SharedPreferencesItem.isDarkMode.name);
 
   static void clear() {
     _pref.remove(SharedPreferencesItem.baseUrl.name);

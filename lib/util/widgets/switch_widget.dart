@@ -30,7 +30,9 @@ class SwitchWidget extends StatelessWidget {
         height: 30.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
-          color: Theme.of(context).colorScheme.tertiaryContainer,
+          color: (isDarkMode || isDemoMode)
+              ? Theme.of(context).colorScheme.tertiaryContainer
+              : Theme.of(context).colorScheme.background,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 2),
         alignment: isDarkMode || isDemoMode
@@ -42,7 +44,9 @@ class SwitchWidget extends StatelessWidget {
           height: 25.0,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Theme.of(context).colorScheme.primary,
+            color: (isDarkMode || isDemoMode)
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.primaryContainer,
           ),
         ),
       ),

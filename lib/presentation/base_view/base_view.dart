@@ -58,11 +58,10 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Theme.of(context).colorScheme.background,
+                      borderRadius: BorderRadius.circular(20),
+                      color: Theme.of(context).colorScheme.tertiaryContainer,
                       border: Border.all(
-                        color: Theme.of(context).colorScheme.primary,
-                        width: 1,
+                        color: Theme.of(context).colorScheme.outline,
                       ),
                     ),
                     child: Center(
@@ -90,8 +89,11 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                     padding:
                         const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: Theme.of(context).colorScheme.background),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Theme.of(context).colorScheme.tertiaryContainer),
                     child: Center(
                       child: Text(
                         "dialog.ok".tr(),

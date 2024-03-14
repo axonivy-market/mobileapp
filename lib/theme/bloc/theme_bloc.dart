@@ -1,8 +1,11 @@
+import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/presentation/task_activity/widgets/task_web_view_widget.dart';
 import 'package:axon_ivy/theme/bloc/theme_event.dart';
 import 'package:axon_ivy/theme/bloc/theme_state.dart';
 import 'package:axon_ivy/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   final bool initialDarkMode;
@@ -17,6 +20,14 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   Future<void> _changeTheme(ChangeTheme event, Emitter<ThemeState> emit) async {
     ThemeData newTheme =
         event.themeData.brightness == Brightness.dark ? darkMode : lightMode;
+    await clearCookies();
     emit(ThemeState(themeData: newTheme));
+
+    SharedPrefs.setThemeSetting(event.themeData.brightness == Brightness.dark);
+  }
+
+  Future<void> clearCookies() async {
+    final cookieManager = CookieManager.instance();
+    await cookieManager.deleteAllCookies();
   }
 }

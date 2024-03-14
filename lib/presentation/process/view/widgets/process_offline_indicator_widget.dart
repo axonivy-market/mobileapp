@@ -36,9 +36,6 @@ class OfflineIndicatorPopupWidget extends StatelessWidget {
           padding: const EdgeInsets.all(16),
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-            border: Border.all(
-              color: Theme.of(context).colorScheme.outline,
-            ),
             borderRadius: BorderRadius.circular(10),
             color: Theme.of(context).colorScheme.background,
           ),
