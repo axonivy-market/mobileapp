@@ -54,15 +54,17 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       emit(const UploadFileState.loading(true));
       await uploadFiles(
           caseId: caseId, file: file, emit: emit, fileName: newFileName);
+      emit(UploadFileState.success(uploadMessage, newFileName));
     } else {
       emit(const UploadFileState.loading(true));
 
       await uploadFiles(
           caseId: caseId, file: cameraFile!, emit: emit, fileName: fileName);
+      emit(UploadFileState.success(uploadMessage, fileName));
     }
 
     cameraFile = null;
-    emit(UploadFileState.success(uploadMessage));
+
     uploadMessage = "";
     FilePicker.platform.clearTemporaryFiles();
     return;
@@ -113,7 +115,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
             .tr(namedArgs: {'fileName': platformFile.name});
       }
       if (uploadMessage.contains("successfully")) {
-        emit(UploadFileState.success(uploadMessage));
+        emit(UploadFileState.success(uploadMessage, platformFile.name));
       } else {
         emit(UploadErrorState(uploadMessage));
       }
@@ -180,7 +182,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       }
 
       if (uploadMessage.contains("successfully")) {
-        emit(UploadFileState.success(uploadMessage));
+        emit(UploadFileState.success(uploadMessage, fileName));
       } else {
         emit(UploadErrorState(uploadMessage));
       }

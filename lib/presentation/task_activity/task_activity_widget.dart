@@ -43,6 +43,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
   double _progress = 0;
   bool isExpanded = false;
   int documentLength = 0;
+  bool shouldFetchTaskList = false;
   @override
   void initState() {
     super.initState();
@@ -79,7 +80,10 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
         listener: (context, state) {
           if (state is TaskDetailLoadingState) {
             showLoading();
-          } else {
+          } else if (state is TaskDetailSuccessState) {
+            setState(() {
+              shouldFetchTaskList = true;
+            });
             hideLoading();
           }
         },
@@ -93,7 +97,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
             leadingWidth: 100,
             leading: Padding(
               padding: const EdgeInsets.only(left: 15),
-              child: BackButtonWidget(),
+              child: BackButtonWidget(shouldFetch: shouldFetchTaskList),
             ),
             actions: [
               if (task != null)
@@ -106,10 +110,15 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
                       padding: const EdgeInsets.only(right: 10.0),
                       child: IconButton(
                         icon: AppAssets.icons.paperclip.svg(),
-                        onPressed: () async {
-                          await context.pushNamed("documentList", extra: task);
-                          taskDetailBloc
-                              .add(TaskDetailEvent.getTaskDetail(task!.id));
+                        onPressed: () {
+                          context
+                              .pushNamed("documentList", extra: task)
+                              .then((value) {
+                            if (value is bool && value == true) {
+                              taskDetailBloc
+                                  .add(TaskDetailEvent.getTaskDetail(task!.id));
+                            }
+                          });
                         },
                       ),
                     );
@@ -283,10 +292,14 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
                       children: [
                         GestureDetector(
                           onTap: () async {
-                            await context.pushNamed("documentList",
-                                extra: task);
-                            taskDetailBloc.add(
-                                TaskDetailEvent.getTaskDetail(task?.id ?? 0));
+                            await context
+                                .pushNamed("documentList", extra: task)
+                                .then((value) {
+                              if (value is bool && value == true) {
+                                taskDetailBloc.add(
+                                    TaskDetailEvent.getTaskDetail(task!.id));
+                              }
+                            });
                           },
                           child: TaskInfoRowWidget(
                             isTitleHighlight: true,

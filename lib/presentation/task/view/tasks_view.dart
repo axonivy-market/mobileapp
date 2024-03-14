@@ -12,8 +12,8 @@ import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/sort_bloc/sort_state.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_detail/task_detail_cubit.dart';
-import 'package:axon_ivy/presentation/task/view/widgets/filter_widget.dart';
 import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
+import 'package:axon_ivy/presentation/task/view/widgets/filter_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
@@ -62,10 +62,10 @@ class TasksView extends StatelessWidget {
           }),
           BlocListener<ConnectivityBloc, ConnectivityState>(
               listener: (context, state) {
-                context
-                    .read<TaskBloc>()
-                    .add(TaskEvent.showOfflinePopupEvent(state is ConnectedState));
-              }),
+            context
+                .read<TaskBloc>()
+                .add(TaskEvent.showOfflinePopupEvent(state is ConnectedState));
+          }),
           BlocListener<ToastMessageCubit, ToastMessageState>(
               listener: (context, state) {
             if (state is ShowToastMessageState) {
@@ -226,8 +226,8 @@ class TasksViewContent extends StatelessWidget {
     } else {
       final task = tasks[index];
       return GestureDetector(
-        onTap: () {
-          _navigateTaskActivity(context, tasks[index]);
+        onTap: () async {
+          await _navigateTaskActivity(context, tasks[index]);
         },
         onLongPress: () => _showDetails(context, task),
         child: TaskItemWidget(
@@ -257,13 +257,15 @@ class TasksViewContent extends StatelessWidget {
     );
   }
 
-  void _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
+  _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
     context.push(AppRoutes.taskActivity, extra: {
       'task': taskIvy,
       'path': taskIvy.fullRequestPath
     }).then((value) {
       if (value != null && value is int) {
         context.read<TabBarCubit>().navigateTaskList(value);
+      } else if (value is bool && value == true) {
+        context.read<TaskBloc>().add(const TaskEvent.getTasks(FilterType.all));
       }
     });
   }

@@ -28,6 +28,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
   late DeleteFileBloc _deleteFileBloc;
   late TaskDetailBloc _taskDetailBloc;
   late DownloadFileBloc _downloadFileBloc;
+  bool shouldFetchTaskList = false;
   dynamic model;
 
   @override
@@ -37,6 +38,22 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
     _taskDetailBloc = getIt<TaskDetailBloc>();
     _deleteFileBloc = getIt<DeleteFileBloc>();
     _downloadFileBloc = getIt<DownloadFileBloc>();
+  }
+
+  bool isUploadDuplicateFile(UploadSuccessState state, TaskIvy task) {
+    if ((task.caseTask?.documents.length ?? 0) > 0) {
+      for (var document in task.caseTask!.documents) {
+        if (document.name == state.fileNames) {
+          showUploadedDialog(
+              title: "Error",
+              message: "File ${state.fileNames} is already uploaded");
+          return true;
+        }
+      }
+    }
+    _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
+    showUploadedDialog(title: "Success process", message: state.message);
+    return false;
   }
 
   void doNothing(BuildContext context) {}
@@ -57,9 +74,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
             listener: (context, state) async {
               if (state is UploadSuccessState) {
                 hideLoading();
-                showUploadedDialog(
-                    title: "Success process", message: state.fileNames);
-                _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
+                isUploadDuplicateFile(state, task);
               } else if (state is UploadErrorState) {
                 hideLoading();
                 showConfirmDialog(title: "Error", message: state.error);
@@ -86,13 +101,11 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
           ),
           BlocListener<TaskDetailBloc, TaskDetailState>(
             listener: (context, state) {
-              if (state is TaskDetailErrorState) {
-                hideLoading();
-              } else if (state is TaskDetailSuccessState) {
-                documentLength = state.task.caseTask?.documents.length ?? 0;
-                hideLoading();
-              } else {
-                // showLoading();
+              if (state is TaskDetailSuccessState) {
+                setState(() {
+                  shouldFetchTaskList = true;
+                  documentLength = state.task.caseTask?.documents.length ?? 0;
+                });
               }
             },
           ),
@@ -119,7 +132,9 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
             title: const Text("Attachments"),
             leading: Padding(
               padding: const EdgeInsets.only(left: 15),
-              child: BackButtonWidget(),
+              child: BackButtonWidget(
+                shouldFetch: shouldFetchTaskList,
+              ),
             ),
             leadingWidth: 100,
             actions: [
