@@ -1,4 +1,5 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
+import 'package:axon_ivy/presentation/login/bloc/login_bloc.dart';
 import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/router/app_router.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -20,7 +21,6 @@ class LoginWidget extends StatelessWidget {
     return Center(
       child: SizedBox(
         width: 242,
-        height: 210,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -57,6 +57,40 @@ class LoginWidget extends StatelessWidget {
                       ),
                       child: Text(
                         "profile.signIn".tr(),
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.inter(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.tropicSea),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 5),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      context
+                          .read<LoginBloc>()
+                          .add(LoginEvent.demoLogin(context));
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: const BoxDecoration(
+                        color: AppColors.placebo,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        "profile.demoMode".tr(),
                         textAlign: TextAlign.center,
                         style: GoogleFonts.inter(
                             fontSize: 17,

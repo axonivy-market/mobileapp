@@ -12,6 +12,7 @@ enum SharedPreferencesItem {
   isLogin,
   keyLastUpdatedTime,
   profileInfo,
+  isDemoLogin
 }
 
 class SharedPrefs {
@@ -45,6 +46,12 @@ class SharedPrefs {
 
   static Future setIsLogin(bool value) =>
       _pref.setBool(SharedPreferencesItem.isLogin.name, value);
+
+  static bool? get isDemoLogin =>
+      _pref.getBool(SharedPreferencesItem.isDemoLogin.name);
+
+  static Future setIsDemoLogin(bool value) =>
+      _pref.setBool(SharedPreferencesItem.isDemoLogin.name, value);
 
   static int? get lastUpdatedTime =>
       _pref.getInt(SharedPreferencesItem.keyLastUpdatedTime.name);
