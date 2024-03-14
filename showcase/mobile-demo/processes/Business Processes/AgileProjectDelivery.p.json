@@ -19,13 +19,13 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f2", "to" : "f3" }
+        { "id" : "f2", "to" : "f5" }
       ]
     }, {
       "id" : "f1",
       "type" : "TaskEnd",
       "visual" : {
-        "at" : { "x" : 352, "y" : 64 }
+        "at" : { "x" : 608, "y" : 64 }
       }
     }, {
       "id" : "f3",
@@ -36,10 +36,36 @@
         }
       },
       "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f76" }
+      ]
+    }, {
+      "id" : "f76",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 480, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f1", "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
         "at" : { "x" : 224, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f4", "to" : "f1" }
+        { "id" : "f6", "to" : "f3", "color" : "default" }
       ]
     } ]
 }

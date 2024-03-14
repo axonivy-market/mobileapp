@@ -219,9 +219,7 @@ class TasksViewContent extends StatelessWidget {
 
   Widget _buildTaskItem(BuildContext context, List<TaskIvy> tasks,
       FilterType activeFilter, int index) {
-    if (tasks.isEmpty && activeFilter == FilterType.expired) {
-      return TaskEmptyWidget(activeFilter: activeFilter);
-    } else if (tasks.isEmpty) {
+    if (tasks.isEmpty) {
       return TaskEmptyWidget(activeFilter: activeFilter);
     } else {
       final task = tasks[index];

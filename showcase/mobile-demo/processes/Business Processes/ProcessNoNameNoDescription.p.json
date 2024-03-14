@@ -18,7 +18,7 @@
         "at" : { "x" : 96, "y" : 112 }
       },
       "connect" : [
-        { "id" : "f44", "to" : "f43" }
+        { "id" : "f44", "to" : "f76" }
       ]
     }, {
       "id" : "f43",
@@ -37,7 +37,7 @@
         "at" : { "x" : 96, "y" : 184 }
       },
       "connect" : [
-        { "id" : "f47", "to" : "f46" }
+        { "id" : "f47", "to" : "f1" }
       ]
     }, {
       "id" : "f46",
@@ -45,5 +45,31 @@
       "visual" : {
         "at" : { "x" : 488, "y" : 184 }
       }
+    }, {
+      "id" : "f76",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 296, "y" : 112 }
+      },
+      "connect" : [
+        { "id" : "f0", "to" : "f43", "color" : "default" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "DialogCall",
+      "name" : "Invoice",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
+      },
+      "visual" : {
+        "at" : { "x" : 296, "y" : 184 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f46", "color" : "default" }
+      ]
     } ]
 }
