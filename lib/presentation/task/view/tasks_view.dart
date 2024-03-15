@@ -3,7 +3,7 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
-import 'package:axon_ivy/presentation/process/view/widgets/process_offline_indicator_widget.dart';
+import 'package:axon_ivy/util/widgets/offline_popup_widget.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
@@ -131,16 +131,16 @@ class TasksViewContent extends StatelessWidget {
                   Column(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
                         child: FilterWidget(),
                       ),
                       Expanded(child: _buildTaskList(context, taskState.tasks)),
                     ],
                   ),
                   if (!taskState.isOnline)
-                    OfflineIndicatorPopupWidget(
+                    OfflinePopupWidget(
                       description: "offline.task_description".tr(),
-                      isShowingProcesses: taskState.tasks.isNotEmpty,
+                      onRefresh: () => _onRefresh(context),
                     ),
                 ],
               );
@@ -210,7 +210,7 @@ class TasksViewContent extends StatelessWidget {
     );
   }
 
-  Future<void> _onRefresh(BuildContext context) async {
+  void _onRefresh(BuildContext context) async {
     final taskBloc = context.read<TaskBloc>();
     final filterState = context.read<FilterBloc>().state;
     await Future.delayed(const Duration(seconds: 1));

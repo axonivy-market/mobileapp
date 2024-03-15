@@ -1,13 +1,13 @@
-import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
-import 'package:axon_ivy/presentation/process/view/widgets/process_offline_indicator_widget.dart';
+import 'package:axon_ivy/util/widgets/offline_popup_widget.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/router/app_router.dart';
+import 'package:axon_ivy/util/resources/resources.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -38,7 +38,6 @@ class ProcessesView extends StatelessWidget {
         ],
         child: BlocBuilder<ProcessBloc, ProcessState>(
           builder: (context, state) {
-            final processBloc = BlocProvider.of<ProcessBloc>(context);
             if (state is ProcessLoadingState) {
               return const LoadingWidget();
             }
@@ -52,10 +51,7 @@ class ProcessesView extends StatelessWidget {
                     ),
                     slivers: [
                       CupertinoSliverRefreshControl(
-                        onRefresh: () async {
-                          await Future.delayed(const Duration(seconds: 1));
-                          processBloc.add(const ProcessEvent.getProcess());
-                        },
+                        onRefresh: () async => _getProcesses(context),
                       ),
                       SliverPadding(
                         padding: const EdgeInsets.symmetric(
@@ -74,9 +70,9 @@ class ProcessesView extends StatelessWidget {
                     ],
                   ),
                   if (!state.isOnline)
-                    OfflineIndicatorPopupWidget(
+                    OfflinePopupWidget(
                       description: "offline.process_description".tr(),
-                      isShowingProcesses: state.processes.isNotEmpty,
+                      onRefresh: () => _getProcesses(context),
                     ),
                 ],
               );
@@ -92,9 +88,8 @@ class ProcessesView extends StatelessWidget {
       List<Process> processes, BuildContext context, int index) {
     if (processes.isEmpty) {
       return SizedBox(
-        height: MediaQuery.of(context).size.height -
-            Constants.appBarHeight -
-            Constants.bottomNavigationBarHeight,
+        height: getNoDataViewHeight(MediaQuery.of(context).size.height,
+            MediaQuery.of(context).viewInsets.bottom),
         child: DataEmptyWidget(
           message: 'process.emptyList',
           icon: AppAssets.icons.processEmpty.svg(),
@@ -119,5 +114,11 @@ class ProcessesView extends StatelessWidget {
         context.read<TabBarCubit>().navigateTaskList(value);
       }
     });
+  }
+
+  void _getProcesses(BuildContext context) async {
+    final processBloc = context.read<ProcessBloc>();
+    await Future.delayed(const Duration(seconds: 1));
+    processBloc.add(const ProcessEvent.getProcess());
   }
 }
