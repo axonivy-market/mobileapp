@@ -18,7 +18,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../process/view/widgets/process_offline_indicator_widget.dart';
+import '../../../util/widgets/offline_popup_widget.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
@@ -104,9 +104,13 @@ class _SearchViewState extends State<SearchView> {
               BlocBuilder<ConnectivityBloc, ConnectivityState>(
                   builder: (context, state) {
                 if (state is NotConnectedState) {
-                  return OfflineIndicatorPopupWidget(
+                  return OfflinePopupWidget(
                     description: "offline.search_description".tr(),
-                    isShowingProcesses: false,
+                    onRefresh: () async {
+                      final engineCubit = context.read<EngineInfoCubit>();
+                      await Future.delayed(const Duration(seconds: 1));
+                      engineCubit.getEngineInfo();
+                    },
                   );
                 }
                 return Container();
@@ -159,9 +163,7 @@ class _SearchViewState extends State<SearchView> {
                         'path': item.task.fullRequestPath
                       }).then((value) {
                         if (value != null && value is int) {
-                          context
-                              .read<TabBarCubit>()
-                              .navigateTaskList(value);
+                          context.read<TabBarCubit>().navigateTaskList(value);
                         }
                       });
                     },
@@ -185,9 +187,7 @@ class _SearchViewState extends State<SearchView> {
                         'path': item.process.fullRequestPath
                       }).then((value) {
                         if (value != null && value is int) {
-                          context
-                              .read<TabBarCubit>()
-                              .navigateTaskList(value);
+                          context.read<TabBarCubit>().navigateTaskList(value);
                         }
                       });
                     },
