@@ -26,19 +26,27 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       scrolledUnderElevation: scrolledUnderElevation,
-      shadowColor: AppColors.mercury,
-      surfaceTintColor: Colors.white,
+      backgroundColor: Theme.of(context).colorScheme.background,
+      shadowColor: Theme.of(context).colorScheme.outline,
+      surfaceTintColor: Theme.of(context).colorScheme.background,
       elevation: 0,
       leadingWidth: 120,
       leading: Padding(
         padding: const EdgeInsets.only(left: 15),
-        child: AppAssets.icons.logo.svg(),
+        child: Theme.of(context).brightness == Brightness.light
+            ? AppAssets.icons.logo.svg()
+            : AppAssets.icons.logoDark.svg(),
       ),
       actions: [
         buildLastUpdatedTime(),
         IconButton(
           onPressed: () {},
-          icon: AppAssets.icons.notification.svg(),
+          icon: AppAssets.icons.notification.svg(
+            colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.surface,
+              BlendMode.srcIn,
+            ),
+          ),
         ),
         const SizedBox(
           width: 5,
@@ -63,7 +71,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       "tasksView.lastUpdated",
                       style: GoogleFonts.inter(
                           fontWeight: FontWeight.w400,
-                          color: AppColors.silver,
+                          color: Theme.of(context).colorScheme.secondary,
                           fontSize: 13),
                     ).tr(
                       namedArgs: {
@@ -71,7 +79,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       },
                     ),
                     const SizedBox(width: 5),
-                    AppAssets.icons.offline.svg()
+                    AppAssets.icons.offline.svg(
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.secondary,
+                            BlendMode.srcIn))
                   ],
                 );
               }

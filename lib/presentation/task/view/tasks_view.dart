@@ -1,7 +1,6 @@
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/util/widgets/offline_popup_widget.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
@@ -71,7 +70,8 @@ class TasksView extends StatelessWidget {
             if (state is ShowToastMessageState) {
               ToastMessageUtils.showMessage(
                   'Following task has been completed: "${state.taskName}"',
-                  AppAssets.icons.success);
+                  AppAssets.icons.success,
+                  context);
             }
           }),
         ],
@@ -169,7 +169,11 @@ class TasksViewContent extends StatelessWidget {
                   Constants.bottomNavigationBarHeight,
               child: DataEmptyWidget(
                 message: "errorCanNotAccessScreen".tr(),
-                icon: AppAssets.icons.tool.svg(),
+                icon: AppAssets.icons.tool.svg(
+                    colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.tertiaryContainer,
+                  BlendMode.srcIn,
+                )),
               ),
             ),
             childCount: 1,
@@ -185,12 +189,13 @@ class TasksViewContent extends StatelessWidget {
       physics:
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       slivers: [
-        const SliverAppBar(
+        SliverAppBar(
+          backgroundColor: Theme.of(context).colorScheme.background,
           toolbarHeight: 10,
           pinned: true,
           scrolledUnderElevation: 0.2,
-          shadowColor: AppColors.mercury,
-          surfaceTintColor: Colors.white,
+          shadowColor: Theme.of(context).colorScheme.outline,
+          surfaceTintColor: Theme.of(context).colorScheme.background,
           elevation: 0,
         ),
         CupertinoSliverRefreshControl(

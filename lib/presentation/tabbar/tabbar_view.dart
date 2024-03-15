@@ -11,7 +11,6 @@ import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
-import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
@@ -23,8 +22,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../core/generated/colors.gen.dart';
 import '../profile/view/profile_view.dart';
 import '../search/view/search_view.dart';
 import '../task/bloc/filter_boc/filter_bloc.dart';
@@ -168,9 +165,10 @@ class _TabBarScreenState extends State<TabBarScreen> {
           bottomNavigationBar: SafeArea(
             child: Container(
               height: Constants.bottomNavigationBarHeight,
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 border: Border(
-                  top: BorderSide(color: AppColors.mercury, width: 1.0),
+                  top: BorderSide(
+                      color: Theme.of(context).colorScheme.outline, width: 1.0),
                 ),
               ),
               child: Row(
@@ -246,12 +244,12 @@ class _TabBarScreenState extends State<TabBarScreen> {
               SvgPicture.asset(
                 svgPath,
                 colorFilter: isSelected
-                    ? const ColorFilter.mode(
-                        AppColors.tropicSea,
+                    ? ColorFilter.mode(
+                        Theme.of(context).colorScheme.primary,
                         BlendMode.srcIn,
                       )
-                    : const ColorFilter.mode(
-                        AppColors.sonicSilver,
+                    : ColorFilter.mode(
+                        Theme.of(context).colorScheme.secondary,
                         BlendMode.srcIn,
                       ),
               ),
@@ -259,7 +257,9 @@ class _TabBarScreenState extends State<TabBarScreen> {
                 label,
                 style: GoogleFonts.inter(
                   color:
-                      isSelected ? AppColors.tropicSea : AppColors.sonicSilver,
+                      isSelected
+                      ? Theme.of(context).colorScheme.primary
+                      : Theme.of(context).colorScheme.secondary,
                   fontSize: 13,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                 ),

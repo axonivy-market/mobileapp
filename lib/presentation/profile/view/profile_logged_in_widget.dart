@@ -1,15 +1,18 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/presentation/base_view/base_view.dart';
-import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
+import 'package:axon_ivy/theme/bloc/theme_event.dart';
+import 'package:axon_ivy/theme/bloc/theme_state.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:axon_ivy/theme/bloc/theme_bloc.dart'; // Import the ThemeBloc
+import 'package:axon_ivy/theme/theme.dart'; // Import your theme data
 
 class ProfileLoggedInWidget extends BasePageScreen {
   const ProfileLoggedInWidget({super.key});
@@ -19,6 +22,8 @@ class ProfileLoggedInWidget extends BasePageScreen {
 }
 
 class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
+  bool _isDemoMode = false;
+
   @override
   void initState() {
     super.initState();
@@ -43,6 +48,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
           }),
           const SizedBox(height: 25),
           _buildDemo(),
+          _buildDarkMode(),
           _buildLanguage(),
           const Spacer(),
           _buildSignOutButton(),
@@ -59,11 +65,12 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
         context.read<LoggedInCubit>().loggedIn(false);
       },
       style: ElevatedButton.styleFrom(
+        backgroundColor: Theme.of(context).colorScheme.primaryContainer,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          elevation: 0,
-          backgroundColor: AppColors.placebo),
+        elevation: 0, 
+      ),
       child: SizedBox(
         width: double.infinity,
         child: Center(
@@ -72,7 +79,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
               fontWeight: FontWeight.w500,
               fontSize: 17,
-              color: AppColors.watermelonade,
+              color: Theme.of(context).colorScheme.error,
             ),
           ),
         ),
@@ -96,7 +103,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
           imageUrl: context.read<LoggedInCubit>().getGravatarUrl(emailAddress),
           errorWidget: (context, url, error) => CircleAvatar(
             radius: 30,
-            backgroundColor: AppColors.bleachedSilk,
+            backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
             child: Text(
               context
                   .read<LoggedInCubit>()
@@ -105,7 +112,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
               style: GoogleFonts.inter(
                 fontWeight: FontWeight.w600,
                 fontSize: 22,
-                color: AppColors.silver,
+                color: Theme.of(context).colorScheme.secondary,
               ),
             ),
           ),
@@ -118,9 +125,9 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
               Text(
                 fullName,
                 style: GoogleFonts.inter(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   fontSize: 17,
-                  color: AppColors.eerieBlack,
+                  color: Theme.of(context).colorScheme.surface,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -134,7 +141,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
                     fontSize: 13,
-                    color: AppColors.eerieBlack,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 ),
             ],
@@ -149,7 +156,8 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
       height: 44,
       padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        color: AppColors.bleachedSilk,
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -160,7 +168,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.w400,
                 fontSize: 17,
-                color: AppColors.eerieBlack),
+                color: Theme.of(context).colorScheme.surface),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -169,12 +177,12 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 "English",
                 style: GoogleFonts.inter(
                     fontSize: 13,
-                    color: AppColors.eerieBlack,
+                    color: Theme.of(context).colorScheme.surface,
                     fontWeight: FontWeight.w400),
               ),
               AppAssets.icons.chevronRight.svg(
-                  colorFilter: const ColorFilter.mode(
-                AppColors.tropicSea,
+                  colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.primary,
                 BlendMode.srcIn,
               ))
             ],
@@ -190,7 +198,8 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
       padding: const EdgeInsets.symmetric(horizontal: 10),
       margin: const EdgeInsets.only(bottom: 10),
       decoration: BoxDecoration(
-        color: AppColors.bleachedSilk,
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -201,11 +210,64 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.w400,
                 fontSize: 17,
-                color: AppColors.eerieBlack),
+                color: Theme.of(context).colorScheme.surface),
           ),
-          const SwitchWidget(),
+          SwitchWidget(
+            isDarkMode: false,
+            isDemoMode: _isDemoMode,
+            onThemeChanged: (value) {},
+            onDemoModeChanged: (value) {
+              setState(() {
+                _isDemoMode = value;
+              });
+              // You can put your logic for demo mode change here
+            },
+          ),
         ],
       ),
     );
   }
+
+  Widget _buildDarkMode() {
+    return BlocBuilder<ThemeBloc, ThemeState>(
+      builder: (context, state) {
+        final isDarkMode = state.themeData?.brightness == Brightness.dark;
+        return Container(
+          height: 44,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          margin: const EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+            border: Border.all(color: Theme.of(context).colorScheme.outline),
+            color: Theme.of(context).colorScheme.onPrimaryContainer,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "profile.darkMode".tr(),
+                style: GoogleFonts.inter(
+                fontWeight: FontWeight.w400,
+                fontSize: 17,
+                  color: Theme.of(context).colorScheme.surface,
+                ),
+              ),
+              SwitchWidget(
+                isDarkMode: isDarkMode,
+                isDemoMode: false,
+                onThemeChanged: (value) {
+                  context.read<ThemeBloc>().add(
+                        ThemeEvent.changeTheme(value ? darkMode : lightMode),
+                      );
+                },
+                onDemoModeChanged: (value) {
+                  // Handle demo mode change here if needed
+                },
+              ),
+            ],
+          ),
+        );
+      },
+    );
+}
 }

@@ -1,5 +1,4 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -17,17 +16,19 @@ class BackButtonWidget extends StatelessWidget {
         context.pop(false);
       },
       child: Container(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.background,
         child: Row(
           children: [
-            AppAssets.icons.chevronLeft.svg(),
+            AppAssets.icons.chevronLeft.svg(
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.primary, BlendMode.srcIn)),
             Expanded(
               child: Text(
                 "generalBack".tr(),
                 style: GoogleFonts.inter(
                   fontSize: 17,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.tropicSea,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),

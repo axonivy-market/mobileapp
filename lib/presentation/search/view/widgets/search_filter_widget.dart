@@ -1,4 +1,3 @@
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/data/models/entity/entity.dart';
 import 'package:axon_ivy/data/models/enums/search_type.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
@@ -27,11 +26,15 @@ class SearchFilterWidget extends StatelessWidget {
                 },
                 filterButtonStyle: state.type == SearchType.all
                     ? TabSelected(
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         name: "generalAll",
                         radius: const BorderRadius.only(
                           topLeft: Radius.circular(10.0),
                           bottomLeft: Radius.circular(10.0),
                         ),
+                        context: context,
                       )
                     : TabUnSelected(
                         name: "generalAll",
@@ -39,12 +42,9 @@ class SearchFilterWidget extends StatelessWidget {
                           topLeft: Radius.circular(10.0),
                           bottomLeft: Radius.circular(10.0),
                         ),
-                        border: state.type == SearchType.processes
-                            ? const Border(
-                                right: BorderSide(
-                                    color: AppColors.kinglyCloud, width: 0.5),
-                              )
-                            : null),
+                        context: context,
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.outline)),
               ),
             ),
             Expanded(
@@ -58,12 +58,20 @@ class SearchFilterWidget extends StatelessWidget {
                 },
                 filterButtonStyle: state.type == SearchType.tasks
                     ? TabSelected(
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         name: "generalTasks",
                         radius: BorderRadius.zero,
+                        context: context,
                       )
                     : TabUnSelected(
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
                         name: "generalTasks",
                         radius: BorderRadius.zero,
+                        context: context,
                       ),
               ),
             ),
@@ -80,11 +88,15 @@ class SearchFilterWidget extends StatelessWidget {
                 },
                 filterButtonStyle: state.type == SearchType.processes
                     ? TabSelected(
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         name: "generalProcesses",
                         radius: const BorderRadius.only(
                           topRight: Radius.circular(10.0),
                           bottomRight: Radius.circular(10.0),
                         ),
+                        context: context,
                       )
                     : TabUnSelected(
                         name: "generalProcesses",
@@ -92,12 +104,9 @@ class SearchFilterWidget extends StatelessWidget {
                           topRight: Radius.circular(10.0),
                           bottomRight: Radius.circular(10.0),
                         ),
-                        border: state.type == SearchType.all
-                            ? const Border(
-                                left: BorderSide(
-                                    color: AppColors.kinglyCloud, width: 0.5),
-                              )
-                            : null),
+                        context: context,
+                        border: Border.all(
+                            color: Theme.of(context).colorScheme.outline)),
               ),
             ),
           ],

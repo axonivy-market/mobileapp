@@ -1,5 +1,4 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:flutter/material.dart';
 
 class NotificationView extends StatelessWidget {
@@ -22,14 +21,18 @@ class NotificationView extends StatelessWidget {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const Text(
+                    Text(
                       'last updated 20:17',
-                      style: TextStyle(color: AppColors.babyTalkGrey),
+                      style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
-                    AppAssets.icons.offline.svg(),
+                    AppAssets.icons.offline.svg(
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.secondary,
+                            BlendMode.srcIn)),
                     const SizedBox(
                       width: 10,
                     ),

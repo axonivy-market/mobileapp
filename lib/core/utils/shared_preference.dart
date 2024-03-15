@@ -12,6 +12,7 @@ enum SharedPreferencesItem {
   isLogin,
   keyLastUpdatedTime,
   profileInfo,
+  isDarkMode
 }
 
 class SharedPrefs {
@@ -64,6 +65,12 @@ class SharedPrefs {
     }
     return Profile.fromJson(json.decode(jsonString));
   }
+
+  static Future setThemeSetting(bool isDarkMode) =>
+      _pref.setBool(SharedPreferencesItem.isDarkMode.name, isDarkMode);
+
+  static bool? get themeSetting =>
+      _pref.getBool(SharedPreferencesItem.isDarkMode.name);
 
   static void clear() {
     _pref.remove(SharedPreferencesItem.baseUrl.name);

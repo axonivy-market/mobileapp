@@ -18,7 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../core/generated/colors.gen.dart';
 import '../../../util/widgets/offline_popup_widget.dart';
 
 class SearchView extends StatefulWidget {
@@ -76,7 +75,12 @@ class _SearchViewState extends State<SearchView> {
                                       ? DataEmptyWidget(
                                           message: state.emptyMessage!.tr(),
                                           icon: AppAssets.icons.icSearchNotFound
-                                              .svg(),
+                                              .svg(
+                                            colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.tertiaryContainer,
+                                              BlendMode.srcIn,
+                                            ),
+                                          )
                                         )
                                       : searchItemList(context, state)),
                             ],
@@ -84,7 +88,12 @@ class _SearchViewState extends State<SearchView> {
                         } else {
                           return DataEmptyWidget(
                             message: 'search.nothingThereYet'.tr(),
-                            icon: AppAssets.icons.icSearchInitial.svg(),
+                            icon: AppAssets.icons.icSearchInitial.svg(
+                                colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.tertiaryContainer,
+                                  BlendMode.srcIn,
+                                ),
+                              )
                           );
                         }
                       },
@@ -116,12 +125,13 @@ class _SearchViewState extends State<SearchView> {
   Widget searchItemList(BuildContext context, SearchResultState state) {
     return CustomScrollView(
       slivers: [
-        const SliverAppBar(
+        SliverAppBar(
+          backgroundColor: Theme.of(context).colorScheme.background,
           toolbarHeight: 10,
           pinned: true,
           scrolledUnderElevation: 0.2,
-          shadowColor: AppColors.mercury,
-          surfaceTintColor: Colors.white,
+          shadowColor: Theme.of(context).colorScheme.outline,
+          surfaceTintColor: Theme.of(context).colorScheme.outline,
           elevation: 0,
         ),
         SliverList(
@@ -137,7 +147,7 @@ class _SearchViewState extends State<SearchView> {
                     style: GoogleFonts.inter(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.eerieBlack,
+                      color: Theme.of(context).colorScheme.surface,
                     ),
                   ),
                 );

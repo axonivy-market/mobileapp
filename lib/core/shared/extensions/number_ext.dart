@@ -18,7 +18,7 @@ extension PriorityNumberExtension on int {
 }
 
 extension PriorityIconExtension on int {
-  Widget get priorityIcon {
+  Widget priorityIcon(BuildContext context) {
     switch (this) {
       case 0:
         return AppAssets.icons.priorityException.svg();
@@ -30,7 +30,10 @@ extension PriorityIconExtension on int {
           height: 21,
         );
       default:
-        return AppAssets.icons.priorityLow.svg();
+        return AppAssets.icons.priorityLow.svg(
+          colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.surface, BlendMode.srcIn),
+        );
     }
   }
 }

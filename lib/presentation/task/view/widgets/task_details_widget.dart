@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
@@ -55,50 +54,74 @@ class TaskDetailsWidget extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 15),
         padding: const EdgeInsets.fromLTRB(5, 15, 5, 15),
         decoration: BoxDecoration(
-          color: AppColors.bleachedSilk,
+          color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildTaskHeader(),
+            _buildTaskHeader(context),
             const SizedBox(height: 15),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 21),
               child: Column(
                 children: [
                   TaskInfoRowWidget(
-                    icon: AppAssets.icons.paperclip.svg(height: 16),
+                    icon: AppAssets.icons.paperclip.svg(
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.surface,
+                            BlendMode.srcIn),
+                        height: 16),
                     title: "taskDetails.attachments".tr(),
                     value: "taskDetails.documents"
                         .plural(task.caseTask?.documents.length ?? 0),
                   ),
                   TaskInfoRowWidget(
-                    icon: AppAssets.icons.clock.svg(height: 16),
+                    icon: AppAssets.icons.clock.svg(
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.surface,
+                            BlendMode.srcIn),
+                        height: 16),
                     title: "taskDetails.expiryDate".tr(),
                     value: task.expiryTimeStamp == null
                         ? "taskDetails.na".tr()
                         : task.expiryTimeStamp!.formatDateYearWithFourNumber,
                   ),
                   TaskInfoRowWidget(
-                    icon: AppAssets.icons.calendar.svg(height: 16),
+                    icon: AppAssets.icons.calendar.svg(
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.surface,
+                            BlendMode.srcIn),
+                        height: 16),
                     title: "taskDetails.creationDate".tr(),
                     value: task.startTimeStamp.formatDateYearWithFourNumber,
                   ),
                   TaskInfoRowWidget(
-                    icon: AppAssets.icons.category2.svg(height: 16),
+                    icon: AppAssets.icons.category2.svg(
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.surface,
+                            BlendMode.srcIn),
+                        height: 16),
                     title: "taskDetails.category".tr(),
                     value: task.category.isNotEmptyOrNull
                         ? task.category
                         : "taskDetails.na".tr(),
                   ),
                   TaskInfoRowWidget(
-                    icon: AppAssets.icons.priorityHighBlack.svg(height: 16),
+                    icon: AppAssets.icons.priorityHighBlack.svg(
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.surface,
+                            BlendMode.srcIn),
+                        height: 16),
                     title: "taskDetails.priority".tr(),
                     value: task.priority.priorityName,
                   ),
                   TaskInfoRowWidget(
-                    icon: AppAssets.icons.users.svg(height: 16),
+                    icon: AppAssets.icons.users.svg(
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.surface,
+                            BlendMode.srcIn),
+                        height: 16),
                     title: "taskDetails.responsible".tr(),
                     value: task.activatorName,
                     isShowDivider: false,
@@ -112,13 +135,13 @@ class TaskDetailsWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildTaskHeader() {
+  Widget _buildTaskHeader(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox.square(
           dimension: 21,
-          child: task.priority.priorityIcon,
+          child: task.priority.priorityIcon(context),
         ),
         const SizedBox(width: 5),
         Expanded(
@@ -132,7 +155,7 @@ class TaskDetailsWidget extends StatelessWidget {
                 style: GoogleFonts.inter(
                     fontSize: 17,
                     fontWeight: FontWeight.w600,
-                    color: AppColors.eerieBlack),
+                    color: Theme.of(context).colorScheme.surface),
               ),
               const SizedBox(height: 2),
               Text(
@@ -142,7 +165,7 @@ class TaskDetailsWidget extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
-                  color: AppColors.sonicSilver,
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
               ),
             ],
@@ -162,7 +185,7 @@ class TaskDetailsWidget extends StatelessWidget {
         width: 136,
         height: 44,
         decoration: BoxDecoration(
-          color: AppColors.bleachedSilk,
+          color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(8),
         ),
         child: Row(
@@ -175,11 +198,13 @@ class TaskDetailsWidget extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 17,
                 fontWeight: FontWeight.w500,
-                color: AppColors.tropicSea,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(width: 5),
             AppAssets.icons.arrowRight.svg(
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.primary, BlendMode.srcIn),
               height: 21,
             ),
           ],

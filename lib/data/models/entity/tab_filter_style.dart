@@ -1,4 +1,3 @@
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:flutter/material.dart';
 
 abstract class TabFilterStyle {
@@ -17,36 +16,58 @@ abstract class TabFilterStyle {
     required this.textButton,
     this.boxBorder,
   });
+
+  BuildContext getThemeContext();
 }
 
 class TabSelected extends TabFilterStyle {
   final String name;
   final BorderRadius radius;
-  final BoxBorder? border;
+  final BoxBorder border;
+  final BuildContext context;
 
-  TabSelected({required this.name, required this.radius, this.border})
+  TabSelected(
+      {required this.name,
+      required this.radius,
+      required this.border,
+      required this.context})
       : super(
           borderRadius: radius,
-          backgroundColor: AppColors.tropicSea,
-          textColor: Colors.white,
+          backgroundColor: Theme.of(context).colorScheme.primary,
+          textColor: Theme.of(context).colorScheme.onSurface,
           fontWeight: FontWeight.w500,
           textButton: name,
           boxBorder: border,
         );
+
+  @override
+  BuildContext getThemeContext() {
+    return context;
+  }
 }
 
 class TabUnSelected extends TabFilterStyle {
   final String name;
   final BorderRadius radius;
   final BoxBorder? border;
+  final BuildContext context;
 
-  TabUnSelected({required this.name, required this.radius, this.border})
+  TabUnSelected(
+      {required this.name,
+      required this.radius,
+      required this.border,
+      required this.context})
       : super(
           borderRadius: radius,
-          backgroundColor: AppColors.bleachedSilk,
-          textColor: AppColors.sonicSilver,
+          backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
+          textColor: Theme.of(context).colorScheme.secondary,
           fontWeight: FontWeight.w400,
           textButton: name,
           boxBorder: border,
         );
+
+  @override
+  BuildContext getThemeContext() {
+    return context;
+  }
 }
