@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 
-import '../../core/generated/colors.gen.dart';
+class SwitchWidget extends StatelessWidget {
+  final Function(bool) onThemeChanged;
+  final Function(bool) onDemoModeChanged;
+  final bool isDarkMode;
+  final bool isDemoMode;
 
-class SwitchWidget extends StatefulWidget {
-  const SwitchWidget({super.key});
-
-  @override
-  State<SwitchWidget> createState() => _SwitchWidgetState();
-}
-
-class _SwitchWidgetState extends State<SwitchWidget> {
-  bool isDemo = false;
+  const SwitchWidget({
+    super.key,
+    required this.onThemeChanged,
+    required this.onDemoModeChanged,
+    required this.isDarkMode,
+    required this.isDemoMode,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isDemo = !isDemo;
-        });
+        if (isDemoMode) {
+          onDemoModeChanged(!isDemoMode);
+        } else {
+          onThemeChanged(!isDarkMode);
+        }
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
@@ -26,20 +30,27 @@ class _SwitchWidgetState extends State<SwitchWidget> {
         height: 30.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),
-          color: isDemo ? AppColors.skyBus : Colors.grey.shade400,
+          color: (isDarkMode || isDemoMode)
+              ? Theme.of(context).colorScheme.tertiaryContainer
+              : Theme.of(context).colorScheme.background,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 2),
-        alignment: isDemo ? Alignment.centerRight : Alignment.centerLeft,
+        alignment: isDarkMode || isDemoMode
+            ? Alignment.centerRight
+            : Alignment.centerLeft,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
           width: 25.0,
           height: 25.0,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: isDemo ? AppColors.tropicSea : Colors.white,
+            color: (isDarkMode || isDemoMode)
+                ? Theme.of(context).colorScheme.primary
+                : Theme.of(context).colorScheme.primaryContainer,
           ),
         ),
       ),
     );
   }
 }
+

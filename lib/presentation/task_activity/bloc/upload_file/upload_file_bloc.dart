@@ -148,7 +148,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
               "uploadFile.failUpload".tr(namedArgs: {'fileName': fileName});
         },
         (r) {
-          uploadMessage += "${r.message}\n";
+          uploadMessage += r.message;
         },
       );
     } catch (e) {

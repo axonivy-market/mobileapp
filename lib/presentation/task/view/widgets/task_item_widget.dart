@@ -1,5 +1,4 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
@@ -9,9 +8,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget getDateTimeTaskWidget(DateTime? dateTime) {
+Widget getDateTimeTaskWidget(DateTime? dateTime, BuildContext context) {
   if (dateTime == null) {
-    return AppAssets.icons.chevronRight.svg();
+    return AppAssets.icons.chevronRight.svg(
+        colorFilter: ColorFilter.mode(
+            Theme.of(context).colorScheme.surface, BlendMode.srcIn));
   }
 
   DateTime now = DateTime.now().toUtc();
@@ -23,14 +24,15 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w400,
-            color: AppColors.watermelonade,
+            color: Theme.of(context).colorScheme.error,
           ),
           overflow: TextOverflow.ellipsis,
           softWrap: true,
         ),
         AppAssets.icons.chevronRight.svg(
           colorFilter:
-              const ColorFilter.mode(AppColors.watermelonade, BlendMode.srcIn),
+               ColorFilter.mode(
+              Theme.of(context).colorScheme.error, BlendMode.srcIn),
         ),
       ],
     );
@@ -42,12 +44,14 @@ Widget getDateTimeTaskWidget(DateTime? dateTime) {
           style: GoogleFonts.inter(
             fontSize: 13,
             fontWeight: FontWeight.w400,
-            color: AppColors.sonicSilver,
+            color: Theme.of(context).colorScheme.secondary,
           ),
           overflow: TextOverflow.ellipsis,
           softWrap: true,
         ),
-        AppAssets.icons.chevronRight.svg()
+        AppAssets.icons.chevronRight.svg(
+            colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.surface, BlendMode.srcIn))
       ],
     );
   }
@@ -78,14 +82,15 @@ class TaskItemWidget extends StatelessWidget {
       height: AppSize.s82,
       padding: const EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
         borderRadius: BorderRadius.circular(10),
-        color: AppColors.bleachedSilk,
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
       ),
       child: Center(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            priority.priorityIcon,
+            priority.priorityIcon(context),
             Expanded(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -103,8 +108,9 @@ class TaskItemWidget extends StatelessWidget {
                                 fontSize: 17,
                                 fontWeight: FontWeight.w600,
                                 color: query.isEmptyOrNull
-                                    ? AppColors.eerieBlack
-                                    : AppColors.darkSouls),
+                                  ? Theme.of(context).colorScheme.surface
+                                  : Theme.of(context).colorScheme.secondary,
+                            ),
                             overflow: TextOverflow.ellipsis,
                           )
                         : TextHighlightWidget(
@@ -128,7 +134,8 @@ class TaskItemWidget extends StatelessWidget {
                                 style: GoogleFonts.inter(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w400,
-                                  color: AppColors.sonicSilver,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
                                 ),
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 2,
@@ -146,7 +153,8 @@ class TaskItemWidget extends StatelessWidget {
                         height: 34,
                         child: Align(
                           alignment: Alignment.bottomLeft,
-                          child: getDateTimeTaskWidget(expiryTimeStamp),
+                          child:
+                              getDateTimeTaskWidget(expiryTimeStamp, context),
                         ),
                       ),
                     ],

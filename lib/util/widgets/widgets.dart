@@ -9,3 +9,6 @@ export 'switch_widget.dart';
 export 'version_name_widget.dart';
 export 'back_button_widget.dart';
 export 'task_info_row_widget.dart';
+export 'offline_popup_widget.dart';
+export 'app_text_field.dart';
+export 'measure_size_widget.dart';

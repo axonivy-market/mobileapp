@@ -37,7 +37,7 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
             "uploadFile.changeFileName".tr(),
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-                color: AppColors.black,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 17,
                 fontWeight: FontWeight.w500),
           ),
@@ -59,18 +59,19 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                     padding:
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: AppColors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      color: Theme.of(context).colorScheme.tertiaryContainer,
                       border: Border.all(
-                        color: AppColors.tropicSea,
-                        width: 1,
+                        color: Theme.of(context).colorScheme.outline,
                       ),
                     ),
                     child: Center(
                       child: Text(
                         "dialog.cancel".tr(),
                         style: GoogleFonts.inter(
-                            color: AppColors.black, fontSize: 14),
+                          color: Theme.of(context).colorScheme.surface,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -89,13 +90,16 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                     padding:
                         const EdgeInsets.symmetric(horizontal: 35, vertical: 5),
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: AppColors.tropicSea),
+                        border: Border.all(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Theme.of(context).colorScheme.tertiaryContainer),
                     child: Center(
                       child: Text(
                         "dialog.ok".tr(),
                         style: GoogleFonts.inter(
-                            color: AppColors.white,
+                            color: Theme.of(context).colorScheme.surface,
                             fontSize: 14,
                             fontWeight: FontWeight.w500),
                       ),
@@ -131,7 +135,7 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
             title ?? "",
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-                color: AppColors.black,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 17,
                 fontWeight: FontWeight.w500),
           ),
@@ -140,8 +144,8 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
             child: Text(
               message,
               textAlign: TextAlign.center,
-              style:
-                  GoogleFonts.inter(color: AppColors.blackMana, fontSize: 17),
+              style: GoogleFonts.inter(
+                  color: Theme.of(context).colorScheme.surface, fontSize: 17),
             ),
           ),
           actions: [
@@ -161,9 +165,9 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                             horizontal: 20, vertical: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: AppColors.white,
+                          color: Theme.of(context).colorScheme.background,
                           border: Border.all(
-                            color: AppColors.tropicSea,
+                            color: Theme.of(context).colorScheme.primary,
                             width: 1,
                           ),
                         ),
@@ -171,7 +175,9 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                           child: Text(
                             "dialog.cancel".tr(),
                             style: GoogleFonts.inter(
-                                color: AppColors.black, fontSize: 14),
+                              color: Theme.of(context).colorScheme.surface,
+                              fontSize: 14,
+                            ),
                           ),
                         ),
                       ),
@@ -191,12 +197,12 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: AppColors.placebo),
+                            color: Theme.of(context).colorScheme.background),
                         child: Center(
                           child: Text(
                             confirmTitle ?? "dialog.ok".tr(),
                             style: GoogleFonts.inter(
-                                color: AppColors.tropicSea,
+                                color: Theme.of(context).colorScheme.surface,
                                 fontSize: 17,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -229,12 +235,12 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8.0))),
           elevation: 0,
-          backgroundColor: AppColors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
           title: Text(
             title ?? "",
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-                color: AppColors.black,
+                color: Theme.of(context).colorScheme.surface,
                 fontSize: 17,
                 fontWeight: FontWeight.w500),
           ),
@@ -243,8 +249,8 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
             child: Text(
               message,
               textAlign: TextAlign.center,
-              style:
-                  GoogleFonts.inter(color: AppColors.blackMana, fontSize: 17),
+              style: GoogleFonts.inter(
+                  color: Theme.of(context).colorScheme.surface, fontSize: 17),
             ),
           ),
           actions: [
@@ -259,13 +265,13 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: AppColors.placebo),
+                      color: Theme.of(context).colorScheme.secondary),
                   child: Center(
                     child: Text(
                       confirmTitle ?? "dialog.ok".tr(),
                       style: GoogleFonts.inter(
-                          color: AppColors.tropicSea,
                           fontSize: 17,
+                          color: Theme.of(context).colorScheme.surface,
                           fontWeight: FontWeight.w500),
                     ),
                   ),

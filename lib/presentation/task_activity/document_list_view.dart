@@ -1,6 +1,5 @@
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/extensions.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/base_view/base_view.dart';
@@ -125,11 +124,15 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
           ),
         ],
         child: Scaffold(
-          backgroundColor: AppColors.white,
+          backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
             scrolledUnderElevation: 0,
-            backgroundColor: AppColors.white,
-            title: const Text("Attachments"),
+            backgroundColor: Theme.of(context).colorScheme.background,
+            title: Text(
+              "Attachments",
+              style:
+                  TextStyle(color: Theme.of(context).colorScheme.onBackground),
+            ),
             leading: Padding(
               padding: const EdgeInsets.only(left: 15),
               child: BackButtonWidget(
@@ -142,7 +145,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                 padding: const EdgeInsets.only(right: 5),
                 child: PopupMenuButton<UploadFileType>(
                   elevation: 0.2,
-                  color: AppColors.white,
+                  color: Theme.of(context).colorScheme.background,
                   position: PopupMenuPosition.under,
                   onSelected: (value) {
                     switch (value) {
@@ -164,15 +167,20 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            AppAssets.icons.iconFile.svg(),
+                            AppAssets.icons.iconFile.svg(
+                              colorFilter: ColorFilter.mode(
+                                  Theme.of(context).colorScheme.surface,
+                                  BlendMode.srcIn),
+                            ),
                             const SizedBox(width: 5),
                             Expanded(
                               child: Text(
                                 "Attach file",
                                 style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
+                                  textStyle: TextStyle(
                                     fontSize: 17,
-                                    color: AppColors.eerieBlack,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -186,15 +194,20 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            AppAssets.icons.iconImage.svg(),
+                            AppAssets.icons.iconImage.svg(
+                              colorFilter: ColorFilter.mode(
+                                  Theme.of(context).colorScheme.surface,
+                                  BlendMode.srcIn),
+                            ),
                             const SizedBox(width: 5),
                             Expanded(
                               child: Text(
                                 "Attach picture",
                                 style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
+                                  textStyle: TextStyle(
                                     fontSize: 17,
-                                    color: AppColors.eerieBlack,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -208,15 +221,20 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            AppAssets.icons.iconCamera.svg(),
+                            AppAssets.icons.iconCamera.svg(
+                              colorFilter: ColorFilter.mode(
+                                  Theme.of(context).colorScheme.surface,
+                                  BlendMode.srcIn),
+                            ),
                             const SizedBox(width: 5),
                             Expanded(
                               child: Text(
                                 "Take picture",
                                 style: GoogleFonts.inter(
-                                  textStyle: const TextStyle(
+                                  textStyle: TextStyle(
                                     fontSize: 17,
-                                    color: AppColors.eerieBlack,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -229,7 +247,10 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(right: 15.0),
-                    child: AppAssets.icons.iconAddAttachment.svg(),
+                    child: AppAssets.icons.iconAddAttachment.svg(
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.surface,
+                            BlendMode.srcIn)),
                   ),
                 ),
               ),
@@ -240,61 +261,75 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
               if (state is TaskDetailSuccessState) {
                 task = state.task;
               }
-              return documentLength != 0
+              return task.caseTask!.documents.isNotEmpty
                   ? SlidableAutoCloseBehavior(
                       child: ListView.separated(
                         itemCount: task.caseTask?.documents.length ?? 0,
                         itemBuilder: (context, index) {
                           return Slidable(
+                            key: ValueKey(index),
+                            endActionPane: ActionPane(
+                              extentRatio: 0.175,
                               key: ValueKey(index),
-                              endActionPane: ActionPane(
-                                extentRatio: 0.175,
-                                key: ValueKey(index),
-                                motion: const ScrollMotion(),
-                                children: [
-                                  CustomSlidableAction(
-                                    autoClose: true,
-                                    padding: EdgeInsets.zero,
-                                    onPressed: (context) {
-                                      _deleteFileBloc.add(
-                                          DeleteFileEvent.deleteFile(
-                                              task.caseTask!.id,
-                                              task.caseTask!.documents[index]
-                                                  .id));
-                                    },
-                                    backgroundColor: const Color(0xFFFE4A49),
-                                    foregroundColor: Colors.white,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        AppAssets.icons.iconDelete.svg(),
-                                        const Text(
-                                          "Delete",
-                                          style: TextStyle(fontSize: 13),
-                                        )
-                                      ],
-                                    ),
+                              motion: const ScrollMotion(),
+                              children: [
+                                CustomSlidableAction(
+                                  autoClose: true,
+                                  padding: EdgeInsets.zero,
+                                  onPressed: (context) {
+                                    _deleteFileBloc.add(
+                                        DeleteFileEvent.deleteFile(
+                                            task.caseTask!.id,
+                                            task.caseTask!.documents[index]
+                                                .id));
+                                  },
+                                  backgroundColor: const Color(0xFFFE4A49),
+                                  foregroundColor: Colors.white,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      AppAssets.icons.iconDelete.svg(),
+                                      const Text(
+                                        "Delete",
+                                        style: TextStyle(fontSize: 13),
+                                      )
+                                    ],
                                   ),
-                                ],
+                                ),
+                              ],
+                            ),
+                            child: AppListTile(
+                              textColor: Theme.of(context).colorScheme.surface,
+                              contentPadding: const EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 0),
+                              onTap: () {
+                                _downloadFileBloc.add(
+                                    DownloadFileEvent.downloadFile(
+                                        task.caseTask!.documents[index].name,
+                                        task.caseTask!.documents[index].url));
+                              },
+                              leading: task.caseTask!.documents[index].name
+                                      .isContainImage
+                                  ? AppAssets.icons.iconImage.svg(
+                                      colorFilter: ColorFilter.mode(
+                                          Theme.of(context)
+                                              .colorScheme
+                                              .onBackground,
+                                          BlendMode.srcIn),
+                                    )
+                                  : AppAssets.icons.iconFile.svg(
+                                      colorFilter: ColorFilter.mode(
+                                          Theme.of(context).colorScheme.surface,
+                                          BlendMode.srcIn),
+                                    ),
+                              title: Text(task.caseTask!.documents[index].name),
+                              trailing: AppAssets.icons.iconArrowRight.svg(
+                                colorFilter: ColorFilter.mode(
+                                    Theme.of(context).colorScheme.surface,
+                                    BlendMode.srcIn),
                               ),
-                              child: AppListTile(
-                                contentPadding: const EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 0),
-                                onTap: () {
-                                  _downloadFileBloc.add(
-                                      DownloadFileEvent.downloadFile(
-                                          task.caseTask!.documents[index].name,
-                                          task.caseTask!.documents[index].url));
-                                },
-                                leading: task.caseTask!.documents[index].name
-                                        .isContainImage
-                                    ? AppAssets.icons.iconImage.svg()
-                                    : AppAssets.icons.iconFile.svg(),
-                                title:
-                                    Text(task.caseTask!.documents[index].name),
-                                trailing: AppAssets.icons.iconArrowRight.svg(),
-                              ));
+                            ),
+                          );
                         },
                         separatorBuilder: (context, index) => Divider(
                           height: 0,
@@ -326,6 +361,7 @@ class AppListTile extends ListTile {
     super.leading,
     super.trailing,
     super.title,
+    super.textColor,
   });
 
   @override
@@ -333,9 +369,10 @@ class AppListTile extends ListTile {
     // ListTile Background Color Appears outside of ListView bounds
     // Preffered URL: https://github.com/flutter/flutter/issues/94261
     return Card(
-      color: AppColors.white,
+      color: Theme.of(context).colorScheme.background,
       elevation: 0,
       child: ListTile(
+        textColor: textColor,
         contentPadding: contentPadding,
         title: title,
         leading: leading,

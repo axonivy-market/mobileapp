@@ -1,5 +1,4 @@
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/data/models/processes/customfield/customfield.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
@@ -37,14 +36,15 @@ class ProcessItemWidget extends StatelessWidget {
       ),
       constraints: const BoxConstraints(minHeight: AppSize.s82),
       decoration: BoxDecoration(
+        border: Border.all(color: Theme.of(context).colorScheme.outline),
         borderRadius: BorderRadius.circular(10),
-        color: AppColors.bleachedSilk,
+        color: Theme.of(context).colorScheme.onPrimaryContainer,
       ),
       child: Stack(
         children: [
           Padding(
             padding: const EdgeInsets.only(top: 4),
-            child: getProcessIcon(process.customFields),
+            child: getProcessIcon(process.customFields, context),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 26),
@@ -62,8 +62,8 @@ class ProcessItemWidget extends StatelessWidget {
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
                             color: query.isEmptyOrNull
-                                ? AppColors.eerieBlack
-                                : AppColors.darkSouls),
+                                ? Theme.of(context).colorScheme.surface
+                                : Theme.of(context).colorScheme.secondary),
                         overflow: TextOverflow.ellipsis,
                       )
                     : TextHighlightWidget(
@@ -83,7 +83,7 @@ class ProcessItemWidget extends StatelessWidget {
                         style: GoogleFonts.inter(
                           fontSize: 13,
                           fontWeight: FontWeight.w400,
-                          color: AppColors.sonicSilver,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
@@ -102,28 +102,38 @@ class ProcessItemWidget extends StatelessWidget {
           Positioned(
             bottom: 0,
             right: 0,
-            child: AppAssets.icons.chevronRight.svg(),
+            child: AppAssets.icons.chevronRight.svg(
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.surface, BlendMode.srcIn)),
           ),
         ],
       ),
     );
   }
 
-  Widget getProcessIcon(List<CustomField> customFields) {
+  Widget getProcessIcon(List<CustomField> customFields, BuildContext context) {
     final cssIcon = customFields
         .firstWhere((element) => element.name == "cssIcon",
             orElse: () => CustomField())
         .value;
 
     if (cssIcon.isEmpty) {
-      return getIconDefaultIcon();
+      return getIconDefaultIcon(context);
     }
-    final icon = getIconUsingPrefix(name: cssIcon);
-    return icon is SvgPicture
-        ? icon
-        : Icon(
-            icon,
-            size: 14,
-          );
+
+    final icon = getIconUsingPrefix(name: cssIcon, context: context);
+
+    if (icon is SvgPicture) {
+      return ColorFiltered(
+        colorFilter: ColorFilter.mode(
+          Theme.of(context).colorScheme.surface,
+          BlendMode.srcIn,
+        ),
+        child: icon,
+      );
+  }
+    else {
+      return getIconDefaultIcon(context);
+    }
   }
 }

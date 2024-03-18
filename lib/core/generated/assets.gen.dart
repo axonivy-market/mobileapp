@@ -113,6 +113,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/login.svg
   SvgGenImage get login => const SvgGenImage('assets/icons/login.svg');
 
+  /// File path: assets/icons/logo-dark.svg
+  SvgGenImage get logoDark => const SvgGenImage('assets/icons/logo-dark.svg');
+
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
 
@@ -210,6 +213,7 @@ class $AssetsIconsGen {
         iconImage,
         list,
         login,
+        logoDark,
         logo,
         noExpiredTask,
         notification,
@@ -244,13 +248,26 @@ class $AssetsImagesGen {
   SvgGenImage get koalaWithPassionFruit =>
       const SvgGenImage('assets/images/koala_with_passion_fruit.svg');
 
+  /// File path: assets/images/koala_with_passion_fruit_dark.svg
+  SvgGenImage get koalaWithPassionFruitDark =>
+      const SvgGenImage('assets/images/koala_with_passion_fruit_dark.svg');
+
   /// File path: assets/images/splash_axon_ivy_logo.svg
   SvgGenImage get splashAxonIvyLogo =>
       const SvgGenImage('assets/images/splash_axon_ivy_logo.svg');
 
+  /// File path: assets/images/splash_axon_ivy_logo_dark.svg
+  SvgGenImage get splashAxonIvyLogoDark =>
+      const SvgGenImage('assets/images/splash_axon_ivy_logo_dark.svg');
+
   /// List of all assets
-  List<dynamic> get values =>
-      [iconPaperclipEmpty, koalaWithPassionFruit, splashAxonIvyLogo];
+  List<dynamic> get values => [
+        iconPaperclipEmpty,
+        koalaWithPassionFruit,
+        koalaWithPassionFruitDark,
+        splashAxonIvyLogo,
+        splashAxonIvyLogoDark
+      ];
 }
 
 class $AssetsStreamlinesGen {
