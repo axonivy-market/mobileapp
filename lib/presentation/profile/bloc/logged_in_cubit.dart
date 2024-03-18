@@ -1,7 +1,14 @@
 import 'dart:convert';
 
+import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
+import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/core/shared/extensions/extensions.dart';
+import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/presentation/login/bloc/login_bloc.dart';
 import 'package:crypto/crypto.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,6 +20,12 @@ part 'logged_in_cubit.freezed.dart';
 @injectable
 class LoggedInCubit extends Cubit<LoggedInState> {
   LoggedInCubit() : super(const LoggedInState.initial());
+  // final demoUrl = DemoConfig.demoServerUrl;
+  // final demoUser = DemoConfig.demoUserName;
+  // final demoPassword = DemoConfig.demoPassword;
+  final demoUrl = 'https://mobile-demo-server.ivy-cloud.com/';
+  final demoUser = 'demo';
+  final demoPassword = '+d3m0++';
 
   String displayShortNameAvatar(String name) {
     return name
@@ -32,5 +45,16 @@ class LoggedInCubit extends Cubit<LoggedInState> {
 
   void loggedIn(bool isLogged) {
     emit(LoggedInState.loggedIn(isLogged));
+  }
+
+  void setDemoUser() {
+    SharedPrefs.setBaseUrl(demoUrl);
+    SharedPrefs.setUsername(demoUser);
+    SharedPrefs.setPassword(demoPassword);
+    SharedPrefs.setIsDemoLogin(true);
+    SharedPrefs.setIsLogin(true);
+    getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
+        ? AppConfig.baseUrl
+        : SharedPrefs.getBaseUrl!;
   }
 }

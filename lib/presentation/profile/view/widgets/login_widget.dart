@@ -77,9 +77,8 @@ class LoginWidget extends StatelessWidget {
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
-                      context
-                          .read<LoginBloc>()
-                          .add(LoginEvent.demoLogin(context));
+                      context.read<LoggedInCubit>().setDemoUser();
+                      context.read<LoggedInCubit>().loggedIn(true);
                     },
                     child: Container(
                       padding: const EdgeInsets.symmetric(vertical: 10),
