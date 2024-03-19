@@ -89,10 +89,6 @@ class $AssetsIconsGen {
   SvgGenImage get iconAddAttachment =>
       const SvgGenImage('assets/icons/icon_add_attachment.svg');
 
-  /// File path: assets/icons/icon_arrow_right.svg
-  SvgGenImage get iconArrowRight =>
-      const SvgGenImage('assets/icons/icon_arrow_right.svg');
-
   /// File path: assets/icons/icon_camera.svg
   SvgGenImage get iconCamera =>
       const SvgGenImage('assets/icons/icon_camera.svg');
@@ -206,7 +202,6 @@ class $AssetsIconsGen {
         icTrigger,
         icUsers,
         iconAddAttachment,
-        iconArrowRight,
         iconCamera,
         iconDelete,
         iconFile,

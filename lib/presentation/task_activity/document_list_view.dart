@@ -1,6 +1,7 @@
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/extensions.dart';
+import 'package:axon_ivy/data/models/task/documents/document.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/base_view/base_view.dart';
 import 'package:axon_ivy/presentation/task_activity/bloc/delete_file/delete_file_bloc.dart';
@@ -29,6 +30,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
   late DownloadFileBloc _downloadFileBloc;
   bool shouldFetchTaskList = false;
   dynamic model;
+  late List<Document> documents = [];
 
   @override
   void initState() {
@@ -59,7 +61,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
   @override
   Widget build(BuildContext context) {
     TaskIvy task = widget.task;
-    int documentLength = widget.task.caseTask?.documents.length ?? 0;
+    documents = widget.task.caseTask?.documents.reversed.toList() ?? [];
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => _uploadFileBloc),
@@ -103,7 +105,6 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
               if (state is TaskDetailSuccessState) {
                 setState(() {
                   shouldFetchTaskList = true;
-                  documentLength = state.task.caseTask?.documents.length ?? 0;
                 });
               }
             },
@@ -260,11 +261,12 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
             builder: (context, state) {
               if (state is TaskDetailSuccessState) {
                 task = state.task;
+                documents = task.caseTask?.documents.reversed.toList() ?? [];
               }
-              return task.caseTask!.documents.isNotEmpty
+              return documents.isNotEmpty
                   ? SlidableAutoCloseBehavior(
                       child: ListView.separated(
-                        itemCount: task.caseTask?.documents.length ?? 0,
+                        itemCount: documents.length,
                         itemBuilder: (context, index) {
                           return Slidable(
                             key: ValueKey(index),
@@ -280,10 +282,9 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                                     _deleteFileBloc.add(
                                         DeleteFileEvent.deleteFile(
                                             task.caseTask!.id,
-                                            task.caseTask!.documents[index]
-                                                .id));
+                                            documents[index].id));
                                   },
-                                  backgroundColor: const Color(0xFFFE4A49),
+                                  backgroundColor: const Color(0xFFEE4A52),
                                   foregroundColor: Colors.white,
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -305,11 +306,10 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                               onTap: () {
                                 _downloadFileBloc.add(
                                     DownloadFileEvent.downloadFile(
-                                        task.caseTask!.documents[index].name,
-                                        task.caseTask!.documents[index].url));
+                                        documents[index].name,
+                                        documents[index].url));
                               },
-                              leading: task.caseTask!.documents[index].name
-                                      .isContainImage
+                              leading: documents[index].name.isContainImage
                                   ? AppAssets.icons.iconImage.svg(
                                       colorFilter: ColorFilter.mode(
                                           Theme.of(context)
@@ -322,8 +322,11 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                                           Theme.of(context).colorScheme.surface,
                                           BlendMode.srcIn),
                                     ),
-                              title: Text(task.caseTask!.documents[index].name),
-                              trailing: AppAssets.icons.iconArrowRight.svg(
+                              title: Text(
+                                documents[index].name,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              trailing: AppAssets.icons.chevronRight.svg(
                                 colorFilter: ColorFilter.mode(
                                     Theme.of(context).colorScheme.surface,
                                     BlendMode.srcIn),
