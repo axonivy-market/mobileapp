@@ -46,7 +46,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
     if ((task.caseTask?.documents.length ?? 0) > 0) {
       for (var document in task.caseTask!.documents) {
         if (document.name == state.fileNames) {
-          showUploadedDialog(
+          showMessageDialog(
               title: "documentList.errorTitle".tr(),
               message: "documentList.errorMessage"
                   .tr(namedArgs: {'fileName': state.fileNames}));
@@ -55,7 +55,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
       }
     }
     _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
-    showUploadedDialog(
+    showMessageDialog(
         title: "documentList.successTitle".tr(), message: state.message);
     return false;
   }
@@ -81,7 +81,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                 isUploadDuplicateFile(state, task);
               } else if (state is UploadErrorState) {
                 hideLoading();
-                showConfirmDialog(
+                showMessageDialog(
                     title: "documentList.errorTitle".tr(),
                     message: state.error);
               } else if (state is UploadChangeFileNameState) {
@@ -97,7 +97,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                 hideLoading();
               } else if (state is DeleteSuccessState) {
                 hideLoading();
-                showUploadedDialog(
+                showMessageDialog(
                     title: "documentList.deleteSuccessTitle".tr(),
                     message: state.message);
                 _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
@@ -119,12 +119,12 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
             listener: (context, state) {
               if (state is DownloadErrorState) {
                 hideLoading();
-                showUploadedDialog(
+                showMessageDialog(
                     title: "documentList.errorTitle".tr(),
                     message: state.error);
               } else if (state is DownloadSuccessState) {
                 hideLoading();
-                showUploadedDialog(
+                showMessageDialog(
                     title: "documentList.downloadSuccessTitle".tr(),
                     message: state.message);
               } else {

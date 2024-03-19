@@ -1,4 +1,3 @@
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/presentation/task_activity/bloc/upload_file/upload_file_bloc.dart';
 import 'package:axon_ivy/util/widgets/bot_toast_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -114,113 +113,7 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
     );
   }
 
-  void showConfirmDialog(
-      {required String message,
-      Function()? onCancel,
-      String? title,
-      String? confirmTitle,
-      Function()? onConfirm,
-      bool barrierDismissible = true,
-      bool needShowCancel = false}) {
-    showDialog(
-      context: context,
-      barrierDismissible: barrierDismissible,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          elevation: 0,
-          backgroundColor: AppColors.white,
-          title: Text(
-            title ?? "",
-            textAlign: TextAlign.center,
-            style: GoogleFonts.inter(
-                color: Theme.of(context).colorScheme.surface,
-                fontSize: 17,
-                fontWeight: FontWeight.w500),
-          ),
-          content: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.9,
-            child: Text(
-              message,
-              textAlign: TextAlign.center,
-              style: GoogleFonts.inter(
-                  color: Theme.of(context).colorScheme.surface, fontSize: 17),
-            ),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  if (needShowCancel)
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        onCancel?.call();
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20, vertical: 5),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30),
-                          color: Theme.of(context).colorScheme.primaryContainer,
-                          border: Border.all(
-                            color: Theme.of(context).colorScheme.primary,
-                            width: 1,
-                          ),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "dialog.cancel".tr(),
-                            style: GoogleFonts.inter(
-                              color: Theme.of(context).colorScheme.surface,
-                              fontSize: 14,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  if (needShowCancel)
-                    const SizedBox(
-                      width: 40,
-                    ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      onConfirm?.call();
-                    },
-                    child: Center(
-                      child: Container(
-                        height: 44,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color:
-                                Theme.of(context).colorScheme.primaryContainer),
-                        child: Center(
-                          child: Text(
-                            confirmTitle ?? "dialog.ok".tr(),
-                            style: GoogleFonts.inter(
-                                color: Theme.of(context).colorScheme.primary,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void showUploadedDialog(
+  void showMessageDialog(
       {required String message,
       Function()? onCancel,
       String? title,

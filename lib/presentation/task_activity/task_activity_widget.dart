@@ -85,7 +85,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
             hideLoading();
           } else if (state is TaskDetailErrorState) {
             hideLoading();
-            showUploadedDialog(
+            showMessageDialog(
                 title: "documentList.errorTitle".tr(), message: state.error);
           }
         },
