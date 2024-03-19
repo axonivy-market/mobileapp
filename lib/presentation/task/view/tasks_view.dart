@@ -2,7 +2,6 @@ import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
-import 'package:axon_ivy/util/widgets/offline_popup_widget.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
@@ -229,8 +228,8 @@ class TasksViewContent extends StatelessWidget {
     } else {
       final task = tasks[index];
       return GestureDetector(
-        onTap: () async {
-          await _navigateTaskActivity(context, tasks[index]);
+        onTap: () {
+          _navigateTaskActivity(context, tasks[index]);
         },
         onLongPress: () => _showDetails(context, task),
         child: TaskItemWidget(

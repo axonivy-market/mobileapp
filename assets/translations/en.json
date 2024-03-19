@@ -120,5 +120,18 @@
     "process_description": "Processes can only be started when connected to the process engine. \nTry again later...",
     "task_description": "Tasks can only be started when connected to the engine. \nTry again later...",
     "search_description": "Tasks and processes can only be started when connected to the engine. \nTry again later..."
+  },
+  "documentList": {
+    "title": "Attachments",
+    "delete": "Delete",
+    "emptyList": "You don’t have any document attached yet. Click on “+” to add your first document.",
+    "takePicture": "Take picture",
+    "attachPicture":  "Attach picture",
+    "attachFile": "Attach file",
+    "errorTitle": "Error",
+    "errorMessage": "File {fileName} is already uploaded.",
+    "successTitle": "Success process",
+    "deleteSuccessTitle": "Delete successfully",
+    "downloadSuccessTitle":  "Download successfully"
   }
 }

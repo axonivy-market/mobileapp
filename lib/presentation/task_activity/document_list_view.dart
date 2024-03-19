@@ -10,6 +10,7 @@ import 'package:axon_ivy/presentation/task_activity/bloc/task_detail/task_detail
 import 'package:axon_ivy/presentation/task_activity/bloc/upload_file/upload_file_bloc.dart';
 import 'package:axon_ivy/util/widgets/back_button_widget.dart';
 import 'package:axon_ivy/util/widgets/data_empty_widget.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -46,14 +47,16 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
       for (var document in task.caseTask!.documents) {
         if (document.name == state.fileNames) {
           showUploadedDialog(
-              title: "Error",
-              message: "File ${state.fileNames} is already uploaded");
+              title: "documentList.errorTitle".tr(),
+              message: "documentList.errorMessage"
+                  .tr(namedArgs: {'fileName': state.fileNames}));
           return true;
         }
       }
     }
     _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
-    showUploadedDialog(title: "Success process", message: state.message);
+    showUploadedDialog(
+        title: "documentList.successTitle".tr(), message: state.message);
     return false;
   }
 
@@ -78,7 +81,9 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                 isUploadDuplicateFile(state, task);
               } else if (state is UploadErrorState) {
                 hideLoading();
-                showConfirmDialog(title: "Error", message: state.error);
+                showConfirmDialog(
+                    title: "documentList.errorTitle".tr(),
+                    message: state.error);
               } else if (state is UploadChangeFileNameState) {
                 await displayTextInputDialog(context, state.fileName);
               } else {
@@ -93,7 +98,8 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
               } else if (state is DeleteSuccessState) {
                 hideLoading();
                 showUploadedDialog(
-                    title: "Delete successfully", message: state.message);
+                    title: "documentList.deleteSuccessTitle".tr(),
+                    message: state.message);
                 _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
               } else {
                 showLoading();
@@ -113,11 +119,14 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
             listener: (context, state) {
               if (state is DownloadErrorState) {
                 hideLoading();
-                showUploadedDialog(title: "Error", message: state.error);
+                showUploadedDialog(
+                    title: "documentList.errorTitle".tr(),
+                    message: state.error);
               } else if (state is DownloadSuccessState) {
                 hideLoading();
                 showUploadedDialog(
-                    title: "Download successfully", message: state.message);
+                    title: "documentList.downloadSuccessTitle".tr(),
+                    message: state.message);
               } else {
                 showLoading();
               }
@@ -130,7 +139,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
             scrolledUnderElevation: 0,
             backgroundColor: Theme.of(context).colorScheme.background,
             title: Text(
-              "Attachments",
+              "documentList.title".tr(),
               style:
                   TextStyle(color: Theme.of(context).colorScheme.onBackground),
             ),
@@ -176,7 +185,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                             const SizedBox(width: 5),
                             Expanded(
                               child: Text(
-                                "Attach file",
+                                "documentList.attachFile".tr(),
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                     fontSize: 17,
@@ -203,7 +212,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                             const SizedBox(width: 5),
                             Expanded(
                               child: Text(
-                                "Attach picture",
+                                "documentList.attachPicture".tr(),
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                     fontSize: 17,
@@ -230,7 +239,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                             const SizedBox(width: 5),
                             Expanded(
                               child: Text(
-                                "Take picture",
+                                "documentList.takePicture".tr(),
                                 style: GoogleFonts.inter(
                                   textStyle: TextStyle(
                                     fontSize: 17,
@@ -290,9 +299,9 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       AppAssets.icons.iconDelete.svg(),
-                                      const Text(
-                                        "Delete",
-                                        style: TextStyle(fontSize: 13),
+                                      Text(
+                                        "documentList.delete".tr(),
+                                        style: const TextStyle(fontSize: 13),
                                       )
                                     ],
                                   ),
@@ -345,8 +354,7 @@ class _DocumentListViewState extends BasePageScreenState<DocumentListView> {
                   : DataEmptyWidget(
                       icon: AppAssets.images.iconPaperclipEmpty
                           .image(width: 62, height: 65),
-                      message:
-                          "You don’t have any document attached yet. Click on “+” to add your first document.",
+                      message: "documentList.emptyList".tr(),
                     );
             },
           ),
