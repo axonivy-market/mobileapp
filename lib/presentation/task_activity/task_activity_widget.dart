@@ -83,6 +83,10 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
               shouldFetchTaskList = true;
             });
             hideLoading();
+          } else if (state is TaskDetailErrorState) {
+            hideLoading();
+            showUploadedDialog(
+                title: "documentList.errorTitle".tr(), message: state.error);
           }
         },
         child: Scaffold(

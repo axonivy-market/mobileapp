@@ -60,7 +60,7 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                         const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Theme.of(context).colorScheme.tertiaryContainer,
+                      color: Theme.of(context).colorScheme.primaryContainer,
                       border: Border.all(
                         color: Theme.of(context).colorScheme.outline,
                       ),
@@ -94,7 +94,7 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                           color: Theme.of(context).colorScheme.outline,
                         ),
                         borderRadius: BorderRadius.circular(20),
-                        color: Theme.of(context).colorScheme.tertiaryContainer),
+                        color: Theme.of(context).colorScheme.primaryContainer),
                     child: Center(
                       child: Text(
                         "dialog.ok".tr(),
@@ -165,7 +165,7 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                             horizontal: 20, vertical: 5),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30),
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).colorScheme.primaryContainer,
                           border: Border.all(
                             color: Theme.of(context).colorScheme.primary,
                             width: 1,
@@ -197,12 +197,13 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
-                            color: Theme.of(context).colorScheme.background),
+                            color:
+                                Theme.of(context).colorScheme.primaryContainer),
                         child: Center(
                           child: Text(
                             confirmTitle ?? "dialog.ok".tr(),
                             style: GoogleFonts.inter(
-                                color: Theme.of(context).colorScheme.surface,
+                                color: Theme.of(context).colorScheme.primary,
                                 fontSize: 17,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -250,7 +251,7 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
               message,
               textAlign: TextAlign.center,
               style: GoogleFonts.inter(
-                  color: Theme.of(context).colorScheme.surface, fontSize: 17),
+                  color: Theme.of(context).colorScheme.secondary, fontSize: 17),
             ),
           ),
           actions: [
@@ -265,13 +266,13 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: Theme.of(context).colorScheme.secondary),
+                      color: Theme.of(context).colorScheme.primaryContainer),
                   child: Center(
                     child: Text(
                       confirmTitle ?? "dialog.ok".tr(),
                       style: GoogleFonts.inter(
                           fontSize: 17,
-                          color: Theme.of(context).colorScheme.surface,
+                          color: Theme.of(context).colorScheme.primary,
                           fontWeight: FontWeight.w500),
                     ),
                   ),
