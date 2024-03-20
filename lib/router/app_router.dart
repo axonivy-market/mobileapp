@@ -13,5 +13,9 @@ class AppRoutes {
 
   static const qr = "/qr";
 
+  static const documentList = "/documentList";
+
+  static const filePreview = "/filePreview";
+
   static const taskActivity = "/taskActivity";
 }

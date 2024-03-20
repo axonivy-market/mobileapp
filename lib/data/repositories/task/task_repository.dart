@@ -4,6 +4,5 @@ import 'package:dartz/dartz.dart';
 
 abstract class TaskRepository {
   Future<Either<Failure, List<TaskIvy>>> getTasks();
-
-  Future<Either<Failure, TaskIvy>> getTask(int id);
+  Future<Either<Failure, TaskIvy>> getTaskDetail(int taskId);
 }

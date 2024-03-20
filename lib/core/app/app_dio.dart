@@ -16,9 +16,9 @@ class AppDio with DioMixin implements Dio {
       platform = 'iOS';
     }
     options = BaseOptions(
-      connectTimeout: const Duration(seconds: 60),
-      sendTimeout: const Duration(seconds: 60),
-      receiveTimeout: const Duration(seconds: 60),
+      connectTimeout: const Duration(seconds: 5),
+      sendTimeout: const Duration(seconds: 5),
+      receiveTimeout: const Duration(seconds: 10),
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",

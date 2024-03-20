@@ -2,7 +2,6 @@ import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
-import 'package:axon_ivy/util/widgets/offline_popup_widget.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
@@ -11,8 +10,8 @@ import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/sort_bloc/sort_state.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_detail/task_detail_cubit.dart';
-import 'package:axon_ivy/presentation/task/view/widgets/filter_widget.dart';
 import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
+import 'package:axon_ivy/presentation/task/view/widgets/filter_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_details_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/presentation/task/view/widgets/task_item_widget.dart';
@@ -260,13 +259,15 @@ class TasksViewContent extends StatelessWidget {
     );
   }
 
-  void _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
+  _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
     context.push(AppRoutes.taskActivity, extra: {
       'task': taskIvy,
       'path': taskIvy.fullRequestPath
     }).then((value) {
       if (value != null && value is int) {
         context.read<TabBarCubit>().navigateTaskList(value);
+      } else if (value is bool && value == true) {
+        context.read<TaskBloc>().add(const TaskEvent.getTasks(FilterType.all));
       }
     });
   }

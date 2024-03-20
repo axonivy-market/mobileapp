@@ -15,7 +15,7 @@ class ToastMessageCubit extends Cubit<ToastMessageState> {
 
   void showToastMessage(int taskId) async {
     try {
-      final task = await _taskRepository.getTask(taskId);
+      final task = await _taskRepository.getTaskDetail(taskId);
 
       task.fold(
         (l) {

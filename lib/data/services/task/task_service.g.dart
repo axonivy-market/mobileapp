@@ -48,7 +48,7 @@ class _TaskService implements TaskService {
   }
 
   @override
-  Future<TaskIvy> getTask(int id) async {
+  Future<TaskIvy> getTaskDetail(int taskId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -61,7 +61,7 @@ class _TaskService implements TaskService {
     )
             .compose(
               _dio.options,
-              '/api/workflow/task/${id}',
+              '/api/workflow/task/${taskId}',
               queryParameters: queryParameters,
               data: _data,
             )

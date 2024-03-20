@@ -38,6 +38,8 @@ PODS:
     - Flutter
   - file_picker_pro (0.0.1):
     - Flutter
+  - file_saver (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_inappwebview_ios (0.0.1):
     - Flutter
@@ -87,6 +89,7 @@ DEPENDENCIES:
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - file_picker_pro (from `.symlinks/plugins/file_picker_pro/ios`)
+  - file_saver (from `.symlinks/plugins/file_saver/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
@@ -119,6 +122,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/file_picker/ios"
   file_picker_pro:
     :path: ".symlinks/plugins/file_picker_pro/ios"
+  file_saver:
+    :path: ".symlinks/plugins/file_saver/ios"
   Flutter:
     :path: Flutter
   flutter_inappwebview_ios:
@@ -150,6 +155,7 @@ SPEC CHECKSUMS:
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
   file_picker_pro: 57e5aa1aa25ce7524969c80fde5852e99c860fb2
+  file_saver: 503e386464dbe118f630e17b4c2e1190fa0cf808
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
@@ -170,6 +176,6 @@ SPEC CHECKSUMS:
   TOCropViewController: edfd4f25713d56905ad1e0b9f5be3fbe0f59c863
   url_launcher_ios: 6116280ddcfe98ab8820085d8d76ae7449447586
 
-PODFILE CHECKSUM: 274e27f3d62449afc2ea98bd38920bc3497b980f
+PODFILE CHECKSUM: 8e48b08a99bd2f9632ea9ac01c43add59692ca66
 
 COCOAPODS: 1.14.2
