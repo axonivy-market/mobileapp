@@ -485,44 +485,6 @@
         { "id" : "f66", "to" : "f52" }
       ]
     }, {
-      "id" : "f69",
-      "type" : "RequestStart",
-      "name" : "elevatorMaintainance",
-      "config" : {
-        "signature" : "elevatorMaintainance",
-        "request" : {
-          "name" : "Elevator Maintainance"
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 72, "y" : 928 }
-      },
-      "connect" : [
-        { "id" : "f71", "to" : "f70" }
-      ]
-    }, {
-      "id" : "f70",
-      "type" : "UserTask",
-      "name" : "Elevator Maintainance",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.ElevatorMaintainance:start()",
-        "task" : {
-          "name" : "Elevator Maintainance"
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 416, "y" : 928 }
-      },
-      "connect" : [
-        { "id" : "f73", "to" : "f72" }
-      ]
-    }, {
-      "id" : "f72",
-      "type" : "TaskEnd",
-      "visual" : {
-        "at" : { "x" : 544, "y" : 928 }
-      }
-    }, {
       "id" : "f74",
       "type" : "DialogCall",
       "name" : "Invoice",
