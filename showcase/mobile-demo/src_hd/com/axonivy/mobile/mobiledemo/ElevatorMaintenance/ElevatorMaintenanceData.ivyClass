@@ -1,0 +1,6 @@
+ElevatorMaintenanceData #class
+com.axonivy.mobile.mobiledemo.ElevatorMaintenance #namespace
+buildingAddress String #field
+maintainer String #field
+isReadOnly Boolean #field
+action String #field
