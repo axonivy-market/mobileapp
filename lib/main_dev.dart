@@ -1,11 +1,11 @@
+import 'package:axon_ivy/app.dart';
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/core/router/router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:axon_ivy/app.dart';
-import 'package:axon_ivy/router/router.dart';
 
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await AppConfig.loadEnv(Environment.dev);

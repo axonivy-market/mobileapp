@@ -10,5 +10,5 @@ final GetIt getIt = GetIt.instance;
   preferRelativeImports: true, // default
   asExtension: false, // default
 )
-void configureDependencies({String env = Environment.dev}) =>
+configureDependencies({String env = Environment.dev}) =>
     $initGetIt(getIt, environment: env);

@@ -50,11 +50,11 @@ dependencies:
   flutter_slidable: ^3.0.1
   font_awesome_flutter: ^10.7.0
   connectivity_plus: ^5.0.2
+  flutter_screenutil: ^5.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
     # For Analyzer
   flutter_lints: ^3.0.1
   path: ^1.8.3

@@ -1,11 +1,13 @@
+import 'package:axon_ivy/core/router/router.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
-import 'package:axon_ivy/router/router.dart';
-import 'package:axon_ivy/theme/bloc/theme_bloc.dart';
-import 'package:axon_ivy/theme/bloc/theme_state.dart';
+import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart';
+import 'package:axon_ivy/features/theme/bloc/theme_state.dart';
 import 'package:bot_toast/bot_toast.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.appRouter});
@@ -21,15 +23,24 @@ class MyApp extends StatelessWidget {
       create: (context) => ThemeBloc(initialDarkMode: isDarkmode),
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
-          return MaterialApp.router(
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            debugShowCheckedModeBanner: false,
-            routerConfig: appRouter.router,
-            theme: state.themeData,
-            builder: (context, child) {
-              return botToastBuilder(context, child!);
-            },
+          return DevicePreview(
+            enabled: true,
+            builder: (context) => ScreenUtilInit(
+              designSize: const Size(393, 852),
+              minTextAdapt: true,
+              splitScreenMode: true,
+              builder: (_, child) => MaterialApp.router(
+                useInheritedMediaQuery: true,
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                debugShowCheckedModeBanner: false,
+                routerConfig: appRouter.router,
+                theme: state.themeData,
+                builder: (context, child) {
+                  return botToastBuilder(context, child!);
+                },
+              ),
+            ),
           );
         },
       ),
