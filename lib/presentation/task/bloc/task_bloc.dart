@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:axon_ivy/core/di/di.dart';
+import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/shared/extensions/extensions.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:dio/dio.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/app/app.dart';
 import '../../../core/utils/shared_preference.dart';
 import '../../../data/repositories/task/task_repository.dart';
 import '../../../util/resources/resources.dart';
@@ -39,9 +39,16 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<_SortTasks>(_sortTasks);
     on<ShowOfflinePopupEvent>(_showOfflinePopupEvent);
 
-    getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
-        ? AppConfig.baseUrl
-        : SharedPrefs.getBaseUrl!;
+    if ((SharedPrefs.isDemoLogin ?? false) ||
+        (SharedPrefs.demoSetting ?? false)) {
+      getIt<Dio>().options.baseUrl = SharedPrefs.getDemoUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : SharedPrefs.getDemoUrl!;
+    } else {
+      getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : SharedPrefs.getBaseUrl!;
+    }
   }
 
   void _sortTasks(event, Emitter emit) {

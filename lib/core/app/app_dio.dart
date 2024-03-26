@@ -8,6 +8,8 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import '../utils/shared_preference.dart';
 
 class AppDio with DioMixin implements Dio {
+  late String username;
+  late String password;
   AppDio() {
     String platform = '';
     if (Platform.isAndroid) {
@@ -35,8 +37,13 @@ class AppDio with DioMixin implements Dio {
     interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          final username = SharedPrefs.getUsername;
-          final password = SharedPrefs.getPassword;
+          if (SharedPrefs.demoSetting ?? false) {
+            username = SharedPrefs.getDemoUsername ?? '';
+            password = SharedPrefs.getDemoPassword ?? '';
+          } else {
+            username = SharedPrefs.getUsername ?? '';
+            password = SharedPrefs.getPassword ?? '';
+          }
           String basicAuth =
               'Basic ${base64Encode(utf8.encode('$username:$password'))}';
           options.headers['Authorization'] = basicAuth;

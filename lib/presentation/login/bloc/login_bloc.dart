@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
@@ -10,7 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/app/app_config.dart';
 import '../../../core/di/di_setup.dart';
 import '../../../core/utils/shared_preference.dart';
 import '../../../util/resources/validators.dart';
@@ -53,9 +53,16 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   FutureOr<void> _submitLogin(event, Emitter emit) async {
     emit(const LoginState(status: LoginStatus.loading));
-    getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
-        ? AppConfig.baseUrl
-        : SharedPrefs.getBaseUrl!;
+    if ((SharedPrefs.isDemoLogin ?? false) ||
+        (SharedPrefs.demoSetting ?? false)) {
+      getIt<Dio>().options.baseUrl = SharedPrefs.getDemoUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : SharedPrefs.getDemoUrl!;
+    } else {
+      getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : SharedPrefs.getBaseUrl!;
+    }
     Uri? uri = Uri.tryParse(getIt<Dio>().options.baseUrl);
     if (uri!.host.isEmptyOrNull) {
       emit(LoginState(
@@ -88,6 +95,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           (r) {
             SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
             SharedPrefs.setIsLogin(true);
+            SharedPrefs.setDemoSetting(false);
             emit(const LoginState(status: LoginStatus.success));
           },
         );

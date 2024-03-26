@@ -1,4 +1,3 @@
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -28,21 +27,21 @@ class TextHighlightWidget extends StatelessWidget {
       text: TextSpan(
         text: text.substring(0, startIndex),
         style: GoogleFonts.inter(
-            color: AppColors.darkSouls,
+            color: Theme.of(context).colorScheme.secondary,
             fontWeight: fontWeight,
             fontSize: fontSize),
         children: [
           TextSpan(
             text: text.substring(startIndex, startIndex + endIndex),
             style: GoogleFonts.inter(
-                color: AppColors.eerieBlack,
+                color: Theme.of(context).colorScheme.onSurfaceVariant,
                 fontWeight: fontWeight,
                 fontSize: fontSize),
           ),
           TextSpan(
               text: text.substring(startIndex + endIndex),
               style: GoogleFonts.inter(
-                  color: AppColors.darkSouls,
+                  color: Theme.of(context).colorScheme.secondary,
                   fontWeight: fontWeight,
                   fontSize: fontSize)),
         ],

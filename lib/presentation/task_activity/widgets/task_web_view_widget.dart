@@ -30,20 +30,43 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
   int overScrollY = 0;
   bool isOverScrolled = true;
   String basicAuth = '';
+  Map<String, dynamic> cookies = {};
 
   InAppWebViewSettings settings = InAppWebViewSettings(
     supportZoom: false,
     verticalScrollBarEnabled: false,
     useShouldInterceptAjaxRequest: true,
     iframeAllowFullscreen: true,
+    transparentBackground: true,
   );
 
   @override
   void initState() {
+    late String username;
+    late String password;
+    
     super.initState();
-    final username = SharedPrefs.getUsername;
-    final password = SharedPrefs.getPassword;
+    if (SharedPrefs.isDemoLogin ?? false) {
+      username = SharedPrefs.getDemoUsername ?? '';
+      password = SharedPrefs.getDemoPassword ?? '';
+    } else {
+      username = SharedPrefs.getUsername ?? '';
+      password = SharedPrefs.getPassword ?? '';
+    }
+    final isDarkMode = SharedPrefs.themeSetting ?? false;
+    final themeValue = isDarkMode ? 'dark' : 'light';
+
     basicAuth = 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+    _setCookies(themeValue);
+  }
+
+  Future<void> _setCookies(String value) async {
+    final cookieManager = CookieManager.instance();
+    await cookieManager.setCookie(
+      url: WebUri.uri(Uri.parse(widget.fullRequestPath)),
+      name: 'primefaces-theme-mode',
+      value: value,
+    );
   }
 
   @override
@@ -61,9 +84,11 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
       },
       initialSettings: settings,
       initialUrlRequest: URLRequest(
-        url: WebUri(widget.fullRequestPath),
-        headers: {'Authorization': basicAuth},
-      ),
+          url: WebUri(widget.fullRequestPath),
+          headers: {
+            'Authorization': basicAuth,
+          },
+          httpShouldHandleCookies: true),
       shouldOverrideUrlLoading: (controller, navigationAction) async {
         if (isFinishedTask) {
           context.pop(taskId);
