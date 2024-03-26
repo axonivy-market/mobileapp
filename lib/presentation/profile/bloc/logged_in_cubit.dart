@@ -18,12 +18,9 @@ part 'logged_in_cubit.freezed.dart';
 @injectable
 class LoggedInCubit extends Cubit<LoggedInState> {
   LoggedInCubit() : super(const LoggedInState.initial());
-  // final demoUrl = DemoConfig.demoServerUrl;
-  // final demoUser = DemoConfig.demoUserName;
-  // final demoPassword = DemoConfig.demoPassword;
-  final demoUrl = 'https://mobile-demo-server.ivy-cloud.com/';
-  final demoUser = 'demo';
-  final demoPassword = '+d3m0++';
+  final demoUrl = DemoConfig.demoServerUrl;
+  final demoUser = DemoConfig.demoUserName;
+  final demoPassword = DemoConfig.demoPassword;
 
   String displayShortNameAvatar(String name) {
     return name
