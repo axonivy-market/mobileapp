@@ -8,7 +8,6 @@ import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/presentation/search/bloc/engine_info_cubit.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
-import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
@@ -16,6 +15,7 @@ import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
 import 'package:axon_ivy/util/resources/constants.dart';
+import 'package:axon_ivy/util/toast_message.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -60,7 +60,6 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final TabBarCubit _tabBarCubit;
   late final LoggedInCubit _loggedInCubit;
   late final ToastMessageCubit _toastMessageCubit;
-  late final ConnectivityBloc _connectivityBloc;
   late final EngineInfoCubit _engineInfoCubit;
 
   bool shouldFetchData = true;
@@ -99,7 +98,6 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _tabBarCubit = getIt<TabBarCubit>();
     _loggedInCubit = getIt<LoggedInCubit>();
     _toastMessageCubit = getIt<ToastMessageCubit>();
-    _connectivityBloc = getIt<ConnectivityBloc>();
     _engineInfoCubit = getIt<EngineInfoCubit>();
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
@@ -129,7 +127,6 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _tabBarCubit),
         BlocProvider(create: (context) => _loggedInCubit),
         BlocProvider(create: (context) => _toastMessageCubit),
-        BlocProvider(create: (context) => _connectivityBloc),
         BlocProvider(create: (context) => _engineInfoCubit),
       ],
       child: MultiBlocListener(
@@ -148,7 +145,9 @@ class _TabBarScreenState extends State<TabBarScreen> {
               context
                   .read<TaskBloc>()
                   .add(TaskEvent.getTasks(filterState.activeFilter));
-              context.read<ToastMessageCubit>().showToastMessage(state.taskId);
+              context
+                  .read<ToastMessageCubit>()
+                  .showToastMessage(state.taskInfo);
             }
           }),
         ],
@@ -256,8 +255,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
               Text(
                 label,
                 style: GoogleFonts.inter(
-                  color:
-                      isSelected
+                  color: isSelected
                       ? Theme.of(context).colorScheme.primary
                       : Theme.of(context).colorScheme.secondary,
                   fontSize: 13,

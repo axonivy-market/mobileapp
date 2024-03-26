@@ -1,12 +1,11 @@
-import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/presentation/task_activity/widgets/task_web_view_widget.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/filter_boc/filter_state.dart';
-import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/sort_bloc/sort_state.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_detail/task_detail_cubit.dart';
@@ -48,27 +47,30 @@ class TasksView extends StatelessWidget {
                 'task': state.taskIvy,
                 'path': state.taskIvy.fullRequestPath
               }).then((value) {
-                if (value != null && value is int) {
+                if (value != null && value is Map) {
                   context.read<TabBarCubit>().navigateTaskList(value);
                 }
               });
             }
           }),
-          BlocListener<TaskBloc, TaskState>(listener: (context, state) {
-            context.read<OfflineIndicatorCubit>().showOfflineIndicator(
-                state is TaskSuccessState && !state.isOnline);
-          }),
           BlocListener<ConnectivityBloc, ConnectivityState>(
               listener: (context, state) {
-            context
-                .read<TaskBloc>()
-                .add(TaskEvent.showOfflinePopupEvent(state is ConnectedState));
+            context.read<TaskBloc>().isOfflineMode = state is NotConnectedState;
+            if (state is ConnectedState) {
+              context
+                  .read<TaskBloc>()
+                  .add(const TaskEvent.syncDataOnEngineRestore());
+            } else {
+              context.read<TaskBloc>().add(const TaskEvent.showTasksOffline());
+            }
           }),
           BlocListener<ToastMessageCubit, ToastMessageState>(
               listener: (context, state) {
             if (state is ShowToastMessageState) {
               ToastMessageUtils.showMessage(
-                  'Following task has been completed: "${state.taskName}"',
+                  "finishedTaskMessage".tr(namedArgs: {
+                    'name': state.taskName,
+                  }),
                   AppAssets.icons.success,
                   context);
             }
@@ -122,11 +124,21 @@ class TasksViewContent extends StatelessWidget {
         ],
         child: BlocBuilder<TaskBloc, TaskState>(
           builder: (context, taskState) {
-            if (taskState is TaskErrorState) {
-              return _buildErrorView(context, taskState);
-            } else if (taskState is TaskSuccessState) {
+            if (taskState is TaskSuccessState) {
               return Stack(
                 children: [
+                  // For cached css task offline on WebView
+                  if (taskState.tasks.firstOrNull?.fullRequestPath != null)
+                    SizedBox(
+                      height: 0,
+                      width: 0,
+                      child: TaskWebViewWidget(
+                        fullRequestPath: taskState.tasks.first.fullRequestPath,
+                        onScrollToTop: (value) => {},
+                        canScrollVertical: (value) => {},
+                        onProgressChanged: (value) => {},
+                      ),
+                    ),
                   Column(
                     children: [
                       const Padding(
@@ -136,11 +148,6 @@ class TasksViewContent extends StatelessWidget {
                       Expanded(child: _buildTaskList(context, taskState.tasks)),
                     ],
                   ),
-                  if (!taskState.isOnline)
-                    OfflinePopupWidget(
-                      description: "offline.task_description".tr(),
-                      onRefresh: () => _onRefresh(context),
-                    ),
                 ],
               );
             } else {
@@ -149,36 +156,6 @@ class TasksViewContent extends StatelessWidget {
           },
         ),
       ),
-    );
-  }
-
-  Widget _buildErrorView(BuildContext context, TaskErrorState taskState) {
-    return CustomScrollView(
-      physics:
-          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-      slivers: [
-        CupertinoSliverRefreshControl(
-          onRefresh: () async => _onRefresh(context),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => SizedBox(
-              height: MediaQuery.of(context).size.height -
-                  Constants.appBarHeight -
-                  Constants.bottomNavigationBarHeight,
-              child: DataEmptyWidget(
-                message: "errorCanNotAccessScreen".tr(),
-                icon: AppAssets.icons.tool.svg(
-                    colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.tertiaryContainer,
-                  BlendMode.srcIn,
-                )),
-              ),
-            ),
-            childCount: 1,
-          ),
-        ),
-      ],
     );
   }
 
@@ -204,8 +181,7 @@ class TasksViewContent extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) =>
-                  _buildTaskItem(context, tasks, activeFilter, index),
+              (_, index) => _buildTaskItem(context, tasks, activeFilter, index),
               childCount: tasks.isEmpty ? 1 : tasks.length,
             ),
           ),
@@ -264,7 +240,7 @@ class TasksViewContent extends StatelessWidget {
       'task': taskIvy,
       'path': taskIvy.fullRequestPath
     }).then((value) {
-      if (value != null && value is int) {
+      if (value != null && value is Map) {
         context.read<TabBarCubit>().navigateTaskList(value);
       } else if (value is bool && value == true) {
         context.read<TaskBloc>().add(const TaskEvent.getTasks(FilterType.all));

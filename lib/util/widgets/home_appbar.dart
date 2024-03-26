@@ -1,6 +1,5 @@
 import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';

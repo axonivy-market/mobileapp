@@ -56,7 +56,7 @@
     "username": "Username",
     "yourPassword": "Your password",
     "demoMode": "Demo mode",
-    "darkMode":"Dark mode",
+    "darkMode": "Dark mode",
     "language": "Language"
   },
   "qr": {
@@ -126,12 +126,13 @@
     "delete": "Delete",
     "emptyList": "You don’t have any document attached yet. Click on “+” to add your first document.",
     "takePicture": "Take picture",
-    "attachPicture":  "Attach picture",
+    "attachPicture": "Attach picture",
     "attachFile": "Attach file",
     "errorTitle": "Error",
     "errorMessage": "File {fileName} is already uploaded.",
     "successTitle": "Success process",
     "deleteSuccessTitle": "Delete successfully",
-    "downloadSuccessTitle":  "Download successfully"
-  }
+    "downloadSuccessTitle": "Download successfully"
+  },
+  "finishedTaskMessage": "Following task has been completed: {name}"
 }

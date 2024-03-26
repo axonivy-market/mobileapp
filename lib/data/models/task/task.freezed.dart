@@ -20,19 +20,38 @@ TaskIvy _$TaskIvyFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TaskIvy {
+  @HiveField(0)
   int get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get description => throw _privateConstructorUsedError;
+  @HiveField(3)
   String get fullRequestPath => throw _privateConstructorUsedError;
+  @HiveField(4)
   bool get offline => throw _privateConstructorUsedError;
+  @HiveField(5)
   DateTime get startTimeStamp => throw _privateConstructorUsedError;
+  @HiveField(6)
   DateTime? get expiryTimeStamp => throw _privateConstructorUsedError;
+  @HiveField(7)
   int get priority => throw _privateConstructorUsedError;
+  @HiveField(8)
   int get state => throw _privateConstructorUsedError;
+  @HiveField(9)
   String get activatorName => throw _privateConstructorUsedError;
+  @HiveField(10)
   String get category => throw _privateConstructorUsedError;
   @JsonKey(name: 'case', defaultValue: null)
+  @HiveField(11)
   CaseTask? get caseTask => throw _privateConstructorUsedError;
+  @HiveField(12)
+  Map<String, dynamic>? get doneTaskFormDataSerializedOffline =>
+      throw _privateConstructorUsedError;
+  @HiveField(13)
+  String get submitUrlOffline => throw _privateConstructorUsedError;
+  @HiveField(14)
+  String get formHTMLPageOffline => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,18 +64,23 @@ abstract class $TaskIvyCopyWith<$Res> {
       _$TaskIvyCopyWithImpl<$Res, TaskIvy>;
   @useResult
   $Res call(
-      {int id,
-      String name,
-      String description,
-      String fullRequestPath,
-      bool offline,
-      DateTime startTimeStamp,
-      DateTime? expiryTimeStamp,
-      int priority,
-      int state,
-      String activatorName,
-      String category,
-      @JsonKey(name: 'case', defaultValue: null) CaseTask? caseTask});
+      {@HiveField(0) int id,
+      @HiveField(1) String name,
+      @HiveField(2) String description,
+      @HiveField(3) String fullRequestPath,
+      @HiveField(4) bool offline,
+      @HiveField(5) DateTime startTimeStamp,
+      @HiveField(6) DateTime? expiryTimeStamp,
+      @HiveField(7) int priority,
+      @HiveField(8) int state,
+      @HiveField(9) String activatorName,
+      @HiveField(10) String category,
+      @JsonKey(name: 'case', defaultValue: null)
+      @HiveField(11)
+      CaseTask? caseTask,
+      @HiveField(12) Map<String, dynamic>? doneTaskFormDataSerializedOffline,
+      @HiveField(13) String submitUrlOffline,
+      @HiveField(14) String formHTMLPageOffline});
 
   $CaseTaskCopyWith<$Res>? get caseTask;
 }
@@ -86,6 +110,9 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
     Object? activatorName = null,
     Object? category = null,
     Object? caseTask = freezed,
+    Object? doneTaskFormDataSerializedOffline = freezed,
+    Object? submitUrlOffline = null,
+    Object? formHTMLPageOffline = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -136,6 +163,19 @@ class _$TaskIvyCopyWithImpl<$Res, $Val extends TaskIvy>
           ? _value.caseTask
           : caseTask // ignore: cast_nullable_to_non_nullable
               as CaseTask?,
+      doneTaskFormDataSerializedOffline: freezed ==
+              doneTaskFormDataSerializedOffline
+          ? _value.doneTaskFormDataSerializedOffline
+          : doneTaskFormDataSerializedOffline // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      submitUrlOffline: null == submitUrlOffline
+          ? _value.submitUrlOffline
+          : submitUrlOffline // ignore: cast_nullable_to_non_nullable
+              as String,
+      formHTMLPageOffline: null == formHTMLPageOffline
+          ? _value.formHTMLPageOffline
+          : formHTMLPageOffline // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 
@@ -160,18 +200,23 @@ abstract class _$$TaskIvyImplCopyWith<$Res> implements $TaskIvyCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
-      String name,
-      String description,
-      String fullRequestPath,
-      bool offline,
-      DateTime startTimeStamp,
-      DateTime? expiryTimeStamp,
-      int priority,
-      int state,
-      String activatorName,
-      String category,
-      @JsonKey(name: 'case', defaultValue: null) CaseTask? caseTask});
+      {@HiveField(0) int id,
+      @HiveField(1) String name,
+      @HiveField(2) String description,
+      @HiveField(3) String fullRequestPath,
+      @HiveField(4) bool offline,
+      @HiveField(5) DateTime startTimeStamp,
+      @HiveField(6) DateTime? expiryTimeStamp,
+      @HiveField(7) int priority,
+      @HiveField(8) int state,
+      @HiveField(9) String activatorName,
+      @HiveField(10) String category,
+      @JsonKey(name: 'case', defaultValue: null)
+      @HiveField(11)
+      CaseTask? caseTask,
+      @HiveField(12) Map<String, dynamic>? doneTaskFormDataSerializedOffline,
+      @HiveField(13) String submitUrlOffline,
+      @HiveField(14) String formHTMLPageOffline});
 
   @override
   $CaseTaskCopyWith<$Res>? get caseTask;
@@ -200,6 +245,9 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
     Object? activatorName = null,
     Object? category = null,
     Object? caseTask = freezed,
+    Object? doneTaskFormDataSerializedOffline = freezed,
+    Object? submitUrlOffline = null,
+    Object? formHTMLPageOffline = null,
   }) {
     return _then(_$TaskIvyImpl(
       id: null == id
@@ -250,68 +298,121 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
           ? _value.caseTask
           : caseTask // ignore: cast_nullable_to_non_nullable
               as CaseTask?,
+      doneTaskFormDataSerializedOffline: freezed ==
+              doneTaskFormDataSerializedOffline
+          ? _value._doneTaskFormDataSerializedOffline
+          : doneTaskFormDataSerializedOffline // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>?,
+      submitUrlOffline: null == submitUrlOffline
+          ? _value.submitUrlOffline
+          : submitUrlOffline // ignore: cast_nullable_to_non_nullable
+              as String,
+      formHTMLPageOffline: null == formHTMLPageOffline
+          ? _value.formHTMLPageOffline
+          : formHTMLPageOffline // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 1)
 class _$TaskIvyImpl implements _TaskIvy {
   const _$TaskIvyImpl(
-      {required this.id,
-      this.name = '',
-      this.description = '',
-      this.fullRequestPath = '',
-      this.offline = false,
-      required this.startTimeStamp,
-      this.expiryTimeStamp = null,
-      this.priority = 0,
-      this.state = 0,
-      this.activatorName = '',
-      this.category = '',
-      @JsonKey(name: 'case', defaultValue: null) this.caseTask = null});
+      {@HiveField(0) required this.id,
+      @HiveField(1) this.name = '',
+      @HiveField(2) this.description = '',
+      @HiveField(3) this.fullRequestPath = '',
+      @HiveField(4) this.offline = false,
+      @HiveField(5) required this.startTimeStamp,
+      @HiveField(6) this.expiryTimeStamp = null,
+      @HiveField(7) this.priority = 0,
+      @HiveField(8) this.state = 0,
+      @HiveField(9) this.activatorName = '',
+      @HiveField(10) this.category = '',
+      @JsonKey(name: 'case', defaultValue: null)
+      @HiveField(11)
+      this.caseTask = null,
+      @HiveField(12)
+      final Map<String, dynamic>? doneTaskFormDataSerializedOffline,
+      @HiveField(13) this.submitUrlOffline = '',
+      @HiveField(14) this.formHTMLPageOffline = ''})
+      : _doneTaskFormDataSerializedOffline = doneTaskFormDataSerializedOffline;
 
   factory _$TaskIvyImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskIvyImplFromJson(json);
 
   @override
+  @HiveField(0)
   final int id;
   @override
   @JsonKey()
+  @HiveField(1)
   final String name;
   @override
   @JsonKey()
+  @HiveField(2)
   final String description;
   @override
   @JsonKey()
+  @HiveField(3)
   final String fullRequestPath;
   @override
   @JsonKey()
+  @HiveField(4)
   final bool offline;
   @override
+  @HiveField(5)
   final DateTime startTimeStamp;
   @override
   @JsonKey()
+  @HiveField(6)
   final DateTime? expiryTimeStamp;
   @override
   @JsonKey()
+  @HiveField(7)
   final int priority;
   @override
   @JsonKey()
+  @HiveField(8)
   final int state;
   @override
   @JsonKey()
+  @HiveField(9)
   final String activatorName;
   @override
   @JsonKey()
+  @HiveField(10)
   final String category;
   @override
   @JsonKey(name: 'case', defaultValue: null)
+  @HiveField(11)
   final CaseTask? caseTask;
+  final Map<String, dynamic>? _doneTaskFormDataSerializedOffline;
+  @override
+  @HiveField(12)
+  Map<String, dynamic>? get doneTaskFormDataSerializedOffline {
+    final value = _doneTaskFormDataSerializedOffline;
+    if (value == null) return null;
+    if (_doneTaskFormDataSerializedOffline is EqualUnmodifiableMapView)
+      return _doneTaskFormDataSerializedOffline;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(value);
+  }
+
+  @override
+  @JsonKey()
+  @HiveField(13)
+  final String submitUrlOffline;
+  @override
+  @JsonKey()
+  @HiveField(14)
+  final String formHTMLPageOffline;
 
   @override
   String toString() {
-    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiryTimeStamp: $expiryTimeStamp, priority: $priority, state: $state, activatorName: $activatorName, category: $category, caseTask: $caseTask)';
+    return 'TaskIvy(id: $id, name: $name, description: $description, fullRequestPath: $fullRequestPath, offline: $offline, startTimeStamp: $startTimeStamp, expiryTimeStamp: $expiryTimeStamp, priority: $priority, state: $state, activatorName: $activatorName, category: $category, caseTask: $caseTask, doneTaskFormDataSerializedOffline: $doneTaskFormDataSerializedOffline, submitUrlOffline: $submitUrlOffline, formHTMLPageOffline: $formHTMLPageOffline)';
   }
 
   @override
@@ -338,7 +439,14 @@ class _$TaskIvyImpl implements _TaskIvy {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.caseTask, caseTask) ||
-                other.caseTask == caseTask));
+                other.caseTask == caseTask) &&
+            const DeepCollectionEquality().equals(
+                other._doneTaskFormDataSerializedOffline,
+                _doneTaskFormDataSerializedOffline) &&
+            (identical(other.submitUrlOffline, submitUrlOffline) ||
+                other.submitUrlOffline == submitUrlOffline) &&
+            (identical(other.formHTMLPageOffline, formHTMLPageOffline) ||
+                other.formHTMLPageOffline == formHTMLPageOffline));
   }
 
   @JsonKey(ignore: true)
@@ -356,7 +464,10 @@ class _$TaskIvyImpl implements _TaskIvy {
       state,
       activatorName,
       category,
-      caseTask);
+      caseTask,
+      const DeepCollectionEquality().hash(_doneTaskFormDataSerializedOffline),
+      submitUrlOffline,
+      formHTMLPageOffline);
 
   @JsonKey(ignore: true)
   @override
@@ -374,47 +485,73 @@ class _$TaskIvyImpl implements _TaskIvy {
 
 abstract class _TaskIvy implements TaskIvy {
   const factory _TaskIvy(
-      {required final int id,
-      final String name,
-      final String description,
-      final String fullRequestPath,
-      final bool offline,
-      required final DateTime startTimeStamp,
-      final DateTime? expiryTimeStamp,
-      final int priority,
-      final int state,
-      final String activatorName,
-      final String category,
+      {@HiveField(0) required final int id,
+      @HiveField(1) final String name,
+      @HiveField(2) final String description,
+      @HiveField(3) final String fullRequestPath,
+      @HiveField(4) final bool offline,
+      @HiveField(5) required final DateTime startTimeStamp,
+      @HiveField(6) final DateTime? expiryTimeStamp,
+      @HiveField(7) final int priority,
+      @HiveField(8) final int state,
+      @HiveField(9) final String activatorName,
+      @HiveField(10) final String category,
       @JsonKey(name: 'case', defaultValue: null)
-      final CaseTask? caseTask}) = _$TaskIvyImpl;
+      @HiveField(11)
+      final CaseTask? caseTask,
+      @HiveField(12)
+      final Map<String, dynamic>? doneTaskFormDataSerializedOffline,
+      @HiveField(13) final String submitUrlOffline,
+      @HiveField(14) final String formHTMLPageOffline}) = _$TaskIvyImpl;
 
   factory _TaskIvy.fromJson(Map<String, dynamic> json) = _$TaskIvyImpl.fromJson;
 
   @override
+  @HiveField(0)
   int get id;
   @override
+  @HiveField(1)
   String get name;
   @override
+  @HiveField(2)
   String get description;
   @override
+  @HiveField(3)
   String get fullRequestPath;
   @override
+  @HiveField(4)
   bool get offline;
   @override
+  @HiveField(5)
   DateTime get startTimeStamp;
   @override
+  @HiveField(6)
   DateTime? get expiryTimeStamp;
   @override
+  @HiveField(7)
   int get priority;
   @override
+  @HiveField(8)
   int get state;
   @override
+  @HiveField(9)
   String get activatorName;
   @override
+  @HiveField(10)
   String get category;
   @override
   @JsonKey(name: 'case', defaultValue: null)
+  @HiveField(11)
   CaseTask? get caseTask;
+  @override
+  @HiveField(12)
+  Map<String, dynamic>? get doneTaskFormDataSerializedOffline;
+  @override
+  @HiveField(13)
+  String get submitUrlOffline;
+  @override
+  @HiveField(14)
+  String get formHTMLPageOffline;
   @override
   @JsonKey(ignore: true)
   _$$TaskIvyImplCopyWith<_$TaskIvyImpl> get copyWith =>

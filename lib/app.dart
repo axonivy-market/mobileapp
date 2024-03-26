@@ -1,4 +1,6 @@
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/router/router.dart';
 import 'package:axon_ivy/theme/bloc/theme_bloc.dart';
 import 'package:axon_ivy/theme/bloc/theme_state.dart';
@@ -17,8 +19,12 @@ class MyApp extends StatelessWidget {
     final botToastBuilder = BotToastInit();
     final isDarkmode = SharedPrefs.themeSetting ?? false;
 
-    return BlocProvider(
-      create: (context) => ThemeBloc(initialDarkMode: isDarkmode),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+            create: (context) => ThemeBloc(initialDarkMode: isDarkmode)),
+        BlocProvider(create: (context) => getIt<ConnectivityBloc>()),
+      ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           return MaterialApp.router(

@@ -23,6 +23,10 @@ mixin _$TaskEvent {
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
     required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -32,6 +36,10 @@ mixin _$TaskEvent {
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
     TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -41,6 +49,10 @@ mixin _$TaskEvent {
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
     TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -52,6 +64,11 @@ mixin _$TaskEvent {
     required TResult Function(_GetTask value) getTask,
     required TResult Function(ShowOfflinePopupEvent value)
         showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +78,11 @@ mixin _$TaskEvent {
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
     TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +92,11 @@ mixin _$TaskEvent {
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
     TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -162,6 +189,10 @@ class _$GetTasksImpl implements _GetTasks {
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
     required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
   }) {
     return getTasks(activeFilter);
   }
@@ -174,6 +205,10 @@ class _$GetTasksImpl implements _GetTasks {
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
     TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
   }) {
     return getTasks?.call(activeFilter);
   }
@@ -186,6 +221,10 @@ class _$GetTasksImpl implements _GetTasks {
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
     TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
@@ -203,6 +242,11 @@ class _$GetTasksImpl implements _GetTasks {
     required TResult Function(_GetTask value) getTask,
     required TResult Function(ShowOfflinePopupEvent value)
         showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
   }) {
     return getTasks(this);
   }
@@ -215,6 +259,11 @@ class _$GetTasksImpl implements _GetTasks {
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
     TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
   }) {
     return getTasks?.call(this);
   }
@@ -227,6 +276,11 @@ class _$GetTasksImpl implements _GetTasks {
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
     TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
     required TResult orElse(),
   }) {
     if (getTasks != null) {
@@ -315,6 +369,10 @@ class _$FilterTasksImpl implements _FilterTasks {
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
     required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
   }) {
     return filterTasks(activeFilter);
   }
@@ -327,6 +385,10 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
     TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
   }) {
     return filterTasks?.call(activeFilter);
   }
@@ -339,6 +401,10 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
     TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
     required TResult orElse(),
   }) {
     if (filterTasks != null) {
@@ -356,6 +422,11 @@ class _$FilterTasksImpl implements _FilterTasks {
     required TResult Function(_GetTask value) getTask,
     required TResult Function(ShowOfflinePopupEvent value)
         showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
   }) {
     return filterTasks(this);
   }
@@ -368,6 +439,11 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
     TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
   }) {
     return filterTasks?.call(this);
   }
@@ -380,6 +456,11 @@ class _$FilterTasksImpl implements _FilterTasks {
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
     TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
     required TResult orElse(),
   }) {
     if (filterTasks != null) {
@@ -475,6 +556,10 @@ class _$SortTasksImpl implements _SortTasks {
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
     required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
   }) {
     return sortTasks(activeSortType);
   }
@@ -487,6 +572,10 @@ class _$SortTasksImpl implements _SortTasks {
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
     TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
   }) {
     return sortTasks?.call(activeSortType);
   }
@@ -499,6 +588,10 @@ class _$SortTasksImpl implements _SortTasks {
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
     TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
     required TResult orElse(),
   }) {
     if (sortTasks != null) {
@@ -516,6 +609,11 @@ class _$SortTasksImpl implements _SortTasks {
     required TResult Function(_GetTask value) getTask,
     required TResult Function(ShowOfflinePopupEvent value)
         showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
   }) {
     return sortTasks(this);
   }
@@ -528,6 +626,11 @@ class _$SortTasksImpl implements _SortTasks {
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
     TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
   }) {
     return sortTasks?.call(this);
   }
@@ -540,6 +643,11 @@ class _$SortTasksImpl implements _SortTasks {
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
     TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
     required TResult orElse(),
   }) {
     if (sortTasks != null) {
@@ -628,6 +736,10 @@ class _$GetTaskImpl implements _GetTask {
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
     required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
   }) {
     return getTask(id);
   }
@@ -640,6 +752,10 @@ class _$GetTaskImpl implements _GetTask {
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
     TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
   }) {
     return getTask?.call(id);
   }
@@ -652,6 +768,10 @@ class _$GetTaskImpl implements _GetTask {
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
     TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
     required TResult orElse(),
   }) {
     if (getTask != null) {
@@ -669,6 +789,11 @@ class _$GetTaskImpl implements _GetTask {
     required TResult Function(_GetTask value) getTask,
     required TResult Function(ShowOfflinePopupEvent value)
         showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
   }) {
     return getTask(this);
   }
@@ -681,6 +806,11 @@ class _$GetTaskImpl implements _GetTask {
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
     TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
   }) {
     return getTask?.call(this);
   }
@@ -693,6 +823,11 @@ class _$GetTaskImpl implements _GetTask {
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
     TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
     required TResult orElse(),
   }) {
     if (getTask != null) {
@@ -783,6 +918,10 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
     required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
   }) {
     return showOfflinePopupEvent(isConnected);
   }
@@ -795,6 +934,10 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
     TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
   }) {
     return showOfflinePopupEvent?.call(isConnected);
   }
@@ -807,6 +950,10 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
     TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
     required TResult orElse(),
   }) {
     if (showOfflinePopupEvent != null) {
@@ -824,6 +971,11 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
     required TResult Function(_GetTask value) getTask,
     required TResult Function(ShowOfflinePopupEvent value)
         showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
   }) {
     return showOfflinePopupEvent(this);
   }
@@ -836,6 +988,11 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
     TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
   }) {
     return showOfflinePopupEvent?.call(this);
   }
@@ -848,6 +1005,11 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
     TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
     required TResult orElse(),
   }) {
     if (showOfflinePopupEvent != null) {
@@ -865,6 +1027,606 @@ abstract class ShowOfflinePopupEvent implements TaskEvent {
   @JsonKey(ignore: true)
   _$$ShowOfflinePopupEventImplCopyWith<_$ShowOfflinePopupEventImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ParseHtmlEventImplCopyWith<$Res> {
+  factory _$$ParseHtmlEventImplCopyWith(_$ParseHtmlEventImpl value,
+          $Res Function(_$ParseHtmlEventImpl) then) =
+      __$$ParseHtmlEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ParseHtmlEventImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$ParseHtmlEventImpl>
+    implements _$$ParseHtmlEventImplCopyWith<$Res> {
+  __$$ParseHtmlEventImplCopyWithImpl(
+      _$ParseHtmlEventImpl _value, $Res Function(_$ParseHtmlEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ParseHtmlEventImpl implements ParseHtmlEvent {
+  const _$ParseHtmlEventImpl();
+
+  @override
+  String toString() {
+    return 'TaskEvent.parseHtml()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ParseHtmlEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
+  }) {
+    return parseHtml();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
+  }) {
+    return parseHtml?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (parseHtml != null) {
+      return parseHtml();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
+  }) {
+    return parseHtml(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
+  }) {
+    return parseHtml?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (parseHtml != null) {
+      return parseHtml(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ParseHtmlEvent implements TaskEvent {
+  const factory ParseHtmlEvent() = _$ParseHtmlEventImpl;
+}
+
+/// @nodoc
+abstract class _$$TasksLoadedSyncEventImplCopyWith<$Res> {
+  factory _$$TasksLoadedSyncEventImplCopyWith(_$TasksLoadedSyncEventImpl value,
+          $Res Function(_$TasksLoadedSyncEventImpl) then) =
+      __$$TasksLoadedSyncEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$TasksLoadedSyncEventImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$TasksLoadedSyncEventImpl>
+    implements _$$TasksLoadedSyncEventImplCopyWith<$Res> {
+  __$$TasksLoadedSyncEventImplCopyWithImpl(_$TasksLoadedSyncEventImpl _value,
+      $Res Function(_$TasksLoadedSyncEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$TasksLoadedSyncEventImpl implements TasksLoadedSyncEvent {
+  const _$TasksLoadedSyncEventImpl();
+
+  @override
+  String toString() {
+    return 'TaskEvent.onTasksLoadedSync()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TasksLoadedSyncEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
+  }) {
+    return onTasksLoadedSync();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
+  }) {
+    return onTasksLoadedSync?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (onTasksLoadedSync != null) {
+      return onTasksLoadedSync();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
+  }) {
+    return onTasksLoadedSync(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
+  }) {
+    return onTasksLoadedSync?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (onTasksLoadedSync != null) {
+      return onTasksLoadedSync(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class TasksLoadedSyncEvent implements TaskEvent {
+  const factory TasksLoadedSyncEvent() = _$TasksLoadedSyncEventImpl;
+}
+
+/// @nodoc
+abstract class _$$SyncDataOnEngineRestoreEventImplCopyWith<$Res> {
+  factory _$$SyncDataOnEngineRestoreEventImplCopyWith(
+          _$SyncDataOnEngineRestoreEventImpl value,
+          $Res Function(_$SyncDataOnEngineRestoreEventImpl) then) =
+      __$$SyncDataOnEngineRestoreEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$SyncDataOnEngineRestoreEventImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$SyncDataOnEngineRestoreEventImpl>
+    implements _$$SyncDataOnEngineRestoreEventImplCopyWith<$Res> {
+  __$$SyncDataOnEngineRestoreEventImplCopyWithImpl(
+      _$SyncDataOnEngineRestoreEventImpl _value,
+      $Res Function(_$SyncDataOnEngineRestoreEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$SyncDataOnEngineRestoreEventImpl
+    implements SyncDataOnEngineRestoreEvent {
+  const _$SyncDataOnEngineRestoreEventImpl();
+
+  @override
+  String toString() {
+    return 'TaskEvent.syncDataOnEngineRestore()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SyncDataOnEngineRestoreEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
+  }) {
+    return syncDataOnEngineRestore();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
+  }) {
+    return syncDataOnEngineRestore?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (syncDataOnEngineRestore != null) {
+      return syncDataOnEngineRestore();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
+  }) {
+    return syncDataOnEngineRestore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
+  }) {
+    return syncDataOnEngineRestore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (syncDataOnEngineRestore != null) {
+      return syncDataOnEngineRestore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SyncDataOnEngineRestoreEvent implements TaskEvent {
+  const factory SyncDataOnEngineRestoreEvent() =
+      _$SyncDataOnEngineRestoreEventImpl;
+}
+
+/// @nodoc
+abstract class _$$ShowTasksOfflineEventImplCopyWith<$Res> {
+  factory _$$ShowTasksOfflineEventImplCopyWith(
+          _$ShowTasksOfflineEventImpl value,
+          $Res Function(_$ShowTasksOfflineEventImpl) then) =
+      __$$ShowTasksOfflineEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ShowTasksOfflineEventImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$ShowTasksOfflineEventImpl>
+    implements _$$ShowTasksOfflineEventImplCopyWith<$Res> {
+  __$$ShowTasksOfflineEventImplCopyWithImpl(_$ShowTasksOfflineEventImpl _value,
+      $Res Function(_$ShowTasksOfflineEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ShowTasksOfflineEventImpl implements ShowTasksOfflineEvent {
+  const _$ShowTasksOfflineEventImpl();
+
+  @override
+  String toString() {
+    return 'TaskEvent.showTasksOffline()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShowTasksOfflineEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
+  }) {
+    return showTasksOffline();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
+  }) {
+    return showTasksOffline?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (showTasksOffline != null) {
+      return showTasksOffline();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
+  }) {
+    return showTasksOffline(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
+  }) {
+    return showTasksOffline?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (showTasksOffline != null) {
+      return showTasksOffline(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowTasksOfflineEvent implements TaskEvent {
+  const factory ShowTasksOfflineEvent() = _$ShowTasksOfflineEventImpl;
 }
 
 /// @nodoc

@@ -5,8 +5,12 @@ import 'package:axon_ivy/core/shared/extensions/number_ext.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/base_view/base_view.dart';
+import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
+import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task_activity/bloc/task_detail/task_detail_bloc.dart';
+import 'package:axon_ivy/presentation/task_activity/bloc/task_activity_bloc.dart';
 import 'package:axon_ivy/presentation/task_activity/widgets/task_web_view_widget.dart';
+import 'package:axon_ivy/util/resources/resources.dart';
 import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +35,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
   late Animation<double> _rotationAnimation;
   late AnimationController _controller;
   late TaskDetailBloc taskDetailBloc;
+  late TaskActivityBloc _taskActivityBloc;
   late double screenHeight;
   final GlobalKey _appBarKey = GlobalKey();
   double taskDetailPanelHeight = 0;
@@ -42,6 +47,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
   bool isExpanded = false;
   int documentLength = 0;
   bool shouldFetchTaskList = false;
+
   @override
   void initState() {
     super.initState();
@@ -51,6 +57,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
     );
     _rotationAnimation = Tween<double>(begin: 0, end: 0.5).animate(_controller);
     taskDetailBloc = getIt<TaskDetailBloc>();
+    _taskActivityBloc = getIt<TaskActivityBloc>();
     WidgetsBinding.instance.addPostFrameCallback((_) => _appBarHeight());
   }
 
@@ -72,23 +79,47 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
     isKeyboardVisible = mediaQuery.viewInsets.bottom > 100;
     TaskIvy? task = widget.taskIvy;
     documentLength = task?.caseTask?.documents.length ?? 0;
-    return BlocProvider(
-      create: (context) => taskDetailBloc,
-      child: BlocListener<TaskDetailBloc, TaskDetailState>(
-        listener: (context, state) {
-          if (state is TaskDetailLoadingState) {
-            showLoading();
-          } else if (state is TaskDetailSuccessState) {
-            setState(() {
-              shouldFetchTaskList = true;
-            });
-            hideLoading();
-          } else if (state is TaskDetailErrorState) {
-            hideLoading();
-            showMessageDialog(
-                title: "documentList.errorTitle".tr(), message: state.error);
-          }
-        },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => taskDetailBloc),
+        BlocProvider(create: (context) => _taskActivityBloc),
+        BlocProvider(create: (context) => getIt<TaskBloc>()),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<TaskDetailBloc, TaskDetailState>(
+              listener: (context, state) {
+            if (state is TaskDetailLoadingState) {
+              showLoading();
+            } else if (state is TaskDetailSuccessState) {
+              setState(() {
+                shouldFetchTaskList = true;
+              });
+              hideLoading();
+            } else if (state is TaskDetailErrorState) {
+              hideLoading();
+              showMessageDialog(
+                  title: "documentList.errorTitle".tr(), message: state.error);
+            }
+          }),
+          BlocListener<TaskActivityBloc, TaskActivityState>(
+              listener: (context, state) {
+            if (state is FinishedLoadingState) {
+              showLoading();
+            } else if (state is FinishedTaskOffline) {
+              hideLoading();
+              context.pop({double.infinity: state.taskIvy.name});
+            }
+          }),
+          // BlocListener<ConnectivityBloc, ConnectivityState>(
+          //     listener: (context, state) {
+          //   if (state is ConnectedState) {
+          //     context
+          //         .read<TaskBloc>()
+          //         .add(const TaskEvent.getTasks(FilterType.all));
+          //   }
+          // }),
+        ],
         child: Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
@@ -138,6 +169,7 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
                           : taskDetailPanelHeight),
                   child: TaskWebViewWidget(
                     fullRequestPath: widget.fullRequestPath,
+                    taskIvy: widget.taskIvy,
                     onScrollToTop: _updateScrollingChanged,
                     canScrollVertical: _canScrollVertical,
                     onProgressChanged: _onProgressChanged,

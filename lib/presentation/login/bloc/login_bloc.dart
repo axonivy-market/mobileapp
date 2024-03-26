@@ -78,7 +78,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           invalidUsernameMessage: invalidUsernameMessage));
     } else {
       try {
-        final engineInfo = await _engineInfoRepository.getEngineInfo();
+        final engineInfo =
+            await _engineInfoRepository.getEngineInfo(CancelToken());
 
         engineInfo.fold(
           (l) {

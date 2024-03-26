@@ -12,5 +12,5 @@ abstract class EngineInfoService {
   factory EngineInfoService(Dio dio) = _EngineInfoService;
 
   @GET('/api/engine/info')
-  Future<EngineInfo> getEngineInfo();
+  Future<EngineInfo> getEngineInfo([@CancelRequest() CancelToken? cancelToken]);
 }

@@ -19,11 +19,9 @@ class AppDio with DioMixin implements Dio {
       connectTimeout: const Duration(seconds: 5),
       sendTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 10),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        'X-Platform': platform,
-        'Accept-Language': 'en'
+      headers: {'X-Platform': platform, 'Accept-Language': 'en'},
+      validateStatus: (status) {
+        return status != null ? status < 500 : false;
       },
     );
     if (kDebugMode) {
@@ -40,7 +38,6 @@ class AppDio with DioMixin implements Dio {
           String basicAuth =
               'Basic ${base64Encode(utf8.encode('$username:$password'))}';
           options.headers['Authorization'] = basicAuth;
-          options.data ??= {};
           debugPrint('Headers: ${options.headers}');
           return handler.next(options);
         },

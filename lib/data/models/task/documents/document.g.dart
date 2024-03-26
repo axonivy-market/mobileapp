@@ -3,6 +3,62 @@
 part of 'document.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class DocumentImplAdapter extends TypeAdapter<_$DocumentImpl> {
+  @override
+  final int typeId = 3;
+
+  @override
+  _$DocumentImpl read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return _$DocumentImpl(
+      id: fields[0] as int,
+      name: fields[1] as String,
+      url: fields[2] as String,
+      path: fields[3] as String,
+      fileLocalState: fields[4] as int,
+      fileLocalPath: fields[5] as String,
+      fileLocalData: (fields[6] as List?)?.cast<int>(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, _$DocumentImpl obj) {
+    writer
+      ..writeByte(7)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.url)
+      ..writeByte(3)
+      ..write(obj.path)
+      ..writeByte(4)
+      ..write(obj.fileLocalState)
+      ..writeByte(5)
+      ..write(obj.fileLocalPath)
+      ..writeByte(6)
+      ..write(obj.fileLocalData);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DocumentImplAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
@@ -12,6 +68,11 @@ _$DocumentImpl _$$DocumentImplFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String? ?? "",
       url: json['url'] as String? ?? "",
       path: json['path'] as String? ?? "",
+      fileLocalState: json['fileLocalState'] as int? ?? 0,
+      fileLocalPath: json['fileLocalPath'] as String? ?? "",
+      fileLocalData: (json['fileLocalData'] as List<dynamic>?)
+          ?.map((e) => e as int)
+          .toList(),
     );
 
 Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
@@ -20,4 +81,7 @@ Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
       'name': instance.name,
       'url': instance.url,
       'path': instance.path,
+      'fileLocalState': instance.fileLocalState,
+      'fileLocalPath': instance.fileLocalPath,
+      'fileLocalData': instance.fileLocalData,
     };

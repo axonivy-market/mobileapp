@@ -2,7 +2,6 @@ import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/data/models/processes/process.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
-import 'package:axon_ivy/util/widgets/offline_popup_widget.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
@@ -113,7 +112,7 @@ class ProcessesView extends StatelessWidget {
   void _navigateProcessActivity(BuildContext context, Process process) {
     context.push(AppRoutes.taskActivity,
         extra: {'path': process.fullRequestPath}).then((value) {
-      if (value != null && value is int) {
+      if (value != null && value is Map) {
         context.read<TabBarCubit>().navigateTaskList(value);
       }
     });

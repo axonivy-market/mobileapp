@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:axon_ivy/data/repositories/engine/engine_info_repository.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -17,6 +18,7 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   StreamSubscription? _streamSubscription;
   var connectivityResult = ConnectivityResult.wifi;
   final EngineInfoRepository _engineInfoRepository;
+  var cancelToken = CancelToken();
 
   ConnectivityBloc(this._engineInfoRepository)
       : super(const ConnectivityState.initial()) {
@@ -38,6 +40,7 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
         _getEngineInfo();
       } else if (result == ConnectivityResult.none &&
           (result != connectivityResult)) {
+        cancelToken.cancel();
         connectivityResult = result;
         add(const ConnectivityEvent.notConnectedEvent());
       }
@@ -45,8 +48,12 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   }
 
   Future<void> _getEngineInfo() async {
+    if (!cancelToken.isCancelled) {
+      cancelToken.cancel();
+    }
+    cancelToken = CancelToken();
     try {
-      final engineInfo = await _engineInfoRepository.getEngineInfo();
+      final engineInfo = await _engineInfoRepository.getEngineInfo(cancelToken);
 
       engineInfo.fold(
         (l) {

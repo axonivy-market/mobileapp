@@ -1,8 +1,13 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/core/shared/extensions/extensions.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/presentation/task_activity/bloc/task_activity_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,12 +15,14 @@ class TaskWebViewWidget extends StatefulWidget {
   const TaskWebViewWidget({
     super.key,
     required this.fullRequestPath,
+    this.taskIvy,
     required this.onScrollToTop,
     required this.canScrollVertical,
     required this.onProgressChanged,
   });
 
   final String fullRequestPath;
+  final TaskIvy? taskIvy;
   final ValueChanged<bool> onScrollToTop;
   final ValueChanged<bool> canScrollVertical;
   final ValueChanged<double> onProgressChanged;
@@ -37,6 +44,8 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
     verticalScrollBarEnabled: false,
     useShouldInterceptAjaxRequest: true,
     iframeAllowFullscreen: true,
+    useShouldOverrideUrlLoading: true,
+    useShouldInterceptRequest: true,
   );
 
   @override
@@ -51,12 +60,14 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
   }
 
   Future<void> _setCookies(String value) async {
-    final cookieManager = CookieManager.instance();
-    await cookieManager.setCookie(
-      url: WebUri.uri(Uri.parse(widget.fullRequestPath)),
-      name: 'primefaces-theme-mode',
-      value: value,
-    );
+    if (widget.fullRequestPath.isNotEmpty) {
+      final cookieManager = CookieManager.instance();
+      await cookieManager.setCookie(
+        url: WebUri.uri(Uri.parse(widget.fullRequestPath)),
+        name: 'primefaces-theme-mode',
+        value: value,
+      );
+    }
   }
 
   @override
@@ -73,18 +84,34 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         return null;
       },
       initialSettings: settings,
-      initialUrlRequest: URLRequest(
-          url: WebUri(widget.fullRequestPath),
-          headers: {
-            'Authorization': basicAuth,
-          },
-          httpShouldHandleCookies: true),
+      initialUrlRequest: widget.taskIvy?.offline != true
+          ? URLRequest(
+              url: WebUri(widget.fullRequestPath),
+              headers: {
+                HttpHeaders.authorizationHeader: basicAuth,
+              },
+              httpShouldHandleCookies: true)
+          : null,
+      initialData: widget.taskIvy?.offline == true &&
+              widget.taskIvy?.formHTMLPageOffline.isNotEmptyOrNull == true
+          ? InAppWebViewInitialData(
+              data: widget.taskIvy!.formHTMLPageOffline,
+              baseUrl: WebUri(SharedPrefs.getBaseUrl!))
+          : null,
       shouldOverrideUrlLoading: (controller, navigationAction) async {
         if (isFinishedTask) {
-          context.pop(taskId);
+          // Finish task normal
+          context.pop({taskId: ''});
           return NavigationActionPolicy.CANCEL;
         }
+        // Handle finish task offline for iOS
+        _iOSFinishTaskOffline(controller, navigationAction);
         return NavigationActionPolicy.ALLOW;
+      },
+      shouldInterceptRequest: (controller, request) async {
+        // Handle finish task offline for Android
+        await _androidFinishTaskOffline(context, controller, request);
+        return null;
       },
       onScrollChanged: (controller, x, y) {
         final scrollDelta = y - _previousScrollY;
@@ -113,5 +140,82 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         widget.onProgressChanged(newProgress / 100);
       },
     );
+  }
+
+  Future _androidFinishTaskOffline(BuildContext context,
+      InAppWebViewController controller, WebResourceRequest request) async {
+    await controller.evaluateJavascript(source: """
+        var buttons = document.querySelectorAll('button');
+        buttons.forEach(button => {
+          button.addEventListener('click', function() {
+              var buttonID = this.id;
+              window.flutter_inappwebview.callHandler('buttonCLick', this.id); 
+          });
+        });
+        """);
+    await controller.evaluateJavascript(source: """
+              var form = document.getElementById("form");
+              var formData = new FormData(form);
+              var object ={};
+              formData.forEach(function(value, key){
+                object[key]=value;
+              });
+              window.flutter_inappwebview.callHandler('formData', JSON.stringify(object)); 
+        """);
+    var formData = "";
+    var buttonId = '';
+    controller.addJavaScriptHandler(
+        handlerName: 'buttonCLick',
+        callback: (args) {
+          buttonId = args[0];
+        });
+    controller.addJavaScriptHandler(
+        handlerName: 'formData',
+        callback: (args) {
+          formData = args[0];
+          if (widget.taskIvy?.offline == true && buttonId.isNotEmpty) {
+            Map<String, dynamic> resultMap = json.decode(formData);
+            resultMap[buttonId] = '';
+            var task = widget.taskIvy!
+                .copyWith(doneTaskFormDataSerializedOffline: resultMap);
+            context
+                .read<TaskActivityBloc>()
+                .add(TaskActivityEvent.finishTaskOffline(task));
+          }
+        });
+    if (widget.taskIvy?.offline == true &&
+        request.url.toString() == widget.taskIvy?.submitUrlOffline) {
+      // Prevent navigate URL to call finish task offline request
+      await Future.delayed(const Duration(seconds: 30));
+      if (context.mounted) {
+        context.pop();
+      }
+    }
+  }
+
+  NavigationActionPolicy? _iOSFinishTaskOffline(
+      InAppWebViewController controller, NavigationAction navigationAction) {
+    if (widget.taskIvy?.offline == true &&
+        navigationAction.request.url!.toString() ==
+            widget.taskIvy?.submitUrlOffline) {
+      if (context.mounted && navigationAction.request.body != null) {
+        var formValues = utf8.decode(navigationAction.request.body!.toList());
+        Map<String, String> resultMap = {};
+        List<String> pairs = formValues.split('&');
+        for (String pair in pairs) {
+          List<String> keyValuePair = pair.split('=');
+          String key = Uri.decodeComponent(keyValuePair[0]);
+          String value = Uri.decodeComponent(keyValuePair[1]);
+          resultMap[key] = value;
+        }
+        var task = widget.taskIvy!
+            .copyWith(doneTaskFormDataSerializedOffline: resultMap);
+        context
+            .read<TaskActivityBloc>()
+            .add(TaskActivityEvent.finishTaskOffline(task));
+      }
+      return NavigationActionPolicy.CANCEL;
+    }
+    return null;
   }
 }

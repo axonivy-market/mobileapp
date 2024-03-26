@@ -1,6 +1,7 @@
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/list_ext.dart';
+import 'package:axon_ivy/data/models/enums/search_type.dart';
 import 'package:axon_ivy/data/models/search/search.dart';
 import 'package:axon_ivy/presentation/process/process.dart';
 import 'package:axon_ivy/presentation/search/bloc/engine_info_cubit.dart';
@@ -18,8 +19,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../util/widgets/offline_popup_widget.dart';
-
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
 
@@ -36,20 +35,32 @@ class _SearchViewState extends State<SearchView> {
         appBar: const HomeAppBar(
           scrolledUnderElevation: 0,
         ),
-        body: BlocListener<EngineInfoCubit, EngineInfoState>(
-          listener: (context, state) {
-            if (state is GetEngineInfo) {
-              if (state.engineInfo != null) {
-                context
-                    .read<ConnectivityBloc>()
-                    .add(const ConnectivityEvent.connectedEvent());
-              } else {
-                context
-                    .read<ConnectivityBloc>()
-                    .add(const ConnectivityEvent.notConnectedEvent());
+        body: MultiBlocListener(
+          listeners: [
+            BlocListener<EngineInfoCubit, EngineInfoState>(
+                listener: (context, state) {
+              if (state is GetEngineInfo) {
+                if (state.engineInfo != null) {
+                  context
+                      .read<ConnectivityBloc>()
+                      .add(const ConnectivityEvent.connectedEvent());
+                } else {
+                  context
+                      .read<ConnectivityBloc>()
+                      .add(const ConnectivityEvent.notConnectedEvent());
+                }
               }
-            }
-          },
+            }),
+            BlocListener<ConnectivityBloc, ConnectivityState>(
+                listener: (context, state) {
+              context.read<SearchBloc>().isOfflineMode =
+                  state is NotConnectedState;
+              context.read<SearchBloc>().add(
+                    SearchEvent.searchItem(
+                        context.read<SearchBloc>().query, SearchType.tasks),
+                  );
+            }),
+          ],
           child: Stack(
             children: [
               Column(
@@ -77,44 +88,32 @@ class _SearchViewState extends State<SearchView> {
                                           icon: AppAssets.icons.icSearchNotFound
                                               .svg(
                                             colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.tertiaryContainer,
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .tertiaryContainer,
                                               BlendMode.srcIn,
                                             ),
-                                          )
-                                        )
+                                          ))
                                       : searchItemList(context, state)),
                             ],
                           );
                         } else {
                           return DataEmptyWidget(
-                            message: 'search.nothingThereYet'.tr(),
-                            icon: AppAssets.icons.icSearchInitial.svg(
+                              message: 'search.nothingThereYet'.tr(),
+                              icon: AppAssets.icons.icSearchInitial.svg(
                                 colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.tertiaryContainer,
+                                  Theme.of(context)
+                                      .colorScheme
+                                      .tertiaryContainer,
                                   BlendMode.srcIn,
                                 ),
-                              )
-                          );
+                              ));
                         }
                       },
                     ),
                   ),
                 ],
               ),
-              BlocBuilder<ConnectivityBloc, ConnectivityState>(
-                  builder: (context, state) {
-                if (state is NotConnectedState) {
-                  return OfflinePopupWidget(
-                    description: "offline.search_description".tr(),
-                    onRefresh: () async {
-                      final engineCubit = context.read<EngineInfoCubit>();
-                      await Future.delayed(const Duration(seconds: 1));
-                      engineCubit.getEngineInfo();
-                    },
-                  );
-                }
-                return Container();
-              })
             ],
           ),
         ),
@@ -162,7 +161,7 @@ class _SearchViewState extends State<SearchView> {
                         'task': item.task,
                         'path': item.task.fullRequestPath
                       }).then((value) {
-                        if (value != null && value is int) {
+                        if (value != null && value is Map) {
                           context.read<TabBarCubit>().navigateTaskList(value);
                         }
                       });
@@ -186,7 +185,7 @@ class _SearchViewState extends State<SearchView> {
                       context.push(AppRoutes.taskActivity, extra: {
                         'path': item.process.fullRequestPath
                       }).then((value) {
-                        if (value != null && value is int) {
+                        if (value != null && value is Map) {
                           context.read<TabBarCubit>().navigateTaskList(value);
                         }
                       });

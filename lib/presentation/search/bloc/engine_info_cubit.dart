@@ -1,5 +1,6 @@
 import 'package:axon_ivy/data/models/engine/engine_info.dart';
 import 'package:axon_ivy/data/repositories/engine/engine_info_repository.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -17,7 +18,8 @@ class EngineInfoCubit extends Cubit<EngineInfoState> {
 
   void getEngineInfo() async {
     try {
-      final engineInfo = await _engineInfoRepository.getEngineInfo();
+      final engineInfo =
+          await _engineInfoRepository.getEngineInfo(CancelToken());
 
       engineInfo.fold(
         (l) {
