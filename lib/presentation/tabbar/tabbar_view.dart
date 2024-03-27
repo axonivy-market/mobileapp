@@ -2,6 +2,7 @@ import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
@@ -12,9 +13,11 @@ import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
+import 'package:axon_ivy/presentation/task/bloc/task_conflict_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
+import 'package:axon_ivy/util/dialog_message.dart';
 import 'package:axon_ivy/util/resources/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -62,6 +65,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final ToastMessageCubit _toastMessageCubit;
   late final ConnectivityBloc _connectivityBloc;
   late final EngineInfoCubit _engineInfoCubit;
+  late final TaskConflictCubit _taskConflictCubit;
 
   bool shouldFetchData = true;
   int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
@@ -101,6 +105,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _toastMessageCubit = getIt<ToastMessageCubit>();
     _connectivityBloc = getIt<ConnectivityBloc>();
     _engineInfoCubit = getIt<EngineInfoCubit>();
+    _taskConflictCubit = getIt<TaskConflictCubit>();
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
@@ -131,6 +136,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _toastMessageCubit),
         BlocProvider(create: (context) => _connectivityBloc),
         BlocProvider(create: (context) => _engineInfoCubit),
+        BlocProvider(create: (context) => _taskConflictCubit),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -151,6 +157,22 @@ class _TabBarScreenState extends State<TabBarScreen> {
               context.read<ToastMessageCubit>().showToastMessage(state.taskId);
             }
           }),
+          BlocListener<TaskConflictCubit, TaskConflictState>(
+            listener: (context, taskConflictState) {
+              if (taskConflictState is TaskStartableState) {
+                _navigateTaskActivity(context, taskConflictState.task);
+              } else if (taskConflictState is TaskUnstartableState) {
+                DialogMessageUtils.showMessageDialog(
+                  title: 'taskConflict.title'.tr(),
+                  message: taskConflictState.message,
+                  onConfirm: () => _taskBloc
+                      .add(TaskEvent.getTasks(_filterBloc.state.activeFilter)),
+                  barrierDismissible: true, //TODO z1 change to false
+                  context: context,
+                );
+              }
+            },
+          ),
         ],
         child: Scaffold(
           body: IndexedStack(
@@ -269,5 +291,18 @@ class _TabBarScreenState extends State<TabBarScreen> {
         );
       },
     );
+  }
+
+  void _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
+    context.push(AppRoutes.taskActivity, extra: {
+      'task': taskIvy,
+      'path': taskIvy.fullRequestPath
+    }).then((value) {
+      if (value != null && value is int) {
+        context.read<TabBarCubit>().navigateTaskList(value);
+      } else if (value is bool && value == true) {
+        context.read<TaskBloc>().add(const TaskEvent.getTasks(FilterType.all));
+      }
+    });
   }
 }
