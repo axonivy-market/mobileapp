@@ -3,6 +3,7 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/presentation/base_view/base_view.dart';
 import 'package:axon_ivy/presentation/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/profile/bloc/logged_in_cubit.dart';
@@ -19,6 +20,7 @@ import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
 import 'package:axon_ivy/util/dialog_message.dart';
 import 'package:axon_ivy/util/resources/constants.dart';
+import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +45,7 @@ extension GoRouterExtension on GoRouter {
   }
 }
 
-class TabBarScreen extends StatefulWidget {
+class TabBarScreen extends BasePageScreen {
   const TabBarScreen({super.key, required this.child});
 
   final Widget child;
@@ -52,7 +54,7 @@ class TabBarScreen extends StatefulWidget {
   State<TabBarScreen> createState() => _TabBarScreenState();
 }
 
-class _TabBarScreenState extends State<TabBarScreen> {
+class _TabBarScreenState extends BasePageScreenState<TabBarScreen> {
   late final TaskBloc _taskBloc;
   late final ProcessBloc _processBloc;
   late final SearchBloc _searchBloc;
@@ -159,17 +161,22 @@ class _TabBarScreenState extends State<TabBarScreen> {
           }),
           BlocListener<TaskConflictCubit, TaskConflictState>(
             listener: (context, taskConflictState) {
-              if (taskConflictState is TaskStartableState) {
-                _navigateTaskActivity(context, taskConflictState.task);
-              } else if (taskConflictState is TaskUnstartableState) {
-                DialogMessageUtils.showMessageDialog(
-                  title: 'taskConflict.title'.tr(),
-                  message: taskConflictState.message,
-                  onConfirm: () => _taskBloc
-                      .add(TaskEvent.getTasks(_filterBloc.state.activeFilter)),
-                  barrierDismissible: true, //TODO z1 change to false
-                  context: context,
-                );
+              if (taskConflictState is LoadingState) {
+                showLoading();
+              } else {
+                hideLoading();
+                if (taskConflictState is TaskStartableState) {
+                  _navigateTaskActivity(context, taskConflictState.task);
+                } else if (taskConflictState is TaskUnstartableState) {
+                  DialogMessageUtils.showMessageDialog(
+                    title: 'taskConflict.title'.tr(),
+                    message: taskConflictState.message,
+                    onConfirm: () => _taskBloc.add(
+                        TaskEvent.getTasks(_filterBloc.state.activeFilter)),
+                    barrierDismissible: true, //TODO z1 change to false
+                    context: context,
+                  );
+                }
               }
             },
           ),

@@ -16,6 +16,7 @@ class TaskConflictCubit extends Cubit<TaskConflictState> {
       : super(const TaskConflictState.initial());
 
   void checkTaskConflict(int taskId) async {
+    emit(const TaskConflictState.loading());
     try {
       final task = await _taskRepository.getTaskDetail(taskId);
       task.fold(

@@ -19,6 +19,7 @@ mixin _$TaskConflictState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(int currentTime, String message) taskUnstartable,
     required TResult Function(int currentTime, TaskIvy task) taskStartable,
   }) =>
@@ -26,6 +27,7 @@ mixin _$TaskConflictState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(int currentTime, String message)? taskUnstartable,
     TResult? Function(int currentTime, TaskIvy task)? taskStartable,
   }) =>
@@ -33,6 +35,7 @@ mixin _$TaskConflictState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(int currentTime, String message)? taskUnstartable,
     TResult Function(int currentTime, TaskIvy task)? taskStartable,
     required TResult orElse(),
@@ -41,6 +44,7 @@ mixin _$TaskConflictState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(LoadingState value) loading,
     required TResult Function(TaskUnstartableState value) taskUnstartable,
     required TResult Function(TaskStartableState value) taskStartable,
   }) =>
@@ -48,6 +52,7 @@ mixin _$TaskConflictState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(LoadingState value)? loading,
     TResult? Function(TaskUnstartableState value)? taskUnstartable,
     TResult? Function(TaskStartableState value)? taskStartable,
   }) =>
@@ -55,6 +60,7 @@ mixin _$TaskConflictState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(LoadingState value)? loading,
     TResult Function(TaskUnstartableState value)? taskUnstartable,
     TResult Function(TaskStartableState value)? taskStartable,
     required TResult orElse(),
@@ -119,6 +125,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(int currentTime, String message) taskUnstartable,
     required TResult Function(int currentTime, TaskIvy task) taskStartable,
   }) {
@@ -129,6 +136,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(int currentTime, String message)? taskUnstartable,
     TResult? Function(int currentTime, TaskIvy task)? taskStartable,
   }) {
@@ -139,6 +147,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(int currentTime, String message)? taskUnstartable,
     TResult Function(int currentTime, TaskIvy task)? taskStartable,
     required TResult orElse(),
@@ -153,6 +162,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(LoadingState value) loading,
     required TResult Function(TaskUnstartableState value) taskUnstartable,
     required TResult Function(TaskStartableState value) taskStartable,
   }) {
@@ -163,6 +173,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(LoadingState value)? loading,
     TResult? Function(TaskUnstartableState value)? taskUnstartable,
     TResult? Function(TaskStartableState value)? taskStartable,
   }) {
@@ -173,6 +184,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(LoadingState value)? loading,
     TResult Function(TaskUnstartableState value)? taskUnstartable,
     TResult Function(TaskStartableState value)? taskStartable,
     required TResult orElse(),
@@ -186,6 +198,120 @@ class _$InitialImpl implements Initial {
 
 abstract class Initial implements TaskConflictState {
   const factory Initial() = _$InitialImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadingStateImplCopyWith<$Res> {
+  factory _$$LoadingStateImplCopyWith(
+          _$LoadingStateImpl value, $Res Function(_$LoadingStateImpl) then) =
+      __$$LoadingStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadingStateImplCopyWithImpl<$Res>
+    extends _$TaskConflictStateCopyWithImpl<$Res, _$LoadingStateImpl>
+    implements _$$LoadingStateImplCopyWith<$Res> {
+  __$$LoadingStateImplCopyWithImpl(
+      _$LoadingStateImpl _value, $Res Function(_$LoadingStateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$LoadingStateImpl implements LoadingState {
+  const _$LoadingStateImpl();
+
+  @override
+  String toString() {
+    return 'TaskConflictState.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$LoadingStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(int currentTime, String message) taskUnstartable,
+    required TResult Function(int currentTime, TaskIvy task) taskStartable,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(int currentTime, String message)? taskUnstartable,
+    TResult? Function(int currentTime, TaskIvy task)? taskStartable,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(int currentTime, String message)? taskUnstartable,
+    TResult Function(int currentTime, TaskIvy task)? taskStartable,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(LoadingState value) loading,
+    required TResult Function(TaskUnstartableState value) taskUnstartable,
+    required TResult Function(TaskStartableState value) taskStartable,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(LoadingState value)? loading,
+    TResult? Function(TaskUnstartableState value)? taskUnstartable,
+    TResult? Function(TaskStartableState value)? taskStartable,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(LoadingState value)? loading,
+    TResult Function(TaskUnstartableState value)? taskUnstartable,
+    TResult Function(TaskStartableState value)? taskStartable,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadingState implements TaskConflictState {
+  const factory LoadingState() = _$LoadingStateImpl;
 }
 
 /// @nodoc
@@ -264,6 +390,7 @@ class _$TaskUnstartableStateImpl implements TaskUnstartableState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(int currentTime, String message) taskUnstartable,
     required TResult Function(int currentTime, TaskIvy task) taskStartable,
   }) {
@@ -274,6 +401,7 @@ class _$TaskUnstartableStateImpl implements TaskUnstartableState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(int currentTime, String message)? taskUnstartable,
     TResult? Function(int currentTime, TaskIvy task)? taskStartable,
   }) {
@@ -284,6 +412,7 @@ class _$TaskUnstartableStateImpl implements TaskUnstartableState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(int currentTime, String message)? taskUnstartable,
     TResult Function(int currentTime, TaskIvy task)? taskStartable,
     required TResult orElse(),
@@ -298,6 +427,7 @@ class _$TaskUnstartableStateImpl implements TaskUnstartableState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(LoadingState value) loading,
     required TResult Function(TaskUnstartableState value) taskUnstartable,
     required TResult Function(TaskStartableState value) taskStartable,
   }) {
@@ -308,6 +438,7 @@ class _$TaskUnstartableStateImpl implements TaskUnstartableState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(LoadingState value)? loading,
     TResult? Function(TaskUnstartableState value)? taskUnstartable,
     TResult? Function(TaskStartableState value)? taskStartable,
   }) {
@@ -318,6 +449,7 @@ class _$TaskUnstartableStateImpl implements TaskUnstartableState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(LoadingState value)? loading,
     TResult Function(TaskUnstartableState value)? taskUnstartable,
     TResult Function(TaskStartableState value)? taskStartable,
     required TResult orElse(),
@@ -425,6 +557,7 @@ class _$TaskStartableStateImpl implements TaskStartableState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() loading,
     required TResult Function(int currentTime, String message) taskUnstartable,
     required TResult Function(int currentTime, TaskIvy task) taskStartable,
   }) {
@@ -435,6 +568,7 @@ class _$TaskStartableStateImpl implements TaskStartableState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? loading,
     TResult? Function(int currentTime, String message)? taskUnstartable,
     TResult? Function(int currentTime, TaskIvy task)? taskStartable,
   }) {
@@ -445,6 +579,7 @@ class _$TaskStartableStateImpl implements TaskStartableState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? loading,
     TResult Function(int currentTime, String message)? taskUnstartable,
     TResult Function(int currentTime, TaskIvy task)? taskStartable,
     required TResult orElse(),
@@ -459,6 +594,7 @@ class _$TaskStartableStateImpl implements TaskStartableState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
+    required TResult Function(LoadingState value) loading,
     required TResult Function(TaskUnstartableState value) taskUnstartable,
     required TResult Function(TaskStartableState value) taskStartable,
   }) {
@@ -469,6 +605,7 @@ class _$TaskStartableStateImpl implements TaskStartableState {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
+    TResult? Function(LoadingState value)? loading,
     TResult? Function(TaskUnstartableState value)? taskUnstartable,
     TResult? Function(TaskStartableState value)? taskStartable,
   }) {
@@ -479,6 +616,7 @@ class _$TaskStartableStateImpl implements TaskStartableState {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
+    TResult Function(LoadingState value)? loading,
     TResult Function(TaskUnstartableState value)? taskUnstartable,
     TResult Function(TaskStartableState value)? taskStartable,
     required TResult orElse(),
