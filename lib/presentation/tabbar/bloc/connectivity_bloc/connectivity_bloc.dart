@@ -7,9 +7,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 part 'connectivity_bloc.freezed.dart';
-
 part 'connectivity_event.dart';
-
 part 'connectivity_state.dart';
 
 @injectable
@@ -20,6 +18,7 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
 
   ConnectivityBloc(this._engineInfoRepository)
       : super(const ConnectivityState.initial()) {
+    _getEngineInfo(); // Invoking before subscription
     on<ConnectivityEvent>((event, emit) {
       if (event is ConnectedEvent) {
         emit(const ConnectivityState.connectedState());
@@ -30,7 +29,8 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
     _streamSubscription = Connectivity()
         .onConnectivityChanged
         .skip(1)
-        .listen((ConnectivityResult result) {
+        .listen((List<ConnectivityResult> results) { // Fixing the listener callback
+      ConnectivityResult result = results.isNotEmpty ? results[0] : ConnectivityResult.none;
       if ((result == ConnectivityResult.wifi ||
               result == ConnectivityResult.mobile) &&
           result != connectivityResult) {

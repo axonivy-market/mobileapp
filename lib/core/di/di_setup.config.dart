@@ -82,7 +82,9 @@ Future<_i1.GetIt> $initGetIt(
     environmentFilter,
   );
   final appModule = _$AppModule();
-  gh.singleton<_i3.Dio>(appModule.dio);
+  gh.singleton<_i3.Dio>(
+    () => appModule.dio,
+  ); // Change the argument to a function
   gh.factory<_i4.EngineInfoService>(() => _i4.EngineInfoService(gh<_i3.Dio>()));
   gh.factory<_i5.FilterBloc>(() => _i5.FilterBloc());
   gh.factory<_i6.LoggedInCubit>(() => _i6.LoggedInCubit());
