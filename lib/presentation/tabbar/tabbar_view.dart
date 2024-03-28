@@ -11,22 +11,21 @@ import 'package:axon_ivy/presentation/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/presentation/search/bloc/engine_info_cubit.dart';
 import 'package:axon_ivy/presentation/search/bloc/search_bloc.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
-import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/tabbar/bloc/tabbar_cubit.dart';
+import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_bloc.dart';
 import 'package:axon_ivy/presentation/task/bloc/task_conflict_cubit.dart';
 import 'package:axon_ivy/presentation/task/bloc/toast_message_cubit.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
 import 'package:axon_ivy/router/app_router.dart';
-import 'package:axon_ivy/util/dialog_message.dart';
 import 'package:axon_ivy/util/resources/constants.dart';
-import 'package:axon_ivy/util/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../profile/view/profile_view.dart';
 import '../search/view/search_view.dart';
 import '../task/bloc/filter_boc/filter_bloc.dart';
@@ -168,13 +167,12 @@ class _TabBarScreenState extends BasePageScreenState<TabBarScreen> {
                 if (taskConflictState is TaskStartableState) {
                   _navigateTaskActivity(context, taskConflictState.task);
                 } else if (taskConflictState is TaskUnstartableState) {
-                  DialogMessageUtils.showMessageDialog(
+                  showMessageDialog(
                     title: 'taskConflict.title'.tr(),
                     message: taskConflictState.message,
                     onConfirm: () => _taskBloc.add(
                         TaskEvent.getTasks(_filterBloc.state.activeFilter)),
-                    barrierDismissible: true, //TODO z1 change to false
-                    context: context,
+                    barrierDismissible: false,
                   );
                 }
               }
