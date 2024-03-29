@@ -17,7 +17,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class DocumentListPage extends BasePageScreen {
+class DocumentListPage extends BasePage {
   const DocumentListPage({super.key, required this.task});
   final TaskIvy task;
 
@@ -25,7 +25,7 @@ class DocumentListPage extends BasePageScreen {
   State<DocumentListPage> createState() => _DocumentListPageState();
 }
 
-class _DocumentListPageState extends BasePageScreenState<DocumentListPage> {
+class _DocumentListPageState extends BasePageState<DocumentListPage> {
   late UploadFileBloc _uploadFileBloc;
   late DeleteFileBloc _deleteFileBloc;
   late TaskDetailBloc _taskDetailBloc;
@@ -47,17 +47,10 @@ class _DocumentListPageState extends BasePageScreenState<DocumentListPage> {
     if ((task.caseTask?.documents.length ?? 0) > 0) {
       for (var document in task.caseTask!.documents) {
         if (document.name == state.fileNames) {
-          showMessageDialog(
-              title: "documentList.errorTitle".tr(),
-              message: "documentList.errorMessage"
-                  .tr(namedArgs: {'fileName': state.fileNames}));
           return true;
         }
       }
     }
-    _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
-    showMessageDialog(
-        title: "documentList.successTitle".tr(), message: state.message);
     return false;
   }
 
@@ -79,15 +72,26 @@ class _DocumentListPageState extends BasePageScreenState<DocumentListPage> {
             listener: (context, state) async {
               if (state is UploadSuccessState) {
                 hideLoading();
-                isUploadDuplicateFile(state, task);
+                if (isUploadDuplicateFile(state, task)) {
+                  showMessageDialog(
+                      title: "documentList.errorTitle".tr(),
+                      message: "documentList.errorMessage"
+                          .tr(namedArgs: {'fileName': state.fileNames}));
+                } else {
+                  _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
+                  showMessageDialog(
+                      title: "documentList.successTitle".tr(),
+                      message: state.message);
+                }
               } else if (state is UploadErrorState) {
                 hideLoading();
                 showMessageDialog(
                     title: "documentList.errorTitle".tr(),
                     message: state.error);
               } else if (state is UploadChangeFileNameState) {
-                await displayTextInputDialog(context, state.fileName);
-              } else {
+                await displayTextInputDialog(
+                    context: context, fileName: state.fileName);
+              } else if (state is UploadLoadingState) {
                 showLoading();
               }
             },
@@ -102,7 +106,7 @@ class _DocumentListPageState extends BasePageScreenState<DocumentListPage> {
                     title: "documentList.deleteSuccessTitle".tr(),
                     message: state.message);
                 _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
-              } else {
+              } else if (state is DeleteLoadingState) {
                 showLoading();
               }
             },
@@ -128,7 +132,7 @@ class _DocumentListPageState extends BasePageScreenState<DocumentListPage> {
                 showMessageDialog(
                     title: "documentList.downloadSuccessTitle".tr(),
                     message: state.message);
-              } else {
+              } else if (state is DownloadLoadingState) {
                 showLoading();
               }
             },
@@ -257,9 +261,9 @@ class _DocumentListPageState extends BasePageScreenState<DocumentListPage> {
                     ];
                   },
                   icon: AppAssets.icons.iconAddAttachment.svg(
-                      colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.surface,
-                          BlendMode.srcIn)),
+                    colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.surface, BlendMode.srcIn),
+                  ),
                 ),
               ),
             ],

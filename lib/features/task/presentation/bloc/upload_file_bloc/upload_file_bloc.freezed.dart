@@ -375,7 +375,7 @@ abstract class _ChangeFileName implements UploadFileEvent {
 mixin _$UploadFileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message, String fileNames) success,
     required TResult Function(String fileName) changeFileName,
@@ -383,7 +383,7 @@ mixin _$UploadFileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message, String fileNames)? success,
     TResult? Function(String fileName)? changeFileName,
@@ -391,7 +391,7 @@ mixin _$UploadFileState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message, String fileNames)? success,
     TResult Function(String fileName)? changeFileName,
@@ -448,8 +448,6 @@ abstract class _$$UploadLoadingStateImplCopyWith<$Res> {
   factory _$$UploadLoadingStateImplCopyWith(_$UploadLoadingStateImpl value,
           $Res Function(_$UploadLoadingStateImpl) then) =
       __$$UploadLoadingStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isShowLoading});
 }
 
 /// @nodoc
@@ -459,19 +457,6 @@ class __$$UploadLoadingStateImplCopyWithImpl<$Res>
   __$$UploadLoadingStateImplCopyWithImpl(_$UploadLoadingStateImpl _value,
       $Res Function(_$UploadLoadingStateImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isShowLoading = null,
-  }) {
-    return _then(_$UploadLoadingStateImpl(
-      null == isShowLoading
-          ? _value.isShowLoading
-          : isShowLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
@@ -479,76 +464,61 @@ class __$$UploadLoadingStateImplCopyWithImpl<$Res>
 class _$UploadLoadingStateImpl
     with DiagnosticableTreeMixin
     implements UploadLoadingState {
-  const _$UploadLoadingStateImpl(this.isShowLoading);
-
-  @override
-  final bool isShowLoading;
+  const _$UploadLoadingStateImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadFileState.loading(isShowLoading: $isShowLoading)';
+    return 'UploadFileState.loading()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'UploadFileState.loading'))
-      ..add(DiagnosticsProperty('isShowLoading', isShowLoading));
+    properties.add(DiagnosticsProperty('type', 'UploadFileState.loading'));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UploadLoadingStateImpl &&
-            (identical(other.isShowLoading, isShowLoading) ||
-                other.isShowLoading == isShowLoading));
+        (other.runtimeType == runtimeType && other is _$UploadLoadingStateImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isShowLoading);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UploadLoadingStateImplCopyWith<_$UploadLoadingStateImpl> get copyWith =>
-      __$$UploadLoadingStateImplCopyWithImpl<_$UploadLoadingStateImpl>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message, String fileNames) success,
     required TResult Function(String fileName) changeFileName,
   }) {
-    return loading(isShowLoading);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message, String fileNames)? success,
     TResult? Function(String fileName)? changeFileName,
   }) {
-    return loading?.call(isShowLoading);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message, String fileNames)? success,
     TResult Function(String fileName)? changeFileName,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isShowLoading);
+      return loading();
     }
     return orElse();
   }
@@ -592,13 +562,7 @@ class _$UploadLoadingStateImpl
 }
 
 abstract class UploadLoadingState implements UploadFileState {
-  const factory UploadLoadingState(final bool isShowLoading) =
-      _$UploadLoadingStateImpl;
-
-  bool get isShowLoading;
-  @JsonKey(ignore: true)
-  _$$UploadLoadingStateImplCopyWith<_$UploadLoadingStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory UploadLoadingState() = _$UploadLoadingStateImpl;
 }
 
 /// @nodoc
@@ -676,7 +640,7 @@ class _$UploadErrorStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message, String fileNames) success,
     required TResult Function(String fileName) changeFileName,
@@ -687,7 +651,7 @@ class _$UploadErrorStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message, String fileNames)? success,
     TResult? Function(String fileName)? changeFileName,
@@ -698,7 +662,7 @@ class _$UploadErrorStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message, String fileNames)? success,
     TResult Function(String fileName)? changeFileName,
@@ -842,7 +806,7 @@ class _$UploadSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message, String fileNames) success,
     required TResult Function(String fileName) changeFileName,
@@ -853,7 +817,7 @@ class _$UploadSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message, String fileNames)? success,
     TResult? Function(String fileName)? changeFileName,
@@ -864,7 +828,7 @@ class _$UploadSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message, String fileNames)? success,
     TResult Function(String fileName)? changeFileName,
@@ -1003,7 +967,7 @@ class _$UploadChangeFileNameStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message, String fileNames) success,
     required TResult Function(String fileName) changeFileName,
@@ -1014,7 +978,7 @@ class _$UploadChangeFileNameStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message, String fileNames)? success,
     TResult? Function(String fileName)? changeFileName,
@@ -1025,7 +989,7 @@ class _$UploadChangeFileNameStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message, String fileNames)? success,
     TResult Function(String fileName)? changeFileName,

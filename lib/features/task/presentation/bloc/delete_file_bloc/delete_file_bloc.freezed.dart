@@ -250,21 +250,21 @@ abstract class _DeleteFile implements DeleteFileEvent {
 mixin _$DeleteFileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
@@ -317,8 +317,6 @@ abstract class _$$DeleteLoadingStateImplCopyWith<$Res> {
   factory _$$DeleteLoadingStateImplCopyWith(_$DeleteLoadingStateImpl value,
           $Res Function(_$DeleteLoadingStateImpl) then) =
       __$$DeleteLoadingStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isShowLoading});
 }
 
 /// @nodoc
@@ -328,19 +326,6 @@ class __$$DeleteLoadingStateImplCopyWithImpl<$Res>
   __$$DeleteLoadingStateImplCopyWithImpl(_$DeleteLoadingStateImpl _value,
       $Res Function(_$DeleteLoadingStateImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isShowLoading = null,
-  }) {
-    return _then(_$DeleteLoadingStateImpl(
-      null == isShowLoading
-          ? _value.isShowLoading
-          : isShowLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
@@ -348,73 +333,58 @@ class __$$DeleteLoadingStateImplCopyWithImpl<$Res>
 class _$DeleteLoadingStateImpl
     with DiagnosticableTreeMixin
     implements DeleteLoadingState {
-  const _$DeleteLoadingStateImpl(this.isShowLoading);
-
-  @override
-  final bool isShowLoading;
+  const _$DeleteLoadingStateImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DeleteFileState.loading(isShowLoading: $isShowLoading)';
+    return 'DeleteFileState.loading()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'DeleteFileState.loading'))
-      ..add(DiagnosticsProperty('isShowLoading', isShowLoading));
+    properties.add(DiagnosticsProperty('type', 'DeleteFileState.loading'));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteLoadingStateImpl &&
-            (identical(other.isShowLoading, isShowLoading) ||
-                other.isShowLoading == isShowLoading));
+        (other.runtimeType == runtimeType && other is _$DeleteLoadingStateImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isShowLoading);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteLoadingStateImplCopyWith<_$DeleteLoadingStateImpl> get copyWith =>
-      __$$DeleteLoadingStateImplCopyWithImpl<_$DeleteLoadingStateImpl>(
-          this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message) success,
   }) {
-    return loading(isShowLoading);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message)? success,
   }) {
-    return loading?.call(isShowLoading);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isShowLoading);
+      return loading();
     }
     return orElse();
   }
@@ -455,13 +425,7 @@ class _$DeleteLoadingStateImpl
 }
 
 abstract class DeleteLoadingState implements DeleteFileState {
-  const factory DeleteLoadingState(final bool isShowLoading) =
-      _$DeleteLoadingStateImpl;
-
-  bool get isShowLoading;
-  @JsonKey(ignore: true)
-  _$$DeleteLoadingStateImplCopyWith<_$DeleteLoadingStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  const factory DeleteLoadingState() = _$DeleteLoadingStateImpl;
 }
 
 /// @nodoc
@@ -539,7 +503,7 @@ class _$DeleteErrorStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message) success,
   }) {
@@ -549,7 +513,7 @@ class _$DeleteErrorStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message)? success,
   }) {
@@ -559,7 +523,7 @@ class _$DeleteErrorStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
@@ -689,7 +653,7 @@ class _$DeleteSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message) success,
   }) {
@@ -699,7 +663,7 @@ class _$DeleteSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message)? success,
   }) {
@@ -709,7 +673,7 @@ class _$DeleteSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),

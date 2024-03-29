@@ -69,7 +69,7 @@ dev_dependencies:
   injectable_generator: ^2.4.1
   retrofit_generator: ^8.0.5
 flutter_gen:
-  output: lib/core/generated/
+  output: lib/generated/
   integrations:
     flutter_svg: true
 

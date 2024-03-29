@@ -34,7 +34,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   File? cameraFile;
 
   UploadFileBloc(this._uploadFileRepository)
-      : super(const UploadFileState.loading(false)) {
+      : super(const UploadFileState.loading()) {
     on<_UploadFiles>(_uploadFile);
     on<_ChangeFileName>(_changeFileName);
 
@@ -51,12 +51,12 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       String dir = path.dirname(filePath);
       String newName = path.join(dir, newFileName);
       File file = cameraFile!.renameSync(newName);
-      emit(const UploadFileState.loading(true));
+      emit(const UploadFileState.loading());
       await uploadFiles(
           caseId: caseId, file: file, emit: emit, fileName: newFileName);
       emit(UploadFileState.success(uploadMessage, newFileName));
     } else {
-      emit(const UploadFileState.loading(true));
+      emit(const UploadFileState.loading());
 
       await uploadFiles(
           caseId: caseId, file: cameraFile!, emit: emit, fileName: fileName);
@@ -101,7 +101,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     );
     if (result != null) {
       PlatformFile platformFile = result.files.first;
-      emit(const UploadFileState.loading(true));
+      emit(const UploadFileState.loading());
       if (platformFile.size < maxFileSize) {
         File fileUpload = File(platformFile.path!);
 
@@ -170,7 +170,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
 
     if (result != null) {
       PlatformFile platformFile = result.files.first;
-      emit(const UploadFileState.loading(true));
+      emit(const UploadFileState.loading());
       if (platformFile.size < maxFileSize) {
         // 10MB
         File fileUpload = File(platformFile.path!);

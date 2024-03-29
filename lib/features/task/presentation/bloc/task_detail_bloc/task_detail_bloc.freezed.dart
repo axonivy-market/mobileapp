@@ -372,7 +372,7 @@ abstract class _StartTask implements TaskDetailEvent {
 mixin _$TaskDetailState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(TaskIvy task) success,
     required TResult Function(TaskIvy task) startTaskSucess,
@@ -380,7 +380,7 @@ mixin _$TaskDetailState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(TaskIvy task)? success,
     TResult? Function(TaskIvy task)? startTaskSucess,
@@ -388,7 +388,7 @@ mixin _$TaskDetailState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(TaskIvy task)? success,
     TResult Function(TaskIvy task)? startTaskSucess,
@@ -447,8 +447,6 @@ abstract class _$$TaskDetailLoadingStateImplCopyWith<$Res> {
           _$TaskDetailLoadingStateImpl value,
           $Res Function(_$TaskDetailLoadingStateImpl) then) =
       __$$TaskDetailLoadingStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isShowLoading});
 }
 
 /// @nodoc
@@ -459,19 +457,6 @@ class __$$TaskDetailLoadingStateImplCopyWithImpl<$Res>
       _$TaskDetailLoadingStateImpl _value,
       $Res Function(_$TaskDetailLoadingStateImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isShowLoading = null,
-  }) {
-    return _then(_$TaskDetailLoadingStateImpl(
-      null == isShowLoading
-          ? _value.isShowLoading
-          : isShowLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
@@ -479,76 +464,62 @@ class __$$TaskDetailLoadingStateImplCopyWithImpl<$Res>
 class _$TaskDetailLoadingStateImpl
     with DiagnosticableTreeMixin
     implements TaskDetailLoadingState {
-  const _$TaskDetailLoadingStateImpl(this.isShowLoading);
-
-  @override
-  final bool isShowLoading;
+  const _$TaskDetailLoadingStateImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TaskDetailState.loading(isShowLoading: $isShowLoading)';
+    return 'TaskDetailState.loading()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskDetailState.loading'))
-      ..add(DiagnosticsProperty('isShowLoading', isShowLoading));
+    properties.add(DiagnosticsProperty('type', 'TaskDetailState.loading'));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskDetailLoadingStateImpl &&
-            (identical(other.isShowLoading, isShowLoading) ||
-                other.isShowLoading == isShowLoading));
+            other is _$TaskDetailLoadingStateImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isShowLoading);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TaskDetailLoadingStateImplCopyWith<_$TaskDetailLoadingStateImpl>
-      get copyWith => __$$TaskDetailLoadingStateImplCopyWithImpl<
-          _$TaskDetailLoadingStateImpl>(this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(TaskIvy task) success,
     required TResult Function(TaskIvy task) startTaskSucess,
   }) {
-    return loading(isShowLoading);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(TaskIvy task)? success,
     TResult? Function(TaskIvy task)? startTaskSucess,
   }) {
-    return loading?.call(isShowLoading);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(TaskIvy task)? success,
     TResult Function(TaskIvy task)? startTaskSucess,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isShowLoading);
+      return loading();
     }
     return orElse();
   }
@@ -593,13 +564,7 @@ class _$TaskDetailLoadingStateImpl
 }
 
 abstract class TaskDetailLoadingState implements TaskDetailState {
-  const factory TaskDetailLoadingState(final bool isShowLoading) =
-      _$TaskDetailLoadingStateImpl;
-
-  bool get isShowLoading;
-  @JsonKey(ignore: true)
-  _$$TaskDetailLoadingStateImplCopyWith<_$TaskDetailLoadingStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  const factory TaskDetailLoadingState() = _$TaskDetailLoadingStateImpl;
 }
 
 /// @nodoc
@@ -678,7 +643,7 @@ class _$TaskDetailErrorStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(TaskIvy task) success,
     required TResult Function(TaskIvy task) startTaskSucess,
@@ -689,7 +654,7 @@ class _$TaskDetailErrorStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(TaskIvy task)? success,
     TResult? Function(TaskIvy task)? startTaskSucess,
@@ -700,7 +665,7 @@ class _$TaskDetailErrorStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(TaskIvy task)? success,
     TResult Function(TaskIvy task)? startTaskSucess,
@@ -848,7 +813,7 @@ class _$TaskDetailSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(TaskIvy task) success,
     required TResult Function(TaskIvy task) startTaskSucess,
@@ -859,7 +824,7 @@ class _$TaskDetailSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(TaskIvy task)? success,
     TResult? Function(TaskIvy task)? startTaskSucess,
@@ -870,7 +835,7 @@ class _$TaskDetailSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(TaskIvy task)? success,
     TResult Function(TaskIvy task)? startTaskSucess,
@@ -1019,7 +984,7 @@ class _$TaskDetailStartSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(TaskIvy task) success,
     required TResult Function(TaskIvy task) startTaskSucess,
@@ -1030,7 +995,7 @@ class _$TaskDetailStartSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(TaskIvy task)? success,
     TResult? Function(TaskIvy task)? startTaskSucess,
@@ -1041,7 +1006,7 @@ class _$TaskDetailStartSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(TaskIvy task)? success,
     TResult Function(TaskIvy task)? startTaskSucess,

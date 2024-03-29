@@ -43,35 +43,44 @@ class TasksView extends StatelessWidget {
       child: MultiBlocListener(
         listeners: [
           BlocListener<TaskDetailBloc, TaskDetailState>(
-              listener: (context, state) {
-            if (state is TaskDetailStartSuccessState) {
-              context.push(AppRoutes.taskActivity, extra: {
-                'task': state.task,
-                'path': state.task.fullRequestPath
-              }).then((value) {
-                if (value != null && value is int) {
-                  context.read<TabBarCubit>().navigateTaskList(value);
-                }
-              });
-            }
-          }),
-          BlocListener<TaskBloc, TaskState>(listener: (context, state) {
-            context.read<OfflineIndicatorCubit>().showOfflineIndicator(
-                state is TaskSuccessState && !state.isOnline);
-          }),
+            listener: (context, state) {
+              if (state is TaskDetailStartSuccessState) {
+                context.push(
+                  AppRoutes.taskActivity,
+                  extra: {
+                    'task': state.task,
+                    'path': state.task.fullRequestPath
+                  },
+                ).then(
+                  (value) {
+                    if (value != null && value is int) {
+                      context.read<TabBarCubit>().navigateTaskList(value);
+                    }
+                  },
+                );
+              }
+            },
+          ),
+          BlocListener<TaskBloc, TaskState>(
+            listener: (context, state) {
+              context.read<OfflineIndicatorCubit>().showOfflineIndicator(
+                  state is TaskSuccessState && !state.isOnline);
+            },
+          ),
           BlocListener<ConnectivityBloc, ConnectivityState>(
-              listener: (context, state) {
-            context
-                .read<TaskBloc>()
-                .add(TaskEvent.showOfflinePopupEvent(state is ConnectedState));
-          }),
+            listener: (context, state) {
+              context.read<TaskBloc>().add(
+                  TaskEvent.showOfflinePopupEvent(state is ConnectedState));
+            },
+          ),
           BlocListener<ToastMessageCubit, ToastMessageState>(
               listener: (context, state) {
             if (state is ShowToastMessageState) {
               ToastMessageUtils.showMessage(
-                  'Following task has been completed: "${state.taskName}"',
-                  AppAssets.icons.success,
-                  context);
+                'Following task has been completed: "${state.taskName}"',
+                AppAssets.icons.success,
+                context,
+              );
             }
           }),
         ],

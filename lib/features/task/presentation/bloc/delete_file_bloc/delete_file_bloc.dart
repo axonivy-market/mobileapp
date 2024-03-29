@@ -19,7 +19,7 @@ part 'delete_file_state.dart';
 class DeleteFileBloc extends Bloc<DeleteFileEvent, DeleteFileState> {
   final DeleteFileUseCase _fileRepository;
   DeleteFileBloc(this._fileRepository)
-      : super(const DeleteFileState.loading(false)) {
+      : super(const DeleteFileState.loading()) {
     on<_DeleteFile>(deleteFile);
     getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
         ? AppConfig.baseUrl
@@ -27,7 +27,7 @@ class DeleteFileBloc extends Bloc<DeleteFileEvent, DeleteFileState> {
   }
 
   Future deleteFile(DeleteFileEvent event, Emitter emit) async {
-    emit(const DeleteFileState.loading(true));
+    emit(const DeleteFileState.loading());
     try {
       final tasks = await _fileRepository.execute(
           event.caseId, event.documentId, APIHeader.requestBy);

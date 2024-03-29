@@ -14,7 +14,7 @@ part 'task_detail_state.dart';
 class TaskDetailBloc extends Bloc<TaskDetailEvent, TaskDetailState> {
   final GetTaskUseCase _taskRepository;
   TaskDetailBloc(this._taskRepository)
-      : super(const TaskDetailState.loading(false)) {
+      : super(const TaskDetailState.loading()) {
     on<TaskDetailEvent>((event, emit) async {
       if (event is _GetTaskDetail) {
         await _getTaskDetail(event.taskId, emit);
@@ -25,7 +25,7 @@ class TaskDetailBloc extends Bloc<TaskDetailEvent, TaskDetailState> {
   }
 
   Future _getTaskDetail(int taskId, Emitter emit) async {
-    emit(const TaskDetailState.loading(true));
+    emit(const TaskDetailState.loading());
     try {
       final task = await _taskRepository.execute(taskId: taskId);
       if (emit.isDone) return;
@@ -45,7 +45,7 @@ class TaskDetailBloc extends Bloc<TaskDetailEvent, TaskDetailState> {
   }
 
   Future _startTask(TaskIvy task, Emitter emit) async {
-    emit(const TaskDetailState.loading(true));
+    emit(const TaskDetailState.loading());
     await Future.delayed(const Duration(seconds: 1));
     if (emit.isDone) return;
     emit(TaskDetailState.startTaskSucess(task));

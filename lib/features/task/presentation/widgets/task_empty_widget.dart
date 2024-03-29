@@ -13,9 +13,7 @@ class TaskEmptyWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height / 4)
-              .r,
+      padding: EdgeInsets.symmetric(vertical: 150.h).r,
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.center,
@@ -41,7 +39,8 @@ class TaskEmptyWidget extends StatelessWidget {
               : AppAssets.icons.noExpiredTask.svg(
                   colorFilter: ColorFilter.mode(
                       Theme.of(context).colorScheme.tertiaryContainer,
-                      BlendMode.srcIn)),
+                      BlendMode.srcIn),
+                ),
         ],
       ),
     );
@@ -49,6 +48,8 @@ class TaskEmptyWidget extends StatelessWidget {
 
   SvgPicture getKoalaImages(BuildContext context) =>
       Theme.of(context).brightness == Brightness.light
-          ? AppAssets.images.koalaWithPassionFruit.svg()
-          : AppAssets.images.koalaWithPassionFruitDark.svg();
+          ? AppAssets.images.koalaWithPassionFruit
+              .svg(width: 175.w, height: 173.h)
+          : AppAssets.images.koalaWithPassionFruitDark
+              .svg(width: 175.w, height: 173.h);
 }

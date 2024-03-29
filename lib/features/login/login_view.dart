@@ -13,14 +13,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../core/di/di_setup.dart';
 
-class LoginView extends BasePageScreen {
-  const LoginView({super.key});
+class LoginPage extends BasePage {
+  const LoginPage({super.key});
 
   @override
-  State<LoginView> createState() => _LoginViewState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginViewState extends BasePageScreenState<LoginView> {
+class _LoginPageState extends BasePageState<LoginPage> {
   final _usernameTextController = TextEditingController();
   final _usernameFocusNode = FocusNode();
 

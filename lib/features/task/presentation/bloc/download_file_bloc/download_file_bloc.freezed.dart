@@ -250,21 +250,21 @@ abstract class _DownloadFile implements DownloadFileEvent {
 mixin _$DownloadFileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
@@ -317,8 +317,6 @@ abstract class _$$DownloadLoadingStateImplCopyWith<$Res> {
   factory _$$DownloadLoadingStateImplCopyWith(_$DownloadLoadingStateImpl value,
           $Res Function(_$DownloadLoadingStateImpl) then) =
       __$$DownloadLoadingStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isShowLoading});
 }
 
 /// @nodoc
@@ -328,19 +326,6 @@ class __$$DownloadLoadingStateImplCopyWithImpl<$Res>
   __$$DownloadLoadingStateImplCopyWithImpl(_$DownloadLoadingStateImpl _value,
       $Res Function(_$DownloadLoadingStateImpl) _then)
       : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isShowLoading = null,
-  }) {
-    return _then(_$DownloadLoadingStateImpl(
-      null == isShowLoading
-          ? _value.isShowLoading
-          : isShowLoading // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
 }
 
 /// @nodoc
@@ -348,74 +333,59 @@ class __$$DownloadLoadingStateImplCopyWithImpl<$Res>
 class _$DownloadLoadingStateImpl
     with DiagnosticableTreeMixin
     implements DownloadLoadingState {
-  const _$DownloadLoadingStateImpl(this.isShowLoading);
-
-  @override
-  final bool isShowLoading;
+  const _$DownloadLoadingStateImpl();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DownloadFileState.loading(isShowLoading: $isShowLoading)';
+    return 'DownloadFileState.loading()';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'DownloadFileState.loading'))
-      ..add(DiagnosticsProperty('isShowLoading', isShowLoading));
+    properties.add(DiagnosticsProperty('type', 'DownloadFileState.loading'));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DownloadLoadingStateImpl &&
-            (identical(other.isShowLoading, isShowLoading) ||
-                other.isShowLoading == isShowLoading));
+            other is _$DownloadLoadingStateImpl);
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isShowLoading);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DownloadLoadingStateImplCopyWith<_$DownloadLoadingStateImpl>
-      get copyWith =>
-          __$$DownloadLoadingStateImplCopyWithImpl<_$DownloadLoadingStateImpl>(
-              this, _$identity);
+  int get hashCode => runtimeType.hashCode;
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message) success,
   }) {
-    return loading(isShowLoading);
+    return loading();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message)? success,
   }) {
-    return loading?.call(isShowLoading);
+    return loading?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(isShowLoading);
+      return loading();
     }
     return orElse();
   }
@@ -456,13 +426,7 @@ class _$DownloadLoadingStateImpl
 }
 
 abstract class DownloadLoadingState implements DownloadFileState {
-  const factory DownloadLoadingState(final bool isShowLoading) =
-      _$DownloadLoadingStateImpl;
-
-  bool get isShowLoading;
-  @JsonKey(ignore: true)
-  _$$DownloadLoadingStateImplCopyWith<_$DownloadLoadingStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  const factory DownloadLoadingState() = _$DownloadLoadingStateImpl;
 }
 
 /// @nodoc
@@ -540,7 +504,7 @@ class _$DownloadErrorStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message) success,
   }) {
@@ -550,7 +514,7 @@ class _$DownloadErrorStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message)? success,
   }) {
@@ -560,7 +524,7 @@ class _$DownloadErrorStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),
@@ -692,7 +656,7 @@ class _$DownloadSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(bool isShowLoading) loading,
+    required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(String message) success,
   }) {
@@ -702,7 +666,7 @@ class _$DownloadSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(bool isShowLoading)? loading,
+    TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(String message)? success,
   }) {
@@ -712,7 +676,7 @@ class _$DownloadSuccessStateImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(bool isShowLoading)? loading,
+    TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(String message)? success,
     required TResult orElse(),

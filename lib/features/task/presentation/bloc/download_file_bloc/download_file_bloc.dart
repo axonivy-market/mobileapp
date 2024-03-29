@@ -18,7 +18,7 @@ part 'download_file_state.dart';
 
 @injectable
 class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
-  DownloadFileBloc() : super(const DownloadFileState.loading(false)) {
+  DownloadFileBloc() : super(const DownloadFileState.loading()) {
     on<_DownloadFile>(downloadFile);
     getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
         ? AppConfig.baseUrl
@@ -30,7 +30,7 @@ class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
     final password = SharedPrefs.getPassword;
     String basicAuth =
         'Basic ${base64Encode(utf8.encode('$username:$password'))}';
-    emit(const DownloadFileState.loading(true));
+    emit(const DownloadFileState.loading());
     try {
       final response = await http.get(
         Uri.parse(event.url),

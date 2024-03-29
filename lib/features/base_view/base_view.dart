@@ -6,140 +6,201 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-abstract class BasePageScreen extends StatefulWidget {
-  const BasePageScreen({super.key});
+abstract class BasePage extends StatefulWidget {
+  const BasePage({super.key});
 }
 
-abstract class BasePageScreenState<Page extends BasePageScreen>
-    extends State<Page> {
+abstract class BasePageState<Page extends BasePage> extends State<Page> {
   Function()? loading;
   final TextEditingController _textFieldController = TextEditingController();
   String valueText = "";
+  final formKey = GlobalKey<FormState>();
 
-  void showLoading() {
+  @override
+  void dispose() {
+    _textFieldController.dispose();
+    super.dispose();
+  }
+
+  showLoading() {
     loading ??= showAppLoading();
   }
 
-  void hideLoading() {
+  hideLoading() {
     loading?.call();
     loading = null;
   }
 
-  Future<void> displayTextInputDialog(
-      BuildContext context, String fileName) async {
+  Future displayTextInputDialog({
+    required BuildContext context,
+    required String fileName,
+    bool barrierDismissible = false,
+  }) async {
     final uploadFileBloc = context.read<UploadFileBloc>();
     return showDialog(
       barrierDismissible: false,
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text(
-            "uploadFile.changeFileName".tr(),
-            textAlign: TextAlign.center,
-            style: GoogleFonts.inter(
+        return Form(
+          key: formKey,
+          child: AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(10.0.r))),
+            elevation: 0,
+            backgroundColor: Theme.of(context).colorScheme.background,
+            title: Text(
+              "uploadFile.changeFileName".tr(),
+              textAlign: TextAlign.center,
+              style: GoogleFonts.inter(
                 color: Theme.of(context).colorScheme.surface,
                 fontSize: 17.sp,
-                fontWeight: FontWeight.w500),
-          ),
-          content: TextField(
-            onChanged: (value) {
-              valueText = value;
-            },
-            controller: _textFieldController..text = fileName,
-          ),
-          actions: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 5)
-                            .r,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20).r,
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                      border: Border.all(
-                        color: Theme.of(context).colorScheme.outline,
-                      ),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "dialog.cancel".tr(),
-                        style: GoogleFonts.inter(
-                          color: Theme.of(context).colorScheme.surface,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  ),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            content: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: TextFormField(
+                style: TextStyle(
+                  color: Theme.of(context).colorScheme.secondary,
                 ),
-                20.horizontalSpace,
-                GestureDetector(
-                  onTap: () {
-                    uploadFileBloc.add(UploadFileEvent.changeFileName(
-                        valueText == "" ? fileName : valueText));
-                    setState(() {
-                      valueText = "";
-                    });
-                    Navigator.pop(context);
-                  },
-                  child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 35, vertical: 5)
-                            .r,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Theme.of(context).colorScheme.outline,
-                        ),
-                        borderRadius: BorderRadius.circular(20).r,
-                        color: Theme.of(context).colorScheme.primaryContainer),
-                    child: Center(
-                      child: Text(
-                        "dialog.ok".tr(),
-                        style: GoogleFonts.inter(
-                            color: Theme.of(context).colorScheme.surface,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500),
-                      ),
+                onChanged: (value) {
+                  valueText = value;
+                },
+                controller: _textFieldController..text = fileName,
+                decoration: InputDecoration(
+                  focusedBorder: InputBorder.none,
+                  enabledBorder: InputBorder.none,
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(width: 0.5),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(4.0),
                     ),
                   ),
-                )
-              ],
-            )
-          ],
+                  filled: true,
+                  fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
+                  hintStyle: GoogleFonts.inter(
+                    fontSize: 17.sp,
+                    color: Theme.of(context).colorScheme.secondary,
+                  ),
+                  hintText: 'My Image Name',
+                ),
+                validator: (value) {
+                  if ((value ?? '').isEmpty) {
+                    return 'Please input the name image!';
+                  }
+                  return null;
+                },
+              ),
+            ),
+            actions: [
+              SizedBox(
+                height: 44.h,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          elevation: const MaterialStatePropertyAll(0.0),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          foregroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).colorScheme.primary,
+                          ),
+                          backgroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).colorScheme.primaryContainer,
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "dialog.cancel".tr(),
+                          style: GoogleFonts.inter(
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                    20.horizontalSpace,
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ButtonStyle(
+                          elevation: const MaterialStatePropertyAll(0.0),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                          ),
+                          foregroundColor: MaterialStatePropertyAll(
+                              Theme.of(context).colorScheme.background),
+                          backgroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).colorScheme.primary,
+                          ),
+                        ),
+                        onPressed: () {
+                          if (!formKey.currentState!.validate()) {
+                            return;
+                          }
+                          uploadFileBloc.add(UploadFileEvent.changeFileName(
+                              valueText == "" ? fileName : valueText));
+                          setState(() {
+                            valueText = "";
+                          });
+                          Navigator.pop(context);
+                        },
+                        child: Text(
+                          'Save',
+                          style: GoogleFonts.inter(
+                            color: Theme.of(context).colorScheme.background,
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
         );
       },
     );
   }
 
-  void showMessageDialog(
-      {required String message,
-      Function()? onCancel,
-      String? title,
-      String? confirmTitle,
-      Function()? onConfirm,
-      bool barrierDismissible = true,
-      bool needShowCancel = false}) {
+  showMessageDialog({
+    required String message,
+    Function()? onCancel,
+    String? title,
+    String? confirmTitle,
+    Function()? onConfirm,
+    bool barrierDismissible = true,
+    bool needShowCancel = false,
+  }) {
     showDialog(
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(8.0.r))),
+              borderRadius: BorderRadius.all(Radius.circular(10.0.r))),
           elevation: 0,
           backgroundColor: Theme.of(context).colorScheme.background,
           title: Text(
             title ?? "",
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-                color: Theme.of(context).colorScheme.surface,
-                fontSize: 17.sp,
-                fontWeight: FontWeight.w500),
+              color: Theme.of(context).colorScheme.surface,
+              fontSize: 17.sp,
+              fontWeight: FontWeight.w500,
+            ),
           ),
           content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
@@ -147,8 +208,10 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
               message,
               textAlign: TextAlign.center,
               style: GoogleFonts.inter(
-                  color: Theme.of(context).colorScheme.secondary,
-                  fontSize: 17.sp),
+                color: Theme.of(context).colorScheme.secondary,
+                fontSize: 17.sp,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           actions: [
@@ -162,15 +225,17 @@ abstract class BasePageScreenState<Page extends BasePageScreen>
                   height: 44.h,
                   padding: const EdgeInsets.symmetric(horizontal: 20).r,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8).r,
-                      color: Theme.of(context).colorScheme.primaryContainer),
+                    borderRadius: BorderRadius.circular(8).r,
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                  ),
                   child: Center(
                     child: Text(
                       confirmTitle ?? "dialog.ok".tr(),
                       style: GoogleFonts.inter(
-                          fontSize: 17.sp,
-                          color: Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.w500),
+                        fontSize: 17.sp,
+                        color: Theme.of(context).colorScheme.primary,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ),

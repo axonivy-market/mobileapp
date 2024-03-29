@@ -78,7 +78,7 @@ class AppRouter {
         path: AppRoutes.login,
         pageBuilder: (context, state) => CustomTransitionPage<void>(
           key: state.pageKey,
-          child: const LoginView(),
+          child: const LoginPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               iosTransition(context, animation, secondaryAnimation, child),
         ),

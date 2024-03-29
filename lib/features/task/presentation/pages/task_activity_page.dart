@@ -15,7 +15,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class TaskActivityPage extends BasePageScreen {
+class TaskActivityPage extends BasePage {
   const TaskActivityPage(
       {super.key, this.taskIvy, required this.fullRequestPath});
 
@@ -26,7 +26,7 @@ class TaskActivityPage extends BasePageScreen {
   State<TaskActivityPage> createState() => _TaskActivityPageState();
 }
 
-class _TaskActivityPageState extends BasePageScreenState<TaskActivityPage>
+class _TaskActivityPageState extends BasePageState<TaskActivityPage>
     with SingleTickerProviderStateMixin {
   LoadingOverlay loadingOverlay = LoadingOverlay();
   late Animation<double> _rotationAnimation;
