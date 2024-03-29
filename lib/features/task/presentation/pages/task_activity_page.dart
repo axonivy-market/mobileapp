@@ -3,7 +3,7 @@ import 'package:axon_ivy/core/extensions/date_time_ext.dart';
 import 'package:axon_ivy/core/extensions/number_ext.dart';
 import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/util/widgets/widgets.dart';
-import 'package:axon_ivy/features/base_view/base_view.dart';
+import 'package:axon_ivy/features/base_page/base_page.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_web_view_widget.dart';

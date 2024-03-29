@@ -1,7 +1,7 @@
 import 'package:axon_ivy/core/theme/theme.dart'; // Import your theme data
 import 'package:axon_ivy/core/util/widgets/widgets.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
-import 'package:axon_ivy/features/base_view/base_view.dart';
+import 'package:axon_ivy/features/base_page/base_page.dart';
 import 'package:axon_ivy/features/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/features/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart'; // Import the ThemeBloc

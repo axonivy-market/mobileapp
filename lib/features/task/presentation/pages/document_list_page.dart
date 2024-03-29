@@ -2,7 +2,7 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/extensions.dart';
 import 'package:axon_ivy/core/util/widgets/back_button_widget.dart';
 import 'package:axon_ivy/core/util/widgets/data_empty_widget.dart';
-import 'package:axon_ivy/features/base_view/base_view.dart';
+import 'package:axon_ivy/features/base_page/base_page.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/delete_file_bloc/delete_file_bloc.dart';

@@ -325,8 +325,9 @@ class _FilterWidgetState extends State<FilterWidget> {
             ];
           },
           child: Container(
+            height: 40.h,
+            width: 80.w,
             clipBehavior: Clip.hardEdge,
-            padding: const EdgeInsets.fromLTRB(9, 8, 9, 8).r,
             decoration: BoxDecoration(
                 border:
                     Border.all(color: Theme.of(context).colorScheme.outline),
@@ -335,6 +336,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                     ? Theme.of(context).colorScheme.primary
                     : Theme.of(context).colorScheme.onPrimaryContainer),
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 AppAssets.icons.filter.svg(
                     colorFilter: ColorFilter.mode(

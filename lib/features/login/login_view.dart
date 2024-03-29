@@ -1,7 +1,7 @@
 import 'package:axon_ivy/core/util/widgets/widgets.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/data/models/qr_model/qr_model.dart';
-import 'package:axon_ivy/features/base_view/base_view.dart';
+import 'package:axon_ivy/features/base_page/base_page.dart';
 import 'package:axon_ivy/features/login/bloc/login_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
