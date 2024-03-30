@@ -43,7 +43,11 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
+        scrolledUnderElevation: 15,
+        elevation: 0,
+        shadowColor: Colors.black.withOpacity(0.4),
         backgroundColor: Theme.of(context).colorScheme.background,
+        surfaceTintColor: Theme.of(context).colorScheme.background,
         title: Text(
           "profile.signIn".tr(),
           style: GoogleFonts.inter(

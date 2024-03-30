@@ -18,8 +18,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../util/widgets/offline_popup_widget.dart';
-
 class SearchView extends StatefulWidget {
   const SearchView({super.key});
 
@@ -77,24 +75,26 @@ class _SearchViewState extends State<SearchView> {
                                           icon: AppAssets.icons.icSearchNotFound
                                               .svg(
                                             colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.tertiaryContainer,
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .tertiaryContainer,
                                               BlendMode.srcIn,
                                             ),
-                                          )
-                                        )
+                                          ))
                                       : searchItemList(context, state)),
                             ],
                           );
                         } else {
                           return DataEmptyWidget(
-                            message: 'search.nothingThereYet'.tr(),
-                            icon: AppAssets.icons.icSearchInitial.svg(
+                              message: 'search.nothingThereYet'.tr(),
+                              icon: AppAssets.icons.icSearchInitial.svg(
                                 colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.tertiaryContainer,
+                                  Theme.of(context)
+                                      .colorScheme
+                                      .tertiaryContainer,
                                   BlendMode.srcIn,
                                 ),
-                              )
-                          );
+                              ));
                         }
                       },
                     ),
@@ -129,9 +129,9 @@ class _SearchViewState extends State<SearchView> {
           backgroundColor: Theme.of(context).colorScheme.background,
           toolbarHeight: 10,
           pinned: true,
-          scrolledUnderElevation: 0.2,
-          shadowColor: Theme.of(context).colorScheme.outline,
-          surfaceTintColor: Theme.of(context).colorScheme.outline,
+          scrolledUnderElevation: 15,
+          shadowColor: Colors.grey.withOpacity(0.55),
+          surfaceTintColor: Theme.of(context).colorScheme.background,
           elevation: 0,
         ),
         SliverList(

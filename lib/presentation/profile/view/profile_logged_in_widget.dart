@@ -66,10 +66,10 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
-        elevation: 0, 
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+        ),
+        elevation: 0,
       ),
       child: SizedBox(
         width: double.infinity,
@@ -213,10 +213,8 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 color: Theme.of(context).colorScheme.surface),
           ),
           SwitchWidget(
-            isDarkMode: false,
-            isDemoMode: _isDemoMode,
-            onThemeChanged: (value) {},
-            onDemoModeChanged: (value) {
+            isSwitchTurnOn: _isDemoMode,
+            onSwitchChanged: (value) {
               setState(() {
                 _isDemoMode = value;
               });
@@ -247,21 +245,17 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
               Text(
                 "profile.darkMode".tr(),
                 style: GoogleFonts.inter(
-                fontWeight: FontWeight.w400,
-                fontSize: 17,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 17,
                   color: Theme.of(context).colorScheme.surface,
                 ),
               ),
               SwitchWidget(
-                isDarkMode: isDarkMode,
-                isDemoMode: false,
-                onThemeChanged: (value) {
+                isSwitchTurnOn: isDarkMode,
+                onSwitchChanged: (value) {
                   context.read<ThemeBloc>().add(
                         ThemeEvent.changeTheme(value ? darkMode : lightMode),
                       );
-                },
-                onDemoModeChanged: (value) {
-                  // Handle demo mode change here if needed
                 },
               ),
             ],
@@ -269,5 +263,5 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
         );
       },
     );
-}
+  }
 }

@@ -1,6 +1,5 @@
 import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/core/generated/assets.gen.dart';
-import 'package:axon_ivy/core/generated/colors.gen.dart';
 import 'package:axon_ivy/core/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/presentation/task/bloc/offline_indicator_cubit.dart';
@@ -13,7 +12,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
     super.key,
     this.isShowLastUpdated = false,
-    this.scrolledUnderElevation = 1.0,
+    this.scrolledUnderElevation = 15.0,
   });
 
   final bool isShowLastUpdated;
@@ -27,7 +26,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       scrolledUnderElevation: scrolledUnderElevation,
       backgroundColor: Theme.of(context).colorScheme.background,
-      shadowColor: Theme.of(context).colorScheme.outline,
+      shadowColor: Colors.black.withOpacity(0.4),
       surfaceTintColor: Theme.of(context).colorScheme.background,
       elevation: 0,
       leadingWidth: 120,
