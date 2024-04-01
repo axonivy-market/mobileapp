@@ -127,15 +127,7 @@ class TasksViewContent extends StatelessWidget {
             } else if (taskState is TaskSuccessState) {
               return Stack(
                 children: [
-                  Column(
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(15, 20, 15, 0),
-                        child: FilterWidget(),
-                      ),
-                      Expanded(child: _buildTaskList(context, taskState.tasks)),
-                    ],
-                  ),
+                  _buildTaskList(context, taskState.tasks),
                   if (!taskState.isOnline)
                     OfflinePopupWidget(
                       description: "offline.task_description".tr(),
@@ -190,12 +182,21 @@ class TasksViewContent extends StatelessWidget {
       slivers: [
         SliverAppBar(
           backgroundColor: Theme.of(context).colorScheme.background,
-          toolbarHeight: 10,
+          toolbarHeight: 62,
           pinned: true,
           scrolledUnderElevation: 15,
-          shadowColor: Colors.grey.withOpacity(0.5),
+          shadowColor: Colors.black.withOpacity(0.4),
           surfaceTintColor: Theme.of(context).colorScheme.background,
           elevation: 0,
+          bottom: tasks.isNotEmpty
+              ? const PreferredSize(
+                  preferredSize: Size.fromHeight(0.0), // Set your height
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(15, 0, 15, 10),
+                    child: FilterWidget(),
+                  ),
+                )
+              : null,
         ),
         CupertinoSliverRefreshControl(
           onRefresh: () async => _onRefresh(context),
