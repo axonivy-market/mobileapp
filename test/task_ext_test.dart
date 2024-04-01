@@ -1,5 +1,5 @@
-import 'package:axon_ivy/core/shared/extensions/task_ext.dart';
-import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/core/extensions/task_ext.dart';
+import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

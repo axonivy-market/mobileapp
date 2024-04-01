@@ -1,9 +1,8 @@
 import 'package:axon_ivy/data/models/processes/process.dart';
-import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'search_result.freezed.dart';
-
 part 'search_result.g.dart';
 
 @freezed
