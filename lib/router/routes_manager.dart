@@ -1,3 +1,4 @@
+import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/presentation/login/login_view.dart';
 import 'package:axon_ivy/presentation/process/view/processes_view.dart';
 import 'package:axon_ivy/presentation/profile/view/profile_view.dart';
@@ -5,6 +6,7 @@ import 'package:axon_ivy/presentation/search/view/search_view.dart';
 import 'package:axon_ivy/presentation/splash/splash_view.dart';
 import 'package:axon_ivy/presentation/tabbar/tabbar_view.dart';
 import 'package:axon_ivy/presentation/task/view/tasks_view.dart';
+import 'package:axon_ivy/presentation/task_activity/document_list_view.dart';
 import 'package:axon_ivy/presentation/task_activity/task_activity.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -87,6 +89,17 @@ class AppRouter {
         pageBuilder: (context, state) => CustomTransitionPage<void>(
           key: state.pageKey,
           child: const QRParentView(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              iosTransition(context, animation, secondaryAnimation, child),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.documentList,
+        name: 'documentList',
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: DocumentListView(task: state.extra as TaskIvy),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               iosTransition(context, animation, secondaryAnimation, child),
         ),

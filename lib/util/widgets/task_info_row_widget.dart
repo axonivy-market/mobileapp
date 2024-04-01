@@ -3,18 +3,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TaskInfoRowWidget extends StatelessWidget {
-  const TaskInfoRowWidget({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.value,
-    this.isShowDivider = true,
-  });
+  const TaskInfoRowWidget(
+      {super.key,
+      required this.icon,
+      required this.title,
+      required this.value,
+      this.isShowDivider = true,
+      this.isTitleHighlight = false});
 
   final SvgPicture icon;
   final String title;
   final String value;
   final bool isShowDivider;
+  final bool isTitleHighlight;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +44,9 @@ class TaskInfoRowWidget extends StatelessWidget {
                   style: GoogleFonts.inter(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
-                      color: Theme.of(context).colorScheme.secondary),
+                      color: isTitleHighlight
+                          ? Theme.of(context).colorScheme.primary
+                          : Theme.of(context).colorScheme.secondary),
                 ),
               ),
             ),

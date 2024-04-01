@@ -24,9 +24,9 @@ class TaskRepositoryImpl implements TaskRepository {
   }
 
   @override
-  Future<Either<Failure, TaskIvy>> getTask(int id) async {
+  Future<Either<Failure, TaskIvy>> getTaskDetail(int taskId) async {
     try {
-      final result = await _remoteDataSource.getTask(id);
+      final result = await _remoteDataSource.getTaskDetail(taskId);
       return right(result);
     } catch (e) {
       return left(AppError.handle(e).failure);

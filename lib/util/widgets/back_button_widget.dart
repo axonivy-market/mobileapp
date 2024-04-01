@@ -5,15 +5,13 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BackButtonWidget extends StatelessWidget {
-  const BackButtonWidget({
-    super.key,
-  });
-
+  BackButtonWidget({super.key, this.shouldFetch = false});
+  bool shouldFetch;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pop(false);
+        context.pop(shouldFetch);
       },
       child: Container(
         color: Theme.of(context).colorScheme.background,

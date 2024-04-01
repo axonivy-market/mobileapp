@@ -26,8 +26,7 @@ class SplashView extends StatelessWidget {
             body: Column(
               children: [
                 Expanded(
-                  child:
-                      Center(
+                  child: Center(
                     child: Theme.of(context).brightness == Brightness.light
                         ? AppAssets.images.splashAxonIvyLogo.svg()
                         : AppAssets.images.splashAxonIvyLogoDark.svg(),

@@ -25,8 +25,7 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
   final _passwordTextController = TextEditingController();
   final _passwordFocusNode = FocusNode();
 
-  final _urlTextController =
-      TextEditingController();
+  final _urlTextController = TextEditingController();
   final _urlFocusNode = FocusNode();
 
   dynamic model;
@@ -66,7 +65,7 @@ class _LoginViewState extends BasePageScreenState<LoginView> {
             if (state.status == LoginStatus.success) {
               context.pop(true);
             } else if (state.status == LoginStatus.error) {
-              showConfirmDialog(
+              showMessageDialog(
                   title: "Error",
                   message: state.error?.message ?? "notFoundError".tr());
             }

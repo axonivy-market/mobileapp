@@ -3,13 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
-part 'upload_file_service.g.dart';
+part 'file_services.g.dart';
 
 @RestApi()
 @injectable
-abstract class UploadFileService {
+abstract class FileServices {
   @factoryMethod
-  factory UploadFileService(Dio dio) = _UploadFileService;
+  factory FileServices(Dio dio) = _FileServices;
 
   @POST('/api/workflow/case/{caseId}/document')
   Future<DocumentResponse> uploadFiles(
@@ -17,5 +17,12 @@ abstract class UploadFileService {
     @Header('Content-Type') String contentType,
     @Header('X-Requested-By') String requestBy,
     @Body() FormData data,
+  );
+
+  @DELETE('/api/workflow/case/{caseId}/document/{documentId}')
+  Future<DocumentResponse> deleteFiles(
+    @Path('caseId') int caseId,
+    @Path('documentId') int documentId,
+    @Header('X-Requested-By') String requestBy,
   );
 }

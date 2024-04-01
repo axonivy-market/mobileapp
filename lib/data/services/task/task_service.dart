@@ -14,6 +14,8 @@ abstract class TaskService {
   @GET('/api/workflow/tasks')
   Future<List<TaskIvy>> getTasks();
 
-  @GET('/api/workflow/task/{id}')
-  Future<TaskIvy> getTask(@Path('id') int id);
+  @GET('/api/workflow/task/{taskId}')
+  Future<TaskIvy> getTaskDetail(
+    @Path('taskId') int taskId,
+  );
 }
