@@ -19,7 +19,7 @@ Future main() async {
       startLocale: const Locale('en'),
       fallbackLocale: const Locale('en'),
       child: DevicePreview(
-        enabled: false,
+        enabled: true,
         builder: (context) => MyApp(
           appRouter: appRouter,
         ),

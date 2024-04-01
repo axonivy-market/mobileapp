@@ -148,11 +148,8 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
               style:
                   TextStyle(color: Theme.of(context).colorScheme.onBackground),
             ),
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 15).r,
-              child: BackButtonWidget(
-                shouldFetch: shouldFetchTaskList,
-              ),
+            leading: BackButtonWidget(
+              shouldFetch: shouldFetchTaskList,
             ),
             leadingWidth: 100.w,
             actions: [

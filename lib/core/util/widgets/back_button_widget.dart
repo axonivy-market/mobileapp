@@ -18,9 +18,11 @@ class BackButtonWidget extends StatelessWidget {
         color: Theme.of(context).colorScheme.background,
         child: Row(
           children: [
+            12.horizontalSpace,
             AppAssets.icons.chevronLeft.svg(
-                colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.primary, BlendMode.srcIn)),
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.primary, BlendMode.srcIn),
+            ),
             Expanded(
               child: Text(
                 "generalBack".tr(),

@@ -1,4 +1,4 @@
-import 'package:axon_ivy/features/login/login_view.dart';
+import 'package:axon_ivy/features/login/login_page.dart';
 import 'package:axon_ivy/features/process/view/processes_view.dart';
 import 'package:axon_ivy/features/profile/view/profile_view.dart';
 import 'package:axon_ivy/features/search/view/search_view.dart';
@@ -12,7 +12,7 @@ import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/qr/qr_view.dart';
+import '../../features/qr/qr_page.dart';
 import 'app_router.dart';
 import 'custom_navigate_transition.dart';
 
@@ -88,7 +88,7 @@ class AppRouter {
         path: AppRoutes.qr,
         pageBuilder: (context, state) => CustomTransitionPage<void>(
           key: state.pageKey,
-          child: const QRParentView(),
+          child: const QRParentPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               iosTransition(context, animation, secondaryAnimation, child),
         ),

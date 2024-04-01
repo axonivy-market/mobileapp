@@ -181,8 +181,7 @@ class TaskDetailsWidget extends StatelessWidget {
         onPressed(task);
       },
       child: Container(
-        width: 136.h,
-        height: 44.w,
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12).r,
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.background,
           borderRadius: BorderRadius.circular(8).r,

@@ -51,9 +51,10 @@ class _LoginPageState extends BasePageState<LoginPage> {
         title: Text(
           "profile.signIn".tr(),
           style: GoogleFonts.inter(
-              color: Theme.of(context).colorScheme.surface,
-              fontSize: 17.sp,
-              fontWeight: FontWeight.w500),
+            color: Theme.of(context).colorScheme.surface,
+            fontSize: 17.sp,
+            fontWeight: FontWeight.w500,
+          ),
         ),
         leading: BackButtonWidget(),
       ),

@@ -2,21 +2,23 @@ import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:axon_ivy/core/util/widgets/back_button_widget.dart';
 import 'package:axon_ivy/data/models/qr_model/qr_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class QRParentView extends StatefulWidget {
-  const QRParentView({super.key});
+class QRParentPage extends StatefulWidget {
+  const QRParentPage({super.key});
 
   @override
-  State<StatefulWidget> createState() => _QRParentViewState();
+  State<StatefulWidget> createState() => _QRParentPageState();
 }
 
-class _QRParentViewState extends State<QRParentView> {
+class _QRParentPageState extends State<QRParentPage> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -34,12 +36,16 @@ class _QRParentViewState extends State<QRParentView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("qr.title".tr()),
-        leading: BackButton(
-          onPressed: () {
-            context.pop();
-          },
+        backgroundColor: Theme.of(context).colorScheme.background,
+        leadingWidth: 100.w,
+        title: Text(
+          "qr.title".tr(),
+          style: GoogleFonts.inter(
+              color: Theme.of(context).colorScheme.surface,
+              fontSize: 17.sp,
+              fontWeight: FontWeight.w500),
         ),
+        leading: BackButtonWidget(),
       ),
       body: _buildQrView(context),
     );

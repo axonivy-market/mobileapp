@@ -98,10 +98,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
             automaticallyImplyLeading: false,
             surfaceTintColor: Theme.of(context).colorScheme.background,
             leadingWidth: 100,
-            leading: Padding(
-              padding: const EdgeInsets.only(left: 15).r,
-              child: BackButtonWidget(shouldFetch: shouldFetchTaskList),
-            ),
+            leading: BackButtonWidget(shouldFetch: shouldFetchTaskList),
             actions: [
               if (task != null)
                 BlocBuilder<TaskDetailBloc, TaskDetailState>(
