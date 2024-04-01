@@ -283,6 +283,8 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                                     .onPrimaryContainer,
                               ),
                               child: AppAssets.icons.chevronUp.svg(
+                                  height: 20.h,
+                                  width: 20.w,
                                   colorFilter: ColorFilter.mode(
                                       Theme.of(context).colorScheme.surface,
                                       BlendMode.srcIn)),
@@ -299,6 +301,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                     duration: const Duration(milliseconds: 300),
                     padding:
                         const EdgeInsets.symmetric(vertical: 15, horizontal: 18)
+                            .r
                             .r,
                     child: Column(
                       children: [

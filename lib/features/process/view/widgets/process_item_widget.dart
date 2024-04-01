@@ -35,7 +35,7 @@ class ProcessItemWidget extends StatelessWidget {
         top: 10,
         bottom: 10,
       ).r,
-      constraints: const BoxConstraints(minHeight: AppSize.s82),
+      constraints: BoxConstraints(minHeight: AppSize.s82.h),
       decoration: BoxDecoration(
         border: Border.all(color: Theme.of(context).colorScheme.outline),
         borderRadius: BorderRadius.circular(10).r,

@@ -94,6 +94,7 @@ class _AppTextFieldState extends State<AppTextField> {
               setState(() {});
             },
         decoration: InputDecoration(
+            contentPadding: const EdgeInsets.symmetric(vertical: 16.0).r,
             filled: true,
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
@@ -120,6 +121,10 @@ class _AppTextFieldState extends State<AppTextField> {
                     child: widget.prefix,
                   )
                 : null,
+            errorBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8.0),
+              borderSide: const BorderSide(color: Colors.red, width: 1.2),
+            ),
             enabledBorder: OutlineInputBorder(
               borderSide:
                   BorderSide(color: Theme.of(context).colorScheme.outline),
