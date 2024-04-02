@@ -111,7 +111,10 @@ class _TaskActivityWidgetState extends BasePageScreenState<TaskActivityWidget>
                     return Padding(
                       padding: const EdgeInsets.only(right: 10.0),
                       child: IconButton(
-                        icon: AppAssets.icons.paperclip.svg(),
+                        icon: AppAssets.icons.paperclip.svg(
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
                         onPressed: () {
                           context
                               .pushNamed("documentList", extra: task)
