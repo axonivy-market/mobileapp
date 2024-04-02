@@ -17,7 +17,7 @@ class DropShadowWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
-            blurRadius: 30,
+            blurRadius: 30.r,
             offset: Offset(0, yOffset),
             spreadRadius: 0,
           ),
