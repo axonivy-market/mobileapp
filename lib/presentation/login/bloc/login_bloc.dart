@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
@@ -53,11 +54,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   FutureOr<void> _submitLogin(event, Emitter emit) async {
     emit(const LoginState(status: LoginStatus.loading));
-    if ((SharedPrefs.isDemoLogin ?? false) ||
-        (SharedPrefs.demoSetting ?? false)) {
-      getIt<Dio>().options.baseUrl = SharedPrefs.getDemoUrl.isEmptyOrNull
+    final isDemoSetting = SharedPrefs.demoSetting ?? false;
+    if (isDemoSetting) {
+      getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
           ? AppConfig.baseUrl
-          : SharedPrefs.getDemoUrl!;
+          : DemoConfig.demoServerUrl;
     } else {
       getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
           ? AppConfig.baseUrl

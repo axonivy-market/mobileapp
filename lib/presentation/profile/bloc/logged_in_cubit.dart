@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/shared/extensions/extensions.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
@@ -18,9 +19,6 @@ part 'logged_in_cubit.freezed.dart';
 @injectable
 class LoggedInCubit extends Cubit<LoggedInState> {
   LoggedInCubit() : super(const LoggedInState.initial());
-  final demoUrl = DemoConfig.demoServerUrl;
-  final demoUser = DemoConfig.demoUserName;
-  final demoPassword = DemoConfig.demoPassword;
 
   String displayShortNameAvatar(String name) {
     return name
@@ -43,13 +41,11 @@ class LoggedInCubit extends Cubit<LoggedInState> {
   }
 
   void setDemoUser() {
-    SharedPrefs.setDemoUrl(demoUrl);
-    SharedPrefs.setDemoUsername(demoUser);
-    SharedPrefs.setDemoPassword(demoPassword);
+
     SharedPrefs.setIsLogin(true);
     
-    getIt<Dio>().options.baseUrl = SharedPrefs.getDemoUrl.isEmptyOrNull
+    getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
           ? AppConfig.baseUrl
-        : SharedPrefs.getDemoUrl!;
+        : DemoConfig.demoServerUrl;
   }
 }

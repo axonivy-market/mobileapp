@@ -226,7 +226,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
               });
               if (!isDemoMode) {
                 if (!isDemoLogin) {
-                  SharedPrefs.clearDemoData();
+                  SharedPrefs.setDemoSetting(false);
                   getIt<Dio>().options.baseUrl =
                       SharedPrefs.getBaseUrl.isEmptyOrNull
                           ? AppConfig.baseUrl

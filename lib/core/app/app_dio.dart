@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -39,8 +40,8 @@ class AppDio with DioMixin implements Dio {
         onRequest: (options, handler) async {
           final isDemoSetting = SharedPrefs.demoSetting ?? false;
           if (isDemoSetting) {
-            username = SharedPrefs.getDemoUsername ?? '';
-            password = SharedPrefs.getDemoPassword ?? '';
+            username = DemoConfig.demoUserName;
+            password = DemoConfig.demoPassword;
           } else {
             username = SharedPrefs.getUsername ?? '';
             password = SharedPrefs.getPassword ?? '';

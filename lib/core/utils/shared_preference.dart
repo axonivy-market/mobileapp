@@ -15,12 +15,10 @@ enum SharedPreferencesItem {
   isDarkMode,
   isDemoMode,
   isDemoLogin,
-  demoUrl,
-  demoUsername,
-  demoPassword,
 }
 
 class SharedPrefs {
+  
   static final _pref = getIt<SharedPreferences>();
 
   static String? get getAccessToken =>
@@ -47,23 +45,6 @@ class SharedPrefs {
   static Future setPassword(String value) =>
       _pref.setString(SharedPreferencesItem.password.name, value);
 
-  static String? get getDemoUrl =>
-      _pref.getString(SharedPreferencesItem.demoUrl.name);
-
-  static Future setDemoUrl(String value) =>
-      _pref.setString(SharedPreferencesItem.demoUrl.name, value);
-
-  static String? get getDemoUsername =>
-      _pref.getString(SharedPreferencesItem.demoUsername.name);
-
-  static Future setDemoUsername(String value) =>
-      _pref.setString(SharedPreferencesItem.demoUsername.name, value);
-
-  static String? get getDemoPassword =>
-      _pref.getString(SharedPreferencesItem.demoPassword.name);
-
-  static Future setDemoPassword(String value) =>
-      _pref.setString(SharedPreferencesItem.demoPassword.name, value);
 
   static bool? get isLogin => _pref.getBool(SharedPreferencesItem.isLogin.name);
 
@@ -115,16 +96,7 @@ class SharedPrefs {
     _pref.remove(SharedPreferencesItem.keyLastUpdatedTime.name);
     _pref.remove(SharedPreferencesItem.profileInfo.name);
     _pref.remove(SharedPreferencesItem.isDemoMode.name);
-    _pref.remove(SharedPreferencesItem.demoPassword.name);
-    _pref.remove(SharedPreferencesItem.demoUrl.name);
-    _pref.remove(SharedPreferencesItem.demoUsername.name);
     _pref.remove(SharedPreferencesItem.isDemoLogin.name);
   }
 
-  static void clearDemoData() {
-    _pref.remove(SharedPreferencesItem.isDemoMode.name);
-    _pref.remove(SharedPreferencesItem.demoPassword.name);
-    _pref.remove(SharedPreferencesItem.demoUrl.name);
-    _pref.remove(SharedPreferencesItem.demoUsername.name);
-  }
 }

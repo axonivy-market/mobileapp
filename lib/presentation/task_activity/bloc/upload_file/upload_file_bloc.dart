@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/shared/extensions/extensions.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
@@ -38,11 +39,11 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     on<_UploadFiles>(_uploadFile);
     on<_ChangeFileName>(_changeFileName);
 
-    if ((SharedPrefs.isDemoLogin ?? false) ||
-        (SharedPrefs.demoSetting ?? false)) {
-      getIt<Dio>().options.baseUrl = SharedPrefs.getDemoUrl.isEmptyOrNull
+    final isDemoSetting = SharedPrefs.demoSetting ?? false;
+    if (isDemoSetting) {
+      getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
           ? AppConfig.baseUrl
-          : SharedPrefs.getDemoUrl!;
+          : DemoConfig.demoServerUrl;
     } else {
       getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
           ? AppConfig.baseUrl

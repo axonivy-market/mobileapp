@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -46,9 +47,10 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
     late String password;
     
     super.initState();
-    if (SharedPrefs.isDemoLogin ?? false) {
-      username = SharedPrefs.getDemoUsername ?? '';
-      password = SharedPrefs.getDemoPassword ?? '';
+    final isDemoSetting = SharedPrefs.demoSetting ?? false;
+    if (isDemoSetting) {
+      username = DemoConfig.demoUserName;
+      password = DemoConfig.demoPassword;
     } else {
       username = SharedPrefs.getUsername ?? '';
       password = SharedPrefs.getPassword ?? '';

@@ -1,4 +1,5 @@
 import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/shared/extensions/string_ext.dart';
@@ -21,9 +22,16 @@ class TaskDetailBloc extends Bloc<TaskDetailEvent, TaskDetailState> {
   TaskDetailBloc(this._taskRepository)
       : super(const TaskDetailState.loading(false)) {
     on<_GetTaskDetail>(getTaskDetail);
-    getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
-        ? AppConfig.baseUrl
-        : SharedPrefs.getBaseUrl!;
+    final isDemoSetting = SharedPrefs.demoSetting ?? false;
+    if (isDemoSetting) {
+      getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : DemoConfig.demoServerUrl;
+    } else {
+      getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : SharedPrefs.getBaseUrl!;
+    }
   }
 
   Future getTaskDetail(TaskDetailEvent event, Emitter emit) async {
