@@ -31,6 +31,9 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
     super.initState();
   }
 
+  bool isDemoMode = SharedPrefs.demoSetting ?? false;
+  bool isDemoLogin = SharedPrefs.isDemoLogin ?? false;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -195,9 +198,6 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
   }
 
   Widget _buildDemo() {
-    bool isDemoMode = SharedPrefs.demoSetting ?? false;
-    bool isDemoLogin = SharedPrefs.isDemoLogin ?? false;
-
     return Container(
       height: 44,
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -228,7 +228,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 if (!isDemoLogin) {
                   SharedPrefs.clearDemoData();
                   getIt<Dio>().options.baseUrl =
-                      SharedPrefs.getDemoUrl.isEmptyOrNull
+                      SharedPrefs.getBaseUrl.isEmptyOrNull
                           ? AppConfig.baseUrl
                           : SharedPrefs.getBaseUrl!;
                 } else {
@@ -237,6 +237,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 }
               } else {
                 context.read<LoggedInCubit>().setDemoUser();
+                SharedPrefs.setDemoSetting(true);
               }
             },
           ),

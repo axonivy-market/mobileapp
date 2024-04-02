@@ -54,16 +54,16 @@ class SharedPrefs {
       _pref.setString(SharedPreferencesItem.demoUrl.name, value);
 
   static String? get getDemoUsername =>
-      _pref.getString(SharedPreferencesItem.username.name);
+      _pref.getString(SharedPreferencesItem.demoUsername.name);
 
   static Future setDemoUsername(String value) =>
-      _pref.setString(SharedPreferencesItem.username.name, value);
+      _pref.setString(SharedPreferencesItem.demoUsername.name, value);
 
   static String? get getDemoPassword =>
-      _pref.getString(SharedPreferencesItem.password.name);
+      _pref.getString(SharedPreferencesItem.demoPassword.name);
 
   static Future setDemoPassword(String value) =>
-      _pref.setString(SharedPreferencesItem.password.name, value);
+      _pref.setString(SharedPreferencesItem.demoPassword.name, value);
 
   static bool? get isLogin => _pref.getBool(SharedPreferencesItem.isLogin.name);
 

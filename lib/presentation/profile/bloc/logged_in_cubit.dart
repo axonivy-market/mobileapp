@@ -47,15 +47,9 @@ class LoggedInCubit extends Cubit<LoggedInState> {
     SharedPrefs.setDemoUsername(demoUser);
     SharedPrefs.setDemoPassword(demoPassword);
     SharedPrefs.setIsLogin(true);
-    if ((SharedPrefs.isDemoLogin ?? false) ||
-        (SharedPrefs.demoSetting ?? false)) {
-      getIt<Dio>().options.baseUrl = SharedPrefs.getDemoUrl.isEmptyOrNull
+    
+    getIt<Dio>().options.baseUrl = SharedPrefs.getDemoUrl.isEmptyOrNull
           ? AppConfig.baseUrl
-          : SharedPrefs.getDemoUrl!;
-    } else {
-      getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
-          ? AppConfig.baseUrl
-          : SharedPrefs.getBaseUrl!;
-    }
+        : SharedPrefs.getDemoUrl!;
   }
 }

@@ -79,6 +79,7 @@ class LoginWidget extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       SharedPrefs.setIsDemoLogin(true);
+                      SharedPrefs.setDemoSetting(true);
                       context.read<LoggedInCubit>().setDemoUser();
                       context.read<LoggedInCubit>().loggedIn(true);
                     },

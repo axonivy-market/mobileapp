@@ -37,7 +37,8 @@ class AppDio with DioMixin implements Dio {
     interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          if (SharedPrefs.demoSetting ?? false) {
+          final isDemoSetting = SharedPrefs.demoSetting ?? false;
+          if (isDemoSetting) {
             username = SharedPrefs.getDemoUsername ?? '';
             password = SharedPrefs.getDemoPassword ?? '';
           } else {

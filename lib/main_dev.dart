@@ -11,9 +11,6 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await AppConfig.loadEnv(Environment.dev);
   await DemoConfig.loadDemoConfig();
-  // TODO for test
-  print(
-      "demo config: ${DemoConfig.demoServerUrl} == ${DemoConfig.demoUserName} == ${DemoConfig.demoPassword}");
   final appRouter = AppRouter();
   configureDependencies();
   runApp(
