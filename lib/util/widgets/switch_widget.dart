@@ -21,6 +21,8 @@ class SwitchWidget extends StatelessWidget {
         width: 50.0,
         height: 30.0,
         decoration: BoxDecoration(
+          border: Border.all(
+              color: Theme.of(context).colorScheme.outline, width: 1.0),
           borderRadius: BorderRadius.circular(15.0),
           color: isActive
               ? Theme.of(context).colorScheme.tertiaryContainer
