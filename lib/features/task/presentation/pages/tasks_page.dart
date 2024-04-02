@@ -198,7 +198,7 @@ class TasksViewContent extends StatelessWidget {
           shadowColor: Colors.black.withOpacity(0.3),
           surfaceTintColor: Theme.of(context).colorScheme.background,
           elevation: 0,
-          bottom: tasks.isNotEmpty
+          bottom: tasks.isNotEmpty || activeFilter == FilterType.expired
               ? PreferredSize(
                   preferredSize: const Size.fromHeight(0.0), // Set your height
                   child: Padding(
