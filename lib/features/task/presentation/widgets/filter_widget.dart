@@ -116,10 +116,13 @@ class _FilterWidgetState extends State<FilterWidget> {
           },
         ),
         PopupMenuButton<SortType>(
-          elevation: 0.2,
-          shadowColor: Theme.of(context).colorScheme.outline,
-          color: Theme.of(context).colorScheme.background,
+          elevation: 10,
+          shadowColor: Colors.black.withOpacity(0.3),
+          color: Theme.of(context).colorScheme.onPrimaryContainer,
           position: PopupMenuPosition.under,
+          surfaceTintColor: Theme.of(context).colorScheme.onPrimaryContainer,
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(const Radius.circular(10.0).r)),
           onSelected: (value) {
             switch (value) {
               case MainSortType.priority:

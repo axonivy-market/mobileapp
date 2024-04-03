@@ -19,6 +19,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class DocumentListPage extends BasePage {
   const DocumentListPage({super.key, required this.task});
+
   final TaskIvy task;
 
   @override
@@ -55,6 +56,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
   }
 
   void doNothing(BuildContext context) {}
+
   @override
   Widget build(BuildContext context) {
     TaskIvy task = widget.task;
