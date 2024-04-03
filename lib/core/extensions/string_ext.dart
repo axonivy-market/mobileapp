@@ -9,6 +9,19 @@ extension StringExt on String? {
             lowerCaseName.contains('png') ||
             lowerCaseName.contains('heic') ||
             lowerCaseName.contains('jpeg') ||
-            lowerCaseName.contains('mp4'));
+            lowerCaseName.contains('mp4') ||
+            lowerCaseName.contains('3gp') ||
+            lowerCaseName.contains('webm') ||
+            lowerCaseName.contains('flv') ||
+            lowerCaseName.contains('wmv') ||
+            lowerCaseName.contains('mov') ||
+            lowerCaseName.contains('avi') ||
+            lowerCaseName.contains('svg') ||
+            lowerCaseName.contains('raw') ||
+            lowerCaseName.contains('webp') ||
+            lowerCaseName.contains('bmp') ||
+            lowerCaseName.contains('tiff') ||
+            lowerCaseName.contains('gif') ||
+            lowerCaseName.contains('mkv'));
   }
 }

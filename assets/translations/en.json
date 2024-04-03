@@ -135,7 +135,7 @@
     "errorTitle": "Error",
     "errorMessage": "File {fileName} already exists",
     "successTitle": "Success process",
-    "deleteSuccessTitle": "Delete successfully",
-    "downloadSuccessTitle":  "Download successfully"
+    "deleteSuccessTitle": "Deleted successfully",
+    "downloadSuccessTitle":  "Downloaded successfully"
   }
 }
