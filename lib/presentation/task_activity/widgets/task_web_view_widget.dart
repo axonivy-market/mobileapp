@@ -46,6 +46,8 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
     iframeAllowFullscreen: true,
     useShouldOverrideUrlLoading: true,
     useShouldInterceptRequest: true,
+    cacheEnabled: false,
+    clearCache: true,
   );
 
   @override
@@ -133,11 +135,15 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
       },
       onLoadStop: (controller, url) async {
         await Future.delayed(const Duration(milliseconds: 500));
-        final canScroll = await controller.canScrollVertically();
-        widget.canScrollVertical(canScroll);
+        if (context.mounted) {
+          final canScroll = await controller.canScrollVertically();
+          widget.canScrollVertical(canScroll);
+        }
       },
       onProgressChanged: (controller, newProgress) {
-        widget.onProgressChanged(newProgress / 100);
+        if (context.mounted) {
+          widget.onProgressChanged(newProgress / 100);
+        }
       },
     );
   }
@@ -184,7 +190,8 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
           }
         });
     if (widget.taskIvy?.offline == true &&
-        request.url.toString() == widget.taskIvy?.submitUrlOffline) {
+        request.url.toString() ==
+            "${SharedPrefs.getBaseUrl}${widget.taskIvy?.submitUrlOffline}") {
       // Prevent navigate URL to call finish task offline request
       await Future.delayed(const Duration(seconds: 30));
       if (context.mounted) {

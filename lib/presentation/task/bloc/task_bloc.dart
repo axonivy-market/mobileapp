@@ -1,16 +1,16 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:axon_ivy/core/di/di.dart';
 import 'package:axon_ivy/core/shared/extensions/extensions.dart';
 import 'package:axon_ivy/data/database/local_task_provider.dart';
 import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../../core/app/app.dart';
 import '../../../core/utils/shared_preference.dart';
@@ -177,10 +177,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       }
     }
     // download task form
-    List<Future<void>> futures = tasks
-        .where((taskServer) =>
-            taskServer.offline && taskServer.submitUrlOffline.isEmptyOrNull)
-        .map((taskIvy) {
+    //TODO test
+    List<Future<void>> futures =
+        tasks.where((taskServer) => taskServer.offline).map((taskIvy) {
       return downloadHTMLFromFullRequestPath(taskIvy);
     }).toList();
     await Future.wait(futures);
@@ -197,15 +196,42 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
     if (response.statusCode == 200 && SharedPrefs.getBaseUrl != null) {
       final submitUrl = _getFormAction(response.data);
+      var cssHref = RegExp(r'<link[^>]*href="([^"]+)"')
+          .allMatches(response.data)
+          .map((match) => match.group(1))
+          .toList();
+      var jsHref = RegExp(r'<script[^>]*src="([^"]+)">')
+          .allMatches(response.data)
+          .map((match) => match.group(1))
+          .toList();
+
+      List<Future<void>> cssHrefFutures = cssHref.map((path) {
+        return downloadResource(path);
+      }).toList();
+      List<Future<void>> jsHrefFutures = jsHref.map((path) {
+        return downloadResource(path);
+      }).toList();
+      // await Future.wait(cssHrefFutures);
+      // await Future.wait(jsHrefFutures);
       final task = taskIvy.copyWith(
-          submitUrlOffline: SharedPrefs.getBaseUrl! + submitUrl,
-          formHTMLPageOffline: response.data);
+          submitUrlOffline: submitUrl, formHTMLPageOffline: response.data);
       // Update task for display on UI
       var index = tasks.indexWhere((element) => element.id == taskIvy.id);
       tasks.removeAt(index);
       tasks.add(task);
       _localTaskProvider.addTask(task);
     }
+  }
+
+  Future<void> downloadResource(String? path) async {
+    if (path.isEmptyOrNull) return;
+    var dio = getIt<Dio>();
+    final directory = await getApplicationDocumentsDirectory();
+    final regex = RegExp(r'[^/]+(?=\?)|[^/]+$', caseSensitive: false);
+    final match = regex.firstMatch(path!);
+    final file = File('${directory.path}/${match?.group(0)}');
+    final response = await dio.get(path);
+    await file.writeAsString(response.data);
   }
 
   String _getFormAction(String htmlContent) {
