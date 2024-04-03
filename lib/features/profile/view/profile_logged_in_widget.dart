@@ -214,8 +214,10 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 color: Theme.of(context).colorScheme.surface),
           ),
           SwitchWidget(
-            isSwitchTurnOn: _isDemoMode,
-            onSwitchChanged: (value) {
+            isDarkMode: false,
+            isDemoMode: _isDemoMode,
+            onThemeChanged: (value) {},
+            onDemoModeChanged: (value) {
               setState(() {
                 _isDemoMode = value;
               });
@@ -252,11 +254,15 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 ),
               ),
               SwitchWidget(
-                isSwitchTurnOn: isDarkMode,
-                onSwitchChanged: (value) {
+                isDarkMode: isDarkMode,
+                isDemoMode: false,
+                onThemeChanged: (value) {
                   context.read<ThemeBloc>().add(
                         ThemeEvent.changeTheme(value ? darkMode : lightMode),
                       );
+                },
+                onDemoModeChanged: (value) {
+                  // Handle demo mode change here if needed
                 },
               ),
             ],
