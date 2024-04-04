@@ -1,8 +1,8 @@
 import 'package:axon_ivy/app.dart';
-import 'package:axon_ivy/router/router.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/core/router/router.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'core/app/demo_config.dart';

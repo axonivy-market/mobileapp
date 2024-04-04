@@ -1,4 +1,4 @@
-import 'package:axon_ivy/util/resources/icons_helper.dart';
+import 'package:axon_ivy/core/util/resources/icons_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

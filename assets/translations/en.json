@@ -52,12 +52,16 @@
     "noServer": "No server has been configured yet...",
     "signIn": "Sign in",
     "signOut": "Sign out",
-    "url": "Url",
+    "url": "Enter you server link",
     "username": "Username",
-    "yourPassword": "Your password",
+    "yourPassword": "Enter your password",
     "demoMode": "Demo mode",
     "darkMode":"Dark mode",
-    "language": "Language"
+    "language": "Language",
+    "error": "Error",
+    "serverLink": "Server Link",
+    "userType": "User Type",
+    "password":  "Password"
   },
   "qr": {
     "title": "Scan the QR",
@@ -129,7 +133,7 @@
     "attachPicture":  "Attach picture",
     "attachFile": "Attach file",
     "errorTitle": "Error",
-    "errorMessage": "File {fileName} is already uploaded.",
+    "errorMessage": "File {fileName} already exists",
     "successTitle": "Success process",
     "deleteSuccessTitle": "Delete successfully",
     "downloadSuccessTitle":  "Download successfully"
