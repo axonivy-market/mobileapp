@@ -72,6 +72,41 @@ class LoginWidget extends StatelessWidget {
                 5.horizontalSpace
               ],
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      SharedPrefs.setIsDemoLogin(true);
+                      SharedPrefs.setDemoSetting(true);
+                      context.read<LoggedInCubit>().setDemoUser();
+                      context.read<LoggedInCubit>().loggedIn(true);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        "profile.demoMode".tr(),
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.inter(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w500,
+                            color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 5),
+              ],
+            ),
           ],
         ),
       ),

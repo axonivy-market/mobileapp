@@ -1,4 +1,5 @@
 import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
@@ -21,9 +22,16 @@ class DeleteFileBloc extends Bloc<DeleteFileEvent, DeleteFileState> {
   DeleteFileBloc(this._fileRepository)
       : super(const DeleteFileState.loading()) {
     on<_DeleteFile>(deleteFile);
-    getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
-        ? AppConfig.baseUrl
-        : SharedPrefs.getBaseUrl!;
+    final isDemoSetting = SharedPrefs.demoSetting ?? false;
+    if (isDemoSetting) {
+      getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : DemoConfig.demoServerUrl;
+    } else {
+      getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : SharedPrefs.getBaseUrl!;
+    }
   }
 
   Future deleteFile(DeleteFileEvent event, Emitter emit) async {

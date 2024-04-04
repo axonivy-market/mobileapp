@@ -236,9 +236,12 @@ class _TabBarScreenState extends State<TabBarScreen> {
     required VoidCallback onPressed,
   }) {
     bool isSelected = index == selectedIndex;
-    return BlocBuilder<ProfileBloc, ProfileState>(
+    return BlocBuilder<LoggedInCubit, LoggedInState>(
       builder: (context, state) {
-        bool isLoggedIn = SharedPrefs.isLogin ?? false;
+        bool isLoggedIn = state.maybeWhen(
+          loggedIn: (isLoggedIn) => isLoggedIn,
+          orElse: () => false,
+        );
         return InkResponse(
           onTap: isLoggedIn ? onPressed : null,
           child: Column(

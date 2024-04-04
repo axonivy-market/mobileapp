@@ -37,6 +37,16 @@ jobs:
           KEYSTORE_STORE_PASSWORD: ${{ secrets.KEY_STORE_PASSWORD }}
         working-directory: android
 
+      - name: Config demo user info
+        run: |
+          echo "demoServerUrl=$DEMO_SERVER_URL" >> assets/env/.env_demo
+          echo "demoUserName=$DEMO_USER_NAME" >> assets/env/.env_demo
+          echo "demoPassword=$DEMO_PASSWORD" >> assets/env/.env_demo
+        env:
+          DEMO_SERVER_URL: ${{ secrets.KEY_DEMO_SERVER_URL }}
+          DEMO_USER_NAME: ${{ secrets.KEY_DEMO_USER_NAME }}
+          DEMO_PASSWORD: ${{ secrets.KEY_DEMO_PASSWORD }}
+
       - name: Build abb release file
         run: flutter build appbundle --flavor prod --target lib/main.dart --build-name ${{ env.VersionName }} --build-number ${{github.run_number}}
 

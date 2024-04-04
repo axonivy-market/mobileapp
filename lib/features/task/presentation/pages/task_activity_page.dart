@@ -110,7 +110,10 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                     return Padding(
                       padding: const EdgeInsets.only(right: 10.0).r,
                       child: IconButton(
-                        icon: AppAssets.icons.paperclip.svg(),
+                        icon: AppAssets.icons.paperclip.svg(
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
                         onPressed: () {
                           context
                               .pushNamed("documentList", extra: task)

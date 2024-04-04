@@ -54,7 +54,7 @@ class OfflinePopupWidget extends StatelessWidget {
                         Text(
                           "offline.popup_title".tr(),
                           style: GoogleFonts.inter(
-                            color: AppColors.eerieBlack,
+                            color: Theme.of(context).colorScheme.surface,
                             fontSize: 17.sp,
                             fontWeight: FontWeight.w600,
                           ),
@@ -64,7 +64,7 @@ class OfflinePopupWidget extends StatelessWidget {
                           description,
                           textAlign: TextAlign.center,
                           style: GoogleFonts.inter(
-                            color: AppColors.sonicSilver,
+                            color: Theme.of(context).colorScheme.secondary,
                             fontSize: 17.sp,
                             fontWeight: FontWeight.w400,
                           ),
