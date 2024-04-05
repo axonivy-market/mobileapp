@@ -1,4 +1,6 @@
 import 'package:axon_ivy/core/abstracts/base_page.dart';
+import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/theme/app_themes.dart'; // Import your theme data
 import 'package:axon_ivy/features/profile/presentation/bloc/logged_cubit/logged_in_cubit.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/profile_bloc/profile_bloc.dart';
@@ -6,9 +8,11 @@ import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart'; // Import the The
 import 'package:axon_ivy/features/theme/bloc/theme_event.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_state.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
+import 'package:axon_ivy/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,12 +27,13 @@ class ProfileLoggedInWidget extends BasePage {
 }
 
 class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
-  bool _isDemoMode = false;
-
   @override
   void initState() {
     super.initState();
   }
+
+  bool isDemoMode = SharedPrefs.demoSetting ?? false;
+  bool isDemoLogin = SharedPrefs.isDemoLogin ?? false;
 
   @override
   Widget build(BuildContext context) {
@@ -214,14 +219,26 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 color: Theme.of(context).colorScheme.surface),
           ),
           SwitchWidget(
-            isDarkMode: false,
-            isDemoMode: _isDemoMode,
-            onThemeChanged: (value) {},
-            onDemoModeChanged: (value) {
+            isActive: isDemoMode,
+            onChanged: (value) {
               setState(() {
-                _isDemoMode = value;
+                isDemoMode = value;
               });
-              // You can put your logic for demo mode change here
+              if (!isDemoMode) {
+                if (!isDemoLogin) {
+                  SharedPrefs.setDemoSetting(false);
+                  getIt<Dio>().options.baseUrl =
+                      SharedPrefs.getBaseUrl.isEmptyOrNull
+                          ? AppConfig.baseUrl
+                          : SharedPrefs.getBaseUrl!;
+                } else {
+                  SharedPrefs.clear(); // Clear shared preferences
+                  context.read<LoggedInCubit>().loggedIn(false);
+                }
+              } else {
+                context.read<LoggedInCubit>().setDemoUser();
+                SharedPrefs.setDemoSetting(true);
+              }
             },
           ),
         ],
@@ -254,15 +271,11 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 ),
               ),
               SwitchWidget(
-                isDarkMode: isDarkMode,
-                isDemoMode: false,
-                onThemeChanged: (value) {
+                isActive: isDarkMode,
+                onChanged: (value) {
                   context.read<ThemeBloc>().add(
                         ThemeEvent.changeTheme(value ? darkMode : lightMode),
                       );
-                },
-                onDemoModeChanged: (value) {
-                  // Handle demo mode change here if needed
                 },
               ),
             ],

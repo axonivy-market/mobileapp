@@ -1,6 +1,9 @@
 import 'dart:async';
 
+import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di.dart';
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/domain/usecases/get_tasks_use_case.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
@@ -37,9 +40,16 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     on<_SortTasks>(_sortTasks);
     on<ShowOfflinePopupEvent>(_showOfflinePopupEvent);
 
-    getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
-        ? AppConfig.baseUrl
-        : SharedPrefs.getBaseUrl!;
+    final isDemoSetting = SharedPrefs.demoSetting ?? false;
+    if (isDemoSetting) {
+      getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : DemoConfig.demoServerUrl;
+    } else {
+      getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : SharedPrefs.getBaseUrl!;
+    }
   }
 
   void _sortTasks(event, Emitter emit) {

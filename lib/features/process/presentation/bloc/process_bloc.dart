@@ -1,4 +1,5 @@
 import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/process/domain/entities/process.dart';
 import 'package:axon_ivy/features/process/domain/usecases/get_processes_use_case.dart';
@@ -22,9 +23,16 @@ class ProcessBloc extends Bloc<ProcessEvent, ProcessState> {
   ProcessBloc(this._processRepository) : super(const ProcessState.initial()) {
     on<GetProcess>(_getProcesses);
     on<ShowOfflinePopupEvent>(_showOfflinePopupEvent);
-    getIt<Dio>().options.baseUrl = (SharedPrefs.getBaseUrl.isEmptyOrNull
-        ? AppConfig.baseUrl
-        : SharedPrefs.getBaseUrl)!;
+    final isDemoSetting = SharedPrefs.demoSetting ?? false;
+    if (isDemoSetting) {
+      getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : DemoConfig.demoServerUrl;
+    } else {
+      getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : SharedPrefs.getBaseUrl!;
+    }
   }
 
   Future<void> _getProcesses(GetProcess event, Emitter emitter) async {

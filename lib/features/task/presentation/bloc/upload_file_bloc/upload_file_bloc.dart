@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/task/domain/repositories/file_repository_interface.dart';
 import 'package:axon_ivy/shared/extensions/string_ext.dart';
@@ -38,9 +39,16 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     on<_UploadFiles>(_uploadFile);
     on<_ChangeFileName>(_changeFileName);
 
-    getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
-        ? AppConfig.baseUrl
-        : SharedPrefs.getBaseUrl!;
+    final isDemoSetting = SharedPrefs.demoSetting ?? false;
+    if (isDemoSetting) {
+      getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : DemoConfig.demoServerUrl;
+    } else {
+      getIt<Dio>().options.baseUrl = SharedPrefs.getBaseUrl.isEmptyOrNull
+          ? AppConfig.baseUrl
+          : SharedPrefs.getBaseUrl!;
+    }
   }
 
   Future _changeFileName(

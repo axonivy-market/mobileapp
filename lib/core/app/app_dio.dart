@@ -1,12 +1,15 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class AppDio with DioMixin implements Dio {
+  late String username;
+  late String password;
   AppDio() {
     String platform = '';
     if (Platform.isAndroid) {
@@ -34,8 +37,14 @@ class AppDio with DioMixin implements Dio {
     interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          final username = SharedPrefs.getUsername;
-          final password = SharedPrefs.getPassword;
+          final isDemoSetting = SharedPrefs.demoSetting ?? false;
+          if (isDemoSetting) {
+            username = DemoConfig.demoUserName;
+            password = DemoConfig.demoPassword;
+          } else {
+            username = SharedPrefs.getUsername ?? '';
+            password = SharedPrefs.getPassword ?? '';
+          }
           String basicAuth =
               'Basic ${base64Encode(utf8.encode('$username:$password'))}';
           options.headers['Authorization'] = basicAuth;

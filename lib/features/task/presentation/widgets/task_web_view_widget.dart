@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -37,15 +38,26 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
     verticalScrollBarEnabled: false,
     useShouldInterceptAjaxRequest: true,
     iframeAllowFullscreen: true,
+    transparentBackground: true,
   );
 
   @override
   void initState() {
+    late String username;
+    late String password;
+
     super.initState();
-    final username = SharedPrefs.getUsername;
-    final password = SharedPrefs.getPassword;
+    final isDemoSetting = SharedPrefs.demoSetting ?? false;
+    if (isDemoSetting) {
+      username = DemoConfig.demoUserName;
+      password = DemoConfig.demoPassword;
+    } else {
+      username = SharedPrefs.getUsername ?? '';
+      password = SharedPrefs.getPassword ?? '';
+    }
     final isDarkMode = SharedPrefs.themeSetting ?? false;
     final themeValue = isDarkMode ? 'dark' : 'light';
+
     basicAuth = 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
     _setCookies(themeValue);
   }
