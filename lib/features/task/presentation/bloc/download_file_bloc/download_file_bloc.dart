@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/extensions/string_ext.dart';
-import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/foundation.dart';

@@ -1,8 +1,5 @@
+import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/extensions/extensions.dart';
-import 'package:axon_ivy/core/util/widgets/back_button_widget.dart';
-import 'package:axon_ivy/core/util/widgets/data_empty_widget.dart';
-import 'package:axon_ivy/features/base_page/base_page.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/delete_file_bloc/delete_file_bloc.dart';
@@ -10,6 +7,9 @@ import 'package:axon_ivy/features/task/presentation/bloc/download_file_bloc/down
 import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/upload_file_bloc/upload_file_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
+import 'package:axon_ivy/shared/extensions/extensions.dart';
+import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
+import 'package:axon_ivy/shared/widgets/data_empty_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,8 +54,6 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
     }
     return false;
   }
-
-  void doNothing(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
@@ -168,8 +166,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                   surfaceTintColor:
                       Theme.of(context).colorScheme.onPrimaryContainer,
                   shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.all(const Radius.circular(10.0).r)),
+                    borderRadius:
+                        BorderRadius.all(const Radius.circular(10.0).r),
+                  ),
                   onSelected: (value) {
                     switch (value) {
                       case UploadFileType.recent:
@@ -192,8 +191,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                           children: [
                             AppAssets.icons.iconFile.svg(
                               colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
-                                  BlendMode.srcIn),
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn,
+                              ),
                             ),
                             5.horizontalSpace,
                             Expanded(
@@ -219,8 +219,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                           children: [
                             AppAssets.icons.iconImage.svg(
                               colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
-                                  BlendMode.srcIn),
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn,
+                              ),
                             ),
                             5.horizontalSpace,
                             Expanded(
@@ -246,8 +247,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                           children: [
                             AppAssets.icons.iconCamera.svg(
                               colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
-                                  BlendMode.srcIn),
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn,
+                              ),
                             ),
                             5.horizontalSpace,
                             Expanded(
@@ -270,7 +272,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                   },
                   icon: AppAssets.icons.iconAddAttachment.svg(
                     colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.surface, BlendMode.srcIn),
+                      Theme.of(context).colorScheme.surface,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               ),
@@ -299,9 +303,11 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                   padding: EdgeInsets.zero,
                                   onPressed: (context) {
                                     _deleteFileBloc.add(
-                                        DeleteFileEvent.deleteFile(
-                                            task.caseTask!.id,
-                                            documents[index].id));
+                                      DeleteFileEvent.deleteFile(
+                                        task.caseTask!.id,
+                                        documents[index].id,
+                                      ),
+                                    );
                                   },
                                   backgroundColor: const Color(0xFFEE4A52),
                                   foregroundColor: Colors.white,
@@ -325,22 +331,26 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                   .r,
                               onTap: () {
                                 _downloadFileBloc.add(
-                                    DownloadFileEvent.downloadFile(
-                                        documents[index].name,
-                                        documents[index].url));
+                                  DownloadFileEvent.downloadFile(
+                                    documents[index].name,
+                                    documents[index].url,
+                                  ),
+                                );
                               },
                               leading: documents[index].name.isContainImage
                                   ? AppAssets.icons.iconImage.svg(
                                       colorFilter: ColorFilter.mode(
-                                          Theme.of(context)
-                                              .colorScheme
-                                              .onBackground,
-                                          BlendMode.srcIn),
+                                        Theme.of(context)
+                                            .colorScheme
+                                            .onBackground,
+                                        BlendMode.srcIn,
+                                      ),
                                     )
                                   : AppAssets.icons.iconFile.svg(
                                       colorFilter: ColorFilter.mode(
-                                          Theme.of(context).colorScheme.surface,
-                                          BlendMode.srcIn),
+                                        Theme.of(context).colorScheme.surface,
+                                        BlendMode.srcIn,
+                                      ),
                                     ),
                               title: Text(
                                 documents[index].name,
@@ -348,8 +358,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                               ),
                               trailing: AppAssets.icons.chevronRight.svg(
                                 colorFilter: ColorFilter.mode(
-                                    Theme.of(context).colorScheme.surface,
-                                    BlendMode.srcIn),
+                                  Theme.of(context).colorScheme.surface,
+                                  BlendMode.srcIn,
+                                ),
                               ),
                             ),
                           );

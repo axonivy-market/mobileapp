@@ -1,7 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:axon_ivy/core/network/failure.dart';
-import 'package:axon_ivy/core/util/resources/resources.dart';
+import 'package:axon_ivy/shared/resources/string_manager.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 
