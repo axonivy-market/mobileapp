@@ -50,6 +50,7 @@ dependencies:
   flutter_slidable: ^3.0.1
   font_awesome_flutter: ^10.7.0
   connectivity_plus: ^5.0.2
+  flutter_screenutil: ^5.9.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   html: ^0.15.4
@@ -59,9 +60,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
     # For Analyzer
   flutter_lints: ^3.0.1
+  path: ^1.8.3
 
   # For Builder
   build_runner: ^2.4.7
@@ -74,7 +75,7 @@ dev_dependencies:
   injectable_generator: ^2.4.1
   retrofit_generator: ^8.0.5
 flutter_gen:
-  output: lib/core/generated/
+  output: lib/generated/
   integrations:
     flutter_svg: true
 

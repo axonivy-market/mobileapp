@@ -1,5 +1,6 @@
 import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/data/models/task/task.dart';
+import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
