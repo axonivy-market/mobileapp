@@ -48,8 +48,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
     transparentBackground: true,
     useShouldOverrideUrlLoading: true,
     useShouldInterceptRequest: true,
-    cacheEnabled: false,
-    clearCache: true,
+    cacheEnabled: true,
   );
 
   @override
@@ -103,6 +102,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
               url: WebUri(widget.fullRequestPath),
               headers: {
                 HttpHeaders.authorizationHeader: basicAuth,
+                HttpHeaders.cacheControlHeader: 'no-cache',
               },
               httpShouldHandleCookies: true)
           : null,
@@ -216,7 +216,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
       InAppWebViewController controller, NavigationAction navigationAction) {
     if (widget.taskIvy?.offline == true &&
         navigationAction.request.url!.toString() ==
-            widget.taskIvy?.submitUrlOffline) {
+            "${SharedPrefs.getBaseUrl}${widget.taskIvy?.submitUrlOffline}") {
       if (context.mounted && navigationAction.request.body != null) {
         var formValues = utf8.decode(navigationAction.request.body!.toList());
         Map<String, String> resultMap = {};

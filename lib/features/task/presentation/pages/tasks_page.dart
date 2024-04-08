@@ -7,6 +7,7 @@ import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_state.dart';
+import 'package:axon_ivy/features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/sort_bloc/sort_state.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_bloc/task_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart';
@@ -63,6 +64,9 @@ class TasksView extends StatelessWidget {
           BlocListener<ConnectivityBloc, ConnectivityState>(
               listener: (context, state) {
             context.read<TaskBloc>().isOfflineMode = state is NotConnectedState;
+            context
+                .read<OfflineIndicatorCubit>()
+                .showOfflineIndicator(state is NotConnectedState);
             if (state is ConnectedState) {
               context
                   .read<TaskBloc>()
@@ -135,17 +139,18 @@ class TasksViewContent extends StatelessWidget {
               return Stack(
                 children: [
                   // For cached css task offline on WebView
-                  // if (taskState.tasks.firstOrNull?.fullRequestPath != null)
-                  //   SizedBox(
-                  //     height: 0,
-                  //     width: 0,
-                  //     child: TaskWebViewWidget(
-                  //       fullRequestPath: taskState.tasks.first.fullRequestPath,
-                  //       onScrollToTop: (value) => {},
-                  //       canScrollVertical: (value) => {},
-                  //       onProgressChanged: (value) => {},
-                  //     ),
-                  //   ),
+                  if (taskState.tasks.firstOrNull?.fullRequestPath != null)
+                    SizedBox(
+                      height: 0,
+                      width: 0,
+                      child: TaskWebViewWidget(
+                        key: GlobalKey(),
+                        fullRequestPath: taskState.tasks.first.fullRequestPath,
+                        onScrollToTop: (value) => {},
+                        canScrollVertical: (value) => {},
+                        onProgressChanged: (value) => {},
+                      ),
+                    ),
                   _buildTaskList(context, taskState.tasks),
                 ],
               );

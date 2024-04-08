@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/extensions.dart';
@@ -14,7 +13,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:path_provider/path_provider.dart';
 
 import '../../../../../core/app/app.dart';
 import '../../../../../core/util/resources/resources.dart';
@@ -148,9 +146,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
       tasks.fold(
         (l) {
+          isOfflineMode = true;
           add(const TaskEvent.showTasksOffline());
         },
         (r) {
+          isOfflineMode = false;
           SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
           this.tasks.clear();
           this.tasks.addAll(r);
@@ -159,6 +159,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         },
       );
     } catch (e) {
+      isOfflineMode = true;
       add(const TaskEvent.showTasksOffline());
     }
   }
@@ -183,13 +184,18 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       int localTaskIndex =
           tasksLocal.indexWhere((localUser) => tasks[i].id == localUser.id);
       if (localTaskIndex != -1) {
-        tasks[i] = tasksLocal[localTaskIndex];
+        tasks[i] = tasks[i].copyWith(
+            submitUrlOffline: tasksLocal[localTaskIndex].submitUrlOffline,
+            formHTMLPageOffline:
+                tasksLocal[localTaskIndex].formHTMLPageOffline);
+        _localTaskProvider.addTask(tasks[i]);
       }
     }
     // download task form
-    //TODO test
-    List<Future<void>> futures =
-        tasks.where((taskServer) => taskServer.offline).map((taskIvy) {
+    List<Future<void>> futures = tasks
+        .where((taskServer) =>
+            taskServer.offline && taskServer.submitUrlOffline.isEmptyOrNull)
+        .map((taskIvy) {
       return downloadHTMLFromFullRequestPath(taskIvy);
     }).toList();
     await Future.wait(futures);
@@ -206,21 +212,21 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
     if (response.statusCode == 200 && SharedPrefs.getBaseUrl != null) {
       final submitUrl = _getFormAction(response.data);
-      var cssHref = RegExp(r'<link[^>]*href="([^"]+)"')
-          .allMatches(response.data)
-          .map((match) => match.group(1))
-          .toList();
-      var jsHref = RegExp(r'<script[^>]*src="([^"]+)">')
-          .allMatches(response.data)
-          .map((match) => match.group(1))
-          .toList();
+      // var cssHref = RegExp(r'<link[^>]*href="([^"]+)"')
+      //     .allMatches(response.data)
+      //     .map((match) => match.group(1))
+      //     .toList();
+      // var jsHref = RegExp(r'<script[^>]*src="([^"]+)">')
+      //     .allMatches(response.data)
+      //     .map((match) => match.group(1))
+      //     .toList();
 
-      List<Future<void>> cssHrefFutures = cssHref.map((path) {
-        return downloadResource(path);
-      }).toList();
-      List<Future<void>> jsHrefFutures = jsHref.map((path) {
-        return downloadResource(path);
-      }).toList();
+      // List<Future<void>> cssHrefFutures = cssHref.map((path) {
+      //   return downloadResource(path);
+      // }).toList();
+      // List<Future<void>> jsHrefFutures = jsHref.map((path) {
+      //   return downloadResource(path);
+      // }).toList();
       // await Future.wait(cssHrefFutures);
       // await Future.wait(jsHrefFutures);
       final task = taskIvy.copyWith(
@@ -233,16 +239,16 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     }
   }
 
-  Future<void> downloadResource(String? path) async {
-    if (path.isEmptyOrNull) return;
-    var dio = getIt<Dio>();
-    final directory = await getApplicationDocumentsDirectory();
-    final regex = RegExp(r'[^/]+(?=\?)|[^/]+$', caseSensitive: false);
-    final match = regex.firstMatch(path!);
-    final file = File('${directory.path}/${match?.group(0)}');
-    final response = await dio.get(path);
-    await file.writeAsString(response.data);
-  }
+  // Future<void> downloadResource(String? path) async {
+  //   if (path.isEmptyOrNull) return;
+  //   var dio = getIt<Dio>();
+  //   final directory = await getApplicationDocumentsDirectory();
+  //   final regex = RegExp(r'[^/]+(?=\?)|[^/]+$', caseSensitive: false);
+  //   final match = regex.firstMatch(path!);
+  //   final file = File('${directory.path}/${match?.group(0)}');
+  //   final response = await dio.get(path);
+  //   await file.writeAsString(response.data);
+  // }
 
   String _getFormAction(String htmlContent) {
     final document = html_parser.parse(htmlContent);
@@ -302,11 +308,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     }).toList();
     await Future.wait(tasksDoneFuture);
 
-    sortDefaultTasks = tasks.sortDefaultTasks;
-    expiredTasks = _filterExpiredTasks(tasks);
-    emit(TaskState.success(
-        tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
-            activeSortType.getSubTypeActive()!)));
+    add(TaskEvent.getTasks(activeFilter));
   }
 
   Future<void> _finishTaskOffline(TaskIvy taskIvy) async {
