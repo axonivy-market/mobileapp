@@ -36,17 +36,19 @@ import '../../data/services/engine_info/engine_info_service.dart' as _i5;
 import '../../data/services/process/process_service.dart' as _i12;
 import '../../data/services/profile/profile_service.dart' as _i13;
 import '../../features/login/bloc/login_bloc.dart' as _i32;
-import '../../features/process/bloc/process_bloc.dart' as _i47;
+import '../../features/process/bloc/process_bloc.dart' as _i48;
 import '../../features/profile/bloc/logged_in_cubit.dart' as _i10;
-import '../../features/profile/bloc/profile_bloc.dart' as _i48;
+import '../../features/profile/bloc/profile_bloc.dart' as _i49;
 import '../../features/search/bloc/engine_info_cubit/engine_info_cubit.dart'
-    as _i46;
+    as _i47;
 import '../../features/search/bloc/search_bloc/search_bloc.dart' as _i14;
 import '../../features/search/bloc/search_filter_cubit/search_filter_cubit.dart'
     as _i15;
+import '../../features/search/bloc/task_conflict_cubit/task_conflict_cubit.dart'
+    as _i42;
 import '../../features/splash/splash_cubit.dart' as _i18;
 import '../../features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart'
-    as _i44;
+    as _i45;
 import '../../features/tabbar/bloc/tabbar_cubit.dart' as _i19;
 import '../../features/task/data/datasources/file_remote_data_source/file_remote_data_source.dart'
     as _i6;
@@ -65,7 +67,7 @@ import '../../features/task/domain/usecases/get_task_use_case.dart' as _i31;
 import '../../features/task/domain/usecases/get_tasks_use_case.dart' as _i30;
 import '../../features/task/domain/usecases/upload_file_use_case.dart' as _i24;
 import '../../features/task/presentation/bloc/delete_file_bloc/delete_file_bloc.dart'
-    as _i45;
+    as _i46;
 import '../../features/task/presentation/bloc/download_file_bloc/download_file_bloc.dart'
     as _i4;
 import '../../features/task/presentation/bloc/filter_bloc/filter_bloc.dart'
@@ -75,12 +77,12 @@ import '../../features/task/presentation/bloc/offline_indicator_cubit/offline_in
 import '../../features/task/presentation/bloc/sort_bloc/sort_bloc.dart' as _i17;
 import '../../features/task/presentation/bloc/task_bloc/task_bloc.dart' as _i41;
 import '../../features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart'
-    as _i42;
-import '../../features/task/presentation/bloc/toast_message_cubit/toast_message_cubit.dart'
     as _i43;
+import '../../features/task/presentation/bloc/toast_message_cubit/toast_message_cubit.dart'
+    as _i44;
 import '../../features/task/presentation/bloc/upload_file_bloc/upload_file_bloc.dart'
     as _i23;
-import 'app_module.dart' as _i49;
+import 'app_module.dart' as _i50;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 Future<_i1.GetIt> $initGetIt(
@@ -144,21 +146,23 @@ Future<_i1.GetIt> $initGetIt(
   gh.factory<_i39.ProfileRepository>(
       () => _i40.ProfileRepositoryImpl(gh<_i37.ProfileRemoteDataSource>()));
   gh.factory<_i41.TaskBloc>(() => _i41.TaskBloc(gh<_i30.GetTaskListUseCase>()));
-  gh.factory<_i42.TaskDetailBloc>(
-      () => _i42.TaskDetailBloc(gh<_i31.GetTaskUseCase>()));
-  gh.factory<_i43.ToastMessageCubit>(
-      () => _i43.ToastMessageCubit(gh<_i31.GetTaskUseCase>()));
-  gh.factory<_i44.ConnectivityBloc>(
-      () => _i44.ConnectivityBloc(gh<_i28.EngineInfoRepository>()));
-  gh.factory<_i45.DeleteFileBloc>(
-      () => _i45.DeleteFileBloc(gh<_i25.DeleteFileUseCase>()));
-  gh.factory<_i46.EngineInfoCubit>(
-      () => _i46.EngineInfoCubit(gh<_i28.EngineInfoRepository>()));
-  gh.factory<_i47.ProcessBloc>(
-      () => _i47.ProcessBloc(gh<_i35.ProcessRepository>()));
-  gh.factory<_i48.ProfileBloc>(
-      () => _i48.ProfileBloc(gh<_i39.ProfileRepository>()));
+  gh.factory<_i42.TaskConflictCubit>(
+      () => _i42.TaskConflictCubit(gh<_i21.TaskRepositoryInterface>()));
+  gh.factory<_i43.TaskDetailBloc>(
+      () => _i43.TaskDetailBloc(gh<_i31.GetTaskUseCase>()));
+  gh.factory<_i44.ToastMessageCubit>(
+      () => _i44.ToastMessageCubit(gh<_i31.GetTaskUseCase>()));
+  gh.factory<_i45.ConnectivityBloc>(
+      () => _i45.ConnectivityBloc(gh<_i28.EngineInfoRepository>()));
+  gh.factory<_i46.DeleteFileBloc>(
+      () => _i46.DeleteFileBloc(gh<_i25.DeleteFileUseCase>()));
+  gh.factory<_i47.EngineInfoCubit>(
+      () => _i47.EngineInfoCubit(gh<_i28.EngineInfoRepository>()));
+  gh.factory<_i48.ProcessBloc>(
+      () => _i48.ProcessBloc(gh<_i35.ProcessRepository>()));
+  gh.factory<_i49.ProfileBloc>(
+      () => _i49.ProfileBloc(gh<_i39.ProfileRepository>()));
   return getIt;
 }
 
-class _$AppModule extends _i49.AppModule {}
+class _$AppModule extends _i50.AppModule {}

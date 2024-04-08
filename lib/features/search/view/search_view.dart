@@ -7,6 +7,7 @@ import 'package:axon_ivy/features/process/process.dart';
 import 'package:axon_ivy/features/search/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/features/search/bloc/search_bloc/search_bloc.dart';
 import 'package:axon_ivy/features/search/bloc/search_filter_cubit/search_filter_cubit.dart';
+import 'package:axon_ivy/features/search/bloc/task_conflict_cubit/task_conflict_cubit.dart';
 import 'package:axon_ivy/features/search/view/widgets/widgets.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
@@ -158,14 +159,9 @@ class _SearchViewState extends State<SearchView> {
                     onTap: () {
                       WidgetsBinding.instance.focusManager.primaryFocus
                           ?.unfocus();
-                      context.push(AppRoutes.taskActivity, extra: {
-                        'task': item.task,
-                        'path': item.task.fullRequestPath
-                      }).then((value) {
-                        if (value != null && value is int) {
-                          context.read<TabBarCubit>().navigateTaskList(value);
-                        }
-                      });
+                      context
+                          .read<TaskConflictCubit>()
+                          .checkTaskConflict(item.task.id);
                     },
                     child: TaskItemWidget(
                       name: item.task.name,

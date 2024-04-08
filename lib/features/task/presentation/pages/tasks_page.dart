@@ -3,8 +3,8 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/router.dart';
 import 'package:axon_ivy/core/util/toast_message.dart';
 import 'package:axon_ivy/core/util/widgets/widgets.dart';
+import 'package:axon_ivy/features/search/bloc/task_conflict_cubit/task_conflict_cubit.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
-import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_state.dart';
@@ -42,25 +42,6 @@ class TasksView extends StatelessWidget {
       ],
       child: MultiBlocListener(
         listeners: [
-          BlocListener<TaskDetailBloc, TaskDetailState>(
-            listener: (context, state) {
-              if (state is TaskDetailStartSuccessState) {
-                context.push(
-                  AppRoutes.taskActivity,
-                  extra: {
-                    'task': state.task,
-                    'path': state.task.fullRequestPath
-                  },
-                ).then(
-                  (value) {
-                    if (value != null && value is int) {
-                      context.read<TabBarCubit>().navigateTaskList(value);
-                    }
-                  },
-                );
-              }
-            },
-          ),
           BlocListener<TaskBloc, TaskState>(
             listener: (context, state) {
               context.read<OfflineIndicatorCubit>().showOfflineIndicator(
@@ -77,7 +58,8 @@ class TasksView extends StatelessWidget {
               listener: (context, state) {
             if (state is ShowToastMessageState) {
               ToastMessageUtils.showMessage(
-                'Following task has been completed: "${state.taskName}"',
+                'taskCompletedMessage'
+                    .tr(namedArgs: {'taskName': state.taskName}),
                 AppAssets.icons.success,
                 context,
               );
@@ -239,9 +221,8 @@ class TasksViewContent extends StatelessWidget {
     } else {
       final task = tasks[index];
       return GestureDetector(
-        onTap: () {
-          _navigateTaskActivity(context, tasks[index]);
-        },
+        onTap: () =>
+            context.read<TaskConflictCubit>().checkTaskConflict(task.id),
         onLongPress: () => _showDetails(context, task),
         child: TaskItemWidget(
           name: task.name,
@@ -264,24 +245,10 @@ class TasksViewContent extends StatelessWidget {
           Animation secondaryAnimation) {
         return TaskDetailsWidget(
           task: task,
-          onPressed: (task) => context
-              .read<TaskDetailBloc>()
-              .add(TaskDetailEvent.startTask(task)),
+          onPressed: (task) =>
+              context.read<TaskConflictCubit>().checkTaskConflict(task.id),
         );
       },
     );
-  }
-
-  _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
-    context.push(AppRoutes.taskActivity, extra: {
-      'task': taskIvy,
-      'path': taskIvy.fullRequestPath
-    }).then((value) {
-      if (value != null && value is int) {
-        context.read<TabBarCubit>().navigateTaskList(value);
-      } else if (value is bool && value == true) {
-        context.read<TaskBloc>().add(const TaskEvent.getTasks(FilterType.all));
-      }
-    });
   }
 }
