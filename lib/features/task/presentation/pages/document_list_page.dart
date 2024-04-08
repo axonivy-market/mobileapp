@@ -7,6 +7,7 @@ import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/delete_file_bloc/delete_file_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/download_file_bloc/download_file_bloc.dart';
+import 'package:axon_ivy/features/task/presentation/bloc/preview_file_bloc/preview_file_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/upload_file_bloc/upload_file_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
@@ -16,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:open_file_plus/open_file_plus.dart';
 
 class DocumentListPage extends BasePage {
   const DocumentListPage({super.key, required this.task});
@@ -31,6 +33,8 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
   late DeleteFileBloc _deleteFileBloc;
   late TaskDetailBloc _taskDetailBloc;
   late DownloadFileBloc _downloadFileBloc;
+  late PreviewFileBloc _previewFileBloc;
+
   bool shouldFetchTaskList = false;
   dynamic model;
   late List<Document> documents = [];
@@ -42,6 +46,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
     _taskDetailBloc = getIt<TaskDetailBloc>();
     _deleteFileBloc = getIt<DeleteFileBloc>();
     _downloadFileBloc = getIt<DownloadFileBloc>();
+    _previewFileBloc = getIt<PreviewFileBloc>();
   }
 
   bool isUploadDuplicateFile(UploadSuccessState state, TaskIvy task) {
@@ -67,6 +72,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
         BlocProvider(create: (context) => _deleteFileBloc),
         BlocProvider(create: (context) => _taskDetailBloc),
         BlocProvider(create: (context) => _downloadFileBloc),
+        BlocProvider(create: (context) => _previewFileBloc),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -135,6 +141,23 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                     title: "documentList.downloadSuccessTitle".tr(),
                     message: state.message);
               } else if (state is DownloadLoadingState) {
+                showLoading();
+              }
+            },
+          ),
+          BlocListener<PreviewFileBloc, PreviewFileState>(
+            listener: (context, state) async {
+              if (state is PreviewErrorState) {
+                hideLoading();
+                showMessageDialog(
+                    title: "documentList.errorTitle".tr(),
+                    message: state.error);
+              } else if (state is PreviewSuccessState) {
+                hideLoading();
+                await OpenFile.open(state.filePath);
+                _previewFileBloc
+                    .add(const PreviewFileEvent.deletePreviewFile());
+              } else if (state is PreviewLoadingState) {
                 showLoading();
               }
             },
@@ -290,7 +313,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                           return Slidable(
                             key: ValueKey(index),
                             endActionPane: ActionPane(
-                              extentRatio: 0.175,
+                              extentRatio: 0.4,
                               key: ValueKey(index),
                               motion: const ScrollMotion(),
                               children: [
@@ -298,10 +321,35 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                   autoClose: true,
                                   padding: EdgeInsets.zero,
                                   onPressed: (context) {
+                                    _downloadFileBloc.add(
+                                      DownloadFileEvent.downloadFile(
+                                          documents[index].name,
+                                          documents[index].url),
+                                    );
+                                  },
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
+                                  foregroundColor: Colors.white,
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(Icons.download_outlined),
+                                      Text(
+                                        'documentList.download'.tr(),
+                                        style: TextStyle(fontSize: 13.sp),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                CustomSlidableAction(
+                                  autoClose: true,
+                                  padding: EdgeInsets.zero,
+                                  onPressed: (context) {
                                     _deleteFileBloc.add(
-                                        DeleteFileEvent.deleteFile(
-                                            task.caseTask!.id,
-                                            documents[index].id));
+                                      DeleteFileEvent.deleteFile(
+                                          task.caseTask!.id,
+                                          documents[index].id),
+                                    );
                                   },
                                   backgroundColor: const Color(0xFFEE4A52),
                                   foregroundColor: Colors.white,
@@ -324,10 +372,12 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                       horizontal: 15, vertical: 0)
                                   .r,
                               onTap: () {
-                                _downloadFileBloc.add(
-                                    DownloadFileEvent.downloadFile(
-                                        documents[index].name,
-                                        documents[index].url));
+                                _previewFileBloc.add(
+                                  PreviewFileEvent.previewFile(
+                                    documents[index].name,
+                                    documents[index].url,
+                                  ),
+                                );
                               },
                               leading: documents[index].name.isContainImage
                                   ? AppAssets.icons.iconImage.svg(
@@ -348,8 +398,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                               ),
                               trailing: AppAssets.icons.chevronRight.svg(
                                 colorFilter: ColorFilter.mode(
-                                    Theme.of(context).colorScheme.surface,
-                                    BlendMode.srcIn),
+                                  Theme.of(context).colorScheme.surface,
+                                  BlendMode.srcIn,
+                                ),
                               ),
                             ),
                           );

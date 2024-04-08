@@ -6,6 +6,7 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:dio/dio.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_saver/file_saver.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,14 +52,15 @@ class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
           bytes: response.bodyBytes,
         );
 
-        emit(DownloadFileState.success(
-            "Download ${event.fileName} successfully"));
+        emit(DownloadFileState.success("downloadFile.downloadSuccess"
+            .tr(namedArgs: {'fileName': fileName})));
       } else {
-        emit(
-            DownloadFileState.error("Fail to download file ${event.fileName}"));
+        emit(DownloadFileState.error("downloadFile.failToDownload"
+            .tr(namedArgs: {'fileName': event.fileName})));
       }
     } catch (e) {
-      emit(DownloadFileState.error("Fail to download file ${event.fileName}"));
+      emit(DownloadFileState.error("downloadFile.failToDownload"
+          .tr(namedArgs: {'fileName': event.fileName})));
     }
   }
 }
