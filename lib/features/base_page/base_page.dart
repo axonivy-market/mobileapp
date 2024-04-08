@@ -60,7 +60,8 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
             child: TextFormField(
               inputFormatters: [
                 FilteringTextInputFormatter.allow(
-                    RegExp(r"[a-zA-ZäöüÄÖÜß\d\s]")),
+                  RegExp(r'[a-zA-Z0-9äöüÄÖÜß]+'),
+                )
               ],
               style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,

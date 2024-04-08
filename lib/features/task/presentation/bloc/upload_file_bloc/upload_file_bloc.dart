@@ -124,11 +124,12 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     }
   }
 
-  Future uploadFiles(
-      {required int caseId,
-      required File file,
-      required Emitter emit,
-      required String fileName}) async {
+  Future uploadFiles({
+    required int caseId,
+    required File file,
+    required Emitter emit,
+    required String fileName,
+  }) async {
     try {
       FormData data = FormData.fromMap(
         {
