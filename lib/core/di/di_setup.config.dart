@@ -25,7 +25,8 @@ import '../../data/data_sources/profile/profile_remote_data_source.dart'
     as _i39;
 import '../../data/data_sources/profile/profile_remote_date_source_impl.dart'
     as _i40;
-import '../../data/database/local_task_provider.dart' as _i10;
+import '../../features/task/data/datasources/task_local_data_source.dart'
+    as _i10;
 import '../../data/repositories/engine/engine_info_repository.dart' as _i30;
 import '../../data/repositories/engine/engine_info_repository_impl.dart'
     as _i31;
@@ -105,9 +106,9 @@ Future<_i1.GetIt> $initGetIt(
   gh.factory<_i7.FileRepositoryInterface>(
       () => _i8.FileRepositoryImplement(gh<_i6.FileRemoteDataSource>()));
   gh.factory<_i9.FilterBloc>(() => _i9.FilterBloc());
-  gh.factory<_i10.LocalTaskProvider>(() => _i10.LocalTaskProvider());
+  gh.factory<_i10.TaskLocalDataSource>(() => _i10.TaskLocalDataSource());
   gh.factory<_i11.LoggedInCubit>(
-      () => _i11.LoggedInCubit(gh<_i10.LocalTaskProvider>()));
+      () => _i11.LoggedInCubit(gh<_i10.TaskLocalDataSource>()));
   gh.factory<_i12.OfflineIndicatorCubit>(() => _i12.OfflineIndicatorCubit());
   gh.factory<_i13.ProcessService>(() => _i13.ProcessService(gh<_i3.Dio>()));
   gh.factory<_i14.ProfileService>(() => _i14.ProfileService(gh<_i3.Dio>()));
@@ -121,7 +122,7 @@ Future<_i1.GetIt> $initGetIt(
   gh.factory<_i19.SplashCubit>(() => _i19.SplashCubit());
   gh.factory<_i20.TabBarCubit>(() => _i20.TabBarCubit());
   gh.factory<_i21.TaskActivityBloc>(
-      () => _i21.TaskActivityBloc(gh<_i10.LocalTaskProvider>()));
+      () => _i21.TaskActivityBloc(gh<_i10.TaskLocalDataSource>()));
   gh.factory<_i22.TaskRemoteDataSource>(
       () => _i22.TaskRemoteDataSource(gh<_i3.Dio>()));
   gh.factory<_i23.TaskRepositoryInterface>(
@@ -152,7 +153,7 @@ Future<_i1.GetIt> $initGetIt(
       () => _i42.ProfileRepositoryImpl(gh<_i39.ProfileRemoteDataSource>()));
   gh.factory<_i43.TaskBloc>(() => _i43.TaskBloc(
         gh<_i32.GetTaskListUseCase>(),
-        gh<_i10.LocalTaskProvider>(),
+        gh<_i10.TaskLocalDataSource>(),
       ));
   gh.factory<_i44.TaskDetailBloc>(
       () => _i44.TaskDetailBloc(gh<_i33.GetTaskUseCase>()));

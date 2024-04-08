@@ -1,17 +1,16 @@
 import 'package:axon_ivy/core/app/app.dart';
-import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class LocalTaskProvider {
+class TaskLocalDataSource {
   void addTask(TaskIvy taskIvy) {
     Box<TaskIvy> taskBox = Hive.box<TaskIvy>(Constants.taskBox);
     taskBox.put(taskIvy.id, taskIvy);
   }
 
-  List<TaskIvy> taskList() {
+  List<TaskIvy> getAllTasks() {
     Box<TaskIvy> taskBox = Hive.box<TaskIvy>(Constants.taskBox);
     return taskBox.values.toList();
   }

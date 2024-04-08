@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
-import 'package:axon_ivy/data/models/task/task.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +10,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/app/app.dart';
-import '../../../../../data/database/local_task_provider.dart';
+import '../../../data/datasources/task_local_data_source.dart';
 
 part 'task_activity_event.dart';
 
@@ -21,9 +20,9 @@ part 'task_activity_bloc.freezed.dart';
 
 @injectable
 class TaskActivityBloc extends Bloc<TaskActivityEvent, TaskActivityState> {
-  final LocalTaskProvider _localTaskProvider;
+  final TaskLocalDataSource _taskLocalDataSource;
 
-  TaskActivityBloc(this._localTaskProvider)
+  TaskActivityBloc(this._taskLocalDataSource)
       : super(const TaskActivityState.initial()) {
     on<_FinishTaskOfflineEvent>(_finishTaskOffline);
   }
@@ -49,16 +48,16 @@ class TaskActivityBloc extends Bloc<TaskActivityEvent, TaskActivityState> {
       var isFinishedTask =
           finishedTask.isNotEmpty && currentRunningTask.isEmpty;
       if (isFinishedTask) {
-        _localTaskProvider.removeTask(taskIvy.id);
+        _taskLocalDataSource.removeTask(taskIvy.id);
         emit(FinishedTaskOffline(taskIvy));
       } else {
         var task = taskIvy.copyWith(state: TaskStateEnum.doneInOffline.value);
-        _localTaskProvider.addTask(task);
+        _taskLocalDataSource.addTask(task);
         emit(FinishedTaskOffline(task));
       }
     } catch (e) {
       var task = taskIvy.copyWith(state: TaskStateEnum.doneInOffline.value);
-      _localTaskProvider.addTask(task);
+      _taskLocalDataSource.addTask(task);
       emit(FinishedTaskOffline(task));
     }
   }

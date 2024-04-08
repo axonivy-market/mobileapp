@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/extensions.dart';
-import 'package:axon_ivy/data/database/local_task_provider.dart';
+import 'package:axon_ivy/features/task/data/datasources/task_local_data_source.dart';
 import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/domain/usecases/get_tasks_use_case.dart';
@@ -28,7 +28,7 @@ part 'task_state.dart';
 @injectable
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final GetTaskListUseCase _taskRepository;
-  final LocalTaskProvider _localTaskProvider;
+  final TaskLocalDataSource _taskLocalDataSource;
   List<TaskIvy> tasks = [];
   List<TaskIvy> sortDefaultTasks = [];
   List<TaskIvy> expiredTasks = [];
@@ -41,7 +41,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     SubSortType.mostImportant
   ];
 
-  TaskBloc(this._taskRepository, this._localTaskProvider)
+  TaskBloc(this._taskRepository, this._taskLocalDataSource)
       : super(const TaskState.loading(false)) {
     on<_GetTasks>(_getTasks);
     on<_FilterTasks>(_filterTasks);
@@ -177,7 +177,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   Future<void> _parseHtml(event, Emitter emit) async {
-    var tasksLocal = _localTaskProvider.taskList();
+    var tasksLocal = _taskLocalDataSource.getAllTasks();
 
     // Load task offline form from local DB
     for (int i = 0; i < tasks.length; i++) {
@@ -188,7 +188,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
             submitUrlOffline: tasksLocal[localTaskIndex].submitUrlOffline,
             formHTMLPageOffline:
                 tasksLocal[localTaskIndex].formHTMLPageOffline);
-        _localTaskProvider.addTask(tasks[i]);
+        _taskLocalDataSource.addTask(tasks[i]);
       }
     }
     // download task form
@@ -212,43 +212,15 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
     if (response.statusCode == 200 && SharedPrefs.getBaseUrl != null) {
       final submitUrl = _getFormAction(response.data);
-      // var cssHref = RegExp(r'<link[^>]*href="([^"]+)"')
-      //     .allMatches(response.data)
-      //     .map((match) => match.group(1))
-      //     .toList();
-      // var jsHref = RegExp(r'<script[^>]*src="([^"]+)">')
-      //     .allMatches(response.data)
-      //     .map((match) => match.group(1))
-      //     .toList();
-
-      // List<Future<void>> cssHrefFutures = cssHref.map((path) {
-      //   return downloadResource(path);
-      // }).toList();
-      // List<Future<void>> jsHrefFutures = jsHref.map((path) {
-      //   return downloadResource(path);
-      // }).toList();
-      // await Future.wait(cssHrefFutures);
-      // await Future.wait(jsHrefFutures);
       final task = taskIvy.copyWith(
           submitUrlOffline: submitUrl, formHTMLPageOffline: response.data);
       // Update task for display on UI
       var index = tasks.indexWhere((element) => element.id == taskIvy.id);
       tasks.removeAt(index);
       tasks.add(task);
-      _localTaskProvider.addTask(task);
+      _taskLocalDataSource.addTask(task);
     }
   }
-
-  // Future<void> downloadResource(String? path) async {
-  //   if (path.isEmptyOrNull) return;
-  //   var dio = getIt<Dio>();
-  //   final directory = await getApplicationDocumentsDirectory();
-  //   final regex = RegExp(r'[^/]+(?=\?)|[^/]+$', caseSensitive: false);
-  //   final match = regex.firstMatch(path!);
-  //   final file = File('${directory.path}/${match?.group(0)}');
-  //   final response = await dio.get(path);
-  //   await file.writeAsString(response.data);
-  // }
 
   String _getFormAction(String htmlContent) {
     final document = html_parser.parse(htmlContent);
@@ -265,8 +237,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   Future<void> _showTasksOffline(event, Emitter emit) async {
-    var tasksOffline = _localTaskProvider
-        .taskList()
+    isOfflineMode = true;
+    var tasksOffline = _taskLocalDataSource
+        .getAllTasks()
         .where((element) => element.state != TaskStateEnum.doneInOffline.value)
         .toList();
     sortDefaultTasks = tasksOffline.sortDefaultTasks;
@@ -279,16 +252,16 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   Future<void> _tasksLoadedSync(event, emit) async {
     // Remove tasks local for tasks done and uploaded from server
-    _localTaskProvider
-        .taskList()
+    _taskLocalDataSource
+        .getAllTasks()
         .where((taskLocal) => !tasks.any((task) => task.id == taskLocal.id))
         .forEach((element) {
-      _localTaskProvider.removeTask(element.id);
+      _taskLocalDataSource.removeTask(element.id);
     });
 
     // sync task done in offline to server
-    List<Future<void>> tasksDoneFuture = _localTaskProvider
-        .taskList()
+    List<Future<void>> tasksDoneFuture = _taskLocalDataSource
+        .getAllTasks()
         .where((element) => element.state == TaskStateEnum.doneInOffline.value)
         .map((taskIvy) {
       return _finishTaskOffline(taskIvy);
@@ -300,8 +273,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   Future<void> _syncDataOnNetworkRestore(event, emit) async {
     // sync task done to server
-    List<Future<void>> tasksDoneFuture = _localTaskProvider
-        .taskList()
+    List<Future<void>> tasksDoneFuture = _taskLocalDataSource
+        .getAllTasks()
         .where((element) => element.state == TaskStateEnum.doneInOffline.value)
         .map((taskIvy) {
       return _finishTaskOffline(taskIvy);
@@ -331,7 +304,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           finishedTask.isNotEmpty && currentRunningTask.isEmpty;
       if (isFinishedTask) {
         // remove task local after it sync done
-        _localTaskProvider.removeTask(taskIvy.id);
+        _taskLocalDataSource.removeTask(taskIvy.id);
         // remove tasks server current
         var taskDoneIdx = tasks.indexWhere((task) => task.id == taskIvy.id);
         tasks.removeAt(taskDoneIdx);
@@ -343,8 +316,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   List<TaskIvy> getTasks() {
     return isOfflineMode
-        ? _localTaskProvider
-            .taskList()
+        ? _taskLocalDataSource
+            .getAllTasks()
             .where(
                 (element) => element.state != TaskStateEnum.doneInOffline.value)
             .toList()

@@ -6,7 +6,7 @@ import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
-import 'package:axon_ivy/data/database/local_task_provider.dart';
+import 'package:axon_ivy/features/task/data/datasources/task_local_data_source.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +19,10 @@ part 'logged_in_cubit.freezed.dart';
 
 @injectable
 class LoggedInCubit extends Cubit<LoggedInState> {
-  final LocalTaskProvider _localTaskProvider;
+  final TaskLocalDataSource _taskLocalDataSource;
 
-  LoggedInCubit(this._localTaskProvider) : super(const LoggedInState.initial());
+  LoggedInCubit(this._taskLocalDataSource)
+      : super(const LoggedInState.initial());
 
   String displayShortNameAvatar(String name) {
     return name
@@ -41,7 +42,7 @@ class LoggedInCubit extends Cubit<LoggedInState> {
 
   void loggedIn(bool isLogged) {
     if (!isLogged) {
-      _localTaskProvider.removeAllTasks();
+      _taskLocalDataSource.removeAllTasks();
     }
     emit(LoggedInState.loggedIn(isLogged));
   }

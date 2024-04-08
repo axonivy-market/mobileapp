@@ -9,7 +9,6 @@ import 'package:axon_ivy/features/profile/bloc/logged_in_cubit.dart';
 import 'package:axon_ivy/features/profile/bloc/profile_bloc.dart';
 import 'package:axon_ivy/features/search/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/features/search/bloc/search_bloc/search_bloc.dart';
-import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_bloc/task_bloc.dart';
