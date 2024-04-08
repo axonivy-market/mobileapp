@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/extensions/string_ext.dart';
@@ -110,7 +111,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
               widget.taskIvy?.formHTMLPageOffline.isEmptyOrNull == false
           ? InAppWebViewInitialData(
               data: widget.taskIvy!.formHTMLPageOffline!,
-              baseUrl: WebUri(SharedPrefs.getBaseUrl!))
+              baseUrl: WebUri(AppConfig.serverUrl))
           : null,
       shouldOverrideUrlLoading: (controller, navigationAction) async {
         if (isFinishedTask) {
@@ -203,7 +204,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         });
     if (widget.taskIvy?.offline == true &&
         request.url.toString() ==
-            "${SharedPrefs.getBaseUrl}${widget.taskIvy?.submitUrlOffline}") {
+            "${AppConfig.serverUrl}${widget.taskIvy?.submitUrlOffline}") {
       // Prevent navigate URL to call finish task offline request
       await Future.delayed(const Duration(seconds: 30));
       if (context.mounted) {
@@ -216,7 +217,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
       InAppWebViewController controller, NavigationAction navigationAction) {
     if (widget.taskIvy?.offline == true &&
         navigationAction.request.url!.toString() ==
-            "${SharedPrefs.getBaseUrl}${widget.taskIvy?.submitUrlOffline}") {
+            "${AppConfig.serverUrl}${widget.taskIvy?.submitUrlOffline}") {
       if (context.mounted && navigationAction.request.body != null) {
         var formValues = utf8.decode(navigationAction.request.body!.toList());
         Map<String, String> resultMap = {};

@@ -208,9 +208,10 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   Future<void> downloadHTMLFromFullRequestPath(TaskIvy taskIvy) async {
     var dio = getIt<Dio>();
+    var requestUrl = taskIvy.fullRequestPath.split(AppConfig.serverUrl);
     final response = await dio.get(taskIvy.fullRequestPath);
 
-    if (response.statusCode == 200 && SharedPrefs.getBaseUrl != null) {
+    if (response.statusCode == 200) {
       final submitUrl = _getFormAction(response.data);
       final task = taskIvy.copyWith(
           submitUrlOffline: submitUrl, formHTMLPageOffline: response.data);
