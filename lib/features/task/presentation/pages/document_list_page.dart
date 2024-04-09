@@ -19,6 +19,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class DocumentListPage extends BasePage {
   const DocumentListPage({super.key, required this.task});
+
   final TaskIvy task;
 
   @override
@@ -55,6 +56,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
   }
 
   void doNothing(BuildContext context) {}
+
   @override
   Widget build(BuildContext context) {
     TaskIvy task = widget.task;
@@ -141,7 +143,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
         child: Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
-            scrolledUnderElevation: 0,
+            scrolledUnderElevation: 15,
+            elevation: 0,
+            shadowColor: Colors.black.withOpacity(0.3),
+            surfaceTintColor: Theme.of(context).colorScheme.background,
             backgroundColor: Theme.of(context).colorScheme.background,
             title: Text(
               "documentList.title".tr(),
@@ -156,9 +161,15 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
               Padding(
                 padding: const EdgeInsets.only(right: 5).r,
                 child: PopupMenuButton<UploadFileType>(
-                  elevation: 0.2,
-                  color: Theme.of(context).colorScheme.background,
+                  elevation: 10,
+                  shadowColor: Colors.black.withOpacity(0.3),
+                  color: Theme.of(context).colorScheme.onPrimaryContainer,
                   position: PopupMenuPosition.under,
+                  surfaceTintColor:
+                      Theme.of(context).colorScheme.onPrimaryContainer,
+                  shape: RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.all(const Radius.circular(10.0).r)),
                   onSelected: (value) {
                     switch (value) {
                       case UploadFileType.recent:

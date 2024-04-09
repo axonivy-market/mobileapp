@@ -5,10 +5,13 @@ import 'package:axon_ivy/core/router/router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-Future main() async {
+import 'core/app/demo_config.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await AppConfig.loadEnv(Environment.prod);
+  await DemoConfig.loadDemoConfig();
   final appRouter = AppRouter();
   configureDependencies();
   runApp(

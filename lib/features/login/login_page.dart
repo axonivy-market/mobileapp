@@ -46,8 +46,11 @@ class _LoginPageState extends BasePageState<LoginPage> {
       appBar: AppBar(
         leadingWidth: 100.w,
         centerTitle: true,
-        scrolledUnderElevation: 0,
+        scrolledUnderElevation: 15,
+        elevation: 0,
+        shadowColor: Colors.black.withOpacity(0.3),
         backgroundColor: Theme.of(context).colorScheme.background,
+        surfaceTintColor: Theme.of(context).colorScheme.background,
         title: Text(
           "profile.signIn".tr(),
           style: GoogleFonts.inter(

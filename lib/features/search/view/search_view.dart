@@ -62,30 +62,18 @@ class _SearchViewState extends State<SearchView> {
                     child: BlocBuilder<SearchBloc, SearchState>(
                       builder: (context, state) {
                         if (state is SearchResultState) {
-                          return Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                        left: 16, right: 16, top: 10)
-                                    .r,
-                                child: const SearchFilterWidget(),
-                              ),
-                              Expanded(
-                                  child: state.items.isEmptyOrNull
-                                      ? DataEmptyWidget(
-                                          message: state.emptyMessage!.tr(),
-                                          icon: AppAssets.icons.icSearchNotFound
-                                              .svg(
-                                            colorFilter: ColorFilter.mode(
-                                              Theme.of(context)
-                                                  .colorScheme
-                                                  .tertiaryContainer,
-                                              BlendMode.srcIn,
-                                            ),
-                                          ))
-                                      : searchItemList(context, state)),
-                            ],
-                          );
+                          return state.items.isEmptyOrNull
+                              ? DataEmptyWidget(
+                                  message: state.emptyMessage!.tr(),
+                                  icon: AppAssets.icons.icSearchNotFound.svg(
+                                    colorFilter: ColorFilter.mode(
+                                      Theme.of(context)
+                                          .colorScheme
+                                          .tertiaryContainer,
+                                      BlendMode.srcIn,
+                                    ),
+                                  ))
+                              : searchItemList(context, state);
                         } else {
                           return DataEmptyWidget(
                               message: 'search.nothingThereYet'.tr(),
@@ -126,15 +114,24 @@ class _SearchViewState extends State<SearchView> {
 
   Widget searchItemList(BuildContext context, SearchResultState state) {
     return CustomScrollView(
+      physics:
+          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       slivers: [
         SliverAppBar(
           backgroundColor: Theme.of(context).colorScheme.background,
-          toolbarHeight: 10.h,
+          toolbarHeight: 62.h,
           pinned: true,
-          scrolledUnderElevation: 0.2,
-          shadowColor: Theme.of(context).colorScheme.outline,
-          surfaceTintColor: Theme.of(context).colorScheme.outline,
+          scrolledUnderElevation: 15,
+          shadowColor: Colors.black.withOpacity(0.3),
+          surfaceTintColor: Theme.of(context).colorScheme.background,
           elevation: 0,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(0.0),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(15, 0, 15, 10).r,
+              child: const SearchFilterWidget(),
+            ),
+          ),
         ),
         SliverList(
           delegate: SliverChildBuilderDelegate(

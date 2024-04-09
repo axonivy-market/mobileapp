@@ -13,7 +13,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
     super.key,
     this.isShowLastUpdated = false,
-    this.scrolledUnderElevation = 1.0,
+    this.scrolledUnderElevation = 15.0,
   });
 
   final bool isShowLastUpdated;
@@ -27,7 +27,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       scrolledUnderElevation: scrolledUnderElevation,
       backgroundColor: Theme.of(context).colorScheme.background,
-      shadowColor: Theme.of(context).colorScheme.outline,
+      shadowColor: Colors.black.withOpacity(0.3),
       surfaceTintColor: Theme.of(context).colorScheme.background,
       elevation: 0,
       leadingWidth: 120.w,

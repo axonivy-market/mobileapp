@@ -43,6 +43,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
   bool isExpanded = false;
   int documentLength = 0;
   bool shouldFetchTaskList = false;
+
   @override
   void initState() {
     super.initState();
@@ -109,7 +110,10 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                     return Padding(
                       padding: const EdgeInsets.only(right: 10.0).r,
                       child: IconButton(
-                        icon: AppAssets.icons.paperclip.svg(),
+                        icon: AppAssets.icons.paperclip.svg(
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
                         onPressed: () {
                           context
                               .pushNamed("documentList", extra: task)
@@ -150,9 +154,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                           state is TaskDetailSuccessState ? state.task : task);
                     },
                   ),
-                if (!isScrollToTop)
-                  Divider(
-                      color: Theme.of(context).colorScheme.outline, height: 1),
+                if (!isScrollToTop) const DropShadowWidget(),
                 if (_progress < 1.0)
                   LinearProgressIndicator(
                     minHeight: 2,
@@ -201,190 +203,183 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
               }
             });
           },
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border(
-                  top: BorderSide(
-                      color: Theme.of(context).colorScheme.outline,
-                      width: 1.0)),
-              color: Theme.of(context).colorScheme.background,
-            ),
-            padding: const EdgeInsets.symmetric(vertical: 16).r,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    if (isExpanded) {
-                      _controller.reverse();
-                    } else {
-                      _controller.forward();
-                    }
-                    setState(() {
-                      isExpanded = !isExpanded;
-                    });
-                  },
-                  child: AnimatedContainer(
-                    width: MediaQuery.of(context).size.width,
-                    color: Theme.of(context).colorScheme.background,
-                    padding: const EdgeInsets.symmetric(horizontal: 16).r,
-                    duration: const Duration(milliseconds: 300),
-                    child: Stack(
-                      children: [
-                        widget.taskIvy!.priority.priorityIcon(context),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 26, right: 35).r,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                maxLines: isExpanded ? null : 1,
-                                overflow:
-                                    isExpanded ? null : TextOverflow.ellipsis,
-                                widget.taskIvy!.name.isEmptyOrNull
-                                    ? "tasksView.noTaskName".tr()
-                                    : widget.taskIvy!.name,
-                                style: GoogleFonts.inter(
-                                  color: Theme.of(context).colorScheme.surface,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 17.sp,
-                                ),
-                              ),
-                              Text(
-                                maxLines: isExpanded ? null : 2,
-                                overflow:
-                                    isExpanded ? null : TextOverflow.ellipsis,
-                                widget.taskIvy!.description.isEmptyOrNull
-                                    ? "tasksView.noTaskDescription".tr()
-                                    : widget.taskIvy!.description,
-                                style: GoogleFonts.inter(
-                                  color:
-                                      Theme.of(context).colorScheme.secondary,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 13.sp,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          right: 0,
-                          top: 0,
-                          bottom: 0,
-                          child: RotationTransition(
-                            turns: _rotationAnimation,
-                            child: Container(
-                              width: 28.w,
-                              height: 28.h,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onPrimaryContainer,
-                              ),
-                              child: AppAssets.icons.chevronUp.svg(
-                                  height: 20.h,
-                                  width: 20.w,
-                                  colorFilter: ColorFilter.mode(
-                                      Theme.of(context).colorScheme.surface,
-                                      BlendMode.srcIn)),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                if (isExpanded)
-                  AnimatedContainer(
-                    color: Theme.of(context).colorScheme.background,
-                    duration: const Duration(milliseconds: 300),
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 15, horizontal: 18)
-                            .r
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const DropShadowWidget(
+                yOffset: -4,
+              ),
+              GestureDetector(
+                onTap: () {
+                  if (isExpanded) {
+                    _controller.reverse();
+                  } else {
+                    _controller.forward();
+                  }
+                  setState(() {
+                    isExpanded = !isExpanded;
+                  });
+                },
+                child: AnimatedContainer(
+                  width: MediaQuery.of(context).size.width,
+                  color: Theme.of(context).colorScheme.background,
+                  padding: const EdgeInsets.fromLTRB(16, 15, 16, 15).r,
+                  duration: const Duration(milliseconds: 300),
+                  child: Stack(
+                    children: [
+                      widget.taskIvy!.priority.priorityIcon(context),
+                      Padding(
+                        padding: EdgeInsets.only(
+                                left: widget.taskIvy!.priority == 2 ? 4 : 26,
+                                right: 35)
                             .r,
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () async {
-                            await context
-                                .pushNamed("documentList", extra: task)
-                                .then((value) {
-                              if (value is bool && value == true) {
-                                taskDetailBloc.add(
-                                    TaskDetailEvent.getTaskDetail(task!.id));
-                              }
-                            });
-                          },
-                          child: TaskInfoRowWidget(
-                            isTitleHighlight: true,
-                            icon: AppAssets.icons.paperclip.svg(
-                                height: 16.sp,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              maxLines: isExpanded ? null : 1,
+                              overflow:
+                                  isExpanded ? null : TextOverflow.ellipsis,
+                              widget.taskIvy!.name.isEmptyOrNull
+                                  ? "tasksView.noTaskName".tr()
+                                  : widget.taskIvy!.name,
+                              style: GoogleFonts.inter(
+                                color: Theme.of(context).colorScheme.surface,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 17.sp,
+                              ),
+                            ),
+                            Text(
+                              maxLines: isExpanded ? null : 2,
+                              overflow:
+                                  isExpanded ? null : TextOverflow.ellipsis,
+                              widget.taskIvy!.description.isEmptyOrNull
+                                  ? "tasksView.noTaskDescription".tr()
+                                  : widget.taskIvy!.description,
+                              style: GoogleFonts.inter(
+                                color: Theme.of(context).colorScheme.secondary,
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13.sp,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        bottom: 0,
+                        child: RotationTransition(
+                          turns: _rotationAnimation,
+                          child: Container(
+                            width: 28.w,
+                            height: 28.h,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .onPrimaryContainer,
+                            ),
+                            child: AppAssets.icons.chevronUp.svg(
+                                height: 20.h,
+                                width: 20.w,
                                 colorFilter: ColorFilter.mode(
                                     Theme.of(context).colorScheme.surface,
                                     BlendMode.srcIn)),
-                            title: "taskDetails.attachments".tr(),
-                            value: "taskDetails.documents"
-                                .plural(task?.caseTask?.documents.length ?? 0),
                           ),
                         ),
-                        TaskInfoRowWidget(
-                          icon: AppAssets.icons.clock.svg(
-                              height: 16.h,
-                              colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
-                                  BlendMode.srcIn)),
-                          title: "taskDetails.expiryDate".tr(),
-                          value: widget.taskIvy!.expiryTimeStamp == null
-                              ? "taskDetails.na".tr()
-                              : widget.taskIvy!.expiryTimeStamp!
-                                  .formatDateYearWithFourNumber,
-                        ),
-                        TaskInfoRowWidget(
-                          icon: AppAssets.icons.calendar.svg(
-                              height: 16.h,
-                              colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
-                                  BlendMode.srcIn)),
-                          title: "taskDetails.creationDate".tr(),
-                          value: widget.taskIvy!.startTimeStamp
-                              .formatDateYearWithFourNumber,
-                        ),
-                        TaskInfoRowWidget(
-                          icon: AppAssets.icons.category2.svg(
-                              height: 16.h,
-                              colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
-                                  BlendMode.srcIn)),
-                          title: "taskDetails.category".tr(),
-                          value: widget.taskIvy!.category.isNotEmptyOrNull
-                              ? widget.taskIvy!.category
-                              : "taskDetails.na".tr(),
-                        ),
-                        TaskInfoRowWidget(
-                          icon: AppAssets.icons.priorityHighBlack.svg(
-                              height: 16.h,
-                              colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
-                                  BlendMode.srcIn)),
-                          title: "taskDetails.priority".tr(),
-                          value: widget.taskIvy!.priority.priorityName,
-                        ),
-                        TaskInfoRowWidget(
-                          icon: AppAssets.icons.users.svg(
-                              height: 16.h,
-                              colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
-                                  BlendMode.srcIn)),
-                          title: "taskDetails.responsible".tr(),
-                          value: widget.taskIvy!.activatorName,
-                          isShowDivider: false,
-                        ),
-                      ],
-                    ),
+                      )
+                    ],
                   ),
-              ],
-            ),
+                ),
+              ),
+              if (isExpanded)
+                AnimatedContainer(
+                  color: Theme.of(context).colorScheme.background,
+                  duration: const Duration(milliseconds: 300),
+                  padding:
+                      const EdgeInsets.only(left: 18, right: 18, bottom: 15).r,
+                  child: Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          await context
+                              .pushNamed("documentList", extra: task)
+                              .then((value) {
+                            if (value is bool && value == true) {
+                              taskDetailBloc
+                                  .add(TaskDetailEvent.getTaskDetail(task!.id));
+                            }
+                          });
+                        },
+                        child: TaskInfoRowWidget(
+                          isTitleHighlight: true,
+                          icon: AppAssets.icons.paperclip.svg(
+                              height: 16.sp,
+                              colorFilter: ColorFilter.mode(
+                                  Theme.of(context).colorScheme.surface,
+                                  BlendMode.srcIn)),
+                          title: "taskDetails.attachments".tr(),
+                          value: "taskDetails.documents"
+                              .plural(task?.caseTask?.documents.length ?? 0),
+                        ),
+                      ),
+                      TaskInfoRowWidget(
+                        icon: AppAssets.icons.clock.svg(
+                            height: 16.h,
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
+                        title: "taskDetails.expiryDate".tr(),
+                        value: widget.taskIvy!.expiryTimeStamp == null
+                            ? "taskDetails.na".tr()
+                            : widget.taskIvy!.expiryTimeStamp!
+                                .formatDateYearWithFourNumber,
+                      ),
+                      TaskInfoRowWidget(
+                        icon: AppAssets.icons.calendar.svg(
+                            height: 16.h,
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
+                        title: "taskDetails.creationDate".tr(),
+                        value: widget.taskIvy!.startTimeStamp
+                            .formatDateYearWithFourNumber,
+                      ),
+                      TaskInfoRowWidget(
+                        icon: AppAssets.icons.category2.svg(
+                            height: 16.h,
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
+                        title: "taskDetails.category".tr(),
+                        value: widget.taskIvy!.category.isNotEmptyOrNull
+                            ? widget.taskIvy!.category
+                            : "taskDetails.na".tr(),
+                      ),
+                      TaskInfoRowWidget(
+                        icon: AppAssets.icons.priorityHighBlack.svg(
+                            height: 16.h,
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
+                        title: "taskDetails.priority".tr(),
+                        value: widget.taskIvy!.priority.priorityName,
+                      ),
+                      TaskInfoRowWidget(
+                        icon: AppAssets.icons.users.svg(
+                            height: 16.h,
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
+                        title: "taskDetails.responsible".tr(),
+                        value: widget.taskIvy!.activatorName,
+                        isShowDivider: false,
+                      ),
+                    ],
+                  ),
+                ),
+            ],
           ),
         ),
       ],
