@@ -18,9 +18,9 @@ class LoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SizedBox(
-        width: 242.w,
-        height: 210.h,
+      
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(98, 0, 98, 0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
