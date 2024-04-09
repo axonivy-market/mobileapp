@@ -163,6 +163,9 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
 
   Future _androidFinishTaskOffline(BuildContext context,
       InAppWebViewController controller, WebResourceRequest request) async {
+    if (!context.mounted) {
+      return;
+    }
     await controller.evaluateJavascript(source: """
         var buttons = document.querySelectorAll('button');
         buttons.forEach(button => {

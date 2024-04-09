@@ -86,6 +86,10 @@ class TasksView extends StatelessWidget {
                   context);
             }
           }),
+          BlocListener<TaskBloc, TaskState>(listener: (context, state) {
+            context.read<OfflineIndicatorCubit>().showOfflineIndicator(
+                state is TaskSuccessState && !state.isOnline);
+          }),
         ],
         child: BlocBuilder<TaskBloc, TaskState>(
           builder: (context, taskState) {
