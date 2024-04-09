@@ -89,25 +89,25 @@ class LoginWidget extends StatelessWidget {
                         context.read<LoggedInCubit>().loggedIn(true);
                       },
                       child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        padding: const EdgeInsets.symmetric(vertical: 10).r,
                         decoration: BoxDecoration(
                           color: Theme.of(context).colorScheme.primaryContainer,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(8),
+                          borderRadius: BorderRadius.all(
+                            const Radius.circular(8).r,
                           ),
                         ),
                         child: Text(
                           "profile.demoMode".tr(),
                           textAlign: TextAlign.center,
                           style: GoogleFonts.inter(
-                              fontSize: 17,
+                              fontSize: 17.sp,
                               fontWeight: FontWeight.w500,
                               color: Theme.of(context).colorScheme.primary),
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(width: 5),
+                  5.horizontalSpace
                 ],
               ),
             ],
