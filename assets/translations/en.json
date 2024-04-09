@@ -135,8 +135,8 @@
     "attachFile": "Attach file",
     "errorTitle": "Error",
     "errorMessage": "File {fileName} already exists",
-    "successTitle": "Success process",
-    "deleteSuccessTitle": "Delete successfully",
-    "downloadSuccessTitle":  "Download successfully"
+    "successTitle": "Upload successfully",
+    "deleteSuccessTitle": "Deleted successfully",
+    "downloadSuccessTitle":  "Downloaded successfully"
   }
 }
