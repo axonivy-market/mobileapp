@@ -7,17 +7,6 @@ extension DateTimeExt on DateTime? {
         this?.month == now.month &&
         this?.day == now.day;
   }
-
-  String get lastUpdatedFormatted {
-    if (this == null) {
-      return "";
-    }
-    if (isNow) {
-      return "${_twoDigits(this!.hour)}:${_twoDigits(this!.minute)}";
-    } else {
-      return "${_twoDigits(this!.day)}.${_twoDigits(this!.month)} ${_twoDigits(this!.hour)}:${_twoDigits(this!.minute)}";
-    }
-  }
 }
 
 extension DateTimeFormatting on DateTime {

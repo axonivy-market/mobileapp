@@ -1,6 +1,4 @@
 import 'package:axon_ivy/core/app/app.dart';
-import 'package:axon_ivy/core/extensions/date_time_ext.dart';
-
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
@@ -9,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppBar({
@@ -74,7 +73,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                           fontSize: 13.sp),
                     ).tr(
                       namedArgs: {
-                        'time': dateTime.lastUpdatedFormatted,
+                        'time': timeago.format(dateTime),
                       },
                     ),
                     5.horizontalSpace,
