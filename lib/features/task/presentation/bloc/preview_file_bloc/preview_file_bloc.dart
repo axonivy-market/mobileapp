@@ -21,6 +21,8 @@ part 'preview_file_state.dart';
 
 @injectable
 class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
+  static const String cacheFileName = 'cache file';
+
   PreviewFileBloc() : super(const PreviewFileState.loading()) {
     on<PreviewFileEvent>((event, emit) async {
       await event.when(
@@ -32,6 +34,7 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
         },
       );
     });
+
     final isDemoSetting = SharedPrefs.demoSetting ?? false;
     if (isDemoSetting) {
       getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
@@ -47,7 +50,7 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
   Future deletePreviewFile(Emitter emit) async {
     try {
       final dir = await getApplicationDocumentsDirectory();
-      String cacheTempFolder = '${dir.path}/cache file';
+      String cacheTempFolder = '${dir.path}/$cacheFileName';
       Directory(cacheTempFolder).deleteSync(recursive: true);
     } catch (e) {
       debugPrint('$e');
@@ -68,7 +71,7 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
       );
       if (response.statusCode == 200) {
         final dir = await getApplicationDocumentsDirectory();
-        String cacheTempFolder = '${dir.path}/cache file';
+        String cacheTempFolder = '${dir.path}/$cacheFileName';
         String filePath = '$cacheTempFolder/$fileName';
         await Directory(cacheTempFolder).create(recursive: true);
 

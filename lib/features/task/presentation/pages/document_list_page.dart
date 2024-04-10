@@ -130,6 +130,21 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
           ),
           BlocListener<DownloadFileBloc, DownloadFileState>(
             listener: (context, state) {
+              if (state is DownloadLoadingState) {
+                showLoading();
+              } else {
+                hideLoading();
+                if (state is DownloadErrorState) {
+                  showMessageDialog(
+                      title: "documentList.errorTitle".tr(),
+                      message: state.error);
+                } else if (state is DownloadSuccessState) {
+                  showMessageDialog(
+                      title: "documentList.downloadSuccessTitle".tr(),
+                      message: state.message);
+                }
+              }
+
               if (state is DownloadErrorState) {
                 hideLoading();
                 showMessageDialog(
@@ -292,8 +307,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                     },
                     icon: AppAssets.icons.iconAddAttachment.svg(
                       colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.surface,
-                          BlendMode.srcIn),
+                        Theme.of(context).colorScheme.surface,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
@@ -313,10 +329,35 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                             return Slidable(
                               key: ValueKey(index),
                               endActionPane: ActionPane(
-                                extentRatio: 0.175,
+                                extentRatio: 0.4,
                                 key: ValueKey(index),
                                 motion: const ScrollMotion(),
                                 children: [
+                                  CustomSlidableAction(
+                                    autoClose: true,
+                                    padding: EdgeInsets.zero,
+                                    onPressed: (context) {
+                                      _downloadFileBloc.add(
+                                        DownloadFileEvent.downloadFile(
+                                            documents[index].name,
+                                            documents[index].url),
+                                      );
+                                    },
+                                    backgroundColor:
+                                        Theme.of(context).primaryColor,
+                                    foregroundColor: Colors.white,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(Icons.download_outlined),
+                                        Text(
+                                          'documentList.download'.tr(),
+                                          style: TextStyle(fontSize: 13.sp),
+                                        )
+                                      ],
+                                    ),
+                                  ),
                                   CustomSlidableAction(
                                     autoClose: true,
                                     padding: EdgeInsets.zero,
@@ -354,10 +395,12 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                         horizontal: 15, vertical: 0)
                                     .r,
                                 onTap: () {
-                                  _downloadFileBloc.add(
-                                      DownloadFileEvent.downloadFile(
-                                          documents[index].name,
-                                          documents[index].url));
+                                  _previewFileBloc.add(
+                                    PreviewFileEvent.previewFile(
+                                      documents[index].name,
+                                      documents[index].url,
+                                    ),
+                                  );
                                 },
                                 leading: documents[index].name.isContainImage
                                     ? AppAssets.icons.iconImage.svg(
