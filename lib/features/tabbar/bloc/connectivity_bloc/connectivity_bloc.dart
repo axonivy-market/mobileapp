@@ -35,7 +35,7 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
               result == ConnectivityResult.mobile) &&
           result != connectivityResult) {
         connectivityResult = result;
-        _getEngineInfo();
+        add(const ConnectivityEvent.connectedEvent());
       } else if (result == ConnectivityResult.none &&
           (result != connectivityResult)) {
         connectivityResult = result;
