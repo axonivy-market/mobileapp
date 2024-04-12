@@ -19,7 +19,7 @@
     "noExpiryDate": "No expiry date",
     "noTaskName": "[Task name is not available]",
     "noTaskDescription": "No description",
-    "lastUpdated": "last updated {time}"
+    "lastUpdated": "updated {time}"
   },
   "taskDetails": {
     "attachments": "Attachments",
@@ -52,11 +52,16 @@
     "noServer": "No server has been configured yet...",
     "signIn": "Sign in",
     "signOut": "Sign out",
-    "url": "Url",
+    "url": "Enter you server link",
     "username": "Username",
-    "yourPassword": "Your password",
+    "yourPassword": "Enter your password",
     "demoMode": "Demo mode",
-    "language": "Language"
+    "darkMode":"Dark mode",
+    "language": "Language",
+    "error": "Error",
+    "serverLink": "Server Link",
+    "userType": "User Type",
+    "password":  "Password"
   },
   "qr": {
     "title": "Scan the QR",
@@ -118,6 +123,20 @@
     "popup_title": "You are offline!",
     "process_description": "Processes can only be started when connected to the process engine. \nTry again later...",
     "task_description": "Tasks can only be started when connected to the engine. \nTry again later...",
-    "search_description": "Tasks and processes can only be started when connected to the engine. \nTry again later..."
+    "search_description": "Tasks and processes can only be started when connected to the engine. \nTry again later...",
+    "login_description": "You can only sign-in or use the demo mode when you’re online.\nTry again later..."
+  },
+  "documentList": {
+    "title": "Attachments",
+    "delete": "Delete",
+    "emptyList": "You don’t have any document attached yet. Click on “+” to add your first document.",
+    "takePicture": "Take picture",
+    "attachPicture":  "Attach picture",
+    "attachFile": "Attach file",
+    "errorTitle": "Error",
+    "errorMessage": "File {fileName} already exists",
+    "successTitle": "Upload successfully",
+    "deleteSuccessTitle": "Deleted successfully",
+    "downloadSuccessTitle":  "Downloaded successfully"
   }
 }

@@ -1,14 +1,17 @@
+import 'package:axon_ivy/app.dart';
 import 'package:axon_ivy/core/app/app_config.dart';
+import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/core/router/router.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:axon_ivy/app.dart';
-import 'package:axon_ivy/router/router.dart';
 
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await AppConfig.loadEnv(Environment.dev);
+  await DemoConfig.loadDemoConfig();
   final appRouter = AppRouter();
   configureDependencies();
   runApp(
@@ -17,8 +20,11 @@ void main() async {
       path: 'assets/translations',
       startLocale: const Locale('en'),
       fallbackLocale: const Locale('en'),
-      child: MyApp(
-        appRouter: appRouter,
+      child: DevicePreview(
+        enabled: false,
+        builder: (context) => MyApp(
+          appRouter: appRouter,
+        ),
       ),
     ),
   );

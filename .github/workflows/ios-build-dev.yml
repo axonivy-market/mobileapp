@@ -48,6 +48,16 @@ jobs:
           mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
           cp $PROVISIONING_PROFILE_PATH ~/Library/MobileDevice/Provisioning\ Profiles
 
+      - name: Config demo user info
+        run: |
+          echo "demoServerUrl=$DEMO_SERVER_URL" >> assets/env/.env_demo
+          echo "demoUserName=$DEMO_USER_NAME" >> assets/env/.env_demo
+          echo "demoPassword=$DEMO_PASSWORD" >> assets/env/.env_demo
+        env:
+          DEMO_SERVER_URL: ${{ secrets.KEY_DEMO_SERVER_URL }}
+          DEMO_USER_NAME: ${{ secrets.KEY_DEMO_USER_NAME }}
+          DEMO_PASSWORD: ${{ secrets.KEY_DEMO_PASSWORD }}
+
       - name: Building IPA
         run: |
           flutter build ipa \

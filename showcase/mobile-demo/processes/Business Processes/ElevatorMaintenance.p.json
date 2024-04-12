@@ -1,0 +1,121 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.2.2/process.json",
+  "id" : "18E5ADAC793AE9E9",
+  "config" : {
+    "data" : "com.axonivy.mobile.mobiledemo.ElevatorMaintenanceData"
+  },
+  "elements" : [ {
+      "id" : "f69",
+      "type" : "RequestStart",
+      "name" : "elevatorMaintenance",
+      "config" : {
+        "signature" : "elevatorMaintenance",
+        "request" : {
+          "name" : "Elevator Maintenance"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 184, "y" : 208 }
+      },
+      "connect" : [
+        { "id" : "f71", "to" : "f70" }
+      ]
+    }, {
+      "id" : "f70",
+      "type" : "UserTask",
+      "name" : "Elevator Maintenance",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.ElevatorMaintenance:start()",
+        "task" : {
+          "name" : "Elevator Maintenance",
+          "skipTasklist" : true
+        },
+        "output" : {
+          "map" : {
+            "out" : "result.elevatorMaintenance"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 320, "y" : 208 }
+      },
+      "connect" : [
+        { "id" : "f73", "to" : "f2" }
+      ]
+    }, {
+      "id" : "f72",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 744, "y" : 208 }
+      }
+    }, {
+      "id" : "f0",
+      "type" : "UserTask",
+      "name" : "View Elevator Maintenance",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.ElevatorMaintenance:start(Boolean,com.axonivy.mobile.mobiledemo.ElevatorMaintenanceData)",
+        "call" : {
+          "map" : {
+            "param.isReadOnly" : "true",
+            "param.elevatorMaintenance" : "in"
+          }
+        },
+        "task" : {
+          "name" : "Elevator Maintenance Summary"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 600, "y" : 208 }
+      },
+      "connect" : [
+        { "id" : "f1", "to" : "f72", "color" : "default" }
+      ]
+    }, {
+      "id" : "f2",
+      "type" : "Alternative",
+      "name" : "action?",
+      "config" : {
+        "conditions" : {
+          "f3" : "\"save\".equals(in.action)"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 448, "y" : 208 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f3", "to" : "f4", "label" : {
+            "name" : "save"
+          }, "color" : "default" },
+        { "id" : "f6", "to" : "f0", "label" : {
+            "name" : "proceed"
+          } }
+      ]
+    }, {
+      "id" : "f4",
+      "type" : "UserTask",
+      "name" : "Elevator Maintenance",
+      "config" : {
+        "dialog" : "com.axonivy.mobile.mobiledemo.ElevatorMaintenance:start(Boolean,com.axonivy.mobile.mobiledemo.ElevatorMaintenanceData)",
+        "call" : {
+          "map" : {
+            "param.elevatorMaintenance" : "in"
+          }
+        },
+        "task" : {
+          "name" : "Elevator Maintenance"
+        },
+        "output" : {
+          "map" : {
+            "out" : "result.elevatorMaintenance"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 600, "y" : 88 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f2", "via" : [ { "x" : 448, "y" : 88 } ] }
+      ]
+    } ]
+}
