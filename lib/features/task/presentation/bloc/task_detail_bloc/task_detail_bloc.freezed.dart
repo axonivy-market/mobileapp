@@ -16,21 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TaskDetailEvent {
+  TaskIvy get task => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int taskId) getTaskDetail,
+    required TResult Function(TaskIvy task) getTaskDetail,
     required TResult Function(TaskIvy task) startTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int taskId)? getTaskDetail,
+    TResult? Function(TaskIvy task)? getTaskDetail,
     TResult? Function(TaskIvy task)? startTask,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int taskId)? getTaskDetail,
+    TResult Function(TaskIvy task)? getTaskDetail,
     TResult Function(TaskIvy task)? startTask,
     required TResult orElse(),
   }) =>
@@ -54,6 +55,10 @@ mixin _$TaskDetailEvent {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $TaskDetailEventCopyWith<TaskDetailEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -61,6 +66,10 @@ abstract class $TaskDetailEventCopyWith<$Res> {
   factory $TaskDetailEventCopyWith(
           TaskDetailEvent value, $Res Function(TaskDetailEvent) then) =
       _$TaskDetailEventCopyWithImpl<$Res, TaskDetailEvent>;
+  @useResult
+  $Res call({TaskIvy task});
+
+  $TaskIvyCopyWith<$Res> get task;
 }
 
 /// @nodoc
@@ -72,15 +81,41 @@ class _$TaskDetailEventCopyWithImpl<$Res, $Val extends TaskDetailEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? task = null,
+  }) {
+    return _then(_value.copyWith(
+      task: null == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskIvy,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskIvyCopyWith<$Res> get task {
+    return $TaskIvyCopyWith<$Res>(_value.task, (value) {
+      return _then(_value.copyWith(task: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
-abstract class _$$GetTaskDetailImplCopyWith<$Res> {
+abstract class _$$GetTaskDetailImplCopyWith<$Res>
+    implements $TaskDetailEventCopyWith<$Res> {
   factory _$$GetTaskDetailImplCopyWith(
           _$GetTaskDetailImpl value, $Res Function(_$GetTaskDetailImpl) then) =
       __$$GetTaskDetailImplCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({int taskId});
+  $Res call({TaskIvy task});
+
+  @override
+  $TaskIvyCopyWith<$Res> get task;
 }
 
 /// @nodoc
@@ -94,13 +129,13 @@ class __$$GetTaskDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taskId = null,
+    Object? task = null,
   }) {
     return _then(_$GetTaskDetailImpl(
-      null == taskId
-          ? _value.taskId
-          : taskId // ignore: cast_nullable_to_non_nullable
-              as int,
+      null == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskIvy,
     ));
   }
 }
@@ -110,14 +145,14 @@ class __$$GetTaskDetailImplCopyWithImpl<$Res>
 class _$GetTaskDetailImpl
     with DiagnosticableTreeMixin
     implements _GetTaskDetail {
-  const _$GetTaskDetailImpl(this.taskId);
+  const _$GetTaskDetailImpl(this.task);
 
   @override
-  final int taskId;
+  final TaskIvy task;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TaskDetailEvent.getTaskDetail(taskId: $taskId)';
+    return 'TaskDetailEvent.getTaskDetail(task: $task)';
   }
 
   @override
@@ -125,7 +160,7 @@ class _$GetTaskDetailImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TaskDetailEvent.getTaskDetail'))
-      ..add(DiagnosticsProperty('taskId', taskId));
+      ..add(DiagnosticsProperty('task', task));
   }
 
   @override
@@ -133,11 +168,11 @@ class _$GetTaskDetailImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetTaskDetailImpl &&
-            (identical(other.taskId, taskId) || other.taskId == taskId));
+            (identical(other.task, task) || other.task == task));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, taskId);
+  int get hashCode => Object.hash(runtimeType, task);
 
   @JsonKey(ignore: true)
   @override
@@ -148,30 +183,30 @@ class _$GetTaskDetailImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int taskId) getTaskDetail,
+    required TResult Function(TaskIvy task) getTaskDetail,
     required TResult Function(TaskIvy task) startTask,
   }) {
-    return getTaskDetail(taskId);
+    return getTaskDetail(task);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int taskId)? getTaskDetail,
+    TResult? Function(TaskIvy task)? getTaskDetail,
     TResult? Function(TaskIvy task)? startTask,
   }) {
-    return getTaskDetail?.call(taskId);
+    return getTaskDetail?.call(task);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int taskId)? getTaskDetail,
+    TResult Function(TaskIvy task)? getTaskDetail,
     TResult Function(TaskIvy task)? startTask,
     required TResult orElse(),
   }) {
     if (getTaskDetail != null) {
-      return getTaskDetail(taskId);
+      return getTaskDetail(task);
     }
     return orElse();
   }
@@ -209,22 +244,27 @@ class _$GetTaskDetailImpl
 }
 
 abstract class _GetTaskDetail implements TaskDetailEvent {
-  const factory _GetTaskDetail(final int taskId) = _$GetTaskDetailImpl;
+  const factory _GetTaskDetail(final TaskIvy task) = _$GetTaskDetailImpl;
 
-  int get taskId;
+  @override
+  TaskIvy get task;
+  @override
   @JsonKey(ignore: true)
   _$$GetTaskDetailImplCopyWith<_$GetTaskDetailImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$StartTaskImplCopyWith<$Res> {
+abstract class _$$StartTaskImplCopyWith<$Res>
+    implements $TaskDetailEventCopyWith<$Res> {
   factory _$$StartTaskImplCopyWith(
           _$StartTaskImpl value, $Res Function(_$StartTaskImpl) then) =
       __$$StartTaskImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({TaskIvy task});
 
+  @override
   $TaskIvyCopyWith<$Res> get task;
 }
 
@@ -247,14 +287,6 @@ class __$$StartTaskImplCopyWithImpl<$Res>
           : task // ignore: cast_nullable_to_non_nullable
               as TaskIvy,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TaskIvyCopyWith<$Res> get task {
-    return $TaskIvyCopyWith<$Res>(_value.task, (value) {
-      return _then(_value.copyWith(task: value));
-    });
   }
 }
 
@@ -299,7 +331,7 @@ class _$StartTaskImpl with DiagnosticableTreeMixin implements _StartTask {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int taskId) getTaskDetail,
+    required TResult Function(TaskIvy task) getTaskDetail,
     required TResult Function(TaskIvy task) startTask,
   }) {
     return startTask(task);
@@ -308,7 +340,7 @@ class _$StartTaskImpl with DiagnosticableTreeMixin implements _StartTask {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int taskId)? getTaskDetail,
+    TResult? Function(TaskIvy task)? getTaskDetail,
     TResult? Function(TaskIvy task)? startTask,
   }) {
     return startTask?.call(task);
@@ -317,7 +349,7 @@ class _$StartTaskImpl with DiagnosticableTreeMixin implements _StartTask {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int taskId)? getTaskDetail,
+    TResult Function(TaskIvy task)? getTaskDetail,
     TResult Function(TaskIvy task)? startTask,
     required TResult orElse(),
   }) {
@@ -362,7 +394,9 @@ class _$StartTaskImpl with DiagnosticableTreeMixin implements _StartTask {
 abstract class _StartTask implements TaskDetailEvent {
   const factory _StartTask(final TaskIvy task) = _$StartTaskImpl;
 
+  @override
   TaskIvy get task;
+  @override
   @JsonKey(ignore: true)
   _$$StartTaskImplCopyWith<_$StartTaskImpl> get copyWith =>
       throw _privateConstructorUsedError;

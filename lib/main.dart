@@ -18,7 +18,6 @@ void main() async {
   await AppConfig.loadEnv(Environment.prod);
   await DemoConfig.loadDemoConfig();
   await Hive.initFlutter();
-  await Hive.initFlutter();
   Hive.registerAdapter(TaskIvyAdapter());
   Hive.registerAdapter(CaseTaskAdapter());
   Hive.registerAdapter(DocumentAdapter());

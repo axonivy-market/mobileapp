@@ -80,7 +80,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                       message: "documentList.errorMessage"
                           .tr(namedArgs: {'fileName': state.fileNames}));
                 } else {
-                  _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
+                  _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task));
                   showMessageDialog(
                       title: "documentList.successTitle".tr(),
                       message: state.message);
@@ -107,7 +107,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                 showMessageDialog(
                     title: "documentList.deleteSuccessTitle".tr(),
                     message: state.message);
-                _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
+                _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task));
               } else if (state is DeleteLoadingState) {
                 showLoading();
               }
@@ -173,13 +173,13 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                       switch (value) {
                         case UploadFileType.recent:
                           _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                              widget.task.caseTask!.id, UploadFileType.recent));
+                              widget.task, UploadFileType.recent));
                         case UploadFileType.images:
                           _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                              widget.task.caseTask!.id, UploadFileType.images));
+                              widget.task, UploadFileType.images));
                         case UploadFileType.camera:
                           _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                              widget.task.caseTask!.id, UploadFileType.camera));
+                              widget.task, UploadFileType.camera));
                       }
                     },
                     itemBuilder: (BuildContext context) {
@@ -302,9 +302,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                         title:
                                             "Do you really want to delete this file?",
                                         onConfirm: () => _deleteFileBloc.add(
+                                          //TODO delete file, coi lai cho nay
                                           DeleteFileEvent.deleteFile(
                                               task.caseTask!.id,
-                                              documents[index].id),
+                                              documents[index].id!),
                                         ),
                                       );
                                     },

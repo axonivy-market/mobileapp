@@ -140,7 +140,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                               .then((value) {
                             if (value is bool && value == true) {
                               taskDetailBloc
-                                  .add(TaskDetailEvent.getTaskDetail(task!.id));
+                                  .add(TaskDetailEvent.getTaskDetail(task!));
                             }
                           });
                         },
@@ -329,7 +329,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                               .then((value) {
                             if (value is bool && value == true) {
                               taskDetailBloc
-                                  .add(TaskDetailEvent.getTaskDetail(task!.id));
+                                  .add(TaskDetailEvent.getTaskDetail(task!));
                             }
                           });
                         },

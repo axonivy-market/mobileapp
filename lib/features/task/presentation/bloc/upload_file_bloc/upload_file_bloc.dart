@@ -6,6 +6,10 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/util/resources/constants.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/data/models/enums/file_local_state_enum.dart';
+import 'package:axon_ivy/features/task/data/datasources/task_local_data_source.dart';
+import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
+import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/domain/repositories/file_repository_interface.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -18,7 +22,9 @@ import 'package:injectable/injectable.dart';
 import 'package:path/path.dart' as path;
 
 part 'upload_file_bloc.freezed.dart';
+
 part 'upload_file_event.dart';
+
 part 'upload_file_state.dart';
 
 enum UploadFileType { recent, images, camera }
@@ -26,6 +32,7 @@ enum UploadFileType { recent, images, camera }
 @injectable
 class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   final FileRepositoryInterface _uploadFileRepository;
+  final TaskLocalDataSource _taskLocalDataSource;
   String uploadMessage = "";
   int maxFileSize = 10000000;
   var filePath = "";
@@ -33,11 +40,13 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   var caseId = 0;
   var fileType = "";
   File? cameraFile;
+  TaskIvy? taskIvy;
 
-  UploadFileBloc(this._uploadFileRepository)
+  UploadFileBloc(this._uploadFileRepository, this._taskLocalDataSource)
       : super(const UploadFileState.loading()) {
     on<_UploadFiles>(_uploadFile);
     on<_ChangeFileName>(_changeFileName);
+    on<CacheFileOfflineEvent>(_cacheFileOffline);
 
     final isDemoSetting = SharedPrefs.demoSetting ?? false;
     if (isDemoSetting) {
@@ -62,13 +71,13 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       emit(const UploadFileState.loading());
       await uploadFiles(
           caseId: caseId, file: file, emit: emit, fileName: newFileName);
-      emit(UploadFileState.success(uploadMessage, newFileName));
+      // emit(UploadFileState.success(uploadMessage, newFileName));
     } else {
       emit(const UploadFileState.loading());
 
       await uploadFiles(
           caseId: caseId, file: cameraFile!, emit: emit, fileName: fileName);
-      emit(UploadFileState.success(uploadMessage, fileName));
+      // emit(UploadFileState.success(uploadMessage, fileName));
     }
 
     cameraFile = null;
@@ -81,21 +90,21 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   Future _uploadFile(_UploadFiles event, Emitter<UploadFileState> emit) async {
     UploadFileType type;
     type = event.type;
-    caseId = event.caseId;
+    taskIvy = event.taskIvy;
+    caseId = event.taskIvy.caseTask!.id;
     switch (type) {
       case UploadFileType.recent:
-        await getFileRecent(caseId: event.caseId, emit: emit);
+        await getFileRecent(caseId: caseId, emit: emit);
         uploadMessage = "";
         FilePicker.platform.clearTemporaryFiles();
         break;
       case UploadFileType.images:
-        await getImages(caseId: event.caseId, emit: emit);
+        await getImages(caseId: caseId, emit: emit);
         uploadMessage = "";
         FilePicker.platform.clearTemporaryFiles();
-
         break;
       case UploadFileType.camera:
-        await usingCamera(caseId: event.caseId, emit: emit);
+        await usingCamera(caseId: caseId, emit: emit);
         break;
     }
     return;
@@ -121,12 +130,13 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       } else {
         uploadMessage = "uploadFile.fileTooLarge"
             .tr(namedArgs: {'fileName': platformFile.name});
-      }
-      if (uploadMessage.contains("successfully")) {
-        emit(UploadFileState.success(uploadMessage, platformFile.name));
-      } else {
         emit(UploadErrorState(uploadMessage));
       }
+      // if (uploadMessage.contains("successfully")) {
+      //   emit(UploadFileState.success(uploadMessage, platformFile.name));
+      // } else {
+      //   emit(UploadErrorState(uploadMessage));
+      // }
     } else {
       return;
     }
@@ -157,16 +167,34 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
 
       tasks.fold(
         (l) {
-          uploadMessage =
-              "uploadFile.failUpload".tr(namedArgs: {'fileName': fileName});
+          if (taskIvy?.offline == true) {
+            add(UploadFileEvent.cacheFileOfflineEvent(
+                file, fileName, FileLocalStateEnum.kPendingUpload.value));
+          } else {
+            uploadMessage =
+                "uploadFile.failUpload".tr(namedArgs: {'fileName': fileName});
+            emit(UploadErrorState(uploadMessage));
+          }
         },
         (r) {
           uploadMessage = r.message;
+          if (taskIvy?.offline == true) {
+            add(UploadFileEvent.cacheFileOfflineEvent(
+                file, fileName, FileLocalStateEnum.kNew.value));
+          } else {
+            emit(UploadFileState.success(uploadMessage, fileName));
+          }
         },
       );
     } catch (e) {
-      uploadMessage =
-          "uploadFile.failUpload".tr(namedArgs: {'fileName': fileName});
+      if (taskIvy?.offline == true) {
+        add(UploadFileEvent.cacheFileOfflineEvent(
+            file, fileName, FileLocalStateEnum.kPendingUpload.value));
+      } else {
+        uploadMessage =
+            "uploadFile.failUpload".tr(namedArgs: {'fileName': fileName});
+        emit(UploadErrorState(uploadMessage));
+      }
     }
   }
 
@@ -192,13 +220,14 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       } else {
         uploadMessage = "uploadFile.fileTooLarge"
             .tr(namedArgs: {'fileName': platformFile.name});
-      }
-
-      if (uploadMessage.contains("successfully")) {
-        emit(UploadFileState.success(uploadMessage, fileName));
-      } else {
         emit(UploadErrorState(uploadMessage));
       }
+
+      // if (uploadMessage.contains("successfully")) {
+      //   emit(UploadFileState.success(uploadMessage, fileName));
+      // } else {
+      //   emit(UploadErrorState(uploadMessage));
+      // }
     } else {
       return;
     }
@@ -227,6 +256,20 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     } else {
       uploadMessage =
           "uploadFile.fileTooLarge".tr(namedArgs: {'fileName': shortName});
+      emit(UploadErrorState(uploadMessage));
     }
+  }
+
+  Future _cacheFileOffline(CacheFileOfflineEvent event, Emitter emit) async {
+    Uint8List bytes = await event.file.readAsBytes();
+    Document document = Document(
+      name: event.fileName,
+      fileLocalState: event.fileState,
+      fileLocalData: bytes.toList(),
+    );
+    _taskLocalDataSource.addDocument(taskIvy!.id, document);
+    uploadMessage = "uploadFile.savedFileOfflineSuccess"
+        .tr(namedArgs: {'fileName': event.fileName});
+    emit(UploadFileState.success(uploadMessage, event.fileName));
   }
 }

@@ -123,8 +123,10 @@ Future<_i1.GetIt> $initGetIt(
       () => _i20.TaskRemoteDataSource(gh<_i3.Dio>()));
   gh.factory<_i21.TaskRepositoryInterface>(
       () => _i22.TaskRepositoryImplement(gh<_i20.TaskRemoteDataSource>()));
-  gh.factory<_i23.UploadFileBloc>(
-      () => _i23.UploadFileBloc(gh<_i7.FileRepositoryInterface>()));
+  gh.factory<_i23.UploadFileBloc>(() => _i23.UploadFileBloc(
+        gh<_i7.FileRepositoryInterface>(),
+        gh<_i19.TaskLocalDataSource>(),
+      ));
   gh.factory<_i24.UploadFileUseCase>(() =>
       _i24.UploadFileUseCase(repository: gh<_i7.FileRepositoryInterface>()));
   gh.factory<_i25.DeleteFileUseCase>(() =>
@@ -155,8 +157,10 @@ Future<_i1.GetIt> $initGetIt(
         gh<_i30.GetTaskListUseCase>(),
         gh<_i19.TaskLocalDataSource>(),
       ));
-  gh.factory<_i44.TaskDetailBloc>(
-      () => _i44.TaskDetailBloc(gh<_i31.GetTaskUseCase>()));
+  gh.factory<_i44.TaskDetailBloc>(() => _i44.TaskDetailBloc(
+        gh<_i31.GetTaskUseCase>(),
+        gh<_i19.TaskLocalDataSource>(),
+      ));
   gh.factory<_i45.ToastMessageCubit>(
       () => _i45.ToastMessageCubit(gh<_i31.GetTaskUseCase>()));
   gh.factory<_i46.ConnectivityBloc>(

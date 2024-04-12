@@ -21,7 +21,7 @@ Document _$DocumentFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Document {
   @HiveField(0)
-  int get id => throw _privateConstructorUsedError;
+  int? get id => throw _privateConstructorUsedError;
   @HiveField(1)
   String get name => throw _privateConstructorUsedError;
   @HiveField(2)
@@ -47,7 +47,7 @@ abstract class $DocumentCopyWith<$Res> {
       _$DocumentCopyWithImpl<$Res, Document>;
   @useResult
   $Res call(
-      {@HiveField(0) int id,
+      {@HiveField(0) int? id,
       @HiveField(1) String name,
       @HiveField(2) String url,
       @HiveField(3) String path,
@@ -69,7 +69,7 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? url = null,
     Object? path = null,
@@ -78,10 +78,10 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
     Object? fileLocalData = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -119,7 +119,7 @@ abstract class _$$DocumentImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@HiveField(0) int id,
+      {@HiveField(0) int? id,
       @HiveField(1) String name,
       @HiveField(2) String url,
       @HiveField(3) String path,
@@ -139,7 +139,7 @@ class __$$DocumentImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
     Object? url = null,
     Object? path = null,
@@ -148,10 +148,10 @@ class __$$DocumentImplCopyWithImpl<$Res>
     Object? fileLocalData = freezed,
   }) {
     return _then(_$DocumentImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -184,7 +184,7 @@ class __$$DocumentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DocumentImpl implements _Document {
   const _$DocumentImpl(
-      {@HiveField(0) required this.id,
+      {@HiveField(0) this.id,
       @HiveField(1) this.name = "",
       @HiveField(2) this.url = "",
       @HiveField(3) this.path = "",
@@ -198,7 +198,7 @@ class _$DocumentImpl implements _Document {
 
   @override
   @HiveField(0)
-  final int id;
+  final int? id;
   @override
   @JsonKey()
   @HiveField(1)
@@ -280,7 +280,7 @@ class _$DocumentImpl implements _Document {
 
 abstract class _Document implements Document {
   const factory _Document(
-      {@HiveField(0) required final int id,
+      {@HiveField(0) final int? id,
       @HiveField(1) final String name,
       @HiveField(2) final String url,
       @HiveField(3) final String path,
@@ -293,7 +293,7 @@ abstract class _Document implements Document {
 
   @override
   @HiveField(0)
-  int get id;
+  int? get id;
   @override
   @HiveField(1)
   String get name;

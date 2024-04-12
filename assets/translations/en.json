@@ -61,7 +61,7 @@
     "error": "Error",
     "serverLink": "Server Link",
     "userType": "User Type",
-    "password":  "Password"
+    "password": "Password"
   },
   "qr": {
     "title": "Scan the QR",
@@ -117,7 +117,8 @@
     "fileTooLarge": "File {fileName} has size too large!\n",
     "cannotSelectFiles": "Cannot select files!",
     "failUpload": "Fail to upload {fileName}\n",
-    "changeFileName": "Change image name"
+    "changeFileName": "Change image name",
+    "savedFileOfflineSuccess": "Document '{fileName}' successfully saved"
   },
   "offline": {
     "popup_title": "You are offline!",
@@ -137,7 +138,7 @@
     "errorMessage": "File {fileName} already exists",
     "successTitle": "Upload successfully",
     "deleteSuccessTitle": "Deleted successfully",
-    "downloadSuccessTitle":  "Downloaded successfully"
+    "downloadSuccessTitle": "Downloaded successfully"
   },
   "finishedTaskMessage": "Following task has been completed: {name}"
 }
