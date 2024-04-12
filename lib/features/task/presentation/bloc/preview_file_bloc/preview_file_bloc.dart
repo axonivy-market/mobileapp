@@ -21,7 +21,7 @@ part 'preview_file_state.dart';
 
 @injectable
 class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
-  static const String cacheFileName = 'cache file';
+  static const String cacheFileName = 'temp';
 
   PreviewFileBloc() : super(const PreviewFileState.loading()) {
     on<PreviewFileEvent>((event, emit) async {
@@ -49,8 +49,13 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
 
   Future deletePreviewFile(Emitter emit) async {
     try {
-      final dir = await getApplicationDocumentsDirectory();
-      String cacheTempFolder = '${dir.path}/$cacheFileName';
+      Directory? dir;
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        dir = await getApplicationCacheDirectory();
+      } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+        dir = await getApplicationDocumentsDirectory();
+      }
+      String cacheTempFolder = '${dir?.path}/$cacheFileName';
       Directory(cacheTempFolder).deleteSync(recursive: true);
     } catch (e) {
       debugPrint('$e');
@@ -69,9 +74,16 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
         Uri.parse(url),
         headers: {"Authorization": basicAuth},
       );
+
       if (response.statusCode == 200) {
-        final dir = await getApplicationDocumentsDirectory();
-        String cacheTempFolder = '${dir.path}/$cacheFileName';
+        Directory? dir;
+        if (defaultTargetPlatform == TargetPlatform.android) {
+          dir = await getApplicationCacheDirectory();
+        } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+          dir = await getApplicationDocumentsDirectory();
+        }
+
+        String cacheTempFolder = '${dir?.path}/$cacheFileName';
         String filePath = '$cacheTempFolder/$fileName';
         await Directory(cacheTempFolder).create(recursive: true);
 
@@ -79,7 +91,9 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
         await file.writeAsBytes(response.bodyBytes);
         final previewFile = File(filePath);
 
-        if (await previewFile.exists()) {
+        final isFileExist = await previewFile.exists();
+
+        if (isFileExist) {
           emit(
             PreviewFileState.success(filePath),
           );

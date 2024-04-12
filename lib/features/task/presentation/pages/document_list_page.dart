@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/extensions.dart';
 import 'package:axon_ivy/core/util/widgets/back_button_widget.dart';
@@ -170,8 +172,14 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
               } else if (state is PreviewSuccessState) {
                 hideLoading();
                 await OpenFile.open(state.filePath);
-                _previewFileBloc
-                    .add(const PreviewFileEvent.deletePreviewFile());
+                if (Platform.isIOS) {
+                  _previewFileBloc
+                      .add(const PreviewFileEvent.deletePreviewFile());
+                } else if (Platform.isAndroid) {
+                  await Future.delayed(const Duration(seconds: 10));
+                  _previewFileBloc
+                      .add(const PreviewFileEvent.deletePreviewFile());
+                }
               } else if (state is PreviewLoadingState) {
                 showLoading();
               }

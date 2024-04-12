@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
@@ -7,12 +8,12 @@ import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:file_saver/file_saver.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'download_file_bloc.freezed.dart';
 part 'download_file_event.dart';
@@ -46,11 +47,11 @@ class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
         headers: {"Authorization": basicAuth},
       );
       if (response.statusCode == 200) {
+        Directory dir = await getApplicationDocumentsDirectory();
         String fileName = event.fileName;
-        await FileSaver.instance.saveFile(
-          name: fileName,
-          bytes: response.bodyBytes,
-        );
+        String filePath = '${dir.path}/$fileName';
+        File file = File(filePath);
+        await file.writeAsBytes(response.bodyBytes);
 
         emit(DownloadFileState.success("downloadFile.downloadSuccess"
             .tr(namedArgs: {'fileName': fileName})));
