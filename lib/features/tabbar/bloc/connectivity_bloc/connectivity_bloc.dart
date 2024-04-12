@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:axon_ivy/data/repositories/engine/engine_info_repository.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,9 +15,8 @@ part 'connectivity_state.dart';
 class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   StreamSubscription? _streamSubscription;
   var connectivityResult = ConnectivityResult.wifi;
-  final EngineInfoRepository _engineInfoRepository;
 
-  ConnectivityBloc(this._engineInfoRepository)
+  ConnectivityBloc()
       : super(const ConnectivityState.initial()) {
     on<ConnectivityEvent>((event, emit) {
       if (event is ConnectedEvent) {
@@ -42,23 +40,6 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
         add(const ConnectivityEvent.notConnectedEvent());
       }
     });
-  }
-
-  Future<void> _getEngineInfo() async {
-    try {
-      final engineInfo = await _engineInfoRepository.getEngineInfo();
-
-      engineInfo.fold(
-        (l) {
-          add(const ConnectivityEvent.notConnectedEvent());
-        },
-        (r) {
-          add(const ConnectivityEvent.connectedEvent());
-        },
-      );
-    } catch (e) {
-      add(const ConnectivityEvent.notConnectedEvent());
-    }
   }
 
   @override
