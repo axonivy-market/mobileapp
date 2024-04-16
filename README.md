@@ -42,9 +42,8 @@ For security-related matters, please review our [security policy](SECURITY.md).
 Contributions are welcome! If you'd like to contribute to the development of the Axon Ivy Mobile Application, please refer to our [contribution guidelines](CONTRIBUTING.md).
 
 ## License
-[![License: GPL](https://www.gnu.org/graphics/gplv3-127x51.png)](https://www.gnu.org/licenses/gpl-3.0)
 
-This project is licensed under the [GNU General Public License (GPL)](LICENSE).
+This project is licensed under the [Apache License 2.0](LICENSE).
 
 ---
 

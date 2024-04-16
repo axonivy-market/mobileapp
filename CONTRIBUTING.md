@@ -30,7 +30,7 @@ We have adopted a Code of Conduct that we expect project participants to adhere 
 
 ## License
 
-By contributing to the Axon Ivy Mobile Application, you agree that your contributions will be licensed under the [GNU General Public License (GPL)](LICENSE). 
+By contributing to the Axon Ivy Mobile Application, you agree that your contributions will be licensed under the [Apache License 2.0](LICENSE). 
 
 ## Contact
 
