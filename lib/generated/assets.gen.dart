@@ -100,6 +100,14 @@ class $AssetsIconsGen {
   SvgGenImage get iconDelete =>
       const SvgGenImage('assets/icons/icon_delete.svg');
 
+  /// File path: assets/icons/icon_empty_notifications.svg
+  SvgGenImage get iconEmptyNotifications =>
+      const SvgGenImage('assets/icons/icon_empty_notifications.svg');
+
+  /// File path: assets/icons/icon_empty_unread_notifications.svg
+  SvgGenImage get iconEmptyUnreadNotifications =>
+      const SvgGenImage('assets/icons/icon_empty_unread_notifications.svg');
+
   /// File path: assets/icons/icon_file.svg
   SvgGenImage get iconFile => const SvgGenImage('assets/icons/icon_file.svg');
 
@@ -217,6 +225,8 @@ class $AssetsIconsGen {
         iconAddAttachment,
         iconCamera,
         iconDelete,
+        iconEmptyNotifications,
+        iconEmptyUnreadNotifications,
         iconFile,
         iconImage,
         iconLock,

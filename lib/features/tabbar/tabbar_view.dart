@@ -3,6 +3,7 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/app_router.dart';
 import 'package:axon_ivy/core/util/resources/constants.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/process/bloc/process_bloc.dart';
 import 'package:axon_ivy/features/process/view/processes_view.dart';
 import 'package:axon_ivy/features/profile/bloc/logged_in_cubit.dart';
@@ -64,6 +65,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
   late final ToastMessageCubit _toastMessageCubit;
   late final ConnectivityBloc _connectivityBloc;
   late final EngineInfoCubit _engineInfoCubit;
+  late final NotificationBloc _notificationBloc;
 
   bool shouldFetchData = true;
   int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
@@ -103,9 +105,14 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _toastMessageCubit = getIt<ToastMessageCubit>();
     _connectivityBloc = getIt<ConnectivityBloc>();
     _engineInfoCubit = getIt<EngineInfoCubit>();
+    _notificationBloc = getIt<NotificationBloc>();
+
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
+      _notificationBloc.add(
+        const NotificationEvent.getNotifications(1, 100),
+      );
     }
   }
 
@@ -115,6 +122,9 @@ class _TabBarScreenState extends State<TabBarScreen> {
     _filterBloc.add(FilterEvent(FilterType.all));
     _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
     _processBloc.add(const ProcessEvent.getProcess());
+    _notificationBloc.add(
+      const NotificationEvent.getNotifications(1, 100),
+    );
   }
 
   @override
@@ -133,6 +143,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
         BlocProvider(create: (context) => _toastMessageCubit),
         BlocProvider(create: (context) => _connectivityBloc),
         BlocProvider(create: (context) => _engineInfoCubit),
+        BlocProvider(create: (context) => _notificationBloc),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -143,13 +154,20 @@ class _TabBarScreenState extends State<TabBarScreen> {
               }
             },
           ),
+          BlocListener<NotificationBloc, NotificationState>(
+            listener: (context, state) {
+              if (state is NotificationSuccessState) {
+                _notificationBloc.notifications = state.notifications;
+              }
+            },
+          ),
           BlocListener<TabBarCubit, TabBarState>(listener: (context, state) {
             if (state is NavigateTasksState) {
               _onItemTapped(context, 0);
               final filterState = context.read<FilterBloc>().state;
-              context
-                  .read<TaskBloc>()
-                  .add(TaskEvent.getTasks(filterState.activeFilter));
+              context.read<TaskBloc>().add(
+                    TaskEvent.getTasks(filterState.activeFilter),
+                  );
               context.read<ToastMessageCubit>().showToastMessage(state.taskId);
             }
           }),
@@ -170,8 +188,9 @@ class _TabBarScreenState extends State<TabBarScreen> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                      color: Theme.of(context).colorScheme.outline,
-                      width: 1.0.w),
+                    color: Theme.of(context).colorScheme.outline,
+                    width: 1.0.w,
+                  ),
                 ),
               ),
               child: Row(

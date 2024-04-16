@@ -1,4 +1,5 @@
 import 'package:axon_ivy/features/login/login_page.dart';
+import 'package:axon_ivy/features/notification/presentation/pages/notification_page.dart';
 import 'package:axon_ivy/features/process/view/processes_view.dart';
 import 'package:axon_ivy/features/profile/view/profile_view.dart';
 import 'package:axon_ivy/features/search/view/search_view.dart';
@@ -100,6 +101,17 @@ class AppRouter {
         pageBuilder: (context, state) => CustomTransitionPage<void>(
           key: state.pageKey,
           child: DocumentListPage(task: state.extra as TaskIvy),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              iosTransition(context, animation, secondaryAnimation, child),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.notification,
+        name: 'notification',
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: const NotificationPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               iosTransition(context, animation, secondaryAnimation, child),
         ),
