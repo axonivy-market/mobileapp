@@ -48,20 +48,36 @@ class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
       );
       if (response.statusCode == 200) {
         Directory dir = await getApplicationDocumentsDirectory();
+        // Directory? dirDownload = await getDownloadsDirectory();
         String fileName = event.fileName;
         String filePath = '${dir.path}/$fileName';
         File file = File(filePath);
         await file.writeAsBytes(response.bodyBytes);
 
-        emit(DownloadFileState.success("downloadFile.downloadSuccess"
-            .tr(namedArgs: {'fileName': fileName})));
+        emit(
+          DownloadFileState.success(
+            "downloadFile.downloadSuccess".tr(
+              namedArgs: {'fileName': fileName},
+            ),
+          ),
+        );
       } else {
-        emit(DownloadFileState.error("downloadFile.failToDownload"
-            .tr(namedArgs: {'fileName': event.fileName})));
+        emit(
+          DownloadFileState.error(
+            "downloadFile.failToDownload".tr(
+              namedArgs: {'fileName': event.fileName},
+            ),
+          ),
+        );
       }
     } catch (e) {
-      emit(DownloadFileState.error("downloadFile.failToDownload"
-          .tr(namedArgs: {'fileName': event.fileName})));
+      emit(
+        DownloadFileState.error(
+          "downloadFile.failToDownload".tr(
+            namedArgs: {'fileName': event.fileName},
+          ),
+        ),
+      );
     }
   }
 }

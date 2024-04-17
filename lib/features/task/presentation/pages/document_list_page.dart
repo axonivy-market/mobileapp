@@ -146,20 +146,6 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                       message: state.message);
                 }
               }
-
-              if (state is DownloadErrorState) {
-                hideLoading();
-                showMessageDialog(
-                    title: "documentList.errorTitle".tr(),
-                    message: state.error);
-              } else if (state is DownloadSuccessState) {
-                hideLoading();
-                showMessageDialog(
-                    title: "documentList.downloadSuccessTitle".tr(),
-                    message: state.message);
-              } else if (state is DownloadLoadingState) {
-                showLoading();
-              }
             },
           ),
           BlocListener<PreviewFileBloc, PreviewFileState>(
