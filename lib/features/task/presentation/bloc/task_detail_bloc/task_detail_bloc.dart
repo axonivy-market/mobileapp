@@ -16,10 +16,10 @@ part 'task_detail_state.dart';
 @injectable
 class TaskDetailBloc extends Bloc<TaskDetailEvent, TaskDetailState> {
   final GetTaskUseCase _taskRepository;
-  final TaskLocalDataSource _taskLocalDataSource;
+  final HiveTaskStorage _hiveTaskStorage;
   TaskIvy? taskIvy;
 
-  TaskDetailBloc(this._taskRepository, this._taskLocalDataSource)
+  TaskDetailBloc(this._taskRepository, this._hiveTaskStorage)
       : super(const TaskDetailState.loading()) {
     on<TaskDetailEvent>((event, emit) async {
       if (event is _GetTaskDetail) {
@@ -38,8 +38,8 @@ class TaskDetailBloc extends Bloc<TaskDetailEvent, TaskDetailState> {
       if (emit.isDone) return;
       task.fold((l) {
         if (taskIvy.offline) {
-          var caseTask = _taskLocalDataSource.getCaseByTaskId(taskIvy.id) ??
-              taskIvy.caseTask;
+          var caseTask =
+              _hiveTaskStorage.getCaseByTaskId(taskIvy.id) ?? taskIvy.caseTask;
           var task = taskIvy.copyWith(caseTask: caseTask);
           emit(TaskDetailState.success(task));
         } else {
@@ -53,8 +53,8 @@ class TaskDetailBloc extends Bloc<TaskDetailEvent, TaskDetailState> {
     } catch (e) {
       if (emit.isDone) return;
       if (taskIvy.offline) {
-        var caseTask = _taskLocalDataSource.getCaseByTaskId(taskIvy.id) ??
-            taskIvy.caseTask;
+        var caseTask =
+            _hiveTaskStorage.getCaseByTaskId(taskIvy.id) ?? taskIvy.caseTask;
         var task = taskIvy.copyWith(caseTask: caseTask);
         emit(TaskDetailState.success(task));
       } else {

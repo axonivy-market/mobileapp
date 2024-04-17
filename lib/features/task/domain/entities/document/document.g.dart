@@ -17,7 +17,7 @@ class DocumentAdapter extends TypeAdapter<Document> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Document(
-      id: fields[0] as int?,
+      id: fields[0] as int,
       name: fields[1] as String,
       url: fields[2] as String,
       path: fields[3] as String,
@@ -64,7 +64,7 @@ class DocumentAdapter extends TypeAdapter<Document> {
 
 _$DocumentImpl _$$DocumentImplFromJson(Map<String, dynamic> json) =>
     _$DocumentImpl(
-      id: json['id'] as int?,
+      id: json['id'] as int,
       name: json['name'] as String? ?? "",
       url: json['url'] as String? ?? "",
       path: json['path'] as String? ?? "",

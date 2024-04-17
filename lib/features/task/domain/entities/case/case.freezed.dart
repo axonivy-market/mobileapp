@@ -140,13 +140,14 @@ class __$$CaseTaskImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CaseTaskImpl implements _CaseTask {
+class _$CaseTaskImpl extends _CaseTask {
   _$CaseTaskImpl(
       {@HiveField(0) required this.id,
       @HiveField(1) this.name = '',
       @HiveField(2) this.description = '',
       @HiveField(3) final List<Document> documents = const []})
-      : _documents = documents;
+      : _documents = documents,
+        super._();
 
   factory _$CaseTaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$CaseTaskImplFromJson(json);
@@ -209,12 +210,13 @@ class _$CaseTaskImpl implements _CaseTask {
   }
 }
 
-abstract class _CaseTask implements CaseTask {
+abstract class _CaseTask extends CaseTask {
   factory _CaseTask(
       {@HiveField(0) required final int id,
       @HiveField(1) final String name,
       @HiveField(2) final String description,
       @HiveField(3) final List<Document> documents}) = _$CaseTaskImpl;
+  _CaseTask._() : super._();
 
   factory _CaseTask.fromJson(Map<String, dynamic> json) =
       _$CaseTaskImpl.fromJson;

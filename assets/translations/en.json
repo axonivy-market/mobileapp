@@ -138,7 +138,8 @@
     "errorMessage": "File {fileName} already exists",
     "successTitle": "Upload successfully",
     "deleteSuccessTitle": "Deleted successfully",
-    "downloadSuccessTitle": "Downloaded successfully"
+    "downloadSuccessTitle": "Downloaded successfully",
+    "deleteFileSuccess": "Document '{fileName}' successfully deleted"
   },
   "finishedTaskMessage": "Following task has been completed: {name}"
 }

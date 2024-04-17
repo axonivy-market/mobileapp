@@ -11,6 +11,7 @@ import '../utils/shared_preference.dart';
 class AppDio with DioMixin implements Dio {
   late String username;
   late String password;
+
   AppDio() {
     String platform = '';
     if (Platform.isAndroid) {
@@ -19,9 +20,9 @@ class AppDio with DioMixin implements Dio {
       platform = 'iOS';
     }
     options = BaseOptions(
-      connectTimeout: const Duration(seconds: 5),
-      sendTimeout: const Duration(seconds: 5),
-      receiveTimeout: const Duration(seconds: 10),
+      connectTimeout: const Duration(seconds: 50),
+      sendTimeout: const Duration(seconds: 50),
+      receiveTimeout: const Duration(seconds: 100),
       headers: {'X-Platform': platform, 'Accept-Language': 'en'},
       validateStatus: (status) {
         return status != null ? status < 500 : false;

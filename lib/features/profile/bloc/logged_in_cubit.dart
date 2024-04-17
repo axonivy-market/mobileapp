@@ -19,10 +19,9 @@ part 'logged_in_cubit.freezed.dart';
 
 @injectable
 class LoggedInCubit extends Cubit<LoggedInState> {
-  final TaskLocalDataSource _taskLocalDataSource;
+  final HiveTaskStorage _hiveTaskStorage;
 
-  LoggedInCubit(this._taskLocalDataSource)
-      : super(const LoggedInState.initial());
+  LoggedInCubit(this._hiveTaskStorage) : super(const LoggedInState.initial());
 
   String displayShortNameAvatar(String name) {
     return name
@@ -42,7 +41,7 @@ class LoggedInCubit extends Cubit<LoggedInState> {
 
   void loggedIn(bool isLogged) {
     if (!isLogged) {
-      _taskLocalDataSource.removeAllTasks();
+      _hiveTaskStorage.removeAllTasks();
     }
     emit(LoggedInState.loggedIn(isLogged));
   }

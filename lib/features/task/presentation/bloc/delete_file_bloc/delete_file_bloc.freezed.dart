@@ -17,20 +17,26 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$DeleteFileEvent {
   int get caseId => throw _privateConstructorUsedError;
-  int get documentId => throw _privateConstructorUsedError;
+  Document get document => throw _privateConstructorUsedError;
+  int get taskId => throw _privateConstructorUsedError;
+  bool get offline => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int caseId, int documentId) deleteFile,
+    required TResult Function(
+            int caseId, Document document, int taskId, bool offline)
+        deleteFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int caseId, int documentId)? deleteFile,
+    TResult? Function(int caseId, Document document, int taskId, bool offline)?
+        deleteFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int caseId, int documentId)? deleteFile,
+    TResult Function(int caseId, Document document, int taskId, bool offline)?
+        deleteFile,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -62,7 +68,9 @@ abstract class $DeleteFileEventCopyWith<$Res> {
           DeleteFileEvent value, $Res Function(DeleteFileEvent) then) =
       _$DeleteFileEventCopyWithImpl<$Res, DeleteFileEvent>;
   @useResult
-  $Res call({int caseId, int documentId});
+  $Res call({int caseId, Document document, int taskId, bool offline});
+
+  $DocumentCopyWith<$Res> get document;
 }
 
 /// @nodoc
@@ -79,18 +87,36 @@ class _$DeleteFileEventCopyWithImpl<$Res, $Val extends DeleteFileEvent>
   @override
   $Res call({
     Object? caseId = null,
-    Object? documentId = null,
+    Object? document = null,
+    Object? taskId = null,
+    Object? offline = null,
   }) {
     return _then(_value.copyWith(
       caseId: null == caseId
           ? _value.caseId
           : caseId // ignore: cast_nullable_to_non_nullable
               as int,
-      documentId: null == documentId
-          ? _value.documentId
-          : documentId // ignore: cast_nullable_to_non_nullable
+      document: null == document
+          ? _value.document
+          : document // ignore: cast_nullable_to_non_nullable
+              as Document,
+      taskId: null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as int,
+      offline: null == offline
+          ? _value.offline
+          : offline // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DocumentCopyWith<$Res> get document {
+    return $DocumentCopyWith<$Res>(_value.document, (value) {
+      return _then(_value.copyWith(document: value) as $Val);
+    });
   }
 }
 
@@ -102,7 +128,10 @@ abstract class _$$DeleteFileImplCopyWith<$Res>
       __$$DeleteFileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int caseId, int documentId});
+  $Res call({int caseId, Document document, int taskId, bool offline});
+
+  @override
+  $DocumentCopyWith<$Res> get document;
 }
 
 /// @nodoc
@@ -117,17 +146,27 @@ class __$$DeleteFileImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? caseId = null,
-    Object? documentId = null,
+    Object? document = null,
+    Object? taskId = null,
+    Object? offline = null,
   }) {
     return _then(_$DeleteFileImpl(
       null == caseId
           ? _value.caseId
           : caseId // ignore: cast_nullable_to_non_nullable
               as int,
-      null == documentId
-          ? _value.documentId
-          : documentId // ignore: cast_nullable_to_non_nullable
+      null == document
+          ? _value.document
+          : document // ignore: cast_nullable_to_non_nullable
+              as Document,
+      null == taskId
+          ? _value.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
               as int,
+      null == offline
+          ? _value.offline
+          : offline // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -135,16 +174,20 @@ class __$$DeleteFileImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$DeleteFileImpl with DiagnosticableTreeMixin implements _DeleteFile {
-  const _$DeleteFileImpl(this.caseId, this.documentId);
+  const _$DeleteFileImpl(this.caseId, this.document, this.taskId, this.offline);
 
   @override
   final int caseId;
   @override
-  final int documentId;
+  final Document document;
+  @override
+  final int taskId;
+  @override
+  final bool offline;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DeleteFileEvent.deleteFile(caseId: $caseId, documentId: $documentId)';
+    return 'DeleteFileEvent.deleteFile(caseId: $caseId, document: $document, taskId: $taskId, offline: $offline)';
   }
 
   @override
@@ -153,7 +196,9 @@ class _$DeleteFileImpl with DiagnosticableTreeMixin implements _DeleteFile {
     properties
       ..add(DiagnosticsProperty('type', 'DeleteFileEvent.deleteFile'))
       ..add(DiagnosticsProperty('caseId', caseId))
-      ..add(DiagnosticsProperty('documentId', documentId));
+      ..add(DiagnosticsProperty('document', document))
+      ..add(DiagnosticsProperty('taskId', taskId))
+      ..add(DiagnosticsProperty('offline', offline));
   }
 
   @override
@@ -162,12 +207,15 @@ class _$DeleteFileImpl with DiagnosticableTreeMixin implements _DeleteFile {
         (other.runtimeType == runtimeType &&
             other is _$DeleteFileImpl &&
             (identical(other.caseId, caseId) || other.caseId == caseId) &&
-            (identical(other.documentId, documentId) ||
-                other.documentId == documentId));
+            (identical(other.document, document) ||
+                other.document == document) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
+            (identical(other.offline, offline) || other.offline == offline));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, caseId, documentId);
+  int get hashCode =>
+      Object.hash(runtimeType, caseId, document, taskId, offline);
 
   @JsonKey(ignore: true)
   @override
@@ -178,27 +226,31 @@ class _$DeleteFileImpl with DiagnosticableTreeMixin implements _DeleteFile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int caseId, int documentId) deleteFile,
+    required TResult Function(
+            int caseId, Document document, int taskId, bool offline)
+        deleteFile,
   }) {
-    return deleteFile(caseId, documentId);
+    return deleteFile(caseId, document, taskId, offline);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int caseId, int documentId)? deleteFile,
+    TResult? Function(int caseId, Document document, int taskId, bool offline)?
+        deleteFile,
   }) {
-    return deleteFile?.call(caseId, documentId);
+    return deleteFile?.call(caseId, document, taskId, offline);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int caseId, int documentId)? deleteFile,
+    TResult Function(int caseId, Document document, int taskId, bool offline)?
+        deleteFile,
     required TResult orElse(),
   }) {
     if (deleteFile != null) {
-      return deleteFile(caseId, documentId);
+      return deleteFile(caseId, document, taskId, offline);
     }
     return orElse();
   }
@@ -233,13 +285,17 @@ class _$DeleteFileImpl with DiagnosticableTreeMixin implements _DeleteFile {
 }
 
 abstract class _DeleteFile implements DeleteFileEvent {
-  const factory _DeleteFile(final int caseId, final int documentId) =
-      _$DeleteFileImpl;
+  const factory _DeleteFile(final int caseId, final Document document,
+      final int taskId, final bool offline) = _$DeleteFileImpl;
 
   @override
   int get caseId;
   @override
-  int get documentId;
+  Document get document;
+  @override
+  int get taskId;
+  @override
+  bool get offline;
   @override
   @JsonKey(ignore: true)
   _$$DeleteFileImplCopyWith<_$DeleteFileImpl> get copyWith =>

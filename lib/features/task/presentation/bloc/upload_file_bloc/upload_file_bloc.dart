@@ -32,7 +32,7 @@ enum UploadFileType { recent, images, camera }
 @injectable
 class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   final FileRepositoryInterface _uploadFileRepository;
-  final TaskLocalDataSource _taskLocalDataSource;
+  final HiveTaskStorage _hiveTaskStorage;
   String uploadMessage = "";
   int maxFileSize = 10000000;
   var filePath = "";
@@ -42,7 +42,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   File? cameraFile;
   TaskIvy? taskIvy;
 
-  UploadFileBloc(this._uploadFileRepository, this._taskLocalDataSource)
+  UploadFileBloc(this._uploadFileRepository, this._hiveTaskStorage)
       : super(const UploadFileState.loading()) {
     on<_UploadFiles>(_uploadFile);
     on<_ChangeFileName>(_changeFileName);
@@ -263,11 +263,12 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   Future _cacheFileOffline(CacheFileOfflineEvent event, Emitter emit) async {
     Uint8List bytes = await event.file.readAsBytes();
     Document document = Document(
+      id: DateTime.now().millisecondsSinceEpoch,
       name: event.fileName,
       fileLocalState: event.fileState,
       fileLocalData: bytes.toList(),
     );
-    _taskLocalDataSource.addDocument(taskIvy!.id, document);
+    _hiveTaskStorage.addDocument(taskIvy!.id, document);
     uploadMessage = "uploadFile.savedFileOfflineSuccess"
         .tr(namedArgs: {'fileName': event.fileName});
     emit(UploadFileState.success(uploadMessage, event.fileName));

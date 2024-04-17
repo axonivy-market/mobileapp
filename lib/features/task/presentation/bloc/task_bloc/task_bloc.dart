@@ -4,10 +4,15 @@ import 'dart:io';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/extensions.dart';
+import 'package:axon_ivy/data/models/enums/file_local_state_enum.dart';
 import 'package:axon_ivy/features/task/data/datasources/task_local_data_source.dart';
 import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
+import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
+import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
+import 'package:axon_ivy/features/task/domain/usecases/delete_file_use_case.dart';
 import 'package:axon_ivy/features/task/domain/usecases/get_tasks_use_case.dart';
+import 'package:axon_ivy/features/task/domain/usecases/upload_file_use_case.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +33,9 @@ part 'task_state.dart';
 @injectable
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final GetTaskListUseCase _taskRepository;
-  final TaskLocalDataSource _taskLocalDataSource;
+  final HiveTaskStorage _hiveTaskStorage;
+  final UploadFileUseCase _uploadFileUseCase;
+  final DeleteFileUseCase _deleteFileUseCase;
   List<TaskIvy> tasks = [];
   List<TaskIvy> sortDefaultTasks = [];
   List<TaskIvy> expiredTasks = [];
@@ -41,7 +48,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     SubSortType.mostImportant
   ];
 
-  TaskBloc(this._taskRepository, this._taskLocalDataSource)
+  TaskBloc(this._taskRepository, this._hiveTaskStorage, this._uploadFileUseCase,
+      this._deleteFileUseCase)
       : super(const TaskState.loading(false)) {
     on<_GetTasks>(_getTasks);
     on<_FilterTasks>(_filterTasks);
@@ -177,18 +185,35 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   Future<void> _parseHtml(event, Emitter emit) async {
-    var tasksLocal = _taskLocalDataSource.getAllTasks();
+    List<TaskIvy> tasksLocal = _hiveTaskStorage.getAllTasks();
 
+    //TODO tach method??
     // Load task offline form from local DB
     for (int i = 0; i < tasks.length; i++) {
       int localTaskIndex =
-          tasksLocal.indexWhere((localUser) => tasks[i].id == localUser.id);
+          tasksLocal.indexWhere((task) => tasks[i].id == task.id);
       if (localTaskIndex != -1) {
+        var destinationList = tasks[i].caseTask?.documents.toList() ?? [];
+        var sourceList =
+            tasksLocal[localTaskIndex].caseTask?.availableDocuments ?? [];
+        for (int j = 0; j < sourceList.length; j++) {
+          final source = sourceList[j];
+          int index =
+              destinationList.indexWhere((des) => des.name == source.name);
+          if (index != -1) {
+            destinationList[index] = destinationList[index]
+                .copyWith(fileLocalData: sourceList[index].fileLocalData);
+          } else {
+            // TODO nếu local có mà server ko có thì có add local vào không???
+            destinationList.add(source);
+          }
+        }
+        var caseTask = tasks[i].caseTask?.copyWith(documents: destinationList);
         tasks[i] = tasks[i].copyWith(
             submitUrlOffline: tasksLocal[localTaskIndex].submitUrlOffline,
-            formHTMLPageOffline:
-                tasksLocal[localTaskIndex].formHTMLPageOffline);
-        _taskLocalDataSource.addTask(tasks[i]);
+            formHTMLPageOffline: tasksLocal[localTaskIndex].formHTMLPageOffline,
+            caseTask: caseTask);
+        _hiveTaskStorage.addTask(tasks[i]);
       }
     }
     // download task form
@@ -220,7 +245,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       var index = tasks.indexWhere((element) => element.id == taskIvy.id);
       tasks.removeAt(index);
       tasks.add(task);
-      _taskLocalDataSource.addTask(task);
+      _hiveTaskStorage.addTask(task);
     }
   }
 
@@ -240,7 +265,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   Future<void> _showTasksOffline(event, Emitter emit) async {
     isOfflineMode = true;
-    var tasksOffline = _taskLocalDataSource
+    var tasksOffline = _hiveTaskStorage
         .getAllTasks()
         .where((element) => element.state != TaskStateEnum.doneInOffline.value)
         .toList();
@@ -254,28 +279,32 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   Future<void> _tasksLoadedSync(event, emit) async {
     // Remove tasks local for tasks done and uploaded from server
-    _taskLocalDataSource
+    _hiveTaskStorage
         .getAllTasks()
         .where((taskLocal) => !tasks.any((task) => task.id == taskLocal.id))
         .forEach((element) {
-      _taskLocalDataSource.removeTask(element.id);
+      _hiveTaskStorage.removeTask(element.id);
     });
-
-    // sync task done in offline to server
-    List<Future<void>> tasksDoneFuture = _taskLocalDataSource
-        .getAllTasks()
-        .where((element) => element.state == TaskStateEnum.doneInOffline.value)
-        .map((taskIvy) {
-      return _finishTaskOffline(taskIvy);
-    }).toList();
-    await Future.wait(tasksDoneFuture);
-
     add(const TaskEvent.parseHtml());
   }
 
   Future<void> _syncDataOnNetworkRestore(event, emit) async {
+    List<CaseTask?> caseTasks =
+        _hiveTaskStorage.getAllCaseTasksPendingSyncFile();
+    for (var caseTask in caseTasks) {
+      caseTask?.documents.forEach((document) async {
+        if (document.fileLocalState ==
+            FileLocalStateEnum.kPendingUpload.value) {
+          _uploadFile(caseTask.id, document);
+        } else if (document.fileLocalState ==
+            FileLocalStateEnum.kMarkedForDeletion.value) {
+          _deleteFile(caseTask.id, document.id);
+        }
+      });
+    }
+
     // sync task done to server
-    List<Future<void>> tasksDoneFuture = _taskLocalDataSource
+    List<Future<void>> tasksDoneFuture = _hiveTaskStorage
         .getAllTasks()
         .where((element) => element.state == TaskStateEnum.doneInOffline.value)
         .map((taskIvy) {
@@ -306,7 +335,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           finishedTask.isNotEmpty && currentRunningTask.isEmpty;
       if (isFinishedTask) {
         // remove task local after it sync done
-        _taskLocalDataSource.removeTask(taskIvy.id);
+        _hiveTaskStorage.removeTask(taskIvy.id);
         // remove tasks server current
         var taskDoneIdx = tasks.indexWhere((task) => task.id == taskIvy.id);
         tasks.removeAt(taskDoneIdx);
@@ -318,11 +347,52 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   List<TaskIvy> getTasks() {
     return isOfflineMode
-        ? _taskLocalDataSource
+        ? _hiveTaskStorage
             .getAllTasks()
             .where(
                 (element) => element.state != TaskStateEnum.doneInOffline.value)
             .toList()
         : tasks;
+  }
+
+  Future _uploadFile(int caseId, Document document) async {
+    try {
+      FormData data = FormData.fromMap(
+        {
+          "file": MultipartFile.fromBytes(document.fileLocalData!,
+              filename: document.name),
+        },
+      );
+      final upload = await _uploadFileUseCase.execute(
+          caseId: caseId,
+          contentType: APIHeader.contentType,
+          requestBy: APIHeader.requestBy,
+          data: data);
+      upload.fold((l) => null, (r) {
+        var documentUploaded = document.copyWith(
+            id: r.document.id,
+            url: r.document.url,
+            path: r.document.path,
+            fileLocalState: FileLocalStateEnum.kNew.value);
+        _hiveTaskStorage.updateDocumentByCase(caseId, documentUploaded);
+      });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future _deleteFile(int caseId, int documentId) async {
+    try {
+      final delete = await _deleteFileUseCase.execute(
+        caseId,
+        documentId,
+        APIHeader.requestBy,
+      );
+      delete.fold((l) => null, (r) {
+        _hiveTaskStorage.deleteDocument(caseId, r.document.name);
+      });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
   }
 }

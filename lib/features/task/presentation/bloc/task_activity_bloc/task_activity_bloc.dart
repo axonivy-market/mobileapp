@@ -20,9 +20,9 @@ part 'task_activity_bloc.freezed.dart';
 
 @injectable
 class TaskActivityBloc extends Bloc<TaskActivityEvent, TaskActivityState> {
-  final TaskLocalDataSource _taskLocalDataSource;
+  final HiveTaskStorage _hiveTaskStorage;
 
-  TaskActivityBloc(this._taskLocalDataSource)
+  TaskActivityBloc(this._hiveTaskStorage)
       : super(const TaskActivityState.initial()) {
     on<_FinishTaskOfflineEvent>(_finishTaskOffline);
   }
@@ -48,16 +48,16 @@ class TaskActivityBloc extends Bloc<TaskActivityEvent, TaskActivityState> {
       var isFinishedTask =
           finishedTask.isNotEmpty && currentRunningTask.isEmpty;
       if (isFinishedTask) {
-        _taskLocalDataSource.removeTask(taskIvy.id);
+        _hiveTaskStorage.removeTask(taskIvy.id);
         emit(FinishedTaskOffline(taskIvy));
       } else {
         var task = taskIvy.copyWith(state: TaskStateEnum.doneInOffline.value);
-        _taskLocalDataSource.addTask(task);
+        _hiveTaskStorage.addTask(task);
         emit(FinishedTaskOffline(task));
       }
     } catch (e) {
       var task = taskIvy.copyWith(state: TaskStateEnum.doneInOffline.value);
-      _taskLocalDataSource.addTask(task);
+      _hiveTaskStorage.addTask(task);
       emit(FinishedTaskOffline(task));
     }
   }

@@ -60,7 +60,8 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
   @override
   Widget build(BuildContext context) {
     TaskIvy task = widget.task;
-    documents = widget.task.caseTask?.documents.reversed.toList() ?? [];
+    documents =
+        widget.task.caseTask?.availableDocuments.reversed.toList() ?? [];
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => _uploadFileBloc),
@@ -280,7 +281,8 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
               builder: (context, state) {
                 if (state is TaskDetailSuccessState) {
                   task = state.task;
-                  documents = task.caseTask?.documents.reversed.toList() ?? [];
+                  documents =
+                      task.caseTask?.availableDocuments.reversed.toList() ?? [];
                 }
                 return documents.isNotEmpty
                     ? SlidableAutoCloseBehavior(
@@ -302,10 +304,11 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                         title:
                                             "Do you really want to delete this file?",
                                         onConfirm: () => _deleteFileBloc.add(
-                                          //TODO delete file, coi lai cho nay
                                           DeleteFileEvent.deleteFile(
                                               task.caseTask!.id,
-                                              documents[index].id!),
+                                              documents[index],
+                                              task.id,
+                                              task.offline),
                                         ),
                                       );
                                     },
