@@ -103,6 +103,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
+      _taskBloc.add(const TaskEvent.syncDataOnEngineRestore());
     }
   }
 

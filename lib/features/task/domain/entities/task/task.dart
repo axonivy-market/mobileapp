@@ -1,3 +1,4 @@
+import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
 import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
@@ -8,7 +9,10 @@ part 'task.g.dart';
 
 @freezed
 @HiveType(typeId: 0)
-class TaskIvy with _$TaskIvy {
+class TaskIvy
+    with _$TaskIvy {
+  const TaskIvy._();
+
   const factory TaskIvy({
     @HiveField(0) required int id,
     @HiveField(1) required String name,
@@ -29,4 +33,8 @@ class TaskIvy with _$TaskIvy {
 
   factory TaskIvy.fromJson(Map<String, dynamic> json) =>
       _$TaskIvyFromJson(json);
+
+  bool get isTaskDone {
+    return state == TaskStateEnum.doneInOffline.value;
+  }
 }

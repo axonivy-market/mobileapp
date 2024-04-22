@@ -9,11 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget getDateTimeTaskWidget(DateTime? dateTime, BuildContext context) {
+Widget getDateTimeTaskWidget(
+    DateTime? dateTime, BuildContext context, bool isTaskDone) {
   if (dateTime == null) {
-    return AppAssets.icons.chevronRight.svg(
-        colorFilter: ColorFilter.mode(
-            Theme.of(context).colorScheme.surface, BlendMode.srcIn));
+    if (!isTaskDone) {
+      return AppAssets.icons.chevronRight.svg(
+          colorFilter: ColorFilter.mode(
+              Theme.of(context).colorScheme.surface, BlendMode.srcIn));
+    } else {
+      return const SizedBox.shrink();
+    }
   }
 
   DateTime now = DateTime.now().toUtc();
@@ -25,15 +30,18 @@ Widget getDateTimeTaskWidget(DateTime? dateTime, BuildContext context) {
           style: GoogleFonts.inter(
             fontSize: 13.sp,
             fontWeight: FontWeight.w400,
-            color: Theme.of(context).colorScheme.error,
+            color: isTaskDone
+                ? Theme.of(context).colorScheme.secondary
+                : Theme.of(context).colorScheme.error,
           ),
           overflow: TextOverflow.ellipsis,
           softWrap: true,
         ),
-        AppAssets.icons.chevronRight.svg(
-          colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.error, BlendMode.srcIn),
-        ),
+        if (!isTaskDone)
+          AppAssets.icons.chevronRight.svg(
+            colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.error, BlendMode.srcIn),
+          ),
       ],
     );
   } else {
@@ -49,12 +57,20 @@ Widget getDateTimeTaskWidget(DateTime? dateTime, BuildContext context) {
           overflow: TextOverflow.ellipsis,
           softWrap: true,
         ),
-        AppAssets.icons.chevronRight.svg(
-            colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.surface, BlendMode.srcIn))
+        if (!isTaskDone)
+          AppAssets.icons.chevronRight.svg(
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.surface, BlendMode.srcIn))
       ],
     );
   }
+}
+
+Color getTaskNameColor(BuildContext context, String query, bool isTaskDone) {
+  var secondaryColor = Theme.of(context).colorScheme.secondary;
+  return query.isEmptyOrNull
+      ? (isTaskDone ? secondaryColor : Theme.of(context).colorScheme.surface)
+      : secondaryColor;
 }
 
 class TaskItemWidget extends StatelessWidget {
@@ -65,6 +81,7 @@ class TaskItemWidget extends StatelessWidget {
     required this.priority,
     required this.expiryTimeStamp,
     this.query = '',
+    this.isTaskDone = false,
   });
 
   final String name;
@@ -72,6 +89,7 @@ class TaskItemWidget extends StatelessWidget {
   final int priority;
   final DateTime? expiryTimeStamp;
   final String query;
+  final bool isTaskDone;
 
   @override
   Widget build(BuildContext context) {
@@ -107,9 +125,8 @@ class TaskItemWidget extends StatelessWidget {
                             style: GoogleFonts.inter(
                               fontSize: 17.sp,
                               fontWeight: FontWeight.w600,
-                              color: query.isEmptyOrNull
-                                  ? Theme.of(context).colorScheme.surface
-                                  : Theme.of(context).colorScheme.secondary,
+                              color:
+                                  getTaskNameColor(context, query, isTaskDone),
                             ),
                             overflow: TextOverflow.ellipsis,
                           )
@@ -153,8 +170,8 @@ class TaskItemWidget extends StatelessWidget {
                         height: 34.h,
                         child: Align(
                           alignment: Alignment.bottomLeft,
-                          child:
-                              getDateTimeTaskWidget(expiryTimeStamp, context),
+                          child: getDateTimeTaskWidget(
+                              expiryTimeStamp, context, isTaskDone),
                         ),
                       ),
                     ],

@@ -185,41 +185,10 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   Future<void> _parseHtml(event, Emitter emit) async {
-    List<TaskIvy> tasksLocal = _hiveTaskStorage.getAllTasks();
-
-    //TODO tach method??
-    // Load task offline form from local DB
-    for (int i = 0; i < tasks.length; i++) {
-      int localTaskIndex =
-          tasksLocal.indexWhere((task) => tasks[i].id == task.id);
-      if (localTaskIndex != -1) {
-        var destinationList = tasks[i].caseTask?.documents.toList() ?? [];
-        var sourceList =
-            tasksLocal[localTaskIndex].caseTask?.availableDocuments ?? [];
-        for (int j = 0; j < sourceList.length; j++) {
-          final source = sourceList[j];
-          int index =
-              destinationList.indexWhere((des) => des.name == source.name);
-          if (index != -1) {
-            destinationList[index] = destinationList[index]
-                .copyWith(fileLocalData: sourceList[index].fileLocalData);
-          } else {
-            // TODO nếu local có mà server ko có thì có add local vào không???
-            destinationList.add(source);
-          }
-        }
-        var caseTask = tasks[i].caseTask?.copyWith(documents: destinationList);
-        tasks[i] = tasks[i].copyWith(
-            submitUrlOffline: tasksLocal[localTaskIndex].submitUrlOffline,
-            formHTMLPageOffline: tasksLocal[localTaskIndex].formHTMLPageOffline,
-            caseTask: caseTask);
-        _hiveTaskStorage.addTask(tasks[i]);
-      }
-    }
+    var serverTasksOffline = tasks.where((element) => element.offline).toList();
     // download task form
-    List<Future<void>> futures = tasks
-        .where((taskServer) =>
-            taskServer.offline && taskServer.submitUrlOffline.isEmptyOrNull)
+    List<Future<void>> futures = serverTasksOffline
+        .where((task) => task.submitUrlOffline.isEmptyOrNull)
         .map((taskIvy) {
       return downloadHTMLFromFullRequestPath(taskIvy);
     }).toList();
@@ -233,8 +202,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   Future<void> downloadHTMLFromFullRequestPath(TaskIvy taskIvy) async {
     var dio = getIt<Dio>();
-    var urls = taskIvy.fullRequestPath.split(AppConfig.serverUrl);
-    var requestUrl = urls.length > 1 ? urls[1] : "";
+    Uri uri = Uri.parse(taskIvy.fullRequestPath);
+    String host = uri.host;
+    var urls = taskIvy.fullRequestPath.split(host);
+    var requestUrl = urls.length > 1 ? urls[1] : taskIvy.fullRequestPath;
+
     final response = await dio.get(requestUrl);
 
     if (response.statusCode == 200) {
@@ -265,10 +237,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   Future<void> _showTasksOffline(event, Emitter emit) async {
     isOfflineMode = true;
-    var tasksOffline = _hiveTaskStorage
-        .getAllTasks()
-        .where((element) => element.state != TaskStateEnum.doneInOffline.value)
-        .toList();
+    var tasksOffline = _hiveTaskStorage.getAllTasks().toList();
     sortDefaultTasks = tasksOffline.sortDefaultTasks;
     expiredTasks = _filterExpiredTasks(tasksOffline);
     emit(TaskState.success(
@@ -285,6 +254,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         .forEach((element) {
       _hiveTaskStorage.removeTask(element.id);
     });
+    var serverTasksOffline = tasks.where((element) => element.offline).toList();
+    _updateTaskWithLocalData(serverTasksOffline);
     add(const TaskEvent.parseHtml());
   }
 
@@ -346,13 +317,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   List<TaskIvy> getTasks() {
-    return isOfflineMode
-        ? _hiveTaskStorage
-            .getAllTasks()
-            .where(
-                (element) => element.state != TaskStateEnum.doneInOffline.value)
-            .toList()
-        : tasks;
+    return isOfflineMode ? _hiveTaskStorage.getAllTasks().toList() : tasks;
   }
 
   Future _uploadFile(int caseId, Document document) async {
@@ -393,6 +358,46 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       });
     } catch (e) {
       debugPrint(e.toString());
+    }
+  }
+
+  void _updateTaskWithLocalData(List<TaskIvy> serverTasksOffline) {
+    List<TaskIvy> localTasksOffline = _hiveTaskStorage.getAllTasks();
+    for (int i = 0; i < serverTasksOffline.length; i++) {
+      int localTaskIdx = localTasksOffline
+          .indexWhere((task) => serverTasksOffline[i].id == task.id);
+      if (localTaskIdx != -1) {
+        var serverDocuments =
+            serverTasksOffline[i].caseTask?.documents.toList() ?? [];
+        var localDocuments =
+            localTasksOffline[localTaskIdx].caseTask?.availableDocuments ?? [];
+        for (int j = 0; j < localDocuments.length; j++) {
+          final document = localDocuments[j];
+          int serverDocumentIdx =
+              serverDocuments.indexWhere((des) => des.name == document.name);
+          if (serverDocumentIdx != -1) {
+            serverDocuments[serverDocumentIdx] =
+                serverDocuments[serverDocumentIdx]
+                    .copyWith(fileLocalData: document.fileLocalData);
+          } else {
+            serverDocuments.add(document);
+          }
+        }
+        var caseTask = serverTasksOffline[i]
+            .caseTask
+            ?.copyWith(documents: serverDocuments);
+        serverTasksOffline[i] = serverTasksOffline[i].copyWith(
+            submitUrlOffline: localTasksOffline[localTaskIdx].submitUrlOffline,
+            formHTMLPageOffline:
+                localTasksOffline[localTaskIdx].formHTMLPageOffline,
+            caseTask: caseTask);
+        var serverTaskIdx =
+            tasks.indexWhere((task) => task.id == serverTasksOffline[i].id);
+        if (serverTaskIdx != -1) {
+          tasks[serverTaskIdx] = serverTasksOffline[i];
+        }
+        _hiveTaskStorage.addTask(serverTasksOffline[i]);
+      }
     }
   }
 }

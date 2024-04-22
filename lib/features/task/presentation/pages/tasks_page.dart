@@ -221,15 +221,16 @@ class TasksViewContent extends StatelessWidget {
     } else {
       final task = tasks[index];
       return GestureDetector(
-        onTap: () {
-          _navigateTaskActivity(context, tasks[index]);
-        },
-        onLongPress: () => _showDetails(context, task),
+        onTap: () => task.isTaskDone
+            ? null
+            : _navigateTaskActivity(context, tasks[index]),
+        onLongPress: () => task.isTaskDone ? null : _showDetails(context, task),
         child: TaskItemWidget(
           name: task.name,
           description: task.description,
           priority: task.priority,
           expiryTimeStamp: task.expiryTimeStamp,
+          isTaskDone: task.isTaskDone,
         ),
       );
     }

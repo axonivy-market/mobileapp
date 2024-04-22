@@ -312,7 +312,7 @@ class __$$TaskIvyImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$TaskIvyImpl implements _TaskIvy {
+class _$TaskIvyImpl extends _TaskIvy {
   const _$TaskIvyImpl(
       {@HiveField(0) required this.id,
       @HiveField(1) required this.name,
@@ -330,7 +330,8 @@ class _$TaskIvyImpl implements _TaskIvy {
       final Map<String, dynamic>? doneTaskFormDataSerializedOffline,
       @HiveField(13) this.submitUrlOffline,
       @HiveField(14) this.formHTMLPageOffline})
-      : _doneTaskFormDataSerializedOffline = doneTaskFormDataSerializedOffline;
+      : _doneTaskFormDataSerializedOffline = doneTaskFormDataSerializedOffline,
+        super._();
 
   factory _$TaskIvyImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskIvyImplFromJson(json);
@@ -463,7 +464,7 @@ class _$TaskIvyImpl implements _TaskIvy {
   }
 }
 
-abstract class _TaskIvy implements TaskIvy {
+abstract class _TaskIvy extends TaskIvy {
   const factory _TaskIvy(
       {@HiveField(0) required final int id,
       @HiveField(1) required final String name,
@@ -481,6 +482,7 @@ abstract class _TaskIvy implements TaskIvy {
       final Map<String, dynamic>? doneTaskFormDataSerializedOffline,
       @HiveField(13) final String? submitUrlOffline,
       @HiveField(14) final String? formHTMLPageOffline}) = _$TaskIvyImpl;
+  const _TaskIvy._() : super._();
 
   factory _TaskIvy.fromJson(Map<String, dynamic> json) = _$TaskIvyImpl.fromJson;
 
