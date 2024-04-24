@@ -24,7 +24,7 @@ class OfflinePopupWidget extends StatelessWidget {
 
   Widget _buildOfflineDialog(BuildContext context) {
     return Container(
-      color: Colors.black54,
+      color: Colors.black.withOpacity(0.5),
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
@@ -44,8 +44,7 @@ class OfflinePopupWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10).r,
-                        color:
-                            Theme.of(context).colorScheme.onPrimaryContainer),
+                        color: Theme.of(context).colorScheme.background),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [

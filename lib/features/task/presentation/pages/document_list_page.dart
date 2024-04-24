@@ -166,9 +166,15 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                 Padding(
                   padding: const EdgeInsets.only(right: 5).r,
                   child: PopupMenuButton<UploadFileType>(
-                    elevation: 0.2,
-                    color: Theme.of(context).colorScheme.background,
+                    elevation: 10,
+                    shadowColor: Colors.black.withOpacity(0.3),
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
                     position: PopupMenuPosition.under,
+                    surfaceTintColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.all(const Radius.circular(10.0).r)),
                     onSelected: (value) {
                       switch (value) {
                         case UploadFileType.recent:

@@ -59,7 +59,7 @@ class _LoginPageState extends BasePageState<LoginPage> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        leading: BackButtonWidget(),
+        leading: const BackButtonWidget(),
       ),
       body: BlocProvider(
         create: (context) => _loginBloc,
@@ -99,6 +99,8 @@ class _LoginPageState extends BasePageState<LoginPage> {
                           validator: (_) => state.invalidUrlMessage,
                           autovalidateMode: AutovalidateMode.always,
                           prefix: AppAssets.icons.iconUrl.svg(
+                            width: 21.h,
+                            height: 21.h,
                             colorFilter: ColorFilter.mode(
                                 Theme.of(context).colorScheme.surface,
                                 BlendMode.srcIn),
@@ -130,6 +132,8 @@ class _LoginPageState extends BasePageState<LoginPage> {
                           autovalidateMode: AutovalidateMode.always,
                           validator: (_) => state.invalidUsernameMessage,
                           prefix: AppAssets.icons.iconUsername.svg(
+                            width: 21.h,
+                            height: 21.h,
                             colorFilter: ColorFilter.mode(
                                 Theme.of(context).colorScheme.surface,
                                 BlendMode.srcIn),
@@ -164,6 +168,8 @@ class _LoginPageState extends BasePageState<LoginPage> {
                           validator: (_) => state.invalidPasswordMessage,
                           focusNode: _passwordFocusNode,
                           prefix: AppAssets.icons.iconLock.svg(
+                            width: 21.h,
+                            height: 21.h,
                             colorFilter: ColorFilter.mode(
                                 Theme.of(context).colorScheme.surface,
                                 BlendMode.srcIn),
@@ -191,7 +197,7 @@ class _LoginPageState extends BasePageState<LoginPage> {
                                 _usernameTextController.text));
                           },
                           child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 10).r,
+                            height: 44.h,
                             decoration: BoxDecoration(
                               color: Theme.of(context)
                                   .colorScheme
@@ -200,13 +206,15 @@ class _LoginPageState extends BasePageState<LoginPage> {
                                 const Radius.circular(8).r,
                               ),
                             ),
-                            child: Text(
-                              "profile.signIn".tr(),
-                              textAlign: TextAlign.center,
-                              style: GoogleFonts.inter(
-                                  fontSize: 17.sp,
-                                  fontWeight: FontWeight.w500,
-                                  color: Theme.of(context).colorScheme.primary),
+                            child: Center(
+                              child: Text(
+                                "profile.signIn".tr(),
+                                style: GoogleFonts.inter(
+                                    fontSize: 17.sp,
+                                    fontWeight: FontWeight.w500,
+                                    color:
+                                        Theme.of(context).colorScheme.primary),
+                              ),
                             ),
                           ),
                         ),

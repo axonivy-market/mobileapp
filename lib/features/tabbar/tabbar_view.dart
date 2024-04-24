@@ -166,7 +166,7 @@ class _TabBarScreenState extends State<TabBarScreen> {
           ),
           bottomNavigationBar: SafeArea(
             child: Container(
-              height: Constants.bottomNavigationBarHeight,
+              height: Constants.bottomNavigationBarHeight.w,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
@@ -245,6 +245,8 @@ class _TabBarScreenState extends State<TabBarScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SvgPicture.asset(
+                width: 21.h,
+                height: 21.h,
                 svgPath,
                 colorFilter: isSelected
                     ? ColorFilter.mode(
