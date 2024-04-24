@@ -118,7 +118,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
             backgroundColor: Theme.of(context).colorScheme.background,
             automaticallyImplyLeading: false,
             surfaceTintColor: Theme.of(context).colorScheme.background,
-            leadingWidth: 100,
+            leadingWidth: 100.w,
             leading: BackButtonWidget(shouldFetch: shouldFetchTaskList),
             actions: [
               if (task != null)

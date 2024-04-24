@@ -1,5 +1,6 @@
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -39,8 +40,8 @@ dynamic getIconUsingPrefix(
 
 SvgPicture getIconDefaultIcon(BuildContext context) {
   return AppAssets.streamlines.controlsPlay.svg(
-      height: 14,
-      width: 14,
+      height: 14.0.h,
+      width: 14.h,
       colorFilter: ColorFilter.mode(
           Theme.of(context).colorScheme.surface, BlendMode.srcIn));
 }
@@ -50,7 +51,7 @@ SvgPicture getStreamLineIcon({required String name}) {
       (element) => (element.keyName.split("/")[2].split(".")[0] == name),
       orElse: () {
     return AppAssets.streamlines.controlsPlay;
-  }).svg(height: 14, width: 14);
+  }).svg(height: 14.h, width: 14.h);
 }
 
 String convertToCamelCase(List<String> parts) {

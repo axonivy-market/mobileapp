@@ -19,24 +19,22 @@ class SwitchWidget extends StatelessWidget {
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
-        width: 50.0.w,
-        height: 30.0.h,
+        width: 50.0.h,
+        height: 29.0.h,
         decoration: BoxDecoration(
-          border: Border.all(
-              color: Theme.of(context).colorScheme.outline, width: 1.0),
-          borderRadius: BorderRadius.circular(15.0),
+          border: Border.all(color: Theme.of(context).colorScheme.outline),
+          borderRadius: BorderRadius.circular(142.0).r,
           color: isActive
               ? Theme.of(context).colorScheme.tertiaryContainer
               : Theme.of(context).colorScheme.background,
         ),
-        padding: const EdgeInsets.symmetric(horizontal: 2).r,
-        alignment: isActive
-            ? Alignment.centerRight
-            : Alignment.centerLeft,
+        padding: const EdgeInsets.symmetric(horizontal: 3).h,
+        alignment: isActive ? Alignment.centerRight : Alignment.centerLeft,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 150),
-          width: 25.0.w,
-          height: 25.0.h,
+          width: 22.0.h,
+          height: 22.0.h,
+          // color: Theme.of(context).colorScheme.primary,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: isActive

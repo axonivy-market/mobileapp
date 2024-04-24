@@ -38,6 +38,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
   }) async {
     final uploadFileBloc = context.read<UploadFileBloc>();
     return showDialog(
+      barrierColor: Colors.black.withOpacity(0.5),
       barrierDismissible: false,
       context: context,
       builder: (context) {
@@ -177,6 +178,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
     bool needShowCancel = false,
   }) {
     showDialog(
+      barrierColor: Colors.black.withOpacity(0.5),
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
@@ -278,6 +280,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
     bool needShowCancel = false,
   }) {
     showDialog(
+      barrierColor: Colors.black.withOpacity(0.5),
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {

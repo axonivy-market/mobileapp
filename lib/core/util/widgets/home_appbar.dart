@@ -20,7 +20,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double scrolledUnderElevation;
 
   @override
-  Size get preferredSize => const Size.fromHeight(Constants.appBarHeight);
+  Size get preferredSize => Size.fromHeight(Constants.appBarHeight.h);
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +42,8 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           onPressed: () {},
           icon: AppAssets.icons.notification.svg(
+            width: 21.h,
+            height: 21.h,
             colorFilter: ColorFilter.mode(
               Theme.of(context).colorScheme.surface,
               BlendMode.srcIn,
