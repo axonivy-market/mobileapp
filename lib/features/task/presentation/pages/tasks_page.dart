@@ -231,6 +231,7 @@ class TasksViewContent extends StatelessWidget {
           priority: task.priority,
           expiryTimeStamp: task.expiryTimeStamp,
           isTaskDone: task.isTaskDone,
+          isOffline: task.offline,
         ),
       );
     }

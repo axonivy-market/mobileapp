@@ -9,23 +9,36 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 Widget getDateTimeTaskWidget(
-    DateTime? dateTime, BuildContext context, bool isTaskDone) {
+    DateTime? dateTime, BuildContext context, bool isTaskDone, bool isOffline) {
   if (dateTime == null) {
-    if (!isTaskDone) {
-      return AppAssets.icons.chevronRight.svg(
-          width: 21.h,
-          height: 21.h,
-          colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.surface, BlendMode.srcIn));
-    } else {
-      return const SizedBox.shrink();
-    }
+    return Row(
+      children: [
+        if (isOffline)
+          AppAssets.icons.cloudOff.svg(
+              height: 16.h,
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.secondary, BlendMode.srcIn)),
+        2.horizontalSpace,
+        !isTaskDone
+            ? AppAssets.icons.chevronRight.svg(
+                height: 21.h,
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.surface, BlendMode.srcIn))
+            : 5.horizontalSpace,
+      ],
+    );
   }
 
   DateTime now = DateTime.now().toUtc();
   if (dateTime.isBefore(now)) {
     return Row(
       children: [
+        if (isOffline)
+          AppAssets.icons.cloudOff.svg(
+              height: 16.h,
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.secondary, BlendMode.srcIn)),
+        5.horizontalSpace,
         Text(
           "tasksView.expired".tr(),
           style: GoogleFonts.inter(
@@ -38,18 +51,24 @@ Widget getDateTimeTaskWidget(
           overflow: TextOverflow.ellipsis,
           softWrap: true,
         ),
-        if (!isTaskDone)
-          AppAssets.icons.chevronRight.svg(
-            width: 21.h,
-            height: 21.h,
-            colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.error, BlendMode.srcIn),
-          ),
+        !isTaskDone
+            ? AppAssets.icons.chevronRight.svg(
+                height: 21.h,
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.error, BlendMode.srcIn),
+              )
+            : 5.horizontalSpace,
       ],
     );
   } else {
     return Row(
       children: [
+        if (isOffline)
+          AppAssets.icons.cloudOff.svg(
+              height: 16.h,
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.secondary, BlendMode.srcIn)),
+        5.horizontalSpace,
         Text(
           dateTime.formatDateYearWithTwoNumber(dateTime),
           style: GoogleFonts.inter(
@@ -60,12 +79,12 @@ Widget getDateTimeTaskWidget(
           overflow: TextOverflow.ellipsis,
           softWrap: true,
         ),
-        if (!isTaskDone)
-          AppAssets.icons.chevronRight.svg(
-              width: 21.h,
-              height: 21.h,
-              colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.surface, BlendMode.srcIn))
+        !isTaskDone
+            ? AppAssets.icons.chevronRight.svg(
+                height: 21.h,
+                colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.surface, BlendMode.srcIn))
+            : 5.horizontalSpace,
       ],
     );
   }
@@ -87,6 +106,7 @@ class TaskItemWidget extends StatelessWidget {
     required this.expiryTimeStamp,
     this.query = '',
     this.isTaskDone = false,
+    this.isOffline = false,
   });
 
   final String name;
@@ -95,6 +115,7 @@ class TaskItemWidget extends StatelessWidget {
   final DateTime? expiryTimeStamp;
   final String query;
   final bool isTaskDone;
+  final bool isOffline;
 
   @override
   Widget build(BuildContext context) {
@@ -123,25 +144,24 @@ class TaskItemWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 20).r,
                   child: query.isEmptyOrNull || startNameIndex == -1
                       ? Text(
-                    name.isEmptyOrNull
-                        ? "tasksView.noTaskName".tr()
-                        : name,
-                    style: GoogleFonts.inter(
-                      fontSize: 17.sp,
-                      fontWeight: FontWeight.w600,
-                      color:
-                      getTaskNameColor(context, query, isTaskDone),
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  )
+                          name.isEmptyOrNull
+                              ? "tasksView.noTaskName".tr()
+                              : name,
+                          style: GoogleFonts.inter(
+                            fontSize: 17.sp,
+                            fontWeight: FontWeight.w600,
+                            color: getTaskNameColor(context, query, isTaskDone),
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                        )
                       : TextHighlightWidget(
-                    text: name,
-                    startIndex: startNameIndex,
-                    endIndex: query.length,
-                    maxLine: 1,
-                    fontSize: 17.sp,
-                    fontWeight: FontWeight.w600,
-                  ),
+                          text: name,
+                          startIndex: startNameIndex,
+                          endIndex: query.length,
+                          maxLine: 1,
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.w600,
+                        ),
                 ),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,33 +169,32 @@ class TaskItemWidget extends StatelessWidget {
                     Expanded(
                       child: query.isEmptyOrNull || startDescIndex == -1
                           ? Text(
-                        description.isEmptyOrNull
-                            ? "tasksView.noTaskDescription".tr()
-                            : description,
-                        style: GoogleFonts.inter(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400,
-                          color:
-                          Theme.of(context).colorScheme.secondary,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      )
+                              description.isEmptyOrNull
+                                  ? "tasksView.noTaskDescription".tr()
+                                  : description,
+                              style: GoogleFonts.inter(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            )
                           : TextHighlightWidget(
-                        text: description,
-                        startIndex: startDescIndex,
-                        endIndex: query.length,
-                        maxLine: 2,
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
+                              text: description,
+                              startIndex: startDescIndex,
+                              endIndex: query.length,
+                              maxLine: 2,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
                     ),
                     SizedBox(
                       height: 35.w,
                       child: Align(
                         alignment: Alignment.bottomLeft,
                         child: getDateTimeTaskWidget(
-                            expiryTimeStamp, context, isTaskDone),
+                            expiryTimeStamp, context, isTaskDone, isOffline),
                       ),
                     ),
                   ],

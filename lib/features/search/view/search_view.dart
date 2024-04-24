@@ -33,6 +33,7 @@ class _SearchViewState extends State<SearchView> {
     return BlocProvider(
       create: (context) => getIt<SearchFilterCubit>(),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: const HomeAppBar(
           scrolledUnderElevation: 0,
         ),
@@ -62,21 +63,28 @@ class _SearchViewState extends State<SearchView> {
                   );
             }),
           ],
-          child: Stack(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Column(
-                children: [
-                  16.verticalSpace,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16).r,
-                    child: const SearchTextField(),
-                  ),
-                  Expanded(
-                    child: BlocBuilder<SearchBloc, SearchState>(
-                      builder: (context, state) {
-                        if (state is SearchResultState) {
-                          return state.items.isEmptyOrNull
-                              ? DataEmptyWidget(
+              16.verticalSpace,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16).r,
+                child: const SearchTextField(),
+              ),
+              Flexible(
+                flex: 1,
+                child: BlocBuilder<SearchBloc, SearchState>(
+                  builder: (context, state) {
+                    if (state is SearchResultState) {
+                      return Stack(
+                        children: [
+                          searchItemList(context, state),
+                          if (state.items.isEmptyOrNull)
+                            Padding(
+                              padding: EdgeInsets.only(top: 62.h),
+                              child: Container(
+                                color: Colors.white,
+                                child: DataEmptyWidget(
                                   message: state.emptyMessage!.tr(),
                                   icon: AppAssets.icons.icSearchNotFound.svg(
                                     colorFilter: ColorFilter.mode(
@@ -85,24 +93,25 @@ class _SearchViewState extends State<SearchView> {
                                           .tertiaryContainer,
                                       BlendMode.srcIn,
                                     ),
-                                  ))
-                              : searchItemList(context, state);
-                        } else {
-                          return DataEmptyWidget(
-                              message: 'search.nothingThereYet'.tr(),
-                              icon: AppAssets.icons.icSearchInitial.svg(
-                                colorFilter: ColorFilter.mode(
-                                  Theme.of(context)
-                                      .colorScheme
-                                      .tertiaryContainer,
-                                  BlendMode.srcIn,
+                                  ),
                                 ),
-                              ));
-                        }
-                      },
-                    ),
-                  ),
-                ],
+                              ),
+                            ),
+                        ],
+                      );
+                    } else {
+                      return DataEmptyWidget(
+                        message: 'search.nothingThereYet'.tr(),
+                        icon: AppAssets.icons.icSearchInitial.svg(
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.tertiaryContainer,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
             ],
           ),
@@ -135,6 +144,9 @@ class _SearchViewState extends State<SearchView> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext _, int index) {
+              if (state.items.isEmptyOrNull) {
+                return const SizedBox.shrink();
+              }
               final item = state.items![index];
               if (item is SectionHeader) {
                 return Padding(
@@ -155,6 +167,9 @@ class _SearchViewState extends State<SearchView> {
                   padding: const EdgeInsets.symmetric(horizontal: 16).r,
                   child: GestureDetector(
                     onTap: () {
+                      if (item.task.isTaskDone) {
+                        return;
+                      }
                       WidgetsBinding.instance.focusManager.primaryFocus
                           ?.unfocus();
                       context.push(AppRoutes.taskActivity, extra: {
@@ -172,6 +187,8 @@ class _SearchViewState extends State<SearchView> {
                       priority: item.task.priority,
                       expiryTimeStamp: item.task.expiryTimeStamp,
                       query: state.query.trim(),
+                      isOffline: item.task.offline,
+                      isTaskDone: item.task.isTaskDone,
                     ),
                   ),
                 );
@@ -199,7 +216,7 @@ class _SearchViewState extends State<SearchView> {
               }
               return null;
             },
-            childCount: state.items!.length,
+            childCount: state.items.isEmptyOrNull ? 1 : state.items!.length,
           ),
         ),
       ],

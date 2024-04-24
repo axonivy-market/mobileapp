@@ -336,7 +336,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                         child: TaskInfoRowWidget(
                           isTitleHighlight: true,
                           icon: AppAssets.icons.paperclip.svg(
-                              height: 16.sp,
+                              height: 16.h,
                               colorFilter: ColorFilter.mode(
                                   Theme.of(context).colorScheme.surface,
                                   BlendMode.srcIn)),

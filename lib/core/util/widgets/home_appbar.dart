@@ -42,8 +42,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           onPressed: () {},
           icon: AppAssets.icons.notification.svg(
-            width: 21.h,
-            height: 21.h,
+            height: 26.h,
             colorFilter: ColorFilter.mode(
               Theme.of(context).colorScheme.surface,
               BlendMode.srcIn,
@@ -80,6 +79,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     5.horizontalSpace,
                     AppAssets.icons.offline.svg(
+                        height: 26.h,
                         colorFilter: ColorFilter.mode(
                             Theme.of(context).colorScheme.secondary,
                             BlendMode.srcIn))
