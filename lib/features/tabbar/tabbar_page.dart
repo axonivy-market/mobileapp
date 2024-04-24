@@ -166,7 +166,7 @@ class _TabBarPageState extends State<TabBarPage> {
           ),
           bottomNavigationBar: SafeArea(
             child: Container(
-              height: Constants.bottomNavigationBarHeight,
+              height: Constants.bottomNavigationBarHeight.w,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
@@ -238,16 +238,15 @@ class _TabBarPageState extends State<TabBarPage> {
     bool isSelected = index == selectedIndex;
     return BlocBuilder<LoggedInCubit, LoggedInState>(
       builder: (context, state) {
-        bool isLoggedIn = state.maybeWhen(
-          loggedIn: (isLoggedIn) => isLoggedIn,
-          orElse: () => false,
-        );
+        bool isLoggedIn = SharedPrefs.isLogin ?? false;
         return InkResponse(
           onTap: isLoggedIn ? onPressed : null,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               SvgPicture.asset(
+                width: 21.h,
+                height: 21.h,
                 svgPath,
                 colorFilter: isSelected
                     ? ColorFilter.mode(

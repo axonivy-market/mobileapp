@@ -1,5 +1,4 @@
 import 'package:axon_ivy/generated/assets.gen.dart';
-import 'package:axon_ivy/generated/colors.gen.dart';
 import 'package:axon_ivy/shared/resources/widget_heights.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,7 +24,7 @@ class OfflinePopupWidget extends StatelessWidget {
 
   Widget _buildOfflineDialog(BuildContext context) {
     return Container(
-      color: Colors.black54,
+      color: Colors.black.withOpacity(0.5),
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
@@ -45,11 +44,14 @@ class OfflinePopupWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10).r,
-                        color: Colors.white),
+                        color: Theme.of(context).colorScheme.background),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        AppAssets.icons.cloudOff.svg(),
+                        AppAssets.icons.cloudOff.svg(
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.tertiaryContainer,
+                                BlendMode.srcIn)),
                         10.verticalSpace,
                         Text(
                           "offline.popup_title".tr(),

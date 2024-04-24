@@ -27,27 +27,22 @@ class ProcessItemWidget extends StatelessWidget {
     int startDescIndex =
         process.description.toLowerCase().indexOf(query.toLowerCase());
     return Container(
-      margin: const EdgeInsets.only(bottom: 10).r,
-      padding: const EdgeInsets.only(
-        left: 8,
-        right: 5,
-        top: 10,
-        bottom: 10,
-      ).r,
-      constraints: BoxConstraints(minHeight: 82.h),
+      margin: const EdgeInsets.only(bottom: 10).h,
+      padding: const EdgeInsets.only(left: 8, right: 5, top: 5, bottom: 5).h,
+      constraints: BoxConstraints(minHeight: 77.h),
       decoration: BoxDecoration(
         border: Border.all(color: Theme.of(context).colorScheme.outline),
-        borderRadius: BorderRadius.circular(10).r,
+        borderRadius: BorderRadius.circular(10).h,
         color: Theme.of(context).colorScheme.onPrimaryContainer,
       ),
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 4).r,
+            padding: const EdgeInsets.only(top: 4).h,
             child: getProcessIcon(process.customFields, context),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20, right: 26).r,
+            padding: const EdgeInsets.only(left: 20).h,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,40 +66,53 @@ class ProcessItemWidget extends StatelessWidget {
                         startIndex: startNameIndex,
                         endIndex: query.length,
                         maxLine: 1,
-                        fontSize: 17,
+                        fontSize: 17.sp,
                         fontWeight: FontWeight.w600,
                       ),
                 2.verticalSpace,
-                query.isEmptyOrNull || startDescIndex == -1
-                    ? Text(
-                        process.description.isEmptyOrNull
-                            ? 'process.noDescription'.tr()
-                            : process.description,
-                        style: GoogleFonts.inter(
-                          fontSize: 13.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Theme.of(context).colorScheme.secondary,
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      )
-                    : TextHighlightWidget(
-                        text: process.description,
-                        startIndex: startDescIndex,
-                        endIndex: query.length,
-                        maxLine: 2,
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w400,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Expanded(
+                      child: query.isEmptyOrNull || startDescIndex == -1
+                          ? Text(
+                              process.description.isEmptyOrNull
+                                  ? 'process.noDescription'.tr()
+                                  : process.description,
+                              style: GoogleFonts.inter(
+                                fontSize: 13.sp,
+                                fontWeight: FontWeight.w400,
+                                color: Theme.of(context).colorScheme.secondary,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            )
+                          : TextHighlightWidget(
+                              text: process.description,
+                              startIndex: startDescIndex,
+                              endIndex: query.length,
+                              maxLine: 2,
+                              fontSize: 13.sp,
+                              fontWeight: FontWeight.w400,
+                            ),
+                    ),
+                    SizedBox(
+                      height: 35.w,
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: AppAssets.icons.chevronRight.svg(
+                            width: 21.h,
+                            height: 21.h,
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
                       ),
+                    )
+                  ],
+                ),
               ],
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: AppAssets.icons.chevronRight.svg(
-                colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.surface, BlendMode.srcIn)),
           ),
         ],
       ),

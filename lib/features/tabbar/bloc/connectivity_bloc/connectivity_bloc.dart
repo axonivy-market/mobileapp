@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:axon_ivy/features/search/domain/repositories/engine_info_repository_interface.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,10 +13,8 @@ part 'connectivity_state.dart';
 class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   StreamSubscription? _streamSubscription;
   var connectivityResult = ConnectivityResult.wifi;
-  final EngineInfoRepositoryInterface _engineInfoRepository;
 
-  ConnectivityBloc(this._engineInfoRepository)
-      : super(const ConnectivityState.initial()) {
+  ConnectivityBloc() : super(const ConnectivityState.initial()) {
     on<ConnectivityEvent>((event, emit) {
       if (event is ConnectedEvent) {
         emit(const ConnectivityState.connectedState());
@@ -33,30 +30,13 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
               result == ConnectivityResult.mobile) &&
           result != connectivityResult) {
         connectivityResult = result;
-        _getEngineInfo();
+        add(const ConnectivityEvent.connectedEvent());
       } else if (result == ConnectivityResult.none &&
           (result != connectivityResult)) {
         connectivityResult = result;
         add(const ConnectivityEvent.notConnectedEvent());
       }
     });
-  }
-
-  Future<void> _getEngineInfo() async {
-    try {
-      final engineInfo = await _engineInfoRepository.getEngineInfo();
-
-      engineInfo.fold(
-        (l) {
-          add(const ConnectivityEvent.notConnectedEvent());
-        },
-        (r) {
-          add(const ConnectivityEvent.connectedEvent());
-        },
-      );
-    } catch (e) {
-      add(const ConnectivityEvent.notConnectedEvent());
-    }
   }
 
   @override

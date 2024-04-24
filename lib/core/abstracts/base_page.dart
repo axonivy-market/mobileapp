@@ -2,6 +2,7 @@ import 'package:axon_ivy/features/task/presentation/bloc/upload_file_bloc/upload
 import 'package:axon_ivy/shared/widgets/bot_toast_helper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,6 +38,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
   }) async {
     final uploadFileBloc = context.read<UploadFileBloc>();
     return showDialog(
+      barrierColor: Colors.black.withOpacity(0.5),
       barrierDismissible: false,
       context: context,
       builder: (context) {
@@ -57,6 +59,11 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
           content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
             child: TextFormField(
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(
+                  RegExp(r'[a-zA-Z0-9äöüÄÖÜß]+'),
+                )
+              ],
               style: TextStyle(
                 color: Theme.of(context).colorScheme.secondary,
               ),
@@ -162,6 +169,107 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
     );
   }
 
+  showConfirmDialog({
+    Function()? onCancel,
+    required String? title,
+    String? confirmTitle,
+    Function()? onConfirm,
+    bool barrierDismissible = false,
+    bool needShowCancel = false,
+  }) {
+    showDialog(
+      barrierColor: Colors.black.withOpacity(0.5),
+      context: context,
+      barrierDismissible: barrierDismissible,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0.r))),
+          elevation: 0,
+          backgroundColor: Theme.of(context).colorScheme.background,
+          title: Text(
+            title ?? "",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.inter(
+              color: Theme.of(context).colorScheme.surface,
+              fontSize: 17.sp,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          actions: [
+            SizedBox(
+              height: 44.h,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        elevation: const MaterialStatePropertyAll(0.0),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        foregroundColor: MaterialStatePropertyAll(
+                          Theme.of(context).colorScheme.primary,
+                        ),
+                        backgroundColor: MaterialStatePropertyAll(
+                          Theme.of(context).colorScheme.primaryContainer,
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        "dialog.cancel".tr(),
+                        style: GoogleFonts.inter(
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                  20.horizontalSpace,
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        elevation: const MaterialStatePropertyAll(0.0),
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                        foregroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).colorScheme.background),
+                        backgroundColor:
+                            const MaterialStatePropertyAll(Color(0xFFEE4A52)),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        onConfirm?.call();
+                      },
+                      child: Text(
+                        'Delete',
+                        style: GoogleFonts.inter(
+                          color: Theme.of(context).colorScheme.background,
+                          fontSize: 17.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
   showMessageDialog({
     required String message,
     Function()? onCancel,
@@ -172,6 +280,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
     bool needShowCancel = false,
   }) {
     showDialog(
+      barrierColor: Colors.black.withOpacity(0.5),
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {

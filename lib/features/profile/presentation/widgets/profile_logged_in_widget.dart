@@ -78,7 +78,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
         elevation: 0,
       ),
       child: SizedBox(
-        width: double.infinity,
+        height: 44.h,
         child: Center(
           child: Text(
             'profile.signOut'.tr(),
@@ -99,7 +99,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
       children: [
         CachedNetworkImage(
           imageBuilder: (context, imageProvider) => Container(
-            width: 60.0.w,
+            width: 60.0.h,
             height: 60.0.h,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
@@ -187,10 +187,12 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                     fontWeight: FontWeight.w400),
               ),
               AppAssets.icons.chevronRight.svg(
+                  width: 21.h,
+                  height: 21.h,
                   colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.primary,
-                BlendMode.srcIn,
-              ))
+                    Theme.of(context).colorScheme.primary,
+                    BlendMode.srcIn,
+                  ))
             ],
           )
         ],
@@ -266,7 +268,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 "profile.darkMode".tr(),
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400,
-                  fontSize: 17,
+                  fontSize: 17.sp,
                   color: Theme.of(context).colorScheme.surface,
                 ),
               ),

@@ -66,70 +66,66 @@ class _AppTextFieldState extends State<AppTextField> {
         isFocus = value;
         setState(() {});
       },
-      child: TextFormField(
-        autovalidateMode: widget.autovalidateMode,
-        textAlignVertical: TextAlignVertical.center,
-        textInputAction: widget.textInputAction,
-        focusNode: widget.focusNode,
-        obscureText: widget.obscureText ?? false,
-        readOnly: widget.readOnly ?? false,
-        controller: widget.controller,
-        keyboardType: widget.keyboardType,
-        autofocus: widget.autofocus ?? false,
-        style: GoogleFonts.inter(
-            fontSize: 17.sp,
-            fontWeight: FontWeight.w400,
-            color: Theme.of(context).colorScheme.surface),
-        validator: widget.validator,
-        inputFormatters: widget.inputFormatters,
-        onTap: widget.onTap,
-        onChanged: (value) {
-          setState(() {});
-          widget.onChanged?.call(value);
-        },
-        onEditingComplete: widget.onEditingComplete ??
-            () {
-              isFocus = false;
-              FocusScope.of(context).unfocus();
-              setState(() {});
-            },
-        decoration: InputDecoration(
-            contentPadding: const EdgeInsets.symmetric(vertical: 16.0).r,
-            filled: true,
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(
-                  color: Theme.of(context).colorScheme.outline, width: 2.0.w),
-              borderRadius: BorderRadius.all(
-                const Radius.circular(10).r,
+      child: SizedBox(
+        height: 44.h,
+        child: TextFormField(
+          autovalidateMode: widget.autovalidateMode,
+          textAlignVertical: TextAlignVertical.center,
+          textInputAction: widget.textInputAction,
+          focusNode: widget.focusNode,
+          obscureText: widget.obscureText ?? false,
+          readOnly: widget.readOnly ?? false,
+          controller: widget.controller,
+          keyboardType: widget.keyboardType,
+          autofocus: widget.autofocus ?? false,
+          style: GoogleFonts.inter(
+              fontSize: 17.sp,
+              fontWeight: FontWeight.w400,
+              color: Theme.of(context).colorScheme.surface),
+          validator: widget.validator,
+          inputFormatters: widget.inputFormatters,
+          onTap: widget.onTap,
+          onChanged: (value) {
+            setState(() {});
+            widget.onChanged?.call(value);
+          },
+          onEditingComplete: widget.onEditingComplete ??
+              () {
+                isFocus = false;
+                FocusScope.of(context).unfocus();
+                setState(() {});
+              },
+          decoration: InputDecoration(
+              contentPadding: const EdgeInsets.only(right: 16.0).r,
+              filled: true,
+              focusedBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.outline),
+                borderRadius: BorderRadius.all(
+                  const Radius.circular(8).r,
+                ),
               ),
-            ),
-            fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
-            hintText: widget.hintText,
-            hintStyle: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(color: Theme.of(context).colorScheme.secondary),
-            suffixIcon: widget.prefix != null
-                ? Padding(
-                    padding: const EdgeInsets.fromLTRB(14, 14, 7, 14).r,
-                    child: widget.suffix,
-                  )
-                : _clearButton(),
-            prefixIcon: widget.prefix != null
-                ? Padding(
-                    padding: const EdgeInsets.fromLTRB(14, 14, 7, 14).r,
-                    child: widget.prefix,
-                  )
-                : null,
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(8.0),
-              borderSide: const BorderSide(color: Colors.red, width: 1.2),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide:
-                  BorderSide(color: Theme.of(context).colorScheme.outline),
-              borderRadius: BorderRadius.all(const Radius.circular(10).r),
-            )),
+              fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
+              hintText: widget.hintText,
+              hintStyle: GoogleFonts.inter(
+                color: Theme.of(context).colorScheme.secondary,
+                fontWeight: FontWeight.w400,
+                fontSize: 17.sp,
+              ),
+              suffixIcon:
+                  widget.prefix != null ? widget.suffix : _clearButton(),
+              prefixIconConstraints: BoxConstraints(minWidth: 40.w),
+              prefixIcon: widget.prefix,
+              errorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(color: Colors.red, width: 1.2),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: Theme.of(context).colorScheme.outline),
+                borderRadius: BorderRadius.all(const Radius.circular(8).r),
+              )),
+        ),
       ),
     );
   }

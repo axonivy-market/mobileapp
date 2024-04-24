@@ -138,247 +138,251 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
             },
           ),
         ],
-        child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
-          appBar: AppBar(
-            scrolledUnderElevation: 15,
-            elevation: 0,
-            shadowColor: Colors.black.withOpacity(0.3),
-            surfaceTintColor: Theme.of(context).colorScheme.background,
+        child: PopScope(
+          canPop: false,
+          onPopInvoked: (didPop) async {
+            if (didPop) {
+              return;
+            }
+            Navigator.of(context).pop(shouldFetchTaskList);
+          },
+          child: Scaffold(
             backgroundColor: Theme.of(context).colorScheme.background,
-            title: Text(
-              "documentList.title".tr(),
-              style:
-                  TextStyle(color: Theme.of(context).colorScheme.onBackground),
-            ),
-            leading: BackButtonWidget(
-              shouldFetch: shouldFetchTaskList,
-            ),
-            leadingWidth: 100.w,
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 5).r,
-                child: PopupMenuButton<UploadFileType>(
-                  elevation: 10,
-                  shadowColor: Colors.black.withOpacity(0.3),
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
-                  position: PopupMenuPosition.under,
-                  surfaceTintColor:
-                      Theme.of(context).colorScheme.onPrimaryContainer,
-                  shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.all(const Radius.circular(10.0).r),
-                  ),
-                  onSelected: (value) {
-                    switch (value) {
-                      case UploadFileType.recent:
-                        _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                            widget.task.caseTask!.id, UploadFileType.recent));
-                      case UploadFileType.images:
-                        _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                            widget.task.caseTask!.id, UploadFileType.images));
-                      case UploadFileType.camera:
-                        _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                            widget.task.caseTask!.id, UploadFileType.camera));
-                    }
-                  },
-                  itemBuilder: (BuildContext context) {
-                    return [
-                      PopupMenuItem(
-                        value: UploadFileType.recent,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            AppAssets.icons.iconFile.svg(
-                              colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            5.horizontalSpace,
-                            Expanded(
-                              child: Text(
-                                "documentList.attachFile".tr(),
-                                style: GoogleFonts.inter(
-                                  textStyle: TextStyle(
-                                    fontSize: 17.sp,
-                                    color:
-                                        Theme.of(context).colorScheme.surface,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem(
-                        value: UploadFileType.images,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            AppAssets.icons.iconImage.svg(
-                              colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            5.horizontalSpace,
-                            Expanded(
-                              child: Text(
-                                "documentList.attachPicture".tr(),
-                                style: GoogleFonts.inter(
-                                  textStyle: TextStyle(
-                                    fontSize: 17.sp,
-                                    color:
-                                        Theme.of(context).colorScheme.surface,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      PopupMenuItem(
-                        value: UploadFileType.camera,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            AppAssets.icons.iconCamera.svg(
-                              colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
-                                BlendMode.srcIn,
-                              ),
-                            ),
-                            5.horizontalSpace,
-                            Expanded(
-                              child: Text(
-                                "documentList.takePicture".tr(),
-                                style: GoogleFonts.inter(
-                                  textStyle: TextStyle(
-                                    fontSize: 17.sp,
-                                    color:
-                                        Theme.of(context).colorScheme.surface,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ];
-                  },
-                  icon: AppAssets.icons.iconAddAttachment.svg(
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.surface,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                ),
+            appBar: AppBar(
+              scrolledUnderElevation: 0,
+              backgroundColor: Theme.of(context).colorScheme.background,
+              title: Text(
+                "documentList.title".tr(),
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground),
               ),
-            ],
-          ),
-          body: BlocBuilder<TaskDetailBloc, TaskDetailState>(
-            builder: (context, state) {
-              if (state is TaskDetailSuccessState) {
-                task = state.task;
-                documents = task.caseTask?.documents.reversed.toList() ?? [];
-              }
-              return documents.isNotEmpty
-                  ? SlidableAutoCloseBehavior(
-                      child: ListView.separated(
-                        itemCount: documents.length,
-                        itemBuilder: (context, index) {
-                          return Slidable(
-                            key: ValueKey(index),
-                            endActionPane: ActionPane(
-                              extentRatio: 0.175,
-                              key: ValueKey(index),
-                              motion: const ScrollMotion(),
-                              children: [
-                                CustomSlidableAction(
-                                  autoClose: true,
-                                  padding: EdgeInsets.zero,
-                                  onPressed: (context) {
-                                    _deleteFileBloc.add(
-                                      DeleteFileEvent.deleteFile(
-                                        task.caseTask!.id,
-                                        documents[index].id,
-                                      ),
-                                    );
-                                  },
-                                  backgroundColor: const Color(0xFFEE4A52),
-                                  foregroundColor: Colors.white,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      AppAssets.icons.iconDelete.svg(),
-                                      Text(
-                                        "documentList.delete".tr(),
-                                        style: TextStyle(fontSize: 13.sp),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                            child: AppListTile(
-                              textColor: Theme.of(context).colorScheme.surface,
-                              contentPadding: const EdgeInsets.symmetric(
-                                      horizontal: 15, vertical: 0)
-                                  .r,
-                              onTap: () {
-                                _downloadFileBloc.add(
-                                  DownloadFileEvent.downloadFile(
-                                    documents[index].name,
-                                    documents[index].url,
-                                  ),
-                                );
-                              },
-                              leading: documents[index].name.isContainImage
-                                  ? AppAssets.icons.iconImage.svg(
-                                      colorFilter: ColorFilter.mode(
-                                        Theme.of(context)
-                                            .colorScheme
-                                            .onBackground,
-                                        BlendMode.srcIn,
-                                      ),
-                                    )
-                                  : AppAssets.icons.iconFile.svg(
-                                      colorFilter: ColorFilter.mode(
-                                        Theme.of(context).colorScheme.surface,
-                                        BlendMode.srcIn,
-                                      ),
-                                    ),
-                              title: Text(
-                                documents[index].name,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              trailing: AppAssets.icons.chevronRight.svg(
+              leading: BackButtonWidget(
+                shouldFetch: shouldFetchTaskList,
+              ),
+              leadingWidth: 100.w,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 5).r,
+                  child: PopupMenuButton<UploadFileType>(
+                    elevation: 10,
+                    shadowColor: Colors.black.withOpacity(0.3),
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    position: PopupMenuPosition.under,
+                    surfaceTintColor:
+                        Theme.of(context).colorScheme.onPrimaryContainer,
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.all(const Radius.circular(10.0).r)),
+                    onSelected: (value) {
+                      switch (value) {
+                        case UploadFileType.recent:
+                          _uploadFileBloc.add(UploadFileEvent.uploadFiles(
+                              widget.task.caseTask!.id, UploadFileType.recent));
+                        case UploadFileType.images:
+                          _uploadFileBloc.add(UploadFileEvent.uploadFiles(
+                              widget.task.caseTask!.id, UploadFileType.images));
+                        case UploadFileType.camera:
+                          _uploadFileBloc.add(UploadFileEvent.uploadFiles(
+                              widget.task.caseTask!.id, UploadFileType.camera));
+                      }
+                    },
+                    itemBuilder: (BuildContext context) {
+                      return [
+                        PopupMenuItem(
+                          value: UploadFileType.recent,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AppAssets.icons.iconFile.svg(
                                 colorFilter: ColorFilter.mode(
                                   Theme.of(context).colorScheme.surface,
                                   BlendMode.srcIn,
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) => Divider(
-                          height: 0,
-                          endIndent: 20.w,
-                          indent: 20.w,
-                          color: Colors.black.withOpacity(0.1),
+                              5.horizontalSpace,
+                              Expanded(
+                                child: Text(
+                                  "documentList.attachFile".tr(),
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      fontSize: 17.sp,
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    )
-                  : DataEmptyWidget(
-                      icon: AppAssets.images.iconPaperclipEmpty
-                          .image(width: 62.w, height: 65.h),
-                      message: "documentList.emptyList".tr(),
-                    );
-            },
+                        PopupMenuItem(
+                          value: UploadFileType.images,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AppAssets.icons.iconImage.svg(
+                                colorFilter: ColorFilter.mode(
+                                    Theme.of(context).colorScheme.surface,
+                                    BlendMode.srcIn),
+                              ),
+                              5.horizontalSpace,
+                              Expanded(
+                                child: Text(
+                                  "documentList.attachPicture".tr(),
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      fontSize: 17.sp,
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        PopupMenuItem(
+                          value: UploadFileType.camera,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AppAssets.icons.iconCamera.svg(
+                                colorFilter: ColorFilter.mode(
+                                    Theme.of(context).colorScheme.surface,
+                                    BlendMode.srcIn),
+                              ),
+                              5.horizontalSpace,
+                              Expanded(
+                                child: Text(
+                                  "documentList.takePicture".tr(),
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      fontSize: 17.sp,
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ];
+                    },
+                    icon: AppAssets.icons.iconAddAttachment.svg(
+                      colorFilter: ColorFilter.mode(
+                          Theme.of(context).colorScheme.surface,
+                          BlendMode.srcIn),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            body: BlocBuilder<TaskDetailBloc, TaskDetailState>(
+              builder: (context, state) {
+                if (state is TaskDetailSuccessState) {
+                  task = state.task;
+                  documents = task.caseTask?.documents.reversed.toList() ?? [];
+                }
+                return documents.isNotEmpty
+                    ? SlidableAutoCloseBehavior(
+                        child: ListView.separated(
+                          itemCount: documents.length,
+                          itemBuilder: (context, index) {
+                            return Slidable(
+                              key: ValueKey(index),
+                              endActionPane: ActionPane(
+                                extentRatio: 0.175,
+                                key: ValueKey(index),
+                                motion: const ScrollMotion(),
+                                children: [
+                                  CustomSlidableAction(
+                                    autoClose: true,
+                                    padding: EdgeInsets.zero,
+                                    onPressed: (context) {
+                                      showConfirmDialog(
+                                        title:
+                                            "Do you really want to delete this file?",
+                                        onConfirm: () => _deleteFileBloc.add(
+                                          DeleteFileEvent.deleteFile(
+                                              task.caseTask!.id,
+                                              documents[index].id),
+                                        ),
+                                      );
+                                    },
+                                    backgroundColor: const Color(0xFFEE4A52),
+                                    foregroundColor: Colors.white,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        AppAssets.icons.iconDelete.svg(),
+                                        Text(
+                                          "documentList.delete".tr(),
+                                          style: TextStyle(fontSize: 13.sp),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              child: AppListTile(
+                                textColor:
+                                    Theme.of(context).colorScheme.surface,
+                                contentPadding: const EdgeInsets.symmetric(
+                                        horizontal: 15, vertical: 0)
+                                    .r,
+                                onTap: () {
+                                  _downloadFileBloc.add(
+                                      DownloadFileEvent.downloadFile(
+                                          documents[index].name,
+                                          documents[index].url));
+                                },
+                                leading: documents[index].name.isContainImage
+                                    ? AppAssets.icons.iconImage.svg(
+                                        colorFilter: ColorFilter.mode(
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .onBackground,
+                                            BlendMode.srcIn),
+                                      )
+                                    : AppAssets.icons.iconFile.svg(
+                                        colorFilter: ColorFilter.mode(
+                                            Theme.of(context)
+                                                .colorScheme
+                                                .surface,
+                                            BlendMode.srcIn),
+                                      ),
+                                title: Text(
+                                  documents[index].name,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                trailing: AppAssets.icons.chevronRight.svg(
+                                  colorFilter: ColorFilter.mode(
+                                      Theme.of(context).colorScheme.surface,
+                                      BlendMode.srcIn),
+                                ),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (context, index) => Divider(
+                            height: 0,
+                            endIndent: 20.w,
+                            indent: 20.w,
+                            color: Colors.black.withOpacity(0.1),
+                          ),
+                        ),
+                      )
+                    : DataEmptyWidget(
+                        icon: AppAssets.images.iconPaperclipEmpty
+                            .image(width: 62.w, height: 65.h),
+                        message: "documentList.emptyList".tr(),
+                      );
+              },
+            ),
           ),
         ),
       ),
