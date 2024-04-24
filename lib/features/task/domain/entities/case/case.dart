@@ -21,12 +21,4 @@ class CaseTask with _$CaseTask {
 
   factory CaseTask.fromJson(Map<String, dynamic> json) =>
       _$CaseTaskFromJson(json);
-
-  List<Document> get availableDocuments {
-    return documents
-        .where((element) =>
-            element.fileLocalState !=
-            FileLocalStateEnum.kMarkedForDeletion.value)
-        .toList();
-  }
 }

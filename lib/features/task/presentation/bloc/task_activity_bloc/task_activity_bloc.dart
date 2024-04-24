@@ -10,7 +10,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/app/app.dart';
-import '../../../data/datasources/task_local_data_source.dart';
+import '../../../data/datasources/hive_task_storage.dart';
 
 part 'task_activity_event.dart';
 

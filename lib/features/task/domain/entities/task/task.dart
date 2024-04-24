@@ -9,8 +9,7 @@ part 'task.g.dart';
 
 @freezed
 @HiveType(typeId: 0)
-class TaskIvy
-    with _$TaskIvy {
+class TaskIvy with _$TaskIvy {
   const TaskIvy._();
 
   const factory TaskIvy({

@@ -1,5 +1,5 @@
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
-import 'package:axon_ivy/features/task/data/datasources/task_local_data_source.dart';
+import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/domain/usecases/get_task_use_case.dart';
 import 'package:flutter/foundation.dart';

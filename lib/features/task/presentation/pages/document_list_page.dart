@@ -42,6 +42,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
     _taskDetailBloc = getIt<TaskDetailBloc>();
     _deleteFileBloc = getIt<DeleteFileBloc>();
     _downloadFileBloc = getIt<DownloadFileBloc>();
+    documents = widget.task.caseTask?.availableDocuments ?? [];
   }
 
   bool isUploadDuplicateFile(UploadSuccessState state, TaskIvy task) {
@@ -60,8 +61,6 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
   @override
   Widget build(BuildContext context) {
     TaskIvy task = widget.task;
-    documents =
-        widget.task.caseTask?.availableDocuments.reversed.toList() ?? [];
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => _uploadFileBloc),
@@ -296,8 +295,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
               builder: (context, state) {
                 if (state is TaskDetailSuccessState) {
                   task = state.task;
-                  documents =
-                      task.caseTask?.availableDocuments.reversed.toList() ?? [];
+                  documents = task.caseTask?.availableDocuments ?? [];
                 }
                 return documents.isNotEmpty
                     ? SlidableAutoCloseBehavior(

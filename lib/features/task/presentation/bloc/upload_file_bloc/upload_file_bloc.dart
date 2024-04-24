@@ -7,7 +7,7 @@ import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/util/resources/constants.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/data/models/enums/file_local_state_enum.dart';
-import 'package:axon_ivy/features/task/data/datasources/task_local_data_source.dart';
+import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/domain/repositories/file_repository_interface.dart';
@@ -132,11 +132,6 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
             .tr(namedArgs: {'fileName': platformFile.name});
         emit(UploadErrorState(uploadMessage));
       }
-      // if (uploadMessage.contains("successfully")) {
-      //   emit(UploadFileState.success(uploadMessage, platformFile.name));
-      // } else {
-      //   emit(UploadErrorState(uploadMessage));
-      // }
     } else {
       return;
     }
@@ -148,6 +143,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     required Emitter emit,
     required String fileName,
   }) async {
+    Uint8List bytes = await file.readAsBytes();
     try {
       FormData data = FormData.fromMap(
         {
@@ -169,7 +165,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
         (l) {
           if (taskIvy?.offline == true) {
             add(UploadFileEvent.cacheFileOfflineEvent(
-                file, fileName, FileLocalStateEnum.kPendingUpload.value));
+                bytes, fileName, FileLocalStateEnum.kPendingUpload.value));
           } else {
             uploadMessage =
                 "uploadFile.failUpload".tr(namedArgs: {'fileName': fileName});
@@ -177,19 +173,21 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
           }
         },
         (r) {
+          Document document = Document(
+            id: DateTime.now().millisecondsSinceEpoch,
+            name: fileName,
+            fileLocalState: FileLocalStateEnum.kNew.value,
+            fileLocalData: bytes.toList(),
+          );
+          _hiveTaskStorage.addDocument(taskIvy!.id, document);
           uploadMessage = r.message;
-          if (taskIvy?.offline == true) {
-            add(UploadFileEvent.cacheFileOfflineEvent(
-                file, fileName, FileLocalStateEnum.kNew.value));
-          } else {
-            emit(UploadFileState.success(uploadMessage, fileName));
-          }
+          emit(UploadFileState.success(uploadMessage, fileName));
         },
       );
     } catch (e) {
       if (taskIvy?.offline == true) {
         add(UploadFileEvent.cacheFileOfflineEvent(
-            file, fileName, FileLocalStateEnum.kPendingUpload.value));
+            bytes, fileName, FileLocalStateEnum.kPendingUpload.value));
       } else {
         uploadMessage =
             "uploadFile.failUpload".tr(namedArgs: {'fileName': fileName});
@@ -211,7 +209,6 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       if (platformFile.size < maxFileSize) {
         // 10MB
         File fileUpload = File(platformFile.path!);
-
         await uploadFiles(
             caseId: caseId,
             file: fileUpload,
@@ -222,12 +219,6 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
             .tr(namedArgs: {'fileName': platformFile.name});
         emit(UploadErrorState(uploadMessage));
       }
-
-      // if (uploadMessage.contains("successfully")) {
-      //   emit(UploadFileState.success(uploadMessage, fileName));
-      // } else {
-      //   emit(UploadErrorState(uploadMessage));
-      // }
     } else {
       return;
     }
@@ -261,16 +252,21 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   }
 
   Future _cacheFileOffline(CacheFileOfflineEvent event, Emitter emit) async {
-    Uint8List bytes = await event.file.readAsBytes();
-    Document document = Document(
-      id: DateTime.now().millisecondsSinceEpoch,
-      name: event.fileName,
-      fileLocalState: event.fileState,
-      fileLocalData: bytes.toList(),
-    );
-    _hiveTaskStorage.addDocument(taskIvy!.id, document);
-    uploadMessage = "uploadFile.savedFileOfflineSuccess"
-        .tr(namedArgs: {'fileName': event.fileName});
-    emit(UploadFileState.success(uploadMessage, event.fileName));
+    try {
+      Document document = Document(
+        id: DateTime.now().millisecondsSinceEpoch,
+        name: event.fileName,
+        fileLocalState: event.fileState,
+        fileLocalData: event.bytes.toList(),
+      );
+      _hiveTaskStorage.addDocument(taskIvy!.id, document);
+      uploadMessage = "uploadFile.savedFileOfflineSuccess"
+          .tr(namedArgs: {'fileName': event.fileName});
+      emit(UploadFileState.success(uploadMessage, event.fileName));
+    } catch (e) {
+      uploadMessage =
+          "uploadFile.failUpload".tr(namedArgs: {'fileName': event.fileName});
+      emit(UploadErrorState(uploadMessage));
+    }
   }
 }

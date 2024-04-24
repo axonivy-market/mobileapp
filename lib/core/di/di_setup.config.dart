@@ -50,8 +50,7 @@ import '../../features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart'
 import '../../features/tabbar/bloc/tabbar_cubit.dart' as _i21;
 import '../../features/task/data/datasources/file_remote_data_source/file_remote_data_source.dart'
     as _i7;
-import '../../features/task/data/datasources/task_local_data_source.dart'
-    as _i11;
+import '../../features/task/data/datasources/hive_task_storage.dart' as _i11;
 import '../../features/task/data/datasources/task_remote_data_source/task_remote_data_source.dart'
     as _i23;
 import '../../features/task/data/repositories/file_repository_implement.dart'

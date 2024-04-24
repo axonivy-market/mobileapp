@@ -20,7 +20,7 @@ mixin _$UploadFileEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(TaskIvy taskIvy, UploadFileType type) uploadFiles,
     required TResult Function(String fileName) changeFileName,
-    required TResult Function(File file, String fileName, int fileState)
+    required TResult Function(Uint8List bytes, String fileName, int fileState)
         cacheFileOfflineEvent,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$UploadFileEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
     TResult? Function(String fileName)? changeFileName,
-    TResult? Function(File file, String fileName, int fileState)?
+    TResult? Function(Uint8List bytes, String fileName, int fileState)?
         cacheFileOfflineEvent,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$UploadFileEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
     TResult Function(String fileName)? changeFileName,
-    TResult Function(File file, String fileName, int fileState)?
+    TResult Function(Uint8List bytes, String fileName, int fileState)?
         cacheFileOfflineEvent,
     required TResult orElse(),
   }) =>
@@ -177,7 +177,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   TResult when<TResult extends Object?>({
     required TResult Function(TaskIvy taskIvy, UploadFileType type) uploadFiles,
     required TResult Function(String fileName) changeFileName,
-    required TResult Function(File file, String fileName, int fileState)
+    required TResult Function(Uint8List bytes, String fileName, int fileState)
         cacheFileOfflineEvent,
   }) {
     return uploadFiles(taskIvy, type);
@@ -188,7 +188,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
     TResult? Function(String fileName)? changeFileName,
-    TResult? Function(File file, String fileName, int fileState)?
+    TResult? Function(Uint8List bytes, String fileName, int fileState)?
         cacheFileOfflineEvent,
   }) {
     return uploadFiles?.call(taskIvy, type);
@@ -199,7 +199,7 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
     TResult Function(String fileName)? changeFileName,
-    TResult Function(File file, String fileName, int fileState)?
+    TResult Function(Uint8List bytes, String fileName, int fileState)?
         cacheFileOfflineEvent,
     required TResult orElse(),
   }) {
@@ -334,7 +334,7 @@ class _$ChangeFileNameImpl
   TResult when<TResult extends Object?>({
     required TResult Function(TaskIvy taskIvy, UploadFileType type) uploadFiles,
     required TResult Function(String fileName) changeFileName,
-    required TResult Function(File file, String fileName, int fileState)
+    required TResult Function(Uint8List bytes, String fileName, int fileState)
         cacheFileOfflineEvent,
   }) {
     return changeFileName(fileName);
@@ -345,7 +345,7 @@ class _$ChangeFileNameImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
     TResult? Function(String fileName)? changeFileName,
-    TResult? Function(File file, String fileName, int fileState)?
+    TResult? Function(Uint8List bytes, String fileName, int fileState)?
         cacheFileOfflineEvent,
   }) {
     return changeFileName?.call(fileName);
@@ -356,7 +356,7 @@ class _$ChangeFileNameImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
     TResult Function(String fileName)? changeFileName,
-    TResult Function(File file, String fileName, int fileState)?
+    TResult Function(Uint8List bytes, String fileName, int fileState)?
         cacheFileOfflineEvent,
     required TResult orElse(),
   }) {
@@ -418,7 +418,7 @@ abstract class _$$CacheFileOfflineEventImplCopyWith<$Res> {
           $Res Function(_$CacheFileOfflineEventImpl) then) =
       __$$CacheFileOfflineEventImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({File file, String fileName, int fileState});
+  $Res call({Uint8List bytes, String fileName, int fileState});
 }
 
 /// @nodoc
@@ -432,15 +432,15 @@ class __$$CacheFileOfflineEventImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? file = null,
+    Object? bytes = null,
     Object? fileName = null,
     Object? fileState = null,
   }) {
     return _then(_$CacheFileOfflineEventImpl(
-      null == file
-          ? _value.file
-          : file // ignore: cast_nullable_to_non_nullable
-              as File,
+      null == bytes
+          ? _value.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
       null == fileName
           ? _value.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
@@ -458,10 +458,10 @@ class __$$CacheFileOfflineEventImplCopyWithImpl<$Res>
 class _$CacheFileOfflineEventImpl
     with DiagnosticableTreeMixin
     implements CacheFileOfflineEvent {
-  const _$CacheFileOfflineEventImpl(this.file, this.fileName, this.fileState);
+  const _$CacheFileOfflineEventImpl(this.bytes, this.fileName, this.fileState);
 
   @override
-  final File file;
+  final Uint8List bytes;
   @override
   final String fileName;
   @override
@@ -469,7 +469,7 @@ class _$CacheFileOfflineEventImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadFileEvent.cacheFileOfflineEvent(file: $file, fileName: $fileName, fileState: $fileState)';
+    return 'UploadFileEvent.cacheFileOfflineEvent(bytes: $bytes, fileName: $fileName, fileState: $fileState)';
   }
 
   @override
@@ -478,7 +478,7 @@ class _$CacheFileOfflineEventImpl
     properties
       ..add(
           DiagnosticsProperty('type', 'UploadFileEvent.cacheFileOfflineEvent'))
-      ..add(DiagnosticsProperty('file', file))
+      ..add(DiagnosticsProperty('bytes', bytes))
       ..add(DiagnosticsProperty('fileName', fileName))
       ..add(DiagnosticsProperty('fileState', fileState));
   }
@@ -488,7 +488,7 @@ class _$CacheFileOfflineEventImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CacheFileOfflineEventImpl &&
-            (identical(other.file, file) || other.file == file) &&
+            const DeepCollectionEquality().equals(other.bytes, bytes) &&
             (identical(other.fileName, fileName) ||
                 other.fileName == fileName) &&
             (identical(other.fileState, fileState) ||
@@ -496,7 +496,8 @@ class _$CacheFileOfflineEventImpl
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, file, fileName, fileState);
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(bytes), fileName, fileState);
 
   @JsonKey(ignore: true)
   @override
@@ -510,10 +511,10 @@ class _$CacheFileOfflineEventImpl
   TResult when<TResult extends Object?>({
     required TResult Function(TaskIvy taskIvy, UploadFileType type) uploadFiles,
     required TResult Function(String fileName) changeFileName,
-    required TResult Function(File file, String fileName, int fileState)
+    required TResult Function(Uint8List bytes, String fileName, int fileState)
         cacheFileOfflineEvent,
   }) {
-    return cacheFileOfflineEvent(file, fileName, fileState);
+    return cacheFileOfflineEvent(bytes, fileName, fileState);
   }
 
   @override
@@ -521,10 +522,10 @@ class _$CacheFileOfflineEventImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
     TResult? Function(String fileName)? changeFileName,
-    TResult? Function(File file, String fileName, int fileState)?
+    TResult? Function(Uint8List bytes, String fileName, int fileState)?
         cacheFileOfflineEvent,
   }) {
-    return cacheFileOfflineEvent?.call(file, fileName, fileState);
+    return cacheFileOfflineEvent?.call(bytes, fileName, fileState);
   }
 
   @override
@@ -532,12 +533,12 @@ class _$CacheFileOfflineEventImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
     TResult Function(String fileName)? changeFileName,
-    TResult Function(File file, String fileName, int fileState)?
+    TResult Function(Uint8List bytes, String fileName, int fileState)?
         cacheFileOfflineEvent,
     required TResult orElse(),
   }) {
     if (cacheFileOfflineEvent != null) {
-      return cacheFileOfflineEvent(file, fileName, fileState);
+      return cacheFileOfflineEvent(bytes, fileName, fileState);
     }
     return orElse();
   }
@@ -580,10 +581,10 @@ class _$CacheFileOfflineEventImpl
 
 abstract class CacheFileOfflineEvent implements UploadFileEvent {
   const factory CacheFileOfflineEvent(
-          final File file, final String fileName, final int fileState) =
+          final Uint8List bytes, final String fileName, final int fileState) =
       _$CacheFileOfflineEventImpl;
 
-  File get file;
+  Uint8List get bytes;
   String get fileName;
   int get fileState;
   @JsonKey(ignore: true)

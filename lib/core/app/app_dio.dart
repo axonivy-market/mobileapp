@@ -20,18 +20,18 @@ class AppDio with DioMixin implements Dio {
       platform = 'iOS';
     }
     options = BaseOptions(
-      connectTimeout: const Duration(seconds: 50),
-      sendTimeout: const Duration(seconds: 50),
-      receiveTimeout: const Duration(seconds: 100),
+      connectTimeout: const Duration(seconds: 5),
+      sendTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 10),
       headers: {'X-Platform': platform, 'Accept-Language': 'en'},
       validateStatus: (status) {
         return status != null ? status < 500 : false;
       },
     );
     if (kDebugMode) {
-      interceptors.add(
-        PrettyDioLogger(requestBody: true),
-      );
+      // interceptors.add(
+      //   PrettyDioLogger(requestBody: true),
+      // );
     }
 
     interceptors.add(

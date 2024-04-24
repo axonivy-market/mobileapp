@@ -95,7 +95,7 @@ class ProcessesView extends StatelessWidget {
           message: 'process.emptyList',
           icon: AppAssets.icons.processEmpty.svg(
               colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.onTertiaryContainer,
+                  Theme.of(context).colorScheme.tertiaryContainer,
                   BlendMode.srcIn)),
         ),
       );

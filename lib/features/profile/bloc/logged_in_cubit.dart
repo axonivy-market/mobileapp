@@ -6,7 +6,7 @@ import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
-import 'package:axon_ivy/features/task/data/datasources/task_local_data_source.dart';
+import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

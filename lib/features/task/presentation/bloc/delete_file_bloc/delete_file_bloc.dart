@@ -6,7 +6,7 @@ import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/util/resources/constants.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/data/models/enums/file_local_state_enum.dart';
-import 'package:axon_ivy/features/task/data/datasources/task_local_data_source.dart';
+import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/usecases/delete_file_use_case.dart';
 import 'package:dio/dio.dart';

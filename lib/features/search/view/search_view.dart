@@ -83,7 +83,7 @@ class _SearchViewState extends State<SearchView> {
                             Padding(
                               padding: EdgeInsets.only(top: 62.h),
                               child: Container(
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.background,
                                 child: DataEmptyWidget(
                                   message: state.emptyMessage!.tr(),
                                   icon: AppAssets.icons.icSearchNotFound.svg(

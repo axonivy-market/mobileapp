@@ -5,7 +5,7 @@ import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/extensions.dart';
 import 'package:axon_ivy/data/models/enums/file_local_state_enum.dart';
-import 'package:axon_ivy/features/task/data/datasources/task_local_data_source.dart';
+import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
 import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
 import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';

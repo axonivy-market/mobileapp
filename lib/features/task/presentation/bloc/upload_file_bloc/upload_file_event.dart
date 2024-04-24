@@ -9,5 +9,5 @@ class UploadFileEvent with _$UploadFileEvent {
       _ChangeFileName;
 
   const factory UploadFileEvent.cacheFileOfflineEvent(
-      File file, String fileName, int fileState) = CacheFileOfflineEvent;
+      Uint8List bytes, String fileName, int fileState) = CacheFileOfflineEvent;
 }
