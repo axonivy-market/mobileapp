@@ -56,7 +56,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
           }
         },
         child: SizedBox(
-          height: 40.h,
+          height: 44.h,
           child: TextField(
             controller: _textController,
             style: GoogleFonts.inter(
@@ -73,7 +73,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
                 fontWeight: FontWeight.w400,
                 fontSize: 17.sp,
               ),
-              contentPadding: EdgeInsets.zero,
+              contentPadding: const EdgeInsets.only(right: 16.0).r,
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
                   color: Theme.of(context).colorScheme.outline,
@@ -88,6 +88,8 @@ class _SearchTextFieldState extends State<SearchTextField> {
               ),
               prefixIconConstraints: BoxConstraints(minWidth: 40.w),
               prefixIcon: AppAssets.icons.icSearchText.svg(
+                width: 21.h,
+                height: 21.h,
                 colorFilter: ColorFilter.mode(
                   Theme.of(context).colorScheme.secondary,
                   BlendMode.srcIn,
@@ -96,7 +98,10 @@ class _SearchTextFieldState extends State<SearchTextField> {
               suffixIcon: _showClearIcon
                   ? IconButton(
                       onPressed: _clearText,
-                      icon: AppAssets.icons.icClose.svg(),
+                      icon: AppAssets.icons.icClose.svg(
+                        width: 21.h,
+                        height: 21.h,
+                      ),
                     )
                   : null,
             ),

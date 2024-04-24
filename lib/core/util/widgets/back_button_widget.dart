@@ -6,8 +6,10 @@ import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BackButtonWidget extends StatelessWidget {
-  BackButtonWidget({super.key, this.shouldFetch = false});
-  bool shouldFetch;
+  const BackButtonWidget({super.key, this.shouldFetch = false});
+
+  final bool shouldFetch;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -20,6 +22,8 @@ class BackButtonWidget extends StatelessWidget {
           children: [
             12.horizontalSpace,
             AppAssets.icons.chevronLeft.svg(
+              width: 21.h,
+              height: 21.h,
               colorFilter: ColorFilter.mode(
                   Theme.of(context).colorScheme.primary, BlendMode.srcIn),
             ),
