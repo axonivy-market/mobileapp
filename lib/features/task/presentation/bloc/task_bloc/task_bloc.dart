@@ -325,7 +325,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       FormData data = FormData.fromMap(
         {
           "file": await MultipartFile.fromFile(
-            document.fileLocalPath,
+            document.fileUploadPath,
             filename: document.name,
           ),
         },
@@ -336,7 +336,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           requestBy: APIHeader.requestBy,
           data: data);
       upload.fold((l) => null, (r) {
-        File file = File(document.fileLocalPath);
+        File file = File(document.fileUploadPath);
         file.deleteSync(recursive: true);
         _hiveTaskStorage.updateDocumentByCase(caseId, r.document);
       });

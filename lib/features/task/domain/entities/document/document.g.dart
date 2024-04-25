@@ -22,7 +22,7 @@ class DocumentAdapter extends TypeAdapter<Document> {
       url: fields[2] as String,
       path: fields[3] as String,
       fileLocalState: fields[4] as int,
-      fileLocalPath: fields[5] as String,
+      fileUploadPath: fields[5] as String,
     );
   }
 
@@ -41,7 +41,7 @@ class DocumentAdapter extends TypeAdapter<Document> {
       ..writeByte(4)
       ..write(obj.fileLocalState)
       ..writeByte(5)
-      ..write(obj.fileLocalPath);
+      ..write(obj.fileUploadPath);
   }
 
   @override
@@ -66,7 +66,7 @@ _$DocumentImpl _$$DocumentImplFromJson(Map<String, dynamic> json) =>
       url: json['url'] as String? ?? "",
       path: json['path'] as String? ?? "",
       fileLocalState: json['fileLocalState'] as int? ?? 0,
-      fileLocalPath: json['fileLocalPath'] as String? ?? "",
+      fileUploadPath: json['fileUploadPath'] as String? ?? "",
     );
 
 Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
@@ -76,5 +76,5 @@ Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
       'url': instance.url,
       'path': instance.path,
       'fileLocalState': instance.fileLocalState,
-      'fileLocalPath': instance.fileLocalPath,
+      'fileUploadPath': instance.fileUploadPath,
     };

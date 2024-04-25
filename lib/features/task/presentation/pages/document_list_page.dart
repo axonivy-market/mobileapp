@@ -384,7 +384,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                             height: 0,
                             endIndent: 20.w,
                             indent: 20.w,
-                            color: Colors.black.withOpacity(0.1),
+                            color: Theme.of(context).dividerTheme.color,
                           ),
                         ),
                       )

@@ -123,8 +123,8 @@ class HiveTaskStorage {
       var documents = task.caseTask?.documents.toList() ?? [];
       int idx = documents.indexWhere((element) => element.name == documentName);
       if (idx != -1) {
-        if (documents[idx].fileLocalPath.isNotEmptyOrNull) {
-          File file = File(documents[idx].fileLocalPath);
+        if (documents[idx].fileUploadPath.isNotEmptyOrNull) {
+          File file = File(documents[idx].fileUploadPath);
           var isExists = await file.exists();
           if (isExists) {
             file.delete(recursive: true);

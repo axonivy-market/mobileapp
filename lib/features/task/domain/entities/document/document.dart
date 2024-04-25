@@ -14,7 +14,7 @@ class Document with _$Document {
     @HiveField(2) @Default("") String url,
     @HiveField(3) @Default("") String path,
     @HiveField(4) @Default(0) int fileLocalState,
-    @HiveField(5) @Default("") String fileLocalPath,
+    @HiveField(5) @Default("") String fileUploadPath,
   }) = _Document;
 
   factory Document.fromJson(Map<String, dynamic> json) =>

@@ -263,7 +263,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
         id: DateTime.now().millisecondsSinceEpoch,
         name: event.fileName,
         fileLocalState: event.fileState,
-        fileLocalPath: filePath,
+        fileUploadPath: filePath,
       );
 
       _hiveTaskStorage.addDocument(taskIvy!.id, document);
