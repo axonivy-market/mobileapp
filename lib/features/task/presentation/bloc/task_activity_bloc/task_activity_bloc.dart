@@ -5,6 +5,7 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -41,21 +42,23 @@ class TaskActivityBloc extends Bloc<TaskActivityEvent, TaskActivityState> {
         taskIvy.submitUrlOffline!,
         data: taskIvy.doneTaskFormDataSerializedOffline,
       );
-      String finishedTask =
-          response.headers.map[Constants.ivyFinishedTask]?.first ?? "";
-      String currentRunningTask =
-          response.headers.map[Constants.ivyCurrentRunningTask]?.first ?? "";
-      var isFinishedTask =
-          finishedTask.isNotEmpty && currentRunningTask.isEmpty;
-      if (isFinishedTask) {
-        _hiveTaskStorage.removeTask(taskIvy.id);
-        emit(FinishedTaskOffline(taskIvy));
-      } else {
-        var task = taskIvy.copyWith(state: TaskStateEnum.doneInOffline.value);
-        _hiveTaskStorage.addTask(task);
-        emit(FinishedTaskOffline(task));
-      }
+      _finishTask(emit, response.headers, taskIvy);
+    } on DioException catch (e) {
+      _finishTask(emit, e.response?.headers, taskIvy);
     } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  void _finishTask(Emitter emit, Headers? headers, TaskIvy taskIvy) {
+    String finishedTask = headers?.map[Constants.ivyFinishedTask]?.first ?? "";
+    String currentRunningTask =
+        headers?.map[Constants.ivyCurrentRunningTask]?.first ?? "";
+    var isFinishedTask = finishedTask.isNotEmpty && currentRunningTask.isEmpty;
+    if (isFinishedTask) {
+      _hiveTaskStorage.removeTask(taskIvy.id);
+      emit(FinishedTaskOffline(taskIvy));
+    } else {
       var task = taskIvy.copyWith(state: TaskStateEnum.doneInOffline.value);
       _hiveTaskStorage.addTask(task);
       emit(FinishedTaskOffline(task));

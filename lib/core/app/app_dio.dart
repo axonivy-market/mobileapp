@@ -24,9 +24,6 @@ class AppDio with DioMixin implements Dio {
       sendTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 10),
       headers: {'X-Platform': platform, 'Accept-Language': 'en'},
-      validateStatus: (status) {
-        return status != null ? status < 500 : false;
-      },
     );
     if (kDebugMode) {
       interceptors.add(

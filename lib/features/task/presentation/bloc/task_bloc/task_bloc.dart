@@ -298,19 +298,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         taskIvy.submitUrlOffline!,
         data: taskIvy.doneTaskFormDataSerializedOffline,
       );
-      String finishedTask =
-          response.headers.map[Constants.ivyFinishedTask]?.first ?? "";
-      String currentRunningTask =
-          response.headers.map[Constants.ivyCurrentRunningTask]?.first ?? "";
-      var isFinishedTask =
-          finishedTask.isNotEmpty && currentRunningTask.isEmpty;
-      if (isFinishedTask) {
-        // remove task local after it sync done
-        _hiveTaskStorage.removeTask(taskIvy.id);
-        // remove tasks server current
-        var taskDoneIdx = tasks.indexWhere((task) => task.id == taskIvy.id);
-        tasks.removeAt(taskDoneIdx);
-      }
+      _finishTask(response.headers, taskIvy);
+    } on DioException catch (e) {
+      _finishTask(e.response?.headers, taskIvy);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -397,6 +387,20 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         }
         _hiveTaskStorage.addTask(serverTasksOffline[i]);
       }
+    }
+  }
+
+  void _finishTask(Headers? headers, TaskIvy taskIvy) {
+    String finishedTask = headers?.map[Constants.ivyFinishedTask]?.first ?? "";
+    String currentRunningTask =
+        headers?.map[Constants.ivyCurrentRunningTask]?.first ?? "";
+    var isFinishedTask = finishedTask.isNotEmpty && currentRunningTask.isEmpty;
+    if (isFinishedTask) {
+      // remove task local after it sync done
+      _hiveTaskStorage.removeTask(taskIvy.id);
+      // remove tasks server current
+      var taskDoneIdx = tasks.indexWhere((task) => task.id == taskIvy.id);
+      tasks.removeAt(taskDoneIdx);
     }
   }
 }
