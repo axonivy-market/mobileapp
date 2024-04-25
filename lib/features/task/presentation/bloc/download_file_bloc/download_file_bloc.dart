@@ -8,6 +8,7 @@ import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:external_path/external_path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -47,10 +48,26 @@ class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
         headers: {"Authorization": basicAuth},
       );
       if (response.statusCode == 200) {
-        Directory dir = await getApplicationDocumentsDirectory();
-        // Directory? dirDownload = await getDownloadsDirectory();
+        String path = "";
+        if (Platform.isAndroid) {
+          path = await ExternalPath.getExternalStoragePublicDirectory(
+              ExternalPath.DIRECTORY_DOWNLOADS);
+        } else if (Platform.isIOS) {
+          Directory dir = await getApplicationDocumentsDirectory();
+          path = dir.path;
+        } else {
+          emit(
+            DownloadFileState.error(
+              "downloadFile.failToDownload".tr(
+                namedArgs: {'fileName': event.fileName},
+              ),
+            ),
+          );
+          return;
+        }
+
         String fileName = event.fileName;
-        String filePath = '${dir.path}/$fileName';
+        String filePath = '$path/$fileName';
         File file = File(filePath);
         await file.writeAsBytes(response.bodyBytes);
 

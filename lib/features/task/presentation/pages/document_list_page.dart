@@ -322,36 +322,41 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                           itemBuilder: (context, index) {
                             return Slidable(
                               key: ValueKey(index),
+                              startActionPane: ActionPane(
+                                  extentRatio: 0.2,
+                                  motion: const ScrollMotion(),
+                                  children: [
+                                    CustomSlidableAction(
+                                      autoClose: true,
+                                      padding: EdgeInsets.zero,
+                                      onPressed: (context) {
+                                        _downloadFileBloc.add(
+                                          DownloadFileEvent.downloadFile(
+                                              documents[index].name,
+                                              documents[index].url),
+                                        );
+                                      },
+                                      backgroundColor:
+                                          Theme.of(context).primaryColor,
+                                      foregroundColor: Colors.white,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(Icons.download_outlined),
+                                          Text(
+                                            'documentList.download'.tr(),
+                                            style: TextStyle(fontSize: 13.sp),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ]),
                               endActionPane: ActionPane(
-                                extentRatio: 0.4,
+                                extentRatio: 0.2,
                                 key: ValueKey(index),
                                 motion: const ScrollMotion(),
                                 children: [
-                                  CustomSlidableAction(
-                                    autoClose: true,
-                                    padding: EdgeInsets.zero,
-                                    onPressed: (context) {
-                                      _downloadFileBloc.add(
-                                        DownloadFileEvent.downloadFile(
-                                            documents[index].name,
-                                            documents[index].url),
-                                      );
-                                    },
-                                    backgroundColor:
-                                        Theme.of(context).primaryColor,
-                                    foregroundColor: Colors.white,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(Icons.download_outlined),
-                                        Text(
-                                          'documentList.download'.tr(),
-                                          style: TextStyle(fontSize: 13.sp),
-                                        )
-                                      ],
-                                    ),
-                                  ),
                                   CustomSlidableAction(
                                     autoClose: true,
                                     padding: EdgeInsets.zero,

@@ -49,13 +49,9 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
 
   Future deletePreviewFile(Emitter emit) async {
     try {
-      Directory? dir;
-      if (defaultTargetPlatform == TargetPlatform.android) {
-        dir = await getApplicationCacheDirectory();
-      } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-        dir = await getApplicationDocumentsDirectory();
-      }
-      String cacheTempFolder = '${dir?.path}/$cacheFileName';
+      Directory dir = await getTemporaryDirectory();
+
+      String cacheTempFolder = '${dir.path}/$cacheFileName';
       Directory(cacheTempFolder).deleteSync(recursive: true);
     } catch (e) {
       debugPrint('$e');
@@ -76,14 +72,9 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
       );
 
       if (response.statusCode == 200) {
-        Directory? dir;
-        if (defaultTargetPlatform == TargetPlatform.android) {
-          dir = await getApplicationCacheDirectory();
-        } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-          dir = await getApplicationDocumentsDirectory();
-        }
+        Directory dir = await getTemporaryDirectory();
 
-        String cacheTempFolder = '${dir?.path}/$cacheFileName';
+        String cacheTempFolder = '${dir.path}/$cacheFileName';
         String filePath = '$cacheTempFolder/$fileName';
         await Directory(cacheTempFolder).create(recursive: true);
 
