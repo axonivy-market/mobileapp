@@ -269,7 +269,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           _uploadFile(caseTask.id, document);
         } else if (document.fileLocalState ==
             FileLocalStateEnum.kMarkedForDeletion.value) {
-          _deleteFile(caseTask.id, document.id);
+          _deleteFile(caseTask.id, document);
         }
       });
     }
@@ -324,8 +324,10 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     try {
       FormData data = FormData.fromMap(
         {
-          "file": MultipartFile.fromBytes(document.fileLocalData!,
-              filename: document.name),
+          "file": await MultipartFile.fromFile(
+            document.fileLocalPath,
+            filename: document.name,
+          ),
         },
       );
       final upload = await _uploadFileUseCase.execute(
@@ -334,27 +336,24 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           requestBy: APIHeader.requestBy,
           data: data);
       upload.fold((l) => null, (r) {
-        var documentUploaded = document.copyWith(
-            id: r.document.id,
-            url: r.document.url,
-            path: r.document.path,
-            fileLocalState: FileLocalStateEnum.kNew.value);
-        _hiveTaskStorage.updateDocumentByCase(caseId, documentUploaded);
+        File file = File(document.fileLocalPath);
+        file.deleteSync(recursive: true);
+        _hiveTaskStorage.updateDocumentByCase(caseId, r.document);
       });
     } catch (e) {
       debugPrint(e.toString());
     }
   }
 
-  Future _deleteFile(int caseId, int documentId) async {
+  Future _deleteFile(int caseId, Document document) async {
     try {
       final delete = await _deleteFileUseCase.execute(
         caseId,
-        documentId,
+        document.id,
         APIHeader.requestBy,
       );
       delete.fold((l) => null, (r) {
-        _hiveTaskStorage.deleteDocument(caseId, r.document.name);
+        _hiveTaskStorage.deleteDocument(caseId, document.name);
       });
     } catch (e) {
       debugPrint(e.toString());
@@ -370,7 +369,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         var serverDocuments =
             serverTasksOffline[i].caseTask?.documents.toList() ?? [];
         var localDocuments =
-            localTasksOffline[localTaskIdx].caseTask?.availableDocuments ?? [];
+            localTasksOffline[localTaskIdx].caseTask?.documents ?? [];
         for (int j = 0; j < localDocuments.length; j++) {
           final document = localDocuments[j];
           int serverDocumentIdx =
@@ -378,8 +377,8 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           if (serverDocumentIdx != -1) {
             serverDocuments[serverDocumentIdx] =
                 serverDocuments[serverDocumentIdx]
-                    .copyWith(fileLocalData: document.fileLocalData);
-          } else {
+                    .copyWith(fileLocalState: document.fileLocalState);
+          } else if (document.fileLocalState != FileLocalStateEnum.kNew.value) {
             serverDocuments.add(document);
           }
         }

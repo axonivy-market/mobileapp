@@ -29,9 +29,9 @@ class AppDio with DioMixin implements Dio {
       },
     );
     if (kDebugMode) {
-      // interceptors.add(
-      //   PrettyDioLogger(requestBody: true),
-      // );
+      interceptors.add(
+        PrettyDioLogger(requestBody: true),
+      );
     }
 
     interceptors.add(

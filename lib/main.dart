@@ -1,6 +1,7 @@
 import 'package:axon_ivy/app.dart';
 import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/core/extensions/hive_ext.dart';
 import 'package:axon_ivy/core/router/router.dart';
 import 'package:axon_ivy/core/utils/secure_storage.dart';
 import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
@@ -17,7 +18,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await AppConfig.loadEnv(Environment.prod);
   await DemoConfig.loadDemoConfig();
-  await Hive.initFlutter();
+  await Hive.initHiveFlutter();
   Hive.registerAdapter(TaskIvyAdapter());
   Hive.registerAdapter(CaseTaskAdapter());
   Hive.registerAdapter(DocumentAdapter());

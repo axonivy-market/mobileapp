@@ -28,6 +28,10 @@ class AppConfig {
     }
   }
 
+  static String get appName {
+    return _packageInfo?.appName ?? "axon_ivy";
+  }
+
   static String baseUrl = '';
 
   static Future<void> _checkEnv() async {

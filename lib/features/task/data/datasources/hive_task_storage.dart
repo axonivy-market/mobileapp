@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:axon_ivy/core/app/app.dart';
+import 'package:axon_ivy/core/extensions/extensions.dart';
 import 'package:axon_ivy/data/models/enums/file_local_state_enum.dart';
 import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
@@ -112,7 +115,7 @@ class HiveTaskStorage {
     }
   }
 
-  void deleteDocument(int caseId, String documentName) {
+  void deleteDocument(int caseId, String documentName) async {
     try {
       Box<TaskIvy> taskBox = Hive.box<TaskIvy>(Constants.taskBox);
       var task = taskBox.values
@@ -120,6 +123,13 @@ class HiveTaskStorage {
       var documents = task.caseTask?.documents.toList() ?? [];
       int idx = documents.indexWhere((element) => element.name == documentName);
       if (idx != -1) {
+        if (documents[idx].fileLocalPath.isNotEmptyOrNull) {
+          File file = File(documents[idx].fileLocalPath);
+          var isExists = await file.exists();
+          if (isExists) {
+            file.delete(recursive: true);
+          }
+        }
         documents.removeAt(idx);
       }
       var caseTask = task.caseTask?.copyWith(documents: documents);

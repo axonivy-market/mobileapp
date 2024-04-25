@@ -23,14 +23,13 @@ class DocumentAdapter extends TypeAdapter<Document> {
       path: fields[3] as String,
       fileLocalState: fields[4] as int,
       fileLocalPath: fields[5] as String,
-      fileLocalData: (fields[6] as List?)?.cast<int>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, Document obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(6)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -42,9 +41,7 @@ class DocumentAdapter extends TypeAdapter<Document> {
       ..writeByte(4)
       ..write(obj.fileLocalState)
       ..writeByte(5)
-      ..write(obj.fileLocalPath)
-      ..writeByte(6)
-      ..write(obj.fileLocalData);
+      ..write(obj.fileLocalPath);
   }
 
   @override
@@ -70,9 +67,6 @@ _$DocumentImpl _$$DocumentImplFromJson(Map<String, dynamic> json) =>
       path: json['path'] as String? ?? "",
       fileLocalState: json['fileLocalState'] as int? ?? 0,
       fileLocalPath: json['fileLocalPath'] as String? ?? "",
-      fileLocalData: (json['fileLocalData'] as List<dynamic>?)
-          ?.map((e) => e as int)
-          .toList(),
     );
 
 Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
@@ -83,5 +77,4 @@ Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
       'path': instance.path,
       'fileLocalState': instance.fileLocalState,
       'fileLocalPath': instance.fileLocalPath,
-      'fileLocalData': instance.fileLocalData,
     };

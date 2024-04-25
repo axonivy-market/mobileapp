@@ -20,6 +20,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
 import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 
 part 'upload_file_bloc.freezed.dart';
 
@@ -173,13 +174,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
           }
         },
         (r) {
-          Document document = Document(
-            id: DateTime.now().millisecondsSinceEpoch,
-            name: fileName,
-            fileLocalState: FileLocalStateEnum.kNew.value,
-            fileLocalData: bytes.toList(),
-          );
-          _hiveTaskStorage.addDocument(taskIvy!.id, document);
+          _hiveTaskStorage.addDocument(taskIvy!.id, r.document);
           uploadMessage = r.message;
           emit(UploadFileState.success(uploadMessage, fileName));
         },
@@ -253,12 +248,24 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
 
   Future _cacheFileOffline(CacheFileOfflineEvent event, Emitter emit) async {
     try {
+      Directory dir = await getApplicationSupportDirectory();
+
+      final subfolderDir = Directory(
+          "${dir.path}/${AppConfig.appName.replaceAll(' ', '_').toLowerCase()}");
+      bool isExists = await subfolderDir.exists();
+      if (!isExists) {
+        await subfolderDir.create(recursive: true);
+      }
+      String filePath = '${subfolderDir.path}/${event.fileName}';
+      File file = File(filePath);
+      await file.writeAsBytes(event.bytes);
       Document document = Document(
         id: DateTime.now().millisecondsSinceEpoch,
         name: event.fileName,
         fileLocalState: event.fileState,
-        fileLocalData: event.bytes.toList(),
+        fileLocalPath: filePath,
       );
+
       _hiveTaskStorage.addDocument(taskIvy!.id, document);
       uploadMessage = "uploadFile.savedFileOfflineSuccess"
           .tr(namedArgs: {'fileName': event.fileName});

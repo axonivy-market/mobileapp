@@ -32,8 +32,6 @@ mixin _$Document {
   int get fileLocalState => throw _privateConstructorUsedError;
   @HiveField(5)
   String get fileLocalPath => throw _privateConstructorUsedError;
-  @HiveField(6)
-  List<int>? get fileLocalData => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,8 +50,7 @@ abstract class $DocumentCopyWith<$Res> {
       @HiveField(2) String url,
       @HiveField(3) String path,
       @HiveField(4) int fileLocalState,
-      @HiveField(5) String fileLocalPath,
-      @HiveField(6) List<int>? fileLocalData});
+      @HiveField(5) String fileLocalPath});
 }
 
 /// @nodoc
@@ -75,7 +72,6 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
     Object? path = null,
     Object? fileLocalState = null,
     Object? fileLocalPath = null,
-    Object? fileLocalData = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -102,10 +98,6 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
           ? _value.fileLocalPath
           : fileLocalPath // ignore: cast_nullable_to_non_nullable
               as String,
-      fileLocalData: freezed == fileLocalData
-          ? _value.fileLocalData
-          : fileLocalData // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
     ) as $Val);
   }
 }
@@ -124,8 +116,7 @@ abstract class _$$DocumentImplCopyWith<$Res>
       @HiveField(2) String url,
       @HiveField(3) String path,
       @HiveField(4) int fileLocalState,
-      @HiveField(5) String fileLocalPath,
-      @HiveField(6) List<int>? fileLocalData});
+      @HiveField(5) String fileLocalPath});
 }
 
 /// @nodoc
@@ -145,7 +136,6 @@ class __$$DocumentImplCopyWithImpl<$Res>
     Object? path = null,
     Object? fileLocalState = null,
     Object? fileLocalPath = null,
-    Object? fileLocalData = freezed,
   }) {
     return _then(_$DocumentImpl(
       id: null == id
@@ -172,10 +162,6 @@ class __$$DocumentImplCopyWithImpl<$Res>
           ? _value.fileLocalPath
           : fileLocalPath // ignore: cast_nullable_to_non_nullable
               as String,
-      fileLocalData: freezed == fileLocalData
-          ? _value._fileLocalData
-          : fileLocalData // ignore: cast_nullable_to_non_nullable
-              as List<int>?,
     ));
   }
 }
@@ -189,9 +175,7 @@ class _$DocumentImpl implements _Document {
       @HiveField(2) this.url = "",
       @HiveField(3) this.path = "",
       @HiveField(4) this.fileLocalState = 0,
-      @HiveField(5) this.fileLocalPath = "",
-      @HiveField(6) final List<int>? fileLocalData})
-      : _fileLocalData = fileLocalData;
+      @HiveField(5) this.fileLocalPath = ""});
 
   factory _$DocumentImpl.fromJson(Map<String, dynamic> json) =>
       _$$DocumentImplFromJson(json);
@@ -219,20 +203,10 @@ class _$DocumentImpl implements _Document {
   @JsonKey()
   @HiveField(5)
   final String fileLocalPath;
-  final List<int>? _fileLocalData;
-  @override
-  @HiveField(6)
-  List<int>? get fileLocalData {
-    final value = _fileLocalData;
-    if (value == null) return null;
-    if (_fileLocalData is EqualUnmodifiableListView) return _fileLocalData;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
 
   @override
   String toString() {
-    return 'Document(id: $id, name: $name, url: $url, path: $path, fileLocalState: $fileLocalState, fileLocalPath: $fileLocalPath, fileLocalData: $fileLocalData)';
+    return 'Document(id: $id, name: $name, url: $url, path: $path, fileLocalState: $fileLocalState, fileLocalPath: $fileLocalPath)';
   }
 
   @override
@@ -247,22 +221,13 @@ class _$DocumentImpl implements _Document {
             (identical(other.fileLocalState, fileLocalState) ||
                 other.fileLocalState == fileLocalState) &&
             (identical(other.fileLocalPath, fileLocalPath) ||
-                other.fileLocalPath == fileLocalPath) &&
-            const DeepCollectionEquality()
-                .equals(other._fileLocalData, _fileLocalData));
+                other.fileLocalPath == fileLocalPath));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      url,
-      path,
-      fileLocalState,
-      fileLocalPath,
-      const DeepCollectionEquality().hash(_fileLocalData));
+      runtimeType, id, name, url, path, fileLocalState, fileLocalPath);
 
   @JsonKey(ignore: true)
   @override
@@ -285,8 +250,7 @@ abstract class _Document implements Document {
       @HiveField(2) final String url,
       @HiveField(3) final String path,
       @HiveField(4) final int fileLocalState,
-      @HiveField(5) final String fileLocalPath,
-      @HiveField(6) final List<int>? fileLocalData}) = _$DocumentImpl;
+      @HiveField(5) final String fileLocalPath}) = _$DocumentImpl;
 
   factory _Document.fromJson(Map<String, dynamic> json) =
       _$DocumentImpl.fromJson;
@@ -309,9 +273,6 @@ abstract class _Document implements Document {
   @override
   @HiveField(5)
   String get fileLocalPath;
-  @override
-  @HiveField(6)
-  List<int>? get fileLocalData;
   @override
   @JsonKey(ignore: true)
   _$$DocumentImplCopyWith<_$DocumentImpl> get copyWith =>

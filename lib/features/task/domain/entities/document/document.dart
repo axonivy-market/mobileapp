@@ -15,7 +15,6 @@ class Document with _$Document {
     @HiveField(3) @Default("") String path,
     @HiveField(4) @Default(0) int fileLocalState,
     @HiveField(5) @Default("") String fileLocalPath,
-    @HiveField(6) List<int>? fileLocalData,
   }) = _Document;
 
   factory Document.fromJson(Map<String, dynamic> json) =>

@@ -45,12 +45,20 @@ class DeleteFileBloc extends Bloc<DeleteFileEvent, DeleteFileState> {
   Future deleteFile(DeleteFileEvent event, Emitter emit) async {
     emit(const DeleteFileState.loading());
     try {
+      if (event.document.fileLocalState ==
+          FileLocalStateEnum.kPendingUpload.value) {
+        _hiveTaskStorage.deleteDocument(event.caseId, event.document.name);
+        emit(DeleteFileState.success("documentList.deleteFileSuccess"
+            .tr(namedArgs: {'fileName': event.document.name})));
+        return;
+      }
       final tasks = await _fileRepository.execute(
           event.caseId, event.document.id, APIHeader.requestBy);
       tasks.fold(
         (l) {
           if (event.offline) {
-            if (event.document.url.isEmptyOrNull) {
+            if (event.document.fileLocalState ==
+                FileLocalStateEnum.kNew.value) {
               _hiveTaskStorage.updateDocumentState(
                   event.caseId,
                   event.document.name,
@@ -76,11 +84,11 @@ class DeleteFileBloc extends Bloc<DeleteFileEvent, DeleteFileState> {
       );
     } catch (e) {
       if (event.offline) {
-        if (event.document.url.isEmptyOrNull) {
-          _hiveTaskStorage.deleteDocument(event.caseId, event.document.name);
-        } else {
+        if (event.document.fileLocalState == FileLocalStateEnum.kNew.value) {
           _hiveTaskStorage.updateDocumentState(event.caseId,
               event.document.name, FileLocalStateEnum.kMarkedForDeletion.value);
+        } else {
+          _hiveTaskStorage.deleteDocument(event.caseId, event.document.name);
         }
         emit(DeleteFileState.success("documentList.deleteFileSuccess"
             .tr(namedArgs: {'fileName': event.document.name})));
