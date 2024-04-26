@@ -46,6 +46,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
   bool isExpanded = false;
   int documentLength = 0;
   bool shouldFetchTaskList = false;
+  var globalKey = GlobalKey();
 
   @override
   void initState() {
@@ -159,6 +160,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                           ? 0
                           : taskDetailPanelHeight),
                   child: TaskWebViewWidget(
+                    key: globalKey,
                     fullRequestPath: widget.fullRequestPath,
                     taskIvy: widget.taskIvy,
                     onScrollToTop: _updateScrollingChanged,

@@ -2,9 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:axon_ivy/core/app/app.dart';
-import 'package:axon_ivy/core/app/app_constants.dart';
-import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/extensions/string_ext.dart';
+import 'package:axon_ivy/core/utils/authorization_utils.dart';
 import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_activity_bloc/task_activity_bloc.dart';
@@ -38,7 +37,6 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
   int _previousScrollY = 0;
   int overScrollY = 0;
   bool isOverScrolled = true;
-  String basicAuth = '';
   Map<String, dynamic> cookies = {};
 
   InAppWebViewSettings settings = InAppWebViewSettings(
@@ -54,22 +52,10 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
 
   @override
   void initState() {
-    late String username;
-    late String password;
-
     super.initState();
-    final isDemoSetting = SharedPrefs.demoSetting ?? false;
-    if (isDemoSetting) {
-      username = DemoConfig.demoUserName;
-      password = DemoConfig.demoPassword;
-    } else {
-      username = SharedPrefs.getUsername ?? '';
-      password = SharedPrefs.getPassword ?? '';
-    }
     final isDarkMode = SharedPrefs.themeSetting ?? false;
     final themeValue = isDarkMode ? 'dark' : 'light';
 
-    basicAuth = 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
     _setCookies(themeValue);
   }
 
@@ -102,7 +88,8 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
           ? URLRequest(
               url: WebUri(widget.fullRequestPath),
               headers: {
-                HttpHeaders.authorizationHeader: basicAuth,
+                HttpHeaders.authorizationHeader:
+                    AuthorizationUtils.authorizationHeader,
                 HttpHeaders.cacheControlHeader: 'no-cache',
               },
               httpShouldHandleCookies: true)

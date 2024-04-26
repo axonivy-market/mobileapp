@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/router.dart';
 import 'package:axon_ivy/core/util/toast_message.dart';
 import 'package:axon_ivy/core/util/widgets/widgets.dart';
+import 'package:axon_ivy/core/utils/authorization_utils.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
@@ -16,12 +19,12 @@ import 'package:axon_ivy/features/task/presentation/widgets/filter_widget.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_details_widget.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_item_widget.dart';
-import 'package:axon_ivy/features/task/presentation/widgets/task_web_view_widget.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -143,18 +146,24 @@ class TasksViewContent extends StatelessWidget {
               return Stack(
                 children: [
                   // For cached css task offline on WebView
-                  if (taskState.tasks.firstOrNull?.fullRequestPath != null)
-                    SizedBox(
-                      height: 0,
-                      width: 0,
-                      child: TaskWebViewWidget(
-                        key: GlobalKey(),
-                        fullRequestPath: taskState.tasks.first.fullRequestPath,
-                        onScrollToTop: (value) => {},
-                        canScrollVertical: (value) => {},
-                        onProgressChanged: (value) => {},
-                      ),
+                  SizedBox(
+                    height: 0,
+                    width: 0,
+                    child: Stack(
+                      children: taskState.tasks
+                          .where((element) => element.offline)
+                          .map((e) => InAppWebView(
+                                initialUrlRequest: URLRequest(
+                                  url: WebUri(e.fullRequestPath),
+                                  headers: {
+                                    HttpHeaders.authorizationHeader:
+                                        AuthorizationUtils.authorizationHeader,
+                                  },
+                                ),
+                              ))
+                          .toList(),
                     ),
+                  ),
                   _buildTaskList(context, taskState.tasks),
                 ],
               );
