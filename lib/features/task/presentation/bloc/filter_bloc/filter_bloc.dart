@@ -1,9 +1,8 @@
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_event.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_state.dart';
+import 'package:axon_ivy/shared/resources/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-
-import '../../../../../core/util/resources/constants.dart';
 
 @injectable
 class FilterBloc extends Bloc<FilterEvent, FilterState> {

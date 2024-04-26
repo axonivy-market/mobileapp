@@ -6,9 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 part 'connectivity_bloc.freezed.dart';
-
 part 'connectivity_event.dart';
-
 part 'connectivity_state.dart';
 
 @injectable
@@ -16,8 +14,7 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   StreamSubscription? _streamSubscription;
   var connectivityResult = ConnectivityResult.wifi;
 
-  ConnectivityBloc()
-      : super(const ConnectivityState.initial()) {
+  ConnectivityBloc() : super(const ConnectivityState.initial()) {
     on<ConnectivityEvent>((event, emit) {
       if (event is ConnectedEvent) {
         emit(const ConnectivityState.connectedState());
