@@ -250,13 +250,13 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     try {
       Directory dir = await getApplicationSupportDirectory();
 
-      final subfolderDir = Directory(
-          "${dir.path}/${AppConfig.appName.replaceAll(' ', '_').toLowerCase()}");
+      final subfolderDir = Directory(path.join(
+          dir.path, AppConfig.appName.replaceAll(' ', '_').toLowerCase()));
       bool isExists = await subfolderDir.exists();
       if (!isExists) {
         await subfolderDir.create(recursive: true);
       }
-      String filePath = '${subfolderDir.path}/${event.fileName}';
+      String filePath = path.join(subfolderDir.path, event.fileName);
       File file = File(filePath);
       await file.writeAsBytes(event.bytes);
       Document document = Document(
