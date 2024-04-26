@@ -1,11 +1,11 @@
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/extensions/string_ext.dart';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
-import 'package:axon_ivy/core/util/resources/constants.dart';
-import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/features/task/domain/usecases/delete_file_use_case.dart';
+import 'package:axon_ivy/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/shared/resources/constants.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

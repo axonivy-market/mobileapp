@@ -1,16 +1,16 @@
 import 'dart:math';
 
+import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/di/di.dart';
-import 'package:axon_ivy/core/extensions/extensions.dart';
-import 'package:axon_ivy/core/util/widgets/back_button_widget.dart';
-import 'package:axon_ivy/core/util/widgets/data_empty_widget.dart';
-import 'package:axon_ivy/features/base_page/base_page.dart';
 import 'package:axon_ivy/features/notification/domain/entities/notification.dart'
     as entities;
 import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/pages/document_list_page.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/generated/colors.gen.dart';
+import 'package:axon_ivy/shared/extensions/date_time_ext.dart';
+import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
+import 'package:axon_ivy/shared/widgets/data_empty_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -120,7 +120,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                             style: GoogleFonts.inter(
                                 color: Theme.of(context).cardColor),
                           ),
-                          leading: BackButtonWidget(),
+                          leading: const BackButtonWidget(),
                           actions: [
                             PopupMenuButton<String>(
                               elevation: 0.2,

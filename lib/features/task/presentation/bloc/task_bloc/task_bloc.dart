@@ -2,18 +2,19 @@ import 'dart:async';
 
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
+import 'package:axon_ivy/core/di/di.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/extensions/extensions.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/domain/usecases/get_tasks_use_case.dart';
+import 'package:axon_ivy/shared/extensions/extensions.dart';
+import 'package:axon_ivy/shared/resources/constants.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../core/app/app.dart';
-import '../../../../../core/util/resources/resources.dart';
-import '../../../../../core/utils/shared_preference.dart';
 
 part 'task_bloc.freezed.dart';
 part 'task_event.dart';
@@ -133,19 +134,28 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
       tasks.fold(
         (l) {
-          emit(TaskState.success(
-              tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
-                  activeSortType.getSubTypeActive()!),
-              isOnline: false));
+          emit(
+            TaskState.success(
+                tasks: _sortTasksLocal(
+                  activeSortType.getMainSortType()!,
+                  activeSortType.getSubTypeActive()!,
+                ),
+                isOnline: false),
+          );
         },
         (r) {
           SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
           this.tasks = r;
           sortDefaultTasks = r.sortDefaultTasks;
           expiredTasks = _filterExpiredTasks(this.tasks);
-          emit(TaskState.success(
-              tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
-                  activeSortType.getSubTypeActive()!)));
+          emit(
+            TaskState.success(
+              tasks: _sortTasksLocal(
+                activeSortType.getMainSortType()!,
+                activeSortType.getSubTypeActive()!,
+              ),
+            ),
+          );
         },
       );
     } catch (e) {
