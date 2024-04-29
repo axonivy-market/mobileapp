@@ -1,11 +1,13 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/extensions/string_ext.dart';
-import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
+import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
+import 'package:axon_ivy/shared/extensions/extensions.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
+import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -16,18 +18,25 @@ import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'preview_file_bloc.freezed.dart';
+
 part 'preview_file_event.dart';
+
 part 'preview_file_state.dart';
 
 @injectable
 class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
   static const String cacheFileName = 'temp';
+  int? caseId;
+  bool isTaskOffline = false;
+  final HiveTaskStorage _hiveTaskStorage;
 
-  PreviewFileBloc() : super(const PreviewFileState.loading()) {
+  PreviewFileBloc(this._hiveTaskStorage)
+      : super(const PreviewFileState.loading()) {
     on<PreviewFileEvent>((event, emit) async {
       await event.when(
-        previewFile: (fileName, url) async {
-          await previewFile(fileName, url, emit);
+        previewFile: (offline, document) async {
+          isTaskOffline = offline;
+          await previewFile(document, emit);
         },
         deletePreviewFile: () async {
           await deletePreviewFile(emit);
@@ -58,24 +67,37 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
     }
   }
 
-  Future previewFile(String fileName, String url, Emitter emit) async {
-    final username = SharedPrefs.getUsername;
-    final password = SharedPrefs.getPassword;
-    String basicAuth =
-        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+  Future previewFile(Document document, Emitter emit) async {
     emit(const PreviewFileState.loading());
-
     try {
+      var url = document.url;
+      if (isTaskOffline && document.fileUploadPath.isNotEmptyOrNull) {
+        File file = File(document.fileUploadPath);
+        var fileLocalExists = await file.exists();
+        if (fileLocalExists) {
+          emit(
+            PreviewFileState.success(document.fileUploadPath),
+          );
+          return;
+        } else {
+          var documentLocal =
+              _hiveTaskStorage.getDocumentByCase(caseId, document.name);
+          url = documentLocal?.url.isEmpty == true
+              ? document.url
+              : documentLocal!.url;
+        }
+      }
+
       final response = await http.get(
         Uri.parse(url),
-        headers: {"Authorization": basicAuth},
+        headers: {"Authorization": AuthorizationUtils.authorizationHeader},
       );
 
       if (response.statusCode == 200) {
         Directory dir = await getTemporaryDirectory();
 
         String cacheTempFolder = '${dir.path}/$cacheFileName';
-        String filePath = '$cacheTempFolder/$fileName';
+        String filePath = '$cacheTempFolder/${document.name}';
         await Directory(cacheTempFolder).create(recursive: true);
 
         File file = File(filePath);
@@ -91,19 +113,19 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
         } else {
           emit(
             PreviewFileState.error("previewFile.failToPreview"
-                .tr(namedArgs: {'fileName': fileName})),
+                .tr(namedArgs: {'fileName': document.name})),
           );
         }
       } else {
         emit(
           PreviewFileState.error("previewFile.failToPreview"
-              .tr(namedArgs: {'fileName': fileName})),
+              .tr(namedArgs: {'fileName': document.name})),
         );
       }
     } catch (e) {
       emit(
-        PreviewFileState.error(
-            "previewFile.failToPreview".tr(namedArgs: {'fileName': fileName})),
+        PreviewFileState.error("previewFile.failToPreview"
+            .tr(namedArgs: {'fileName': document.name})),
       );
     }
   }

@@ -107,6 +107,20 @@ class _TasksPageState extends BasePageState<TasksPage> {
                   state is TaskSuccessState && !state.isOnline);
             }
           }),
+          BlocListener<FilterBloc, FilterState>(
+            listener: (context, filterState) {
+              context
+                  .read<TaskBloc>()
+                  .add(TaskEvent.filterTasks(filterState.activeFilter));
+            },
+          ),
+          BlocListener<SortBloc, SortState>(
+            listener: (context, sortState) {
+              context
+                  .read<TaskBloc>()
+                  .add(TaskEvent.sortTasks(sortState.activeSortType));
+            },
+          ),
         ],
         child: TasksViewContent(
           isTaskOnline: isTaskOnline,
@@ -135,55 +149,37 @@ class TasksViewContent extends StatelessWidget {
         isShowLastUpdated: true,
         scrolledUnderElevation: 0,
       ),
-      body: MultiBlocListener(
-        listeners: [
-          BlocListener<FilterBloc, FilterState>(
-            listener: (context, filterState) {
-              context
-                  .read<TaskBloc>()
-                  .add(TaskEvent.filterTasks(filterState.activeFilter));
-            },
-          ),
-          BlocListener<SortBloc, SortState>(
-            listener: (context, sortState) {
-              context
-                  .read<TaskBloc>()
-                  .add(TaskEvent.sortTasks(sortState.activeSortType));
-            },
-          ),
-        ],
-        child: BlocBuilder<TaskBloc, TaskState>(
-          builder: (context, taskState) {
-            if (taskState is TaskSuccessState) {
-              taskList = taskState.tasks;
-              isTaskOnline = taskState.isOnline;
-            }
-            return Stack(
-              children: [
-                // For cached css task offline on WebView
-                SizedBox(
-                  height: 0,
-                  width: 0,
-                  child: Stack(
-                    children: taskList
-                        .where((element) => element.offline)
-                        .map((e) => InAppWebView(
-                              initialUrlRequest: URLRequest(
-                                url: WebUri(e.fullRequestPath),
-                                headers: {
-                                  HttpHeaders.authorizationHeader:
-                                      AuthorizationUtils.authorizationHeader,
-                                },
-                              ),
-                            ))
-                        .toList(),
-                  ),
+      body: BlocBuilder<TaskBloc, TaskState>(
+        builder: (context, taskState) {
+          if (taskState is TaskSuccessState) {
+            taskList = taskState.tasks;
+            isTaskOnline = taskState.isOnline;
+          }
+          return Stack(
+            children: [
+              // For cached css task offline on WebView
+              SizedBox(
+                height: 0,
+                width: 0,
+                child: Stack(
+                  children: taskList
+                      .where((element) => element.offline)
+                      .map((e) => InAppWebView(
+                            initialUrlRequest: URLRequest(
+                              url: WebUri(e.fullRequestPath),
+                              headers: {
+                                HttpHeaders.authorizationHeader:
+                                    AuthorizationUtils.authorizationHeader,
+                              },
+                            ),
+                          ))
+                      .toList(),
                 ),
-                _buildTaskList(context, taskList),
-              ],
-            );
-          },
-        ),
+              ),
+              _buildTaskList(context, taskList),
+            ],
+          );
+        },
       ),
     );
   }
@@ -206,7 +202,7 @@ class TasksViewContent extends StatelessWidget {
               ? PreferredSize(
                   preferredSize: const Size.fromHeight(0.0), // Set your height
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0).r,
+                    padding: const EdgeInsets.symmetric(horizontal: 15).r,
                     child: const FilterWidget(),
                   ),
                 )

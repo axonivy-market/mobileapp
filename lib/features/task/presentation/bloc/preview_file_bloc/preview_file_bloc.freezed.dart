@@ -18,19 +18,19 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PreviewFileEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String fileName, String url) previewFile,
+    required TResult Function(bool isOffline, Document document) previewFile,
     required TResult Function() deletePreviewFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String fileName, String url)? previewFile,
+    TResult? Function(bool isOffline, Document document)? previewFile,
     TResult? Function()? deletePreviewFile,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String fileName, String url)? previewFile,
+    TResult Function(bool isOffline, Document document)? previewFile,
     TResult Function()? deletePreviewFile,
     required TResult orElse(),
   }) =>
@@ -80,7 +80,9 @@ abstract class _$$PreviewFileImplCopyWith<$Res> {
           _$PreviewFileImpl value, $Res Function(_$PreviewFileImpl) then) =
       __$$PreviewFileImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String fileName, String url});
+  $Res call({bool isOffline, Document document});
+
+  $DocumentCopyWith<$Res> get document;
 }
 
 /// @nodoc
@@ -94,35 +96,43 @@ class __$$PreviewFileImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? fileName = null,
-    Object? url = null,
+    Object? isOffline = null,
+    Object? document = null,
   }) {
     return _then(_$PreviewFileImpl(
-      null == fileName
-          ? _value.fileName
-          : fileName // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
+      null == isOffline
+          ? _value.isOffline
+          : isOffline // ignore: cast_nullable_to_non_nullable
+              as bool,
+      null == document
+          ? _value.document
+          : document // ignore: cast_nullable_to_non_nullable
+              as Document,
     ));
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DocumentCopyWith<$Res> get document {
+    return $DocumentCopyWith<$Res>(_value.document, (value) {
+      return _then(_value.copyWith(document: value));
+    });
   }
 }
 
 /// @nodoc
 
 class _$PreviewFileImpl with DiagnosticableTreeMixin implements _PreviewFile {
-  const _$PreviewFileImpl(this.fileName, this.url);
+  const _$PreviewFileImpl(this.isOffline, this.document);
 
   @override
-  final String fileName;
+  final bool isOffline;
   @override
-  final String url;
+  final Document document;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PreviewFileEvent.previewFile(fileName: $fileName, url: $url)';
+    return 'PreviewFileEvent.previewFile(isOffline: $isOffline, document: $document)';
   }
 
   @override
@@ -130,8 +140,8 @@ class _$PreviewFileImpl with DiagnosticableTreeMixin implements _PreviewFile {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PreviewFileEvent.previewFile'))
-      ..add(DiagnosticsProperty('fileName', fileName))
-      ..add(DiagnosticsProperty('url', url));
+      ..add(DiagnosticsProperty('isOffline', isOffline))
+      ..add(DiagnosticsProperty('document', document));
   }
 
   @override
@@ -139,13 +149,14 @@ class _$PreviewFileImpl with DiagnosticableTreeMixin implements _PreviewFile {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$PreviewFileImpl &&
-            (identical(other.fileName, fileName) ||
-                other.fileName == fileName) &&
-            (identical(other.url, url) || other.url == url));
+            (identical(other.isOffline, isOffline) ||
+                other.isOffline == isOffline) &&
+            (identical(other.document, document) ||
+                other.document == document));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, fileName, url);
+  int get hashCode => Object.hash(runtimeType, isOffline, document);
 
   @JsonKey(ignore: true)
   @override
@@ -156,30 +167,30 @@ class _$PreviewFileImpl with DiagnosticableTreeMixin implements _PreviewFile {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String fileName, String url) previewFile,
+    required TResult Function(bool isOffline, Document document) previewFile,
     required TResult Function() deletePreviewFile,
   }) {
-    return previewFile(fileName, url);
+    return previewFile(isOffline, document);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String fileName, String url)? previewFile,
+    TResult? Function(bool isOffline, Document document)? previewFile,
     TResult? Function()? deletePreviewFile,
   }) {
-    return previewFile?.call(fileName, url);
+    return previewFile?.call(isOffline, document);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String fileName, String url)? previewFile,
+    TResult Function(bool isOffline, Document document)? previewFile,
     TResult Function()? deletePreviewFile,
     required TResult orElse(),
   }) {
     if (previewFile != null) {
-      return previewFile(fileName, url);
+      return previewFile(isOffline, document);
     }
     return orElse();
   }
@@ -217,11 +228,11 @@ class _$PreviewFileImpl with DiagnosticableTreeMixin implements _PreviewFile {
 }
 
 abstract class _PreviewFile implements PreviewFileEvent {
-  const factory _PreviewFile(final String fileName, final String url) =
+  const factory _PreviewFile(final bool isOffline, final Document document) =
       _$PreviewFileImpl;
 
-  String get fileName;
-  String get url;
+  bool get isOffline;
+  Document get document;
   @JsonKey(ignore: true)
   _$$PreviewFileImplCopyWith<_$PreviewFileImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -274,7 +285,7 @@ class _$DeletePreviewFileImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String fileName, String url) previewFile,
+    required TResult Function(bool isOffline, Document document) previewFile,
     required TResult Function() deletePreviewFile,
   }) {
     return deletePreviewFile();
@@ -283,7 +294,7 @@ class _$DeletePreviewFileImpl
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String fileName, String url)? previewFile,
+    TResult? Function(bool isOffline, Document document)? previewFile,
     TResult? Function()? deletePreviewFile,
   }) {
     return deletePreviewFile?.call();
@@ -292,7 +303,7 @@ class _$DeletePreviewFileImpl
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String fileName, String url)? previewFile,
+    TResult Function(bool isOffline, Document document)? previewFile,
     TResult Function()? deletePreviewFile,
     required TResult orElse(),
   }) {

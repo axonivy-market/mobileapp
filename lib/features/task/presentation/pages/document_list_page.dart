@@ -50,6 +50,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
     _downloadFileBloc = getIt<DownloadFileBloc>();
     _previewFileBloc = getIt<PreviewFileBloc>();
     documents = widget.task.caseTask?.availableDocuments ?? [];
+    _previewFileBloc.caseId = widget.task.caseTask?.id;
   }
 
   bool isUploadDuplicateFile(UploadSuccessState state, TaskIvy task) {
@@ -412,9 +413,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                 onTap: () {
                                   _previewFileBloc.add(
                                     PreviewFileEvent.previewFile(
-                                      documents[index].name,
-                                      documents[index].url,
-                                    ),
+                                        task.offline, documents[index]),
                                   );
                                 },
                                 leading: documents[index].name.isContainImage

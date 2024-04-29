@@ -139,4 +139,17 @@ class HiveTaskStorage {
       debugPrint(e.toString());
     }
   }
+
+  Document? getDocumentByCase(int? caseId, String docName) {
+    try {
+      Box<TaskIvy> taskBox = Hive.box<TaskIvy>(Constants.taskBox);
+      var task = taskBox.values
+          .firstWhere((element) => element.caseTask?.id == caseId);
+      var documents = task.caseTask?.documents.toList() ?? [];
+      return documents.firstWhere((element) => element.name == docName);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+    return null;
+  }
 }
