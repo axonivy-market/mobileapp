@@ -72,13 +72,11 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
       emit(const UploadFileState.loading());
       await uploadFiles(
           caseId: caseId, file: file, emit: emit, fileName: newFileName);
-      // emit(UploadFileState.success(uploadMessage, newFileName));
     } else {
       emit(const UploadFileState.loading());
 
       await uploadFiles(
           caseId: caseId, file: cameraFile!, emit: emit, fileName: fileName);
-      // emit(UploadFileState.success(uploadMessage, fileName));
     }
 
     cameraFile = null;
