@@ -38,8 +38,6 @@ PODS:
     - Flutter
   - file_picker_pro (0.0.1):
     - Flutter
-  - file_saver (0.0.1):
-    - Flutter
   - Flutter (1.0.0)
   - flutter_inappwebview_ios (0.0.1):
     - Flutter
@@ -59,6 +57,8 @@ PODS:
   - image_picker_ios (0.0.1):
     - Flutter
   - MTBBarcodeScanner (5.0.11)
+  - open_file_plus (1.0.0):
+    - Flutter
   - open_filex (0.0.2):
     - Flutter
   - open_share_plus (0.0.1):
@@ -91,12 +91,12 @@ DEPENDENCIES:
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - file_picker_pro (from `.symlinks/plugins/file_picker_pro/ios`)
-  - file_saver (from `.symlinks/plugins/file_saver/ios`)
   - Flutter (from `Flutter`)
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
   - image_cropper (from `.symlinks/plugins/image_cropper/ios`)
   - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
+  - open_file_plus (from `.symlinks/plugins/open_file_plus/ios`)
   - open_filex (from `.symlinks/plugins/open_filex/ios`)
   - open_share_plus (from `.symlinks/plugins/open_share_plus/ios`)
   - package_info_plus (from `.symlinks/plugins/package_info_plus/ios`)
@@ -125,8 +125,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/file_picker/ios"
   file_picker_pro:
     :path: ".symlinks/plugins/file_picker_pro/ios"
-  file_saver:
-    :path: ".symlinks/plugins/file_saver/ios"
   Flutter:
     :path: Flutter
   flutter_inappwebview_ios:
@@ -137,6 +135,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/image_cropper/ios"
   image_picker_ios:
     :path: ".symlinks/plugins/image_picker_ios/ios"
+  open_file_plus:
+    :path: ".symlinks/plugins/open_file_plus/ios"
   open_filex:
     :path: ".symlinks/plugins/open_filex/ios"
   open_share_plus:
@@ -160,7 +160,6 @@ SPEC CHECKSUMS:
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
   file_picker_pro: 57e5aa1aa25ce7524969c80fde5852e99c860fb2
-  file_saver: 503e386464dbe118f630e17b4c2e1190fa0cf808
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
   flutter_secure_storage: 23fc622d89d073675f2eaa109381aefbcf5a49be
@@ -168,6 +167,7 @@ SPEC CHECKSUMS:
   image_cropper: a3291c624a953049bc6a02e1f8c8ceb162a24b25
   image_picker_ios: 99dfe1854b4fa34d0364e74a78448a0151025425
   MTBBarcodeScanner: f453b33c4b7dfe545d8c6484ed744d55671788cb
+  open_file_plus: 05737718530c14cf02868e3b7754d7fe4df76d8b
   open_filex: 6e26e659846ec990262224a12ef1c528bb4edbe4
   open_share_plus: e4475cd9e43ff4032d7e7429b21a614fa7d79290
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c

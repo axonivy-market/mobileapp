@@ -35,7 +35,7 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   final FileRepositoryInterface _uploadFileRepository;
   final HiveTaskStorage _hiveTaskStorage;
   String uploadMessage = "";
-  int maxFileSize = 10000000;
+  int maxFileSize = 20971520;
   var filePath = "";
   var fileName = "";
   var caseId = 0;
