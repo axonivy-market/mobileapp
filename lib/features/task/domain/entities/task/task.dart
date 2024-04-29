@@ -1,5 +1,5 @@
-import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
 import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
+import 'package:axon_ivy/shared/enums/task_state_enum.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 

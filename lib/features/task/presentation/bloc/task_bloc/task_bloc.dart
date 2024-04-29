@@ -2,27 +2,28 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:axon_ivy/core/app/demo_config.dart';
+import 'package:axon_ivy/core/di/di.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/extensions/extensions.dart';
-import 'package:axon_ivy/data/models/enums/file_local_state_enum.dart';
 import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
-import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
 import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/domain/usecases/delete_file_use_case.dart';
 import 'package:axon_ivy/features/task/domain/usecases/get_tasks_use_case.dart';
 import 'package:axon_ivy/features/task/domain/usecases/upload_file_use_case.dart';
+import 'package:axon_ivy/shared/enums/file_local_state_enum.dart';
+import 'package:axon_ivy/shared/enums/task_state_enum.dart';
+import 'package:axon_ivy/shared/extensions/extensions.dart';
+import 'package:axon_ivy/shared/resources/constants.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:html/parser.dart' as html_parser;
 
 import '../../../../../core/app/app.dart';
-import '../../../../../core/util/resources/resources.dart';
-import '../../../../../core/utils/shared_preference.dart';
-import 'package:html/parser.dart' as html_parser;
 
 part 'task_bloc.freezed.dart';
 

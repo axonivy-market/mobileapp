@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:axon_ivy/core/app/app.dart';
-import 'package:axon_ivy/core/extensions/extensions.dart';
-import 'package:axon_ivy/data/models/enums/file_local_state_enum.dart';
 import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
+import 'package:axon_ivy/shared/enums/file_local_state_enum.dart';
+import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';

@@ -152,23 +152,15 @@ class __$$GetTasksImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetTasksImpl with DiagnosticableTreeMixin implements _GetTasks {
+class _$GetTasksImpl implements _GetTasks {
   const _$GetTasksImpl(this.activeFilter);
 
   @override
   final FilterType activeFilter;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskEvent.getTasks(activeFilter: $activeFilter)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskEvent.getTasks'))
-      ..add(DiagnosticsProperty('activeFilter', activeFilter));
   }
 
   @override
@@ -340,23 +332,15 @@ class __$$FilterTasksImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FilterTasksImpl with DiagnosticableTreeMixin implements _FilterTasks {
+class _$FilterTasksImpl implements _FilterTasks {
   const _$FilterTasksImpl(this.activeFilter);
 
   @override
   final FilterType activeFilter;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskEvent.filterTasks(activeFilter: $activeFilter)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskEvent.filterTasks'))
-      ..add(DiagnosticsProperty('activeFilter', activeFilter));
   }
 
   @override
@@ -528,7 +512,7 @@ class __$$SortTasksImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$SortTasksImpl with DiagnosticableTreeMixin implements _SortTasks {
+class _$SortTasksImpl implements _SortTasks {
   const _$SortTasksImpl(final List<SortType> activeSortType)
       : _activeSortType = activeSortType;
 
@@ -541,16 +525,8 @@ class _$SortTasksImpl with DiagnosticableTreeMixin implements _SortTasks {
   }
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskEvent.sortTasks(activeSortType: $activeSortType)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskEvent.sortTasks'))
-      ..add(DiagnosticsProperty('activeSortType', activeSortType));
   }
 
   @override
@@ -724,23 +700,15 @@ class __$$GetTaskImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$GetTaskImpl with DiagnosticableTreeMixin implements _GetTask {
+class _$GetTaskImpl implements _GetTask {
   const _$GetTaskImpl(this.id);
 
   @override
   final int id;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskEvent.getTask(id: $id)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskEvent.getTask'))
-      ..add(DiagnosticsProperty('id', id));
   }
 
   @override
@@ -912,25 +880,15 @@ class __$$ShowOfflinePopupEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ShowOfflinePopupEventImpl
-    with DiagnosticableTreeMixin
-    implements ShowOfflinePopupEvent {
+class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
   const _$ShowOfflinePopupEventImpl(this.isConnected);
 
   @override
   final bool isConnected;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskEvent.showOfflinePopupEvent(isConnected: $isConnected)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskEvent.showOfflinePopupEvent'))
-      ..add(DiagnosticsProperty('isConnected', isConnected));
   }
 
   @override
@@ -1089,20 +1047,12 @@ class __$$ParseHtmlEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ParseHtmlEventImpl
-    with DiagnosticableTreeMixin
-    implements ParseHtmlEvent {
+class _$ParseHtmlEventImpl implements ParseHtmlEvent {
   const _$ParseHtmlEventImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskEvent.parseHtml()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TaskEvent.parseHtml'));
   }
 
   @override
@@ -1245,20 +1195,12 @@ class __$$TasksLoadedSyncEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TasksLoadedSyncEventImpl
-    with DiagnosticableTreeMixin
-    implements TasksLoadedSyncEvent {
+class _$TasksLoadedSyncEventImpl implements TasksLoadedSyncEvent {
   const _$TasksLoadedSyncEventImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskEvent.onTasksLoadedSync()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TaskEvent.onTasksLoadedSync'));
   }
 
   @override
@@ -1405,20 +1347,12 @@ class __$$SyncDataOnEngineRestoreEventImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SyncDataOnEngineRestoreEventImpl
-    with DiagnosticableTreeMixin
     implements SyncDataOnEngineRestoreEvent {
   const _$SyncDataOnEngineRestoreEventImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskEvent.syncDataOnEngineRestore()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-        .add(DiagnosticsProperty('type', 'TaskEvent.syncDataOnEngineRestore'));
   }
 
   @override
@@ -1564,20 +1498,12 @@ class __$$ShowTasksOfflineEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ShowTasksOfflineEventImpl
-    with DiagnosticableTreeMixin
-    implements ShowTasksOfflineEvent {
+class _$ShowTasksOfflineEventImpl implements ShowTasksOfflineEvent {
   const _$ShowTasksOfflineEventImpl();
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskEvent.showTasksOffline()';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TaskEvent.showTasksOffline'));
   }
 
   @override
@@ -1801,25 +1727,15 @@ class __$$TaskLoadingStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TaskLoadingStateImpl
-    with DiagnosticableTreeMixin
-    implements TaskLoadingState {
+class _$TaskLoadingStateImpl implements TaskLoadingState {
   const _$TaskLoadingStateImpl(this.isShowLoading);
 
   @override
   final bool isShowLoading;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskState.loading(isShowLoading: $isShowLoading)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskState.loading'))
-      ..add(DiagnosticsProperty('isShowLoading', isShowLoading));
   }
 
   @override
@@ -1953,25 +1869,15 @@ class __$$TaskErrorStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TaskErrorStateImpl
-    with DiagnosticableTreeMixin
-    implements TaskErrorState {
+class _$TaskErrorStateImpl implements TaskErrorState {
   const _$TaskErrorStateImpl(this.error);
 
   @override
   final String error;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskState.error(error: $error)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskState.error'))
-      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
@@ -2108,9 +2014,7 @@ class __$$TaskSuccessStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TaskSuccessStateImpl
-    with DiagnosticableTreeMixin
-    implements TaskSuccessState {
+class _$TaskSuccessStateImpl implements TaskSuccessState {
   const _$TaskSuccessStateImpl(
       {required final List<TaskIvy> tasks, this.isOnline = true})
       : _tasks = tasks;
@@ -2128,17 +2032,8 @@ class _$TaskSuccessStateImpl
   final bool isOnline;
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+  String toString() {
     return 'TaskState.success(tasks: $tasks, isOnline: $isOnline)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskState.success'))
-      ..add(DiagnosticsProperty('tasks', tasks))
-      ..add(DiagnosticsProperty('isOnline', isOnline));
   }
 
   @override

@@ -1,9 +1,9 @@
-import 'package:axon_ivy/core/di/di.dart';
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/router.dart';
-import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_state.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

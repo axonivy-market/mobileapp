@@ -1,8 +1,8 @@
-import 'package:axon_ivy/core/extensions/date_time_ext.dart';
-import 'package:axon_ivy/core/extensions/number_ext.dart';
-import 'package:axon_ivy/core/extensions/string_ext.dart';
-import 'package:axon_ivy/core/util/widgets/text_highlight_widget.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
+import 'package:axon_ivy/shared/extensions/date_time_ext.dart';
+import 'package:axon_ivy/shared/extensions/number_ext.dart';
+import 'package:axon_ivy/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/shared/widgets/text_highlight_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

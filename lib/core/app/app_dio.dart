@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:axon_ivy/core/utils/authorization_utils.dart';
+import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';

@@ -1,10 +1,8 @@
 import 'dart:io';
 
+import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/router.dart';
-import 'package:axon_ivy/core/util/toast_message.dart';
-import 'package:axon_ivy/core/util/widgets/widgets.dart';
-import 'package:axon_ivy/core/utils/authorization_utils.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
@@ -20,6 +18,10 @@ import 'package:axon_ivy/features/task/presentation/widgets/task_details_widget.
 import 'package:axon_ivy/features/task/presentation/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_item_widget.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
+import 'package:axon_ivy/shared/resources/constants.dart';
+import 'package:axon_ivy/shared/utils/authorization_utils.dart';
+import 'package:axon_ivy/shared/widgets/toast_message.dart';
+import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -28,11 +30,18 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../core/util/resources/constants.dart';
 import '../bloc/sort_bloc/sort_bloc.dart';
 
-class TasksView extends StatelessWidget {
-  const TasksView({super.key});
+class TasksPage extends BasePage {
+  const TasksPage({super.key});
+
+  @override
+  State<TasksPage> createState() => _TasksPageState();
+}
+
+class _TasksPageState extends BasePageState<TasksPage> {
+  bool isTaskOnline = true;
+  List<TaskIvy> taskList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -90,31 +99,34 @@ class TasksView extends StatelessWidget {
             }
           }),
           BlocListener<TaskBloc, TaskState>(listener: (context, state) {
-            context.read<OfflineIndicatorCubit>().showOfflineIndicator(
-                state is TaskSuccessState && !state.isOnline);
+            if (state is TaskLoadingState) {
+              showLoading();
+            } else {
+              hideLoading();
+              context.read<OfflineIndicatorCubit>().showOfflineIndicator(
+                  state is TaskSuccessState && !state.isOnline);
+            }
           }),
         ],
-        child: BlocBuilder<TaskBloc, TaskState>(
-          builder: (context, taskState) {
-            final activeFilter = context.watch<FilterBloc>().state.activeFilter;
-            final tasksIsEmpty =
-                taskState is TaskSuccessState && taskState.tasks.isNotEmpty;
-            return TasksViewContent(
-              isShowFilterBar:
-                  tasksIsEmpty || activeFilter == FilterType.expired,
-            );
-          },
+        child: TasksViewContent(
+          isTaskOnline: isTaskOnline,
+          taskList: taskList,
         ),
       ),
     );
   }
 }
 
+// ignore: must_be_immutable
 class TasksViewContent extends StatelessWidget {
-  const TasksViewContent({super.key, required this.isShowFilterBar});
+  TasksViewContent({
+    super.key,
+    required this.isTaskOnline,
+    required this.taskList,
+  });
 
-  final TaskIvy? taskSelecting = null;
-  final bool isShowFilterBar;
+  List<TaskIvy> taskList;
+  bool isTaskOnline;
 
   @override
   Widget build(BuildContext context) {
@@ -143,33 +155,33 @@ class TasksViewContent extends StatelessWidget {
         child: BlocBuilder<TaskBloc, TaskState>(
           builder: (context, taskState) {
             if (taskState is TaskSuccessState) {
-              return Stack(
-                children: [
-                  // For cached css task offline on WebView
-                  SizedBox(
-                    height: 0,
-                    width: 0,
-                    child: Stack(
-                      children: taskState.tasks
-                          .where((element) => element.offline)
-                          .map((e) => InAppWebView(
-                                initialUrlRequest: URLRequest(
-                                  url: WebUri(e.fullRequestPath),
-                                  headers: {
-                                    HttpHeaders.authorizationHeader:
-                                        AuthorizationUtils.authorizationHeader,
-                                  },
-                                ),
-                              ))
-                          .toList(),
-                    ),
-                  ),
-                  _buildTaskList(context, taskState.tasks),
-                ],
-              );
-            } else {
-              return const LoadingWidget();
+              taskList = taskState.tasks;
+              isTaskOnline = taskState.isOnline;
             }
+            return Stack(
+              children: [
+                // For cached css task offline on WebView
+                SizedBox(
+                  height: 0,
+                  width: 0,
+                  child: Stack(
+                    children: taskList
+                        .where((element) => element.offline)
+                        .map((e) => InAppWebView(
+                              initialUrlRequest: URLRequest(
+                                url: WebUri(e.fullRequestPath),
+                                headers: {
+                                  HttpHeaders.authorizationHeader:
+                                      AuthorizationUtils.authorizationHeader,
+                                },
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                ),
+                _buildTaskList(context, taskList),
+              ],
+            );
           },
         ),
       ),
@@ -190,15 +202,16 @@ class TasksViewContent extends StatelessWidget {
           shadowColor: Colors.black.withOpacity(0.3),
           surfaceTintColor: Theme.of(context).colorScheme.background,
           elevation: 0,
-          bottom: tasks.isNotEmpty || activeFilter == FilterType.expired
+          title: tasks.isNotEmpty || activeFilter == FilterType.expired
               ? PreferredSize(
                   preferredSize: const Size.fromHeight(0.0), // Set your height
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 10).r,
+                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 0).r,
                     child: const FilterWidget(),
                   ),
                 )
               : null,
+          titleSpacing: 0,
         ),
         CupertinoSliverRefreshControl(
           onRefresh: () async => _onRefresh(context),

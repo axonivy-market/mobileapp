@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/data/models/enums/task_state_enum.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
+import 'package:axon_ivy/shared/enums/task_state_enum.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
