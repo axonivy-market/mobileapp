@@ -17,7 +17,9 @@ import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'download_file_bloc.freezed.dart';
+
 part 'download_file_event.dart';
+
 part 'download_file_state.dart';
 
 @injectable

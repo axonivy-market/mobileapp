@@ -16,7 +16,9 @@ import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'preview_file_bloc.freezed.dart';
+
 part 'preview_file_event.dart';
+
 part 'preview_file_state.dart';
 
 @injectable
@@ -86,7 +88,7 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
 
         if (isFileExist) {
           emit(
-            PreviewFileState.success(filePath),
+            PreviewFileState.success(filePath, fileName),
           );
         } else {
           emit(

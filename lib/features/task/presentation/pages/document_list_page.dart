@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/extensions/extensions.dart';
 import 'package:axon_ivy/core/util/widgets/back_button_widget.dart';
@@ -30,7 +28,8 @@ class DocumentListPage extends BasePage {
   State<DocumentListPage> createState() => _DocumentListPageState();
 }
 
-class _DocumentListPageState extends BasePageState<DocumentListPage> {
+class _DocumentListPageState extends BasePageState<DocumentListPage>
+    with WidgetsBindingObserver {
   late UploadFileBloc _uploadFileBloc;
   late DeleteFileBloc _deleteFileBloc;
   late TaskDetailBloc _taskDetailBloc;
@@ -40,6 +39,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
   bool shouldFetchTaskList = false;
   dynamic model;
   late List<Document> documents = [];
+  OpenResult? openResult;
 
   @override
   void initState() {
@@ -49,6 +49,22 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
     _deleteFileBloc = getIt<DeleteFileBloc>();
     _downloadFileBloc = getIt<DownloadFileBloc>();
     _previewFileBloc = getIt<PreviewFileBloc>();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed &&
+        openResult?.type == ResultType.done) {
+      openResult = null;
+      _previewFileBloc.add(const PreviewFileEvent.deletePreviewFile());
+    }
   }
 
   bool isUploadDuplicateFile(UploadSuccessState state, TaskIvy task) {
@@ -157,14 +173,12 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                     message: state.error);
               } else if (state is PreviewSuccessState) {
                 hideLoading();
-                await OpenFile.open(state.filePath);
-                if (Platform.isIOS) {
-                  _previewFileBloc
-                      .add(const PreviewFileEvent.deletePreviewFile());
-                } else if (Platform.isAndroid) {
-                  await Future.delayed(const Duration(seconds: 10));
-                  _previewFileBloc
-                      .add(const PreviewFileEvent.deletePreviewFile());
+                openResult = await OpenFile.open(state.filePath);
+                if (openResult != null && openResult?.type != ResultType.done) {
+                  showMessageDialog(
+                      title: "documentList.errorTitle".tr(),
+                      message: "previewFile.failToPreview"
+                          .tr(namedArgs: {'fileName': state.fileName}));
                 }
               } else if (state is PreviewLoadingState) {
                 showLoading();
@@ -175,7 +189,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
         child: PopScope(
           canPop: false,
           onPopInvoked: (didPop) async {
-            if (didPop) {
+            if (didPop && loading != null) {
               return;
             }
             Navigator.of(context).pop(shouldFetchTaskList);
@@ -321,7 +335,6 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                           itemCount: documents.length,
                           itemBuilder: (context, index) {
                             return Slidable(
-                              key: ValueKey(index),
                               startActionPane: ActionPane(
                                   extentRatio: 0.2,
                                   motion: const ScrollMotion(),
@@ -354,7 +367,6 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                   ]),
                               endActionPane: ActionPane(
                                 extentRatio: 0.2,
-                                key: ValueKey(index),
                                 motion: const ScrollMotion(),
                                 children: [
                                   CustomSlidableAction(

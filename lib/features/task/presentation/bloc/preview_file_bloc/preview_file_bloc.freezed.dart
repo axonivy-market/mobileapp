@@ -344,21 +344,21 @@ mixin _$PreviewFileState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(String filePath) success,
+    required TResult Function(String filePath, String fileName) success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String error)? error,
-    TResult? Function(String filePath)? success,
+    TResult? Function(String filePath, String fileName)? success,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(String filePath)? success,
+    TResult Function(String filePath, String fileName)? success,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -453,7 +453,7 @@ class _$PreviewLoadingStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(String filePath) success,
+    required TResult Function(String filePath, String fileName) success,
   }) {
     return loading();
   }
@@ -463,7 +463,7 @@ class _$PreviewLoadingStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String error)? error,
-    TResult? Function(String filePath)? success,
+    TResult? Function(String filePath, String fileName)? success,
   }) {
     return loading?.call();
   }
@@ -473,7 +473,7 @@ class _$PreviewLoadingStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(String filePath)? success,
+    TResult Function(String filePath, String fileName)? success,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -598,7 +598,7 @@ class _$PreviewErrorStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(String filePath) success,
+    required TResult Function(String filePath, String fileName) success,
   }) {
     return error(this.error);
   }
@@ -608,7 +608,7 @@ class _$PreviewErrorStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String error)? error,
-    TResult? Function(String filePath)? success,
+    TResult? Function(String filePath, String fileName)? success,
   }) {
     return error?.call(this.error);
   }
@@ -618,7 +618,7 @@ class _$PreviewErrorStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(String filePath)? success,
+    TResult Function(String filePath, String fileName)? success,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -677,7 +677,7 @@ abstract class _$$PreviewSuccessStateImplCopyWith<$Res> {
           $Res Function(_$PreviewSuccessStateImpl) then) =
       __$$PreviewSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String filePath});
+  $Res call({String filePath, String fileName});
 }
 
 /// @nodoc
@@ -692,11 +692,16 @@ class __$$PreviewSuccessStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? filePath = null,
+    Object? fileName = null,
   }) {
     return _then(_$PreviewSuccessStateImpl(
       null == filePath
           ? _value.filePath
           : filePath // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == fileName
+          ? _value.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -707,14 +712,16 @@ class __$$PreviewSuccessStateImplCopyWithImpl<$Res>
 class _$PreviewSuccessStateImpl
     with DiagnosticableTreeMixin
     implements PreviewSuccessState {
-  const _$PreviewSuccessStateImpl(this.filePath);
+  const _$PreviewSuccessStateImpl(this.filePath, this.fileName);
 
   @override
   final String filePath;
+  @override
+  final String fileName;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PreviewFileState.success(filePath: $filePath)';
+    return 'PreviewFileState.success(filePath: $filePath, fileName: $fileName)';
   }
 
   @override
@@ -722,7 +729,8 @@ class _$PreviewSuccessStateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PreviewFileState.success'))
-      ..add(DiagnosticsProperty('filePath', filePath));
+      ..add(DiagnosticsProperty('filePath', filePath))
+      ..add(DiagnosticsProperty('fileName', fileName));
   }
 
   @override
@@ -731,11 +739,13 @@ class _$PreviewSuccessStateImpl
         (other.runtimeType == runtimeType &&
             other is _$PreviewSuccessStateImpl &&
             (identical(other.filePath, filePath) ||
-                other.filePath == filePath));
+                other.filePath == filePath) &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, filePath);
+  int get hashCode => Object.hash(runtimeType, filePath, fileName);
 
   @JsonKey(ignore: true)
   @override
@@ -749,9 +759,9 @@ class _$PreviewSuccessStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(String filePath) success,
+    required TResult Function(String filePath, String fileName) success,
   }) {
-    return success(filePath);
+    return success(filePath, fileName);
   }
 
   @override
@@ -759,9 +769,9 @@ class _$PreviewSuccessStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String error)? error,
-    TResult? Function(String filePath)? success,
+    TResult? Function(String filePath, String fileName)? success,
   }) {
-    return success?.call(filePath);
+    return success?.call(filePath, fileName);
   }
 
   @override
@@ -769,11 +779,11 @@ class _$PreviewSuccessStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(String filePath)? success,
+    TResult Function(String filePath, String fileName)? success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(filePath);
+      return success(filePath, fileName);
     }
     return orElse();
   }
@@ -814,10 +824,11 @@ class _$PreviewSuccessStateImpl
 }
 
 abstract class PreviewSuccessState implements PreviewFileState {
-  const factory PreviewSuccessState(final String filePath) =
-      _$PreviewSuccessStateImpl;
+  const factory PreviewSuccessState(
+      final String filePath, final String fileName) = _$PreviewSuccessStateImpl;
 
   String get filePath;
+  String get fileName;
   @JsonKey(ignore: true)
   _$$PreviewSuccessStateImplCopyWith<_$PreviewSuccessStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
