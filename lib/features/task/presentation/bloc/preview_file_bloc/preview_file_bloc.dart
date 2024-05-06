@@ -4,8 +4,8 @@ import 'dart:io';
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/extensions/string_ext.dart';
-import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/shared/extensions/extensions.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -16,9 +16,7 @@ import 'package:injectable/injectable.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'preview_file_bloc.freezed.dart';
-
 part 'preview_file_event.dart';
-
 part 'preview_file_state.dart';
 
 @injectable
