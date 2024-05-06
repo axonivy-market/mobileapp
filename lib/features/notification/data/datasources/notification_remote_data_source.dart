@@ -18,8 +18,14 @@ abstract class NotificationRemoteDataSource {
   );
 
   @PATCH('/api/notifications/{uuid}')
-  Future markReadNotification(
+  Future<HttpResponse> markReadNotification(
     @Path('uuid') String uuid,
+    @Header('X-Requested-By') String requestBy,
+    @Body() body,
+  );
+
+  @PATCH('/api/notifications')
+  Future<HttpResponse> markReadAllNotification(
     @Header('X-Requested-By') String requestBy,
     @Body() body,
   );

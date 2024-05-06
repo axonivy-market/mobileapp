@@ -4,6 +4,7 @@ import 'package:axon_ivy/features/notification/domain/entities/notification.dart
 import 'package:axon_ivy/features/notification/domain/repositories/notification_repository_interface.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:retrofit/retrofit.dart';
 
 import '../../../../core/network/dio_error_handler.dart';
 
@@ -28,14 +29,29 @@ class NotificationRepositoryImplement extends NotificationRepositoryInterface {
   }
 
   @override
-  Future<Either<Failure, bool>> markReadNotification({
+  Future<Either<Failure, HttpResponse>> markReadNotification({
     required String uuid,
     required Map<String, dynamic> body,
     required String requestBy,
   }) async {
     try {
-      await _remoteDataSource.markReadNotification(uuid, requestBy, body);
-      return right(true);
+      final result =
+          await _remoteDataSource.markReadNotification(uuid, requestBy, body);
+      return right(result);
+    } catch (e) {
+      return left(AppError.handle(e).failure);
+    }
+  }
+
+  @override
+  Future<Either<Failure, HttpResponse>> markReadAllNotification({
+    required Map<String, dynamic> body,
+    required String requestBy,
+  }) async {
+    try {
+      final result =
+          await _remoteDataSource.markReadAllNotification(requestBy, body);
+      return right(result);
     } catch (e) {
       return left(AppError.handle(e).failure);
     }

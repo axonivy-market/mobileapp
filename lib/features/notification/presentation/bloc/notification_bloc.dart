@@ -4,6 +4,7 @@ import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/notification/domain/entities/notification.dart';
 import 'package:axon_ivy/features/notification/domain/usecases/get_notifications_use_case.dart';
+import 'package:axon_ivy/features/notification/domain/usecases/mark_read_all_notification_use_case.dart';
 import 'package:axon_ivy/features/notification/domain/usecases/mark_read_notification_use_case.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/resources/constants.dart';
@@ -18,26 +19,36 @@ part 'notification_bloc.freezed.dart';
 part 'notification_event.dart';
 part 'notification_state.dart';
 
-@injectable
+@singleton
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   final GetNotificationUseCase getNotificationUseCase;
   final MarkReadNotificationUseCase markReadNotificationUseCase;
+  final MarkReadAllNotificationUseCase markReadAllNotificationUseCase;
 
   List<Notification> notifications = [];
 
   NotificationBloc(
-      this.getNotificationUseCase, this.markReadNotificationUseCase)
-      : super(const NotificationState.loading()) {
+    this.getNotificationUseCase,
+    this.markReadNotificationUseCase,
+    this.markReadAllNotificationUseCase,
+  ) : super(const NotificationState.loading()) {
     on<NotificationEvent>((event, emit) async {
       await event.when(
         getNotifications: (page, pageSize) async {
           await getNotifications(page, pageSize, emit);
         },
         markReadNotification: (uuid) async {
-          await markReadNotifications(uuid, emit);
+          await markReadNotification(uuid, emit);
+        },
+        markReadAllNotification: () async {
+          await markReadAllNotification(emit);
+        },
+        showOfflinePopupEvent: (isConnected) async {
+          showOfflinePopupEvent(isConnected, emit);
         },
       );
     });
+
     final isDemoSetting = SharedPrefs.demoSetting ?? false;
     if (isDemoSetting) {
       getIt<Dio>().options.baseUrl = DemoConfig.demoServerUrl.isEmptyOrNull
@@ -61,7 +72,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
         },
         (r) {
           notifications = List.from(r);
-          emit(NotificationSuccessState(r));
+          emit(NotificationSuccessState(notifications: r));
         },
       );
     } catch (e) {
@@ -69,7 +80,30 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     }
   }
 
-  Future markReadNotifications(String uuid, Emitter emit) async {
+  Future markReadAllNotification(Emitter emit) async {
+    emit(const NotificationState.loading());
+    try {
+      final response = await markReadAllNotificationUseCase.execute(
+        body: Constants.markReadNotificationBody,
+        requestBy: APIHeader.requestBy,
+      );
+      response.fold(
+        (l) {
+          emit(NotificationErrorState(l.toString()));
+        },
+        (r) {
+          for (int i = 0; i < notifications.length; i++) {
+            notifications[i] = notifications[i].copyWith(read: true);
+          }
+          emit(NotificationSuccessState(notifications: notifications));
+        },
+      );
+    } catch (e) {
+      emit(NotificationErrorState(e.toString()));
+    }
+  }
+
+  Future markReadNotification(String uuid, Emitter emit) async {
     emit(const NotificationState.loading());
     try {
       final response = await markReadNotificationUseCase.execute(
@@ -87,11 +121,16 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
               notifications[i] = notifications[i].copyWith(read: true);
             }
           }
-          emit(NotificationSuccessState(notifications));
+          emit(NotificationSuccessState(notifications: notifications));
         },
       );
     } catch (e) {
       emit(NotificationErrorState(e.toString()));
     }
+  }
+
+  showOfflinePopupEvent(bool isConnected, Emitter emit) {
+    emit(NotificationSuccessState(
+        notifications: notifications, isOnline: isConnected));
   }
 }

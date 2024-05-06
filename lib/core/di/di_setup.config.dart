@@ -21,10 +21,12 @@ import '../../features/notification/domain/repositories/notification_repository_
     as _i17;
 import '../../features/notification/domain/usecases/get_notifications_use_case.dart'
     as _i39;
-import '../../features/notification/domain/usecases/mark_read_notification_use_case.dart'
+import '../../features/notification/domain/usecases/mark_read_all_notification_use_case.dart'
     as _i43;
-import '../../features/notification/presentation/bloc/notification_bloc.dart'
+import '../../features/notification/domain/usecases/mark_read_notification_use_case.dart'
     as _i44;
+import '../../features/notification/presentation/bloc/notification_bloc.dart'
+    as _i45;
 import '../../features/process/data/datasources/process_remote_data_source.dart'
     as _i20;
 import '../../features/process/data/repositories/process_repository_implement.dart'
@@ -33,7 +35,7 @@ import '../../features/process/domain/repositories/process_repository_inteface.d
     as _i21;
 import '../../features/process/domain/usecases/get_processes_use_case.dart'
     as _i40;
-import '../../features/process/presentation/bloc/process_bloc.dart' as _i45;
+import '../../features/process/presentation/bloc/process_bloc.dart' as _i46;
 import '../../features/profile/data/datasources/profile_remote_data_source.dart'
     as _i23;
 import '../../features/profile/data/repositories/profile_repository_implement.dart'
@@ -45,7 +47,7 @@ import '../../features/profile/presentation/bloc/logged_cubit/logged_in_cubit.da
 import '../../features/profile/presentation/bloc/login_bloc/login_bloc.dart'
     as _i15;
 import '../../features/profile/presentation/bloc/profile_bloc/profile_bloc.dart'
-    as _i46;
+    as _i47;
 import '../../features/search/data/datasources/engine_info_remote_data_source.dart'
     as _i6;
 import '../../features/search/data/repositories/engine_info_repository_implement.dart'
@@ -81,7 +83,7 @@ import '../../features/task/domain/usecases/get_task_use_case.dart' as _i42;
 import '../../features/task/domain/usecases/get_tasks_use_case.dart' as _i41;
 import '../../features/task/domain/usecases/upload_file_use_case.dart' as _i36;
 import '../../features/task/presentation/bloc/delete_file_bloc/delete_file_bloc.dart'
-    as _i50;
+    as _i51;
 import '../../features/task/presentation/bloc/download_file_bloc/download_file_bloc.dart'
     as _i5;
 import '../../features/task/presentation/bloc/filter_bloc/filter_bloc.dart'
@@ -89,14 +91,14 @@ import '../../features/task/presentation/bloc/filter_bloc/filter_bloc.dart'
 import '../../features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart'
     as _i19;
 import '../../features/task/presentation/bloc/sort_bloc/sort_bloc.dart' as _i29;
-import '../../features/task/presentation/bloc/task_bloc/task_bloc.dart' as _i47;
+import '../../features/task/presentation/bloc/task_bloc/task_bloc.dart' as _i48;
 import '../../features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart'
-    as _i48;
-import '../../features/task/presentation/bloc/toast_message_cubit/toast_message_cubit.dart'
     as _i49;
+import '../../features/task/presentation/bloc/toast_message_cubit/toast_message_cubit.dart'
+    as _i50;
 import '../../features/task/presentation/bloc/upload_file_bloc/upload_file_bloc.dart'
     as _i35;
-import 'app_module.dart' as _i51;
+import 'app_module.dart' as _i52;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 Future<_i1.GetIt> $initGetIt(
@@ -170,25 +172,29 @@ Future<_i1.GetIt> $initGetIt(
       _i41.GetTaskListUseCase(repository: gh<_i33.TaskRepositoryInterface>()));
   gh.factory<_i42.GetTaskUseCase>(() =>
       _i42.GetTaskUseCase(repository: gh<_i33.TaskRepositoryInterface>()));
-  gh.factory<_i43.MarkReadNotificationUseCase>(() =>
-      _i43.MarkReadNotificationUseCase(
+  gh.factory<_i43.MarkReadAllNotificationUseCase>(() =>
+      _i43.MarkReadAllNotificationUseCase(
           repository: gh<_i17.NotificationRepositoryInterface>()));
-  gh.factory<_i44.NotificationBloc>(() => _i44.NotificationBloc(
-        gh<_i39.GetNotificationUseCase>(),
-        gh<_i43.MarkReadNotificationUseCase>(),
-      ));
-  gh.factory<_i45.ProcessBloc>(
-      () => _i45.ProcessBloc(gh<_i40.GetProcessesUseCase>()));
-  gh.factory<_i46.ProfileBloc>(
-      () => _i46.ProfileBloc(gh<_i24.ProfileRepositoryInterface>()));
-  gh.factory<_i47.TaskBloc>(() => _i47.TaskBloc(gh<_i41.GetTaskListUseCase>()));
-  gh.factory<_i48.TaskDetailBloc>(
-      () => _i48.TaskDetailBloc(gh<_i42.GetTaskUseCase>()));
-  gh.factory<_i49.ToastMessageCubit>(
-      () => _i49.ToastMessageCubit(gh<_i42.GetTaskUseCase>()));
-  gh.factory<_i50.DeleteFileBloc>(
-      () => _i50.DeleteFileBloc(gh<_i37.DeleteFileUseCase>()));
+  gh.factory<_i44.MarkReadNotificationUseCase>(() =>
+      _i44.MarkReadNotificationUseCase(
+          repository: gh<_i17.NotificationRepositoryInterface>()));
+  gh.singleton<_i45.NotificationBloc>(_i45.NotificationBloc(
+    gh<_i39.GetNotificationUseCase>(),
+    gh<_i44.MarkReadNotificationUseCase>(),
+    gh<_i43.MarkReadAllNotificationUseCase>(),
+  ));
+  gh.factory<_i46.ProcessBloc>(
+      () => _i46.ProcessBloc(gh<_i40.GetProcessesUseCase>()));
+  gh.factory<_i47.ProfileBloc>(
+      () => _i47.ProfileBloc(gh<_i24.ProfileRepositoryInterface>()));
+  gh.factory<_i48.TaskBloc>(() => _i48.TaskBloc(gh<_i41.GetTaskListUseCase>()));
+  gh.factory<_i49.TaskDetailBloc>(
+      () => _i49.TaskDetailBloc(gh<_i42.GetTaskUseCase>()));
+  gh.factory<_i50.ToastMessageCubit>(
+      () => _i50.ToastMessageCubit(gh<_i42.GetTaskUseCase>()));
+  gh.factory<_i51.DeleteFileBloc>(
+      () => _i51.DeleteFileBloc(gh<_i37.DeleteFileUseCase>()));
   return getIt;
 }
 
-class _$AppModule extends _i51.AppModule {}
+class _$AppModule extends _i52.AppModule {}

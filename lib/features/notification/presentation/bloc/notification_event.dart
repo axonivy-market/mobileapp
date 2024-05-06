@@ -6,4 +6,8 @@ class NotificationEvent with _$NotificationEvent {
       _GetNotification;
   const factory NotificationEvent.markReadNotification(String uuid) =
       _MarkReadNotification;
+  const factory NotificationEvent.markReadAllNotification() = _MarkReadAll;
+
+  const factory NotificationEvent.showOfflinePopupEvent(bool isConnected) =
+      ShowOfflinePopupEvent;
 }

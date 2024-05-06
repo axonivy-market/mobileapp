@@ -56,7 +56,7 @@ class _NotificationRemoteDataSource implements NotificationRemoteDataSource {
   }
 
   @override
-  Future<dynamic> markReadNotification(
+  Future<HttpResponse<dynamic>> markReadNotification(
     String uuid,
     String requestBy,
     dynamic body,
@@ -66,24 +66,58 @@ class _NotificationRemoteDataSource implements NotificationRemoteDataSource {
     final _headers = <String, dynamic>{r'X-Requested-By': requestBy};
     _headers.removeWhere((k, v) => v == null);
     final _data = body;
-    final _result = await _dio.fetch(_setStreamType<dynamic>(Options(
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
       method: 'PATCH',
       headers: _headers,
       extra: _extra,
     )
-        .compose(
-          _dio.options,
-          '/api/notifications/${uuid}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
+            .compose(
+              _dio.options,
+              '/api/notifications/${uuid}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
     final value = _result.data;
-    return value;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
+  }
+
+  @override
+  Future<HttpResponse<dynamic>> markReadAllNotification(
+    String requestBy,
+    dynamic body,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{r'X-Requested-By': requestBy};
+    _headers.removeWhere((k, v) => v == null);
+    final _data = body;
+    final _result =
+        await _dio.fetch(_setStreamType<HttpResponse<dynamic>>(Options(
+      method: 'PATCH',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/notifications',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data;
+    final httpResponse = HttpResponse(value, _result);
+    return httpResponse;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

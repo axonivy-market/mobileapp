@@ -5,12 +5,16 @@ import 'package:axon_ivy/core/di/di.dart';
 import 'package:axon_ivy/features/notification/domain/entities/notification.dart'
     as entities;
 import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
+import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/pages/document_list_page.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/generated/colors.gen.dart';
 import 'package:axon_ivy/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
 import 'package:axon_ivy/shared/widgets/data_empty_widget.dart';
+import 'package:axon_ivy/shared/widgets/offline_popup_widget.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +27,8 @@ enum NotificationType {
   unread;
 
   String get title => switch (this) {
-        all => 'All',
-        unread => 'Unread',
+        all => "notificationList.all".tr(),
+        unread => "notificationList.unread".tr(),
       };
 }
 
@@ -39,7 +43,9 @@ class TabEnitity {
 }
 
 class NotificationPage extends BasePage {
-  const NotificationPage({super.key});
+  const NotificationPage({
+    super.key,
+  });
 
   @override
   State<NotificationPage> createState() => _NotificationPageState();
@@ -48,7 +54,7 @@ class NotificationPage extends BasePage {
 class _NotificationPageState extends BasePageState<NotificationPage>
     with TickerProviderStateMixin {
   late final TabController _tabController;
-  late NotificationBloc _notificationBloc;
+  bool isNotConnectedInternet = false;
   List<entities.Notification> notifications = [];
   List<entities.Notification> notificationsUnread = [];
 
@@ -56,8 +62,11 @@ class _NotificationPageState extends BasePageState<NotificationPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
-    _notificationBloc = getIt<NotificationBloc>()
-      ..add(const NotificationEvent.getNotifications(1, 11));
+
+    if (context.read<ConnectivityBloc>().connectivityResult ==
+        ConnectivityResult.none) {
+      isNotConnectedInternet = true;
+    }
   }
 
   @override
@@ -66,204 +75,242 @@ class _NotificationPageState extends BasePageState<NotificationPage>
     _tabController.dispose();
   }
 
-  void _onRefresh(
-      BuildContext context, NotificationType notificationType) async {
-    _notificationBloc.add(const NotificationEvent.getNotifications(1, 11));
+  void _onRefresh(BuildContext context) async {
+    context
+        .read<NotificationBloc>()
+        .add(const NotificationEvent.getNotifications(1, 10));
   }
 
   @override
   Widget build(BuildContext context) {
+    bool isNotificationOnline = true;
     List<TabEnitity> tabs = [];
-
-    return BlocProvider(
-      create: (context) => _notificationBloc,
-      child: BlocListener<NotificationBloc, NotificationState>(
-        listener: (context, state) {
-          if (state is NotificationLoadingState) {
-            showLoading();
-          } else {
-            hideLoading();
-          }
-        },
-        child: BlocBuilder<NotificationBloc, NotificationState>(
-          builder: (context, state) {
-            if (state is NotificationSuccessState) {
-              notifications = state.notifications;
-              notificationsUnread =
-                  notifications.where((e) => e.read == false).toList();
-              tabs = [
-                TabEnitity(
-                  type: NotificationType.all,
-                  notificationList: notifications,
-                ),
-                TabEnitity(
-                  type: NotificationType.unread,
-                  notificationList: notificationsUnread,
-                ),
-              ];
+    return MultiBlocListener(
+      listeners: [
+        BlocListener<NotificationBloc, NotificationState>(
+          listener: (context, state) {
+            if (state is NotificationLoadingState) {
+              showLoading();
+            } else {
+              hideLoading();
             }
-            return DefaultTabController(
-              length: 2,
-              child: Scaffold(
-                body: NestedScrollView(
-                  headerSliverBuilder: (context, innerBoxIsScrolled) {
-                    return [
-                      SliverOverlapAbsorber(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context),
-                        sliver: SliverAppBar(
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor,
-                          leadingWidth: 100.w,
-                          title: Text(
-                            'Notification',
-                            style: GoogleFonts.inter(
-                                color: Theme.of(context).cardColor),
-                          ),
-                          leading: const BackButtonWidget(),
-                          actions: [
-                            PopupMenuButton<String>(
-                              elevation: 0.2,
-                              color: Theme.of(context).colorScheme.background,
-                              position: PopupMenuPosition.under,
-                              itemBuilder: (BuildContext context) {
-                                return [
-                                  PopupMenuItem(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        AppAssets.icons.iconFile.svg(
-                                          colorFilter: ColorFilter.mode(
-                                            Theme.of(context)
-                                                .colorScheme
-                                                .surface,
-                                            BlendMode.srcIn,
-                                          ),
-                                        ),
-                                        5.horizontalSpace,
-                                        Expanded(
-                                          child: Text(
-                                            "Mark on as read",
-                                            style: GoogleFonts.inter(
-                                              textStyle: TextStyle(
-                                                fontSize: 17.sp,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .surface,
-                                                fontWeight: FontWeight.w400,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
+          },
+        ),
+        BlocListener<ConnectivityBloc, ConnectivityState>(
+          listener: (context, state) {
+            context.read<NotificationBloc>().add(
+                  NotificationEvent.showOfflinePopupEvent(
+                      state is ConnectedState),
+                );
+          },
+        ),
+      ],
+      child: BlocBuilder<NotificationBloc, NotificationState>(
+        builder: (context, state) {
+          if (state is NotificationSuccessState) {
+            notifications = state.notifications;
+            isNotificationOnline = state.isOnline;
+            isNotConnectedInternet = !state.isOnline;
+            notificationsUnread =
+                notifications.where((e) => e.read == false).toList();
+            tabs = [
+              TabEnitity(
+                type: NotificationType.all,
+                notificationList: notifications,
+              ),
+              TabEnitity(
+                type: NotificationType.unread,
+                notificationList: notificationsUnread,
+              ),
+            ];
+          }
+          return DefaultTabController(
+            length: 2,
+            child: Scaffold(
+              appBar: AppBar(
+                scrolledUnderElevation: 0,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                leadingWidth: 100.w,
+                title: Text(
+                  "notificationList.title".tr(),
+                  style: GoogleFonts.inter(color: Theme.of(context).cardColor),
+                ),
+                leading: const BackButtonWidget(),
+                actions: [
+                  PopupMenuButton(
+                    elevation: 0.2,
+                    color: Theme.of(context).colorScheme.background,
+                    position: PopupMenuPosition.under,
+                    itemBuilder: (BuildContext context) {
+                      return [
+                        PopupMenuItem(
+                          onTap: () {
+                            context.read<NotificationBloc>().add(
+                                  const NotificationEvent
+                                      .markReadAllNotification(),
+                                );
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              AppAssets.icons.iconFile.svg(
+                                colorFilter: ColorFilter.mode(
+                                  Theme.of(context).colorScheme.surface,
+                                  BlendMode.srcIn,
+                                ),
+                              ),
+                              5.horizontalSpace,
+                              Expanded(
+                                child: Text(
+                                  "notificationList.markOnAsRead".tr(),
+                                  style: GoogleFonts.inter(
+                                    textStyle: TextStyle(
+                                      fontSize: 17.sp,
+                                      color:
+                                          Theme.of(context).colorScheme.surface,
+                                      fontWeight: FontWeight.w400,
                                     ),
                                   ),
-                                ];
-                              },
-                              icon: const Icon(Icons.more_horiz),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ];
+                    },
+                    icon: const Icon(Icons.more_horiz),
+                  ),
+                ],
+              ),
+              body: Stack(
+                children: [
+                  NestedScrollView(
+                    headerSliverBuilder: (context, innerBoxIsScrolled) {
+                      return [
+                        if (notifications.isNotEmpty)
+                          SliverOverlapAbsorber(
+                            handle:
+                                NestedScrollView.sliverOverlapAbsorberHandleFor(
+                              context,
                             ),
-                          ],
-                          pinned: true,
-                          expandedHeight: 80.0,
-                          surfaceTintColor:
-                              Theme.of(context).colorScheme.background,
-                          scrolledUnderElevation: 15,
-                          shadowColor: Colors.black.withOpacity(0.3),
-                          forceElevated: innerBoxIsScrolled,
-                          bottom: notifications.isNotEmpty
-                              ? PreferredSize(
-                                  preferredSize: Size.fromHeight(50.h),
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                            horizontal: 15, vertical: 10)
-                                        .r,
-                                    child: Container(
-                                      height: 40.h,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.zhenZhuBaiPear,
-                                        borderRadius: BorderRadius.circular(
-                                          10.0.r,
-                                        ),
+                            sliver: SliverAppBar(
+                              backgroundColor:
+                                  Theme.of(context).scaffoldBackgroundColor,
+                              pinned: true,
+                              surfaceTintColor:
+                                  Theme.of(context).colorScheme.background,
+                              scrolledUnderElevation: 15,
+                              shadowColor: Colors.black.withOpacity(0.3),
+                              forceElevated: innerBoxIsScrolled,
+                              bottom: PreferredSize(
+                                preferredSize: Size.fromHeight(10.h),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                          horizontal: 15, vertical: 10)
+                                      .r,
+                                  child: Container(
+                                    height: 40.h,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onPrimaryContainer,
+                                      borderRadius: BorderRadius.circular(
+                                        10.0.r,
                                       ),
-                                      child: TabBar(
-                                        // onTap: (index) {},
-                                        labelPadding: EdgeInsets.zero,
-                                        overlayColor:
-                                            const MaterialStatePropertyAll(
-                                          Colors.transparent,
-                                        ),
-                                        indicatorColor: Colors.transparent,
-                                        dividerColor: Colors.transparent,
-                                        unselectedLabelColor:
-                                            AppColors.blackMana,
-                                        labelColor: Colors.white,
-                                        controller: _tabController,
-                                        indicatorSize: TabBarIndicatorSize.tab,
-                                        indicator: BoxDecoration(
+                                    ),
+                                    child: TabBar(
+                                      // onTap: (index) {},
+                                      labelPadding: EdgeInsets.zero,
+                                      overlayColor:
+                                          const MaterialStatePropertyAll(
+                                        Colors.transparent,
+                                      ),
+                                      indicatorColor: Colors.transparent,
+                                      dividerColor: Colors.transparent,
+                                      unselectedLabelColor: Theme.of(context)
+                                          .colorScheme
+                                          .secondary,
+                                      labelColor: Theme.of(context)
+                                          .colorScheme
+                                          .onSurface,
+                                      controller: _tabController,
+                                      indicatorSize: TabBarIndicatorSize.tab,
+                                      indicator: BoxDecoration(
                                           borderRadius: BorderRadius.circular(
                                             10.0.r,
                                           ),
-                                          color: AppColors.tropicSea,
-                                        ),
-                                        tabs: tabs
-                                            .map(
-                                              (TabEnitity tab) => Tab(
-                                                child: Text(
-                                                  tab.type.title,
-                                                  style: GoogleFonts.inter(
-                                                    textStyle: TextStyle(
-                                                      fontSize: 17.sp,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .primary),
+                                      tabs: tabs
+                                          .map(
+                                            (TabEnitity tab) => Tab(
+                                              child: Text(
+                                                tab.type.title,
+                                                style: GoogleFonts.inter(
+                                                  textStyle: TextStyle(
+                                                    fontSize: 17.sp,
+                                                    fontWeight: FontWeight.w500,
                                                   ),
                                                 ),
                                               ),
-                                            )
-                                            .toList(),
-                                      ),
+                                            ),
+                                          )
+                                          .toList(),
                                     ),
                                   ),
-                                )
-                              : null,
-                        ),
-                      ),
-                    ];
-                  },
-                  body: notifications.isNotEmpty
-                      ? TabBarView(
-                          controller: _tabController,
-                          children: tabs
-                              .map(
-                                (TabEnitity tab) => SafeArea(
-                                  top: false,
-                                  bottom: false,
-                                  child: Builder(
-                                    builder: (BuildContext context) {
-                                      return tab.notificationList.isNotEmpty
-                                          ? CustomScrollView(
-                                              key: PageStorageKey(
-                                                  tab.type.title),
-                                              slivers: [
-                                                CupertinoSliverRefreshControl(
-                                                  onRefresh: () async =>
-                                                      _onRefresh(
-                                                    context,
-                                                    tab.type,
+                                ),
+                              ),
+                            ),
+                          ),
+                      ];
+                    },
+                    body: notifications.isNotEmpty
+                        ? TabBarView(
+                            controller: _tabController,
+                            children: tabs
+                                .map(
+                                  (TabEnitity tab) => SafeArea(
+                                    top: false,
+                                    bottom: false,
+                                    child: Builder(
+                                      builder: (BuildContext context) {
+                                        return SlidableAutoCloseBehavior(
+                                          child: CustomScrollView(
+                                            key: PageStorageKey(
+                                              tab.type.title,
+                                            ),
+                                            slivers: [
+                                              CupertinoSliverRefreshControl(
+                                                onRefresh: () async =>
+                                                    _onRefresh(
+                                                  context,
+                                                ),
+                                              ),
+                                              SliverOverlapInjector(
+                                                handle: NestedScrollView
+                                                    .sliverOverlapAbsorberHandleFor(
+                                                        context),
+                                              ),
+                                              if (tab.notificationList.isEmpty)
+                                                SliverFillRemaining(
+                                                  child: DataEmptyWidget(
+                                                    message:
+                                                        "notificationList.noUnreadNotifications"
+                                                            .tr(),
+                                                    icon: AppAssets.icons
+                                                        .iconEmptyUnreadNotifications
+                                                        .svg(),
                                                   ),
                                                 ),
-                                                SliverOverlapInjector(
-                                                  handle: NestedScrollView
-                                                      .sliverOverlapAbsorberHandleFor(
-                                                          context),
-                                                ),
+                                              if (tab
+                                                  .notificationList.isNotEmpty)
                                                 SliverPadding(
                                                   padding: const EdgeInsets
-                                                          .symmetric(
-                                                          vertical: 10.0,
-                                                          horizontal: 15.0)
-                                                      .r,
+                                                      .symmetric(
+                                                    vertical: 10.0,
+                                                    horizontal: 15.0,
+                                                  ).r,
                                                   sliver: SliverList(
                                                     delegate:
                                                         SliverChildBuilderDelegate(
@@ -283,31 +330,49 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                                     ),
                                                   ),
                                                 ),
-                                              ],
-                                            )
-                                          : DataEmptyWidget(
-                                              message:
-                                                  'There are no unread notifications',
-                                              icon: AppAssets.icons
-                                                  .iconEmptyUnreadNotifications
-                                                  .svg(),
-                                            );
-                                    },
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   ),
-                                ),
-                              )
-                              .toList(),
-                        )
-                      : DataEmptyWidget(
-                          message:
-                              'There are no notifications at the moment...',
-                          icon: AppAssets.icons.iconEmptyNotifications.svg(),
-                        ),
-                ),
+                                )
+                                .toList(),
+                          )
+                        : Builder(
+                            builder: (BuildContext context) {
+                              return CustomScrollView(
+                                slivers: [
+                                  CupertinoSliverRefreshControl(
+                                    onRefresh: () async => _onRefresh(
+                                      context,
+                                    ),
+                                  ),
+                                  SliverFillRemaining(
+                                    child: DataEmptyWidget(
+                                      message:
+                                          "notificationList.noNotifications"
+                                              .tr(),
+                                      icon: AppAssets
+                                          .icons.iconEmptyNotifications
+                                          .svg(),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                  ),
+                  if (!isNotificationOnline || isNotConnectedInternet)
+                    OfflinePopupWidget(
+                      description: "notificationList.offlineNotification".tr(),
+                      onRefresh: () => _onRefresh(context),
+                    ),
+                ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
@@ -335,7 +400,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
               children: [
                 const Icon(Icons.info_outline_rounded),
                 Text(
-                  'Infos',
+                  "notificationList.infos".tr(),
                   style: TextStyle(fontSize: 13.sp),
                 )
               ],
@@ -355,20 +420,20 @@ class _NotificationPageState extends BasePageState<NotificationPage>
             autoClose: true,
             padding: EdgeInsets.zero,
             onPressed: (context) {
-              _notificationBloc.add(
+              getIt<NotificationBloc>().add(
                 NotificationEvent.markReadNotification(
                   notifications[index].uuid,
                 ),
               );
             },
-            backgroundColor: AppColors.tropicSea,
-            foregroundColor: Colors.white,
+            backgroundColor: Theme.of(context).colorScheme.primary,
+            foregroundColor: Theme.of(context).colorScheme.onSurface,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(Icons.remove_red_eye_outlined),
                 Text(
-                  'Mark read',
+                  "notificationList.markRead".tr(),
                   style: TextStyle(fontSize: 13.sp),
                 )
               ],
@@ -385,10 +450,10 @@ class _NotificationPageState extends BasePageState<NotificationPage>
               child: SizedBox(),
             ),
             if (!notifications[index].read) ...[
-              const Icon(
+              Icon(
                 Icons.circle,
                 size: 10,
-                color: AppColors.tropicSea,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ] else
               const SizedBox(
@@ -408,7 +473,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
           style: GoogleFonts.inter(
             fontSize: 15.sp,
             fontWeight: FontWeight.w500,
-            color: Theme.of(context).colorScheme.onBackground,
+            color: Theme.of(context).colorScheme.surface,
           ),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,

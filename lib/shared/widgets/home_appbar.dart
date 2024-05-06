@@ -1,7 +1,7 @@
 import 'package:axon_ivy/core/app/app.dart';
+import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
-import 'package:axon_ivy/generated/colors.gen.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +16,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.isShowLastUpdated = false,
     this.scrolledUnderElevation = 15.0,
-    this.isNewNotification = false,
   });
 
   final bool isShowLastUpdated;
   final double scrolledUnderElevation;
-  final bool isNewNotification;
 
   @override
   Size get preferredSize => Size.fromHeight(Constants.appBarHeight.h);
@@ -56,16 +54,31 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-            if (isNewNotification)
-              const Positioned(
-                right: 15,
-                top: 15,
-                child: Icon(
-                  Icons.circle,
-                  size: 10,
-                  color: AppColors.tropicSea,
-                ),
-              ),
+            BlocBuilder<NotificationBloc, NotificationState>(
+              builder: (context, state) {
+                bool isUnreadNotification = false;
+                if (state is NotificationSuccessState) {
+                  for (var notification in state.notifications) {
+                    if (notification.read == false) {
+                      isUnreadNotification = true;
+                      break;
+                    }
+                  }
+                }
+
+                return isUnreadNotification
+                    ? Positioned(
+                        right: 15,
+                        top: 15,
+                        child: Icon(
+                          Icons.circle,
+                          size: 10,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      )
+                    : const SizedBox();
+              },
+            ),
           ],
         ),
         5.horizontalSpace

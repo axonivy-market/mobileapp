@@ -20,18 +20,24 @@ mixin _$NotificationEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int page, int pageSize) getNotifications,
     required TResult Function(String uuid) markReadNotification,
+    required TResult Function() markReadAllNotification,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, int pageSize)? getNotifications,
     TResult? Function(String uuid)? markReadNotification,
+    TResult? Function()? markReadAllNotification,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, int pageSize)? getNotifications,
     TResult Function(String uuid)? markReadNotification,
+    TResult Function()? markReadAllNotification,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +45,25 @@ mixin _$NotificationEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_GetNotification value) getNotifications,
     required TResult Function(_MarkReadNotification value) markReadNotification,
+    required TResult Function(_MarkReadAll value) markReadAllNotification,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetNotification value)? getNotifications,
     TResult? Function(_MarkReadNotification value)? markReadNotification,
+    TResult? Function(_MarkReadAll value)? markReadAllNotification,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetNotification value)? getNotifications,
     TResult Function(_MarkReadNotification value)? markReadNotification,
+    TResult Function(_MarkReadAll value)? markReadAllNotification,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -161,6 +174,8 @@ class _$GetNotificationImpl
   TResult when<TResult extends Object?>({
     required TResult Function(int page, int pageSize) getNotifications,
     required TResult Function(String uuid) markReadNotification,
+    required TResult Function() markReadAllNotification,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
   }) {
     return getNotifications(page, pageSize);
   }
@@ -170,6 +185,8 @@ class _$GetNotificationImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, int pageSize)? getNotifications,
     TResult? Function(String uuid)? markReadNotification,
+    TResult? Function()? markReadAllNotification,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
   }) {
     return getNotifications?.call(page, pageSize);
   }
@@ -179,6 +196,8 @@ class _$GetNotificationImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, int pageSize)? getNotifications,
     TResult Function(String uuid)? markReadNotification,
+    TResult Function()? markReadAllNotification,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (getNotifications != null) {
@@ -192,6 +211,9 @@ class _$GetNotificationImpl
   TResult map<TResult extends Object?>({
     required TResult Function(_GetNotification value) getNotifications,
     required TResult Function(_MarkReadNotification value) markReadNotification,
+    required TResult Function(_MarkReadAll value) markReadAllNotification,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
   }) {
     return getNotifications(this);
   }
@@ -201,6 +223,8 @@ class _$GetNotificationImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetNotification value)? getNotifications,
     TResult? Function(_MarkReadNotification value)? markReadNotification,
+    TResult? Function(_MarkReadAll value)? markReadAllNotification,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
   }) {
     return getNotifications?.call(this);
   }
@@ -210,6 +234,8 @@ class _$GetNotificationImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetNotification value)? getNotifications,
     TResult Function(_MarkReadNotification value)? markReadNotification,
+    TResult Function(_MarkReadAll value)? markReadAllNotification,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (getNotifications != null) {
@@ -309,6 +335,8 @@ class _$MarkReadNotificationImpl
   TResult when<TResult extends Object?>({
     required TResult Function(int page, int pageSize) getNotifications,
     required TResult Function(String uuid) markReadNotification,
+    required TResult Function() markReadAllNotification,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
   }) {
     return markReadNotification(uuid);
   }
@@ -318,6 +346,8 @@ class _$MarkReadNotificationImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int page, int pageSize)? getNotifications,
     TResult? Function(String uuid)? markReadNotification,
+    TResult? Function()? markReadAllNotification,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
   }) {
     return markReadNotification?.call(uuid);
   }
@@ -327,6 +357,8 @@ class _$MarkReadNotificationImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int page, int pageSize)? getNotifications,
     TResult Function(String uuid)? markReadNotification,
+    TResult Function()? markReadAllNotification,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (markReadNotification != null) {
@@ -340,6 +372,9 @@ class _$MarkReadNotificationImpl
   TResult map<TResult extends Object?>({
     required TResult Function(_GetNotification value) getNotifications,
     required TResult Function(_MarkReadNotification value) markReadNotification,
+    required TResult Function(_MarkReadAll value) markReadAllNotification,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
   }) {
     return markReadNotification(this);
   }
@@ -349,6 +384,8 @@ class _$MarkReadNotificationImpl
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetNotification value)? getNotifications,
     TResult? Function(_MarkReadNotification value)? markReadNotification,
+    TResult? Function(_MarkReadAll value)? markReadAllNotification,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
   }) {
     return markReadNotification?.call(this);
   }
@@ -358,6 +395,8 @@ class _$MarkReadNotificationImpl
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetNotification value)? getNotifications,
     TResult Function(_MarkReadNotification value)? markReadNotification,
+    TResult Function(_MarkReadAll value)? markReadAllNotification,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
     required TResult orElse(),
   }) {
     if (markReadNotification != null) {
@@ -378,12 +417,296 @@ abstract class _MarkReadNotification implements NotificationEvent {
 }
 
 /// @nodoc
+abstract class _$$MarkReadAllImplCopyWith<$Res> {
+  factory _$$MarkReadAllImplCopyWith(
+          _$MarkReadAllImpl value, $Res Function(_$MarkReadAllImpl) then) =
+      __$$MarkReadAllImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$MarkReadAllImplCopyWithImpl<$Res>
+    extends _$NotificationEventCopyWithImpl<$Res, _$MarkReadAllImpl>
+    implements _$$MarkReadAllImplCopyWith<$Res> {
+  __$$MarkReadAllImplCopyWithImpl(
+      _$MarkReadAllImpl _value, $Res Function(_$MarkReadAllImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$MarkReadAllImpl with DiagnosticableTreeMixin implements _MarkReadAll {
+  const _$MarkReadAllImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'NotificationEvent.markReadAllNotification()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty(
+        'type', 'NotificationEvent.markReadAllNotification'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$MarkReadAllImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int page, int pageSize) getNotifications,
+    required TResult Function(String uuid) markReadNotification,
+    required TResult Function() markReadAllNotification,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
+  }) {
+    return markReadAllNotification();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int page, int pageSize)? getNotifications,
+    TResult? Function(String uuid)? markReadNotification,
+    TResult? Function()? markReadAllNotification,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
+  }) {
+    return markReadAllNotification?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int page, int pageSize)? getNotifications,
+    TResult Function(String uuid)? markReadNotification,
+    TResult Function()? markReadAllNotification,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
+    required TResult orElse(),
+  }) {
+    if (markReadAllNotification != null) {
+      return markReadAllNotification();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetNotification value) getNotifications,
+    required TResult Function(_MarkReadNotification value) markReadNotification,
+    required TResult Function(_MarkReadAll value) markReadAllNotification,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
+  }) {
+    return markReadAllNotification(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetNotification value)? getNotifications,
+    TResult? Function(_MarkReadNotification value)? markReadNotification,
+    TResult? Function(_MarkReadAll value)? markReadAllNotification,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+  }) {
+    return markReadAllNotification?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetNotification value)? getNotifications,
+    TResult Function(_MarkReadNotification value)? markReadNotification,
+    TResult Function(_MarkReadAll value)? markReadAllNotification,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    required TResult orElse(),
+  }) {
+    if (markReadAllNotification != null) {
+      return markReadAllNotification(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _MarkReadAll implements NotificationEvent {
+  const factory _MarkReadAll() = _$MarkReadAllImpl;
+}
+
+/// @nodoc
+abstract class _$$ShowOfflinePopupEventImplCopyWith<$Res> {
+  factory _$$ShowOfflinePopupEventImplCopyWith(
+          _$ShowOfflinePopupEventImpl value,
+          $Res Function(_$ShowOfflinePopupEventImpl) then) =
+      __$$ShowOfflinePopupEventImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool isConnected});
+}
+
+/// @nodoc
+class __$$ShowOfflinePopupEventImplCopyWithImpl<$Res>
+    extends _$NotificationEventCopyWithImpl<$Res, _$ShowOfflinePopupEventImpl>
+    implements _$$ShowOfflinePopupEventImplCopyWith<$Res> {
+  __$$ShowOfflinePopupEventImplCopyWithImpl(_$ShowOfflinePopupEventImpl _value,
+      $Res Function(_$ShowOfflinePopupEventImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isConnected = null,
+  }) {
+    return _then(_$ShowOfflinePopupEventImpl(
+      null == isConnected
+          ? _value.isConnected
+          : isConnected // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ShowOfflinePopupEventImpl
+    with DiagnosticableTreeMixin
+    implements ShowOfflinePopupEvent {
+  const _$ShowOfflinePopupEventImpl(this.isConnected);
+
+  @override
+  final bool isConnected;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'NotificationEvent.showOfflinePopupEvent(isConnected: $isConnected)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty(
+          'type', 'NotificationEvent.showOfflinePopupEvent'))
+      ..add(DiagnosticsProperty('isConnected', isConnected));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShowOfflinePopupEventImpl &&
+            (identical(other.isConnected, isConnected) ||
+                other.isConnected == isConnected));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, isConnected);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShowOfflinePopupEventImplCopyWith<_$ShowOfflinePopupEventImpl>
+      get copyWith => __$$ShowOfflinePopupEventImplCopyWithImpl<
+          _$ShowOfflinePopupEventImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int page, int pageSize) getNotifications,
+    required TResult Function(String uuid) markReadNotification,
+    required TResult Function() markReadAllNotification,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent(isConnected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int page, int pageSize)? getNotifications,
+    TResult? Function(String uuid)? markReadNotification,
+    TResult? Function()? markReadAllNotification,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent?.call(isConnected);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int page, int pageSize)? getNotifications,
+    TResult Function(String uuid)? markReadNotification,
+    TResult Function()? markReadAllNotification,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
+    required TResult orElse(),
+  }) {
+    if (showOfflinePopupEvent != null) {
+      return showOfflinePopupEvent(isConnected);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetNotification value) getNotifications,
+    required TResult Function(_MarkReadNotification value) markReadNotification,
+    required TResult Function(_MarkReadAll value) markReadAllNotification,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetNotification value)? getNotifications,
+    TResult? Function(_MarkReadNotification value)? markReadNotification,
+    TResult? Function(_MarkReadAll value)? markReadAllNotification,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+  }) {
+    return showOfflinePopupEvent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetNotification value)? getNotifications,
+    TResult Function(_MarkReadNotification value)? markReadNotification,
+    TResult Function(_MarkReadAll value)? markReadAllNotification,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    required TResult orElse(),
+  }) {
+    if (showOfflinePopupEvent != null) {
+      return showOfflinePopupEvent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowOfflinePopupEvent implements NotificationEvent {
+  const factory ShowOfflinePopupEvent(final bool isConnected) =
+      _$ShowOfflinePopupEventImpl;
+
+  bool get isConnected;
+  @JsonKey(ignore: true)
+  _$$ShowOfflinePopupEventImplCopyWith<_$ShowOfflinePopupEventImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$NotificationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Notification> notifications) success,
+    required TResult Function(List<Notification> notifications, bool isOnline)
+        success,
     required TResult Function(String uuid) markedReadNotification,
   }) =>
       throw _privateConstructorUsedError;
@@ -391,7 +714,7 @@ mixin _$NotificationState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<Notification> notifications)? success,
+    TResult? Function(List<Notification> notifications, bool isOnline)? success,
     TResult? Function(String uuid)? markedReadNotification,
   }) =>
       throw _privateConstructorUsedError;
@@ -399,7 +722,7 @@ mixin _$NotificationState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Notification> notifications)? success,
+    TResult Function(List<Notification> notifications, bool isOnline)? success,
     TResult Function(String uuid)? markedReadNotification,
     required TResult orElse(),
   }) =>
@@ -503,7 +826,8 @@ class _$NotificationLoadingStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Notification> notifications) success,
+    required TResult Function(List<Notification> notifications, bool isOnline)
+        success,
     required TResult Function(String uuid) markedReadNotification,
   }) {
     return loading();
@@ -514,7 +838,7 @@ class _$NotificationLoadingStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<Notification> notifications)? success,
+    TResult? Function(List<Notification> notifications, bool isOnline)? success,
     TResult? Function(String uuid)? markedReadNotification,
   }) {
     return loading?.call();
@@ -525,7 +849,7 @@ class _$NotificationLoadingStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Notification> notifications)? success,
+    TResult Function(List<Notification> notifications, bool isOnline)? success,
     TResult Function(String uuid)? markedReadNotification,
     required TResult orElse(),
   }) {
@@ -658,7 +982,8 @@ class _$NotificationErrorStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Notification> notifications) success,
+    required TResult Function(List<Notification> notifications, bool isOnline)
+        success,
     required TResult Function(String uuid) markedReadNotification,
   }) {
     return error(this.error);
@@ -669,7 +994,7 @@ class _$NotificationErrorStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<Notification> notifications)? success,
+    TResult? Function(List<Notification> notifications, bool isOnline)? success,
     TResult? Function(String uuid)? markedReadNotification,
   }) {
     return error?.call(this.error);
@@ -680,7 +1005,7 @@ class _$NotificationErrorStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Notification> notifications)? success,
+    TResult Function(List<Notification> notifications, bool isOnline)? success,
     TResult Function(String uuid)? markedReadNotification,
     required TResult orElse(),
   }) {
@@ -747,7 +1072,7 @@ abstract class _$$NotificationSuccessStateImplCopyWith<$Res> {
           $Res Function(_$NotificationSuccessStateImpl) then) =
       __$$NotificationSuccessStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<Notification> notifications});
+  $Res call({List<Notification> notifications, bool isOnline});
 }
 
 /// @nodoc
@@ -764,12 +1089,17 @@ class __$$NotificationSuccessStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? notifications = null,
+    Object? isOnline = null,
   }) {
     return _then(_$NotificationSuccessStateImpl(
-      null == notifications
+      notifications: null == notifications
           ? _value._notifications
           : notifications // ignore: cast_nullable_to_non_nullable
               as List<Notification>,
+      isOnline: null == isOnline
+          ? _value.isOnline
+          : isOnline // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -779,7 +1109,8 @@ class __$$NotificationSuccessStateImplCopyWithImpl<$Res>
 class _$NotificationSuccessStateImpl
     with DiagnosticableTreeMixin
     implements NotificationSuccessState {
-  const _$NotificationSuccessStateImpl(final List<Notification> notifications)
+  const _$NotificationSuccessStateImpl(
+      {required final List<Notification> notifications, this.isOnline = true})
       : _notifications = notifications;
 
   final List<Notification> _notifications;
@@ -791,8 +1122,12 @@ class _$NotificationSuccessStateImpl
   }
 
   @override
+  @JsonKey()
+  final bool isOnline;
+
+  @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'NotificationState.success(notifications: $notifications)';
+    return 'NotificationState.success(notifications: $notifications, isOnline: $isOnline)';
   }
 
   @override
@@ -800,7 +1135,8 @@ class _$NotificationSuccessStateImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'NotificationState.success'))
-      ..add(DiagnosticsProperty('notifications', notifications));
+      ..add(DiagnosticsProperty('notifications', notifications))
+      ..add(DiagnosticsProperty('isOnline', isOnline));
   }
 
   @override
@@ -809,12 +1145,14 @@ class _$NotificationSuccessStateImpl
         (other.runtimeType == runtimeType &&
             other is _$NotificationSuccessStateImpl &&
             const DeepCollectionEquality()
-                .equals(other._notifications, _notifications));
+                .equals(other._notifications, _notifications) &&
+            (identical(other.isOnline, isOnline) ||
+                other.isOnline == isOnline));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_notifications));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_notifications), isOnline);
 
   @JsonKey(ignore: true)
   @override
@@ -828,10 +1166,11 @@ class _$NotificationSuccessStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Notification> notifications) success,
+    required TResult Function(List<Notification> notifications, bool isOnline)
+        success,
     required TResult Function(String uuid) markedReadNotification,
   }) {
-    return success(notifications);
+    return success(notifications, isOnline);
   }
 
   @override
@@ -839,10 +1178,10 @@ class _$NotificationSuccessStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<Notification> notifications)? success,
+    TResult? Function(List<Notification> notifications, bool isOnline)? success,
     TResult? Function(String uuid)? markedReadNotification,
   }) {
-    return success?.call(notifications);
+    return success?.call(notifications, isOnline);
   }
 
   @override
@@ -850,12 +1189,12 @@ class _$NotificationSuccessStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Notification> notifications)? success,
+    TResult Function(List<Notification> notifications, bool isOnline)? success,
     TResult Function(String uuid)? markedReadNotification,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(notifications);
+      return success(notifications, isOnline);
     }
     return orElse();
   }
@@ -902,9 +1241,11 @@ class _$NotificationSuccessStateImpl
 
 abstract class NotificationSuccessState implements NotificationState {
   const factory NotificationSuccessState(
-      final List<Notification> notifications) = _$NotificationSuccessStateImpl;
+      {required final List<Notification> notifications,
+      final bool isOnline}) = _$NotificationSuccessStateImpl;
 
   List<Notification> get notifications;
+  bool get isOnline;
   @JsonKey(ignore: true)
   _$$NotificationSuccessStateImplCopyWith<_$NotificationSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -991,7 +1332,8 @@ class _$NotificationMarkedReadStateImpl
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(String error) error,
-    required TResult Function(List<Notification> notifications) success,
+    required TResult Function(List<Notification> notifications, bool isOnline)
+        success,
     required TResult Function(String uuid) markedReadNotification,
   }) {
     return markedReadNotification(uuid);
@@ -1002,7 +1344,7 @@ class _$NotificationMarkedReadStateImpl
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(String error)? error,
-    TResult? Function(List<Notification> notifications)? success,
+    TResult? Function(List<Notification> notifications, bool isOnline)? success,
     TResult? Function(String uuid)? markedReadNotification,
   }) {
     return markedReadNotification?.call(uuid);
@@ -1013,7 +1355,7 @@ class _$NotificationMarkedReadStateImpl
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(String error)? error,
-    TResult Function(List<Notification> notifications)? success,
+    TResult Function(List<Notification> notifications, bool isOnline)? success,
     TResult Function(String uuid)? markedReadNotification,
     required TResult orElse(),
   }) {

@@ -5,18 +5,16 @@ import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class MarkReadNotificationUseCase {
+class MarkReadAllNotificationUseCase {
   final NotificationRepositoryInterface repository;
 
-  MarkReadNotificationUseCase({required this.repository});
+  MarkReadAllNotificationUseCase({required this.repository});
   Future<Either<Failure, bool>> execute({
-    required String uuid,
     required Map<String, dynamic> body,
     required String requestBy,
   }) async {
     try {
-      final result = await repository.markReadNotification(
-        uuid: uuid,
+      final result = await repository.markReadAllNotification(
         body: body,
         requestBy: requestBy,
       );

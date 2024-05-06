@@ -7,7 +7,6 @@ import 'package:axon_ivy/features/task/presentation/bloc/download_file_bloc/down
 import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/upload_file_bloc/upload_file_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
-import 'package:axon_ivy/generated/colors.gen.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
 import 'package:axon_ivy/shared/widgets/data_empty_widget.dart';
@@ -409,9 +408,7 @@ class AppListTile extends ListTile {
     // ListTile Background Color Appears outside of ListView bounds
     // Preffered URL: https://github.com/flutter/flutter/issues/94261
     return Card(
-      // color: Theme.of(context).colorScheme.background,
-      color: AppColors.zhenZhuBaiPear,
-
+      color: Theme.of(context).colorScheme.onPrimaryContainer,
       elevation: 0,
       child: ListTile(
         minLeadingWidth: minLeadingWidth,

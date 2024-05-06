@@ -9,7 +9,6 @@ import 'package:axon_ivy/features/profile/presentation/bloc/profile_bloc/profile
 import 'package:axon_ivy/features/search/presentation/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/features/search/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:axon_ivy/features/search/presentation/pages/search_page.dart';
-import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_bloc/task_bloc.dart';
@@ -63,9 +62,7 @@ class _TabBarPageState extends State<TabBarPage> {
   late final TabBarCubit _tabBarCubit;
   late final LoggedInCubit _loggedInCubit;
   late final ToastMessageCubit _toastMessageCubit;
-  late final ConnectivityBloc _connectivityBloc;
   late final EngineInfoCubit _engineInfoCubit;
-  late final NotificationBloc _notificationBloc;
 
   bool shouldFetchData = true;
   int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
@@ -103,16 +100,13 @@ class _TabBarPageState extends State<TabBarPage> {
     _tabBarCubit = getIt<TabBarCubit>();
     _loggedInCubit = getIt<LoggedInCubit>();
     _toastMessageCubit = getIt<ToastMessageCubit>();
-    _connectivityBloc = getIt<ConnectivityBloc>();
     _engineInfoCubit = getIt<EngineInfoCubit>();
-    _notificationBloc = getIt<NotificationBloc>();
 
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
-      _notificationBloc.add(
-        const NotificationEvent.getNotifications(1, 100),
-      );
+      getIt<NotificationBloc>()
+          .add(const NotificationEvent.getNotifications(1, 100));
     }
   }
 
@@ -122,9 +116,8 @@ class _TabBarPageState extends State<TabBarPage> {
     _filterBloc.add(FilterEvent(FilterType.all));
     _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
     _processBloc.add(const ProcessEvent.getProcess());
-    _notificationBloc.add(
-      const NotificationEvent.getNotifications(1, 100),
-    );
+    getIt<NotificationBloc>()
+        .add(const NotificationEvent.getNotifications(1, 100));
   }
 
   @override
@@ -141,9 +134,7 @@ class _TabBarPageState extends State<TabBarPage> {
         BlocProvider(create: (context) => _tabBarCubit),
         BlocProvider(create: (context) => _loggedInCubit),
         BlocProvider(create: (context) => _toastMessageCubit),
-        BlocProvider(create: (context) => _connectivityBloc),
         BlocProvider(create: (context) => _engineInfoCubit),
-        BlocProvider(create: (context) => _notificationBloc),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -151,13 +142,6 @@ class _TabBarPageState extends State<TabBarPage> {
             listener: (context, state) {
               if (state is LoggedInSuccessState && state.isLoggedIn) {
                 fetchData();
-              }
-            },
-          ),
-          BlocListener<NotificationBloc, NotificationState>(
-            listener: (context, state) {
-              if (state is NotificationSuccessState) {
-                _notificationBloc.notifications = state.notifications;
               }
             },
           ),
