@@ -3,11 +3,9 @@ import 'dart:io';
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
-import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
+import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
-import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -108,7 +106,7 @@ class PreviewFileBloc extends Bloc<PreviewFileEvent, PreviewFileState> {
 
         if (isFileExist) {
           emit(
-            PreviewFileState.success(filePath),
+            PreviewFileState.success(filePath, fileName),
           );
         } else {
           emit(
