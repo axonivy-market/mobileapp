@@ -1,12 +1,15 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 part 'connectivity_bloc.freezed.dart';
+
 part 'connectivity_event.dart';
+
 part 'connectivity_state.dart';
 
 @injectable
@@ -25,11 +28,14 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
     _streamSubscription = Connectivity()
         .onConnectivityChanged
         .skip(1)
-        .listen((ConnectivityResult result) {
+        .listen((ConnectivityResult result) async {
       if ((result == ConnectivityResult.wifi ||
               result == ConnectivityResult.mobile) &&
           result != connectivityResult) {
         connectivityResult = result;
+        if (kDebugMode) {
+          await Future.delayed(const Duration(seconds: 5));
+        }
         add(const ConnectivityEvent.connectedEvent());
       } else if (result == ConnectivityResult.none &&
           (result != connectivityResult)) {

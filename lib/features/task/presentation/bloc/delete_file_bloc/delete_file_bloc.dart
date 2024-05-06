@@ -48,7 +48,7 @@ class DeleteFileBloc extends Bloc<DeleteFileEvent, DeleteFileState> {
       if (event.document.fileLocalState ==
           FileLocalStateEnum.kPendingUpload.value) {
         _hiveTaskStorage.deleteDocument(event.caseId, event.document.name);
-        emit(DeleteFileState.success("documentList.deleteFileSuccess"
+        emit(DeleteFileState.success("downloadFile.deleteFileSuccess"
             .tr(namedArgs: {'fileName': event.document.name})));
         return;
       }
@@ -67,7 +67,7 @@ class DeleteFileBloc extends Bloc<DeleteFileEvent, DeleteFileState> {
               _hiveTaskStorage.deleteDocument(
                   event.caseId, event.document.name);
             }
-            emit(DeleteFileState.success("documentList.deleteFileSuccess"
+            emit(DeleteFileState.success("downloadFile.deleteFileSuccess"
                 .tr(namedArgs: {'fileName': event.document.name})));
           } else {
             emit(
@@ -90,7 +90,7 @@ class DeleteFileBloc extends Bloc<DeleteFileEvent, DeleteFileState> {
         } else {
           _hiveTaskStorage.deleteDocument(event.caseId, event.document.name);
         }
-        emit(DeleteFileState.success("documentList.deleteFileSuccess"
+        emit(DeleteFileState.success("downloadFile.deleteFileSuccess"
             .tr(namedArgs: {'fileName': event.document.name})));
       } else {
         emit(
