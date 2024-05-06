@@ -161,7 +161,7 @@ class _SearchViewState extends State<SearchView> {
                           ?.unfocus();
                       context
                           .read<TaskConflictCubit>()
-                          .checkTaskConflict(item.task.id);
+                          .checkTaskConflict(item.task);
                     },
                     child: TaskItemWidget(
                       name: item.task.name,

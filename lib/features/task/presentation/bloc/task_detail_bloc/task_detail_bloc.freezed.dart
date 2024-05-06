@@ -236,7 +236,6 @@ mixin _$TaskDetailState {
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(TaskIvy task) success,
-    required TResult Function(TaskIvy task) startTaskSucess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -244,7 +243,6 @@ mixin _$TaskDetailState {
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(TaskIvy task)? success,
-    TResult? Function(TaskIvy task)? startTaskSucess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -252,7 +250,6 @@ mixin _$TaskDetailState {
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(TaskIvy task)? success,
-    TResult Function(TaskIvy task)? startTaskSucess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -261,8 +258,6 @@ mixin _$TaskDetailState {
     required TResult Function(TaskDetailLoadingState value) loading,
     required TResult Function(TaskDetailErrorState value) error,
     required TResult Function(TaskDetailSuccessState value) success,
-    required TResult Function(TaskDetailStartSuccessState value)
-        startTaskSucess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -270,7 +265,6 @@ mixin _$TaskDetailState {
     TResult? Function(TaskDetailLoadingState value)? loading,
     TResult? Function(TaskDetailErrorState value)? error,
     TResult? Function(TaskDetailSuccessState value)? success,
-    TResult? Function(TaskDetailStartSuccessState value)? startTaskSucess,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -278,7 +272,6 @@ mixin _$TaskDetailState {
     TResult Function(TaskDetailLoadingState value)? loading,
     TResult Function(TaskDetailErrorState value)? error,
     TResult Function(TaskDetailSuccessState value)? success,
-    TResult Function(TaskDetailStartSuccessState value)? startTaskSucess,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -354,7 +347,6 @@ class _$TaskDetailLoadingStateImpl
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(TaskIvy task) success,
-    required TResult Function(TaskIvy task) startTaskSucess,
   }) {
     return loading();
   }
@@ -365,7 +357,6 @@ class _$TaskDetailLoadingStateImpl
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(TaskIvy task)? success,
-    TResult? Function(TaskIvy task)? startTaskSucess,
   }) {
     return loading?.call();
   }
@@ -376,7 +367,6 @@ class _$TaskDetailLoadingStateImpl
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(TaskIvy task)? success,
-    TResult Function(TaskIvy task)? startTaskSucess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -391,8 +381,6 @@ class _$TaskDetailLoadingStateImpl
     required TResult Function(TaskDetailLoadingState value) loading,
     required TResult Function(TaskDetailErrorState value) error,
     required TResult Function(TaskDetailSuccessState value) success,
-    required TResult Function(TaskDetailStartSuccessState value)
-        startTaskSucess,
   }) {
     return loading(this);
   }
@@ -403,7 +391,6 @@ class _$TaskDetailLoadingStateImpl
     TResult? Function(TaskDetailLoadingState value)? loading,
     TResult? Function(TaskDetailErrorState value)? error,
     TResult? Function(TaskDetailSuccessState value)? success,
-    TResult? Function(TaskDetailStartSuccessState value)? startTaskSucess,
   }) {
     return loading?.call(this);
   }
@@ -414,7 +401,6 @@ class _$TaskDetailLoadingStateImpl
     TResult Function(TaskDetailLoadingState value)? loading,
     TResult Function(TaskDetailErrorState value)? error,
     TResult Function(TaskDetailSuccessState value)? success,
-    TResult Function(TaskDetailStartSuccessState value)? startTaskSucess,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -507,7 +493,6 @@ class _$TaskDetailErrorStateImpl
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(TaskIvy task) success,
-    required TResult Function(TaskIvy task) startTaskSucess,
   }) {
     return error(this.error);
   }
@@ -518,7 +503,6 @@ class _$TaskDetailErrorStateImpl
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(TaskIvy task)? success,
-    TResult? Function(TaskIvy task)? startTaskSucess,
   }) {
     return error?.call(this.error);
   }
@@ -529,7 +513,6 @@ class _$TaskDetailErrorStateImpl
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(TaskIvy task)? success,
-    TResult Function(TaskIvy task)? startTaskSucess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -544,8 +527,6 @@ class _$TaskDetailErrorStateImpl
     required TResult Function(TaskDetailLoadingState value) loading,
     required TResult Function(TaskDetailErrorState value) error,
     required TResult Function(TaskDetailSuccessState value) success,
-    required TResult Function(TaskDetailStartSuccessState value)
-        startTaskSucess,
   }) {
     return error(this);
   }
@@ -556,7 +537,6 @@ class _$TaskDetailErrorStateImpl
     TResult? Function(TaskDetailLoadingState value)? loading,
     TResult? Function(TaskDetailErrorState value)? error,
     TResult? Function(TaskDetailSuccessState value)? success,
-    TResult? Function(TaskDetailStartSuccessState value)? startTaskSucess,
   }) {
     return error?.call(this);
   }
@@ -567,7 +547,6 @@ class _$TaskDetailErrorStateImpl
     TResult Function(TaskDetailLoadingState value)? loading,
     TResult Function(TaskDetailErrorState value)? error,
     TResult Function(TaskDetailSuccessState value)? success,
-    TResult Function(TaskDetailStartSuccessState value)? startTaskSucess,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -677,7 +656,6 @@ class _$TaskDetailSuccessStateImpl
     required TResult Function() loading,
     required TResult Function(String error) error,
     required TResult Function(TaskIvy task) success,
-    required TResult Function(TaskIvy task) startTaskSucess,
   }) {
     return success(task);
   }
@@ -688,7 +666,6 @@ class _$TaskDetailSuccessStateImpl
     TResult? Function()? loading,
     TResult? Function(String error)? error,
     TResult? Function(TaskIvy task)? success,
-    TResult? Function(TaskIvy task)? startTaskSucess,
   }) {
     return success?.call(task);
   }
@@ -699,7 +676,6 @@ class _$TaskDetailSuccessStateImpl
     TResult Function()? loading,
     TResult Function(String error)? error,
     TResult Function(TaskIvy task)? success,
-    TResult Function(TaskIvy task)? startTaskSucess,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -714,8 +690,6 @@ class _$TaskDetailSuccessStateImpl
     required TResult Function(TaskDetailLoadingState value) loading,
     required TResult Function(TaskDetailErrorState value) error,
     required TResult Function(TaskDetailSuccessState value) success,
-    required TResult Function(TaskDetailStartSuccessState value)
-        startTaskSucess,
   }) {
     return success(this);
   }
@@ -726,7 +700,6 @@ class _$TaskDetailSuccessStateImpl
     TResult? Function(TaskDetailLoadingState value)? loading,
     TResult? Function(TaskDetailErrorState value)? error,
     TResult? Function(TaskDetailSuccessState value)? success,
-    TResult? Function(TaskDetailStartSuccessState value)? startTaskSucess,
   }) {
     return success?.call(this);
   }
@@ -737,7 +710,6 @@ class _$TaskDetailSuccessStateImpl
     TResult Function(TaskDetailLoadingState value)? loading,
     TResult Function(TaskDetailErrorState value)? error,
     TResult Function(TaskDetailSuccessState value)? success,
-    TResult Function(TaskDetailStartSuccessState value)? startTaskSucess,
     required TResult orElse(),
   }) {
     if (success != null) {
@@ -754,176 +726,5 @@ abstract class TaskDetailSuccessState implements TaskDetailState {
   TaskIvy get task;
   @JsonKey(ignore: true)
   _$$TaskDetailSuccessStateImplCopyWith<_$TaskDetailSuccessStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TaskDetailStartSuccessStateImplCopyWith<$Res> {
-  factory _$$TaskDetailStartSuccessStateImplCopyWith(
-          _$TaskDetailStartSuccessStateImpl value,
-          $Res Function(_$TaskDetailStartSuccessStateImpl) then) =
-      __$$TaskDetailStartSuccessStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({TaskIvy task});
-
-  $TaskIvyCopyWith<$Res> get task;
-}
-
-/// @nodoc
-class __$$TaskDetailStartSuccessStateImplCopyWithImpl<$Res>
-    extends _$TaskDetailStateCopyWithImpl<$Res,
-        _$TaskDetailStartSuccessStateImpl>
-    implements _$$TaskDetailStartSuccessStateImplCopyWith<$Res> {
-  __$$TaskDetailStartSuccessStateImplCopyWithImpl(
-      _$TaskDetailStartSuccessStateImpl _value,
-      $Res Function(_$TaskDetailStartSuccessStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? task = null,
-  }) {
-    return _then(_$TaskDetailStartSuccessStateImpl(
-      null == task
-          ? _value.task
-          : task // ignore: cast_nullable_to_non_nullable
-              as TaskIvy,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TaskIvyCopyWith<$Res> get task {
-    return $TaskIvyCopyWith<$Res>(_value.task, (value) {
-      return _then(_value.copyWith(task: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$TaskDetailStartSuccessStateImpl
-    with DiagnosticableTreeMixin
-    implements TaskDetailStartSuccessState {
-  const _$TaskDetailStartSuccessStateImpl(this.task);
-
-  @override
-  final TaskIvy task;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TaskDetailState.startTaskSucess(task: $task)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskDetailState.startTaskSucess'))
-      ..add(DiagnosticsProperty('task', task));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TaskDetailStartSuccessStateImpl &&
-            (identical(other.task, task) || other.task == task));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, task);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TaskDetailStartSuccessStateImplCopyWith<_$TaskDetailStartSuccessStateImpl>
-      get copyWith => __$$TaskDetailStartSuccessStateImplCopyWithImpl<
-          _$TaskDetailStartSuccessStateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(TaskIvy task) success,
-    required TResult Function(TaskIvy task) startTaskSucess,
-  }) {
-    return startTaskSucess(task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(TaskIvy task)? success,
-    TResult? Function(TaskIvy task)? startTaskSucess,
-  }) {
-    return startTaskSucess?.call(task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(TaskIvy task)? success,
-    TResult Function(TaskIvy task)? startTaskSucess,
-    required TResult orElse(),
-  }) {
-    if (startTaskSucess != null) {
-      return startTaskSucess(task);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TaskDetailLoadingState value) loading,
-    required TResult Function(TaskDetailErrorState value) error,
-    required TResult Function(TaskDetailSuccessState value) success,
-    required TResult Function(TaskDetailStartSuccessState value)
-        startTaskSucess,
-  }) {
-    return startTaskSucess(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskDetailLoadingState value)? loading,
-    TResult? Function(TaskDetailErrorState value)? error,
-    TResult? Function(TaskDetailSuccessState value)? success,
-    TResult? Function(TaskDetailStartSuccessState value)? startTaskSucess,
-  }) {
-    return startTaskSucess?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TaskDetailLoadingState value)? loading,
-    TResult Function(TaskDetailErrorState value)? error,
-    TResult Function(TaskDetailSuccessState value)? success,
-    TResult Function(TaskDetailStartSuccessState value)? startTaskSucess,
-    required TResult orElse(),
-  }) {
-    if (startTaskSucess != null) {
-      return startTaskSucess(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TaskDetailStartSuccessState implements TaskDetailState {
-  const factory TaskDetailStartSuccessState(final TaskIvy task) =
-      _$TaskDetailStartSuccessStateImpl;
-
-  TaskIvy get task;
-  @JsonKey(ignore: true)
-  _$$TaskDetailStartSuccessStateImplCopyWith<_$TaskDetailStartSuccessStateImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

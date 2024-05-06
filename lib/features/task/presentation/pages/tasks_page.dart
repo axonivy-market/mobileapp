@@ -1,6 +1,5 @@
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/router/router.dart';
 import 'package:axon_ivy/core/util/toast_message.dart';
 import 'package:axon_ivy/core/util/widgets/widgets.dart';
 import 'package:axon_ivy/features/search/bloc/task_conflict_cubit/task_conflict_cubit.dart';
@@ -23,7 +22,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../core/util/resources/constants.dart';
 import '../bloc/sort_bloc/sort_bloc.dart';
@@ -221,8 +219,7 @@ class TasksViewContent extends StatelessWidget {
     } else {
       final task = tasks[index];
       return GestureDetector(
-        onTap: () =>
-            context.read<TaskConflictCubit>().checkTaskConflict(task.id),
+        onTap: () => context.read<TaskConflictCubit>().checkTaskConflict(task),
         onLongPress: () => _showDetails(context, task),
         child: TaskItemWidget(
           name: task.name,
@@ -246,7 +243,7 @@ class TasksViewContent extends StatelessWidget {
         return TaskDetailsWidget(
           task: task,
           onPressed: (task) =>
-              context.read<TaskConflictCubit>().checkTaskConflict(task.id),
+              context.read<TaskConflictCubit>().checkTaskConflict(task),
         );
       },
     );
