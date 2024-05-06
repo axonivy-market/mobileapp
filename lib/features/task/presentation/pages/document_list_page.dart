@@ -54,6 +54,8 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
     _downloadFileBloc = getIt<DownloadFileBloc>();
     _previewFileBloc = getIt<PreviewFileBloc>();
     WidgetsBinding.instance.addObserver(this);
+    documents = widget.task.caseTask?.availableDocuments ?? [];
+    _previewFileBloc.caseId = widget.task.caseTask?.id;
   }
 
   @override
@@ -69,8 +71,6 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
       openResult = null;
       _previewFileBloc.add(const PreviewFileEvent.deletePreviewFile());
     }
-    documents = widget.task.caseTask?.availableDocuments ?? [];
-    _previewFileBloc.caseId = widget.task.caseTask?.id;
   }
 
   bool isUploadDuplicateFile(UploadSuccessState state, TaskIvy task) {
