@@ -114,9 +114,9 @@
   },
   "generalBack": "Back",
   "uploadFile": {
-    "fileTooLarge": "File {fileName} has size too large!\n",
+    "fileTooLarge": "File {fileName} has size too large!",
     "cannotSelectFiles": "Cannot select files!",
-    "failUpload": "Fail to upload {fileName}\n",
+    "failUpload": "Fail to upload {fileName}",
     "changeFileName": "Change image name"
   },
   "offline": {
@@ -136,6 +136,16 @@
     "errorTitle": "Error",
     "errorMessage": "File {fileName} already exists",
     "successTitle": "Upload successfully",
+    "deleteSuccessTitle": "Delete successfully",
+    "downloadSuccessTitle":  "Download successfully",
+    "download": "Download"
+  },
+  "previewFile": {
+    "failToPreview": "Fail to preview the file {fileName}"
+  },
+  "downloadFile": {
+    "downloadSuccess": "{fileName} was downloaded",
+    "failToDownload": "Fail to download the file {fileName}",
     "deleteSuccessTitle": "Deleted successfully",
     "downloadSuccessTitle":  "Downloaded successfully"
   }
