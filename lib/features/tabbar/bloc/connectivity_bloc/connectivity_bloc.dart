@@ -34,6 +34,7 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
           result != connectivityResult) {
         connectivityResult = result;
         if (kDebugMode) {
+          // Debug mode should wait for network ready to support test on simulator
           await Future.delayed(const Duration(seconds: 5));
         }
         add(const ConnectivityEvent.connectedEvent());
