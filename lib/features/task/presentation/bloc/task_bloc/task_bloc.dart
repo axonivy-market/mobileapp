@@ -204,10 +204,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   Future<void> downloadHTMLFromFullRequestPath(TaskIvy taskIvy) async {
     var dio = getIt<Dio>();
     Uri uri = Uri.parse(taskIvy.fullRequestPath);
-    String host = uri.host;
-    var urls = taskIvy.fullRequestPath.split(host);
-    var requestUrl = urls.length > 1 ? urls[1] : taskIvy.fullRequestPath;
-
+    var requestUrl = "${uri.path}?${uri.query}";
     final response = await dio.get(requestUrl);
 
     if (response.statusCode == 200) {
