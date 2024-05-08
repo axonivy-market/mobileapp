@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
-import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:go_router/go_router.dart';
@@ -45,7 +45,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
   void initState() {
     late String username;
     late String password;
-    
+
     super.initState();
     final isDemoSetting = SharedPrefs.demoSetting ?? false;
     if (isDemoSetting) {

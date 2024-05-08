@@ -1,4 +1,4 @@
-import '../../../../../core/util/resources/constants.dart';
+import 'package:axon_ivy/shared/resources/constants.dart';
 
 class SortEvent {
   List<SortType> sortType;

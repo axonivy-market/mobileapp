@@ -19,7 +19,7 @@
     "noExpiryDate": "No expiry date",
     "noTaskName": "[Task name is not available]",
     "noTaskDescription": "No description",
-    "lastUpdated": "last updated {time}"
+    "lastUpdated": "updated {time}"
   },
   "taskDetails": {
     "attachments": "Attachments",
@@ -115,16 +115,17 @@
   },
   "generalBack": "Back",
   "uploadFile": {
-    "fileTooLarge": "File {fileName} has size too large!\n",
+    "fileTooLarge": "File {fileName} has size too large!",
     "cannotSelectFiles": "Cannot select files!",
-    "failUpload": "Fail to upload {fileName}\n",
+    "failUpload": "Fail to upload {fileName}",
     "changeFileName": "Change image name"
   },
   "offline": {
     "popup_title": "You are offline!",
     "process_description": "Processes can only be started when connected to the process engine. \nTry again later...",
     "task_description": "Tasks can only be started when connected to the engine. \nTry again later...",
-    "search_description": "Tasks and processes can only be started when connected to the engine. \nTry again later..."
+    "search_description": "Tasks and processes can only be started when connected to the engine. \nTry again later...",
+    "login_description": "You can only sign-in or use the demo mode when you’re online.\nTry again later..."
   },
   "documentList": {
     "title": "Attachments",
@@ -135,9 +136,19 @@
     "attachFile": "Attach file",
     "errorTitle": "Error",
     "errorMessage": "File {fileName} already exists",
-    "successTitle": "Success process",
+    "successTitle": "Upload successfully",
     "deleteSuccessTitle": "Delete successfully",
-    "downloadSuccessTitle":  "Download successfully"
+    "downloadSuccessTitle":  "Download successfully",
+    "download": "Download"
+  },
+  "previewFile": {
+    "failToPreview": "Fail to preview the file {fileName}"
+  },
+  "downloadFile": {
+    "downloadSuccess": "{fileName} was downloaded",
+    "failToDownload": "Fail to download the file {fileName}",
+    "deleteSuccessTitle": "Deleted successfully",
+    "downloadSuccessTitle":  "Downloaded successfully"
   },
   "taskConflict": {
     "title": "We couldn’t complete the task you requested",

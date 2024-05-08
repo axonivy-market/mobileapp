@@ -1,9 +1,9 @@
+import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/util/toast_message.dart';
-import 'package:axon_ivy/core/util/widgets/widgets.dart';
-import 'package:axon_ivy/features/search/bloc/task_conflict_cubit/task_conflict_cubit.dart';
+import 'package:axon_ivy/core/router/router.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
+import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_state.dart';
@@ -17,18 +17,28 @@ import 'package:axon_ivy/features/task/presentation/widgets/task_details_widget.
 import 'package:axon_ivy/features/task/presentation/widgets/task_empty_widget.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_item_widget.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
+import 'package:axon_ivy/shared/resources/constants.dart';
+import 'package:axon_ivy/shared/widgets/toast_message.dart';
+import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../../core/util/resources/constants.dart';
 import '../bloc/sort_bloc/sort_bloc.dart';
 
-class TasksView extends StatelessWidget {
-  const TasksView({super.key});
+class TasksPage extends BasePage {
+  const TasksPage({super.key});
 
+  @override
+  State<TasksPage> createState() => _TasksPageState();
+}
+
+class _TasksPageState extends BasePageState<TasksPage> {
+  bool isTaskOnline = true;
+  List<TaskIvy> taskList = [];
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -42,8 +52,13 @@ class TasksView extends StatelessWidget {
         listeners: [
           BlocListener<TaskBloc, TaskState>(
             listener: (context, state) {
-              context.read<OfflineIndicatorCubit>().showOfflineIndicator(
-                  state is TaskSuccessState && !state.isOnline);
+              if (state is TaskLoadingState) {
+                showLoading();
+              } else {
+                hideLoading();
+                context.read<OfflineIndicatorCubit>().showOfflineIndicator(
+                    state is TaskSuccessState && !state.isOnline);
+              }
             },
           ),
           BlocListener<ConnectivityBloc, ConnectivityState>(
@@ -64,27 +79,25 @@ class TasksView extends StatelessWidget {
             }
           }),
         ],
-        child: BlocBuilder<TaskBloc, TaskState>(
-          builder: (context, taskState) {
-            final activeFilter = context.watch<FilterBloc>().state.activeFilter;
-            final tasksIsEmpty =
-                taskState is TaskSuccessState && taskState.tasks.isNotEmpty;
-            return TasksViewContent(
-              isShowFilterBar:
-                  tasksIsEmpty || activeFilter == FilterType.expired,
-            );
-          },
+        child: TasksViewContent(
+          isTaskOnline: isTaskOnline,
+          taskList: taskList,
         ),
       ),
     );
   }
 }
 
+// ignore: must_be_immutable
 class TasksViewContent extends StatelessWidget {
-  const TasksViewContent({super.key, required this.isShowFilterBar});
+  TasksViewContent({
+    super.key,
+    required this.isTaskOnline,
+    required this.taskList,
+  });
 
-  final TaskIvy? taskSelecting = null;
-  final bool isShowFilterBar;
+  List<TaskIvy> taskList;
+  bool isTaskOnline;
 
   @override
   Widget build(BuildContext context) {
@@ -115,19 +128,19 @@ class TasksViewContent extends StatelessWidget {
             if (taskState is TaskErrorState) {
               return _buildErrorView(context, taskState);
             } else if (taskState is TaskSuccessState) {
-              return Stack(
-                children: [
-                  _buildTaskList(context, taskState.tasks),
-                  if (!taskState.isOnline)
-                    OfflinePopupWidget(
-                      description: "offline.task_description".tr(),
-                      onRefresh: () => _onRefresh(context),
-                    ),
-                ],
-              );
-            } else {
-              return const LoadingWidget();
+              taskList = taskState.tasks;
+              isTaskOnline = taskState.isOnline;
             }
+            return Stack(
+              children: [
+                _buildTaskList(context, taskList),
+                if (!isTaskOnline)
+                  OfflinePopupWidget(
+                    description: "offline.task_description".tr(),
+                    onRefresh: () => _onRefresh(context),
+                  ),
+              ],
+            );
           },
         ),
       ),
@@ -151,10 +164,11 @@ class TasksViewContent extends StatelessWidget {
               child: DataEmptyWidget(
                 message: "errorCanNotAccessScreen".tr(),
                 icon: AppAssets.icons.tool.svg(
-                    colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.tertiaryContainer,
-                  BlendMode.srcIn,
-                )),
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.tertiaryContainer,
+                    BlendMode.srcIn,
+                  ),
+                ),
               ),
             ),
             childCount: 1,
@@ -172,7 +186,7 @@ class TasksViewContent extends StatelessWidget {
       slivers: [
         SliverAppBar(
           backgroundColor: Theme.of(context).colorScheme.background,
-          toolbarHeight: 62.h,
+          toolbarHeight: 70.h,
           pinned: true,
           scrolledUnderElevation: 15,
           shadowColor: Colors.black.withOpacity(0.3),

@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/extensions/string_ext.dart';
-import 'package:axon_ivy/core/util/resources/constants.dart';
-import 'package:axon_ivy/core/utils/shared_preference.dart';
 import 'package:axon_ivy/features/task/domain/repositories/file_repository_interface.dart';
+import 'package:axon_ivy/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/shared/resources/constants.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
@@ -27,7 +27,7 @@ enum UploadFileType { recent, images, camera }
 class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
   final FileRepositoryInterface _uploadFileRepository;
   String uploadMessage = "";
-  int maxFileSize = 10000000;
+  int maxFileSize = 20971520;
   var filePath = "";
   var fileName = "";
   var caseId = 0;
@@ -132,11 +132,12 @@ class UploadFileBloc extends Bloc<UploadFileEvent, UploadFileState> {
     }
   }
 
-  Future uploadFiles(
-      {required int caseId,
-      required File file,
-      required Emitter emit,
-      required String fileName}) async {
+  Future uploadFiles({
+    required int caseId,
+    required File file,
+    required Emitter emit,
+    required String fileName,
+  }) async {
     try {
       FormData data = FormData.fromMap(
         {
