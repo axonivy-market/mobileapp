@@ -42,8 +42,6 @@ import '../../features/search/domain/repositories/engine_info_repository_interfa
     as _i7;
 import '../../features/search/domain/usecases/get_engine_info_use_case.dart'
     as _i13;
-import '../../features/search/presentation/bloc/engine_info_cubit/engine_info_cubit.dart'
-    as _i36;
 import '../../features/search/presentation/bloc/search_bloc/search_bloc.dart'
     as _i24;
 import '../../features/search/presentation/bloc/search_filter_cubit/search_filter_cubit.dart'
@@ -51,6 +49,8 @@ import '../../features/search/presentation/bloc/search_filter_cubit/search_filte
 import '../../features/splash/splash_cubit.dart' as _i28;
 import '../../features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart'
     as _i3;
+import '../../features/tabbar/bloc/engine_info_cubit/engine_info_cubit.dart'
+    as _i36;
 import '../../features/tabbar/bloc/tabbar_cubit.dart' as _i29;
 import '../../features/task/data/datasources/file_remote_data_source/file_remote_data_source.dart'
     as _i9;

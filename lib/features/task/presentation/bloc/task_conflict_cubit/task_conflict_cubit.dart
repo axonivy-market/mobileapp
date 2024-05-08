@@ -19,6 +19,11 @@ class TaskConflictCubit extends Cubit<TaskConflictState> {
       : super(const TaskConflictState.initial());
 
   void checkTaskConflict(TaskIvy taskIvy) async {
+    if (taskIvy.offline) {
+      emit(TaskConflictState.taskStartable(
+          DateTime.now().millisecondsSinceEpoch, taskIvy));
+      return;
+    }
     emit(const TaskConflictState.loading());
     try {
       final task = await _repository.getTaskDetail(taskId: taskIvy.id);
