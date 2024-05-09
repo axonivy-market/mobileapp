@@ -42,13 +42,13 @@
       "config" : {
         "output" : {
           "code" : [
+            "import helios.showcase.DataGenerator;",
             "import ch.ivyteam.ivy.workflow.document.Path;",
             "import ch.ivyteam.ivy.workflow.document.IDocument;",
             "import java.util.ArrayList;",
             "import showcase.Company;",
             "import showcase.Result;",
             "import showcase.Material;",
-            "import helios.showcase.DataGenerator;",
             "",
             "// attach document",
             "ivy.case.documents().add(new Path(\"OwnersGuide.pdf\")).write().withContentFrom(new File(\"Documents/OwnersGuide.pdf\"));",
@@ -64,7 +64,8 @@
             "out.company = company;",
             "out.inform = result;"
           ]
-        }
+        },
+        "sudo" : true
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 80 },

@@ -6,18 +6,13 @@
 package helios.showcase;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringWriter;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -76,11 +71,7 @@ public class DataGenerator {
     }
 
     // get index file
-    try {
-      this.companyIndexFile = Paths.get(this.getClass().getResource("not_used_companies.json").toURI()).toFile();
-    } catch (URISyntaxException var3) {
-      var3.printStackTrace();
-    }
+
 
   }
 
@@ -94,58 +85,9 @@ public class DataGenerator {
   }
 
   public Company companyFromResource() {
-    int companyIndex = this.getCompanyIndex();
+    Random ran = new Random();
+    int companyIndex = ran.nextInt(6);
     return this.companyList.get(companyIndex);
-  }
-
-  private int getCompanyIndex() {
-    JSONObject jsonObject = null;
-
-    try {
-      jsonObject = readJsonFromUrl(this.companyIndexFile.toURI().toString());
-    } catch (JSONException var11) {
-      var11.printStackTrace();
-    } catch (IOException var12) {
-      var12.printStackTrace();
-    }
-
-    if (jsonObject == null) {
-      return 0;
-    } else {
-      JSONArray arr = jsonObject.getJSONArray("remaining_company");
-      if (arr.length() <= 0) {
-        for (int random = 0; random < this.companyList.size(); ++random) {
-          arr.put(random);
-        }
-      }
-
-      Random var13 = new Random();
-      int randomArrayIndex = var13.nextInt(arr.length());
-      int companyIndex = arr.getInt(randomArrayIndex);
-      arr.remove(randomArrayIndex);
-      jsonObject.put("remaining_company", arr);
-
-      try {
-        if (!this.companyIndexFile.exists()) {
-          this.companyIndexFile.createNewFile();
-        }
-
-        StringWriter e = new StringWriter();
-        jsonObject.write(e);
-        StringBuffer sb = e.getBuffer();
-        String content = sb.toString();
-        e.close();
-        FileWriter fw = new FileWriter(this.companyIndexFile);
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(content);
-        bw.close();
-        fw.close();
-      } catch (IOException var10) {
-        var10.printStackTrace();
-      }
-
-      return companyIndex;
-    }
   }
 
   private List<Company> companyListFromJsonArray(JSONArray jsonCompanyList) {
