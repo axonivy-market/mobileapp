@@ -1,7 +1,5 @@
-import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/domain/usecases/get_task_use_case.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
@@ -34,16 +32,6 @@ class TaskConflictCubit extends Cubit<TaskConflictState> {
         (r) async {
           switch (r.state) {
             case 5:
-              var isConflict =
-                  await checkTaskFromServerWithPath(taskIvy.fullRequestPath);
-              if (isConflict) {
-                emitTaskUnstartable(
-                    "taskConflict.taskUpdatedInBackground".tr());
-              } else {
-                emit(TaskConflictState.taskStartable(
-                    DateTime.now().millisecondsSinceEpoch, r));
-              }
-              break;
             case 4:
             case 8:
               emit(TaskConflictState.taskStartable(
@@ -63,17 +51,5 @@ class TaskConflictCubit extends Cubit<TaskConflictState> {
   void emitTaskUnstartable(String message) {
     emit(TaskConflictState.taskUnstartable(
         DateTime.now().millisecondsSinceEpoch, message));
-  }
-
-  Future<bool> checkTaskFromServerWithPath(String path) async {
-    var dio = getIt<Dio>();
-    try {
-      await dio.get(path);
-      return false;
-    } on DioException catch (e) {
-      return e.response?.statusCode == 409;
-    } catch (e) {
-      return false;
-    }
   }
 }
