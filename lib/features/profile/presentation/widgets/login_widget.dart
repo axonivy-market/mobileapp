@@ -1,7 +1,7 @@
 import 'package:axon_ivy/core/router/app_router.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/logged_cubit/logged_in_cubit.dart';
-import 'package:axon_ivy/features/search/presentation/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
+import 'package:axon_ivy/features/tabbar/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:axon_ivy/shared/widgets/offline_popup_widget.dart';

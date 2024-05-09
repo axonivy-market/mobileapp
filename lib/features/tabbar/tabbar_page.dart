@@ -1,3 +1,4 @@
+import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/app_router.dart';
@@ -5,13 +6,15 @@ import 'package:axon_ivy/features/process/presentation/bloc/process_bloc.dart';
 import 'package:axon_ivy/features/process/presentation/pages/processes_page.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/logged_cubit/logged_in_cubit.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/profile_bloc/profile_bloc.dart';
-import 'package:axon_ivy/features/search/presentation/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/features/search/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:axon_ivy/features/search/presentation/pages/search_page.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
+import 'package:axon_ivy/features/tabbar/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
+import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_bloc/task_bloc.dart';
+import 'package:axon_ivy/features/task/presentation/bloc/task_conflict_cubit/task_conflict_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/toast_message_cubit/toast_message_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/pages/tasks_page.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
@@ -42,7 +45,7 @@ extension GoRouterExtension on GoRouter {
   }
 }
 
-class TabBarPage extends StatefulWidget {
+class TabBarPage extends BasePage {
   const TabBarPage({super.key, required this.child});
 
   final Widget child;
@@ -51,7 +54,7 @@ class TabBarPage extends StatefulWidget {
   State<TabBarPage> createState() => _TabBarPageState();
 }
 
-class _TabBarPageState extends State<TabBarPage> {
+class _TabBarPageState extends BasePageState<TabBarPage> {
   late final TaskBloc _taskBloc;
   late final ProcessBloc _processBloc;
   late final SearchBloc _searchBloc;
@@ -64,6 +67,7 @@ class _TabBarPageState extends State<TabBarPage> {
   late final ToastMessageCubit _toastMessageCubit;
   late final ConnectivityBloc _connectivityBloc;
   late final EngineInfoCubit _engineInfoCubit;
+  late final TaskConflictCubit _taskConflictCubit;
 
   bool shouldFetchData = true;
   int selectedIndex = SharedPrefs.isLogin ?? false ? 0 : 3;
@@ -103,6 +107,7 @@ class _TabBarPageState extends State<TabBarPage> {
     _toastMessageCubit = getIt<ToastMessageCubit>();
     _connectivityBloc = getIt<ConnectivityBloc>();
     _engineInfoCubit = getIt<EngineInfoCubit>();
+    _taskConflictCubit = getIt<TaskConflictCubit>();
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
@@ -133,6 +138,7 @@ class _TabBarPageState extends State<TabBarPage> {
         BlocProvider(create: (context) => _toastMessageCubit),
         BlocProvider(create: (context) => _connectivityBloc),
         BlocProvider(create: (context) => _engineInfoCubit),
+        BlocProvider(create: (context) => _taskConflictCubit),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -153,6 +159,26 @@ class _TabBarPageState extends State<TabBarPage> {
               context.read<ToastMessageCubit>().showToastMessage(state.taskId);
             }
           }),
+          BlocListener<TaskConflictCubit, TaskConflictState>(
+            listener: (context, taskConflictState) {
+              if (taskConflictState is LoadingState) {
+                showLoading();
+              } else {
+                hideLoading();
+                if (taskConflictState is TaskStartableState) {
+                  _navigateTaskActivity(context, taskConflictState.task);
+                } else if (taskConflictState is TaskUnstartableState) {
+                  showMessageDialog(
+                    title: 'taskConflict.title'.tr(),
+                    message: taskConflictState.message,
+                    onConfirm: () => _taskBloc.add(
+                        TaskEvent.getTasks(_filterBloc.state.activeFilter)),
+                    barrierDismissible: false,
+                  );
+                }
+              }
+            },
+          ),
         ],
         child: Scaffold(
           body: IndexedStack(
@@ -245,7 +271,6 @@ class _TabBarPageState extends State<TabBarPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               SvgPicture.asset(
-                width: 21.h,
                 height: 21.h,
                 svgPath,
                 colorFilter: isSelected
@@ -273,5 +298,18 @@ class _TabBarPageState extends State<TabBarPage> {
         );
       },
     );
+  }
+
+  void _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
+    context.push(AppRoutes.taskActivity, extra: {
+      'task': taskIvy,
+      'path': taskIvy.fullRequestPath
+    }).then((value) {
+      if (value != null && value is int) {
+        context.read<TabBarCubit>().navigateTaskList(value);
+      } else if (value is bool && value == true) {
+        context.read<TaskBloc>().add(const TaskEvent.getTasks(FilterType.all));
+      }
+    });
   }
 }

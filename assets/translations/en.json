@@ -91,6 +91,7 @@
   "generalAll": "All",
   "generalTasks": "Tasks",
   "generalProcesses": "Processes",
+  "taskCompletedMessage": "Following task has been completed: \"{taskName}\"",
   "search": {
     "nothingThereYet": "Nothing there yet... Search for a specific task or process",
     "noMatchingResults": "There are no matching results to your search...",
@@ -148,5 +149,9 @@
     "failToDownload": "Fail to download the file {fileName}",
     "deleteSuccessTitle": "Deleted successfully",
     "downloadSuccessTitle":  "Downloaded successfully"
+  },
+  "taskConflict": {
+    "title": "We couldn’t complete the task you requested",
+    "taskUpdatedInBackground": "This task was updated in the background and can not be worked on anymore."
   }
 }
