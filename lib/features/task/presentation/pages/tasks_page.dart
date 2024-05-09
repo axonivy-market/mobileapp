@@ -2,6 +2,7 @@ import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/router.dart';
+import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
@@ -242,6 +243,11 @@ class TasksViewContent extends StatelessWidget {
   void _onRefresh(BuildContext context) async {
     final taskBloc = context.read<TaskBloc>();
     final filterState = context.read<FilterBloc>().state;
+    //TODO: check it work or not
+    // check other location then fetch data task list
+    context
+        .read<NotificationBloc>()
+        .add(const NotificationEvent.getNotifications(1, 1000));
     await Future.delayed(const Duration(seconds: 1));
     taskBloc.add(TaskEvent.getTasks(filterState.activeFilter));
   }

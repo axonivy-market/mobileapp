@@ -104,9 +104,10 @@ class _ProcessesPageState extends BasePageState<ProcessesPage> {
         child: DataEmptyWidget(
           message: 'process.emptyList',
           icon: AppAssets.icons.processEmpty.svg(
-              colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.onTertiaryContainer,
-                  BlendMode.srcIn)),
+            colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.onTertiaryContainer,
+                BlendMode.srcIn),
+          ),
         ),
       );
     }
@@ -127,7 +128,7 @@ class _ProcessesPageState extends BasePageState<ProcessesPage> {
       if (value != null && value is int) {
         context
             .read<NotificationBloc>()
-            .add(const NotificationEvent.getNotifications(1, 10));
+            .add(const NotificationEvent.getNotifications(1, 1000));
         context.read<TabBarCubit>().navigateTaskList(value);
       }
     });

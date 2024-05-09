@@ -114,9 +114,9 @@
   },
   "generalBack": "Back",
   "uploadFile": {
-    "fileTooLarge": "File {fileName} has size too large!\n",
+    "fileTooLarge": "File {fileName} has size too large!",
     "cannotSelectFiles": "Cannot select files!",
-    "failUpload": "Fail to upload {fileName}\n",
+    "failUpload": "Fail to upload {fileName}",
     "changeFileName": "Change image name"
   },
   "offline": {
@@ -136,14 +136,24 @@
     "errorTitle": "Error",
     "errorMessage": "File {fileName} already exists",
     "successTitle": "Upload successfully",
+    "deleteSuccessTitle": "Delete successfully",
+    "downloadSuccessTitle":  "Download successfully",
+    "download": "Download"
+  },
+  "previewFile": {
+    "failToPreview": "Fail to preview the file {fileName}"
+  },
+  "downloadFile": {
+    "downloadSuccess": "{fileName} was downloaded",
+    "failToDownload": "Fail to download the file {fileName}",
     "deleteSuccessTitle": "Deleted successfully",
     "downloadSuccessTitle":  "Downloaded successfully"
   },
   "notificationList": {
     "all": "All",
     "unread": "Unread",
-    "title": "Notification",
-    "markOnAsRead": "Mark on as read",
+    "title": "Notifications",
+    "markOnAsRead": "Mark all as read",
     "noUnreadNotifications": "There are no unread notifications",
     "noNotifications": "There are no notifications at the moment...",
     "offlineNotification": "You can only view your notifications when you’re online.\nTry again later...",

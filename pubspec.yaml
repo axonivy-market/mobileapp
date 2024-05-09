@@ -30,7 +30,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   easy_localization: ^3.0.3
   device_preview: ^1.1.0
-  package_info_plus: ^5.0.1
+  package_info_plus: ^8.0.0
   injectable: ^2.3.2
   flutter_dotenv: ^5.1.0
   json_annotation: ^4.8.1
@@ -46,19 +46,22 @@ dependencies:
   file_picker_pro: ^1.5.0
   image_picker: ^1.0.7
   path: ^1.9.0
-  file_saver: ^0.2.11
   flutter_slidable: ^3.0.1
   font_awesome_flutter: ^10.7.0
   connectivity_plus: ^5.0.2
   flutter_screenutil: ^5.9.0
+  open_file_plus: ^3.4.1+1
   timeago: ^3.6.1
+  path_provider: ^2.1.2
+  external_path: ^1.0.3
+  permission_handler: ^11.3.1
+  device_info_plus: ^10.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
     # For Analyzer
   flutter_lints: ^3.0.1
-  path: ^1.8.3
 
   # For Builder
   build_runner: ^2.4.7

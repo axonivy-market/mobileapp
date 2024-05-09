@@ -1,21 +1,27 @@
+import 'dart:io';
+
 import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/delete_file_bloc/delete_file_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/download_file_bloc/download_file_bloc.dart';
+import 'package:axon_ivy/features/task/presentation/bloc/preview_file_bloc/preview_file_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/upload_file_bloc/upload_file_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
 import 'package:axon_ivy/shared/widgets/data_empty_widget.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:open_file_plus/open_file_plus.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class DocumentListPage extends BasePage {
   const DocumentListPage({super.key, required this.task});
@@ -26,14 +32,18 @@ class DocumentListPage extends BasePage {
   State<DocumentListPage> createState() => _DocumentListPageState();
 }
 
-class _DocumentListPageState extends BasePageState<DocumentListPage> {
+class _DocumentListPageState extends BasePageState<DocumentListPage>
+    with WidgetsBindingObserver {
   late UploadFileBloc _uploadFileBloc;
   late DeleteFileBloc _deleteFileBloc;
   late TaskDetailBloc _taskDetailBloc;
   late DownloadFileBloc _downloadFileBloc;
+  late PreviewFileBloc _previewFileBloc;
+
   bool shouldFetchTaskList = false;
   dynamic model;
   late List<Document> documents = [];
+  OpenResult? openResult;
 
   @override
   void initState() {
@@ -42,6 +52,23 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
     _taskDetailBloc = getIt<TaskDetailBloc>();
     _deleteFileBloc = getIt<DeleteFileBloc>();
     _downloadFileBloc = getIt<DownloadFileBloc>();
+    _previewFileBloc = getIt<PreviewFileBloc>();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed &&
+        openResult?.type == ResultType.done) {
+      openResult = null;
+      _previewFileBloc.add(const PreviewFileEvent.deletePreviewFile());
+    }
   }
 
   bool isUploadDuplicateFile(UploadSuccessState state, TaskIvy task) {
@@ -65,6 +92,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
         BlocProvider(create: (context) => _deleteFileBloc),
         BlocProvider(create: (context) => _taskDetailBloc),
         BlocProvider(create: (context) => _downloadFileBloc),
+        BlocProvider(create: (context) => _previewFileBloc),
       ],
       child: MultiBlocListener(
         listeners: [
@@ -122,17 +150,39 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
           ),
           BlocListener<DownloadFileBloc, DownloadFileState>(
             listener: (context, state) {
-              if (state is DownloadErrorState) {
+              if (state is DownloadLoadingState) {
+                showLoading();
+              } else {
+                hideLoading();
+                if (state is DownloadErrorState) {
+                  showMessageDialog(
+                      title: "documentList.errorTitle".tr(),
+                      message: state.error);
+                } else if (state is DownloadSuccessState) {
+                  showMessageDialog(
+                      title: "documentList.downloadSuccessTitle".tr(),
+                      message: state.message);
+                }
+              }
+            },
+          ),
+          BlocListener<PreviewFileBloc, PreviewFileState>(
+            listener: (context, state) async {
+              if (state is PreviewErrorState) {
                 hideLoading();
                 showMessageDialog(
                     title: "documentList.errorTitle".tr(),
                     message: state.error);
-              } else if (state is DownloadSuccessState) {
+              } else if (state is PreviewSuccessState) {
                 hideLoading();
-                showMessageDialog(
-                    title: "documentList.downloadSuccessTitle".tr(),
-                    message: state.message);
-              } else if (state is DownloadLoadingState) {
+                openResult = await OpenFile.open(state.filePath);
+                if (openResult != null && openResult?.type != ResultType.done) {
+                  showMessageDialog(
+                      title: "documentList.errorTitle".tr(),
+                      message: "previewFile.failToPreview"
+                          .tr(namedArgs: {'fileName': state.fileName}));
+                }
+              } else if (state is PreviewLoadingState) {
                 showLoading();
               }
             },
@@ -141,7 +191,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
         child: PopScope(
           canPop: false,
           onPopInvoked: (didPop) async {
-            if (didPop) {
+            if (didPop && loading != null) {
               return;
             }
             Navigator.of(context).pop(shouldFetchTaskList);
@@ -274,8 +324,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                     },
                     icon: AppAssets.icons.iconAddAttachment.svg(
                       colorFilter: ColorFilter.mode(
-                          Theme.of(context).colorScheme.surface,
-                          BlendMode.srcIn),
+                        Theme.of(context).colorScheme.surface,
+                        BlendMode.srcIn,
+                      ),
                     ),
                   ),
                 ),
@@ -293,10 +344,69 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                           itemCount: documents.length,
                           itemBuilder: (context, index) {
                             return Slidable(
-                              key: ValueKey(index),
+                              startActionPane: ActionPane(
+                                  extentRatio: 0.2,
+                                  motion: const ScrollMotion(),
+                                  children: [
+                                    CustomSlidableAction(
+                                      autoClose: true,
+                                      padding: EdgeInsets.zero,
+                                      onPressed: (context) async {
+                                        if (Platform.isAndroid) {
+                                          DeviceInfoPlugin deviceInfo =
+                                              DeviceInfoPlugin();
+                                          AndroidDeviceInfo androidInfo =
+                                              await deviceInfo.androidInfo;
+                                          if (androidInfo.version.sdkInt >=
+                                              30) {
+                                            _requestManageExternalStoragePermission(
+                                                documents[index].name,
+                                                documents[index].url);
+                                          } else {
+                                            _requestStoragePermission(
+                                                documents[index].name,
+                                                documents[index].url);
+                                          }
+                                        } else {
+                                          _downloadFileBloc.add(
+                                            DownloadFileEvent.downloadFile(
+                                                documents[index].name,
+                                                documents[index].url),
+                                          );
+                                        }
+                                      },
+                                      backgroundColor:
+                                          Theme.of(context).primaryColor,
+                                      foregroundColor: Colors.white,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          AppAssets.icons.iconDownload.svg(
+                                            colorFilter: ColorFilter.mode(
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .background,
+                                              BlendMode.srcIn,
+                                            ),
+                                          ),
+                                          Text(
+                                            'documentList.download'.tr(),
+                                            style: GoogleFonts.inter(
+                                              textStyle: TextStyle(
+                                                fontSize: 13.sp,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .background,
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ]),
                               endActionPane: ActionPane(
-                                extentRatio: 0.175,
-                                key: ValueKey(index),
+                                extentRatio: 0.2,
                                 motion: const ScrollMotion(),
                                 children: [
                                   CustomSlidableAction(
@@ -322,7 +432,11 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                         AppAssets.icons.iconDelete.svg(),
                                         Text(
                                           "documentList.delete".tr(),
-                                          style: TextStyle(fontSize: 13.sp),
+                                          style: GoogleFonts.inter(
+                                            textStyle: TextStyle(
+                                              fontSize: 13.sp,
+                                            ),
+                                          ),
                                         )
                                       ],
                                     ),
@@ -336,10 +450,12 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                                         horizontal: 15, vertical: 0)
                                     .r,
                                 onTap: () {
-                                  _downloadFileBloc.add(
-                                      DownloadFileEvent.downloadFile(
-                                          documents[index].name,
-                                          documents[index].url));
+                                  _previewFileBloc.add(
+                                    PreviewFileEvent.previewFile(
+                                      documents[index].name,
+                                      documents[index].url,
+                                    ),
+                                  );
                                 },
                                 leading: documents[index].name.isContainImage
                                     ? AppAssets.icons.iconImage.svg(
@@ -377,8 +493,11 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
                         ),
                       )
                     : DataEmptyWidget(
-                        icon: AppAssets.images.iconPaperclipEmpty
-                            .image(width: 62.w, height: 65.h),
+                        icon: AppAssets.images.iconPaperclipEmpty.image(
+                          width: 62.w,
+                          height: 65.h,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         message: "documentList.emptyList".tr(),
                       );
               },
@@ -387,6 +506,53 @@ class _DocumentListPageState extends BasePageState<DocumentListPage> {
         ),
       ),
     );
+  }
+
+  void _requestManageExternalStoragePermission(String name, String url) async {
+    final status = await Permission.manageExternalStorage.status;
+    switch (status) {
+      case PermissionStatus.denied:
+        await Permission.manageExternalStorage.request().then((value) {
+          if (value == PermissionStatus.granted) {
+            _downloadFileBloc.add(
+              DownloadFileEvent.downloadFile(name, url),
+            );
+          }
+        });
+        break;
+      case PermissionStatus.granted:
+        _downloadFileBloc.add(
+          DownloadFileEvent.downloadFile(name, url),
+        );
+        break;
+      default:
+        break;
+    }
+  }
+
+  void _requestStoragePermission(String name, String url) async {
+    final status = await Permission.storage.status;
+    switch (status) {
+      case PermissionStatus.denied:
+        await Permission.storage.request().then((value) {
+          if (value == PermissionStatus.granted) {
+            _downloadFileBloc.add(
+              DownloadFileEvent.downloadFile(name, url),
+            );
+          }
+        });
+        break;
+      case PermissionStatus.permanentlyDenied:
+        openAppSettings();
+        break;
+      case PermissionStatus.granted:
+        _downloadFileBloc.add(
+          DownloadFileEvent.downloadFile(name, url),
+        );
+        break;
+      default:
+        break;
+    }
   }
 }
 
@@ -401,25 +567,26 @@ class AppListTile extends ListTile {
     super.textColor,
     super.subtitle,
     super.minLeadingWidth,
+    super.horizontalTitleGap,
+    super.shape,
   });
 
   @override
   Widget build(BuildContext context) {
     // ListTile Background Color Appears outside of ListView bounds
     // Preffered URL: https://github.com/flutter/flutter/issues/94261
-    return Card(
-      color: Theme.of(context).colorScheme.onPrimaryContainer,
-      elevation: 0,
-      child: ListTile(
-        minLeadingWidth: minLeadingWidth,
-        textColor: textColor,
-        contentPadding: contentPadding,
-        subtitle: subtitle,
-        title: title,
-        leading: leading,
-        trailing: trailing,
-        onTap: onTap,
-      ),
+    return ListTile(
+      tileColor: Theme.of(context).colorScheme.onPrimaryContainer,
+      horizontalTitleGap: horizontalTitleGap,
+      minLeadingWidth: minLeadingWidth,
+      textColor: textColor,
+      contentPadding: contentPadding,
+      subtitle: subtitle,
+      title: title,
+      leading: leading,
+      trailing: trailing,
+      onTap: onTap,
+      shape: shape,
     );
   }
 }
