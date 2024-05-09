@@ -1,0 +1,10 @@
+{"company":[ 
+{"name":"Gartner Inc.", "contactName":"gartner.com", "phone":"+1 203-964-0096","location":{"lat":"41.030705","lng":"-73.550079", "address1":"56 Top Gallant Rd", "address2":"Stamford", "address3":"CT 06902, USA"}, "elevator" : "0"},
+{"name":"Bob's Discount Furniture Stamford", "contactName":"mybobs.com", "phone":"+1 203-324-2727","location":{"lat":"41.075835","lng":"-73.521474", "address1":"Glenbrook Shopping Center", "address2":"479 Hope St, Stamford", "address3":"CT 06905, USA"}, "elevator" : "1"},
+{"name":"Stamford Hospital", "contactName":"stamfordhospital.org", "phone":"+1 203-276-1000","location":{"lat":"41.055155","lng":"-73.552386", "address1":"30 Shelburne Rd", "address2":"Stamford", "address3":"CT 06902, USA"}, "elevator" : "3"},
+{"name":"Stark Home & Trade Showroom", "contactName":"starkcarpet.com", "phone":"+1 203-899-1771","location":{"lat":"41.038789","lng":"-73.551783", "address1":"375 Fairfield Ave", "address2":"Stamford", "address3":"CT 06902, United States"}, "elevator" : "2"},
+{"name":"Stamford Motorsports", "contactName":"stamfordmotorsports.net", "phone":"+1 203-323-3141","location":{"lat":"41.044518","lng":"-73.546748", "address1":"177 Greenwich Ave", "address2":"Stamford", "address3":"CT 06902, United States"}, "elevator" : "4"},
+{"name":"Subaru Stamford", "contactName":"stamfordsubaru.com", "phone":"+1 203-252-2222","location":{"lat":"41.044119","lng":"-73.560411", "address1":"198 Baxter Ave", "address2":"Stamford", "address3":"CT 06902, United States"}, "elevator" : "1"},
+{"name":"121 Towne Luxury Apartments", "contactName":"121towne.com", "phone":"+1 203-602-2266","location":{"lat":"41.045218","lng":"-73.535574", "address1":"119 Towne St", "address2":"Stamford", "address3":"CT 06902-5952, United States"}, "elevator" : "3"}
+]
+}

@@ -1,0 +1,20 @@
+Result #class
+showcase #namespace
+workedTime String #field
+workedTime PERSISTENT #fieldModifier
+comment String #field
+comment PERSISTENT #fieldModifier
+usedMaterials java.util.List<showcase.Material> #field
+usedMaterials PERSISTENT #fieldModifier
+totalWorkedTimePrice String #field
+totalWorkedTimePrice PERSISTENT #fieldModifier
+subTotalPrice String #field
+subTotalPrice PERSISTENT #fieldModifier
+totalPrice String #field
+totalPrice PERSISTENT #fieldModifier
+taxPrice String #field
+taxPrice PERSISTENT #fieldModifier
+selectedList String #field
+selectedList PERSISTENT #fieldModifier
+signature String #field
+signature PERSISTENT #fieldModifier

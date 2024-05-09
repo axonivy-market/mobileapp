@@ -1,0 +1,6 @@
+RestockData #class
+showcase #namespace
+restockMaterials java.util.List<showcase.Material> #field
+restockMaterials PERSISTENT #fieldModifier
+createdRestockerTask Boolean #field
+createdRestockerTask PERSISTENT #fieldModifier

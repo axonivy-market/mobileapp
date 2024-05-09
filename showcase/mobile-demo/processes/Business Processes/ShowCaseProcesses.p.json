@@ -1,0 +1,350 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "15147338A9A6EABC",
+  "config" : {
+    "data" : "showcase.Data"
+  },
+  "elements" : [ {
+      "id" : "f13",
+      "type" : "DialogCall",
+      "name" : "Invoice Approval",
+      "config" : {
+        "dialog" : "showcase.NormalInvoiceForm:start(showcase.Data)",
+        "call" : {
+          "map" : {
+            "param.data.company" : "in.company",
+            "param.data.inform" : "in.inform"
+          }
+        },
+        "output" : {
+          "map" : {
+            "out" : "result.data"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 976, "y" : 80 }
+      },
+      "connect" : [
+        { "id" : "f20", "to" : "f14" }
+      ]
+    }, {
+      "id" : "f14",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1104, "y" : 80 },
+        "labelOffset" : { "x" : 0, "y" : 15 }
+      }
+    }, {
+      "id" : "f15",
+      "type" : "Script",
+      "name" : "Init data",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.workflow.document.Path;",
+            "import ch.ivyteam.ivy.workflow.document.IDocument;",
+            "import java.util.ArrayList;",
+            "import showcase.Company;",
+            "import showcase.Result;",
+            "import showcase.Material;",
+            "import helios.showcase.DataGenerator;",
+            "",
+            "// attach document",
+            "ivy.case.documents().add(new Path(\"OwnersGuide.pdf\")).write().withContentFrom(new File(\"Documents/OwnersGuide.pdf\"));",
+            "ivy.case.documents().add(new Path(\"Schindler 9700 Elevator System.pdf\")).write().withContentFrom(new File(\"Documents/Schindler 9700 Escalator System.pdf\"));",
+            "",
+            "DataGenerator dataGenerator = new DataGenerator();",
+            "Company company = dataGenerator.companyFromResource();",
+            "Result result = new Result();",
+            "result.workedTime = \"00:00\";",
+            "result.selectedList = \"\";",
+            "result.usedMaterials = new ArrayList<Material>();",
+            "",
+            "out.company = company;",
+            "out.inform = result;"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 80 },
+        "description" : "Random generate data for the processes"
+      },
+      "connect" : [
+        { "id" : "f23", "to" : "f18", "var" : "in1" }
+      ]
+    }, {
+      "id" : "f18",
+      "type" : "UserTask",
+      "name" : "Elevator maintenance",
+      "config" : {
+        "dialog" : "showcase.OfflineElevatorMantainanceForm:start(showcase.Company,showcase.Result)",
+        "call" : {
+          "map" : {
+            "param.company" : "in.company",
+            "param.inform" : "in.inform"
+          }
+        },
+        "task" : {
+          "name" : "Elevator maintenance for <%=in.company.name%>",
+          "description" : "Elevator <%=in.company.elevator.name%> at <%=in.company.name%> needs to be maintainaned.",
+          "responsible" : {
+            "activator" : "Technician"
+          },
+          "priority" : {
+            "level" : "HIGH"
+          },
+          "expiry" : {
+            "timeout" : "new Duration(\"72h\")",
+            "responsible" : {
+              "activator" : "Technician"
+            },
+            "priority" : {
+              "level" : "HIGH"
+            }
+          }
+        },
+        "output" : {
+          "map" : {
+            "out.company" : "result.company",
+            "out.inform" : "result.inform"
+          },
+          "code" : [
+            "import helios.showcase.Helper;",
+            "",
+            "Helper.applyMaterialResult(result.company.elevator.materials, result.inform);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 392, "y" : 80 },
+        "size" : { "width" : 128 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f4", "condition" : "ivp==\"TaskA.ivp\"" }
+      ]
+    }, {
+      "id" : "f35",
+      "type" : "Script",
+      "name" : "Calculate restock materials",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.workflow.query.TaskQuery;",
+            "import helios.showcase.MaterialRestocker;",
+            "",
+            "MaterialRestocker restocker = new MaterialRestocker();",
+            "boolean useMaterials = (in.inform.usedMaterials != null && in.inform.usedMaterials.size() > 0);",
+            "boolean createdRestockTask = restocker.restockFormExisted() || !useMaterials;",
+            "out.restockData.createdRestockerTask = createdRestockTask;",
+            "",
+            "restocker.plusRestockMaterial(out.inform.usedMaterials);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 584, "y" : 176 },
+        "size" : { "width" : 160 },
+        "description" : "calculate "
+      },
+      "connect" : [
+        { "id" : "f41", "to" : "f36" }
+      ]
+    }, {
+      "id" : "f36",
+      "type" : "Alternative",
+      "name" : "Check if restock task is created",
+      "config" : {
+        "conditions" : {
+          "f46" : "in.restockData.createdRestockerTask"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 584, "y" : 280 },
+        "labelOffset" : { "x" : 8, "y" : 38 }
+      },
+      "connect" : [
+        { "id" : "f46", "to" : "f38" },
+        { "id" : "f11", "to" : "f2" }
+      ]
+    }, {
+      "id" : "f38",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 720, "y" : 280 },
+        "labelOffset" : { "x" : 0, "y" : 15 }
+      }
+    }, {
+      "id" : "f4",
+      "type" : "Split",
+      "config" : {
+        "output" : {
+          "map" : {
+            "out1" : "in",
+            "out2" : "in"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 584, "y" : 80 },
+        "labelOffset" : { "x" : 0, "y" : 16 }
+      },
+      "connect" : [
+        { "id" : "f10", "to" : "f8", "var" : "in1", "outVar" : "out1" },
+        { "id" : "f7", "to" : "f35", "outVar" : "out2" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "TaskSwitchEvent",
+      "name" : "Approve invoice",
+      "config" : {
+        "task" : {
+          "name" : "Approve invoice",
+          "description" : "This task is for a leader to approve or decline a invoice of maintenaince task",
+          "responsible" : {
+            "activator" : "Team Lead"
+          },
+          "expiry" : {
+            "timeout" : "new Duration(\"24h\")",
+            "responsible" : {
+              "activator" : "Team Lead"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 688, "y" : 80 },
+        "labelOffset" : { "x" : 8, "y" : 37 },
+        "description" : "Apprive invoice"
+      },
+      "connect" : [
+        { "id" : "f24", "to" : "f16", "condition" : "ivp==\"TaskA.ivp\"" }
+      ]
+    }, {
+      "id" : "f2",
+      "type" : "TriggerCall",
+      "name" : "Trigger restock service",
+      "config" : {
+        "processCall" : "Business Processes/ShowCaseProcesses:startRestockService()"
+      },
+      "visual" : {
+        "at" : { "x" : 584, "y" : 376 },
+        "size" : { "width" : 128 }
+      },
+      "connect" : [
+        { "id" : "f3", "to" : "f38", "via" : [ { "x" : 720, "y" : 376 } ] }
+      ]
+    }, {
+      "id" : "f12",
+      "type" : "RequestStart",
+      "name" : "Restock car",
+      "config" : {
+        "signature" : "startRestockService",
+        "request" : {
+          "isHttpRequestable" : false
+        },
+        "triggerable" : true,
+        "task" : {
+          "name" : "Restock car",
+          "description" : "Restock your service car in the headquarter",
+          "responsible" : {
+            "type" : "USER_FROM_ATTRIBUTE",
+            "activator" : "ivy.session.getSessionUserName()"
+          },
+          "expiry" : {
+            "responsible" : {
+              "type" : "USER_FROM_ATTRIBUTE",
+              "activator" : "ivy.session.getSessionUserName()"
+            }
+          }
+        },
+        "case" : {
+          "attachToBusinessCase" : false
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 104, "y" : 352 },
+        "labelOffset" : { "x" : 8, "y" : 37 }
+      },
+      "connect" : [
+        { "id" : "f0", "to" : "f17" }
+      ]
+    }, {
+      "id" : "f22",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 392, "y" : 352 },
+        "labelOffset" : { "x" : 0, "y" : 15 }
+      }
+    }, {
+      "id" : "f17",
+      "type" : "DialogCall",
+      "name" : "Restock car",
+      "config" : {
+        "dialog" : "showcase.NormalRestockForm:start(showcase.Company,showcase.Result,showcase.RestockData)"
+      },
+      "visual" : {
+        "at" : { "x" : 248, "y" : 352 },
+        "description" : "Restock car"
+      },
+      "connect" : [
+        { "id" : "f26", "to" : "f22" }
+      ]
+    }, {
+      "id" : "f16",
+      "type" : "Script",
+      "name" : "Calculate price",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import helios.showcase.Helper;",
+            "",
+            "Helper.calculatePrice(in.inform);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 816, "y" : 80 },
+        "description" : "Calculate used material prices, total price"
+      },
+      "connect" : [
+        { "id" : "f6", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f19",
+      "type" : "RequestStart",
+      "name" : "Elevator Maintenance",
+      "config" : {
+        "signature" : "elevatorMaintenance",
+        "request" : {
+          "name" : "Elevator maintenance offline",
+          "description" : "Elevator maintenance offline"
+        },
+        "triggerable" : true,
+        "task" : {
+          "name" : "Start elevator maintenance",
+          "responsible" : {
+            "activator" : "Technician"
+          },
+          "expiry" : {
+            "timeout" : "new Duration(0, 0, 3, 0, 0, 0)",
+            "responsible" : {
+              "activator" : "Technician"
+            },
+            "priority" : {
+              "level" : "HIGH"
+            }
+          }
+        },
+        "case" : {
+          "attachToBusinessCase" : false
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 88, "y" : 80 }
+      },
+      "connect" : [
+        { "id" : "f21", "to" : "f15" }
+      ]
+    } ]
+}

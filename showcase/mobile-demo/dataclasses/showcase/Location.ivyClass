@@ -1,0 +1,12 @@
+Location #class
+showcase #namespace
+latitude String #field
+latitude PERSISTENT #fieldModifier
+longitude String #field
+longitude PERSISTENT #fieldModifier
+address1 String #field
+address1 PERSISTENT #fieldModifier
+address2 String #field
+address2 PERSISTENT #fieldModifier
+address3 String #field
+address3 PERSISTENT #fieldModifier

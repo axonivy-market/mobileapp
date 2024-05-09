@@ -1,0 +1,16 @@
+Elevator #class
+showcase #namespace
+name String #field
+name PERSISTENT #fieldModifier
+yoc String #field
+yoc PERSISTENT #fieldModifier
+type String #field
+type PERSISTENT #fieldModifier
+materials java.util.List<showcase.Material> #field
+materials PERSISTENT #fieldModifier
+date String #field
+date PERSISTENT #fieldModifier
+time String #field
+time PERSISTENT #fieldModifier
+duration String #field
+duration PERSISTENT #fieldModifier

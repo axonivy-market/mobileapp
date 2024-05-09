@@ -1,0 +1,12 @@
+Company #class
+showcase #namespace
+elevator showcase.Elevator #field
+elevator PERSISTENT #fieldModifier
+location showcase.Location #field
+location PERSISTENT #fieldModifier
+contactName String #field
+contactName PERSISTENT #fieldModifier
+phone String #field
+phone PERSISTENT #fieldModifier
+name String #field
+name PERSISTENT #fieldModifier

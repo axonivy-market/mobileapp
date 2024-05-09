@@ -1,0 +1,145 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:ic="http://ivyteam.ch/jsf/component"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
+<h:head>
+	<title>Invoice Form</title>
+	<h:outputStylesheet name="layouts/stylesheet/form.css" />
+	<h:outputScript name="layouts/javascript/form.js" />
+</h:head>
+
+<h:body>
+
+
+	<h:form id="form">
+		<div>
+			<table style="width: 100%">
+				<tbody>
+
+					<tr>
+						<th style="width: 70%"></th>
+						<th style="width: 30%"></th>
+
+					</tr>
+					<tr>
+						<td><b>Company Name</b></td>
+						<td align="center"><b>Balance Due:</b></td>
+
+					</tr>
+					<tr>
+						<td>#{data.data.company.name}</td>
+						<td align="center" style="font-size: 80%;">Upon Receipt</td>
+					</tr>
+					<tr>
+						<td>#{data.data.company.location.address1}</td>
+						<td rowspan="2" align="center"
+							style="font-size: 180%; color: #c7d426">$#{data.data.inform.totalPrice}</td>
+					</tr>
+					<tr>
+						<td>#{data.data.company.location.address2}</td>
+
+
+					</tr>
+					<tr>
+						<td>#{data.data.company.location.address3}</td>
+						<td></td>
+
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div style="margin-top: 30px">
+
+			<div>
+				<table style="width: 100%" class="w3-table-all">
+					<tbody>
+						<tr style="background: #c7d426; color: #fff;">
+							<th>Items</th>
+							<th>Quantity</th>
+							<th>Price per</th>
+							<th>Total</th>
+						</tr>
+						<c:forEach var="item" step="1"
+							items="#{data.data.inform.usedMaterials}" varStatus="loop">
+							<tr>
+								<td>#{item.name}</td>
+								<td align="right">1</td>
+								<td align="right">$#{item.price}</td>
+								<td align="right">$#{item.price * 1}</td>
+
+							</tr>
+						</c:forEach>
+						<tr>
+							<td>Working Time</td>
+							<td align="right">#{data.data.inform.workedTime}</td>
+							<td align="right">$150</td>
+							<td align="right">$#{data.data.inform.totalWorkedTimePrice}</td>
+
+						</tr>
+						<tr style="background: #d9d9d9; color: #fff;">
+							<td></td>
+							<td></td>
+							<td>Sub Total</td>
+							<td align="right">$#{data.data.inform.subTotalPrice}</td>
+						</tr>
+						<tr style="background: #d9d9d9; color: #fff;">
+							<td></td>
+							<td></td>
+							<td>Tax - 10%</td>
+							<td align="right">$#{data.data.inform.taxPrice}</td>
+						</tr>
+						<tr style="background: #c7d426; color: #fff;">
+							<td></td>
+							<td></td>
+							<td>TOTAL</td>
+							<td align="right">$#{data.data.inform.totalPrice}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="border" style="margin-top: 10px">
+				<div class="header">
+					<b style="margin-left: 2%">Notes</b>
+				</div>
+				<table style="width: 100%;">
+					<tr>
+						<td style="width: 1%"></td>
+						<td style="width: 98%"><p:inputTextarea id="comment_id"
+								styleClass="textAreaStyle" value="#{data.data.inform.comment}"
+								readonly="true" autoResize="false">
+
+							</p:inputTextarea></td>
+						<td style="width: 1%"></td>
+					</tr>
+				</table>
+			</div>
+
+			<div style="margin-top: 20px">
+
+
+				<table style="width: 100%">
+					<tr>
+
+						<td style="width: 50%"><p:commandButton styleClass="btn"
+								actionListener="#{logic.close}" value="Accept" ajax="false"
+								validateClient="true" /></td>
+
+						<td style="width: 50%"><p:commandButton styleClass="btn-red"
+								actionListener="#{logic.close}" value="Decline" ajax="false"
+								validateClient="true" /></td>
+
+					</tr>
+				</table>
+			</div>
+		</div>
+	</h:form>
+
+
+</h:body>
+</html>

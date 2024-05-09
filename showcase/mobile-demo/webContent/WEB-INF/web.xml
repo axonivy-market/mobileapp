@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+  Please keep the web.xml file on the designer and engine synchronous
+  to have the same settings on designer and engine,
+  because this file is not deployed from the designer to the engine.
+
+  See apache tomcat documentation for more information about this configuration:
+  http://tomcat.apache.org/tomcat-7.0-doc/config/
+-->
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+                      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  version="3.0"
+  metadata-complete="false">
+
+<context-param>
+	<param-name>primefaces.THEME</param-name>
+    <param-value>none</param-value>
+</context-param>
+
+</web-app>

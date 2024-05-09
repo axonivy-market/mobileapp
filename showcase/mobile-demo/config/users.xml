@@ -12,4 +12,16 @@
         <fullName>Admin User</fullName>
         <emailAddress>portal1.axonivy@gmail.com</emailAddress>
     </user>
+    <user>
+        <username>technician</username>
+        <password>technician</password>
+        <fullName>technician</fullName>
+        <role>Technician</role>
+    </user>
+    <user>
+        <username>teamlead</username>
+        <password>teamlead</password>
+        <fullName>teamlead</fullName>
+        <role>Team Lead</role>
+    </user>
 </userConfig>

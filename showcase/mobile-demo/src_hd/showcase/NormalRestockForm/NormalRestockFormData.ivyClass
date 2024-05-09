@@ -1,0 +1,8 @@
+NormalRestockFormData #class
+showcase.NormalRestockForm #namespace
+company showcase.Company #field
+company PERSISTENT #fieldModifier
+inform showcase.Result #field
+inform PERSISTENT #fieldModifier
+restockData showcase.RestockData #field
+restockData PERSISTENT #fieldModifier

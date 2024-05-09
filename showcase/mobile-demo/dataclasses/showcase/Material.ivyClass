@@ -1,0 +1,8 @@
+Material #class
+showcase #namespace
+name String #field
+name PERSISTENT #fieldModifier
+price String #field
+price PERSISTENT #fieldModifier
+restockQuantity Integer #field
+restockQuantity PERSISTENT #fieldModifier
