@@ -128,7 +128,7 @@ class _ProcessesPageState extends BasePageState<ProcessesPage> {
       if (value != null && value is int) {
         context
             .read<NotificationBloc>()
-            .add(const NotificationEvent.getNotifications(1, 1000));
+            .add(const NotificationEvent.getNotifications(1, 9000));
         context.read<TabBarCubit>().navigateTaskList(value);
       }
     });

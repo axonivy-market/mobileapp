@@ -82,7 +82,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
   void _onRefresh(BuildContext context) async {
     context
         .read<NotificationBloc>()
-        .add(const NotificationEvent.getNotifications(1, 1000));
+        .add(const NotificationEvent.getNotifications(1, 9000));
   }
 
   @override
@@ -222,9 +222,9 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                               bottom: PreferredSize(
                                 preferredSize: Size.fromHeight(10.h),
                                 child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                          horizontal: 15, vertical: 10)
-                                      .r,
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 15)
+                                          .r,
                                   child: Container(
                                     height: 40.h,
                                     decoration: BoxDecoration(
@@ -457,7 +457,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
               autoClose: true,
               padding: EdgeInsets.zero,
               onPressed: (context) {},
-              backgroundColor: AppColors.sonicSilver,
+              backgroundColor: AppColors.darkSouls,
               foregroundColor: Colors.white,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -473,6 +473,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                         fontSize: 13.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                     ),
                   )

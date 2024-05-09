@@ -106,7 +106,7 @@ class _TabBarPageState extends State<TabBarPage> {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
       getIt<NotificationBloc>()
-          .add(const NotificationEvent.getNotifications(1, 100));
+          .add(const NotificationEvent.getNotifications(1, 9000));
     }
   }
 
@@ -117,7 +117,7 @@ class _TabBarPageState extends State<TabBarPage> {
     _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
     _processBloc.add(const ProcessEvent.getProcess());
     getIt<NotificationBloc>()
-        .add(const NotificationEvent.getNotifications(1, 100));
+        .add(const NotificationEvent.getNotifications(1, 9000));
   }
 
   @override

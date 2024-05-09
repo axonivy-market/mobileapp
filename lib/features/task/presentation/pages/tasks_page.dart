@@ -243,11 +243,9 @@ class TasksViewContent extends StatelessWidget {
   void _onRefresh(BuildContext context) async {
     final taskBloc = context.read<TaskBloc>();
     final filterState = context.read<FilterBloc>().state;
-    //TODO: check it work or not
-    // check other location then fetch data task list
     context
         .read<NotificationBloc>()
-        .add(const NotificationEvent.getNotifications(1, 1000));
+        .add(const NotificationEvent.getNotifications(1, 9000));
     await Future.delayed(const Duration(seconds: 1));
     taskBloc.add(TaskEvent.getTasks(filterState.activeFilter));
   }
