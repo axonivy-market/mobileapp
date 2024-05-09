@@ -162,7 +162,7 @@ Future<_i1.GetIt> $initGetIt(
       () => _i41.ProfileBloc(gh<_i22.ProfileRepositoryInterface>()));
   gh.factory<_i42.TaskBloc>(() => _i42.TaskBloc(gh<_i38.GetTaskListUseCase>()));
   gh.factory<_i43.TaskConflictCubit>(
-      () => _i43.TaskConflictCubit(gh<_i31.TaskRepositoryInterface>()));
+      () => _i43.TaskConflictCubit(gh<_i39.GetTaskUseCase>()));
   gh.factory<_i44.TaskDetailBloc>(
       () => _i44.TaskDetailBloc(gh<_i39.GetTaskUseCase>()));
   gh.factory<_i45.ToastMessageCubit>(

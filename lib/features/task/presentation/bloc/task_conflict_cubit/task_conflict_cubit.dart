@@ -1,6 +1,6 @@
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
-import 'package:axon_ivy/features/task/domain/repositories/task_repository_interface.dart';
+import 'package:axon_ivy/features/task/domain/usecases/get_task_use_case.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -13,9 +13,9 @@ part 'task_conflict_state.dart';
 
 @injectable
 class TaskConflictCubit extends Cubit<TaskConflictState> {
-  final TaskRepositoryInterface _repository;
+  final GetTaskUseCase _getTaskUseCase;
 
-  TaskConflictCubit(this._repository)
+  TaskConflictCubit(this._getTaskUseCase)
       : super(const TaskConflictState.initial());
 
   void checkTaskConflict(TaskIvy taskIvy) async {
@@ -26,7 +26,7 @@ class TaskConflictCubit extends Cubit<TaskConflictState> {
     }
     emit(const TaskConflictState.loading());
     try {
-      final task = await _repository.getTaskDetail(taskId: taskIvy.id);
+      final task = await _getTaskUseCase.execute(taskId: taskIvy.id);
       task.fold(
         (l) {
           emitTaskUnstartable(l.message);
