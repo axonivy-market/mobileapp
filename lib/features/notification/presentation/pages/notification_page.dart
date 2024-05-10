@@ -210,6 +210,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                               context,
                             ),
                             sliver: SliverAppBar(
+                              toolbarHeight: 60.h,
                               automaticallyImplyLeading: false,
                               backgroundColor:
                                   Theme.of(context).scaffoldBackgroundColor,
@@ -219,7 +220,8 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                               scrolledUnderElevation: 15,
                               shadowColor: Colors.black.withOpacity(0.3),
                               forceElevated: innerBoxIsScrolled,
-                              bottom: PreferredSize(
+                              titleSpacing: 0,
+                              title: PreferredSize(
                                 preferredSize: Size.fromHeight(10.h),
                                 child: Padding(
                                   padding:
@@ -359,8 +361,9 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                               if (tab
                                                   .notificationList.isNotEmpty)
                                                 SliverPadding(
-                                                  padding: const EdgeInsets.all(
-                                                    15.0,
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                    horizontal: 15.0,
                                                   ).r,
                                                   sliver: SliverList(
                                                     delegate:
