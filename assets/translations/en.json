@@ -91,6 +91,7 @@
   "generalAll": "All",
   "generalTasks": "Tasks",
   "generalProcesses": "Processes",
+  "taskCompletedMessage": "Following task has been completed: \"{taskName}\"",
   "search": {
     "nothingThereYet": "Nothing there yet... Search for a specific task or process",
     "noMatchingResults": "There are no matching results to your search...",
@@ -159,5 +160,9 @@
     "offlineNotification": "You can only view your notifications when you’re online.\nTry again later...",
     "infos": "Infos",
     "markRead": "Mark read"
+  },
+  "taskConflict": {
+    "title": "We couldn’t complete the task you requested",
+    "taskUpdatedInBackground": "This task was updated in the background and can not be worked on anymore."
   }
 }
