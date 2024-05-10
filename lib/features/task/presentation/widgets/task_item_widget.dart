@@ -70,7 +70,7 @@ Widget getDateTimeTaskWidget(
                   Theme.of(context).colorScheme.secondary, BlendMode.srcIn)),
         5.horizontalSpace,
         Text(
-          dateTime.formatDateYearWithTwoNumber(dateTime),
+          dateTime.formatDateYearWithTwoNumber,
           style: GoogleFonts.inter(
             fontSize: 13.sp,
             fontWeight: FontWeight.w400,

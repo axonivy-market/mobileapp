@@ -151,6 +151,17 @@
     "downloadSuccessTitle": "Downloaded successfully",
     "deleteFileSuccess": "Document '{fileName}' successfully deleted"
   },
+  "notificationList": {
+    "all": "All",
+    "unread": "Unread",
+    "title": "Notifications",
+    "markOnAsRead": "Mark all as read",
+    "noUnreadNotifications": "There are no unread notifications",
+    "noNotifications": "There are no notifications at the moment...",
+    "offlineNotification": "You can only view your notifications when you’re online.\nTry again later...",
+    "infos": "Infos",
+    "markRead": "Mark read"
+  },
   "taskConflict": {
     "title": "We couldn’t complete the task you requested",
     "taskUpdatedInBackground": "This task was updated in the background and can not be worked on anymore."

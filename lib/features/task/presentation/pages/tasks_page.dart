@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_bloc.dart';
@@ -19,8 +20,8 @@ import 'package:axon_ivy/features/task/presentation/widgets/task_item_widget.dar
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/resources/constants.dart';
 import 'package:axon_ivy/shared/utils/authorization_utils.dart';
+import 'package:axon_ivy/shared/widgets/home_appbar.dart';
 import 'package:axon_ivy/shared/widgets/toast_message.dart';
-import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,8 @@ class _TasksPageState extends BasePageState<TasksPage> {
           ),
           BlocListener<ConnectivityBloc, ConnectivityState>(
             listener: (context, state) {
-              context.read<TaskBloc>().isOfflineMode = state is NotConnectedState;
+              context.read<TaskBloc>().isOfflineMode =
+                  state is NotConnectedState;
               context
                   .read<OfflineIndicatorCubit>()
                   .showOfflineIndicator(state is NotConnectedState);
@@ -74,7 +76,9 @@ class _TasksPageState extends BasePageState<TasksPage> {
                     .read<TaskBloc>()
                     .add(const TaskEvent.syncDataOnEngineRestore());
               } else {
-                context.read<TaskBloc>().add(const TaskEvent.showTasksOffline());
+                context
+                    .read<TaskBloc>()
+                    .add(const TaskEvent.showTasksOffline());
               }
             },
           ),
@@ -210,6 +214,9 @@ class TasksViewContent extends StatelessWidget {
   void _onRefresh(BuildContext context) async {
     final taskBloc = context.read<TaskBloc>();
     final filterState = context.read<FilterBloc>().state;
+    context
+        .read<NotificationBloc>()
+        .add(const NotificationEvent.getNotifications(1, 9000));
     await Future.delayed(const Duration(seconds: 1));
     taskBloc.add(TaskEvent.getTasks(filterState.activeFilter));
   }

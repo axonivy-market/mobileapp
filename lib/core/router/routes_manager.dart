@@ -1,3 +1,4 @@
+import 'package:axon_ivy/features/notification/presentation/pages/notification_page.dart';
 import 'package:axon_ivy/features/process/presentation/pages/processes_page.dart';
 import 'package:axon_ivy/features/profile/presentation/pages/login_page.dart';
 import 'package:axon_ivy/features/profile/presentation/pages/profile_page.dart';
@@ -6,7 +7,7 @@ import 'package:axon_ivy/features/splash/splash_page.dart';
 import 'package:axon_ivy/features/tabbar/tabbar_page.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/pages/document_list_page.dart';
-import 'package:axon_ivy/features/task/presentation/pages/task_activity.dart';
+import 'package:axon_ivy/features/task/presentation/pages/task_activity_page.dart';
 import 'package:axon_ivy/features/task/presentation/pages/tasks_page.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
@@ -101,6 +102,17 @@ class AppRouter {
         pageBuilder: (context, state) => CustomTransitionPage<void>(
           key: state.pageKey,
           child: DocumentListPage(task: state.extra as TaskIvy),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              iosTransition(context, animation, secondaryAnimation, child),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.notification,
+        name: 'notification',
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: const NotificationPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               iosTransition(context, animation, secondaryAnimation, child),
         ),

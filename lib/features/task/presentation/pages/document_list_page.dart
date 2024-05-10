@@ -11,8 +11,7 @@ import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_d
 import 'package:axon_ivy/features/task/presentation/bloc/upload_file_bloc/upload_file_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
-import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
-import 'package:axon_ivy/shared/widgets/data_empty_widget.dart';
+import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -376,19 +375,23 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Icon(
-                                            Icons.download_outlined,
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .onSurface,
+                                          AppAssets.icons.iconDownload.svg(
+                                            colorFilter: ColorFilter.mode(
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .background,
+                                              BlendMode.srcIn,
+                                            ),
                                           ),
                                           Text(
                                             'documentList.download'.tr(),
                                             style: GoogleFonts.inter(
-                                              fontSize: 13.sp,
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .onSurface,
+                                              textStyle: TextStyle(
+                                                fontSize: 13.sp,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .background,
+                                              ),
                                             ),
                                           )
                                         ],
@@ -483,8 +486,11 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                         ),
                       )
                     : DataEmptyWidget(
-                        icon: AppAssets.images.iconPaperclipEmpty
-                            .image(width: 62.w, height: 65.h),
+                        icon: AppAssets.images.iconPaperclipEmpty.image(
+                          width: 62.w,
+                          height: 65.h,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         message: "documentList.emptyList".tr(),
                       );
               },
@@ -540,35 +546,5 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
       default:
         break;
     }
-  }
-}
-
-class AppListTile extends ListTile {
-  const AppListTile({
-    super.key,
-    super.contentPadding,
-    super.onTap,
-    super.leading,
-    super.trailing,
-    super.title,
-    super.textColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    // ListTile Background Color Appears outside of ListView bounds
-    // Preffered URL: https://github.com/flutter/flutter/issues/94261
-    return Card(
-      color: Theme.of(context).colorScheme.background,
-      elevation: 0,
-      child: ListTile(
-        textColor: textColor,
-        contentPadding: contentPadding,
-        title: title,
-        leading: leading,
-        trailing: trailing,
-        onTap: onTap,
-      ),
-    );
   }
 }

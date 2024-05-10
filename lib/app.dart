@@ -1,5 +1,6 @@
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/router.dart';
+import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_state.dart';
@@ -24,9 +25,10 @@ class MyApp extends StatelessWidget {
 
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (context) => getIt<NotificationBloc>()),
+        BlocProvider(create: (context) => getIt<ConnectivityBloc>()),
         BlocProvider(
             create: (context) => ThemeBloc(initialDarkMode: isDarkmode)),
-        BlocProvider(create: (context) => getIt<ConnectivityBloc>()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
