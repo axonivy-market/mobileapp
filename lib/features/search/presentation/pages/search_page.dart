@@ -2,12 +2,13 @@ import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/router.dart';
 import 'package:axon_ivy/features/process/presentation/widgets/process_item_widget.dart';
 import 'package:axon_ivy/features/search/domain/entities/search.dart';
-import 'package:axon_ivy/features/search/presentation/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/features/search/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:axon_ivy/features/search/presentation/bloc/search_filter_cubit/search_filter_cubit.dart';
 import 'package:axon_ivy/features/search/presentation/widgets/widgets.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
+import 'package:axon_ivy/features/tabbar/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
+import 'package:axon_ivy/features/task/presentation/bloc/task_conflict_cubit/task_conflict_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_item_widget.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/enums/search_type.dart';
@@ -172,14 +173,9 @@ class _SearchPageState extends State<SearchPage> {
                       }
                       WidgetsBinding.instance.focusManager.primaryFocus
                           ?.unfocus();
-                      context.push(AppRoutes.taskActivity, extra: {
-                        'task': item.task,
-                        'path': item.task.fullRequestPath
-                      }).then((value) {
-                        if (value != null && value is Map) {
-                          context.read<TabBarCubit>().navigateTaskList(value);
-                        }
-                      });
+                      context
+                          .read<TaskConflictCubit>()
+                          .checkTaskConflict(item.task);
                     },
                     child: TaskItemWidget(
                       name: item.task.name,

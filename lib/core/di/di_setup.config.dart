@@ -42,8 +42,6 @@ import '../../features/search/domain/repositories/engine_info_repository_interfa
     as _i7;
 import '../../features/search/domain/usecases/get_engine_info_use_case.dart'
     as _i13;
-import '../../features/search/presentation/bloc/engine_info_cubit/engine_info_cubit.dart'
-    as _i38;
 import '../../features/search/presentation/bloc/search_bloc/search_bloc.dart'
     as _i25;
 import '../../features/search/presentation/bloc/search_filter_cubit/search_filter_cubit.dart'
@@ -51,6 +49,8 @@ import '../../features/search/presentation/bloc/search_filter_cubit/search_filte
 import '../../features/splash/splash_cubit.dart' as _i29;
 import '../../features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart'
     as _i3;
+import '../../features/tabbar/bloc/engine_info_cubit/engine_info_cubit.dart'
+    as _i38;
 import '../../features/tabbar/bloc/tabbar_cubit.dart' as _i30;
 import '../../features/task/data/datasources/file_remote_data_source/file_remote_data_source.dart'
     as _i9;
@@ -70,7 +70,7 @@ import '../../features/task/domain/usecases/get_task_use_case.dart' as _i41;
 import '../../features/task/domain/usecases/get_tasks_use_case.dart' as _i40;
 import '../../features/task/domain/usecases/upload_file_use_case.dart' as _i36;
 import '../../features/task/presentation/bloc/delete_file_bloc/delete_file_bloc.dart'
-    as _i47;
+    as _i48;
 import '../../features/task/presentation/bloc/download_file_bloc/download_file_bloc.dart'
     as _i5;
 import '../../features/task/presentation/bloc/filter_bloc/filter_bloc.dart'
@@ -83,13 +83,15 @@ import '../../features/task/presentation/bloc/sort_bloc/sort_bloc.dart' as _i28;
 import '../../features/task/presentation/bloc/task_activity_bloc/task_activity_bloc.dart'
     as _i31;
 import '../../features/task/presentation/bloc/task_bloc/task_bloc.dart' as _i44;
-import '../../features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart'
+import '../../features/task/presentation/bloc/task_conflict_cubit/task_conflict_cubit.dart'
     as _i45;
-import '../../features/task/presentation/bloc/toast_message_cubit/toast_message_cubit.dart'
+import '../../features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart'
     as _i46;
+import '../../features/task/presentation/bloc/toast_message_cubit/toast_message_cubit.dart'
+    as _i47;
 import '../../features/task/presentation/bloc/upload_file_bloc/upload_file_bloc.dart'
     as _i35;
-import 'app_module.dart' as _i48;
+import 'app_module.dart' as _i49;
 
 // initializes the registration of main-scope dependencies inside of GetIt
 Future<_i1.GetIt> $initGetIt(
@@ -174,17 +176,19 @@ Future<_i1.GetIt> $initGetIt(
         gh<_i36.UploadFileUseCase>(),
         gh<_i37.DeleteFileUseCase>(),
       ));
-  gh.factory<_i45.TaskDetailBloc>(() => _i45.TaskDetailBloc(
+  gh.factory<_i45.TaskConflictCubit>(
+      () => _i45.TaskConflictCubit(gh<_i41.GetTaskUseCase>()));
+  gh.factory<_i46.TaskDetailBloc>(() => _i46.TaskDetailBloc(
         gh<_i41.GetTaskUseCase>(),
         gh<_i14.HiveTaskStorage>(),
       ));
-  gh.factory<_i46.ToastMessageCubit>(
-      () => _i46.ToastMessageCubit(gh<_i41.GetTaskUseCase>()));
-  gh.factory<_i47.DeleteFileBloc>(() => _i47.DeleteFileBloc(
+  gh.factory<_i47.ToastMessageCubit>(
+      () => _i47.ToastMessageCubit(gh<_i41.GetTaskUseCase>()));
+  gh.factory<_i48.DeleteFileBloc>(() => _i48.DeleteFileBloc(
         gh<_i37.DeleteFileUseCase>(),
         gh<_i14.HiveTaskStorage>(),
       ));
   return getIt;
 }
 
-class _$AppModule extends _i48.AppModule {}
+class _$AppModule extends _i49.AppModule {}

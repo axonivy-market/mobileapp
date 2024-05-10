@@ -58,22 +58,39 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
           ),
           content: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
+            height: 44.h,
             child: TextFormField(
+              textAlignVertical: TextAlignVertical.center,
               inputFormatters: [
                 FilteringTextInputFormatter.allow(
                   RegExp(r'[a-zA-Z0-9äöüÄÖÜß]+'),
                 )
               ],
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.secondary,
-              ),
+              style: GoogleFonts.inter(
+                  fontSize: 17.sp,
+                  fontWeight: FontWeight.w400,
+                  color: Theme.of(context).colorScheme.surface),
               onChanged: (value) {
                 valueText = value;
               },
+              cursorColor: Theme.of(context).colorScheme.primary,
               controller: _textFieldController..text = fileName,
               decoration: InputDecoration(
-                focusedBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16.0).r,
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      width: 0.5, color: Theme.of(context).colorScheme.outline),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(5.0),
+                  ),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      width: 0.5, color: Theme.of(context).colorScheme.outline),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(5.0),
+                  ),
+                ),
                 border: const OutlineInputBorder(
                   borderSide: BorderSide(width: 0.5),
                   borderRadius: BorderRadius.all(
@@ -86,7 +103,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
                   fontSize: 17.sp,
                   color: Theme.of(context).colorScheme.secondary,
                 ),
-                hintText: 'My Image Name',
+                hintText: 'documentList.changeFileNameHint'.tr(),
               ),
             ),
           ),

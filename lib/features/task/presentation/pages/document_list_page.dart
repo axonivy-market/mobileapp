@@ -109,7 +109,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                 } else {
                   _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task));
                   showMessageDialog(
-                      title: "documentList.successTitle".tr(),
+                      title: "uploadFile.successTitle".tr(),
                       message: state.message);
                 }
               } else if (state is UploadErrorState) {
@@ -132,7 +132,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
               } else if (state is DeleteSuccessState) {
                 hideLoading();
                 showMessageDialog(
-                    title: "documentList.deleteSuccessTitle".tr(),
+                    title: "downloadFile.deleteSuccessTitle".tr(),
                     message: state.message);
                 _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task));
               } else if (state is DeleteLoadingState) {
@@ -161,7 +161,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                       message: state.error);
                 } else if (state is DownloadSuccessState) {
                   showMessageDialog(
-                      title: "documentList.downloadSuccessTitle".tr(),
+                      title: "downloadFile.downloadSuccessTitle".tr(),
                       message: state.message);
                 }
               }

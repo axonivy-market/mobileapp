@@ -59,7 +59,7 @@ class _LoginPageState extends BasePageState<LoginPage> {
             fontWeight: FontWeight.w500,
           ),
         ),
-        leading: BackButtonWidget(),
+        leading: const BackButtonWidget(),
       ),
       body: BlocProvider(
         create: (context) => _loginBloc,

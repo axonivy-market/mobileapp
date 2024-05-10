@@ -91,6 +91,7 @@
   "generalAll": "All",
   "generalTasks": "Tasks",
   "generalProcesses": "Processes",
+  "taskCompletedMessage": "Following task has been completed: \"{taskName}\"",
   "search": {
     "nothingThereYet": "Nothing there yet... Search for a specific task or process",
     "noMatchingResults": "There are no matching results to your search...",
@@ -118,7 +119,8 @@
     "cannotSelectFiles": "Cannot select files!",
     "failUpload": "Fail to upload {fileName}",
     "changeFileName": "Change image name",
-    "savedFileOfflineSuccess": "Document '{fileName}' successfully saved"
+    "savedFileOfflineSuccess": "Document '{fileName}' successfully saved",
+    "successTitle": "Uploaded successfully"
   },
   "offline": {
     "popup_title": "You are offline!",
@@ -136,10 +138,8 @@
     "attachFile": "Attach file",
     "errorTitle": "Error",
     "errorMessage": "File {fileName} already exists",
-    "successTitle": "Upload successfully",
-    "deleteSuccessTitle": "Delete successfully",
-    "downloadSuccessTitle":  "Download successfully",
-    "download": "Download"
+    "download": "Download",
+    "changeFileNameHint": "My Image Name"
   },
   "previewFile": {
     "failToPreview": "Fail to preview the file {fileName}"
@@ -151,5 +151,8 @@
     "downloadSuccessTitle": "Downloaded successfully",
     "deleteFileSuccess": "Document '{fileName}' successfully deleted"
   },
-  "finishedTaskMessage": "Following task has been completed: {name}"
+  "taskConflict": {
+    "title": "We couldn’t complete the task you requested",
+    "taskUpdatedInBackground": "This task was updated in the background and can not be worked on anymore."
+  }
 }

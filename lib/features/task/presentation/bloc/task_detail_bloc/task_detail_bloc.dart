@@ -25,8 +25,6 @@ class TaskDetailBloc extends Bloc<TaskDetailEvent, TaskDetailState> {
       if (event is _GetTaskDetail) {
         taskIvy = event.task;
         await _getTaskDetail(event.task, emit);
-      } else if (event is _StartTask) {
-        await _startTask(event.task, emit);
       }
     });
   }
@@ -63,12 +61,5 @@ class TaskDetailBloc extends Bloc<TaskDetailEvent, TaskDetailState> {
         );
       }
     }
-  }
-
-  Future _startTask(TaskIvy task, Emitter emit) async {
-    emit(const TaskDetailState.loading());
-    await Future.delayed(const Duration(seconds: 1));
-    if (emit.isDone) return;
-    emit(TaskDetailState.startTaskSucess(task));
   }
 }

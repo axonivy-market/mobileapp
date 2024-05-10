@@ -2,15 +2,14 @@ import 'dart:io';
 
 import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/router/router.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
-import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_state.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/sort_bloc/sort_state.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_bloc/task_bloc.dart';
+import 'package:axon_ivy/features/task/presentation/bloc/task_conflict_cubit/task_conflict_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/toast_message_cubit/toast_message_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/filter_widget.dart';
@@ -28,7 +27,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
 
 import '../bloc/sort_bloc/sort_bloc.dart';
 
@@ -54,57 +52,41 @@ class _TasksPageState extends BasePageState<TasksPage> {
       ],
       child: MultiBlocListener(
         listeners: [
-          BlocListener<TaskDetailBloc, TaskDetailState>(
+          BlocListener<TaskBloc, TaskState>(
             listener: (context, state) {
-              if (state is TaskDetailStartSuccessState) {
-                context.push(
-                  AppRoutes.taskActivity,
-                  extra: {
-                    'task': state.task,
-                    'path': state.task.fullRequestPath
-                  },
-                ).then(
-                  (value) {
-                    if (value != null && value is Map) {
-                      context.read<TabBarCubit>().navigateTaskList(value);
-                    }
-                  },
-                );
+              if (state is TaskLoadingState) {
+                showLoading();
+              } else {
+                hideLoading();
+                context.read<OfflineIndicatorCubit>().showOfflineIndicator(
+                    state is TaskSuccessState && !state.isOnline);
               }
             },
           ),
           BlocListener<ConnectivityBloc, ConnectivityState>(
-              listener: (context, state) {
-            context.read<TaskBloc>().isOfflineMode = state is NotConnectedState;
-            context
-                .read<OfflineIndicatorCubit>()
-                .showOfflineIndicator(state is NotConnectedState);
-            if (state is ConnectedState) {
+            listener: (context, state) {
+              context.read<TaskBloc>().isOfflineMode = state is NotConnectedState;
               context
-                  .read<TaskBloc>()
-                  .add(const TaskEvent.syncDataOnEngineRestore());
-            } else {
-              context.read<TaskBloc>().add(const TaskEvent.showTasksOffline());
-            }
-          }),
+                  .read<OfflineIndicatorCubit>()
+                  .showOfflineIndicator(state is NotConnectedState);
+              if (state is ConnectedState) {
+                context
+                    .read<TaskBloc>()
+                    .add(const TaskEvent.syncDataOnEngineRestore());
+              } else {
+                context.read<TaskBloc>().add(const TaskEvent.showTasksOffline());
+              }
+            },
+          ),
           BlocListener<ToastMessageCubit, ToastMessageState>(
               listener: (context, state) {
             if (state is ShowToastMessageState) {
               ToastMessageUtils.showMessage(
-                  "finishedTaskMessage".tr(namedArgs: {
-                    'name': state.taskName,
-                  }),
-                  AppAssets.icons.success,
-                  context);
-            }
-          }),
-          BlocListener<TaskBloc, TaskState>(listener: (context, state) {
-            if (state is TaskLoadingState) {
-              showLoading();
-            } else {
-              hideLoading();
-              context.read<OfflineIndicatorCubit>().showOfflineIndicator(
-                  state is TaskSuccessState && !state.isOnline);
+                'taskCompletedMessage'
+                    .tr(namedArgs: {'taskName': state.taskName}),
+                AppAssets.icons.success,
+                context,
+              );
             }
           }),
           BlocListener<FilterBloc, FilterState>(
@@ -241,7 +223,7 @@ class TasksViewContent extends StatelessWidget {
       return GestureDetector(
         onTap: () => task.isTaskDone
             ? null
-            : _navigateTaskActivity(context, tasks[index]),
+            : context.read<TaskConflictCubit>().checkTaskConflict(task),
         onLongPress: () => task.isTaskDone ? null : _showDetails(context, task),
         child: TaskItemWidget(
           name: task.name,
@@ -266,24 +248,10 @@ class TasksViewContent extends StatelessWidget {
           Animation secondaryAnimation) {
         return TaskDetailsWidget(
           task: task,
-          onPressed: (task) => context
-              .read<TaskDetailBloc>()
-              .add(TaskDetailEvent.startTask(task)),
+          onPressed: (task) =>
+              context.read<TaskConflictCubit>().checkTaskConflict(task),
         );
       },
     );
-  }
-
-  _navigateTaskActivity(BuildContext context, TaskIvy taskIvy) {
-    context.push(AppRoutes.taskActivity, extra: {
-      'task': taskIvy,
-      'path': taskIvy.fullRequestPath
-    }).then((value) {
-      if (value != null && value is Map) {
-        context.read<TabBarCubit>().navigateTaskList(value);
-      } else if (value is bool && value == true) {
-        context.read<TaskBloc>().add(const TaskEvent.getTasks(FilterType.all));
-      }
-    });
   }
 }
