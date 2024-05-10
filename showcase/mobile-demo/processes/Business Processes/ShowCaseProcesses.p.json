@@ -29,13 +29,6 @@
         { "id" : "f20", "to" : "f14" }
       ]
     }, {
-      "id" : "f14",
-      "type" : "TaskEnd",
-      "visual" : {
-        "at" : { "x" : 1104, "y" : 80 },
-        "labelOffset" : { "x" : 0, "y" : 15 }
-      }
-    }, {
       "id" : "f15",
       "type" : "Script",
       "name" : "Init data",
@@ -107,6 +100,7 @@
         },
         "output" : {
           "map" : {
+            "out" : "in",
             "out.company" : "result.company",
             "out.inform" : "result.inform"
           },
@@ -157,7 +151,8 @@
       "name" : "Check if restock task is created",
       "config" : {
         "conditions" : {
-          "f46" : "in.restockData.createdRestockerTask"
+          "f25" : "in.restockData.createdRestockerTask",
+          "f11" : ""
         }
       },
       "visual" : {
@@ -165,16 +160,9 @@
         "labelOffset" : { "x" : 8, "y" : 38 }
       },
       "connect" : [
-        { "id" : "f46", "to" : "f38" },
-        { "id" : "f11", "to" : "f2" }
+        { "id" : "f11", "to" : "f2" },
+        { "id" : "f25", "to" : "f3", "via" : [ { "x" : 776, "y" : 280 } ] }
       ]
-    }, {
-      "id" : "f38",
-      "type" : "TaskEnd",
-      "visual" : {
-        "at" : { "x" : 720, "y" : 280 },
-        "labelOffset" : { "x" : 0, "y" : 15 }
-      }
     }, {
       "id" : "f4",
       "type" : "Split",
@@ -200,10 +188,13 @@
       "name" : "Approve invoice",
       "config" : {
         "task" : {
-          "name" : "Approve invoice",
+          "name" : "Approve invoice <%=in1.company.name%>",
           "description" : "This task is for a leader to approve or decline a invoice of maintenaince task",
           "responsible" : {
             "activator" : "Team Lead"
+          },
+          "priority" : {
+            "level" : "HIGH"
           },
           "expiry" : {
             "timeout" : "new Duration(\"24h\")",
@@ -226,14 +217,19 @@
       "type" : "TriggerCall",
       "name" : "Trigger restock service",
       "config" : {
-        "processCall" : "Business Processes/ShowCaseProcesses:startRestockService()"
+        "processCall" : "Business Processes/ShowCaseProcesses:startRestockService(showcase.Company)",
+        "call" : {
+          "map" : {
+            "param.company" : "in.company"
+          }
+        }
       },
       "visual" : {
         "at" : { "x" : 584, "y" : 376 },
         "size" : { "width" : 128 }
       },
       "connect" : [
-        { "id" : "f3", "to" : "f38", "via" : [ { "x" : 720, "y" : 376 } ] }
+        { "id" : "f22", "to" : "f3" }
       ]
     }, {
       "id" : "f12",
@@ -241,16 +237,27 @@
       "name" : "Restock car",
       "config" : {
         "signature" : "startRestockService",
+        "input" : {
+          "params" : [
+            { "name" : "company", "type" : "showcase.Company", "desc" : "" }
+          ],
+          "map" : {
+            "out.company" : "param.company"
+          }
+        },
         "request" : {
           "isHttpRequestable" : false
         },
         "triggerable" : true,
         "task" : {
-          "name" : "Restock car",
+          "name" : "Restock car <%=param.company.name%>",
           "description" : "Restock your service car in the headquarter",
           "responsible" : {
             "type" : "USER_FROM_ATTRIBUTE",
             "activator" : "ivy.session.getSessionUserName()"
+          },
+          "priority" : {
+            "level" : "HIGH"
           },
           "expiry" : {
             "responsible" : {
@@ -264,19 +271,12 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 104, "y" : 352 },
+        "at" : { "x" : 960, "y" : 344 },
         "labelOffset" : { "x" : 8, "y" : 37 }
       },
       "connect" : [
         { "id" : "f0", "to" : "f17" }
       ]
-    }, {
-      "id" : "f22",
-      "type" : "TaskEnd",
-      "visual" : {
-        "at" : { "x" : 392, "y" : 352 },
-        "labelOffset" : { "x" : 0, "y" : 15 }
-      }
     }, {
       "id" : "f17",
       "type" : "DialogCall",
@@ -285,11 +285,11 @@
         "dialog" : "showcase.NormalRestockForm:start(showcase.Company,showcase.Result,showcase.RestockData)"
       },
       "visual" : {
-        "at" : { "x" : 248, "y" : 352 },
+        "at" : { "x" : 1104, "y" : 344 },
         "description" : "Restock car"
       },
       "connect" : [
-        { "id" : "f26", "to" : "f22" }
+        { "id" : "f9", "to" : "f1" }
       ]
     }, {
       "id" : "f16",
@@ -347,5 +347,26 @@
       "connect" : [
         { "id" : "f21", "to" : "f15" }
       ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1296, "y" : 344 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f14",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1168, "y" : 80 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 776, "y" : 376 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
     } ]
 }
