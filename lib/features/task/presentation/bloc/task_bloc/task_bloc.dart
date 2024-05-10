@@ -260,18 +260,21 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   Future<void> _syncDataOnNetworkRestore(event, emit) async {
     List<CaseTask?> caseTasks =
         _hiveTaskStorage.getAllCaseTasksPendingSyncFile();
+    List<Future<void>> deletedTasks = [];
+    List<Future<void>> uploadedTasks = [];
     for (var caseTask in caseTasks) {
       caseTask?.documents.forEach((document) async {
         if (document.fileLocalState ==
             FileLocalStateEnum.kPendingUpload.value) {
-          _uploadFile(caseTask.id, document);
+          uploadedTasks.add(_uploadFile(caseTask.id, document));
         } else if (document.fileLocalState ==
             FileLocalStateEnum.kMarkedForDeletion.value) {
-          _deleteFile(caseTask.id, document);
+          deletedTasks.add(_deleteFile(caseTask.id, document));
         }
       });
     }
-
+    await Future.wait(deletedTasks);
+    await Future.wait(uploadedTasks);
     // sync task done to server
     List<Future<void>> tasksDoneFuture = _hiveTaskStorage
         .getAllTasks()
@@ -280,7 +283,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       return _finishTaskOffline(taskIvy);
     }).toList();
     await Future.wait(tasksDoneFuture);
-
     add(TaskEvent.getTasks(activeFilter));
   }
 

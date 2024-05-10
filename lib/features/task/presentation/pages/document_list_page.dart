@@ -101,17 +101,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
             listener: (context, state) async {
               if (state is UploadSuccessState) {
                 hideLoading();
-                if (isUploadDuplicateFile(state, task)) {
-                  showMessageDialog(
-                      title: "documentList.errorTitle".tr(),
-                      message: "documentList.errorMessage"
-                          .tr(namedArgs: {'fileName': state.fileNames}));
-                } else {
-                  _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task));
-                  showMessageDialog(
-                      title: "uploadFile.successTitle".tr(),
-                      message: state.message);
-                }
+                _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task));
+                showMessageDialog(
+                    title: "uploadFile.successTitle".tr(),
+                    message: state.message);
               } else if (state is UploadErrorState) {
                 hideLoading();
                 showMessageDialog(

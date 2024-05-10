@@ -59,7 +59,9 @@ class TaskActivityBloc extends Bloc<TaskActivityEvent, TaskActivityState> {
       _hiveTaskStorage.removeTask(taskIvy.id);
       emit(FinishedTaskOffline(taskIvy));
     } else {
-      var task = taskIvy.copyWith(state: TaskStateEnum.doneInOffline.value);
+      var caseTask = _hiveTaskStorage.getCaseByTaskId(taskIvy.id);
+      var task = taskIvy.copyWith(
+          state: TaskStateEnum.doneInOffline.value, caseTask: caseTask);
       _hiveTaskStorage.addTask(task);
       emit(FinishedTaskOffline(task));
     }

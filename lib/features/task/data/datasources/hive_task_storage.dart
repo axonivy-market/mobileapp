@@ -38,6 +38,15 @@ class HiveTaskStorage {
       var task = taskBox.values.firstWhere((task) => task.id == taskId);
       List<Document> documents =
           task.caseTask?.documents.toList() ?? List.empty();
+      int idx =
+          documents.indexWhere((element) => element.name == document.name);
+      if (idx != -1) {
+        if (documents[idx].fileLocalState == FileLocalStateEnum.kNew.value ||
+            documents[idx].fileLocalState ==
+                FileLocalStateEnum.kPendingUpload.value) {
+          documents.removeAt(idx);
+        }
+      }
       documents.add(document);
       var caseTask = task.caseTask?.copyWith(documents: documents);
 
