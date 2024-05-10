@@ -205,7 +205,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
               centerTitle: true,
               title: Text(
                 "documentList.title".tr(),
-                style: TextStyle(
+                style: GoogleFonts.inter(
                     color: Theme.of(context).colorScheme.onBackground,
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w500),
@@ -259,12 +259,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                 child: Text(
                                   "documentList.attachFile".tr(),
                                   style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      fontSize: 17.sp,
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                    fontSize: 17.sp,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
@@ -287,12 +285,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                 child: Text(
                                   "documentList.attachPicture".tr(),
                                   style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      fontSize: 17.sp,
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                    fontSize: 17.sp,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
@@ -315,12 +311,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                 child: Text(
                                   "documentList.takePicture".tr(),
                                   style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      fontSize: 17.sp,
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                    fontSize: 17.sp,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
@@ -389,10 +383,20 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          const Icon(Icons.download_outlined),
+                                          Icon(
+                                            Icons.download_outlined,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onSurface,
+                                          ),
                                           Text(
                                             'documentList.download'.tr(),
-                                            style: TextStyle(fontSize: 13.sp),
+                                            style: GoogleFonts.inter(
+                                              fontSize: 13.sp,
+                                              color: Theme.of(context)
+                                                  .colorScheme
+                                                  .onSurface,
+                                            ),
                                           )
                                         ],
                                       ),
@@ -427,7 +431,11 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                         AppAssets.icons.iconDelete.svg(),
                                         Text(
                                           "documentList.delete".tr(),
-                                          style: TextStyle(fontSize: 13.sp),
+                                          style: GoogleFonts.inter(
+                                            color: Colors.white,
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w400,
+                                          ),
                                         )
                                       ],
                                     ),

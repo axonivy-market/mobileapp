@@ -37,7 +37,7 @@ ThemeData darkMode = ThemeData(
       outline: AppColors.shadowedSteel,
       surface: AppColors.white,
       onSurfaceVariant: AppColors.white,
-      onSurface: AppColors.eerieBlack,
+      onSurface: AppColors.shoeWax,
       error: AppColors.watermelonade),
   useMaterial3: true,
   dividerTheme: const DividerThemeData(

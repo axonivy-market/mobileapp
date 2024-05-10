@@ -98,12 +98,21 @@ class __$$ConnectedEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ConnectedEventImpl implements ConnectedEvent {
+class _$ConnectedEventImpl
+    with DiagnosticableTreeMixin
+    implements ConnectedEvent {
   const _$ConnectedEventImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityEvent.connectedEvent()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'ConnectivityEvent.connectedEvent'));
   }
 
   @override
@@ -206,12 +215,21 @@ class __$$NotConnectedEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotConnectedEventImpl implements NotConnectedEvent {
+class _$NotConnectedEventImpl
+    with DiagnosticableTreeMixin
+    implements NotConnectedEvent {
   const _$NotConnectedEventImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityEvent.notConnectedEvent()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'ConnectivityEvent.notConnectedEvent'));
   }
 
   @override
@@ -314,12 +332,21 @@ class __$$FetchEngineInfoEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FetchEngineInfoEventImpl implements FetchEngineInfoEvent {
+class _$FetchEngineInfoEventImpl
+    with DiagnosticableTreeMixin
+    implements FetchEngineInfoEvent {
   const _$FetchEngineInfoEventImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityEvent.fetchEngineInfo()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'ConnectivityEvent.fetchEngineInfo'));
   }
 
   @override
@@ -489,12 +516,18 @@ class __$$InitialStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialStateImpl implements InitialState {
+class _$InitialStateImpl with DiagnosticableTreeMixin implements InitialState {
   const _$InitialStateImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ConnectivityState.initial'));
   }
 
   @override
@@ -597,12 +630,21 @@ class __$$ConnectedStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ConnectedStateImpl implements ConnectedState {
+class _$ConnectedStateImpl
+    with DiagnosticableTreeMixin
+    implements ConnectedState {
   const _$ConnectedStateImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityState.connectedState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'ConnectivityState.connectedState'));
   }
 
   @override
@@ -705,12 +747,21 @@ class __$$NotConnectedStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotConnectedStateImpl implements NotConnectedState {
+class _$NotConnectedStateImpl
+    with DiagnosticableTreeMixin
+    implements NotConnectedState {
   const _$NotConnectedStateImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityState.notConnectedState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'ConnectivityState.notConnectedState'));
   }
 
   @override
