@@ -382,10 +382,24 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          const Icon(Icons.download_outlined),
+                                          AppAssets.icons.iconDownload.svg(
+                                            colorFilter: ColorFilter.mode(
+                                              Theme.of(context)
+                                                  .colorScheme
+                                                  .background,
+                                              BlendMode.srcIn,
+                                            ),
+                                          ),
                                           Text(
                                             'documentList.download'.tr(),
-                                            style: TextStyle(fontSize: 13.sp),
+                                            style: GoogleFonts.inter(
+                                              textStyle: TextStyle(
+                                                fontSize: 13.sp,
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .background,
+                                              ),
+                                            ),
                                           )
                                         ],
                                       ),
@@ -418,7 +432,11 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                         AppAssets.icons.iconDelete.svg(),
                                         Text(
                                           "documentList.delete".tr(),
-                                          style: TextStyle(fontSize: 13.sp),
+                                          style: GoogleFonts.inter(
+                                            textStyle: TextStyle(
+                                              fontSize: 13.sp,
+                                            ),
+                                          ),
                                         )
                                       ],
                                     ),
@@ -475,8 +493,11 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                         ),
                       )
                     : DataEmptyWidget(
-                        icon: AppAssets.images.iconPaperclipEmpty
-                            .image(width: 62.w, height: 65.h),
+                        icon: AppAssets.images.iconPaperclipEmpty.image(
+                          width: 62.w,
+                          height: 65.h,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
                         message: "documentList.emptyList".tr(),
                       );
               },
@@ -544,23 +565,28 @@ class AppListTile extends ListTile {
     super.trailing,
     super.title,
     super.textColor,
+    super.subtitle,
+    super.minLeadingWidth,
+    super.horizontalTitleGap,
+    super.shape,
   });
 
   @override
   Widget build(BuildContext context) {
     // ListTile Background Color Appears outside of ListView bounds
     // Preffered URL: https://github.com/flutter/flutter/issues/94261
-    return Card(
-      color: Theme.of(context).colorScheme.background,
-      elevation: 0,
-      child: ListTile(
-        textColor: textColor,
-        contentPadding: contentPadding,
-        title: title,
-        leading: leading,
-        trailing: trailing,
-        onTap: onTap,
-      ),
+    return ListTile(
+      tileColor: Theme.of(context).colorScheme.onPrimaryContainer,
+      horizontalTitleGap: horizontalTitleGap,
+      minLeadingWidth: minLeadingWidth,
+      textColor: textColor,
+      contentPadding: contentPadding,
+      subtitle: subtitle,
+      title: title,
+      leading: leading,
+      trailing: trailing,
+      onTap: onTap,
+      shape: shape,
     );
   }
 }

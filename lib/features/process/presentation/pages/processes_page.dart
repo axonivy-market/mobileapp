@@ -1,5 +1,6 @@
 import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/router/app_router.dart';
+import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/process/domain/entities/process.dart';
 import 'package:axon_ivy/features/process/presentation/bloc/process_bloc.dart';
 import 'package:axon_ivy/features/process/presentation/widgets/process_item_widget.dart';
@@ -103,9 +104,10 @@ class _ProcessesPageState extends BasePageState<ProcessesPage> {
         child: DataEmptyWidget(
           message: 'process.emptyList',
           icon: AppAssets.icons.processEmpty.svg(
-              colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.onTertiaryContainer,
-                  BlendMode.srcIn)),
+            colorFilter: ColorFilter.mode(
+                Theme.of(context).colorScheme.onTertiaryContainer,
+                BlendMode.srcIn),
+          ),
         ),
       );
     }
@@ -124,6 +126,9 @@ class _ProcessesPageState extends BasePageState<ProcessesPage> {
     context.push(AppRoutes.taskActivity,
         extra: {'path': process.fullRequestPath}).then((value) {
       if (value != null && value is int) {
+        context
+            .read<NotificationBloc>()
+            .add(const NotificationEvent.getNotifications(1, 9000));
         context.read<TabBarCubit>().navigateTaskList(value);
       }
     });

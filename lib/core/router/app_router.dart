@@ -1,6 +1,8 @@
 class AppRoutes {
   static const task = "/task";
 
+  static const notification = '/notification';
+
   static const processes = "/processes";
 
   static const search = "/search";

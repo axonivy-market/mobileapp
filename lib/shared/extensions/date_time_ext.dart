@@ -14,10 +14,8 @@ extension DateTimeFormatting on DateTime {
     return "${_twoDigits(day)}.${_twoDigits(month)}.$year";
   }
 
-  String formatDateYearWithTwoNumber(DateTime dateTime) {
-    String formattedDate =
-        "${_twoDigits(dateTime.day)}.${_twoDigits(dateTime.month)}.${_twoDigits(dateTime.year % 100)}";
-    return formattedDate;
+  String get formatDateYearWithTwoNumber {
+    return "${_twoDigits(day)}.${_twoDigits(month)}.${_twoDigits(year % 100)}";
   }
 }
 

@@ -4,10 +4,12 @@ import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_web_view_widget.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
-import 'package:axon_ivy/shared/extensions/date_time_ext.dart';
-import 'package:axon_ivy/shared/extensions/number_ext.dart';
-import 'package:axon_ivy/shared/extensions/string_ext.dart';
-import 'package:axon_ivy/shared/widgets/widgets.dart';
+import 'package:axon_ivy/shared/extensions/extensions.dart';
+import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
+import 'package:axon_ivy/shared/widgets/drop_shadow_widget.dart';
+import 'package:axon_ivy/shared/widgets/loading_widget.dart';
+import 'package:axon_ivy/shared/widgets/measure_size_widget.dart';
+import 'package:axon_ivy/shared/widgets/task_info_row_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -101,33 +103,32 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
             leadingWidth: 100.w,
             leading: BackButtonWidget(shouldFetch: shouldFetchTaskList),
             actions: [
-              if (task != null)
-                BlocBuilder<TaskDetailBloc, TaskDetailState>(
-                  builder: (context, state) {
-                    if (state is TaskDetailSuccessState) {
-                      task = state.task;
-                    }
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 10.0).r,
-                      child: IconButton(
-                        icon: AppAssets.icons.paperclip.svg(
-                            colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
-                                BlendMode.srcIn)),
-                        onPressed: () {
-                          context
-                              .pushNamed("documentList", extra: task)
-                              .then((value) {
-                            if (value is bool && value == true) {
-                              taskDetailBloc
-                                  .add(TaskDetailEvent.getTaskDetail(task!.id));
-                            }
-                          });
-                        },
-                      ),
-                    );
-                  },
-                ),
+              BlocBuilder<TaskDetailBloc, TaskDetailState>(
+                builder: (context, state) {
+                  if (state is TaskDetailSuccessState) {
+                    task = state.task;
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 10.0).r,
+                    child: IconButton(
+                      icon: AppAssets.icons.paperclip.svg(
+                          colorFilter: ColorFilter.mode(
+                              Theme.of(context).colorScheme.surface,
+                              BlendMode.srcIn)),
+                      onPressed: () {
+                        context
+                            .pushNamed("documentList", extra: task)
+                            .then((value) {
+                          if (value is bool && value == true) {
+                            taskDetailBloc
+                                .add(TaskDetailEvent.getTaskDetail(task!.id));
+                          }
+                        });
+                      },
+                    ),
+                  );
+                },
+              ),
             ],
           ),
           body: SafeArea(

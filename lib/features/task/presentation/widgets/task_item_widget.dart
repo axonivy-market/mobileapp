@@ -43,7 +43,7 @@ Widget getDateTimeTaskWidget(DateTime? dateTime, BuildContext context) {
     return Row(
       children: [
         Text(
-          dateTime.formatDateYearWithTwoNumber(dateTime),
+          dateTime.formatDateYearWithTwoNumber,
           style: GoogleFonts.inter(
             fontSize: 13.sp,
             fontWeight: FontWeight.w400,

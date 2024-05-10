@@ -2,13 +2,13 @@ import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/app_router.dart';
+import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/process/presentation/bloc/process_bloc.dart';
 import 'package:axon_ivy/features/process/presentation/pages/processes_page.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/logged_cubit/logged_in_cubit.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/profile_bloc/profile_bloc.dart';
 import 'package:axon_ivy/features/search/presentation/bloc/search_bloc/search_bloc.dart';
 import 'package:axon_ivy/features/search/presentation/pages/search_page.dart';
-import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/engine_info_cubit/engine_info_cubit.dart';
 import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
@@ -65,7 +65,6 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
   late final TabBarCubit _tabBarCubit;
   late final LoggedInCubit _loggedInCubit;
   late final ToastMessageCubit _toastMessageCubit;
-  late final ConnectivityBloc _connectivityBloc;
   late final EngineInfoCubit _engineInfoCubit;
   late final TaskConflictCubit _taskConflictCubit;
 
@@ -105,12 +104,14 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
     _tabBarCubit = getIt<TabBarCubit>();
     _loggedInCubit = getIt<LoggedInCubit>();
     _toastMessageCubit = getIt<ToastMessageCubit>();
-    _connectivityBloc = getIt<ConnectivityBloc>();
     _engineInfoCubit = getIt<EngineInfoCubit>();
+
     _taskConflictCubit = getIt<TaskConflictCubit>();
     if (SharedPrefs.isLogin ?? false) {
       _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
       _processBloc.add(const ProcessEvent.getProcess());
+      getIt<NotificationBloc>()
+          .add(const NotificationEvent.getNotifications(1, 9000));
     }
   }
 
@@ -120,6 +121,8 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
     _filterBloc.add(FilterEvent(FilterType.all));
     _taskBloc.add(const TaskEvent.getTasks(FilterType.all));
     _processBloc.add(const ProcessEvent.getProcess());
+    getIt<NotificationBloc>()
+        .add(const NotificationEvent.getNotifications(1, 9000));
   }
 
   @override
@@ -136,7 +139,6 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
         BlocProvider(create: (context) => _tabBarCubit),
         BlocProvider(create: (context) => _loggedInCubit),
         BlocProvider(create: (context) => _toastMessageCubit),
-        BlocProvider(create: (context) => _connectivityBloc),
         BlocProvider(create: (context) => _engineInfoCubit),
         BlocProvider(create: (context) => _taskConflictCubit),
       ],
@@ -153,9 +155,9 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
             if (state is NavigateTasksState) {
               _onItemTapped(context, 0);
               final filterState = context.read<FilterBloc>().state;
-              context
-                  .read<TaskBloc>()
-                  .add(TaskEvent.getTasks(filterState.activeFilter));
+              context.read<TaskBloc>().add(
+                    TaskEvent.getTasks(filterState.activeFilter),
+                  );
               context.read<ToastMessageCubit>().showToastMessage(state.taskId);
             }
           }),
@@ -196,8 +198,9 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                      color: Theme.of(context).colorScheme.outline,
-                      width: 1.0.w),
+                    color: Theme.of(context).colorScheme.outline,
+                    width: 1.0.w,
+                  ),
                 ),
               ),
               child: Row(

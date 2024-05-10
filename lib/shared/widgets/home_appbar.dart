@@ -1,4 +1,5 @@
 import 'package:axon_ivy/core/app/app.dart';
+import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
@@ -6,6 +7,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -39,16 +41,45 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         buildLastUpdatedTime(),
-        IconButton(
-          onPressed: () {},
-          icon: AppAssets.icons.notification.svg(
-            width: 21.h,
-            height: 21.h,
-            colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.surface,
-              BlendMode.srcIn,
+        Stack(
+          children: [
+            IconButton(
+              onPressed: () {
+                context.pushNamed('notification');
+              },
+              icon: AppAssets.icons.notification.svg(
+                colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.surface,
+                  BlendMode.srcIn,
+                ),
+              ),
             ),
-          ),
+            BlocBuilder<NotificationBloc, NotificationState>(
+              builder: (context, state) {
+                bool isUnreadNotification = false;
+                if (state is NotificationSuccessState) {
+                  for (var notification in state.notifications) {
+                    if (notification.read == false) {
+                      isUnreadNotification = true;
+                      break;
+                    }
+                  }
+                }
+
+                return isUnreadNotification
+                    ? Positioned(
+                        right: 15,
+                        top: 15,
+                        child: Icon(
+                          Icons.circle,
+                          size: 10,
+                          color: Theme.of(context).colorScheme.primary,
+                        ),
+                      )
+                    : const SizedBox();
+              },
+            ),
+          ],
         ),
         5.horizontalSpace
       ],
