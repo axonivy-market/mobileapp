@@ -15,6 +15,7 @@ part 'search_state.dart';
 class SearchBloc extends Bloc<SearchEvent, SearchState> {
   late List<SearchResult> _searchData;
   String query = '';
+  bool isOfflineMode = false;
 
   SearchBloc() : super(const SearchState.initial()) {
     _searchData = [];
@@ -59,7 +60,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
         case SearchType.processes:
           final processes =
               _processSearchResults(event.query.toLowerCase().trim());
-          if (processes.isEmpty) {
+          if (isOfflineMode || processes.isEmpty) {
             emit(const SearchState.loaded(
                 emptyMessage: "search.noProcessResults"));
           } else {
@@ -74,12 +75,19 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     if (query.isEmpty) {
       return List.empty();
     }
-    final tasks = _searchData
-        .where((item) =>
-            item is TaskItem &&
-            (item.task.name.toLowerCase().contains(query) ||
-                item.task.description.toLowerCase().contains(query)))
-        .toList();
+    final tasks = _searchData.where((item) {
+      if (item is TaskItem &&
+          (item.task.name.toLowerCase().contains(query) ||
+              item.task.description.toLowerCase().contains(query))) {
+        if (isOfflineMode) {
+          return item.task.offline;
+        } else {
+          return true;
+        }
+      } else {
+        return false;
+      }
+    }).toList();
     if (tasks.isNotEmpty) {
       tasks.insert(0, const SearchResult.sectionHeader('generalTasks'));
     }
@@ -91,7 +99,8 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       return List.empty();
     }
     final tasks = _taskSearchResults(query);
-    final processes = _processSearchResults(query);
+    List<SearchResult> processes =
+        isOfflineMode ? [] : _processSearchResults(query);
     return tasks + processes;
   }
 

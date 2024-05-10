@@ -6,13 +6,10 @@ import 'package:axon_ivy/features/notification/domain/entities/notification.dart
     as entities;
 import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
-import 'package:axon_ivy/features/task/presentation/pages/document_list_page.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/generated/colors.gen.dart';
 import 'package:axon_ivy/shared/extensions/date_time_ext.dart';
-import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
-import 'package:axon_ivy/shared/widgets/data_empty_widget.dart';
-import 'package:axon_ivy/shared/widgets/offline_popup_widget.dart';
+import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -352,7 +349,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                                           ColorFilter.mode(
                                                         Theme.of(context)
                                                             .colorScheme
-                                                            .primary,
+                                                            .tertiaryContainer,
                                                         BlendMode.srcIn,
                                                       ),
                                                     ),
@@ -411,7 +408,9 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                           .icons.iconEmptyNotifications
                                           .svg(
                                         colorFilter: ColorFilter.mode(
-                                          Theme.of(context).colorScheme.primary,
+                                          Theme.of(context)
+                                              .colorScheme
+                                              .tertiaryContainer,
                                           BlendMode.srcIn,
                                         ),
                                       ),
@@ -590,6 +589,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
               ),
             ],
           ),
+          tileColor: Theme.of(context).colorScheme.onPrimaryContainer,
         ),
       ),
     );

@@ -44,8 +44,15 @@ class SearchFilterWidget extends StatelessWidget {
                           bottomLeft: const Radius.circular(10.0).r,
                         ),
                         context: context,
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.outline)),
+                        border: Border(
+                          left: BorderSide(
+                              color: Theme.of(context).colorScheme.outline),
+                          top: BorderSide(
+                              color: Theme.of(context).colorScheme.outline),
+                          bottom: BorderSide(
+                              color: Theme.of(context).colorScheme.outline),
+                        ),
+                      ),
               ),
             ),
             Expanded(
@@ -106,8 +113,15 @@ class SearchFilterWidget extends StatelessWidget {
                           bottomRight: const Radius.circular(10.0).r,
                         ),
                         context: context,
-                        border: Border.all(
-                            color: Theme.of(context).colorScheme.outline)),
+                        border: Border(
+                          top: BorderSide(
+                              color: Theme.of(context).colorScheme.outline),
+                          right: BorderSide(
+                              color: Theme.of(context).colorScheme.outline),
+                          bottom: BorderSide(
+                              color: Theme.of(context).colorScheme.outline),
+                        ),
+                      ),
               ),
             ),
           ],

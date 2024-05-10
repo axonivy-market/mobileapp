@@ -33,6 +33,7 @@ class AppRouter {
         parentNavigatorKey: _rootNavigatorKey,
         path: AppRoutes.taskActivity,
         pageBuilder: (_, state) => CustomTransitionPage(
+          key: state.pageKey,
           child: TaskActivityPage(
             taskIvy: (state.extra as Map<String, dynamic>)[
                 'task'], // if starting process, taskIvy would be null

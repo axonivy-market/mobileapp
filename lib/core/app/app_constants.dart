@@ -7,4 +7,8 @@ class Constants {
   static const Map<String, dynamic> markReadNotificationBody = {
     "operation": "MARK_AS_READ"
   };
+  static const xRequestByHeader = "X-Requested-By";
+  static const xRequestBy = "mobile";
+  static const formUrlEncodedContentType = "application/x-www-form-urlencoded";
+  static const taskBox = "task_box";
 }

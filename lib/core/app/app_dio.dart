@@ -1,15 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 
-import 'package:axon_ivy/core/app/demo_config.dart';
-import 'package:axon_ivy/shared/storage/shared_preference.dart';
+import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class AppDio with DioMixin implements Dio {
-  late String username;
-  late String password;
   AppDio() {
     String platform = '';
     if (Platform.isAndroid) {
@@ -19,14 +15,9 @@ class AppDio with DioMixin implements Dio {
     }
     options = BaseOptions(
       connectTimeout: const Duration(seconds: 10),
-      sendTimeout: const Duration(seconds: 5),
+      sendTimeout: const Duration(seconds: 30),
       receiveTimeout: const Duration(seconds: 10),
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-        'X-Platform': platform,
-        'Accept-Language': 'en'
-      },
+      headers: {'X-Platform': platform, 'Accept-Language': 'en'},
     );
     if (kDebugMode) {
       interceptors.add(
@@ -37,18 +28,8 @@ class AppDio with DioMixin implements Dio {
     interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          final isDemoSetting = SharedPrefs.demoSetting ?? false;
-          if (isDemoSetting) {
-            username = DemoConfig.demoUserName;
-            password = DemoConfig.demoPassword;
-          } else {
-            username = SharedPrefs.getUsername ?? '';
-            password = SharedPrefs.getPassword ?? '';
-          }
-          String basicAuth =
-              'Basic ${base64Encode(utf8.encode('$username:$password'))}';
-          options.headers['Authorization'] = basicAuth;
-          options.data ??= {};
+          options.headers['Authorization'] =
+              AuthorizationUtils.authorizationHeader;
           debugPrint('Headers: ${options.headers}');
           return handler.next(options);
         },

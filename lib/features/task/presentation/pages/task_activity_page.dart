@@ -1,6 +1,8 @@
 import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
+import 'package:axon_ivy/features/task/presentation/bloc/bloc.dart';
+import 'package:axon_ivy/features/task/presentation/bloc/task_activity_bloc/task_activity_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_detail_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_web_view_widget.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
@@ -34,6 +36,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
   late Animation<double> _rotationAnimation;
   late AnimationController _controller;
   late TaskDetailBloc taskDetailBloc;
+  late TaskActivityBloc _taskActivityBloc;
   late double screenHeight;
   final GlobalKey _appBarKey = GlobalKey();
   double taskDetailPanelHeight = 0;
@@ -45,6 +48,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
   bool isExpanded = false;
   int documentLength = 0;
   bool shouldFetchTaskList = false;
+  var globalKey = GlobalKey();
 
   @override
   void initState() {
@@ -55,6 +59,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
     );
     _rotationAnimation = Tween<double>(begin: 0, end: 0.5).animate(_controller);
     taskDetailBloc = getIt<TaskDetailBloc>();
+    _taskActivityBloc = getIt<TaskActivityBloc>();
     WidgetsBinding.instance.addPostFrameCallback((_) => _appBarHeight());
   }
 
@@ -76,23 +81,39 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
     isKeyboardVisible = mediaQuery.viewInsets.bottom > 100.h;
     TaskIvy? task = widget.taskIvy;
     documentLength = task?.caseTask?.documents.length ?? 0;
-    return BlocProvider(
-      create: (context) => taskDetailBloc,
-      child: BlocListener<TaskDetailBloc, TaskDetailState>(
-        listener: (context, state) {
-          if (state is TaskDetailLoadingState) {
-            showLoading();
-          } else if (state is TaskDetailSuccessState) {
-            setState(() {
-              shouldFetchTaskList = true;
-            });
-            hideLoading();
-          } else if (state is TaskDetailErrorState) {
-            hideLoading();
-            showMessageDialog(
-                title: "documentList.errorTitle".tr(), message: state.error);
-          }
-        },
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => taskDetailBloc),
+        BlocProvider(create: (context) => _taskActivityBloc),
+        BlocProvider(create: (context) => getIt<TaskBloc>()),
+      ],
+      child: MultiBlocListener(
+        listeners: [
+          BlocListener<TaskDetailBloc, TaskDetailState>(
+              listener: (context, state) {
+            if (state is TaskDetailLoadingState) {
+              showLoading();
+            } else if (state is TaskDetailSuccessState) {
+              setState(() {
+                shouldFetchTaskList = true;
+              });
+              hideLoading();
+            } else if (state is TaskDetailErrorState) {
+              hideLoading();
+              showMessageDialog(
+                  title: "documentList.errorTitle".tr(), message: state.error);
+            }
+          }),
+          BlocListener<TaskActivityBloc, TaskActivityState>(
+              listener: (context, state) {
+            if (state is FinishedLoadingState) {
+              showLoading();
+            } else if (state is FinishedTaskOffline) {
+              hideLoading();
+              context.pop({double.infinity: state.taskIvy.name});
+            }
+          }),
+        ],
         child: Scaffold(
           backgroundColor: Theme.of(context).colorScheme.background,
           appBar: AppBar(
@@ -103,32 +124,33 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
             leadingWidth: 100.w,
             leading: BackButtonWidget(shouldFetch: shouldFetchTaskList),
             actions: [
-              BlocBuilder<TaskDetailBloc, TaskDetailState>(
-                builder: (context, state) {
-                  if (state is TaskDetailSuccessState) {
-                    task = state.task;
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 10.0).r,
-                    child: IconButton(
-                      icon: AppAssets.icons.paperclip.svg(
-                          colorFilter: ColorFilter.mode(
-                              Theme.of(context).colorScheme.surface,
-                              BlendMode.srcIn)),
-                      onPressed: () {
-                        context
-                            .pushNamed("documentList", extra: task)
-                            .then((value) {
-                          if (value is bool && value == true) {
-                            taskDetailBloc
-                                .add(TaskDetailEvent.getTaskDetail(task!.id));
-                          }
-                        });
-                      },
-                    ),
-                  );
-                },
-              ),
+              if (task != null)
+                BlocBuilder<TaskDetailBloc, TaskDetailState>(
+                  builder: (context, state) {
+                    if (state is TaskDetailSuccessState) {
+                      task = state.task;
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 10.0).r,
+                      child: IconButton(
+                        icon: AppAssets.icons.paperclip.svg(
+                            colorFilter: ColorFilter.mode(
+                                Theme.of(context).colorScheme.surface,
+                                BlendMode.srcIn)),
+                        onPressed: () {
+                          context
+                              .pushNamed("documentList", extra: task)
+                              .then((value) {
+                            if (value is bool && value == true) {
+                              taskDetailBloc
+                                  .add(TaskDetailEvent.getTaskDetail(task!));
+                            }
+                          });
+                        },
+                      ),
+                    );
+                  },
+                ),
             ],
           ),
           body: SafeArea(
@@ -140,7 +162,9 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                           ? 0
                           : taskDetailPanelHeight),
                   child: TaskWebViewWidget(
+                    key: globalKey,
                     fullRequestPath: widget.fullRequestPath,
+                    taskIvy: widget.taskIvy,
                     onScrollToTop: _updateScrollingChanged,
                     canScrollVertical: _canScrollVertical,
                     onProgressChanged: _onProgressChanged,
@@ -309,14 +333,14 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                               .then((value) {
                             if (value is bool && value == true) {
                               taskDetailBloc
-                                  .add(TaskDetailEvent.getTaskDetail(task!.id));
+                                  .add(TaskDetailEvent.getTaskDetail(task!));
                             }
                           });
                         },
                         child: TaskInfoRowWidget(
                           isTitleHighlight: true,
                           icon: AppAssets.icons.paperclip.svg(
-                              height: 16.sp,
+                              height: 16.h,
                               colorFilter: ColorFilter.mode(
                                   Theme.of(context).colorScheme.surface,
                                   BlendMode.srcIn)),

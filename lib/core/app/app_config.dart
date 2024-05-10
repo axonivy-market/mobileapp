@@ -1,3 +1,5 @@
+import 'package:axon_ivy/core/app/demo_config.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -24,6 +26,10 @@ class AppConfig {
     } else {
       return '';
     }
+  }
+
+  static String get appName {
+    return _packageInfo?.appName ?? "axon_ivy";
   }
 
   static String baseUrl = '';
@@ -54,5 +60,13 @@ class AppConfig {
     await dotenv.load(fileName: fileName);
     baseUrl = dotenv.env['BASE_URL'] ?? '';
     debugPrint(baseUrl);
+  }
+
+  static String get serverUrl {
+    if (SharedPrefs.demoSetting == true) {
+      return DemoConfig.demoServerUrl;
+    } else {
+      return SharedPrefs.getBaseUrl ?? '';
+    }
   }
 }

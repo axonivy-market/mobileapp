@@ -20,10 +20,18 @@ Document _$DocumentFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Document {
+  @HiveField(0)
   int get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get url => throw _privateConstructorUsedError;
+  @HiveField(3)
   String get path => throw _privateConstructorUsedError;
+  @HiveField(4)
+  int get fileLocalState => throw _privateConstructorUsedError;
+  @HiveField(5)
+  String get fileUploadPath => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +44,13 @@ abstract class $DocumentCopyWith<$Res> {
   factory $DocumentCopyWith(Document value, $Res Function(Document) then) =
       _$DocumentCopyWithImpl<$Res, Document>;
   @useResult
-  $Res call({int id, String name, String url, String path});
+  $Res call(
+      {@HiveField(0) int id,
+      @HiveField(1) String name,
+      @HiveField(2) String url,
+      @HiveField(3) String path,
+      @HiveField(4) int fileLocalState,
+      @HiveField(5) String fileUploadPath});
 }
 
 /// @nodoc
@@ -56,6 +70,8 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
     Object? name = null,
     Object? url = null,
     Object? path = null,
+    Object? fileLocalState = null,
+    Object? fileUploadPath = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -74,6 +90,14 @@ class _$DocumentCopyWithImpl<$Res, $Val extends Document>
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
+      fileLocalState: null == fileLocalState
+          ? _value.fileLocalState
+          : fileLocalState // ignore: cast_nullable_to_non_nullable
+              as int,
+      fileUploadPath: null == fileUploadPath
+          ? _value.fileUploadPath
+          : fileUploadPath // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -86,7 +110,13 @@ abstract class _$$DocumentImplCopyWith<$Res>
       __$$DocumentImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String name, String url, String path});
+  $Res call(
+      {@HiveField(0) int id,
+      @HiveField(1) String name,
+      @HiveField(2) String url,
+      @HiveField(3) String path,
+      @HiveField(4) int fileLocalState,
+      @HiveField(5) String fileUploadPath});
 }
 
 /// @nodoc
@@ -104,6 +134,8 @@ class __$$DocumentImplCopyWithImpl<$Res>
     Object? name = null,
     Object? url = null,
     Object? path = null,
+    Object? fileLocalState = null,
+    Object? fileUploadPath = null,
   }) {
     return _then(_$DocumentImpl(
       id: null == id
@@ -122,6 +154,14 @@ class __$$DocumentImplCopyWithImpl<$Res>
           ? _value.path
           : path // ignore: cast_nullable_to_non_nullable
               as String,
+      fileLocalState: null == fileLocalState
+          ? _value.fileLocalState
+          : fileLocalState // ignore: cast_nullable_to_non_nullable
+              as int,
+      fileUploadPath: null == fileUploadPath
+          ? _value.fileUploadPath
+          : fileUploadPath // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -130,26 +170,43 @@ class __$$DocumentImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DocumentImpl implements _Document {
   const _$DocumentImpl(
-      {required this.id, this.name = "", this.url = "", this.path = ""});
+      {@HiveField(0) required this.id,
+      @HiveField(1) this.name = "",
+      @HiveField(2) this.url = "",
+      @HiveField(3) this.path = "",
+      @HiveField(4) this.fileLocalState = 0,
+      @HiveField(5) this.fileUploadPath = ""});
 
   factory _$DocumentImpl.fromJson(Map<String, dynamic> json) =>
       _$$DocumentImplFromJson(json);
 
   @override
+  @HiveField(0)
   final int id;
   @override
   @JsonKey()
+  @HiveField(1)
   final String name;
   @override
   @JsonKey()
+  @HiveField(2)
   final String url;
   @override
   @JsonKey()
+  @HiveField(3)
   final String path;
+  @override
+  @JsonKey()
+  @HiveField(4)
+  final int fileLocalState;
+  @override
+  @JsonKey()
+  @HiveField(5)
+  final String fileUploadPath;
 
   @override
   String toString() {
-    return 'Document(id: $id, name: $name, url: $url, path: $path)';
+    return 'Document(id: $id, name: $name, url: $url, path: $path, fileLocalState: $fileLocalState, fileUploadPath: $fileUploadPath)';
   }
 
   @override
@@ -160,12 +217,17 @@ class _$DocumentImpl implements _Document {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.url, url) || other.url == url) &&
-            (identical(other.path, path) || other.path == path));
+            (identical(other.path, path) || other.path == path) &&
+            (identical(other.fileLocalState, fileLocalState) ||
+                other.fileLocalState == fileLocalState) &&
+            (identical(other.fileUploadPath, fileUploadPath) ||
+                other.fileUploadPath == fileUploadPath));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, url, path);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, url, path, fileLocalState, fileUploadPath);
 
   @JsonKey(ignore: true)
   @override
@@ -183,22 +245,34 @@ class _$DocumentImpl implements _Document {
 
 abstract class _Document implements Document {
   const factory _Document(
-      {required final int id,
-      final String name,
-      final String url,
-      final String path}) = _$DocumentImpl;
+      {@HiveField(0) required final int id,
+      @HiveField(1) final String name,
+      @HiveField(2) final String url,
+      @HiveField(3) final String path,
+      @HiveField(4) final int fileLocalState,
+      @HiveField(5) final String fileUploadPath}) = _$DocumentImpl;
 
   factory _Document.fromJson(Map<String, dynamic> json) =
       _$DocumentImpl.fromJson;
 
   @override
+  @HiveField(0)
   int get id;
   @override
+  @HiveField(1)
   String get name;
   @override
+  @HiveField(2)
   String get url;
   @override
+  @HiveField(3)
   String get path;
+  @override
+  @HiveField(4)
+  int get fileLocalState;
+  @override
+  @HiveField(5)
+  String get fileUploadPath;
   @override
   @JsonKey(ignore: true)
   _$$DocumentImplCopyWith<_$DocumentImpl> get copyWith =>

@@ -112,6 +112,7 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
       _processBloc.add(const ProcessEvent.getProcess());
       getIt<NotificationBloc>()
           .add(const NotificationEvent.getNotifications(1, 9000));
+      _taskBloc.add(const TaskEvent.syncDataOnEngineRestore());
     }
   }
 
@@ -155,10 +156,12 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
             if (state is NavigateTasksState) {
               _onItemTapped(context, 0);
               final filterState = context.read<FilterBloc>().state;
-              context.read<TaskBloc>().add(
-                    TaskEvent.getTasks(filterState.activeFilter),
-                  );
-              context.read<ToastMessageCubit>().showToastMessage(state.taskId);
+              context
+                  .read<TaskBloc>()
+                  .add(TaskEvent.getTasks(filterState.activeFilter));
+              context
+                  .read<ToastMessageCubit>()
+                  .showToastMessage(state.taskInfo);
             }
           }),
           BlocListener<TaskConflictCubit, TaskConflictState>(
@@ -308,7 +311,7 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
       'task': taskIvy,
       'path': taskIvy.fullRequestPath
     }).then((value) {
-      if (value != null && value is int) {
+      if (value != null && value is Map) {
         context.read<TabBarCubit>().navigateTaskList(value);
       } else if (value is bool && value == true) {
         context.read<TaskBloc>().add(const TaskEvent.getTasks(FilterType.all));

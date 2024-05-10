@@ -48,6 +48,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                 context.pushNamed('notification');
               },
               icon: AppAssets.icons.notification.svg(
+                height: 26.h,
                 colorFilter: ColorFilter.mode(
                   Theme.of(context).colorScheme.surface,
                   BlendMode.srcIn,
@@ -112,11 +113,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     5.horizontalSpace,
                     AppAssets.icons.offline.svg(
-                      colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.secondary,
-                        BlendMode.srcIn,
-                      ),
-                    )
+                        height: 26.h,
+                        colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.secondary,
+                            BlendMode.srcIn))
                   ],
                 );
               }

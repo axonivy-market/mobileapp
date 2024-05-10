@@ -1,0 +1,114 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "151AA454FC07997D",
+  "kind" : "HTML_DIALOG",
+  "config" : {
+    "data" : "showcase.NormalRestockForm.NormalRestockFormData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start(Company,Result,RestockData)",
+      "config" : {
+        "signature" : "start",
+        "input" : {
+          "params" : [
+            { "name" : "company", "type" : "showcase.Company", "desc" : "" },
+            { "name" : "inform", "type" : "showcase.Result", "desc" : "" },
+            { "name" : "restockData", "type" : "showcase.RestockData", "desc" : "" }
+          ],
+          "map" : {
+            "out.company" : "param.company",
+            "out.inform" : "param.inform",
+            "out.restockData" : "param.restockData"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "company", "type" : "showcase.Company", "desc" : "" },
+            { "name" : "inform", "type" : "showcase.Result", "desc" : "" },
+            { "name" : "restockData", "type" : "showcase.RestockData", "desc" : "" }
+          ],
+          "map" : {
+            "result.company" : "in.company",
+            "result.inform" : "in.inform",
+            "result.restockData" : "in.restockData"
+          }
+        },
+        "guid" : "151AA454FF13B644"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "labelOffset" : { "x" : 8, "y" : 35 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 368, "y" : 64 },
+        "labelOffset" : { "x" : 0, "y" : 12 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "HtmlDialogEventStart",
+      "name" : "close",
+      "config" : {
+        "guid" : "151AA4550006239F"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 },
+        "labelOffset" : { "x" : 8, "y" : 32 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f8" }
+      ]
+    }, {
+      "id" : "f4",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 376, "y" : 160 },
+        "labelOffset" : { "x" : 0, "y" : 12 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import helios.showcase.MaterialRestocker;",
+            "MaterialRestocker restocker = new MaterialRestocker();",
+            "",
+            "out.restockData.restockMaterials = restocker.getRestockMaterialFromResource();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 232, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import helios.showcase.MaterialRestocker;",
+            "MaterialRestocker restocker = new MaterialRestocker();",
+            "",
+            "restocker.minusRestockMaterial(out.restockData.restockMaterials);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f4" }
+      ]
+    } ]
+}

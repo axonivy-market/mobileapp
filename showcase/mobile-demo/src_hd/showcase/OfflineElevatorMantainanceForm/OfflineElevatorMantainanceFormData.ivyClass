@@ -1,0 +1,6 @@
+OfflineElevatorMantainanceFormData #class
+showcase.OfflineElevatorMantainanceForm #namespace
+company showcase.Company #field
+company PERSISTENT #fieldModifier
+inform showcase.Result #field
+inform PERSISTENT #fieldModifier

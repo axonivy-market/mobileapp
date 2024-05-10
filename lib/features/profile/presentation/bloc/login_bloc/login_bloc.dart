@@ -4,7 +4,7 @@ import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/network/dio_error_handler.dart';
 import 'package:axon_ivy/core/network/failure.dart';
-import 'package:axon_ivy/features/search/domain/repositories/engine_info_repository_interface.dart';
+import 'package:axon_ivy/features/search/domain/usecases/get_engine_info_use_case.dart';
 import 'package:axon_ivy/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/shared/resources/validators.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
@@ -17,12 +17,14 @@ import 'package:injectable/injectable.dart';
 import '../../../../../core/di/di_setup.dart';
 
 part 'login_bloc.freezed.dart';
+
 part 'login_event.dart';
+
 part 'login_state.dart';
 
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final EngineInfoRepositoryInterface _engineInfoRepository;
+  final GetEngineInfoUseCase _engineInfoRepository;
 
   LoginBloc(this._engineInfoRepository) : super(const LoginState()) {
     on<_SubmitLogin>(_submitLogin);
@@ -84,7 +86,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           invalidUsernameMessage: invalidUsernameMessage));
     } else {
       try {
-        final engineInfo = await _engineInfoRepository.getEngineInfo();
+        final engineInfo = await _engineInfoRepository.execute();
 
         engineInfo.fold(
           (l) {

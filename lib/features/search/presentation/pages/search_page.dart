@@ -11,6 +11,7 @@ import 'package:axon_ivy/features/tabbar/bloc/tabbar_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_conflict_cubit/task_conflict_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/widgets/task_item_widget.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
+import 'package:axon_ivy/shared/enums/search_type.dart';
 import 'package:axon_ivy/shared/extensions/list_ext.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -33,38 +34,58 @@ class _SearchPageState extends State<SearchPage> {
     return BlocProvider(
       create: (context) => getIt<SearchFilterCubit>(),
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: const HomeAppBar(
           scrolledUnderElevation: 0,
         ),
-        body: BlocListener<EngineInfoCubit, EngineInfoState>(
-          listener: (context, state) {
-            if (state is GetEngineInfo) {
-              if (state.engineInfo != null) {
-                context
-                    .read<ConnectivityBloc>()
-                    .add(const ConnectivityEvent.connectedEvent());
-              } else {
-                context
-                    .read<ConnectivityBloc>()
-                    .add(const ConnectivityEvent.notConnectedEvent());
+        body: MultiBlocListener(
+          listeners: [
+            BlocListener<EngineInfoCubit, EngineInfoState>(
+                listener: (context, state) {
+              if (state is GetEngineInfo) {
+                if (state.engineInfo != null) {
+                  context
+                      .read<ConnectivityBloc>()
+                      .add(const ConnectivityEvent.connectedEvent());
+                } else {
+                  context
+                      .read<ConnectivityBloc>()
+                      .add(const ConnectivityEvent.notConnectedEvent());
+                }
               }
-            }
-          },
-          child: Stack(
+            }),
+            BlocListener<ConnectivityBloc, ConnectivityState>(
+                listener: (context, state) {
+              context.read<SearchBloc>().isOfflineMode =
+                  state is NotConnectedState;
+              context.read<SearchBloc>().add(
+                    SearchEvent.searchItem(
+                        context.read<SearchBloc>().query, SearchType.tasks),
+                  );
+            }),
+          ],
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Column(
-                children: [
-                  16.verticalSpace,
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16).r,
-                    child: const SearchTextField(),
-                  ),
-                  Expanded(
-                    child: BlocBuilder<SearchBloc, SearchState>(
-                      builder: (context, state) {
-                        if (state is SearchResultState) {
-                          return state.items.isEmptyOrNull
-                              ? DataEmptyWidget(
+              16.verticalSpace,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16).r,
+                child: const SearchTextField(),
+              ),
+              Flexible(
+                flex: 1,
+                child: BlocBuilder<SearchBloc, SearchState>(
+                  builder: (context, state) {
+                    if (state is SearchResultState) {
+                      return Stack(
+                        children: [
+                          searchItemList(context, state),
+                          if (state.items.isEmptyOrNull)
+                            Padding(
+                              padding: EdgeInsets.only(top: 62.h),
+                              child: Container(
+                                color: Theme.of(context).colorScheme.background,
+                                child: DataEmptyWidget(
                                   message: state.emptyMessage!.tr(),
                                   icon: AppAssets.icons.icSearchNotFound.svg(
                                     colorFilter: ColorFilter.mode(
@@ -73,39 +94,26 @@ class _SearchPageState extends State<SearchPage> {
                                           .tertiaryContainer,
                                       BlendMode.srcIn,
                                     ),
-                                  ))
-                              : searchItemList(context, state);
-                        } else {
-                          return DataEmptyWidget(
-                              message: 'search.nothingThereYet'.tr(),
-                              icon: AppAssets.icons.icSearchInitial.svg(
-                                colorFilter: ColorFilter.mode(
-                                  Theme.of(context)
-                                      .colorScheme
-                                      .tertiaryContainer,
-                                  BlendMode.srcIn,
+                                  ),
                                 ),
-                              ));
-                        }
-                      },
-                    ),
-                  ),
-                ],
+                              ),
+                            ),
+                        ],
+                      );
+                    } else {
+                      return DataEmptyWidget(
+                        message: 'search.nothingThereYet'.tr(),
+                        icon: AppAssets.icons.icSearchInitial.svg(
+                          colorFilter: ColorFilter.mode(
+                            Theme.of(context).colorScheme.tertiaryContainer,
+                            BlendMode.srcIn,
+                          ),
+                        ),
+                      );
+                    }
+                  },
+                ),
               ),
-              BlocBuilder<ConnectivityBloc, ConnectivityState>(
-                  builder: (context, state) {
-                if (state is NotConnectedState) {
-                  return OfflinePopupWidget(
-                    description: "offline.search_description".tr(),
-                    onRefresh: () async {
-                      final engineCubit = context.read<EngineInfoCubit>();
-                      await Future.delayed(const Duration(seconds: 1));
-                      engineCubit.getEngineInfo();
-                    },
-                  );
-                }
-                return Container();
-              })
             ],
           ),
         ),
@@ -137,6 +145,9 @@ class _SearchPageState extends State<SearchPage> {
         SliverList(
           delegate: SliverChildBuilderDelegate(
             (BuildContext _, int index) {
+              if (state.items.isEmptyOrNull) {
+                return const SizedBox.shrink();
+              }
               final item = state.items![index];
               if (item is SectionHeader) {
                 return Padding(
@@ -157,6 +168,9 @@ class _SearchPageState extends State<SearchPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 16).r,
                   child: GestureDetector(
                     onTap: () {
+                      if (item.task.isTaskDone) {
+                        return;
+                      }
                       WidgetsBinding.instance.focusManager.primaryFocus
                           ?.unfocus();
                       context
@@ -169,6 +183,8 @@ class _SearchPageState extends State<SearchPage> {
                       priority: item.task.priority,
                       expiryTimeStamp: item.task.expiryTimeStamp,
                       query: state.query.trim(),
+                      isOffline: item.task.offline,
+                      isTaskDone: item.task.isTaskDone,
                     ),
                   ),
                 );
@@ -182,7 +198,7 @@ class _SearchPageState extends State<SearchPage> {
                       context.push(AppRoutes.taskActivity, extra: {
                         'path': item.process.fullRequestPath
                       }).then((value) {
-                        if (value != null && value is int) {
+                        if (value != null && value is Map) {
                           context.read<TabBarCubit>().navigateTaskList(value);
                         }
                       });
@@ -196,7 +212,7 @@ class _SearchPageState extends State<SearchPage> {
               }
               return null;
             },
-            childCount: state.items!.length,
+            childCount: state.items.isEmptyOrNull ? 1 : state.items!.length,
           ),
         ),
       ],

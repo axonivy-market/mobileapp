@@ -1,44 +1,65 @@
 import 'dart:async';
+import 'dart:io';
 
-import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
+import 'package:axon_ivy/features/task/data/datasources/hive_task_storage.dart';
+import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
+import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
+import 'package:axon_ivy/features/task/domain/usecases/delete_file_use_case.dart';
 import 'package:axon_ivy/features/task/domain/usecases/get_tasks_use_case.dart';
+import 'package:axon_ivy/features/task/domain/usecases/upload_file_use_case.dart';
+import 'package:axon_ivy/shared/enums/file_local_state_enum.dart';
+import 'package:axon_ivy/shared/enums/task_state_enum.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/resources/constants.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:html/parser.dart' as html_parser;
 
 import '../../../../../core/app/app.dart';
 
 part 'task_bloc.freezed.dart';
+
 part 'task_event.dart';
+
 part 'task_state.dart';
 
 @injectable
 class TaskBloc extends Bloc<TaskEvent, TaskState> {
   final GetTaskListUseCase _taskRepository;
+  final HiveTaskStorage _hiveTaskStorage;
+  final UploadFileUseCase _uploadFileUseCase;
+  final DeleteFileUseCase _deleteFileUseCase;
   List<TaskIvy> tasks = [];
   List<TaskIvy> sortDefaultTasks = [];
   List<TaskIvy> expiredTasks = [];
   FilterType activeFilter = FilterType.all;
   bool isFirstTimeFetch = true;
+  bool isOfflineMode = false;
 
   List<SortType> activeSortType = [
     MainSortType.priority,
     SubSortType.mostImportant
   ];
 
-  TaskBloc(this._taskRepository) : super(const TaskState.loading(false)) {
+  TaskBloc(this._taskRepository, this._hiveTaskStorage, this._uploadFileUseCase,
+      this._deleteFileUseCase)
+      : super(const TaskState.loading(false)) {
     on<_GetTasks>(_getTasks);
     on<_FilterTasks>(_filterTasks);
     on<_SortTasks>(_sortTasks);
     on<ShowOfflinePopupEvent>(_showOfflinePopupEvent);
+    on<ParseHtmlEvent>(_parseHtml);
+    on<ShowTasksOfflineEvent>(_showTasksOffline);
+    on<TasksLoadedSyncEvent>(_tasksLoadedSync);
+    on<SyncDataOnEngineRestoreEvent>(_syncDataOnNetworkRestore);
 
     final isDemoSetting = SharedPrefs.demoSetting ?? false;
     if (isDemoSetting) {
@@ -54,7 +75,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   void _sortTasks(event, Emitter emit) {
     activeSortType = event.activeSortType;
-    if (tasks.isNotEmpty) {
+    if (getTasks().isNotEmpty) {
       emit(TaskState.success(
           tasks: _sortTasksLocal(
               event.activeSortType[0], event.activeSortType[1])));
@@ -63,7 +84,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
   List<TaskIvy> _sortTasksLocal(MainSortType mainType, SubSortType subType) {
     List<TaskIvy> sortedTasks =
-        activeFilter == FilterType.all ? tasks : expiredTasks;
+        activeFilter == FilterType.all ? getTasks() : expiredTasks;
     switch (mainType) {
       case MainSortType.priority:
         List<TaskIvy> priorityTasks = sortedTasks.sortDefaultTasks;
@@ -103,7 +124,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     activeFilter = event.activeFilter;
     switch (event.activeFilter) {
       case FilterType.all:
-        if (tasks.isNotEmpty) {
+        if (getTasks().isNotEmpty) {
           emit(TaskState.success(
               tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
                   activeSortType.getSubTypeActive()!)));
@@ -114,7 +135,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
               tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
                   activeSortType.getSubTypeActive()!)));
         } else {
-          expiredTasks = _filterExpiredTasks(tasks);
+          expiredTasks = _filterExpiredTasks(getTasks());
           emit(TaskState.success(
               tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
                   activeSortType.getSubTypeActive()!)));
@@ -134,35 +155,21 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
 
       tasks.fold(
         (l) {
-          emit(
-            TaskState.success(
-                tasks: _sortTasksLocal(
-                  activeSortType.getMainSortType()!,
-                  activeSortType.getSubTypeActive()!,
-                ),
-                isOnline: false),
-          );
+          isOfflineMode = true;
+          add(const TaskEvent.showTasksOffline());
         },
         (r) {
+          isOfflineMode = false;
           SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
-          this.tasks = r;
-          sortDefaultTasks = r.sortDefaultTasks;
-          expiredTasks = _filterExpiredTasks(this.tasks);
-          emit(
-            TaskState.success(
-              tasks: _sortTasksLocal(
-                activeSortType.getMainSortType()!,
-                activeSortType.getSubTypeActive()!,
-              ),
-            ),
-          );
+          this.tasks.clear();
+          this.tasks.addAll(r);
+          // Sync data
+          add(const TaskEvent.onTasksLoadedSync());
         },
       );
     } catch (e) {
-      emit(TaskState.success(
-          tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
-              activeSortType.getSubTypeActive()!),
-          isOnline: false));
+      isOfflineMode = true;
+      add(const TaskEvent.showTasksOffline());
     }
   }
 
@@ -176,5 +183,224 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
         tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
             activeSortType.getSubTypeActive()!),
         isOnline: event.isConnected));
+  }
+
+  Future<void> _parseHtml(event, Emitter emit) async {
+    var serverTasksOffline = tasks.where((element) => element.offline).toList();
+    // download task form
+    List<Future<void>> futures = serverTasksOffline
+        .where((task) => task.submitUrlOffline.isEmptyOrNull)
+        .map((taskIvy) {
+      return downloadHTMLFromFullRequestPath(taskIvy);
+    }).toList();
+    await Future.wait(futures);
+    sortDefaultTasks = tasks.sortDefaultTasks;
+    expiredTasks = _filterExpiredTasks(tasks);
+    emit(TaskState.success(
+        tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
+            activeSortType.getSubTypeActive()!)));
+  }
+
+  Future<void> downloadHTMLFromFullRequestPath(TaskIvy taskIvy) async {
+    var dio = getIt<Dio>();
+    Uri uri = Uri.parse(taskIvy.fullRequestPath);
+    var requestUrl = "${uri.path}?${uri.query}";
+    final response = await dio.get(requestUrl);
+
+    if (response.statusCode == 200) {
+      final submitUrl = _getFormAction(response.data);
+      final task = taskIvy.copyWith(
+          submitUrlOffline: submitUrl, formHTMLPageOffline: response.data);
+      // Update task for display on UI
+      var index = tasks.indexWhere((element) => element.id == taskIvy.id);
+      tasks.removeAt(index);
+      tasks.add(task);
+      _hiveTaskStorage.addTask(task);
+    }
+  }
+
+  String _getFormAction(String htmlContent) {
+    final document = html_parser.parse(htmlContent);
+
+    final forms = document.getElementsByTagName('form');
+
+    for (final form in forms) {
+      final action = form.attributes['action'];
+      if (action != null) {
+        return action;
+      }
+    }
+    return "";
+  }
+
+  Future<void> _showTasksOffline(event, Emitter emit) async {
+    isOfflineMode = true;
+    var tasksOffline = _hiveTaskStorage.getAllTasks().toList();
+    sortDefaultTasks = tasksOffline.sortDefaultTasks;
+    expiredTasks = _filterExpiredTasks(tasksOffline);
+    emit(TaskState.success(
+        tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
+            activeSortType.getSubTypeActive()!),
+        isOnline: false));
+  }
+
+  Future<void> _tasksLoadedSync(event, emit) async {
+    // Remove tasks local for tasks done and uploaded from server
+    _hiveTaskStorage
+        .getAllTasks()
+        .where((taskLocal) => !tasks.any((task) => task.id == taskLocal.id))
+        .forEach((element) {
+      _hiveTaskStorage.removeTask(element.id);
+    });
+    var serverTasksOffline = tasks.where((element) => element.offline).toList();
+    _updateTaskWithLocalData(serverTasksOffline);
+    add(const TaskEvent.parseHtml());
+  }
+
+  Future<void> _syncDataOnNetworkRestore(event, emit) async {
+    List<CaseTask?> caseTasks =
+        _hiveTaskStorage.getAllCaseTasksPendingSyncFile();
+    List<Future<void>> deletedTasks = [];
+    List<Future<void>> uploadedTasks = [];
+    for (var caseTask in caseTasks) {
+      caseTask?.documents.forEach((document) async {
+        if (document.fileLocalState ==
+            FileLocalStateEnum.kPendingUpload.value) {
+          uploadedTasks.add(_uploadFile(caseTask.id, document));
+        } else if (document.fileLocalState ==
+            FileLocalStateEnum.kMarkedForDeletion.value) {
+          deletedTasks.add(_deleteFile(caseTask.id, document));
+        }
+      });
+    }
+    await Future.wait(deletedTasks);
+    await Future.wait(uploadedTasks);
+    // sync task done to server
+    List<Future<void>> tasksDoneFuture = _hiveTaskStorage
+        .getAllTasks()
+        .where((element) => element.state == TaskStateEnum.doneInOffline.value)
+        .map((taskIvy) {
+      return _finishTaskOffline(taskIvy);
+    }).toList();
+    await Future.wait(tasksDoneFuture);
+    add(TaskEvent.getTasks(activeFilter));
+  }
+
+  Future<void> _finishTaskOffline(TaskIvy taskIvy) async {
+    var dio = getIt<Dio>();
+    final headers = {
+      Constants.xRequestByHeader: Constants.xRequestBy,
+      HttpHeaders.contentTypeHeader: Constants.formUrlEncodedContentType,
+    };
+    dio.options.headers = headers;
+    try {
+      final response = await dio.post(
+        taskIvy.submitUrlOffline!,
+        data: taskIvy.doneTaskFormDataSerializedOffline,
+      );
+      _finishTask(response.headers, taskIvy);
+    } on DioException catch (e) {
+      _finishTask(e.response?.headers, taskIvy);
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  List<TaskIvy> getTasks() {
+    return isOfflineMode ? _hiveTaskStorage.getAllTasks().toList() : tasks;
+  }
+
+  Future _uploadFile(int caseId, Document document) async {
+    try {
+      FormData data = FormData.fromMap(
+        {
+          "file": await MultipartFile.fromFile(
+            document.fileUploadPath,
+            filename: document.name,
+          ),
+        },
+      );
+      final upload = await _uploadFileUseCase.execute(
+          caseId: caseId,
+          contentType: APIHeader.contentType,
+          requestBy: APIHeader.requestBy,
+          data: data);
+      upload.fold((l) => null, (r) {
+        File file = File(document.fileUploadPath);
+        file.deleteSync(recursive: true);
+        _hiveTaskStorage.updateDocumentByCase(caseId, r.document);
+      });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  Future _deleteFile(int caseId, Document document) async {
+    try {
+      final delete = await _deleteFileUseCase.execute(
+        caseId,
+        document.id,
+        APIHeader.requestBy,
+      );
+      delete.fold((l) => null, (r) {
+        _hiveTaskStorage.deleteDocument(caseId, document.name);
+      });
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+  void _updateTaskWithLocalData(List<TaskIvy> serverTasksOffline) {
+    List<TaskIvy> localTasksOffline = _hiveTaskStorage.getAllTasks();
+    for (int i = 0; i < serverTasksOffline.length; i++) {
+      int localTaskIdx = localTasksOffline
+          .indexWhere((task) => serverTasksOffline[i].id == task.id);
+      if (localTaskIdx != -1) {
+        var serverDocuments =
+            serverTasksOffline[i].caseTask?.documents.toList() ?? [];
+        var localDocuments =
+            localTasksOffline[localTaskIdx].caseTask?.documents ?? [];
+        for (int j = 0; j < localDocuments.length; j++) {
+          final document = localDocuments[j];
+          int serverDocumentIdx =
+              serverDocuments.indexWhere((des) => des.name == document.name);
+          if (serverDocumentIdx != -1) {
+            serverDocuments[serverDocumentIdx] =
+                serverDocuments[serverDocumentIdx]
+                    .copyWith(fileLocalState: document.fileLocalState);
+          } else if (document.fileLocalState != FileLocalStateEnum.kNew.value) {
+            serverDocuments.add(document);
+          }
+        }
+        var caseTask = serverTasksOffline[i]
+            .caseTask
+            ?.copyWith(documents: serverDocuments);
+        serverTasksOffline[i] = serverTasksOffline[i].copyWith(
+            submitUrlOffline: localTasksOffline[localTaskIdx].submitUrlOffline,
+            formHTMLPageOffline:
+                localTasksOffline[localTaskIdx].formHTMLPageOffline,
+            caseTask: caseTask);
+        var serverTaskIdx =
+            tasks.indexWhere((task) => task.id == serverTasksOffline[i].id);
+        if (serverTaskIdx != -1) {
+          tasks[serverTaskIdx] = serverTasksOffline[i];
+        }
+        _hiveTaskStorage.addTask(serverTasksOffline[i]);
+      }
+    }
+  }
+
+  void _finishTask(Headers? headers, TaskIvy taskIvy) {
+    String finishedTask = headers?.map[Constants.ivyFinishedTask]?.first ?? "";
+    String currentRunningTask =
+        headers?.map[Constants.ivyCurrentRunningTask]?.first ?? "";
+    var isFinishedTask = finishedTask.isNotEmpty && currentRunningTask.isEmpty;
+    if (isFinishedTask) {
+      // remove task local after it sync done
+      _hiveTaskStorage.removeTask(taskIvy.id);
+      // remove tasks server current
+      var taskDoneIdx = tasks.indexWhere((task) => task.id == taskIvy.id);
+      tasks.removeAt(taskDoneIdx);
+    }
   }
 }

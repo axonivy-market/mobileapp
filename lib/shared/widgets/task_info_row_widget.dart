@@ -55,7 +55,7 @@ class TaskInfoRowWidget extends StatelessWidget {
         isShowDivider
             ? Divider(
                 height: 0.5.h,
-                color: Theme.of(context).colorScheme.outline,
+                color: Theme.of(context).colorScheme.secondaryContainer,
               )
             : const SizedBox.shrink(),
       ],

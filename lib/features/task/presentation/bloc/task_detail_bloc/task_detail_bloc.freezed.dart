@@ -16,20 +16,20 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TaskDetailEvent {
-  int get taskId => throw _privateConstructorUsedError;
+  TaskIvy get task => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int taskId) getTaskDetail,
+    required TResult Function(TaskIvy task) getTaskDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int taskId)? getTaskDetail,
+    TResult? Function(TaskIvy task)? getTaskDetail,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int taskId)? getTaskDetail,
+    TResult Function(TaskIvy task)? getTaskDetail,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,9 @@ abstract class $TaskDetailEventCopyWith<$Res> {
           TaskDetailEvent value, $Res Function(TaskDetailEvent) then) =
       _$TaskDetailEventCopyWithImpl<$Res, TaskDetailEvent>;
   @useResult
-  $Res call({int taskId});
+  $Res call({TaskIvy task});
+
+  $TaskIvyCopyWith<$Res> get task;
 }
 
 /// @nodoc
@@ -77,14 +79,22 @@ class _$TaskDetailEventCopyWithImpl<$Res, $Val extends TaskDetailEvent>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taskId = null,
+    Object? task = null,
   }) {
     return _then(_value.copyWith(
-      taskId: null == taskId
-          ? _value.taskId
-          : taskId // ignore: cast_nullable_to_non_nullable
-              as int,
+      task: null == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskIvy,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskIvyCopyWith<$Res> get task {
+    return $TaskIvyCopyWith<$Res>(_value.task, (value) {
+      return _then(_value.copyWith(task: value) as $Val);
+    });
   }
 }
 
@@ -96,7 +106,10 @@ abstract class _$$GetTaskDetailImplCopyWith<$Res>
       __$$GetTaskDetailImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int taskId});
+  $Res call({TaskIvy task});
+
+  @override
+  $TaskIvyCopyWith<$Res> get task;
 }
 
 /// @nodoc
@@ -110,13 +123,13 @@ class __$$GetTaskDetailImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? taskId = null,
+    Object? task = null,
   }) {
     return _then(_$GetTaskDetailImpl(
-      null == taskId
-          ? _value.taskId
-          : taskId // ignore: cast_nullable_to_non_nullable
-              as int,
+      null == task
+          ? _value.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskIvy,
     ));
   }
 }
@@ -126,14 +139,14 @@ class __$$GetTaskDetailImplCopyWithImpl<$Res>
 class _$GetTaskDetailImpl
     with DiagnosticableTreeMixin
     implements _GetTaskDetail {
-  const _$GetTaskDetailImpl(this.taskId);
+  const _$GetTaskDetailImpl(this.task);
 
   @override
-  final int taskId;
+  final TaskIvy task;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TaskDetailEvent.getTaskDetail(taskId: $taskId)';
+    return 'TaskDetailEvent.getTaskDetail(task: $task)';
   }
 
   @override
@@ -141,7 +154,7 @@ class _$GetTaskDetailImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'TaskDetailEvent.getTaskDetail'))
-      ..add(DiagnosticsProperty('taskId', taskId));
+      ..add(DiagnosticsProperty('task', task));
   }
 
   @override
@@ -149,11 +162,11 @@ class _$GetTaskDetailImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$GetTaskDetailImpl &&
-            (identical(other.taskId, taskId) || other.taskId == taskId));
+            (identical(other.task, task) || other.task == task));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, taskId);
+  int get hashCode => Object.hash(runtimeType, task);
 
   @JsonKey(ignore: true)
   @override
@@ -164,27 +177,27 @@ class _$GetTaskDetailImpl
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(int taskId) getTaskDetail,
+    required TResult Function(TaskIvy task) getTaskDetail,
   }) {
-    return getTaskDetail(taskId);
+    return getTaskDetail(task);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int taskId)? getTaskDetail,
+    TResult? Function(TaskIvy task)? getTaskDetail,
   }) {
-    return getTaskDetail?.call(taskId);
+    return getTaskDetail?.call(task);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int taskId)? getTaskDetail,
+    TResult Function(TaskIvy task)? getTaskDetail,
     required TResult orElse(),
   }) {
     if (getTaskDetail != null) {
-      return getTaskDetail(taskId);
+      return getTaskDetail(task);
     }
     return orElse();
   }
@@ -219,10 +232,10 @@ class _$GetTaskDetailImpl
 }
 
 abstract class _GetTaskDetail implements TaskDetailEvent {
-  const factory _GetTaskDetail(final int taskId) = _$GetTaskDetailImpl;
+  const factory _GetTaskDetail(final TaskIvy task) = _$GetTaskDetailImpl;
 
   @override
-  int get taskId;
+  TaskIvy get task;
   @override
   @JsonKey(ignore: true)
   _$$GetTaskDetailImplCopyWith<_$GetTaskDetailImpl> get copyWith =>

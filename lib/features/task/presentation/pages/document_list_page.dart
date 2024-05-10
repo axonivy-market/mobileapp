@@ -11,8 +11,7 @@ import 'package:axon_ivy/features/task/presentation/bloc/task_detail_bloc/task_d
 import 'package:axon_ivy/features/task/presentation/bloc/upload_file_bloc/upload_file_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
-import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
-import 'package:axon_ivy/shared/widgets/data_empty_widget.dart';
+import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -54,6 +53,8 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
     _downloadFileBloc = getIt<DownloadFileBloc>();
     _previewFileBloc = getIt<PreviewFileBloc>();
     WidgetsBinding.instance.addObserver(this);
+    documents = widget.task.caseTask?.availableDocuments ?? [];
+    _previewFileBloc.caseId = widget.task.caseTask?.id;
   }
 
   @override
@@ -85,7 +86,6 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
   @override
   Widget build(BuildContext context) {
     TaskIvy task = widget.task;
-    documents = widget.task.caseTask?.documents.reversed.toList() ?? [];
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => _uploadFileBloc),
@@ -100,17 +100,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
             listener: (context, state) async {
               if (state is UploadSuccessState) {
                 hideLoading();
-                if (isUploadDuplicateFile(state, task)) {
-                  showMessageDialog(
-                      title: "documentList.errorTitle".tr(),
-                      message: "documentList.errorMessage"
-                          .tr(namedArgs: {'fileName': state.fileNames}));
-                } else {
-                  _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
-                  showMessageDialog(
-                      title: "documentList.successTitle".tr(),
-                      message: state.message);
-                }
+                _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task));
+                showMessageDialog(
+                    title: "uploadFile.successTitle".tr(),
+                    message: state.message);
               } else if (state is UploadErrorState) {
                 hideLoading();
                 showMessageDialog(
@@ -131,9 +124,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
               } else if (state is DeleteSuccessState) {
                 hideLoading();
                 showMessageDialog(
-                    title: "documentList.deleteSuccessTitle".tr(),
+                    title: "downloadFile.deleteSuccessTitle".tr(),
                     message: state.message);
-                _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task.id));
+                _taskDetailBloc.add(TaskDetailEvent.getTaskDetail(task));
               } else if (state is DeleteLoadingState) {
                 showLoading();
               }
@@ -160,7 +153,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                       message: state.error);
                 } else if (state is DownloadSuccessState) {
                   showMessageDialog(
-                      title: "documentList.downloadSuccessTitle".tr(),
+                      title: "downloadFile.downloadSuccessTitle".tr(),
                       message: state.message);
                 }
               }
@@ -201,10 +194,13 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
             appBar: AppBar(
               scrolledUnderElevation: 0,
               backgroundColor: Theme.of(context).colorScheme.background,
+              centerTitle: true,
               title: Text(
                 "documentList.title".tr(),
-                style: TextStyle(
-                    color: Theme.of(context).colorScheme.onBackground),
+                style: GoogleFonts.inter(
+                    color: Theme.of(context).colorScheme.onBackground,
+                    fontSize: 17.sp,
+                    fontWeight: FontWeight.w500),
               ),
               leading: BackButtonWidget(
                 shouldFetch: shouldFetchTaskList,
@@ -227,13 +223,13 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                       switch (value) {
                         case UploadFileType.recent:
                           _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                              widget.task.caseTask!.id, UploadFileType.recent));
+                              widget.task, UploadFileType.recent));
                         case UploadFileType.images:
                           _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                              widget.task.caseTask!.id, UploadFileType.images));
+                              widget.task, UploadFileType.images));
                         case UploadFileType.camera:
                           _uploadFileBloc.add(UploadFileEvent.uploadFiles(
-                              widget.task.caseTask!.id, UploadFileType.camera));
+                              widget.task, UploadFileType.camera));
                       }
                     },
                     itemBuilder: (BuildContext context) {
@@ -244,6 +240,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               AppAssets.icons.iconFile.svg(
+                                height: 21.h,
                                 colorFilter: ColorFilter.mode(
                                   Theme.of(context).colorScheme.surface,
                                   BlendMode.srcIn,
@@ -254,12 +251,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                 child: Text(
                                   "documentList.attachFile".tr(),
                                   style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      fontSize: 17.sp,
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                    fontSize: 17.sp,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
@@ -272,6 +267,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               AppAssets.icons.iconImage.svg(
+                                height: 21.h,
                                 colorFilter: ColorFilter.mode(
                                     Theme.of(context).colorScheme.surface,
                                     BlendMode.srcIn),
@@ -281,12 +277,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                 child: Text(
                                   "documentList.attachPicture".tr(),
                                   style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      fontSize: 17.sp,
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                    fontSize: 17.sp,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
@@ -299,6 +293,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               AppAssets.icons.iconCamera.svg(
+                                height: 21.h,
                                 colorFilter: ColorFilter.mode(
                                     Theme.of(context).colorScheme.surface,
                                     BlendMode.srcIn),
@@ -308,12 +303,10 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                 child: Text(
                                   "documentList.takePicture".tr(),
                                   style: GoogleFonts.inter(
-                                    textStyle: TextStyle(
-                                      fontSize: 17.sp,
-                                      color:
-                                          Theme.of(context).colorScheme.surface,
-                                      fontWeight: FontWeight.w400,
-                                    ),
+                                    fontSize: 17.sp,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                               ),
@@ -336,7 +329,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
               builder: (context, state) {
                 if (state is TaskDetailSuccessState) {
                   task = state.task;
-                  documents = task.caseTask?.documents.reversed.toList() ?? [];
+                  documents = task.caseTask?.availableDocuments ?? [];
                 }
                 return documents.isNotEmpty
                     ? SlidableAutoCloseBehavior(
@@ -419,7 +412,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                         onConfirm: () => _deleteFileBloc.add(
                                           DeleteFileEvent.deleteFile(
                                               task.caseTask!.id,
-                                              documents[index].id),
+                                              documents[index],
+                                              task.id,
+                                              task.offline),
                                         ),
                                       );
                                     },
@@ -433,9 +428,9 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                         Text(
                                           "documentList.delete".tr(),
                                           style: GoogleFonts.inter(
-                                            textStyle: TextStyle(
-                                              fontSize: 13.sp,
-                                            ),
+                                            color: Colors.white,
+                                            fontSize: 13.sp,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                         )
                                       ],
@@ -452,9 +447,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                 onTap: () {
                                   _previewFileBloc.add(
                                     PreviewFileEvent.previewFile(
-                                      documents[index].name,
-                                      documents[index].url,
-                                    ),
+                                        task.offline, documents[index]),
                                   );
                                 },
                                 leading: documents[index].name.isContainImage
@@ -488,7 +481,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                             height: 0,
                             endIndent: 20.w,
                             indent: 20.w,
-                            color: Colors.black.withOpacity(0.1),
+                            color: Theme.of(context).dividerTheme.color,
                           ),
                         ),
                       )
@@ -496,7 +489,8 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                         icon: AppAssets.images.iconPaperclipEmpty.image(
                           width: 62.w,
                           height: 65.h,
-                          color: Theme.of(context).colorScheme.primary,
+                          color:
+                              Theme.of(context).colorScheme.tertiaryContainer,
                         ),
                         message: "documentList.emptyList".tr(),
                       );
@@ -553,40 +547,5 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
       default:
         break;
     }
-  }
-}
-
-class AppListTile extends ListTile {
-  const AppListTile({
-    super.key,
-    super.contentPadding,
-    super.onTap,
-    super.leading,
-    super.trailing,
-    super.title,
-    super.textColor,
-    super.subtitle,
-    super.minLeadingWidth,
-    super.horizontalTitleGap,
-    super.shape,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    // ListTile Background Color Appears outside of ListView bounds
-    // Preffered URL: https://github.com/flutter/flutter/issues/94261
-    return ListTile(
-      tileColor: Theme.of(context).colorScheme.onPrimaryContainer,
-      horizontalTitleGap: horizontalTitleGap,
-      minLeadingWidth: minLeadingWidth,
-      textColor: textColor,
-      contentPadding: contentPadding,
-      subtitle: subtitle,
-      title: title,
-      leading: leading,
-      trailing: trailing,
-      onTap: onTap,
-      shape: shape,
-    );
   }
 }

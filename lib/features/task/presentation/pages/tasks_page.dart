@@ -1,5 +1,6 @@
+import 'dart:io';
+
 import 'package:axon_ivy/core/abstracts/base_page.dart';
-import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
@@ -18,14 +19,14 @@ import 'package:axon_ivy/features/task/presentation/widgets/task_empty_widget.da
 import 'package:axon_ivy/features/task/presentation/widgets/task_item_widget.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/resources/constants.dart';
-import 'package:axon_ivy/shared/widgets/data_empty_widget.dart';
+import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:axon_ivy/shared/widgets/home_appbar.dart';
-import 'package:axon_ivy/shared/widgets/offline_popup_widget.dart';
 import 'package:axon_ivy/shared/widgets/toast_message.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../bloc/sort_bloc/sort_bloc.dart';
@@ -65,8 +66,20 @@ class _TasksPageState extends BasePageState<TasksPage> {
           ),
           BlocListener<ConnectivityBloc, ConnectivityState>(
             listener: (context, state) {
-              context.read<TaskBloc>().add(
-                  TaskEvent.showOfflinePopupEvent(state is ConnectedState));
+              context.read<TaskBloc>().isOfflineMode =
+                  state is NotConnectedState;
+              context
+                  .read<OfflineIndicatorCubit>()
+                  .showOfflineIndicator(state is NotConnectedState);
+              if (state is ConnectedState) {
+                context
+                    .read<TaskBloc>()
+                    .add(const TaskEvent.syncDataOnEngineRestore());
+              } else {
+                context
+                    .read<TaskBloc>()
+                    .add(const TaskEvent.showTasksOffline());
+              }
             },
           ),
           BlocListener<ToastMessageCubit, ToastMessageState>(
@@ -80,6 +93,20 @@ class _TasksPageState extends BasePageState<TasksPage> {
               );
             }
           }),
+          BlocListener<FilterBloc, FilterState>(
+            listener: (context, filterState) {
+              context
+                  .read<TaskBloc>()
+                  .add(TaskEvent.filterTasks(filterState.activeFilter));
+            },
+          ),
+          BlocListener<SortBloc, SortState>(
+            listener: (context, sortState) {
+              context
+                  .read<TaskBloc>()
+                  .add(TaskEvent.sortTasks(sortState.activeSortType));
+            },
+          ),
         ],
         child: TasksViewContent(
           isTaskOnline: isTaskOnline,
@@ -108,75 +135,38 @@ class TasksViewContent extends StatelessWidget {
         isShowLastUpdated: true,
         scrolledUnderElevation: 0,
       ),
-      body: MultiBlocListener(
-        listeners: [
-          BlocListener<FilterBloc, FilterState>(
-            listener: (context, filterState) {
-              context
-                  .read<TaskBloc>()
-                  .add(TaskEvent.filterTasks(filterState.activeFilter));
-            },
-          ),
-          BlocListener<SortBloc, SortState>(
-            listener: (context, sortState) {
-              context
-                  .read<TaskBloc>()
-                  .add(TaskEvent.sortTasks(sortState.activeSortType));
-            },
-          ),
-        ],
-        child: BlocBuilder<TaskBloc, TaskState>(
-          builder: (context, taskState) {
-            if (taskState is TaskErrorState) {
-              return _buildErrorView(context, taskState);
-            } else if (taskState is TaskSuccessState) {
-              taskList = taskState.tasks;
-              isTaskOnline = taskState.isOnline;
-            }
-            return Stack(
-              children: [
-                _buildTaskList(context, taskList),
-                if (!isTaskOnline)
-                  OfflinePopupWidget(
-                    description: "offline.task_description".tr(),
-                    onRefresh: () => _onRefresh(context),
-                  ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget _buildErrorView(BuildContext context, TaskErrorState taskState) {
-    return CustomScrollView(
-      physics:
-          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-      slivers: [
-        CupertinoSliverRefreshControl(
-          onRefresh: () async => _onRefresh(context),
-        ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (context, index) => SizedBox(
-              height: MediaQuery.of(context).size.height -
-                  Constants.appBarHeight -
-                  Constants.bottomNavigationBarHeight,
-              child: DataEmptyWidget(
-                message: "errorCanNotAccessScreen".tr(),
-                icon: AppAssets.icons.tool.svg(
-                  colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.tertiaryContainer,
-                    BlendMode.srcIn,
-                  ),
+      body: BlocBuilder<TaskBloc, TaskState>(
+        builder: (context, taskState) {
+          if (taskState is TaskSuccessState) {
+            taskList = taskState.tasks;
+            isTaskOnline = taskState.isOnline;
+          }
+          return Stack(
+            children: [
+              // For cached css task offline on WebView
+              SizedBox(
+                height: 0,
+                width: 0,
+                child: Stack(
+                  children: taskList
+                      .where((element) => element.offline)
+                      .map((e) => InAppWebView(
+                            initialUrlRequest: URLRequest(
+                              url: WebUri(e.fullRequestPath),
+                              headers: {
+                                HttpHeaders.authorizationHeader:
+                                    AuthorizationUtils.authorizationHeader,
+                              },
+                            ),
+                          ))
+                      .toList(),
                 ),
               ),
-            ),
-            childCount: 1,
-          ),
-        ),
-      ],
+              _buildTaskList(context, taskList),
+            ],
+          );
+        },
+      ),
     );
   }
 
@@ -188,21 +178,22 @@ class TasksViewContent extends StatelessWidget {
       slivers: [
         SliverAppBar(
           backgroundColor: Theme.of(context).colorScheme.background,
-          toolbarHeight: 70.h,
+          toolbarHeight: 62.h,
           pinned: true,
           scrolledUnderElevation: 15,
           shadowColor: Colors.black.withOpacity(0.3),
           surfaceTintColor: Theme.of(context).colorScheme.background,
           elevation: 0,
-          bottom: tasks.isNotEmpty || activeFilter == FilterType.expired
+          title: tasks.isNotEmpty || activeFilter == FilterType.expired
               ? PreferredSize(
                   preferredSize: const Size.fromHeight(0.0), // Set your height
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(15, 0, 15, 10).r,
+                    padding: const EdgeInsets.symmetric(horizontal: 15).r,
                     child: const FilterWidget(),
                   ),
                 )
               : null,
+          titleSpacing: 0,
         ),
         CupertinoSliverRefreshControl(
           onRefresh: () async => _onRefresh(context),
@@ -211,8 +202,7 @@ class TasksViewContent extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10).r,
           sliver: SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) =>
-                  _buildTaskItem(context, tasks, activeFilter, index),
+              (_, index) => _buildTaskItem(context, tasks, activeFilter, index),
               childCount: tasks.isEmpty ? 1 : tasks.length,
             ),
           ),
@@ -238,13 +228,17 @@ class TasksViewContent extends StatelessWidget {
     } else {
       final task = tasks[index];
       return GestureDetector(
-        onTap: () => context.read<TaskConflictCubit>().checkTaskConflict(task),
-        onLongPress: () => _showDetails(context, task),
+        onTap: () => task.isTaskDone
+            ? null
+            : context.read<TaskConflictCubit>().checkTaskConflict(task),
+        onLongPress: () => task.isTaskDone ? null : _showDetails(context, task),
         child: TaskItemWidget(
           name: task.name,
           description: task.description,
           priority: task.priority,
           expiryTimeStamp: task.expiryTimeStamp,
+          isTaskDone: task.isTaskDone,
+          isOffline: task.offline,
         ),
       );
     }

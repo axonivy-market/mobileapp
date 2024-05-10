@@ -56,12 +56,12 @@
     "username": "Username",
     "yourPassword": "Enter your password",
     "demoMode": "Demo mode",
-    "darkMode":"Dark mode",
+    "darkMode": "Dark mode",
     "language": "Language",
     "error": "Error",
     "serverLink": "Server Link",
     "userType": "User Type",
-    "password":  "Password"
+    "password": "Password"
   },
   "qr": {
     "title": "Scan the QR",
@@ -118,7 +118,9 @@
     "fileTooLarge": "File {fileName} has size too large!",
     "cannotSelectFiles": "Cannot select files!",
     "failUpload": "Fail to upload {fileName}",
-    "changeFileName": "Change image name"
+    "changeFileName": "Change image name",
+    "savedFileOfflineSuccess": "Document '{fileName}' successfully saved",
+    "successTitle": "Uploaded successfully"
   },
   "offline": {
     "popup_title": "You are offline!",
@@ -132,14 +134,12 @@
     "delete": "Delete",
     "emptyList": "You don’t have any document attached yet. Click on “+” to add your first document.",
     "takePicture": "Take picture",
-    "attachPicture":  "Attach picture",
+    "attachPicture": "Attach picture",
     "attachFile": "Attach file",
     "errorTitle": "Error",
     "errorMessage": "File {fileName} already exists",
-    "successTitle": "Upload successfully",
-    "deleteSuccessTitle": "Delete successfully",
-    "downloadSuccessTitle":  "Download successfully",
-    "download": "Download"
+    "download": "Download",
+    "changeFileNameHint": "My Image Name"
   },
   "previewFile": {
     "failToPreview": "Fail to preview the file {fileName}"
@@ -148,7 +148,8 @@
     "downloadSuccess": "{fileName} was downloaded",
     "failToDownload": "Fail to download the file {fileName}",
     "deleteSuccessTitle": "Deleted successfully",
-    "downloadSuccessTitle":  "Downloaded successfully"
+    "downloadSuccessTitle": "Downloaded successfully",
+    "deleteFileSuccess": "Document '{fileName}' successfully deleted"
   },
   "notificationList": {
     "all": "All",

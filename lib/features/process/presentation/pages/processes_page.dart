@@ -104,10 +104,9 @@ class _ProcessesPageState extends BasePageState<ProcessesPage> {
         child: DataEmptyWidget(
           message: 'process.emptyList',
           icon: AppAssets.icons.processEmpty.svg(
-            colorFilter: ColorFilter.mode(
-                Theme.of(context).colorScheme.onTertiaryContainer,
-                BlendMode.srcIn),
-          ),
+              colorFilter: ColorFilter.mode(
+                  Theme.of(context).colorScheme.tertiaryContainer,
+                  BlendMode.srcIn)),
         ),
       );
     }
@@ -125,7 +124,7 @@ class _ProcessesPageState extends BasePageState<ProcessesPage> {
   void _navigateProcessActivity(BuildContext context, Process process) {
     context.push(AppRoutes.taskActivity,
         extra: {'path': process.fullRequestPath}).then((value) {
-      if (value != null && value is int) {
+      if (value != null && value is Map) {
         context
             .read<NotificationBloc>()
             .add(const NotificationEvent.getNotifications(1, 9000));

@@ -19,19 +19,22 @@ mixin _$TabBarState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int currentTime, int taskId) navigateTasks,
+    required TResult Function(int currentTime, Map<dynamic, dynamic> taskInfo)
+        navigateTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int currentTime, int taskId)? navigateTasks,
+    TResult? Function(int currentTime, Map<dynamic, dynamic> taskInfo)?
+        navigateTasks,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int currentTime, int taskId)? navigateTasks,
+    TResult Function(int currentTime, Map<dynamic, dynamic> taskInfo)?
+        navigateTasks,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,7 +116,8 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int currentTime, int taskId) navigateTasks,
+    required TResult Function(int currentTime, Map<dynamic, dynamic> taskInfo)
+        navigateTasks,
   }) {
     return initial();
   }
@@ -122,7 +126,8 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int currentTime, int taskId)? navigateTasks,
+    TResult? Function(int currentTime, Map<dynamic, dynamic> taskInfo)?
+        navigateTasks,
   }) {
     return initial?.call();
   }
@@ -131,7 +136,8 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int currentTime, int taskId)? navigateTasks,
+    TResult Function(int currentTime, Map<dynamic, dynamic> taskInfo)?
+        navigateTasks,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -182,7 +188,7 @@ abstract class _$$NavigateTasksStateImplCopyWith<$Res> {
           $Res Function(_$NavigateTasksStateImpl) then) =
       __$$NavigateTasksStateImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int currentTime, int taskId});
+  $Res call({int currentTime, Map<dynamic, dynamic> taskInfo});
 }
 
 /// @nodoc
@@ -197,17 +203,17 @@ class __$$NavigateTasksStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentTime = null,
-    Object? taskId = null,
+    Object? taskInfo = null,
   }) {
     return _then(_$NavigateTasksStateImpl(
       null == currentTime
           ? _value.currentTime
           : currentTime // ignore: cast_nullable_to_non_nullable
               as int,
-      null == taskId
-          ? _value.taskId
-          : taskId // ignore: cast_nullable_to_non_nullable
-              as int,
+      null == taskInfo
+          ? _value._taskInfo
+          : taskInfo // ignore: cast_nullable_to_non_nullable
+              as Map<dynamic, dynamic>,
     ));
   }
 }
@@ -215,16 +221,23 @@ class __$$NavigateTasksStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$NavigateTasksStateImpl implements NavigateTasksState {
-  const _$NavigateTasksStateImpl(this.currentTime, this.taskId);
+  const _$NavigateTasksStateImpl(
+      this.currentTime, final Map<dynamic, dynamic> taskInfo)
+      : _taskInfo = taskInfo;
 
   @override
   final int currentTime;
+  final Map<dynamic, dynamic> _taskInfo;
   @override
-  final int taskId;
+  Map<dynamic, dynamic> get taskInfo {
+    if (_taskInfo is EqualUnmodifiableMapView) return _taskInfo;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_taskInfo);
+  }
 
   @override
   String toString() {
-    return 'TabBarState.navigateTasks(currentTime: $currentTime, taskId: $taskId)';
+    return 'TabBarState.navigateTasks(currentTime: $currentTime, taskInfo: $taskInfo)';
   }
 
   @override
@@ -234,11 +247,12 @@ class _$NavigateTasksStateImpl implements NavigateTasksState {
             other is _$NavigateTasksStateImpl &&
             (identical(other.currentTime, currentTime) ||
                 other.currentTime == currentTime) &&
-            (identical(other.taskId, taskId) || other.taskId == taskId));
+            const DeepCollectionEquality().equals(other._taskInfo, _taskInfo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentTime, taskId);
+  int get hashCode => Object.hash(
+      runtimeType, currentTime, const DeepCollectionEquality().hash(_taskInfo));
 
   @JsonKey(ignore: true)
   @override
@@ -251,29 +265,32 @@ class _$NavigateTasksStateImpl implements NavigateTasksState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(int currentTime, int taskId) navigateTasks,
+    required TResult Function(int currentTime, Map<dynamic, dynamic> taskInfo)
+        navigateTasks,
   }) {
-    return navigateTasks(currentTime, taskId);
+    return navigateTasks(currentTime, taskInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(int currentTime, int taskId)? navigateTasks,
+    TResult? Function(int currentTime, Map<dynamic, dynamic> taskInfo)?
+        navigateTasks,
   }) {
-    return navigateTasks?.call(currentTime, taskId);
+    return navigateTasks?.call(currentTime, taskInfo);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(int currentTime, int taskId)? navigateTasks,
+    TResult Function(int currentTime, Map<dynamic, dynamic> taskInfo)?
+        navigateTasks,
     required TResult orElse(),
   }) {
     if (navigateTasks != null) {
-      return navigateTasks(currentTime, taskId);
+      return navigateTasks(currentTime, taskInfo);
     }
     return orElse();
   }
@@ -311,11 +328,12 @@ class _$NavigateTasksStateImpl implements NavigateTasksState {
 }
 
 abstract class NavigateTasksState implements TabBarState {
-  const factory NavigateTasksState(final int currentTime, final int taskId) =
+  const factory NavigateTasksState(
+          final int currentTime, final Map<dynamic, dynamic> taskInfo) =
       _$NavigateTasksStateImpl;
 
   int get currentTime;
-  int get taskId;
+  Map<dynamic, dynamic> get taskInfo;
   @JsonKey(ignore: true)
   _$$NavigateTasksStateImplCopyWith<_$NavigateTasksStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
