@@ -489,7 +489,8 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                         icon: AppAssets.images.iconPaperclipEmpty.image(
                           width: 62.w,
                           height: 65.h,
-                          color: Theme.of(context).colorScheme.primary,
+                          color:
+                              Theme.of(context).colorScheme.tertiaryContainer,
                         ),
                         message: "documentList.emptyList".tr(),
                       );

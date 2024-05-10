@@ -349,7 +349,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                                           ColorFilter.mode(
                                                         Theme.of(context)
                                                             .colorScheme
-                                                            .primary,
+                                                            .tertiaryContainer,
                                                         BlendMode.srcIn,
                                                       ),
                                                     ),
@@ -408,7 +408,9 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                           .icons.iconEmptyNotifications
                                           .svg(
                                         colorFilter: ColorFilter.mode(
-                                          Theme.of(context).colorScheme.primary,
+                                          Theme.of(context)
+                                              .colorScheme
+                                              .tertiaryContainer,
                                           BlendMode.srcIn,
                                         ),
                                       ),
