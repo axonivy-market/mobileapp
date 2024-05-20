@@ -41,46 +41,49 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         buildLastUpdatedTime(),
-        Stack(
-          children: [
-            IconButton(
-              onPressed: () {
-                context.pushNamed('notification');
-              },
-              icon: AppAssets.icons.notification.svg(
-                height: 26.h,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.surface,
-                  BlendMode.srcIn,
+        SizedBox(
+          width: 50.w,
+          child: Stack(
+            children: [
+              IconButton(
+                onPressed: () {
+                  context.pushNamed('notification');
+                },
+                icon: AppAssets.icons.notification.svg(
+                  height: 26.h,
+                  colorFilter: ColorFilter.mode(
+                    Theme.of(context).colorScheme.surface,
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
-            ),
-            BlocBuilder<NotificationBloc, NotificationState>(
-              builder: (context, state) {
-                bool isUnreadNotification = false;
-                if (state is NotificationSuccessState) {
-                  for (var notification in state.notifications) {
-                    if (notification.read == false) {
-                      isUnreadNotification = true;
-                      break;
+              BlocBuilder<NotificationBloc, NotificationState>(
+                builder: (context, state) {
+                  bool isUnreadNotification = false;
+                  if (state is NotificationSuccessState) {
+                    for (var notification in state.notifications) {
+                      if (notification.read == false) {
+                        isUnreadNotification = true;
+                        break;
+                      }
                     }
                   }
-                }
 
-                return isUnreadNotification
-                    ? Positioned(
-                        right: 15,
-                        top: 15,
-                        child: Icon(
-                          Icons.circle,
-                          size: 10,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      )
-                    : const SizedBox();
-              },
-            ),
-          ],
+                  return isUnreadNotification
+                      ? Positioned(
+                          right: 17.w,
+                          top: 12,
+                          child: Icon(
+                            Icons.circle,
+                            size: 10.r,
+                            color: Theme.of(context).colorScheme.primary,
+                          ),
+                        )
+                      : const SizedBox();
+                },
+              ),
+            ],
+          ),
         ),
         5.horizontalSpace
       ],

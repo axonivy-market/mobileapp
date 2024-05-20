@@ -34,7 +34,7 @@ Widget getDateTimeTaskWidget(
     return Row(
       children: [
         if (isOffline)
-          AppAssets.icons.cloudOff.svg(
+          AppAssets.icons.iconCloudOffTaskItem.svg(
               height: 16.h,
               colorFilter: ColorFilter.mode(
                   Theme.of(context).colorScheme.secondary, BlendMode.srcIn)),

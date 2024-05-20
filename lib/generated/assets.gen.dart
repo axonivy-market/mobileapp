@@ -96,6 +96,10 @@ class $AssetsIconsGen {
   SvgGenImage get iconCamera =>
       const SvgGenImage('assets/icons/icon_camera.svg');
 
+  /// File path: assets/icons/icon_cloud_off_task_item.svg
+  SvgGenImage get iconCloudOffTaskItem =>
+      const SvgGenImage('assets/icons/icon_cloud_off_task_item.svg');
+
   /// File path: assets/icons/icon_delete.svg
   SvgGenImage get iconDelete =>
       const SvgGenImage('assets/icons/icon_delete.svg');
@@ -240,6 +244,7 @@ class $AssetsIconsGen {
         icUsers,
         iconAddAttachment,
         iconCamera,
+        iconCloudOffTaskItem,
         iconDelete,
         iconDownload,
         iconEmptyNotifications,

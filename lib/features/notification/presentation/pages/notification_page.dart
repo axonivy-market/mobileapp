@@ -160,6 +160,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                     itemBuilder: (BuildContext context) {
                       return [
                         PopupMenuItem(
+                          height: 30,
                           onTap: () {
                             context.read<NotificationBloc>().add(
                                   const NotificationEvent
@@ -536,15 +537,11 @@ class _NotificationPageState extends BasePageState<NotificationPage>
           minLeadingWidth: 0,
           leading: Column(
             children: [
-              const Expanded(
-                flex: 1,
-                child: SizedBox(),
-              ),
               if (!notifications[index].read) ...[
                 const Expanded(child: SizedBox()),
                 Icon(
                   Icons.circle,
-                  size: 8.r,
+                  size: 10.r,
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ] else
