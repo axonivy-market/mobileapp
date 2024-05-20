@@ -1,7 +1,10 @@
+import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/core/router/router.dart';
-import 'package:axon_ivy/core/utils/shared_preference.dart';
+import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
+import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_state.dart';
+import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +23,13 @@ class MyApp extends StatelessWidget {
     const designWidth = 393.0;
     const designHeight = 852.0;
 
-    return BlocProvider(
-      create: (context) => ThemeBloc(initialDarkMode: isDarkmode),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getIt<NotificationBloc>()),
+        BlocProvider(create: (context) => getIt<ConnectivityBloc>()),
+        BlocProvider(
+            create: (context) => ThemeBloc(initialDarkMode: isDarkmode)),
+      ],
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) {
           return ScreenUtilInit(

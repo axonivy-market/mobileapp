@@ -1,0 +1,68 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "15161EF3DBFBE72F",
+  "kind" : "HTML_DIALOG",
+  "config" : {
+    "data" : "showcase.NormalInvoiceForm.NormalInvoiceFormData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start(Data)",
+      "config" : {
+        "signature" : "start",
+        "input" : {
+          "params" : [
+            { "name" : "data", "type" : "showcase.Data", "desc" : "" }
+          ],
+          "map" : {
+            "out.data" : "param.data"
+          }
+        },
+        "result" : {
+          "params" : [
+            { "name" : "data", "type" : "showcase.Data", "desc" : "" }
+          ],
+          "map" : {
+            "result.data" : "in.data"
+          }
+        },
+        "guid" : "15161EF3E06CF103"
+      },
+      "visual" : {
+        "at" : { "x" : 80, "y" : 64 },
+        "labelOffset" : { "x" : 8, "y" : 35 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 },
+        "labelOffset" : { "x" : 0, "y" : 12 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "HtmlDialogEventStart",
+      "name" : "close",
+      "config" : {
+        "guid" : "15161EF3E312ABEC"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 },
+        "labelOffset" : { "x" : 8, "y" : 32 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f4" }
+      ]
+    }, {
+      "id" : "f4",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 },
+        "labelOffset" : { "x" : 0, "y" : 12 }
+      }
+    } ]
+}

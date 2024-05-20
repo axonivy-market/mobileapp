@@ -20,18 +20,21 @@ mixin _$ConnectivityEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() connectedEvent,
     required TResult Function() notConnectedEvent,
+    required TResult Function() fetchEngineInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? connectedEvent,
     TResult? Function()? notConnectedEvent,
+    TResult? Function()? fetchEngineInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? connectedEvent,
     TResult Function()? notConnectedEvent,
+    TResult Function()? fetchEngineInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$ConnectivityEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(ConnectedEvent value) connectedEvent,
     required TResult Function(NotConnectedEvent value) notConnectedEvent,
+    required TResult Function(FetchEngineInfoEvent value) fetchEngineInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ConnectedEvent value)? connectedEvent,
     TResult? Function(NotConnectedEvent value)? notConnectedEvent,
+    TResult? Function(FetchEngineInfoEvent value)? fetchEngineInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConnectedEvent value)? connectedEvent,
     TResult Function(NotConnectedEvent value)? notConnectedEvent,
+    TResult Function(FetchEngineInfoEvent value)? fetchEngineInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -92,12 +98,21 @@ class __$$ConnectedEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ConnectedEventImpl implements ConnectedEvent {
+class _$ConnectedEventImpl
+    with DiagnosticableTreeMixin
+    implements ConnectedEvent {
   const _$ConnectedEventImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityEvent.connectedEvent()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'ConnectivityEvent.connectedEvent'));
   }
 
   @override
@@ -114,6 +129,7 @@ class _$ConnectedEventImpl implements ConnectedEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() connectedEvent,
     required TResult Function() notConnectedEvent,
+    required TResult Function() fetchEngineInfo,
   }) {
     return connectedEvent();
   }
@@ -123,6 +139,7 @@ class _$ConnectedEventImpl implements ConnectedEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? connectedEvent,
     TResult? Function()? notConnectedEvent,
+    TResult? Function()? fetchEngineInfo,
   }) {
     return connectedEvent?.call();
   }
@@ -132,6 +149,7 @@ class _$ConnectedEventImpl implements ConnectedEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? connectedEvent,
     TResult Function()? notConnectedEvent,
+    TResult Function()? fetchEngineInfo,
     required TResult orElse(),
   }) {
     if (connectedEvent != null) {
@@ -145,6 +163,7 @@ class _$ConnectedEventImpl implements ConnectedEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(ConnectedEvent value) connectedEvent,
     required TResult Function(NotConnectedEvent value) notConnectedEvent,
+    required TResult Function(FetchEngineInfoEvent value) fetchEngineInfo,
   }) {
     return connectedEvent(this);
   }
@@ -154,6 +173,7 @@ class _$ConnectedEventImpl implements ConnectedEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ConnectedEvent value)? connectedEvent,
     TResult? Function(NotConnectedEvent value)? notConnectedEvent,
+    TResult? Function(FetchEngineInfoEvent value)? fetchEngineInfo,
   }) {
     return connectedEvent?.call(this);
   }
@@ -163,6 +183,7 @@ class _$ConnectedEventImpl implements ConnectedEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConnectedEvent value)? connectedEvent,
     TResult Function(NotConnectedEvent value)? notConnectedEvent,
+    TResult Function(FetchEngineInfoEvent value)? fetchEngineInfo,
     required TResult orElse(),
   }) {
     if (connectedEvent != null) {
@@ -194,12 +215,21 @@ class __$$NotConnectedEventImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotConnectedEventImpl implements NotConnectedEvent {
+class _$NotConnectedEventImpl
+    with DiagnosticableTreeMixin
+    implements NotConnectedEvent {
   const _$NotConnectedEventImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityEvent.notConnectedEvent()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'ConnectivityEvent.notConnectedEvent'));
   }
 
   @override
@@ -216,6 +246,7 @@ class _$NotConnectedEventImpl implements NotConnectedEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() connectedEvent,
     required TResult Function() notConnectedEvent,
+    required TResult Function() fetchEngineInfo,
   }) {
     return notConnectedEvent();
   }
@@ -225,6 +256,7 @@ class _$NotConnectedEventImpl implements NotConnectedEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? connectedEvent,
     TResult? Function()? notConnectedEvent,
+    TResult? Function()? fetchEngineInfo,
   }) {
     return notConnectedEvent?.call();
   }
@@ -234,6 +266,7 @@ class _$NotConnectedEventImpl implements NotConnectedEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? connectedEvent,
     TResult Function()? notConnectedEvent,
+    TResult Function()? fetchEngineInfo,
     required TResult orElse(),
   }) {
     if (notConnectedEvent != null) {
@@ -247,6 +280,7 @@ class _$NotConnectedEventImpl implements NotConnectedEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(ConnectedEvent value) connectedEvent,
     required TResult Function(NotConnectedEvent value) notConnectedEvent,
+    required TResult Function(FetchEngineInfoEvent value) fetchEngineInfo,
   }) {
     return notConnectedEvent(this);
   }
@@ -256,6 +290,7 @@ class _$NotConnectedEventImpl implements NotConnectedEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(ConnectedEvent value)? connectedEvent,
     TResult? Function(NotConnectedEvent value)? notConnectedEvent,
+    TResult? Function(FetchEngineInfoEvent value)? fetchEngineInfo,
   }) {
     return notConnectedEvent?.call(this);
   }
@@ -265,6 +300,7 @@ class _$NotConnectedEventImpl implements NotConnectedEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ConnectedEvent value)? connectedEvent,
     TResult Function(NotConnectedEvent value)? notConnectedEvent,
+    TResult Function(FetchEngineInfoEvent value)? fetchEngineInfo,
     required TResult orElse(),
   }) {
     if (notConnectedEvent != null) {
@@ -276,6 +312,124 @@ class _$NotConnectedEventImpl implements NotConnectedEvent {
 
 abstract class NotConnectedEvent implements ConnectivityEvent {
   const factory NotConnectedEvent() = _$NotConnectedEventImpl;
+}
+
+/// @nodoc
+abstract class _$$FetchEngineInfoEventImplCopyWith<$Res> {
+  factory _$$FetchEngineInfoEventImplCopyWith(_$FetchEngineInfoEventImpl value,
+          $Res Function(_$FetchEngineInfoEventImpl) then) =
+      __$$FetchEngineInfoEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$FetchEngineInfoEventImplCopyWithImpl<$Res>
+    extends _$ConnectivityEventCopyWithImpl<$Res, _$FetchEngineInfoEventImpl>
+    implements _$$FetchEngineInfoEventImplCopyWith<$Res> {
+  __$$FetchEngineInfoEventImplCopyWithImpl(_$FetchEngineInfoEventImpl _value,
+      $Res Function(_$FetchEngineInfoEventImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$FetchEngineInfoEventImpl
+    with DiagnosticableTreeMixin
+    implements FetchEngineInfoEvent {
+  const _$FetchEngineInfoEventImpl();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ConnectivityEvent.fetchEngineInfo()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'ConnectivityEvent.fetchEngineInfo'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$FetchEngineInfoEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() connectedEvent,
+    required TResult Function() notConnectedEvent,
+    required TResult Function() fetchEngineInfo,
+  }) {
+    return fetchEngineInfo();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? connectedEvent,
+    TResult? Function()? notConnectedEvent,
+    TResult? Function()? fetchEngineInfo,
+  }) {
+    return fetchEngineInfo?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? connectedEvent,
+    TResult Function()? notConnectedEvent,
+    TResult Function()? fetchEngineInfo,
+    required TResult orElse(),
+  }) {
+    if (fetchEngineInfo != null) {
+      return fetchEngineInfo();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConnectedEvent value) connectedEvent,
+    required TResult Function(NotConnectedEvent value) notConnectedEvent,
+    required TResult Function(FetchEngineInfoEvent value) fetchEngineInfo,
+  }) {
+    return fetchEngineInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ConnectedEvent value)? connectedEvent,
+    TResult? Function(NotConnectedEvent value)? notConnectedEvent,
+    TResult? Function(FetchEngineInfoEvent value)? fetchEngineInfo,
+  }) {
+    return fetchEngineInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConnectedEvent value)? connectedEvent,
+    TResult Function(NotConnectedEvent value)? notConnectedEvent,
+    TResult Function(FetchEngineInfoEvent value)? fetchEngineInfo,
+    required TResult orElse(),
+  }) {
+    if (fetchEngineInfo != null) {
+      return fetchEngineInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class FetchEngineInfoEvent implements ConnectivityEvent {
+  const factory FetchEngineInfoEvent() = _$FetchEngineInfoEventImpl;
 }
 
 /// @nodoc
@@ -362,12 +516,18 @@ class __$$InitialStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialStateImpl implements InitialState {
+class _$InitialStateImpl with DiagnosticableTreeMixin implements InitialState {
   const _$InitialStateImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'ConnectivityState.initial'));
   }
 
   @override
@@ -470,12 +630,21 @@ class __$$ConnectedStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ConnectedStateImpl implements ConnectedState {
+class _$ConnectedStateImpl
+    with DiagnosticableTreeMixin
+    implements ConnectedState {
   const _$ConnectedStateImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityState.connectedState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'ConnectivityState.connectedState'));
   }
 
   @override
@@ -578,12 +747,21 @@ class __$$NotConnectedStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotConnectedStateImpl implements NotConnectedState {
+class _$NotConnectedStateImpl
+    with DiagnosticableTreeMixin
+    implements NotConnectedState {
   const _$NotConnectedStateImpl();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ConnectivityState.notConnectedState()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+        DiagnosticsProperty('type', 'ConnectivityState.notConnectedState'));
   }
 
   @override

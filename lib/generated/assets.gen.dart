@@ -100,14 +100,38 @@ class $AssetsIconsGen {
   SvgGenImage get iconDelete =>
       const SvgGenImage('assets/icons/icon_delete.svg');
 
+  /// File path: assets/icons/icon_download.svg
+  SvgGenImage get iconDownload =>
+      const SvgGenImage('assets/icons/icon_download.svg');
+
+  /// File path: assets/icons/icon_empty_notifications.svg
+  SvgGenImage get iconEmptyNotifications =>
+      const SvgGenImage('assets/icons/icon_empty_notifications.svg');
+
+  /// File path: assets/icons/icon_empty_unread_notifications.svg
+  SvgGenImage get iconEmptyUnreadNotifications =>
+      const SvgGenImage('assets/icons/icon_empty_unread_notifications.svg');
+
   /// File path: assets/icons/icon_file.svg
   SvgGenImage get iconFile => const SvgGenImage('assets/icons/icon_file.svg');
 
   /// File path: assets/icons/icon_image.svg
   SvgGenImage get iconImage => const SvgGenImage('assets/icons/icon_image.svg');
 
+  /// File path: assets/icons/icon_info_notification.svg
+  SvgGenImage get iconInfoNotification =>
+      const SvgGenImage('assets/icons/icon_info_notification.svg');
+
   /// File path: assets/icons/icon_lock.svg
   SvgGenImage get iconLock => const SvgGenImage('assets/icons/icon_lock.svg');
+
+  /// File path: assets/icons/icon_mark_as_read.svg
+  SvgGenImage get iconMarkAsRead =>
+      const SvgGenImage('assets/icons/icon_mark_as_read.svg');
+
+  /// File path: assets/icons/icon_mark_read.svg
+  SvgGenImage get iconMarkRead =>
+      const SvgGenImage('assets/icons/icon_mark_read.svg');
 
   /// File path: assets/icons/icon_url.svg
   SvgGenImage get iconUrl => const SvgGenImage('assets/icons/icon_url.svg');
@@ -217,9 +241,15 @@ class $AssetsIconsGen {
         iconAddAttachment,
         iconCamera,
         iconDelete,
+        iconDownload,
+        iconEmptyNotifications,
+        iconEmptyUnreadNotifications,
         iconFile,
         iconImage,
+        iconInfoNotification,
         iconLock,
+        iconMarkAsRead,
+        iconMarkRead,
         iconUrl,
         iconUsername,
         list,

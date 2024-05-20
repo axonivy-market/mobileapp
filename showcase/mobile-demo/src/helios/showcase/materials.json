@@ -1,0 +1,22 @@
+{"materials":[
+              {"name":"Indicator", "price":"30.00","checked":"false"},
+              {"name":"Indicator panel", "price":"30.00","checked":"false"},
+              {"name":"Handrail", "price":"40.00","checked":"false"},
+              {"name":"Control panel board", "price":"56.00","checked":"false"},
+              {"name":"Controller board", "price":"340.00","checked":"false"},
+              {"name":"LED lighting", "price":"40.00","checked":"false"},
+              {"name":"Sonic button", "price":"10.00","checked":"false"},
+              {"name":"Door sensor", "price":"100.00","checked":"false"},
+              {"name":"Weight sensor", "price":"70.00","checked":"false"},
+              {"name":"Traction machine", "price":"2990.00","checked":"false"},
+              {"name":"Power transformer", "price":"1500.00","checked":"false"},
+              {"name":"Motor", "price":"420.00","checked":"false"},
+              {"name":"Eyelets (10 pcs)", "price":"5.00","checked":"false"},
+              {"name":"Sheave pulley", "price":"44.00","checked":"false"},
+              {"name":"Sheave wheel", "price":"289.00","checked":"false"},
+              {"name":"Control Arm Bearings", "price":"14.00","checked":"false"},
+              {"name":"Dome camera ceiling", "price":"46.00","checked":"false"},
+              {"name":"Grease", "price":"7.00","checked":"false"},
+              {"name":"Control arm bearing", "price":"14.00","checked":"false"}
+              ]
+}

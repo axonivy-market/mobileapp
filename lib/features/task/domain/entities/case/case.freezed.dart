@@ -20,9 +20,13 @@ CaseTask _$CaseTaskFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CaseTask {
+  @HiveField(0)
   int get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
+  @HiveField(2)
   String get description => throw _privateConstructorUsedError;
+  @HiveField(3)
   List<Document> get documents => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +41,10 @@ abstract class $CaseTaskCopyWith<$Res> {
       _$CaseTaskCopyWithImpl<$Res, CaseTask>;
   @useResult
   $Res call(
-      {int id, String name, String description, List<Document> documents});
+      {@HiveField(0) int id,
+      @HiveField(1) String name,
+      @HiveField(2) String description,
+      @HiveField(3) List<Document> documents});
 }
 
 /// @nodoc
@@ -88,7 +95,10 @@ abstract class _$$CaseTaskImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int id, String name, String description, List<Document> documents});
+      {@HiveField(0) int id,
+      @HiveField(1) String name,
+      @HiveField(2) String description,
+      @HiveField(3) List<Document> documents});
 }
 
 /// @nodoc
@@ -130,28 +140,33 @@ class __$$CaseTaskImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$CaseTaskImpl implements _CaseTask {
+class _$CaseTaskImpl extends _CaseTask {
   _$CaseTaskImpl(
-      {required this.id,
-      this.name = '',
-      this.description = '',
-      final List<Document> documents = const []})
-      : _documents = documents;
+      {@HiveField(0) required this.id,
+      @HiveField(1) this.name = '',
+      @HiveField(2) this.description = '',
+      @HiveField(3) final List<Document> documents = const []})
+      : _documents = documents,
+        super._();
 
   factory _$CaseTaskImpl.fromJson(Map<String, dynamic> json) =>
       _$$CaseTaskImplFromJson(json);
 
   @override
+  @HiveField(0)
   final int id;
   @override
   @JsonKey()
+  @HiveField(1)
   final String name;
   @override
   @JsonKey()
+  @HiveField(2)
   final String description;
   final List<Document> _documents;
   @override
   @JsonKey()
+  @HiveField(3)
   List<Document> get documents {
     if (_documents is EqualUnmodifiableListView) return _documents;
     // ignore: implicit_dynamic_type
@@ -195,23 +210,28 @@ class _$CaseTaskImpl implements _CaseTask {
   }
 }
 
-abstract class _CaseTask implements CaseTask {
+abstract class _CaseTask extends CaseTask {
   factory _CaseTask(
-      {required final int id,
-      final String name,
-      final String description,
-      final List<Document> documents}) = _$CaseTaskImpl;
+      {@HiveField(0) required final int id,
+      @HiveField(1) final String name,
+      @HiveField(2) final String description,
+      @HiveField(3) final List<Document> documents}) = _$CaseTaskImpl;
+  _CaseTask._() : super._();
 
   factory _CaseTask.fromJson(Map<String, dynamic> json) =
       _$CaseTaskImpl.fromJson;
 
   @override
+  @HiveField(0)
   int get id;
   @override
+  @HiveField(1)
   String get name;
   @override
+  @HiveField(2)
   String get description;
   @override
+  @HiveField(3)
   List<Document> get documents;
   @override
   @JsonKey(ignore: true)

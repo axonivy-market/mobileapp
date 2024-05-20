@@ -1,0 +1,4 @@
+NormalInvoiceFormData #class
+showcase.NormalInvoiceForm #namespace
+data showcase.Data #field
+data PERSISTENT #fieldModifier

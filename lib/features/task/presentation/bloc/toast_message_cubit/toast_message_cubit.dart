@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 part 'toast_message_cubit.freezed.dart';
+
 part 'toast_message_state.dart';
 
 @injectable
@@ -13,9 +14,17 @@ class ToastMessageCubit extends Cubit<ToastMessageState> {
   ToastMessageCubit(this._taskRepository)
       : super(const ToastMessageState.initial());
 
-  void showToastMessage(int taskId) async {
+  void showToastMessage(Map<dynamic, dynamic> taskInfo) async {
+    var taskName = taskInfo.entries.first.value;
+
+    if (taskName.isNotEmpty) {
+      emit(ToastMessageState.show(
+          DateTime.now().millisecondsSinceEpoch, taskName));
+      return;
+    }
     try {
-      final task = await _taskRepository.execute(taskId: taskId);
+      final task =
+          await _taskRepository.execute(taskId: taskInfo.entries.first.key);
 
       task.fold(
           (l) => null,

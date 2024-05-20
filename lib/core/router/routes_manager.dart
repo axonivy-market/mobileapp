@@ -1,18 +1,19 @@
-import 'package:axon_ivy/features/login/login_page.dart';
-import 'package:axon_ivy/features/process/view/processes_view.dart';
-import 'package:axon_ivy/features/profile/view/profile_view.dart';
-import 'package:axon_ivy/features/search/view/search_view.dart';
-import 'package:axon_ivy/features/splash/splash_view.dart';
-import 'package:axon_ivy/features/tabbar/tabbar_view.dart';
+import 'package:axon_ivy/features/notification/presentation/pages/notification_page.dart';
+import 'package:axon_ivy/features/process/presentation/pages/processes_page.dart';
+import 'package:axon_ivy/features/profile/presentation/pages/login_page.dart';
+import 'package:axon_ivy/features/profile/presentation/pages/profile_page.dart';
+import 'package:axon_ivy/features/search/presentation/pages/search_page.dart';
+import 'package:axon_ivy/features/splash/splash_page.dart';
+import 'package:axon_ivy/features/tabbar/tabbar_page.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/pages/document_list_page.dart';
-import 'package:axon_ivy/features/task/presentation/pages/task_activity.dart';
+import 'package:axon_ivy/features/task/presentation/pages/task_activity_page.dart';
 import 'package:axon_ivy/features/task/presentation/pages/tasks_page.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/qr/qr_page.dart';
+import '../../features/profile/presentation/pages/qr_page.dart';
 import 'app_router.dart';
 import 'custom_navigate_transition.dart';
 
@@ -26,12 +27,13 @@ class AppRouter {
     routes: [
       GoRoute(
         path: AppRoutes.splash,
-        builder: (_, __) => const SplashView(),
+        builder: (_, __) => const SplashPage(),
       ),
       GoRoute(
         parentNavigatorKey: _rootNavigatorKey,
         path: AppRoutes.taskActivity,
         pageBuilder: (_, state) => CustomTransitionPage(
+          key: state.pageKey,
           child: TaskActivityPage(
             taskIvy: (state.extra as Map<String, dynamic>)[
                 'task'], // if starting process, taskIvy would be null
@@ -43,7 +45,7 @@ class AppRouter {
       ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
-        builder: (context, state, child) => TabBarScreen(
+        builder: (context, state, child) => TabBarPage(
           child: child,
         ),
         routes: [
@@ -51,25 +53,25 @@ class AppRouter {
             parentNavigatorKey: _shellNavigatorKey,
             path: AppRoutes.task,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(child: TasksView()),
+                const NoTransitionPage(child: TasksPage()),
           ),
           GoRoute(
             parentNavigatorKey: _shellNavigatorKey,
             path: AppRoutes.processes,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(child: ProcessesView()),
+                const NoTransitionPage(child: ProcessesPage()),
           ),
           GoRoute(
             parentNavigatorKey: _shellNavigatorKey,
             path: AppRoutes.search,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(child: SearchView()),
+                const NoTransitionPage(child: SearchPage()),
           ),
           GoRoute(
             parentNavigatorKey: _shellNavigatorKey,
             path: AppRoutes.profile,
             pageBuilder: (context, state) =>
-                const NoTransitionPage(child: ProfileView()),
+                const NoTransitionPage(child: ProfilePage()),
           )
         ],
       ),
@@ -100,6 +102,17 @@ class AppRouter {
         pageBuilder: (context, state) => CustomTransitionPage<void>(
           key: state.pageKey,
           child: DocumentListPage(task: state.extra as TaskIvy),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              iosTransition(context, animation, secondaryAnimation, child),
+        ),
+      ),
+      GoRoute(
+        parentNavigatorKey: _rootNavigatorKey,
+        path: AppRoutes.notification,
+        name: 'notification',
+        pageBuilder: (context, state) => CustomTransitionPage<void>(
+          key: state.pageKey,
+          child: const NotificationPage(),
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               iosTransition(context, animation, secondaryAnimation, child),
         ),

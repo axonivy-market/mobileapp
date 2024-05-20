@@ -1,14 +1,14 @@
-import 'package:axon_ivy/core/extensions/sort_type_ext.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_bloc.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_event.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/filter_bloc/filter_state.dart';
+import 'package:axon_ivy/shared/extensions/sort_type_ext.dart';
+import 'package:axon_ivy/shared/resources/constants.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../core/util/resources/constants.dart';
 import '../../../../generated/assets.gen.dart';
 import '../bloc/sort_bloc/sort_bloc.dart';
 import '../bloc/sort_bloc/sort_event.dart';
@@ -38,74 +38,79 @@ class _FilterWidgetState extends State<FilterWidget> {
           builder: (context, state) {
             return Row(
               children: [
-                GestureDetector(
-                  onTap: () {
+                ElevatedButton(
+                  onPressed: () {
                     filterBloc.add(FilterEvent(FilterType.all));
                   },
-                  child: Container(
-                    height: 40.h,
-                    width: 86.w,
-                    decoration: BoxDecoration(
-                        border: BorderDirectional(
-                            start: BorderSide(
-                                color: Theme.of(context).colorScheme.outline),
-                            top: BorderSide(
-                                color: Theme.of(context).colorScheme.outline),
-                            bottom: BorderSide(
-                                color: Theme.of(context).colorScheme.outline)),
-                        borderRadius: BorderRadius.only(
-                            topLeft: const Radius.circular(10.0).r,
-                            bottomLeft: const Radius.circular(10.0).r),
-                        color: getFilterColor(
-                            state.activeFilter == FilterType.all)),
-                    child: Center(
-                      child: Text(
-                        "tasksView.all".tr(),
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                              fontSize: 17.sp,
-                              fontWeight: state.activeFilter == FilterType.all
-                                  ? FontWeight.w500
-                                  : FontWeight.w400,
-                              color: getFilterTextColor(
-                                  state.activeFilter == FilterType.all)),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStatePropertyAll(Size(86.w, 40.h)),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+                    elevation: const MaterialStatePropertyAll(0.0),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.horizontal(
+                          left: const Radius.circular(10.0).r,
+                        ),
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                      ),
+                    ),
+                    backgroundColor: MaterialStatePropertyAll(
+                      getFilterBackgroundColor(
+                        state.activeFilter == FilterType.all,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "tasksView.all".tr(),
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        fontSize: 17.sp,
+                        fontWeight: state.activeFilter == FilterType.expired
+                            ? FontWeight.w500
+                            : FontWeight.w400,
+                        color: getFilterTextColor(
+                          state.activeFilter == FilterType.all,
                         ),
                       ),
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () {
+                ElevatedButton(
+                  onPressed: () {
                     filterBloc.add(FilterEvent(FilterType.expired));
                   },
-                  child: Container(
-                    height: 40.h,
-                    width: 86.w,
-                    decoration: BoxDecoration(
-                        border: BorderDirectional(
-                            end: BorderSide(
-                                color: Theme.of(context).colorScheme.outline),
-                            top: BorderSide(
-                                color: Theme.of(context).colorScheme.outline),
-                            bottom: BorderSide(
-                                color: Theme.of(context).colorScheme.outline)),
-                        borderRadius: BorderRadius.only(
-                            topRight: const Radius.circular(10.0).r,
-                            bottomRight: const Radius.circular(10.0).r),
-                        color: getFilterColor(
-                            state.activeFilter == FilterType.expired)),
-                    child: Center(
-                      child: Text(
-                        "tasksView.expired".tr(),
-                        style: GoogleFonts.inter(
-                          textStyle: TextStyle(
-                              fontSize: 17.sp,
-                              fontWeight:
-                                  state.activeFilter == FilterType.expired
-                                      ? FontWeight.w500
-                                      : FontWeight.w400,
-                              color: getFilterTextColor(
-                                  state.activeFilter == FilterType.expired)),
+                  style: ButtonStyle(
+                    minimumSize: MaterialStatePropertyAll(Size(86.w, 40.h)),
+                    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
+                    elevation: const MaterialStatePropertyAll(0.0),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.horizontal(
+                          right: const Radius.circular(10.0).r,
+                        ),
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                      ),
+                    ),
+                    backgroundColor: MaterialStatePropertyAll(
+                      getFilterBackgroundColor(
+                        state.activeFilter == FilterType.expired,
+                      ),
+                    ),
+                  ),
+                  child: Text(
+                    "tasksView.expired".tr(),
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        fontSize: 17.sp,
+                        fontWeight: state.activeFilter == FilterType.expired
+                            ? FontWeight.w500
+                            : FontWeight.w400,
+                        color: getFilterTextColor(
+                          state.activeFilter == FilterType.expired,
                         ),
                       ),
                     ),
@@ -122,7 +127,9 @@ class _FilterWidgetState extends State<FilterWidget> {
           position: PopupMenuPosition.under,
           surfaceTintColor: Theme.of(context).colorScheme.onPrimaryContainer,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(const Radius.circular(10.0).r)),
+            borderRadius: BorderRadius.all(const Radius.circular(10.0).r),
+          ),
+          constraints: BoxConstraints(minWidth: 182.r),
           onSelected: (value) {
             switch (value) {
               case MainSortType.priority:
@@ -211,11 +218,12 @@ class _FilterWidgetState extends State<FilterWidget> {
                       MainSortType.name.toString(),
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                            fontSize: 17.sp,
-                            color: activeSortType.contains(MainSortType.name)
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.w400),
+                          fontSize: 17.sp,
+                          color: activeSortType.contains(MainSortType.name)
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     if (activeSortType.contains(MainSortType.name))
@@ -235,12 +243,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                       MainSortType.creationDate.toString(),
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                            fontSize: 17.sp,
-                            color: activeSortType
-                                    .contains(MainSortType.creationDate)
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.w400),
+                          fontSize: 17.sp,
+                          color:
+                              activeSortType.contains(MainSortType.creationDate)
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     if (activeSortType.contains(MainSortType.creationDate))
@@ -260,12 +269,13 @@ class _FilterWidgetState extends State<FilterWidget> {
                       MainSortType.expiryDate.toString(),
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                            fontSize: 17.sp,
-                            color:
-                                activeSortType.contains(MainSortType.expiryDate)
-                                    ? Theme.of(context).colorScheme.primary
-                                    : Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.w400),
+                          fontSize: 17.sp,
+                          color:
+                              activeSortType.contains(MainSortType.expiryDate)
+                                  ? Theme.of(context).colorScheme.primary
+                                  : Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     if (activeSortType.contains(MainSortType.expiryDate))
@@ -286,11 +296,12 @@ class _FilterWidgetState extends State<FilterWidget> {
                       activeSortType.getSubTypes()[0].toString(),
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                            fontSize: 17.sp,
-                            color: activeSortType.isSubTypeActive(0)
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.w400),
+                          fontSize: 17.sp,
+                          color: activeSortType.isSubTypeActive(0)
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     if (activeSortType.isSubTypeActive(0))
@@ -310,11 +321,12 @@ class _FilterWidgetState extends State<FilterWidget> {
                       activeSortType.getSubTypes()[1].toString(),
                       style: GoogleFonts.inter(
                         textStyle: TextStyle(
-                            fontSize: 17.sp,
-                            color: activeSortType.isSubTypeActive(1)
-                                ? Theme.of(context).colorScheme.primary
-                                : Theme.of(context).colorScheme.secondary,
-                            fontWeight: FontWeight.w400),
+                          fontSize: 17.sp,
+                          color: activeSortType.isSubTypeActive(1)
+                              ? Theme.of(context).colorScheme.primary
+                              : Theme.of(context).colorScheme.secondary,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                     if (activeSortType.isSubTypeActive(1))
@@ -364,7 +376,7 @@ class _FilterWidgetState extends State<FilterWidget> {
     );
   }
 
-  Color getFilterColor(bool isCurrentFilterType) {
+  Color getFilterBackgroundColor(bool isCurrentFilterType) {
     return isCurrentFilterType
         ? Theme.of(context).colorScheme.primary
         : Theme.of(context).colorScheme.onPrimaryContainer;

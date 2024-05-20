@@ -1,0 +1,235 @@
+
+body {
+	background-color: #f8f8f9;
+}
+
+.btn {
+	width: 100% !important;
+	border: 1px solid #c7d929 !important;
+	border-radius: 8px !important;
+	font-family: Arial !important;
+	color: #ffffff !important;
+	font-size: 15px !important;
+	background: #c7d426 !important;
+	padding: 10px 0px 10px 0px !important;
+	text-decoration: none !important;
+}
+
+.btn-red {
+	width: 100% !important;
+	border: 1px solid #e25041 !important;
+	border-radius: 8px !important;
+	font-family: Arial !important;
+	color: #ffffff !important;
+	font-size: 15px !important;
+	background: #e25041 !important;
+	padding: 10px 0px 10px 0px !important;
+	text-decoration: none !important;
+}
+
+.timer {
+	background-color: #f8f8f8 !important;
+	border: 0px solid #f8f8f8 !important;
+	width: 100% !important;
+	text-align: center !important;
+	font-size: 15px !important;
+}
+
+.btn:hover {
+	background: #c7d929;
+	text-decoration: none;
+}
+
+.btn:disabled {
+	background: #a5a5a5 !important;
+	text-decoration: none !important;
+	border: 1px solid #f5f5f5 !important;
+}
+
+
+
+.border {
+	border: 1px solid #E9EAE9;
+	right: 2;
+	left: 2;
+	background: #f8f8f8;
+	width: 100%;
+	border-radius: 3px;
+}
+
+.header {
+	background-color: #f1f1f2;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	padding-top: 10px;
+	color: #565657;
+	
+	
+	padding-bottom: 5px;
+}
+
+label {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+input[type=checkbox].css-checkbox {
+	position: absolute;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+}
+
+input[type=checkbox].css-checkbox+label.css-label {
+	padding-left: 20px;
+	height: 15px;
+	display: inline-block;
+	line-height: 15px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	font-size: 15px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+input[type=checkbox].css-checkbox:checked+label.css-label {
+	background-position: 0 -15px;
+}
+
+/*specific classes related to Checkbox skins*/
+.lite-gray-check {
+	background-image:
+		url("#{resource['ivy-webcontent:layouts/images/lite-gray-check.png']}");
+}
+
+.locationButton {
+	background-image:
+		url("#{resource['ivy-webcontent:layouts/images/ic_location.png']}")");
+	width: 24px;
+	height: 30px;
+	border: none;
+}
+
+input[type=checkbox].css-checkbox.med+label.css-label.med {
+	padding-left: 22px;
+	height: 17px;
+	display: inline-block;
+	line-height: 17px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	font-size: 15px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+input[type=checkbox].css-checkbox.med:checked+label.css-label.med {
+	background-position: 0 -17px;
+}
+
+input[type=checkbox].css-checkbox.sme+label.css-label.sme {
+	padding-left: 22px;
+	height: 16px;
+	display: inline-block;
+	line-height: 16px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	font-size: 15px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+input[type=checkbox].css-checkbox.sme:checked+label.css-label.sme {
+	background-position: 0 -16px;
+}
+
+input[type=checkbox].css-checkbox.lrg+label.css-label.lrg {
+	padding-left: 22px;
+	height: 20px;
+	display: inline-block;
+	line-height: 20px;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+	font-size: 15px;
+	vertical-align: middle;
+	cursor: pointer;
+}
+
+input[type=checkbox].css-checkbox.lrg:checked+label.css-label.lrg {
+	background-position: 0 -20px;
+}
+
+body {
+	font: -apple-system-body;
+	!
+	important
+}
+
+input {
+	-webkit-appearance: none;
+	!
+	important
+}
+
+.disableMenu {
+	display: none;
+}
+
+.textAreaStyle {
+	overflow: hidden !important;
+	width: 100% !important;
+	color: black !important;
+	background-color: transparent !important;
+	border: none !important;
+}
+
+.w3-table-all {
+	border: 1px solid #ccc
+}
+
+.w3-bordered tr, .w3-table-all tr {
+	border-bottom: 1px solid #ddd
+}
+
+.w3-striped tbody tr:nth-child(even) {
+	background-color: #f1f1f1
+}
+
+.w3-table-all tr:nth-child(odd) {
+	background-color: #fff
+}
+
+.w3-table-all tr:nth-child(even) {
+	background-color: #f1f1f1
+}
+
+.w3-hoverable tbody tr {
+	transition: background-color .25s ease
+}
+
+.w3-hoverable tbody tr:hover {
+	background-color: #ccc
+}
+
+.w3-centered tr th, .w3-centered tr td {
+	text-align: center
+}
+
+.w3-table td, .w3-table th, .w3-table-all td, .w3-table-all th {
+	padding: 6px 8px;
+	display: table-cell;
+	vertical-align: top;
+	font-size: 14px;
+}
+
+.w3-table th:first-child, .w3-table td:first-child, .w3-table-all th:first-child,
+	.w3-table-all td:first-child {
+	padding-left: 16px
+}

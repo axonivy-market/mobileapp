@@ -1,0 +1,80 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "151A8C87A68DBDA8",
+  "config" : {
+    "data" : "showcase.Data"
+  },
+  "elements" : [ {
+      "id" : "f48",
+      "type" : "ProgramStart",
+      "name" : "Auto clean Invoice Approval",
+      "config" : {
+        "javaClass" : "helios.helper.AutoInvoiceCleaner",
+        "link" : "eventLink.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 136, "y" : 176 },
+        "labelOffset" : { "x" : 8, "y" : 37 }
+      },
+      "connect" : [
+        { "id" : "f54", "to" : "f53" }
+      ]
+    }, {
+      "id" : "f10",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 472, "y" : 72 },
+        "labelOffset" : { "x" : 0, "y" : 15 }
+      }
+    }, {
+      "id" : "f11",
+      "type" : "TriggerCall",
+      "name" : "Trigger elevator maintenance",
+      "config" : {
+        "processCall" : "Business Processes/ShowCaseProcesses:elevatorMaintenance()"
+      },
+      "visual" : {
+        "at" : { "x" : 312, "y" : 72 },
+        "size" : { "width" : 176 }
+      },
+      "connect" : [
+        { "id" : "f52", "to" : "f10" }
+      ]
+    }, {
+      "id" : "f53",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 296, "y" : 176 },
+        "labelOffset" : { "x" : 0, "y" : 15 }
+      }
+    }, {
+      "id" : "f7",
+      "type" : "ProgramStart",
+      "name" : "Auto start elevator maintenance",
+      "config" : {
+        "javaClass" : "helios.helper.AutoStartShowCase",
+        "link" : "eventLink2.ivp"
+      },
+      "visual" : {
+        "at" : { "x" : 136, "y" : 72 },
+        "labelOffset" : { "x" : 8, "y" : 37 }
+      },
+      "connect" : [
+        { "id" : "f0", "to" : "f11" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "RequestStart",
+      "name" : "start.ivp",
+      "config" : {
+        "signature" : "start"
+      },
+      "visual" : {
+        "at" : { "x" : 160, "y" : 128 },
+        "labelOffset" : { "x" : 9, "y" : 37 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f11" }
+      ]
+    } ]
+}
