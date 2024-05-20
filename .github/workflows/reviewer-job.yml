@@ -17,6 +17,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Play-Free release
+        run: flutter build apk --debug --flavor dev --target lib/main_dev.dart
+
       - uses: invertase/github-action-dart-analyzer@v2.0.0
         with:
           # (Optional) Treat info level issues as fatal.
