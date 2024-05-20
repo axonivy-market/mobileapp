@@ -79,6 +79,7 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
       switch (tabIndex) {
         case 0:
           _taskBloc.add(TaskEvent.getTasks(_filterBloc.state.activeFilter));
+          break;
         case 1:
           _processBloc.add(const ProcessEvent.getProcess());
           break;

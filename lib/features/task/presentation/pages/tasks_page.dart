@@ -91,6 +91,9 @@ class _TasksPageState extends BasePageState<TasksPage> {
                 AppAssets.icons.success,
                 context,
               );
+              context
+                  .read<NotificationBloc>()
+                  .add(const NotificationEvent.getNotifications(1, 9000));
             }
           }),
           BlocListener<FilterBloc, FilterState>(

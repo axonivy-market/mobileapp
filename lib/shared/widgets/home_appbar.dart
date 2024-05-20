@@ -1,5 +1,6 @@
 import 'package:axon_ivy/core/app/app.dart';
 import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
+import 'package:axon_ivy/features/profile/presentation/bloc/logged_cubit/logged_in_cubit.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/offline_indicator_cubit/offline_indicator_cubit.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
@@ -41,46 +42,55 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       actions: [
         buildLastUpdatedTime(),
-        Stack(
-          children: [
-            IconButton(
-              onPressed: () {
-                context.pushNamed('notification');
-              },
-              icon: AppAssets.icons.notification.svg(
-                height: 26.h,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.surface,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ),
-            BlocBuilder<NotificationBloc, NotificationState>(
-              builder: (context, state) {
-                bool isUnreadNotification = false;
-                if (state is NotificationSuccessState) {
-                  for (var notification in state.notifications) {
-                    if (notification.read == false) {
-                      isUnreadNotification = true;
-                      break;
-                    }
-                  }
-                }
+        SizedBox(
+          width: 48,
+          child: BlocBuilder<LoggedInCubit, LoggedInState>(
+            builder: (context, state) {
+              return Stack(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      if (SharedPrefs.isLogin ?? false) {
+                        context.pushNamed('notification');
+                      }
+                    },
+                    icon: AppAssets.icons.notification.svg(
+                      colorFilter: ColorFilter.mode(
+                        Theme.of(context).colorScheme.surface,
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                  ),
+                  if (SharedPrefs.isLogin ?? false)
+                    BlocBuilder<NotificationBloc, NotificationState>(
+                      builder: (context, state) {
+                        bool isUnreadNotification = false;
+                        if (state is NotificationSuccessState) {
+                          for (var notification in state.notifications) {
+                            if (notification.read == false) {
+                              isUnreadNotification = true;
+                              break;
+                            }
+                          }
+                        }
 
-                return isUnreadNotification
-                    ? Positioned(
-                        right: 15,
-                        top: 15,
-                        child: Icon(
-                          Icons.circle,
-                          size: 10,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      )
-                    : const SizedBox();
-              },
-            ),
-          ],
+                        return isUnreadNotification
+                            ? Positioned(
+                                right: 15,
+                                top: 12,
+                                child: Icon(
+                                  Icons.circle,
+                                  size: 10,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                              )
+                            : const SizedBox();
+                      },
+                    ),
+                ],
+              );
+            },
+          ),
         ),
         5.horizontalSpace
       ],
