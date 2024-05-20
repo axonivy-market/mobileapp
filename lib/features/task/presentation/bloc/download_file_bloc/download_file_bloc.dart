@@ -8,7 +8,6 @@ import 'package:axon_ivy/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:external_path/external_path.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -52,8 +51,13 @@ class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
       if (response.statusCode == 200) {
         String path = "";
         if (Platform.isAndroid) {
-          path = await ExternalPath.getExternalStoragePublicDirectory(
-              ExternalPath.DIRECTORY_DOWNLOADS);
+          var dir = await getExternalStorageDirectory();
+          if (dir != null) {
+            path = dir.path;
+          } else {
+            Directory dir = await getApplicationDocumentsDirectory();
+            path = dir.path;
+          }
         } else if (Platform.isIOS) {
           Directory dir = await getApplicationDocumentsDirectory();
           path = dir.path;

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
@@ -12,7 +10,6 @@ import 'package:axon_ivy/features/task/presentation/bloc/upload_file_bloc/upload
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +17,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:open_file_plus/open_file_plus.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class DocumentListPage extends BasePage {
   const DocumentListPage({super.key, required this.task});
@@ -345,28 +341,11 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                       autoClose: true,
                                       padding: EdgeInsets.zero,
                                       onPressed: (context) async {
-                                        if (Platform.isAndroid) {
-                                          DeviceInfoPlugin deviceInfo =
-                                              DeviceInfoPlugin();
-                                          AndroidDeviceInfo androidInfo =
-                                              await deviceInfo.androidInfo;
-                                          if (androidInfo.version.sdkInt >=
-                                              30) {
-                                            _requestManageExternalStoragePermission(
-                                                documents[index].name,
-                                                documents[index].url);
-                                          } else {
-                                            _requestStoragePermission(
-                                                documents[index].name,
-                                                documents[index].url);
-                                          }
-                                        } else {
-                                          _downloadFileBloc.add(
-                                            DownloadFileEvent.downloadFile(
-                                                documents[index].name,
-                                                documents[index].url),
-                                          );
-                                        }
+                                        _downloadFileBloc.add(
+                                          DownloadFileEvent.downloadFile(
+                                              documents[index].name,
+                                              documents[index].url),
+                                        );
                                       },
                                       backgroundColor:
                                           Theme.of(context).primaryColor,
@@ -500,52 +479,5 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
         ),
       ),
     );
-  }
-
-  void _requestManageExternalStoragePermission(String name, String url) async {
-    final status = await Permission.manageExternalStorage.status;
-    switch (status) {
-      case PermissionStatus.denied:
-        await Permission.manageExternalStorage.request().then((value) {
-          if (value == PermissionStatus.granted) {
-            _downloadFileBloc.add(
-              DownloadFileEvent.downloadFile(name, url),
-            );
-          }
-        });
-        break;
-      case PermissionStatus.granted:
-        _downloadFileBloc.add(
-          DownloadFileEvent.downloadFile(name, url),
-        );
-        break;
-      default:
-        break;
-    }
-  }
-
-  void _requestStoragePermission(String name, String url) async {
-    final status = await Permission.storage.status;
-    switch (status) {
-      case PermissionStatus.denied:
-        await Permission.storage.request().then((value) {
-          if (value == PermissionStatus.granted) {
-            _downloadFileBloc.add(
-              DownloadFileEvent.downloadFile(name, url),
-            );
-          }
-        });
-        break;
-      case PermissionStatus.permanentlyDenied:
-        openAppSettings();
-        break;
-      case PermissionStatus.granted:
-        _downloadFileBloc.add(
-          DownloadFileEvent.downloadFile(name, url),
-        );
-        break;
-      default:
-        break;
-    }
   }
 }
