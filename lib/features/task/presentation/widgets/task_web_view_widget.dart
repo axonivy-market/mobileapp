@@ -193,9 +193,10 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
                 .add(TaskActivityEvent.finishTaskOffline(task));
           }
         });
+    var submitUrlOffline = widget.taskIvy?.submitUrlOffline ?? "";
     if (widget.taskIvy?.offline == true &&
-        request.url.toString() ==
-            "${AppConfig.serverUrl}${widget.taskIvy?.submitUrlOffline}") {
+        submitUrlOffline.isNotEmpty &&
+        request.url.toString().endsWith(submitUrlOffline)) {
       // Prevent navigate URL to call finish task offline request
       await Future.delayed(const Duration(seconds: 30));
       if (context.mounted) {
@@ -206,10 +207,11 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
 
   NavigationActionPolicy? _iOSFinishTaskOffline(
       InAppWebViewController controller, NavigationAction navigationAction) {
-    Uri uri = Uri.parse(navigationAction.request.url!.toString());
-    var path = navigationAction.request.url!.toString().split(uri.host)[1];
+    var submitUrlOffline = widget.taskIvy?.submitUrlOffline ?? "";
     if (widget.taskIvy?.offline == true &&
-        path == widget.taskIvy?.submitUrlOffline) {
+        submitUrlOffline.isNotEmpty &&
+        navigationAction.request.url?.toString().endsWith(submitUrlOffline) ==
+            true) {
       if (context.mounted && navigationAction.request.body != null) {
         var formValues = utf8.decode(navigationAction.request.body!.toList());
         Map<String, String> resultMap = {};
