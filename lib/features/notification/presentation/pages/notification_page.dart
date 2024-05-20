@@ -156,10 +156,10 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                       borderRadius:
                           BorderRadius.all(const Radius.circular(10.0).r),
                     ),
-                    constraints: BoxConstraints.tightFor(height: 55.h),
                     itemBuilder: (BuildContext context) {
                       return [
                         PopupMenuItem(
+                          height: 30.h,
                           onTap: () {
                             context.read<NotificationBloc>().add(
                                   const NotificationEvent
@@ -536,15 +536,11 @@ class _NotificationPageState extends BasePageState<NotificationPage>
           minLeadingWidth: 0,
           leading: Column(
             children: [
-              const Expanded(
-                flex: 1,
-                child: SizedBox(),
-              ),
               if (!notifications[index].read) ...[
                 const Expanded(child: SizedBox()),
                 Icon(
                   Icons.circle,
-                  size: 8.r,
+                  size: 10.r,
                   color: Theme.of(context).colorScheme.primary,
                 ),
               ] else
