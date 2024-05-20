@@ -129,6 +129,7 @@ class _FilterWidgetState extends State<FilterWidget> {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(const Radius.circular(10.0).r),
           ),
+          constraints: BoxConstraints(minWidth: 182.r),
           onSelected: (value) {
             switch (value) {
               case MainSortType.priority:
