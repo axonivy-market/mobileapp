@@ -156,11 +156,10 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                       borderRadius:
                           BorderRadius.all(const Radius.circular(10.0).r),
                     ),
-                    constraints: BoxConstraints.tightFor(height: 55.h),
                     itemBuilder: (BuildContext context) {
                       return [
                         PopupMenuItem(
-                          height: 30,
+                          height: 30.h,
                           onTap: () {
                             context.read<NotificationBloc>().add(
                                   const NotificationEvent
