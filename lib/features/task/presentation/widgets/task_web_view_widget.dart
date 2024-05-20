@@ -206,9 +206,10 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
 
   NavigationActionPolicy? _iOSFinishTaskOffline(
       InAppWebViewController controller, NavigationAction navigationAction) {
+    Uri uri = Uri.parse(navigationAction.request.url!.toString());
+    var path = navigationAction.request.url!.toString().split(uri.host)[1];
     if (widget.taskIvy?.offline == true &&
-        navigationAction.request.url!.toString() ==
-            "${AppConfig.serverUrl}${widget.taskIvy?.submitUrlOffline}") {
+        path == widget.taskIvy?.submitUrlOffline) {
       if (context.mounted && navigationAction.request.body != null) {
         var formValues = utf8.decode(navigationAction.request.body!.toList());
         Map<String, String> resultMap = {};
