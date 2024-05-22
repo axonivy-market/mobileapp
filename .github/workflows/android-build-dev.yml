@@ -51,7 +51,7 @@ jobs:
         run: flutter build apk --flavor dev --target lib/main_dev.dart --build-name ${{ env.VersionName }} --build-number ${{github.run_number}}
 
       - name: Archive build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4.3.3
         with:
           name: Android app develop APK
           path: |
@@ -68,4 +68,3 @@ jobs:
           releaseFiles: build/app/outputs/bundle/devRelease/app-dev-release.aab
           mappingFile: ./build/app/outputs/mapping/devRelease/mapping.txt
           track: internal
-          changesNotSentForReview: true
