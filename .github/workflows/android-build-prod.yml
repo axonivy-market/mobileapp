@@ -58,3 +58,4 @@ jobs:
           releaseFiles: build/app/outputs/bundle/prodRelease/app-prod-release.aab
           mappingFile: ./build/app/outputs/mapping/prodRelease/mapping.txt
           track: internal
+          changesNotSentForReview: true
