@@ -130,8 +130,8 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         }
         _previousScrollY = y;
       },
-      onOverScrolled: (controller, x, y, a, b) {
-        isOverScrolled = true;
+      onOverScrolled: (controller, x, y, clampedX, clampedY) {
+        isOverScrolled = clampedY;
         overScrollY = y;
       },
       onLoadStop: (controller, url) async {
