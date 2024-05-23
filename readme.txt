@@ -1,4 +1,4 @@
-1. Config demo mode in local
+1. Config demo mode on local
   - Update file assets\env\.env_demo with proper values
     demoServerUrl='XXX'
     demoUserName='XXX'
