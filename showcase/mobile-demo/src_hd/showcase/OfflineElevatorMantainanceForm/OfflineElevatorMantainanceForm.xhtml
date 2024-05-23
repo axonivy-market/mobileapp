@@ -11,6 +11,19 @@
 <h:head>
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Elevator Maintenance Form</title>
+	<f:attribute name="primefaces.THEME" value="#{ivyFreyaTheme.theme}" />
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title><ui:insert name="title">Ivy Html Dialog</ui:insert></title>
+	<link rel="shortcut icon" href="#{resource['ivy-branding:favicon']}" />
+	<h:outputScript name="js/layout.js" library="#{ivyFreyaTheme.library}" />
+	<h:outputStylesheet name="#{ivyFreyaTheme.layout}"
+		library="#{ivyFreyaTheme.library}" />
+	<h:outputStylesheet name="primeflex-2.min.css" library="primeflex" />
+	<h:outputStylesheet name="custom.css" library="ivy-branding" />
+	<!-- Optional Style or Script files: 
+  <h:outputStylesheet name="layouts/styles/style.css" /> 
+  -->
 	<h:outputStylesheet name="layouts/stylesheet/form.css" />
 	<h:outputScript name="layouts/javascript/form.js" />
 	<h:outputScript name="layouts/javascript/jSignature.min.js" />
@@ -18,181 +31,162 @@
 
 <h:body onload="onTimerLoad()">
 
-	<h:form id="form">
-		<div class="border" style="margin-top: 10px">
-			<div>
-				<table class="header"
-					style="width: 100%; border-collapse: collapse;">
-					<tbody>
+	<div class="card">
+		<h:form id="form">
 
-						<tr>
-							<td onclick="showHideHeader();"
-								style="width: 2%; padding-left: 0px;"></td>
-							<td onclick="showHideHeader();" style="width: 23%"><b>Job
-									Details</b></td>
-							<td onclick="showHideHeader();" style="width: 35%"></td>
-							<td style="width: 40%; vertical-align: middle;"><b>Location</b>
-								<img id="location" align="right"
-								src="#{resource['ivy-webcontent:layouts/images/ic_location.png']}"
-								alt="*" style="width: 24px; height: 30px; margin-right: 5px"
-								onclick="openNativeMapsApp(#{data.company.location.latitude},#{data.company.location.longitude});" /></td>
-						</tr>
-					</tbody>
-				</table>
-				<table id="bodyHeader"
-					style="width: 100%; border-collapse: collapse;">
-					<tbody>
-						<tr style="height: 10px">
-							<td style="width: 2%"></td>
-							<td style="width: 23%"></td>
-							<td style="width: 35%"></td>
-							<td style="width: 40%"></td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Elevator:</td>
-							<td>#{data.company.elevator.name}</td>
-							<td>#{data.company.location.address1}</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>YOC:</td>
-							<td>#{data.company.elevator.yoc}</td>
-							<td>#{data.company.location.address2}</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Type:</td>
-							<td>#{data.company.elevator.type}</td>
-							<td>#{data.company.location.address3}</td>
-						</tr>
-						<tr style="height: 20px">
-							<td></td>
-							<th style="width: 23%"></th>
-							<th style="width: 35%"></th>
-							<th style="width: 40%"></th>
-
-						</tr>
-						<tr>
-							<td></td>
-							<td>Date:</td>
-							<td>#{data.company.elevator.date}</td>
-							<td>Local Contact:</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Time:</td>
-							<td>#{data.company.elevator.time}</td>
-							<td>#{data.company.contactName}</td>
-						</tr>
-						<tr>
-							<td></td>
-							<td>Duration:</td>
-							<td>#{data.company.elevator.duration}</td>
-							<td>#{data.company.phone}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-
-		</div>
-		<div class="border" style="margin-top: 10px">
-
-			<div class="header" onclick="showHideWorkingTime()">
-				<b style="margin-left: 2%">Work time</b>
-			</div>
-			<table id="workingTimeTable"
-				style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
-				<tr id="headerId">
-					<td style="width: 3%"></td>
-					<td style="width: 37%"><input type="button" class="btn"
-						id="startPauseTimerId" onclick="myTimer()" value="Start" /></td>
-					<td style="width: 20%"><input type="text" id="timerId"
-						style="text-align: center; font-size: 15px;" readonly="readonly"
-						class="timer" value="00:00" /> <h:inputHidden id="hiddenTimerId"
-							type="text" value="#{data.inform.workedTime}"></h:inputHidden></td>
-					<td style="width: 37%"><input type="button" class="btn"
-						id="stopTimerId" onclick="stopMyTimer()" value="End"
-						disabled="disabled" /></td>
-					<td style="width: 3%"></td>
-				</tr>
-
-			</table>
-		</div>
-		<div class="border" style="margin-top: 10px">
-			<div onclick="showHideSpareParks();" class="header">
-				<b style="margin-left: 2%">Spare Parts</b>
-			</div>
-			<div id="spareParksTable"
-				style="width: 100%; margin-top: 10px; margin-bottom: 10px; margin-left: 5%;">
+			<div class="border" style="margin-top: 10px">
 				<div>
-					<table style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+					<table class="header"
+						style="width: 100%; border-collapse: collapse;">
 						<tbody>
-							<c:set var="i" value="0" />
-							<c:forEach step="2" items="#{data.company.elevator.materials}"
-								varStatus="loop">
-								<tr style="height: 40px">
-									<td style="width: 2%"></td>
-									<td><c:set var="item"
-											value="#{data.company.elevator.materials[loop.index]}" /> <input
-										type="checkbox" class="css-checkbox" id="cb#{loop.index}"
-										onclick="setValueToCheckBox(#{loop.index});" /> <label
-										for="cb#{loop.index}" class="css-label lite-gray-check">#{data.company.elevator.materials[loop.index].name}</label>
-
-									</td>
-									<c:if
-										test="${fn:length(data.company.elevator.materials) gt loop.index + 1}">
-										<td><input type="checkbox" class="css-checkbox"
-											id="cb#{loop.index+1}"
-											onclick="setValueToCheckBox(#{loop.index+1});" /> <label
-											for="cb#{loop.index+1}" class="css-label lite-gray-check">#{data.company.elevator.materials[loop.index+1].name}</label>
-										</td>
-									</c:if>
-								</tr>
-
-							</c:forEach>
-
+							<tr>
+								<td onclick="showHideHeader();"
+									style="width: 2%; padding-left: 0px;"></td>
+								<td onclick="showHideHeader();" style="width: 23%"><h:outputLabel
+										value="Job Details" /></td>
+								<td onclick="showHideHeader();" style="width: 35%"></td>
+								<td style="width: 40%; vertical-align: middle;"><h:outputLabel
+										value="location" /></td>
+							</tr>
 						</tbody>
 					</table>
-					<h:inputHidden id="selectedMatetialList" type="text"
-						value="#{data.inform.selectedList}"></h:inputHidden>
+					<table id="bodyHeader"
+						style="width: 100%; border-collapse: collapse;">
+						<tbody>
+							<tr style="height: 10px">
+								<td style="width: 2%"></td>
+								<td style="width: 23%"></td>
+								<td style="width: 35%"></td>
+								<td style="width: 40%"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Elevator:</td>
+								<td>#{data.company.elevator.name}</td>
+								<td>#{data.company.location.address1}</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>YOC:</td>
+								<td>#{data.company.elevator.yoc}</td>
+								<td>#{data.company.location.address2}</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Type:</td>
+								<td>#{data.company.elevator.type}</td>
+								<td>#{data.company.location.address3}</td>
+							</tr>
+							<tr style="height: 20px">
+								<td></td>
+								<th style="width: 23%"></th>
+								<th style="width: 35%"></th>
+								<th style="width: 40%"></th>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Date:</td>
+								<td>#{data.company.elevator.date}</td>
+								<td>Local Contact:</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Time:</td>
+								<td>#{data.company.elevator.time}</td>
+								<td>#{data.company.contactName}</td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>Duration:</td>
+								<td>#{data.company.elevator.duration}</td>
+								<td>#{data.company.phone}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
-		</div>
-		<div class="border" style="margin-top: 10px">
-			<div class="header" onclick="showHideComments();">
-				<b style="margin-left: 2%">Comments</b>
+			<div class="border" style="margin-top: 10px">
+				<div class="header" onclick="showHideWorkingTime()">
+					<b style="margin-left: 2%">Work time</b>
+				</div>
+				<table id="workingTimeTable"
+					style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+					<tr id="headerId">
+						<td style="width: 3%"></td>
+						<td style="width: 37%"><input type="button"
+							class="btn ui-button" id="startPauseTimerId" onclick="myTimer()"
+							value="Start" /></td>
+						<td style="width: 20%"><input type="text" id="timerId"
+							style="text-align: center; font-size: 15px;" readonly="readonly"
+							class="timer" value="00:00" /> <h:inputHidden id="hiddenTimerId"
+								type="text" value="#{data.inform.workedTime}"></h:inputHidden></td>
+						<td style="width: 37%"><input type="button"
+							class="btn ui-button" id="stopTimerId" onclick="stopMyTimer()"
+							value="End" disabled="disabled" /></td>
+						<td style="width: 3%"></td>
+					</tr>
+				</table>
 			</div>
-			<table id="commentsTable"
-				style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
-				<tr>
-					<td style="width: 1%"></td>
-					<td style="width: 98%"><p:inputTextarea id="comment_id"
-							styleClass="textAreaStyle" value="#{data.inform.comment}"
-							autoResize="false" required="false">
+			<div class="border" style="margin-top: 10px">
+				<div onclick="showHideSpareParks();" class="header">
+					<b style="margin-left: 2%">Spare Parts</b>
+				</div>
+				<div id="spareParksTable"
+					style="width: 100%; margin-top: 10px; margin-bottom: 10px; margin-left: 5%;">
+					<div>
+						<table style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+							<tbody>
+								<c:set var="i" value="0" />
+								<c:forEach step="2" items="#{data.company.elevator.materials}"
+									varStatus="loop">
+									<tr style="height: 40px">
+										<td style="width: 2%"></td>
+										<td><c:set var="item"
+												value="#{data.company.elevator.materials[loop.index]}" /> <input
+											type="checkbox" class="css-checkbox" id="cb#{loop.index}"
+											onclick="setValueToCheckBox(#{loop.index});" /> <label
+											for="cb#{loop.index}" class="css-label lite-gray-check">#{data.company.elevator.materials[loop.index].name}</label>
 
-						</p:inputTextarea></td>
-					<td style="width: 1%"></td>
-				</tr>
-			</table>
-		</div>
+										</td>
+										<c:if
+											test="${fn:length(data.company.elevator.materials) gt loop.index + 1}">
+											<td><input type="checkbox" class="css-checkbox"
+												id="cb#{loop.index+1}"
+												onclick="setValueToCheckBox(#{loop.index+1});" /> <label
+												for="cb#{loop.index+1}" class="css-label lite-gray-check">#{data.company.elevator.materials[loop.index+1].name}</label>
+											</td>
+										</c:if>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+						<h:inputHidden id="selectedMatetialList" type="text"
+							value="#{data.inform.selectedList}"></h:inputHidden>
+					</div>
+				</div>
+			</div>
+			<div class="border" style="margin-top: 10px">
+				<div class="header" onclick="showHideComments();">
+					<b style="margin-left: 2%">Comments</b>
+				</div>
+				<table id="commentsTable"
+					style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
+					<tr>
+						<td style="width: 1%"></td>
+						<td style="width: 98%"><p:inputTextarea id="comment_id"
+								styleClass="textAreaStyle" value="#{data.inform.comment}"
+								autoResize="false" required="false" /></td>
+						<td style="width: 1%"></td>
+					</tr>
+				</table>
+			</div>
+			<script
+				src="#{resource['ivy-webcontent:layouts/javascript/jquery-1.12.0.min.js']}"></script>
+			<script
+				src="#{resource['ivy-webcontent:layouts/javascript/jSignature.min.js']}"></script>
 
-
-		<!-- 
-
-Sig component from
-
-https://github.com/brinley/jSignature
-
- -->
-
-		<script
-			src="#{resource['ivy-webcontent:layouts/javascript/jquery-1.12.0.min.js']}"></script>
-		<script
-			src="#{resource['ivy-webcontent:layouts/javascript/jSignature.min.js']}"></script>
-
-		<div id="signature" style="width: 100%; height: 100px"></div>
-		<script>
+			<div id="signature" style="width: 100%; height: 100px;"></div>
+			<script>
 	    $(document).ready(function() {
 	        $("#signature").jSignature()
 	    });
@@ -204,39 +198,19 @@ https://github.com/brinley/jSignature
 	    })
 	    	    
 	</script>
-		<p style="text-align: center;">Unterschrift</p>
+			<p style="text-align: center;">Unterschrift</p>
+			<input type="button" class="ui-commandlink" value="Clear Signature"
+				id="MyClearButton" />
+			<div style="width: 100%; margin-top: 20px;" align="center">
+				<p:commandButton styleClass="ui-button btn"
+					actionListener="#{logic.close}" value="Done" ajax="false"
+					validateClient="true" />
+			</div>
+
+		</h:form>
+
+	</div>
 
 
-		<!-- <script src="#{resource['ivy-webcontent:layouts/javascript/jSignature.CompressorBase30.js']}"></script> -->
-		<!-- <script src="#{resource['ivy-webcontent:layouts/javascript/jSignature.CompressorSVG.js']}"></script> -->
-
-		<script>
-//     $(document).ready(function() {
-//       //  var $sigdiv = $("#signature").jSignature({'UndoButton':false});
-
-//         // -- i explain from here...
-//         $('#btnSave').click(function(){
-//             var sigData = $('#signature').jSignature('getData','base30');
-//             $('#hiddenSigData').val(sigData);
-//             alert(sigData);
-//         });
-//         // -- ... to here.
-
-//     })
-</script>
-
-		<!-- <input type="hidden" value="#{data.inform.signature}" id="hiddenSigData" name="hiddenSigData" /> -->
-		<!-- <button type="button" id="btnSave">Save</button> -->
-
-
-
-
-		<input type="button" value="Clear Signature" id="MyClearButton" />
-
-		<div style="width: 100%; margin-top: 20px;" align="center">
-			<p:commandButton styleClass="btn" actionListener="#{logic.close}"
-				value="Done" ajax="false" validateClient="true" />
-		</div>
-	</h:form>
 </h:body>
 </html>
