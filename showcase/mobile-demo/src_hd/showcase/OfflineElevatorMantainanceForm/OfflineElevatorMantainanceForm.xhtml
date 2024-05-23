@@ -31,18 +31,19 @@
 
 <h:body onload="onTimerLoad()">
 	<h:form id="form">
-		<div class="card	">
+		<div class="container">
 			<div class="border" style="margin-top: 10px">
 				<div>
-					<table class="header"
-						style="width: 100%;">
+					<table class="header" style="width: 100%;">
 						<tbody>
 							<tr>
 								<td onclick="showHideHeader();"
 									style="width: 2%; padding-left: 0px;"></td>
-								<td onclick="showHideHeader();" style="width: 23%"><b style="margin-left: 2%" >Job Details</b></td>
+								<td onclick="showHideHeader();" style="width: 23%"><b
+									style="margin-left: 2%">Job Details</b></td>
 								<td onclick="showHideHeader();" style="width: 35%"></td>
-								<td style="width: 40%; vertical-align: middle;"><b style="margin-left: 2%" >Location</b></td>
+								<td style="width: 40%; vertical-align: middle;"><b
+									style="margin-left: 2%">Location</b></td>
 							</tr>
 						</tbody>
 					</table>
@@ -96,12 +97,6 @@
 								<td>Duration:</td>
 								<td>#{data.company.elevator.duration}</td>
 								<td>#{data.company.phone}</td>
-							</tr>
-							<tr style="height: 20px">
-								<td></td>
-								<th style="width: 23%"></th>
-								<th style="width: 35%"></th>
-								<th style="width: 40%"></th>
 							</tr>
 						</tbody>
 					</table>
@@ -187,7 +182,7 @@
 			<script
 				src="#{resource['ivy-webcontent:layouts/javascript/jSignature.min.js']}"></script>
 
-			<div id="signature" style="width: 100%; height: 190px;"></div>
+			<div id="signature" style="width: 100%; height: 100px;"></div>
 			<script>
 	    $(document).ready(function() {
 	        $("#signature").jSignature()
@@ -209,11 +204,7 @@
 					actionListener="#{logic.close}" value="Done" ajax="false"
 					validateClient="true" />
 			</div>
-
-		</h:form>
-
-	</div>
-
-
+		</div>
+	</h:form>
 </h:body>
 </html>

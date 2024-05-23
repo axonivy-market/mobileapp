@@ -24,6 +24,7 @@
 	width: 100% !important;
 	text-align: center !important;
 	font-size: 15px !important;
+	  background: inherit;
 }
 
 .btn:hover {
