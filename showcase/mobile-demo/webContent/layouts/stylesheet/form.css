@@ -1,16 +1,8 @@
 
-body {
-	background-color: #f8f8f9;
-}
-
 .btn {
 	width: 100% !important;
-	border: 1px solid #c7d929 !important;
 	border-radius: 8px !important;
-	font-family: Arial !important;
-	color: #ffffff !important;
 	font-size: 15px !important;
-	background: #c7d426 !important;
 	padding: 10px 0px 10px 0px !important;
 	text-decoration: none !important;
 }
@@ -36,7 +28,7 @@ body {
 }
 
 .btn:hover {
-	background: #c7d929;
+	background: #005c7a;
 	text-decoration: none;
 }
 
@@ -49,22 +41,18 @@ body {
 
 
 .border {
-	border: 1px solid #E9EAE9;
+	border: 1px solid #545B67;
 	right: 2;
 	left: 2;
-	background: #f8f8f8;
 	width: 100%;
-	border-radius: 3px;
+	border-radius: 8px;
 }
 
 .header {
 	background-color: #f1f1f2;
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
-	padding-top: 10px;
-	color: #565657;
-	
-	
+	padding-top: 10px;	
 	padding-bottom: 5px;
 }
 
