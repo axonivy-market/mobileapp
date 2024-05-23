@@ -14,30 +14,36 @@
 		<ui:define name="content">
 			<h:form id="form">
 				<div>
-					<h:panelGrid columns="2" style="width: 100%;">
-						<h:outputText value="" />
-						<h:outputText value="" />
+					<table style="width: 100%">
+						<tbody>
+							<tr>
+								<th style="width: 70%"></th>
+								<th style="width: 30%"></th>
+							</tr>
+							<tr>
+								<td><b>Company Name</b></td>
+								<td align="center"><b>Balance Due:</b></td>
+							</tr>
+							<tr>
+								<td>#{data.data.company.name}</td>
+								<td align="center" style="font-size: 80%;">Upon Receipt</td>
+							</tr>
+							<tr>
+								<td>#{data.data.company.location.address1}</td>
+								<td rowspan="2" align="center"
+									style="font-size: 180%; color: #28a745">$#{data.data.inform.totalPrice}</td>
+							</tr>
+							<tr>
+								<td>#{data.data.company.location.address2}</td>
+							</tr>
+							<tr>
+								<td>#{data.data.company.location.address3}</td>
+								<td></td>
 
-						<h:outputText value="Company Name" />
-						<h:outputText value="Balance Due:" style="text-align: center;" />
-
-						<h:outputText value="#{data.data.company.name}" />
-						<h:outputText value="Upon Receipt"
-							style="text-align: center; font-size: 80%;" />
-
-						<h:outputText value="#{data.data.company.location.address1}" />
-						<h:outputText value="$#{data.data.inform.totalPrice}"
-							style="text-align: center; font-size: 180%; color: #005c7a;"
-							rowspan="2" />
-
-						<h:outputText value="#{data.data.company.location.address2}" />
-						<h:outputText value="" />
-
-						<h:outputText value="#{data.data.company.location.address3}" />
-						<h:outputText value="" />
-					</h:panelGrid>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-
 				<div style="margin-top: 30px">
 					<p:dataTable value="#{data.data.inform.usedMaterials}" var="item"
 						rows="10">
@@ -53,7 +59,6 @@
 						<p:column headerText="Total" style="text-align: right;">
 							<h:outputText value="$#{item.price * 1}" />
 						</p:column>
-
 						<p:row>
 							<p:column headerText="Working Time">
 								<h:outputText value="Working Time" />
@@ -68,7 +73,6 @@
 								<h:outputText value="$#{data.data.inform.totalWorkedTimePrice}" />
 							</p:column>
 						</p:row>
-
 						<p:row>
 							<p:column colspan="2">
 								<h:outputText value="" />
@@ -80,7 +84,6 @@
 								<h:outputText value="$#{data.data.inform.subTotalPrice}" />
 							</p:column>
 						</p:row>
-
 						<p:row>
 							<p:column colspan="2">
 								<h:outputText value="" />
@@ -106,7 +109,6 @@
 						</p:row>
 					</p:dataTable>
 				</div>
-
 				<div class="container">
 					<div>
 						<b>Notes</b>
@@ -117,7 +119,6 @@
 							autoResize="true" />
 					</p:panelGrid>
 				</div>
-
 				<div style="margin-top: 20px">
 					<p:panelGrid columns="2" style="width: 100%;">
 						<p:commandButton styleClass="btn" actionListener="#{logic.close}"
@@ -129,7 +130,6 @@
 					</p:panelGrid>
 				</div>
 			</h:form>
-
 		</ui:define>
 	</ui:composition>
 </h:body>
