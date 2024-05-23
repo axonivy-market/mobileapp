@@ -15,8 +15,6 @@
 </h:head>
 
 <h:body>
-
-
 	<h:form id="form">
 		<div>
 			<table style="width: 100%">
@@ -39,7 +37,7 @@
 					<tr>
 						<td>#{data.data.company.location.address1}</td>
 						<td rowspan="2" align="center"
-							style="font-size: 180%; color: #c7d426">$#{data.data.inform.totalPrice}</td>
+							style="font-size: 180%; color: #005c7a">$#{data.data.inform.totalPrice}</td>
 					</tr>
 					<tr>
 						<td>#{data.data.company.location.address2}</td>
@@ -60,7 +58,7 @@
 			<div>
 				<table style="width: 100%" class="w3-table-all">
 					<tbody>
-						<tr style="background: #c7d426; color: #fff;">
+						<tr>
 							<th>Items</th>
 							<th>Quantity</th>
 							<th>Price per</th>
@@ -83,19 +81,19 @@
 							<td align="right">$#{data.data.inform.totalWorkedTimePrice}</td>
 
 						</tr>
-						<tr style="background: #d9d9d9; color: #fff;">
+						<tr>
 							<td></td>
 							<td></td>
 							<td>Sub Total</td>
 							<td align="right">$#{data.data.inform.subTotalPrice}</td>
 						</tr>
-						<tr style="background: #d9d9d9; color: #fff;">
+						<tr>
 							<td></td>
 							<td></td>
 							<td>Tax - 10%</td>
 							<td align="right">$#{data.data.inform.taxPrice}</td>
 						</tr>
-						<tr style="background: #c7d426; color: #fff;">
+						<tr>
 							<td></td>
 							<td></td>
 							<td>TOTAL</td>
@@ -140,7 +138,5 @@
 			</div>
 		</div>
 	</h:form>
-
-
 </h:body>
 </html>
