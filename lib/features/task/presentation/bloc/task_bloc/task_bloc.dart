@@ -16,12 +16,14 @@ import 'package:axon_ivy/shared/enums/task_state_enum.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/resources/constants.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
+import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:html/parser.dart' as html_parser;
+import 'package:http/http.dart' as http;
 
 import '../../../../../core/app/app.dart';
 
@@ -202,15 +204,16 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   Future<void> downloadHTMLFromFullRequestPath(TaskIvy taskIvy) async {
-    var dio = getIt<Dio>();
     Uri uri = Uri.parse(taskIvy.fullRequestPath);
-    var requestUrl = "${uri.path}?${uri.query}";
     try {
-      final response = await dio.get(requestUrl);
+      final response = await http.get(
+        uri,
+        headers: {"Authorization": AuthorizationUtils.authorizationHeader},
+      );
       if (response.statusCode == 200) {
-        final submitUrl = _getFormAction(response.data);
+        final submitUrl = _getFormAction(response.body);
         final task = taskIvy.copyWith(
-            submitUrlOffline: submitUrl, formHTMLPageOffline: response.data);
+            submitUrlOffline: submitUrl, formHTMLPageOffline: response.body);
         // Update task for display on UI
         var index = tasks.indexWhere((element) => element.id == taskIvy.id);
         tasks.removeAt(index);
@@ -294,16 +297,21 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     final headers = {
       Constants.xRequestByHeader: Constants.xRequestBy,
       HttpHeaders.contentTypeHeader: Constants.formUrlEncodedContentType,
+      HttpHeaders.authorizationHeader: AuthorizationUtils.authorizationHeader,
     };
-    dio.options.headers = headers;
     try {
-      final response = await dio.post(
-        taskIvy.submitUrlOffline!,
-        data: taskIvy.doneTaskFormDataSerializedOffline,
+      var uri = Uri.parse(dio.options.baseUrl);
+      var submitFullUrl = Uri(
+          scheme: uri.scheme,
+          host: uri.host,
+          port: uri.port,
+          path: taskIvy.submitUrlOffline);
+      final response = await http.post(
+        submitFullUrl,
+        headers: headers,
+        body: taskIvy.doneTaskFormDataSerializedOffline,
       );
       _finishTask(response.headers, taskIvy);
-    } on DioException catch (e) {
-      _finishTask(e.response?.headers, taskIvy);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -393,10 +401,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     }
   }
 
-  void _finishTask(Headers? headers, TaskIvy taskIvy) {
-    String finishedTask = headers?.map[Constants.ivyFinishedTask]?.first ?? "";
-    String currentRunningTask =
-        headers?.map[Constants.ivyCurrentRunningTask]?.first ?? "";
+  void _finishTask(Map<String, String> headers, TaskIvy taskIvy) {
+    String finishedTask = headers[Constants.ivyFinishedTask] ?? "";
+    String currentRunningTask = headers[Constants.ivyCurrentRunningTask] ?? "";
     var isFinishedTask = finishedTask.isNotEmpty && currentRunningTask.isEmpty;
     if (isFinishedTask) {
       // remove task local after it sync done
