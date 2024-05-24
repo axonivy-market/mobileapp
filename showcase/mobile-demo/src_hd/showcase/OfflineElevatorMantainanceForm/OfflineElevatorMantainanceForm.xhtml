@@ -29,9 +29,10 @@
 	<h:outputScript name="layouts/javascript/jSignature.min.js" />
 </h:head>
 
-<h:body onload="onTimerLoad()">
-	<h:form id="form">
-		<div class="container">
+<h:body style="background-color: rgba(0, 0, 0, 0);">
+	<div class="card" onload="onTimerLoad()">
+
+		<h:form id="form">
 			<div class="border" style="margin-top: 10px">
 				<div>
 					<table class="header" style="width: 100%;">
@@ -170,9 +171,9 @@
 					style="width: 100%; margin-top: 10px; margin-bottom: 10px;">
 					<tr>
 						<td style="width: 1%"></td>
-						<td style="width: 98%"><p:inputTextarea id="comment_id"
+						<td style="width: 98%"><p:inputTextarea style="width:100%;" id="comment_id"
 								styleClass="textAreaStyle" value="#{data.inform.comment}"
-								autoResize="false" required="false" /></td>
+								required="false" /></td>
 						<td style="width: 1%"></td>
 					</tr>
 				</table>
@@ -195,7 +196,7 @@
 	    })
 	    	    
 	</script>
-			<p style="text-align: center;">Unterschrift</p>
+			<p style="text-align: center;">Abalsiger</p>
 
 			<input type="button" class="ui-commandlink" value="Clear Signature"
 				id="MyClearButton" />
@@ -204,7 +205,8 @@
 					actionListener="#{logic.close}" value="Done" ajax="false"
 					validateClient="true" />
 			</div>
-		</div>
-	</h:form>
+		</h:form>
+	</div>
+
 </h:body>
 </html>
