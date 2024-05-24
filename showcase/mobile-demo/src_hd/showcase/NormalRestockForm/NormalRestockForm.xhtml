@@ -12,30 +12,30 @@
 	<ui:composition template="/layouts/frame-10-full-width.xhtml">
 		<ui:define name="title">NormalRestockForm</ui:define>
 		<ui:define name="content">
+			<div class="card">
+				<h:form id="form">
+					<h2>Please restock the following items in your service car:</h2>
+					<p:dataTable var="item"
+						value="#{data.restockData.restockMaterials}" paginator="false"
+						rows="10">
+						<p:column headerText="Items">
+							<h:outputText value="#{item.name}" />
+						</p:column>
 
-			<h:form id="form">
-				<h2>Please restock the following items in your service car:</h2>
-				<p:dataTable var="item" value="#{data.restockData.restockMaterials}" paginator="false" rows="10"
-					responsiveLayout="scroll">
+						<p:column headerText="Quantity">
+							<h:outputText value="#{item.restockQuantity}"
+								style="text-align:center" />
+						</p:column>
 
-					<p:column headerText="Items">
-						<h:outputText value="#{item.name}" />
-					</p:column>
+					</p:dataTable>
 
-					<p:column headerText="Quantity">
-						<h:outputText value="#{item.restockQuantity}"
-							style="text-align:center" />
-					</p:column>
-
-				</p:dataTable>
-
-				<br />
-				<div style="width: 100%; margin-top: 20px;" align="center">
-					<p:commandButton styleClass="btn" actionListener="#{logic.close}"
-						value="Done" ajax="false" validateClient="true" />
-				</div>
-			</h:form>
-
+					<br />
+					<div style="width: 100%; margin-top: 20px;" align="center">
+						<p:commandButton styleClass="btn" actionListener="#{logic.close}"
+							value="Done" ajax="false" validateClient="true" />
+					</div>
+				</h:form>
+			</div>
 		</ui:define>
 	</ui:composition>
 </h:body>

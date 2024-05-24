@@ -12,126 +12,128 @@
 	<ui:composition template="/layouts/frame-10-full-width.xhtml">
 		<ui:define name="title">Invoice Form</ui:define>
 		<ui:define name="content">
-			<h:form id="form">
-				<div>
-					<h:panelGrid columns="2" style="width: 100%;">
-						<h:outputText value="" />
-						<h:outputText value="" />
+			<div class="card">
+				<h:form id="form">
+					<div>
+						<table style="width: 100%">
+							<tbody>
+								<tr>
+									<th style="width: 70%"></th>
+									<th style="width: 30%"></th>
+								</tr>
+								<tr>
+									<td><b>Company Name</b></td>
+									<td align="center"><b>Balance Due:</b></td>
+								</tr>
+								<tr>
+									<td>#{data.data.company.name}</td>
+									<td align="center" style="font-size: 80%;">Upon Receipt</td>
+								</tr>
+								<tr>
+									<td>#{data.data.company.location.address1}</td>
+									<td rowspan="2" align="center"
+										style="font-size: 180%; color: #28a745">$#{data.data.inform.totalPrice}</td>
+								</tr>
+								<tr>
+									<td>#{data.data.company.location.address2}</td>
+								</tr>
+								<tr>
+									<td>#{data.data.company.location.address3}</td>
+									<td></td>
 
-						<h:outputText value="Company Name" />
-						<h:outputText value="Balance Due:" style="text-align: center;" />
-
-						<h:outputText value="#{data.data.company.name}" />
-						<h:outputText value="Upon Receipt"
-							style="text-align: center; font-size: 80%;" />
-
-						<h:outputText value="#{data.data.company.location.address1}" />
-						<h:outputText value="$#{data.data.inform.totalPrice}"
-							style="text-align: center; font-size: 180%; color: #005c7a;"
-							rowspan="2" />
-
-						<h:outputText value="#{data.data.company.location.address2}" />
-						<h:outputText value="" />
-
-						<h:outputText value="#{data.data.company.location.address3}" />
-						<h:outputText value="" />
-					</h:panelGrid>
-				</div>
-
-				<div style="margin-top: 30px">
-					<p:dataTable value="#{data.data.inform.usedMaterials}" var="item"
-						rows="10">
-						<p:column headerText="Items">
-							<h:outputText value="#{item.name}" />
-						</p:column>
-						<p:column headerText="Quantity" style="text-align: right;">
-							<h:outputText value="1" />
-						</p:column>
-						<p:column headerText="Price per" style="text-align: right;">
-							<h:outputText value="$#{item.price}" />
-						</p:column>
-						<p:column headerText="Total" style="text-align: right;">
-							<h:outputText value="$#{item.price * 1}" />
-						</p:column>
-
-						<p:row>
-							<p:column headerText="Working Time">
-								<h:outputText value="Working Time" />
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div style="margin-top: 30px">
+						<p:dataTable value="#{data.data.inform.usedMaterials}" var="item"
+							rows="10">
+							<p:column headerText="Items">
+								<h:outputText value="#{item.name}" />
 							</p:column>
 							<p:column headerText="Quantity" style="text-align: right;">
-								<h:outputText value="#{data.data.inform.workedTime}" />
+								<h:outputText value="1" />
 							</p:column>
 							<p:column headerText="Price per" style="text-align: right;">
-								<h:outputText value="$150" />
+								<h:outputText value="$#{item.price}" />
 							</p:column>
 							<p:column headerText="Total" style="text-align: right;">
-								<h:outputText value="$#{data.data.inform.totalWorkedTimePrice}" />
+								<h:outputText value="$#{item.price * 1}" />
 							</p:column>
-						</p:row>
+							<p:row>
+								<p:column headerText="Working Time">
+									<h:outputText value="Working Time" />
+								</p:column>
+								<p:column headerText="Quantity" style="text-align: right;">
+									<h:outputText value="#{data.data.inform.workedTime}" />
+								</p:column>
+								<p:column headerText="Price per" style="text-align: right;">
+									<h:outputText value="$150" />
+								</p:column>
+								<p:column headerText="Total" style="text-align: right;">
+									<h:outputText value="$#{data.data.inform.totalWorkedTimePrice}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column colspan="2">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Sub Total" style="text-align: right;">
+									<h:outputText value="Sub Total" />
+								</p:column>
+								<p:column style="text-align: right;">
+									<h:outputText value="$#{data.data.inform.subTotalPrice}" />
+								</p:column>
+							</p:row>
+							<p:row>
+								<p:column colspan="2">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="Tax - 10%" style="text-align: right;">
+									<h:outputText value="Tax - 10%" />
+								</p:column>
+								<p:column style="text-align: right;">
+									<h:outputText value="$#{data.data.inform.taxPrice}" />
+								</p:column>
+							</p:row>
 
-						<p:row>
-							<p:column colspan="2">
-								<h:outputText value="" />
-							</p:column>
-							<p:column headerText="Sub Total" style="text-align: right;">
-								<h:outputText value="Sub Total" />
-							</p:column>
-							<p:column style="text-align: right;">
-								<h:outputText value="$#{data.data.inform.subTotalPrice}" />
-							</p:column>
-						</p:row>
-
-						<p:row>
-							<p:column colspan="2">
-								<h:outputText value="" />
-							</p:column>
-							<p:column headerText="Tax - 10%" style="text-align: right;">
-								<h:outputText value="Tax - 10%" />
-							</p:column>
-							<p:column style="text-align: right;">
-								<h:outputText value="$#{data.data.inform.taxPrice}" />
-							</p:column>
-						</p:row>
-
-						<p:row>
-							<p:column colspan="2">
-								<h:outputText value="" />
-							</p:column>
-							<p:column headerText="TOTAL" style="text-align: right;">
-								<h:outputText value="TOTAL" />
-							</p:column>
-							<p:column style="text-align: right;">
-								<h:outputText value="$#{data.data.inform.totalPrice}" />
-							</p:column>
-						</p:row>
-					</p:dataTable>
-				</div>
-
-				<div class="container">
-					<div>
-						<b>Notes</b>
+							<p:row>
+								<p:column colspan="2">
+									<h:outputText value="" />
+								</p:column>
+								<p:column headerText="TOTAL" style="text-align: right;">
+									<h:outputText value="TOTAL" />
+								</p:column>
+								<p:column style="text-align: right;">
+									<h:outputText value="$#{data.data.inform.totalPrice}" />
+								</p:column>
+							</p:row>
+						</p:dataTable>
 					</div>
-					<p:panelGrid columns="1">
-						<p:inputTextarea id="comment_id"
-							value="#{data.data.inform.comment}" readonly="true"
-							autoResize="true" />
-					</p:panelGrid>
-				</div>
-
-				<div style="margin-top: 20px">
-					<p:panelGrid columns="2" style="width: 100%;">
-						<p:commandButton styleClass="btn" actionListener="#{logic.close}"
-							value="Accept" ajax="false" validateClient="true"
-							style="width: 100%;" />
-						<p:commandButton styleClass="btn-red"
-							actionListener="#{logic.close}" value="Decline" ajax="false"
-							validateClient="true" style="width: 100%;" />
-					</p:panelGrid>
-				</div>
-			</h:form>
+					<div class="card">
+						<div>
+							<b>Notes</b>
+						</div>
+						<p:panelGrid columns="1">
+							<p:inputTextarea id="comment_id"
+								value="#{data.data.inform.comment}" readonly="true"
+								autoResize="true" />
+						</p:panelGrid>
+					</div>
+					<div style="margin-top: 20px">
+						<p:panelGrid columns="2" style="width: 100%;">
+							<p:commandButton styleClass="btn" actionListener="#{logic.close}"
+								value="Accept" ajax="false" validateClient="true"
+								style="width: 100%;" />
+							<p:commandButton styleClass="btn-red"
+								actionListener="#{logic.close}" value="Decline" ajax="false"
+								validateClient="true" style="width: 100%;" />
+						</p:panelGrid>
+					</div>
+				</h:form>
+			</div>
 
 		</ui:define>
 	</ui:composition>
 </h:body>
-
 </html>
