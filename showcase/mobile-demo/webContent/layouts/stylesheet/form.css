@@ -47,7 +47,7 @@
 }
 
 .header {
-	background-color: #d0d0d0;
+	background-color: rgba(0, 0, 0, 0.2);
 	border-top-left-radius: 8px;
 	border-top-right-radius: 8px;
 	padding-top: 10px;	
@@ -158,14 +158,6 @@ input {
 
 .disableMenu {
 	display: none;
-}
-
-.textAreaStyle {
-	overflow: hidden !important;
-	width: 100% !important;
-	color: black !important;
-	background-color: transparent !important;
-	border: none !important;
 }
 
 .w3-table-all {
