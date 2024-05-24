@@ -35,6 +35,9 @@
       "config" : {
         "output" : {
           "code" : [
+            "import java.util.Random;",
+            "import helios.showcase.MaintananceType;",
+            "import java.util.UUID;",
             "import helios.showcase.DataGenerator;",
             "import ch.ivyteam.ivy.workflow.document.Path;",
             "import ch.ivyteam.ivy.workflow.document.IDocument;",
@@ -54,8 +57,13 @@
             "result.selectedList = \"\";",
             "result.usedMaterials = new ArrayList<Material>();",
             "",
+            "Random random = new Random();",
+            "int n = MaintananceType.values().size();",
+            "",
             "out.company = company;",
-            "out.inform = result;"
+            "out.inform = result;",
+            "in.clientId = UUID.randomUUID().toString();",
+            "in.maintananceType = MaintananceType.values().get(random.nextInt(n)).getName();"
           ]
         },
         "sudo" : true
@@ -85,18 +93,19 @@
           "responsible" : {
             "activator" : "Technician"
           },
-          "priority" : {
-            "level" : "HIGH"
-          },
           "expiry" : {
             "timeout" : "new Duration(\"72h\")",
             "responsible" : {
               "activator" : "Technician"
-            },
-            "priority" : {
-              "level" : "HIGH"
             }
           }
+        },
+        "case" : {
+          "name" : "Elevator maintenance for <%=in.company.name%>",
+          "customFields" : [
+            { "name" : "ClientId", "type" : "STRING", "value" : "in.clientId" },
+            { "name" : "MaintananceType", "type" : "STRING", "value" : "in.maintananceType" }
+          ]
         },
         "output" : {
           "map" : {
@@ -267,6 +276,7 @@
           }
         },
         "case" : {
+          "name" : "Restock car <%=param.company.name%>",
           "attachToBusinessCase" : false
         }
       },
@@ -325,7 +335,7 @@
         "task" : {
           "name" : "Start elevator maintenance",
           "responsible" : {
-            "activator" : "Technician"
+            "activator" : "SYSTEM"
           },
           "expiry" : {
             "timeout" : "new Duration(0, 0, 3, 0, 0, 0)",
@@ -338,6 +348,7 @@
           }
         },
         "case" : {
+          "name" : "Elevator maintenance",
           "attachToBusinessCase" : false
         }
       },

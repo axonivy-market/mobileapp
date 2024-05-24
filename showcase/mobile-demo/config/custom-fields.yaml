@@ -6,6 +6,15 @@
 # Have a look at our documentation for more information.
 #
 CustomFields:
+  Cases:
+    ClientId:
+      Label: ClientId
+      Description: Custom field for client id
+      Type: STRING
+    MaintananceType:
+      Label: MaintananceType
+      Description: Custom field for type of maintanance
+      Type: STRING
 #  Tasks:
 #    MyTaskCustomField:
 #      Label: My task custom field
@@ -20,3 +29,4 @@ CustomFields:
 #    MyStartCustomField:
 #      Label: My start custom field
 #      Description: This new start custom field can be used to ...
+  
