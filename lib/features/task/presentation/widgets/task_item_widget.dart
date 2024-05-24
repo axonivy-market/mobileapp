@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/widgets/text_highlight_widget.dart';
@@ -112,6 +110,7 @@ class TaskItemWidget extends StatelessWidget {
     this.isOffline = false,
     this.onTap,
     this.onLongPress,
+    this.isSearchPage = false,
   });
 
   final String name;
@@ -121,15 +120,14 @@ class TaskItemWidget extends StatelessWidget {
   final String query;
   final bool isTaskDone;
   final bool isOffline;
+  final bool isSearchPage;
   final void Function()? onTap;
   final void Function()? onLongPress;
 
   @override
   Widget build(BuildContext context) {
-    int startNameIndex =
-        max(name.toLowerCase().indexOf(query.toLowerCase()), 0);
-    int startDescIndex =
-        max(description.toLowerCase().indexOf(query.toLowerCase()), 0);
+    int startNameIndex = name.toLowerCase().indexOf(query.toLowerCase());
+    int startDescIndex = description.toLowerCase().indexOf(query.toLowerCase());
 
     return Card(
       margin: EdgeInsets.zero,
@@ -162,8 +160,9 @@ class TaskItemWidget extends StatelessWidget {
         ),
         textColor: Theme.of(context).colorScheme.surface,
         title: TextHighlightWidget(
+          isSearchPage: isSearchPage,
           text: name,
-          titleColor: getTaskNameColor(context, query, isTaskDone),
+          textColor: getTaskNameColor(context, query, isTaskDone),
           startIndex: startNameIndex,
           endIndex: query.length,
           maxLine: 1,
@@ -176,6 +175,8 @@ class TaskItemWidget extends StatelessWidget {
             Flexible(
               fit: FlexFit.tight,
               child: TextHighlightWidget(
+                isSearchPage: isSearchPage,
+                textColor: Theme.of(context).colorScheme.secondary,
                 text: description.isEmptyOrNull
                     ? "tasksView.noTaskDescription".tr()
                     : description,

@@ -163,6 +163,7 @@ class _SearchPageState extends State<SearchPage> {
                 );
               } else if (item is TaskItem) {
                 return TaskItemWidget(
+                  isSearchPage: true,
                   onTap: () {
                     if (item.task.isTaskDone) {
                       return;
@@ -182,7 +183,7 @@ class _SearchPageState extends State<SearchPage> {
                   isTaskDone: item.task.isTaskDone,
                 );
               } else if (item is ProcessItem) {
-                return GestureDetector(
+                return ProcessItemWidget(
                   onTap: () {
                     WidgetsBinding.instance.focusManager.primaryFocus
                         ?.unfocus();
@@ -194,10 +195,9 @@ class _SearchPageState extends State<SearchPage> {
                       }
                     });
                   },
-                  child: ProcessItemWidget(
-                    process: item.process,
-                    query: state.query.trim(),
-                  ),
+                  isSearchPage: true,
+                  process: item.process,
+                  query: state.query.trim(),
                 );
               }
               return null;
