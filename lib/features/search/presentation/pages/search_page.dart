@@ -68,7 +68,7 @@ class _SearchPageState extends State<SearchPage> {
             mainAxisSize: MainAxisSize.min,
             children: [
               16.verticalSpace,
-              Padding(
+              Container(
                 padding: const EdgeInsets.symmetric(horizontal: 16).r,
                 child: const SearchTextField(),
               ),
@@ -142,77 +142,66 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
         ),
-        SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext _, int index) {
+        SliverPadding(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10).r,
+          sliver: SliverList.separated(
+            itemCount: state.items.isEmptyOrNull ? 1 : state.items!.length,
+            separatorBuilder: (context, index) => 10.verticalSpace,
+            itemBuilder: (context, index) {
               if (state.items.isEmptyOrNull) {
                 return const SizedBox.shrink();
               }
               final item = state.items![index];
               if (item is SectionHeader) {
-                return Padding(
-                  padding: const EdgeInsets.only(
-                          left: 16, right: 16, bottom: 10, top: 10)
-                      .r,
-                  child: Text(
-                    item.title.tr(),
-                    style: GoogleFonts.inter(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).colorScheme.surface,
-                    ),
+                return Text(
+                  item.title.tr(),
+                  style: GoogleFonts.inter(
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.w600,
+                    color: Theme.of(context).colorScheme.surface,
                   ),
                 );
               } else if (item is TaskItem) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16).r,
-                  child: GestureDetector(
-                    onTap: () {
-                      if (item.task.isTaskDone) {
-                        return;
-                      }
-                      WidgetsBinding.instance.focusManager.primaryFocus
-                          ?.unfocus();
-                      context
-                          .read<TaskConflictCubit>()
-                          .checkTaskConflict(item.task);
-                    },
-                    child: TaskItemWidget(
-                      name: item.task.name,
-                      description: item.task.description,
-                      priority: item.task.priority,
-                      expiryTimeStamp: item.task.expiryTimeStamp,
-                      query: state.query.trim(),
-                      isOffline: item.task.offline,
-                      isTaskDone: item.task.isTaskDone,
-                    ),
-                  ),
+                return TaskItemWidget(
+                  onTap: () {
+                    if (item.task.isTaskDone) {
+                      return;
+                    }
+                    WidgetsBinding.instance.focusManager.primaryFocus
+                        ?.unfocus();
+                    context
+                        .read<TaskConflictCubit>()
+                        .checkTaskConflict(item.task);
+                  },
+                  name: item.task.name,
+                  description: item.task.description,
+                  priority: item.task.priority,
+                  expiryTimeStamp: item.task.expiryTimeStamp,
+                  query: state.query.trim(),
+                  isOffline: item.task.offline,
+                  isTaskDone: item.task.isTaskDone,
                 );
               } else if (item is ProcessItem) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16).r,
-                  child: GestureDetector(
-                    onTap: () {
-                      WidgetsBinding.instance.focusManager.primaryFocus
-                          ?.unfocus();
-                      context.push(AppRoutes.taskActivity, extra: {
-                        'path': item.process.fullRequestPath
-                      }).then((value) {
-                        if (value != null && value is Map) {
-                          context.read<TabBarCubit>().navigateTaskList(value);
-                        }
-                      });
-                    },
-                    child: ProcessItemWidget(
-                      process: item.process,
-                      query: state.query.trim(),
-                    ),
+                return GestureDetector(
+                  onTap: () {
+                    WidgetsBinding.instance.focusManager.primaryFocus
+                        ?.unfocus();
+                    context.push(AppRoutes.taskActivity, extra: {
+                      'path': item.process.fullRequestPath
+                    }).then((value) {
+                      if (value != null && value is Map) {
+                        context.read<TabBarCubit>().navigateTaskList(value);
+                      }
+                    });
+                  },
+                  child: ProcessItemWidget(
+                    process: item.process,
+                    query: state.query.trim(),
                   ),
                 );
               }
               return null;
             },
-            childCount: state.items.isEmptyOrNull ? 1 : state.items!.length,
           ),
         ),
       ],

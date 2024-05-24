@@ -526,7 +526,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
             ),
           ],
         ),
-        child: AppListTile(
+        child: ListTile(
           shape: RoundedRectangleBorder(
             side: BorderSide(
                 color: Theme.of(context).colorScheme.outline, width: 1),

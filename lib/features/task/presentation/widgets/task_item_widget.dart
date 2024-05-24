@@ -1,7 +1,7 @@
+import 'dart:math';
+
 import 'package:axon_ivy/generated/assets.gen.dart';
-import 'package:axon_ivy/shared/extensions/date_time_ext.dart';
-import 'package:axon_ivy/shared/extensions/number_ext.dart';
-import 'package:axon_ivy/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/widgets/text_highlight_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +12,10 @@ Widget getDateTimeTaskWidget(
     DateTime? dateTime, BuildContext context, bool isTaskDone, bool isOffline) {
   if (dateTime == null) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (isOffline)
-          AppAssets.icons.cloudOff.svg(
+          AppAssets.icons.iconCloudOffTaskItem.svg(
               height: 16.h,
               colorFilter: ColorFilter.mode(
                   Theme.of(context).colorScheme.secondary, BlendMode.srcIn)),
@@ -32,6 +33,7 @@ Widget getDateTimeTaskWidget(
   DateTime now = DateTime.now().toUtc();
   if (dateTime.isBefore(now)) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (isOffline)
           AppAssets.icons.iconCloudOffTaskItem.svg(
@@ -62,9 +64,10 @@ Widget getDateTimeTaskWidget(
     );
   } else {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
         if (isOffline)
-          AppAssets.icons.cloudOff.svg(
+          AppAssets.icons.iconCloudOffTaskItem.svg(
               height: 16.h,
               colorFilter: ColorFilter.mode(
                   Theme.of(context).colorScheme.secondary, BlendMode.srcIn)),
@@ -107,6 +110,8 @@ class TaskItemWidget extends StatelessWidget {
     this.query = '',
     this.isTaskDone = false,
     this.isOffline = false,
+    this.onTap,
+    this.onLongPress,
   });
 
   final String name;
@@ -116,93 +121,76 @@ class TaskItemWidget extends StatelessWidget {
   final String query;
   final bool isTaskDone;
   final bool isOffline;
+  final void Function()? onTap;
+  final void Function()? onLongPress;
 
   @override
   Widget build(BuildContext context) {
-    int startNameIndex = name.toLowerCase().indexOf(query.toLowerCase());
-    int startDescIndex = description.toLowerCase().indexOf(query.toLowerCase());
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10).h,
-      constraints: BoxConstraints(minHeight: 77.h),
-      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5).h,
-      decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).colorScheme.outline),
-        borderRadius: BorderRadius.circular(10).h,
-        color: Theme.of(context).colorScheme.onPrimaryContainer,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          priority.priorityIcon(context),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 20).r,
-                  child: query.isEmptyOrNull || startNameIndex == -1
-                      ? Text(
-                          name.isEmptyOrNull
-                              ? "tasksView.noTaskName".tr()
-                              : name,
-                          style: GoogleFonts.inter(
-                            fontSize: 17.sp,
-                            fontWeight: FontWeight.w600,
-                            color: getTaskNameColor(context, query, isTaskDone),
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      : TextHighlightWidget(
-                          text: name,
-                          startIndex: startNameIndex,
-                          endIndex: query.length,
-                          maxLine: 1,
-                          fontSize: 17.sp,
-                          fontWeight: FontWeight.w600,
-                        ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: query.isEmptyOrNull || startDescIndex == -1
-                          ? Text(
-                              description.isEmptyOrNull
-                                  ? "tasksView.noTaskDescription".tr()
-                                  : description,
-                              style: GoogleFonts.inter(
-                                fontSize: 13.sp,
-                                fontWeight: FontWeight.w400,
-                                color: Theme.of(context).colorScheme.secondary,
-                              ),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
-                            )
-                          : TextHighlightWidget(
-                              text: description,
-                              startIndex: startDescIndex,
-                              endIndex: query.length,
-                              maxLine: 2,
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w400,
-                            ),
-                    ),
-                    SizedBox(
-                      height: 35.w,
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: getDateTimeTaskWidget(
-                            expiryTimeStamp, context, isTaskDone, isOffline),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+    int startNameIndex =
+        max(name.toLowerCase().indexOf(query.toLowerCase()), 0);
+    int startDescIndex =
+        max(description.toLowerCase().indexOf(query.toLowerCase()), 0);
+
+    return Card(
+      margin: EdgeInsets.zero,
+      color: Colors.transparent,
+      elevation: 0,
+      child: ListTile(
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 2, vertical: 10).r,
+        visualDensity: VisualDensity(
+          vertical: ScreenUtil().screenHeight > 845.0
+              ? 1
+              : -2, // 845 is the height of the iPhone 13. Using Device Preview to check other screens
+        ),
+        horizontalTitleGap: 0,
+        minLeadingWidth: 0,
+        minVerticalPadding: 0,
+        onTap: onTap,
+        onLongPress: onLongPress,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+              color: Theme.of(context).colorScheme.outline, width: 1),
+          borderRadius: BorderRadius.circular(12).r,
+        ),
+        leading: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            priority.priorityIcon(context),
+          ],
+        ),
+        textColor: Theme.of(context).colorScheme.surface,
+        title: TextHighlightWidget(
+          text: name,
+          titleColor: getTaskNameColor(context, query, isTaskDone),
+          startIndex: startNameIndex,
+          endIndex: query.length,
+          maxLine: 1,
+          fontSize: 17.sp,
+          fontWeight: FontWeight.w600,
+        ),
+        subtitle: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Flexible(
+              fit: FlexFit.tight,
+              child: TextHighlightWidget(
+                text: description.isEmptyOrNull
+                    ? "tasksView.noTaskDescription".tr()
+                    : description,
+                startIndex: startDescIndex,
+                endIndex: query.length,
+                maxLine: 2,
+                fontSize: 13.sp,
+                fontWeight: FontWeight.w400,
+              ),
             ),
-          ),
-        ],
+            getDateTimeTaskWidget(
+                expiryTimeStamp, context, isTaskDone, isOffline),
+          ],
+        ),
+        tileColor: Theme.of(context).colorScheme.onPrimaryContainer,
       ),
     );
   }

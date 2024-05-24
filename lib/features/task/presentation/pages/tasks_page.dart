@@ -189,7 +189,7 @@ class TasksViewContent extends StatelessWidget {
           elevation: 0,
           title: tasks.isNotEmpty || activeFilter == FilterType.expired
               ? PreferredSize(
-                  preferredSize: const Size.fromHeight(0.0), // Set your height
+                  preferredSize: const Size.fromHeight(0.0),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15).r,
                     child: const FilterWidget(),
@@ -203,11 +203,11 @@ class TasksViewContent extends StatelessWidget {
         ),
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10).r,
-          sliver: SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (_, index) => _buildTaskItem(context, tasks, activeFilter, index),
-              childCount: tasks.isEmpty ? 1 : tasks.length,
-            ),
+          sliver: SliverList.separated(
+            itemCount: tasks.isEmpty ? 1 : tasks.length,
+            itemBuilder: (_, index) =>
+                _buildTaskItem(context, tasks, activeFilter, index),
+            separatorBuilder: (context, index) => 10.verticalSpace,
           ),
         ),
       ],
@@ -230,19 +230,17 @@ class TasksViewContent extends StatelessWidget {
       return TaskEmptyWidget(activeFilter: activeFilter);
     } else {
       final task = tasks[index];
-      return GestureDetector(
+      return TaskItemWidget(
         onTap: () => task.isTaskDone
             ? null
             : context.read<TaskConflictCubit>().checkTaskConflict(task),
         onLongPress: () => task.isTaskDone ? null : _showDetails(context, task),
-        child: TaskItemWidget(
-          name: task.name,
-          description: task.description,
-          priority: task.priority,
-          expiryTimeStamp: task.expiryTimeStamp,
-          isTaskDone: task.isTaskDone,
-          isOffline: task.offline,
-        ),
+        name: task.name,
+        description: task.description,
+        priority: task.priority,
+        expiryTimeStamp: task.expiryTimeStamp,
+        isTaskDone: task.isTaskDone,
+        isOffline: task.offline,
       );
     }
   }
