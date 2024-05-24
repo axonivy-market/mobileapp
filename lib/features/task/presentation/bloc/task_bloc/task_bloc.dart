@@ -74,7 +74,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           : SharedPrefs.getBaseUrl!;
     }
   }
-  
 
   void _sortTasks(event, Emitter emit) {
     activeSortType = event.activeSortType;
@@ -298,16 +297,18 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     final headers = {
       Constants.xRequestByHeader: Constants.xRequestBy,
       HttpHeaders.contentTypeHeader: Constants.formUrlEncodedContentType,
+      HttpHeaders.authorizationHeader: AuthorizationUtils.authorizationHeader,
     };
-    dio.options.headers = headers;
     try {
-      final response = await dio.post(
-        taskIvy.submitUrlOffline!,
-        data: taskIvy.doneTaskFormDataSerializedOffline,
+      var uri = Uri.parse(dio.options.baseUrl);
+      var submitFullUrl =
+          "${uri.scheme}://${uri.host}${taskIvy.submitUrlOffline}";
+      final response = await http.post(
+        Uri.parse(submitFullUrl),
+        headers: headers,
+        body: taskIvy.doneTaskFormDataSerializedOffline,
       );
       _finishTask(response.headers, taskIvy);
-    } on DioException catch (e) {
-      _finishTask(e.response?.headers, taskIvy);
     } catch (e) {
       debugPrint(e.toString());
     }
@@ -397,10 +398,9 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     }
   }
 
-  void _finishTask(Headers? headers, TaskIvy taskIvy) {
-    String finishedTask = headers?.map[Constants.ivyFinishedTask]?.first ?? "";
-    String currentRunningTask =
-        headers?.map[Constants.ivyCurrentRunningTask]?.first ?? "";
+  void _finishTask(Map<String, String> headers, TaskIvy taskIvy) {
+    String finishedTask = headers[Constants.ivyFinishedTask] ?? "";
+    String currentRunningTask = headers[Constants.ivyCurrentRunningTask] ?? "";
     var isFinishedTask = finishedTask.isNotEmpty && currentRunningTask.isEmpty;
     if (isFinishedTask) {
       // remove task local after it sync done
