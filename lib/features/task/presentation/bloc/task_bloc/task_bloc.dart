@@ -301,10 +301,13 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     };
     try {
       var uri = Uri.parse(dio.options.baseUrl);
-      var submitFullUrl =
-          "${uri.scheme}://${uri.host}${taskIvy.submitUrlOffline}";
+      var submitFullUrl = Uri(
+          scheme: uri.scheme,
+          host: uri.host,
+          port: uri.port,
+          path: taskIvy.submitUrlOffline);
       final response = await http.post(
-        Uri.parse(submitFullUrl),
+        submitFullUrl,
         headers: headers,
         body: taskIvy.doneTaskFormDataSerializedOffline,
       );
