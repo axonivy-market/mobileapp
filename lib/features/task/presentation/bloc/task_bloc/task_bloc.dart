@@ -16,12 +16,14 @@ import 'package:axon_ivy/shared/enums/task_state_enum.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/resources/constants.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
+import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:html/parser.dart' as html_parser;
+import 'package:http/http.dart' as http;
 
 import '../../../../../core/app/app.dart';
 
@@ -72,6 +74,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
           : SharedPrefs.getBaseUrl!;
     }
   }
+  
 
   void _sortTasks(event, Emitter emit) {
     activeSortType = event.activeSortType;
@@ -202,20 +205,24 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   }
 
   Future<void> downloadHTMLFromFullRequestPath(TaskIvy taskIvy) async {
-    var dio = getIt<Dio>();
     Uri uri = Uri.parse(taskIvy.fullRequestPath);
-    var requestUrl = "${uri.path}?${uri.query}";
-    final response = await dio.get(requestUrl);
-
-    if (response.statusCode == 200) {
-      final submitUrl = _getFormAction(response.data);
-      final task = taskIvy.copyWith(
-          submitUrlOffline: submitUrl, formHTMLPageOffline: response.data);
-      // Update task for display on UI
-      var index = tasks.indexWhere((element) => element.id == taskIvy.id);
-      tasks.removeAt(index);
-      tasks.add(task);
-      _hiveTaskStorage.addTask(task);
+    try {
+      final response = await http.get(
+        uri,
+        headers: {"Authorization": AuthorizationUtils.authorizationHeader},
+      );
+      if (response.statusCode == 200) {
+        final submitUrl = _getFormAction(response.body);
+        final task = taskIvy.copyWith(
+            submitUrlOffline: submitUrl, formHTMLPageOffline: response.body);
+        // Update task for display on UI
+        var index = tasks.indexWhere((element) => element.id == taskIvy.id);
+        tasks.removeAt(index);
+        tasks.add(task);
+        _hiveTaskStorage.addTask(task);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 
