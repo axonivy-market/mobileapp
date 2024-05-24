@@ -15,6 +15,11 @@ CustomFields:
       Label: MaintananceType
       Description: Custom field for type of maintanance
       Type: STRING
+    CancelMaintenanceAction:
+      Label: Cancel Maintenance
+      Category: Custom Case Action
+      Icon: si si-delete-2
+      IsCustomAction: true
 #  Tasks:
 #    MyTaskCustomField:
 #      Label: My task custom field

@@ -404,7 +404,7 @@
       "type" : "RequestStart",
       "name" : "createInvoice",
       "config" : {
-        "signature" : "start6",
+        "signature" : "createInvoice",
         "request" : {
           "name" : "Create Invoice",
           "description" : "Process to create invoice",

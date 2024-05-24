@@ -59,10 +59,13 @@
             "",
             "Random random = new Random();",
             "int n = MaintananceType.values().size();",
+            "int startValue = 10000;",
+            "int range = 90000;",
             "",
             "out.company = company;",
             "out.inform = result;",
-            "in.clientId = UUID.randomUUID().toString();",
+            "int id = startValue + random.nextInt(range);",
+            "in.clientId = id.toString();",
             "in.maintananceType = MaintananceType.values().get(random.nextInt(n)).getName();"
           ]
         },
@@ -103,6 +106,7 @@
         "case" : {
           "name" : "Elevator maintenance for <%=in.company.name%>",
           "customFields" : [
+            { "name" : "CancelMaintenanceAction", "type" : "STRING", "value" : "\"Business Processes/TestDataCreation/createInvoice\"" },
             { "name" : "ClientId", "type" : "STRING", "value" : "in.clientId" },
             { "name" : "MaintananceType", "type" : "STRING", "value" : "in.maintananceType" }
           ]
