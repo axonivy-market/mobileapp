@@ -10,3 +10,4 @@ clientId String #field
 clientId PERSISTENT #fieldModifier
 maintananceType String #field
 maintananceType PERSISTENT #fieldModifier
+count Integer #field
