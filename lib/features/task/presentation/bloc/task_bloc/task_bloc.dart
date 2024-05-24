@@ -205,17 +205,20 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     var dio = getIt<Dio>();
     Uri uri = Uri.parse(taskIvy.fullRequestPath);
     var requestUrl = "${uri.path}?${uri.query}";
-    final response = await dio.get(requestUrl);
-
-    if (response.statusCode == 200) {
-      final submitUrl = _getFormAction(response.data);
-      final task = taskIvy.copyWith(
-          submitUrlOffline: submitUrl, formHTMLPageOffline: response.data);
-      // Update task for display on UI
-      var index = tasks.indexWhere((element) => element.id == taskIvy.id);
-      tasks.removeAt(index);
-      tasks.add(task);
-      _hiveTaskStorage.addTask(task);
+    try {
+      final response = await dio.get(requestUrl);
+      if (response.statusCode == 200) {
+        final submitUrl = _getFormAction(response.data);
+        final task = taskIvy.copyWith(
+            submitUrlOffline: submitUrl, formHTMLPageOffline: response.data);
+        // Update task for display on UI
+        var index = tasks.indexWhere((element) => element.id == taskIvy.id);
+        tasks.removeAt(index);
+        tasks.add(task);
+        _hiveTaskStorage.addTask(task);
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 
