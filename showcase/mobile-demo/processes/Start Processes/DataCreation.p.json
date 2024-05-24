@@ -1,0 +1,88 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "18FA865CAD5E34DC",
+  "config" : {
+    "data" : "test.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "CreateTask",
+      "config" : {
+        "signature" : "CreateTask",
+        "request" : {
+          "name" : "Create 10 Elevator Maintanance Task"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f5" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 752, "y" : 64 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "TriggerCall",
+      "name" : "Business Processes/ShowCaseProcesses",
+      "config" : {
+        "processCall" : "Business Processes/ShowCaseProcesses:elevatorMaintenance()",
+        "output" : {
+          "code" : "in.count = in.count + 1;"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 512, "y" : 144 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f9", "via" : [ { "x" : 656, "y" : 144 } ], "color" : "default" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "Script",
+      "name" : "init",
+      "config" : {
+        "output" : {
+          "code" : "in.count = 0;"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f6", "to" : "f7", "color" : "default" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "Alternative",
+      "visual" : {
+        "at" : { "x" : 368, "y" : 64 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f3", "via" : [ { "x" : 368, "y" : 144 } ], "color" : "default" }
+      ]
+    }, {
+      "id" : "f9",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f10" : "in.count == 10"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 656, "y" : 64 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f10", "to" : "f1", "color" : "default" },
+        { "id" : "f11", "to" : "f7", "via" : [ { "x" : 656, "y" : 16 }, { "x" : 368, "y" : 16 } ] }
+      ]
+    } ]
+}
