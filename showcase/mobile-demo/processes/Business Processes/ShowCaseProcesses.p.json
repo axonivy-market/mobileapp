@@ -61,6 +61,11 @@
             "int n = MaintananceType.values().size();",
             "int startValue = 10000;",
             "int range = 90000;",
+            "int hours = random.nextInt(72);",
+            "",
+            "",
+            "in.expiryTime = hours.toString() + \"h\";",
+            "ivy.log.error(in.expiryTIme);",
             "",
             "out.company = company;",
             "out.inform = result;",
@@ -97,7 +102,7 @@
             "activator" : "Technician"
           },
           "expiry" : {
-            "timeout" : "new Duration(\"72h\")",
+            "timeout" : "new Duration(in.expiryTime)",
             "responsible" : {
               "activator" : "Technician"
             }
@@ -105,6 +110,7 @@
         },
         "case" : {
           "name" : "Elevator maintenance for <%=in.company.name%>",
+          "category" : "ElevatorMaintenance",
           "customFields" : [
             { "name" : "CancelMaintenanceAction", "type" : "STRING", "value" : "\"Business Processes/TestDataCreation/createInvoice\"" },
             { "name" : "ClientId", "type" : "STRING", "value" : "in.clientId" },
@@ -148,7 +154,8 @@
             "",
             "restocker.plusRestockMaterial(out.inform.usedMaterials);"
           ]
-        }
+        },
+        "sudo" : true
       },
       "visual" : {
         "at" : { "x" : 584, "y" : 176 },
@@ -213,6 +220,9 @@
             "timeout" : "new Duration(\"24h\")",
             "responsible" : {
               "activator" : "Team Lead"
+            },
+            "priority" : {
+              "level" : "HIGH"
             }
           }
         }
@@ -280,8 +290,7 @@
           }
         },
         "case" : {
-          "name" : "Restock car <%=param.company.name%>",
-          "attachToBusinessCase" : false
+          "name" : "Restock car <%=param.company.name%>"
         }
       },
       "visual" : {

@@ -3,8 +3,10 @@
     <identifier>Everybody</identifier>
     <role>
         <identifier>Technician</identifier>
+        <displayName>Technician</displayName>
     </role>
     <role>
         <identifier>Team Lead</identifier>
+        <displayName>Team Lead</displayName>
     </role>
 </role>

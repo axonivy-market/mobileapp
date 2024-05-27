@@ -62,19 +62,5 @@
       "connect" : [
         { "id" : "f0", "to" : "f11" }
       ]
-    }, {
-      "id" : "f1",
-      "type" : "RequestStart",
-      "name" : "start.ivp",
-      "config" : {
-        "signature" : "start"
-      },
-      "visual" : {
-        "at" : { "x" : 160, "y" : 128 },
-        "labelOffset" : { "x" : 9, "y" : 37 }
-      },
-      "connect" : [
-        { "id" : "f2", "to" : "f11" }
-      ]
     } ]
 }

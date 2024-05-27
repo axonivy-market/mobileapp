@@ -12,6 +12,7 @@
       "config" : {
         "signature" : "start",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with Normal Priority Process",
           "customFields" : [
             { "name" : "cssIcon", "value" : "si-view-1" }
@@ -37,6 +38,7 @@
       "config" : {
         "signature" : "",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with High Priority Process",
           "description" : "Task with High Priority Process",
           "customFields" : [
@@ -63,6 +65,7 @@
       "config" : {
         "signature" : "start3",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with Exception Priority Process",
           "description" : "Task with Exception Priority Process",
           "customFields" : [
@@ -96,6 +99,7 @@
       "config" : {
         "signature" : "start4",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with Low Priority Process",
           "description" : "Task with Low Priority Process",
           "customFields" : [
@@ -201,6 +205,7 @@
       "config" : {
         "signature" : "start5",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with long name and description Task with long name and description",
           "description" : "Task with long name and description Task with long name and description",
           "customFields" : [
@@ -257,6 +262,7 @@
       "config" : {
         "signature" : "taskWithNoNameNoDescription",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with no name and no description",
           "description" : "Task with no name and no description",
           "customFields" : [
@@ -296,6 +302,7 @@
       "config" : {
         "signature" : "taskWithExpiredTime",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with expired time",
           "description" : "Task with expired time example",
           "customFields" : [

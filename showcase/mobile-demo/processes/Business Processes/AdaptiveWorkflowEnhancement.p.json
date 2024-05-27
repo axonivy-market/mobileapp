@@ -12,14 +12,21 @@
         "signature" : "start",
         "request" : {
           "name" : "Adaptive Workflow Enhancement",
-          "description" : "Adaptive Workflow Enhancement is a process designed to evolve and optimize workflows based on changing business requirements and technological advancements. It ensures that workflows remain flexible, efficient, and aligned with organizational goals."
+          "description" : "Adaptive Workflow Enhancement is a process designed to evolve and optimize workflows based on changing business requirements and technological advancements. It ensures that workflows remain flexible, efficient, and aligned with organizational goals.",
+          "isVisibleOnStartList" : false
+        },
+        "triggerable" : true,
+        "task" : {
+          "responsible" : {
+            "activator" : "SYSTEM"
+          }
         }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f2", "to" : "f76" }
+        { "id" : "f2", "to" : "f3" }
       ]
     }, {
       "id" : "f1",
@@ -32,40 +39,28 @@
       "type" : "TaskSwitchEvent",
       "config" : {
         "task" : {
-          "name" : "Adaptive Workflow Enhancement"
+          "name" : "Adaptive Workflow Enhancement",
+          "description" : "Adaptive Workflow Enhancement is a process designed to evolve and optimize workflows based on changing business requirements and technological advancements. It ensures that workflows remain flexible, efficient, and aligned with organizational goals.\r",
+          "category" : "WorkflowEnhancement",
+          "responsible" : {
+            "activator" : "SYSTEM"
+          },
+          "priority" : {
+            "level" : "EXCEPTION"
+          }
+        },
+        "case" : {
+          "name" : "Adaptive Workflow Enhancement",
+          "description" : "Adaptive Workflow Enhancement is a process designed to evolve and optimize workflows based on changing business requirements and technological advancements. It ensures that workflows remain flexible, efficient, and aligned with organizational goals.",
+          "category" : "WorkflowEnhancement"
         }
       },
       "visual" : {
-        "at" : { "x" : 352, "y" : 64 }
+        "at" : { "x" : 320, "y" : 64 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
       },
       "connect" : [
-        { "id" : "f4", "to" : "f6" }
-      ]
-    }, {
-      "id" : "f76",
-      "type" : "DialogCall",
-      "name" : "Invoice",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 224, "y" : 64 }
-      },
-      "connect" : [
-        { "id" : "f5", "to" : "f3", "color" : "default" }
-      ]
-    }, {
-      "id" : "f6",
-      "type" : "DialogCall",
-      "name" : "Invoice",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 480, "y" : 64 }
-      },
-      "connect" : [
-        { "id" : "f7", "to" : "f1", "color" : "default" }
+        { "id" : "f4", "to" : "f1", "color" : "default" }
       ]
     } ]
 }
