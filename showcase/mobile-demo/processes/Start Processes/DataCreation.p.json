@@ -182,6 +182,9 @@
           "name" : "Financial Tracking System",
           "description" : "Create a system to track income and expenses for the garage business.",
           "category" : "GarageMaintenance/FinancialTracking",
+          "responsible" : {
+            "activator" : "SYSTEM"
+          },
           "priority" : {
             "level" : "EXCEPTION"
           },
@@ -210,7 +213,7 @@
         "signature" : "createData",
         "input" : {
           "map" : {
-            "out.count" : "5"
+            "out.count" : "2"
           }
         },
         "request" : {
@@ -427,7 +430,7 @@
                   "UPDATE IWA_CASE",
                   "SET STARTTIMESTAMP = DATEADD(dd,<%=in.mockStartWorkingDay%>, STARTTIMESTAMP),",
                   "ENDTIMESTAMP = DATEADD(dd,<%=in.mockEndWorkingDay%>, STARTTIMESTAMP),",
-                  "WORKINGTIME = <%=in.mockWorkingHourForCase%>",
+                  "BUSINESSRUNTIME = <%=in.mockWorkingHourForCase%>",
                   "WHERE CASEID = <%=in.caseId%>"
                 ],
                 "quote" : true
@@ -486,6 +489,8 @@
                 "if (in.mockBussinesRuntime2 <= 0) {",
                 "  in.mockBussinesRuntime2 = 15;",
                 "}",
+                "",
+                "in.mockWorkingHourForCase = in.mockWorkingHourForCase * 3600;",
                 "in.count--;"
               ]
             }
@@ -697,7 +702,7 @@
         "signature" : "createData2",
         "input" : {
           "map" : {
-            "out.count" : "5"
+            "out.count" : "2"
           }
         },
         "request" : {
@@ -902,6 +907,9 @@
           "name" : "Optimize System Performance",
           "description" : "Fine-tune system settings to optimize overall performance.",
           "category" : "OptimizeSystemPerformance",
+          "responsible" : {
+            "activator" : "SYSTEM"
+          },
           "priority" : {
             "level" : "LOW"
           },
@@ -933,41 +941,40 @@
                 "import java.util.Random;",
                 "",
                 "Random rn = new Random();",
-                "in.mockStartWorkingDay = (rn.nextInt(4) - 7);",
-                "in.mockEndWorkingDay = ((in.mockStartWorkingDay + rn.nextInt(3) + 1));",
+                "in.mockStartWorkingDay = rn.nextInt(4) - 7;",
+                "in.mockEndWorkingDay =  in.mockStartWorkingDay + rn.nextInt(3) + 1;",
+                "in.caseId = in.casesToBeUpdate.get(in.count - 1).getField(\"CASEID\") as Long;",
                 "",
-                "// Safeguard nextInt calls with positive bounds",
-                "in.caseId = (in.casesToBeUpdate.get((in.count - 1)).getField(\"CASEID\")as Long );",
-                "",
-                "in.mockWorkingHour = rn.nextInt(60);",
-                "",
-                "in.mockWorkingHourForCase = rn.nextInt(40);",
-                "while (in.mockWorkingHourForCase > 30) {",
-                "    in.mockWorkingHourForCase = rn.nextInt(40);",
+                "in.mockWorkingHour= rn.nextInt(60);",
+                "in.mockWorkingHourForCase = rn.nextInt(60);",
+                "while (in.mockWorkingHourForCase < 30){",
+                "  in.mockWorkingHourForCase = rn.nextInt(60);",
                 "}",
                 "",
-                "in.mockWorkingHourForTask2 = rn.nextInt(Math.max(in.mockWorkingHourForCase, 1));",
-                "while (in.mockWorkingHourForTask2 > 20) {",
-                "    in.mockWorkingHourForTask2 = rn.nextInt(30);",
+                "in.mockWorkingHourForTask2 = rn.nextInt(in.mockWorkingHourForCase);",
+                "while (in.mockWorkingHourForTask2 < 20) {",
+                "  in.mockWorkingHourForTask2 = rn.nextInt(30);",
                 "}",
                 "",
                 "in.mockWorkingHourForTask1 = rn.nextInt(30);",
-                "while (in.mockWorkingHourForTask1 > 10) {",
-                "    in.mockWorkingHourForTask1 = rn.nextInt(30);",
+                "while (in.mockWorkingHourForTask1 < 10) {",
+                "  in.mockWorkingHourForTask1 = rn.nextInt(30);",
                 "}",
                 "",
-                "in.mockWorkingHourForTask3 = ((in.mockWorkingHourForCase - in.mockWorkingHourForTask1) - in.mockWorkingHourForTask2);",
-                "while (in.mockWorkingHourForTask3 <= 0 || in.mockWorkingHourForTask3 > 10) {",
-                "    in.mockWorkingHourForTask3 = rn.nextInt(40);",
+                "in.mockWorkingHourForTask3 = in.mockWorkingHourForCase - in.mockWorkingHourForTask1 - in.mockWorkingHourForTask2;",
+                "while (in.mockWorkingHourForTask3 <= 0 || in.mockWorkingHourForTask3 < 10) {",
+                "  in.mockWorkingHourForTask3 = rn.nextInt(40);",
                 "}",
                 "",
                 "in.mockBussinesRuntime1 = 0;",
-                "in.mockBussinesRuntime3 = 40;",
-                "in.mockBussinesRuntime2 = 3 * (in.mockWorkingHourForCase - in.mockBussinesRuntime1 - in.mockBussinesRuntime3);",
-                "if (in.mockBussinesRuntime2 <= 0) {",
-                "    in.mockBussinesRuntime2 = 15;",
-                "}",
                 "",
+                "in.mockBussinesRuntime3 = 40;",
+                "",
+                "in.mockBussinesRuntime2 = 3 * (in.mockWorkingHourForCase - in. mockBussinesRuntime1 - in.mockBussinesRuntime3 );",
+                "if (in.mockBussinesRuntime2 <= 0) {",
+                "  in.mockBussinesRuntime2 = 15;",
+                "}",
+                "in.mockWorkingHourForCase = in.mockWorkingHourForCase * 3600;",
                 "in.count--;"
               ]
             }
@@ -991,7 +998,7 @@
                   "UPDATE IWA_CASE",
                   "SET STARTTIMESTAMP = DATEADD(dd,<%=in.mockStartWorkingDay%>, STARTTIMESTAMP),",
                   "ENDTIMESTAMP = DATEADD(dd,<%=in.mockEndWorkingDay%>, STARTTIMESTAMP),",
-                  "WORKINGTIME = <%=in.mockWorkingHourForCase%>",
+                  "BUSINESSRUNTIME = <%=in.mockWorkingHourForCase%>",
                   "WHERE CASEID = <%=in.caseId%>"
                 ],
                 "quote" : true
