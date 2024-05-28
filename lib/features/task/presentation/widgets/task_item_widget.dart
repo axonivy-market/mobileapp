@@ -158,7 +158,6 @@ class TaskItemWidget extends StatelessWidget {
             priority.priorityIcon(context),
           ],
         ),
-        textColor: Theme.of(context).colorScheme.surface,
         title: TextHighlightWidget(
           isSearchPage: isSearchPage,
           text: name,

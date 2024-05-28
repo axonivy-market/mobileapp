@@ -34,6 +34,7 @@ class ProcessItemWidget extends StatelessWidget {
       color: Colors.transparent,
       elevation: 0,
       child: ListTile(
+        tileColor: Theme.of(context).colorScheme.onPrimaryContainer,
         contentPadding:
             const EdgeInsets.symmetric(horizontal: 5, vertical: 10).r,
         visualDensity: VisualDensity(
