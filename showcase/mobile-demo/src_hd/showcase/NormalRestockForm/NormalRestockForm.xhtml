@@ -8,38 +8,36 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions">
 
-<h:head>
-	<title>NormalRestockForm</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<h:outputStylesheet name="layouts/stylesheet/form.css" />
-	<h:outputScript name="layouts/javascript/form.js" />
-</h:head>
-
 <h:body>
-	<h:form id="form">
-		<h4>Please restock the following items in your service car:</h4>
-		<table style="width: 100%" class="w3-table-all">
-			<tbody>
-				<tr style="background: #c7d426; color: #fff;">
-					<th>Items</th>
-					<th>Quantity</th>
-				</tr>
-				<c:forEach var="item" step="1"
-					items="#{data.restockData.restockMaterials}" varStatus="loop">
-					<tr>
-						<td>#{item.name}</td>
-						<td align="center">#{item.restockQuantity}</td>
+	<ui:composition template="/layouts/frame-10-full-width.xhtml">
+		<ui:define name="title">NormalRestockForm</ui:define>
+		<ui:define name="content">
+			<div class="card">
+				<h:form id="form">
+					<h2>Please restock the following items in your service car:</h2>
+					<p:dataTable var="item"
+						value="#{data.restockData.restockMaterials}" paginator="false"
+						rows="10">
+						<p:column headerText="Items">
+							<h:outputText value="#{item.name}" />
+						</p:column>
 
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+						<p:column headerText="Quantity">
+							<h:outputText value="#{item.restockQuantity}"
+								style="text-align:center" />
+						</p:column>
 
-		<br />
-		<div style="width: 100%; margin-top: 20px;" align="center">
-			<p:commandButton styleClass="btn" actionListener="#{logic.close}"
-				value="Done" ajax="false" validateClient="true" />
-		</div>
-	</h:form>
+					</p:dataTable>
+
+					<br />
+					<div style="width: 100%; margin-top: 20px;" align="center">
+						<p:commandButton styleClass="btn" actionListener="#{logic.close}"
+							value="Done" ajax="false" validateClient="true" />
+					</div>
+				</h:form>
+			</div>
+		</ui:define>
+	</ui:composition>
 </h:body>
+
 </html>

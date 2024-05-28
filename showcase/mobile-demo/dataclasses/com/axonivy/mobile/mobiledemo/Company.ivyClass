@@ -1,0 +1,12 @@
+Company #class
+com.axonivy.mobile.mobiledemo #namespace
+elevator com.axonivy.mobile.mobiledemo.Elevator #field
+elevator PERSISTENT #fieldModifier
+location com.axonivy.mobile.mobiledemo.Location #field
+location PERSISTENT #fieldModifier
+contactName String #field
+contactName PERSISTENT #fieldModifier
+phone String #field
+phone PERSISTENT #fieldModifier
+name String #field
+name PERSISTENT #fieldModifier

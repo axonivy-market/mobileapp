@@ -1,0 +1,6 @@
+RestockData #class
+com.axonivy.mobile.mobiledemo #namespace
+restockMaterials java.util.List<showcase.Material> #field
+restockMaterials PERSISTENT #fieldModifier
+createdRestockerTask Boolean #field
+createdRestockerTask PERSISTENT #fieldModifier
