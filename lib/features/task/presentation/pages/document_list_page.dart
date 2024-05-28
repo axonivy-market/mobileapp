@@ -456,11 +456,15 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                               ),
                             );
                           },
-                          separatorBuilder: (context, index) => Divider(
-                            height: 0,
-                            endIndent: 20.w,
-                            indent: 20.w,
-                            color: Theme.of(context).dividerTheme.color,
+                          separatorBuilder: (context, index) => Padding(
+                            padding:
+                                const EdgeInsets.symmetric(vertical: 1.0).r,
+                            child: Divider(
+                              height: 0,
+                              endIndent: 20.w,
+                              indent: 20.w,
+                              color: Theme.of(context).dividerTheme.color,
+                            ),
                           ),
                         ),
                       )
