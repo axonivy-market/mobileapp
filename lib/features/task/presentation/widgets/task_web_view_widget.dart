@@ -3,10 +3,12 @@ import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_activity_bloc/task_activity_bloc.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:axon_ivy/shared/utils/authorization_utils.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -39,6 +41,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
   int overScrollY = 0;
   bool isOverScrolled = true;
   Map<String, dynamic> cookies = {};
+  bool isOffline = false;
 
   InAppWebViewSettings settings = InAppWebViewSettings(
     supportZoom: false,
@@ -74,6 +77,8 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
   @override
   Widget build(BuildContext context) {
     int taskId = -1;
+    isOffline = context.read<ConnectivityBloc>().connectivityResult ==
+        ConnectivityResult.none;
     return InAppWebView(
       onAjaxReadyStateChange: (controller, ajx) async {
         String finishedTask =
@@ -85,7 +90,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         return null;
       },
       initialSettings: settings,
-      initialUrlRequest: widget.taskIvy?.offline != true
+      initialUrlRequest: !isOffline
           ? URLRequest(
               url: WebUri(widget.fullRequestPath),
               headers: {
@@ -95,7 +100,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
               },
               httpShouldHandleCookies: true)
           : null,
-      initialData: widget.taskIvy?.offline == true &&
+      initialData: isOffline &&
               widget.taskIvy?.formHTMLPageOffline.isEmptyOrNull == false
           ? InAppWebViewInitialData(
               data: widget.taskIvy!.formHTMLPageOffline!,
@@ -194,7 +199,8 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
           }
         });
     var submitUrlOffline = widget.taskIvy?.submitUrlOffline ?? "";
-    if (widget.taskIvy?.offline == true &&
+    if (isOffline &&
+        widget.taskIvy?.offline == true &&
         submitUrlOffline.isNotEmpty &&
         request.url.toString().endsWith(submitUrlOffline)) {
       // Prevent navigate URL to call finish task offline request
