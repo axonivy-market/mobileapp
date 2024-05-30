@@ -11,4 +11,5 @@ class Constants {
   static const xRequestBy = "mobile";
   static const formUrlEncodedContentType = "application/x-www-form-urlencoded";
   static const taskBox = "task_box";
+  static const endTaskUrlPattern = 'end?endedTaskId=';
 }

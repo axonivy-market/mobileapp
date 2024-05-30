@@ -3,10 +3,12 @@ import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/app_constants.dart';
+import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/presentation/bloc/task_activity_bloc/task_activity_bloc.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:axon_ivy/shared/utils/authorization_utils.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -34,7 +36,6 @@ class TaskWebViewWidget extends StatefulWidget {
 }
 
 class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
-  bool isFinishedTask = false;
   int _previousScrollY = 0;
   int overScrollY = 0;
   bool isOverScrolled = true;
@@ -73,17 +74,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    int taskId = -1;
     return InAppWebView(
-      onAjaxReadyStateChange: (controller, ajx) async {
-        String finishedTask =
-            ajx.responseHeaders?[Constants.ivyFinishedTask] ?? "";
-        String currentRunningTask =
-            ajx.responseHeaders?[Constants.ivyCurrentRunningTask] ?? "";
-        isFinishedTask = finishedTask.isNotEmpty && currentRunningTask.isEmpty;
-        taskId = int.parse(finishedTask);
-        return null;
-      },
       initialSettings: settings,
       initialUrlRequest: widget.taskIvy?.offline != true
           ? URLRequest(
@@ -102,9 +93,16 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
               baseUrl: WebUri(AppConfig.serverUrl))
           : null,
       shouldOverrideUrlLoading: (controller, navigationAction) async {
+        String requestURL =
+            navigationAction.request.url?.toString().split('/').last ?? "";
+        bool isFinishedTask =
+            requestURL.startsWith(Constants.endTaskUrlPattern);
         if (isFinishedTask) {
+          int taskId = int.tryParse(
+                  requestURL.replaceFirst(Constants.endTaskUrlPattern, '')) ??
+              -1;
           // Finish task normal
-          context.pop({taskId: ''});
+          context.pop({taskId: ''}); 
           return NavigationActionPolicy.CANCEL;
         }
         // Handle finish task offline for iOS
@@ -113,7 +111,13 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
       },
       shouldInterceptRequest: (controller, request) async {
         // Handle finish task offline for Android
-        await _androidFinishTaskOffline(context, controller, request);
+        var connectivityResult =
+            context.read<ConnectivityBloc>().connectivityResult;
+        if (connectivityResult == ConnectivityResult.none &&
+            Platform.isAndroid) {
+          await _androidFinishTaskOffline(context, controller, request);
+        }
+
         return null;
       },
       onScrollChanged: (controller, x, y) {
@@ -197,6 +201,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
     if (widget.taskIvy?.offline == true &&
         submitUrlOffline.isNotEmpty &&
         request.url.toString().endsWith(submitUrlOffline)) {
+      // TODO z1 check offline first then online, online first then offline
       // Prevent navigate URL to call finish task offline request
       await Future.delayed(const Duration(seconds: 30));
       if (context.mounted) {
