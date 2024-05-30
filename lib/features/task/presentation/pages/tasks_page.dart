@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:axon_ivy/core/abstracts/base_page.dart';
@@ -30,6 +31,8 @@ import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../bloc/sort_bloc/sort_bloc.dart';
+
+bool isFirstLaunch = true;
 
 class TasksPage extends BasePage {
   const TasksPage({super.key});
@@ -141,6 +144,7 @@ class TasksViewContent extends StatelessWidget {
       body: BlocBuilder<TaskBloc, TaskState>(
         builder: (context, taskState) {
           if (taskState is TaskSuccessState) {
+            isFirstLaunch = false;
             taskList = taskState.tasks;
             isTaskOnline = taskState.isOnline;
           }
@@ -220,13 +224,29 @@ class TasksViewContent extends StatelessWidget {
     context
         .read<NotificationBloc>()
         .add(const NotificationEvent.getNotifications(1, 9000));
-    await Future.delayed(const Duration(seconds: 1));
-    taskBloc.add(TaskEvent.getTasks(filterState.activeFilter));
+    final completer = Completer<void>();
+    final subscription = context.read<TaskBloc>().stream.listen((state) {
+      if (state is! TaskLoadingState) {
+        completer.complete();
+      }
+    });
+
+    try {
+      taskBloc.add(TaskEvent.pullToRefresh(filterState.activeFilter));
+      await completer.future;
+    } catch (e) {
+      completer.completeError(e);
+    } finally {
+      await subscription.cancel();
+    }
   }
 
   Widget _buildTaskItem(BuildContext context, List<TaskIvy> tasks,
       FilterType activeFilter, int index) {
     if (tasks.isEmpty) {
+      if (isFirstLaunch) {
+        return Container();
+      }
       return TaskEmptyWidget(activeFilter: activeFilter);
     } else {
       final task = tasks[index];

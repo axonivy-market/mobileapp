@@ -7,7 +7,6 @@ import 'package:axon_ivy/features/notification/domain/entities/notification.dart
 import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
-import 'package:axon_ivy/generated/colors.gen.dart';
 import 'package:axon_ivy/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -225,6 +224,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                       const EdgeInsets.symmetric(horizontal: 15)
                                           .r,
                                   child: Container(
+                                    clipBehavior: Clip.hardEdge,
                                     height: 40.h,
                                     decoration: BoxDecoration(
                                       color: Theme.of(context)

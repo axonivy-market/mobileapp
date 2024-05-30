@@ -19,6 +19,7 @@ mixin _$TaskEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -32,6 +33,7 @@ mixin _$TaskEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -45,6 +47,7 @@ mixin _$TaskEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -59,6 +62,7 @@ mixin _$TaskEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -74,6 +78,7 @@ mixin _$TaskEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -88,6 +93,7 @@ mixin _$TaskEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
@@ -185,6 +191,7 @@ class _$GetTasksImpl implements _GetTasks {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -201,6 +208,7 @@ class _$GetTasksImpl implements _GetTasks {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -217,6 +225,7 @@ class _$GetTasksImpl implements _GetTasks {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -237,6 +246,7 @@ class _$GetTasksImpl implements _GetTasks {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -255,6 +265,7 @@ class _$GetTasksImpl implements _GetTasks {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -272,6 +283,7 @@ class _$GetTasksImpl implements _GetTasks {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
@@ -296,6 +308,193 @@ abstract class _GetTasks implements TaskEvent {
   FilterType get activeFilter;
   @JsonKey(ignore: true)
   _$$GetTasksImplCopyWith<_$GetTasksImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PullToRefreshImplCopyWith<$Res> {
+  factory _$$PullToRefreshImplCopyWith(
+          _$PullToRefreshImpl value, $Res Function(_$PullToRefreshImpl) then) =
+      __$$PullToRefreshImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({FilterType activeFilter});
+}
+
+/// @nodoc
+class __$$PullToRefreshImplCopyWithImpl<$Res>
+    extends _$TaskEventCopyWithImpl<$Res, _$PullToRefreshImpl>
+    implements _$$PullToRefreshImplCopyWith<$Res> {
+  __$$PullToRefreshImplCopyWithImpl(
+      _$PullToRefreshImpl _value, $Res Function(_$PullToRefreshImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? activeFilter = null,
+  }) {
+    return _then(_$PullToRefreshImpl(
+      null == activeFilter
+          ? _value.activeFilter
+          : activeFilter // ignore: cast_nullable_to_non_nullable
+              as FilterType,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PullToRefreshImpl implements _PullToRefresh {
+  const _$PullToRefreshImpl(this.activeFilter);
+
+  @override
+  final FilterType activeFilter;
+
+  @override
+  String toString() {
+    return 'TaskEvent.pullToRefresh(activeFilter: $activeFilter)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PullToRefreshImpl &&
+            (identical(other.activeFilter, activeFilter) ||
+                other.activeFilter == activeFilter));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, activeFilter);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PullToRefreshImplCopyWith<_$PullToRefreshImpl> get copyWith =>
+      __$$PullToRefreshImplCopyWithImpl<_$PullToRefreshImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
+    required TResult Function(FilterType activeFilter) filterTasks,
+    required TResult Function(List<SortType> activeSortType) sortTasks,
+    required TResult Function(int id) getTask,
+    required TResult Function(bool isConnected) showOfflinePopupEvent,
+    required TResult Function() parseHtml,
+    required TResult Function() onTasksLoadedSync,
+    required TResult Function() syncDataOnEngineRestore,
+    required TResult Function() showTasksOffline,
+  }) {
+    return pullToRefresh(activeFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
+    TResult? Function(FilterType activeFilter)? filterTasks,
+    TResult? Function(List<SortType> activeSortType)? sortTasks,
+    TResult? Function(int id)? getTask,
+    TResult? Function(bool isConnected)? showOfflinePopupEvent,
+    TResult? Function()? parseHtml,
+    TResult? Function()? onTasksLoadedSync,
+    TResult? Function()? syncDataOnEngineRestore,
+    TResult? Function()? showTasksOffline,
+  }) {
+    return pullToRefresh?.call(activeFilter);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
+    TResult Function(FilterType activeFilter)? filterTasks,
+    TResult Function(List<SortType> activeSortType)? sortTasks,
+    TResult Function(int id)? getTask,
+    TResult Function(bool isConnected)? showOfflinePopupEvent,
+    TResult Function()? parseHtml,
+    TResult Function()? onTasksLoadedSync,
+    TResult Function()? syncDataOnEngineRestore,
+    TResult Function()? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (pullToRefresh != null) {
+      return pullToRefresh(activeFilter);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
+    required TResult Function(_FilterTasks value) filterTasks,
+    required TResult Function(_SortTasks value) sortTasks,
+    required TResult Function(_GetTask value) getTask,
+    required TResult Function(ShowOfflinePopupEvent value)
+        showOfflinePopupEvent,
+    required TResult Function(ParseHtmlEvent value) parseHtml,
+    required TResult Function(TasksLoadedSyncEvent value) onTasksLoadedSync,
+    required TResult Function(SyncDataOnEngineRestoreEvent value)
+        syncDataOnEngineRestore,
+    required TResult Function(ShowTasksOfflineEvent value) showTasksOffline,
+  }) {
+    return pullToRefresh(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
+    TResult? Function(_FilterTasks value)? filterTasks,
+    TResult? Function(_SortTasks value)? sortTasks,
+    TResult? Function(_GetTask value)? getTask,
+    TResult? Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult? Function(ParseHtmlEvent value)? parseHtml,
+    TResult? Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult? Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult? Function(ShowTasksOfflineEvent value)? showTasksOffline,
+  }) {
+    return pullToRefresh?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
+    TResult Function(_FilterTasks value)? filterTasks,
+    TResult Function(_SortTasks value)? sortTasks,
+    TResult Function(_GetTask value)? getTask,
+    TResult Function(ShowOfflinePopupEvent value)? showOfflinePopupEvent,
+    TResult Function(ParseHtmlEvent value)? parseHtml,
+    TResult Function(TasksLoadedSyncEvent value)? onTasksLoadedSync,
+    TResult Function(SyncDataOnEngineRestoreEvent value)?
+        syncDataOnEngineRestore,
+    TResult Function(ShowTasksOfflineEvent value)? showTasksOffline,
+    required TResult orElse(),
+  }) {
+    if (pullToRefresh != null) {
+      return pullToRefresh(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _PullToRefresh implements TaskEvent {
+  const factory _PullToRefresh(final FilterType activeFilter) =
+      _$PullToRefreshImpl;
+
+  FilterType get activeFilter;
+  @JsonKey(ignore: true)
+  _$$PullToRefreshImplCopyWith<_$PullToRefreshImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -365,6 +564,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -381,6 +581,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -397,6 +598,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -417,6 +619,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -435,6 +638,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -452,6 +656,7 @@ class _$FilterTasksImpl implements _FilterTasks {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
@@ -552,6 +757,7 @@ class _$SortTasksImpl implements _SortTasks {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -568,6 +774,7 @@ class _$SortTasksImpl implements _SortTasks {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -584,6 +791,7 @@ class _$SortTasksImpl implements _SortTasks {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -604,6 +812,7 @@ class _$SortTasksImpl implements _SortTasks {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -622,6 +831,7 @@ class _$SortTasksImpl implements _SortTasks {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -639,6 +849,7 @@ class _$SortTasksImpl implements _SortTasks {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
@@ -732,6 +943,7 @@ class _$GetTaskImpl implements _GetTask {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -748,6 +960,7 @@ class _$GetTaskImpl implements _GetTask {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -764,6 +977,7 @@ class _$GetTaskImpl implements _GetTask {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -784,6 +998,7 @@ class _$GetTaskImpl implements _GetTask {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -802,6 +1017,7 @@ class _$GetTaskImpl implements _GetTask {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -819,6 +1035,7 @@ class _$GetTaskImpl implements _GetTask {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
@@ -914,6 +1131,7 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -930,6 +1148,7 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -946,6 +1165,7 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -966,6 +1186,7 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -984,6 +1205,7 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -1001,6 +1223,7 @@ class _$ShowOfflinePopupEventImpl implements ShowOfflinePopupEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
@@ -1068,6 +1291,7 @@ class _$ParseHtmlEventImpl implements ParseHtmlEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -1084,6 +1308,7 @@ class _$ParseHtmlEventImpl implements ParseHtmlEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -1100,6 +1325,7 @@ class _$ParseHtmlEventImpl implements ParseHtmlEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -1120,6 +1346,7 @@ class _$ParseHtmlEventImpl implements ParseHtmlEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -1138,6 +1365,7 @@ class _$ParseHtmlEventImpl implements ParseHtmlEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -1155,6 +1383,7 @@ class _$ParseHtmlEventImpl implements ParseHtmlEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
@@ -1217,6 +1446,7 @@ class _$TasksLoadedSyncEventImpl implements TasksLoadedSyncEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -1233,6 +1463,7 @@ class _$TasksLoadedSyncEventImpl implements TasksLoadedSyncEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -1249,6 +1480,7 @@ class _$TasksLoadedSyncEventImpl implements TasksLoadedSyncEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -1269,6 +1501,7 @@ class _$TasksLoadedSyncEventImpl implements TasksLoadedSyncEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -1287,6 +1520,7 @@ class _$TasksLoadedSyncEventImpl implements TasksLoadedSyncEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -1304,6 +1538,7 @@ class _$TasksLoadedSyncEventImpl implements TasksLoadedSyncEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
@@ -1369,6 +1604,7 @@ class _$SyncDataOnEngineRestoreEventImpl
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -1385,6 +1621,7 @@ class _$SyncDataOnEngineRestoreEventImpl
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -1401,6 +1638,7 @@ class _$SyncDataOnEngineRestoreEventImpl
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -1421,6 +1659,7 @@ class _$SyncDataOnEngineRestoreEventImpl
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -1439,6 +1678,7 @@ class _$SyncDataOnEngineRestoreEventImpl
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -1456,6 +1696,7 @@ class _$SyncDataOnEngineRestoreEventImpl
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
@@ -1520,6 +1761,7 @@ class _$ShowTasksOfflineEventImpl implements ShowTasksOfflineEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(FilterType activeFilter) getTasks,
+    required TResult Function(FilterType activeFilter) pullToRefresh,
     required TResult Function(FilterType activeFilter) filterTasks,
     required TResult Function(List<SortType> activeSortType) sortTasks,
     required TResult Function(int id) getTask,
@@ -1536,6 +1778,7 @@ class _$ShowTasksOfflineEventImpl implements ShowTasksOfflineEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(FilterType activeFilter)? getTasks,
+    TResult? Function(FilterType activeFilter)? pullToRefresh,
     TResult? Function(FilterType activeFilter)? filterTasks,
     TResult? Function(List<SortType> activeSortType)? sortTasks,
     TResult? Function(int id)? getTask,
@@ -1552,6 +1795,7 @@ class _$ShowTasksOfflineEventImpl implements ShowTasksOfflineEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(FilterType activeFilter)? getTasks,
+    TResult Function(FilterType activeFilter)? pullToRefresh,
     TResult Function(FilterType activeFilter)? filterTasks,
     TResult Function(List<SortType> activeSortType)? sortTasks,
     TResult Function(int id)? getTask,
@@ -1572,6 +1816,7 @@ class _$ShowTasksOfflineEventImpl implements ShowTasksOfflineEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_GetTasks value) getTasks,
+    required TResult Function(_PullToRefresh value) pullToRefresh,
     required TResult Function(_FilterTasks value) filterTasks,
     required TResult Function(_SortTasks value) sortTasks,
     required TResult Function(_GetTask value) getTask,
@@ -1590,6 +1835,7 @@ class _$ShowTasksOfflineEventImpl implements ShowTasksOfflineEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_GetTasks value)? getTasks,
+    TResult? Function(_PullToRefresh value)? pullToRefresh,
     TResult? Function(_FilterTasks value)? filterTasks,
     TResult? Function(_SortTasks value)? sortTasks,
     TResult? Function(_GetTask value)? getTask,
@@ -1607,6 +1853,7 @@ class _$ShowTasksOfflineEventImpl implements ShowTasksOfflineEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTasks value)? getTasks,
+    TResult Function(_PullToRefresh value)? pullToRefresh,
     TResult Function(_FilterTasks value)? filterTasks,
     TResult Function(_SortTasks value)? sortTasks,
     TResult Function(_GetTask value)? getTask,
