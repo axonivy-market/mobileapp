@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
@@ -42,6 +43,7 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
   bool isOverScrolled = true;
   Map<String, dynamic> cookies = {};
   bool isOffline = false;
+  var buttonId = '';
 
   InAppWebViewSettings settings = InAppWebViewSettings(
     supportZoom: false,
@@ -117,8 +119,16 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         return NavigationActionPolicy.ALLOW;
       },
       shouldInterceptRequest: (controller, request) async {
-        // Handle finish task offline for Android
-        await _androidFinishTaskOffline(context, controller, request);
+        if (!context.mounted) {
+          return;
+        }
+        if (buttonId.isNotEmpty && widget.taskIvy?.offline == true) {
+          // Prevent navigate URL to call finish task offline request
+          await Future.delayed(const Duration(seconds: 30));
+          if (context.mounted) {
+            context.pop();
+          }
+        }
         return null;
       },
       onScrollChanged: (controller, x, y) {
@@ -140,6 +150,10 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         overScrollY = y;
       },
       onLoadStop: (controller, url) async {
+        if (Platform.isAndroid) {
+          // Handle finish task offline for Android
+          _androidFinishTaskOffline(context, controller);
+        }
         await Future.delayed(const Duration(milliseconds: 500));
         if (context.mounted) {
           final canScroll = await controller.canScrollVertically();
@@ -154,36 +168,36 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
     );
   }
 
-  Future _androidFinishTaskOffline(BuildContext context,
-      InAppWebViewController controller, WebResourceRequest request) async {
-    if (!context.mounted) {
-      return;
-    }
-    await controller.evaluateJavascript(source: """
+  Future _androidFinishTaskOffline(
+      BuildContext context, InAppWebViewController controller) async {
+    if (widget.taskIvy?.offline == true) {
+      await controller.evaluateJavascript(source: """
         var buttons = document.querySelectorAll('button');
         buttons.forEach(button => {
           button.addEventListener('click', function() {
               var buttonID = this.id;
-              window.flutter_inappwebview.callHandler('buttonCLick', this.id); 
+              window.flutter_inappwebview.callHandler('buttonCLick', this.id);
           });
         });
         """);
-    await controller.evaluateJavascript(source: """
-              var form = document.getElementById("form");
-              var formData = new FormData(form);
-              var object ={};
-              formData.forEach(function(value, key){
-                object[key]=value;
-              });
-              window.flutter_inappwebview.callHandler('formData', JSON.stringify(object)); 
-        """);
+    }
+
     var formData = "";
-    var buttonId = '';
     controller.addJavaScriptHandler(
         handlerName: 'buttonCLick',
-        callback: (args) {
+        callback: (args) async {
           buttonId = args[0];
+          await controller.evaluateJavascript(source: """
+                      var form = document.getElementById("form");
+                      var formData = new FormData(form);
+                      var object ={};
+                      formData.forEach(function(value, key){
+                        object[key]=value;
+                      });
+                      window.flutter_inappwebview.callHandler('formData', JSON.stringify(object)); 
+                """);
         });
+
     controller.addJavaScriptHandler(
         handlerName: 'formData',
         callback: (args) {
@@ -198,17 +212,6 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
                 .add(TaskActivityEvent.finishTaskOffline(task));
           }
         });
-    var submitUrlOffline = widget.taskIvy?.submitUrlOffline ?? "";
-    if (isOffline &&
-        widget.taskIvy?.offline == true &&
-        submitUrlOffline.isNotEmpty &&
-        request.url.toString().endsWith(submitUrlOffline)) {
-      // Prevent navigate URL to call finish task offline request
-      await Future.delayed(const Duration(seconds: 30));
-      if (context.mounted) {
-        context.pop();
-      }
-    }
   }
 
   NavigationActionPolicy? _iOSFinishTaskOffline(
