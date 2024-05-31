@@ -204,7 +204,6 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
     if (widget.taskIvy?.offline == true &&
         submitUrlOffline.isNotEmpty &&
         request.url.toString().endsWith(submitUrlOffline)) {
-      // TODO z1 check offline first then online, online first then offline
       // Prevent navigate URL to call finish task offline request
       await Future.delayed(const Duration(seconds: 30));
       if (context.mounted) {
