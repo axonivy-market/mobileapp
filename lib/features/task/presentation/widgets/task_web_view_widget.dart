@@ -37,7 +37,6 @@ class TaskWebViewWidget extends StatefulWidget {
 }
 
 class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
-  bool isFinishedTask = false;
   int _previousScrollY = 0;
   int overScrollY = 0;
   bool isOverScrolled = true;
@@ -78,19 +77,9 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
 
   @override
   Widget build(BuildContext context) {
-    int taskId = -1;
     isOffline = context.read<ConnectivityBloc>().connectivityResult ==
         ConnectivityResult.none;
     return InAppWebView(
-      onAjaxReadyStateChange: (controller, ajx) async {
-        String finishedTask =
-            ajx.responseHeaders?[Constants.ivyFinishedTask] ?? "";
-        String currentRunningTask =
-            ajx.responseHeaders?[Constants.ivyCurrentRunningTask] ?? "";
-        isFinishedTask = finishedTask.isNotEmpty && currentRunningTask.isEmpty;
-        taskId = int.parse(finishedTask);
-        return null;
-      },
       initialSettings: settings,
       initialUrlRequest: !isOffline
           ? URLRequest(
@@ -109,13 +98,24 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
               baseUrl: WebUri(AppConfig.serverUrl))
           : null,
       shouldOverrideUrlLoading: (controller, navigationAction) async {
+        String requestURL =
+            navigationAction.request.url?.toString().split('/').last ?? "";
+        bool isFinishedTask =
+            requestURL.startsWith(Constants.endTaskUrlPattern);
         if (isFinishedTask) {
+          int taskId = int.tryParse(
+                  requestURL.replaceFirst(Constants.endTaskUrlPattern, '')) ??
+              -1;
           // Finish task normal
           context.pop({taskId: ''});
           return NavigationActionPolicy.CANCEL;
         }
         // Handle finish task offline for iOS
-        _iOSFinishTaskOffline(controller, navigationAction);
+        if (context.read<ConnectivityBloc>().connectivityResult ==
+                ConnectivityResult.none &&
+            Platform.isIOS) {
+          _iOSFinishTaskOffline(controller, navigationAction);
+        }
         return NavigationActionPolicy.ALLOW;
       },
       shouldInterceptRequest: (controller, request) async {
@@ -150,8 +150,10 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
         overScrollY = y;
       },
       onLoadStop: (controller, url) async {
-        if (Platform.isAndroid) {
-          // Handle finish task offline for Android
+        // Handle finish task offline for Android
+        if (context.read<ConnectivityBloc>().connectivityResult ==
+                ConnectivityResult.none &&
+            Platform.isAndroid) {
           _androidFinishTaskOffline(context, controller);
         }
         await Future.delayed(const Duration(milliseconds: 500));
