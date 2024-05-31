@@ -102,18 +102,21 @@ class _TaskWebViewWidgetState extends State<TaskWebViewWidget> {
                   requestURL.replaceFirst(Constants.endTaskUrlPattern, '')) ??
               -1;
           // Finish task normal
-          context.pop({taskId: ''}); 
+          context.pop({taskId: ''});
           return NavigationActionPolicy.CANCEL;
         }
         // Handle finish task offline for iOS
-        _iOSFinishTaskOffline(controller, navigationAction);
+        if (context.read<ConnectivityBloc>().connectivityResult ==
+                ConnectivityResult.none &&
+            Platform.isIOS) {
+          _iOSFinishTaskOffline(controller, navigationAction);
+        }
         return NavigationActionPolicy.ALLOW;
       },
       shouldInterceptRequest: (controller, request) async {
         // Handle finish task offline for Android
-        var connectivityResult =
-            context.read<ConnectivityBloc>().connectivityResult;
-        if (connectivityResult == ConnectivityResult.none &&
+        if (context.read<ConnectivityBloc>().connectivityResult ==
+                ConnectivityResult.none &&
             Platform.isAndroid) {
           await _androidFinishTaskOffline(context, controller, request);
         }
