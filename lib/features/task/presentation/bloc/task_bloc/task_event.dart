@@ -4,6 +4,9 @@ part of 'task_bloc.dart';
 class TaskEvent with _$TaskEvent {
   const factory TaskEvent.getTasks(FilterType activeFilter) = _GetTasks;
 
+  const factory TaskEvent.pullToRefresh(FilterType activeFilter) =
+      _PullToRefresh;
+
   const factory TaskEvent.filterTasks(FilterType activeFilter) = _FilterTasks;
 
   const factory TaskEvent.sortTasks(List<SortType> activeSortType) = _SortTasks;
