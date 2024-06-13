@@ -14,15 +14,15 @@
 			"elevator": "0"
 		},
 		{
-			"name": "Bob's Discount Furniture Stamford",
-			"contactName": "mybobs.com",
-			"phone": "+1 203-324-2727",
+			"name": "Axon Ivy AG",
+			"contactName": "https://www.axonivy.com",
+			"phone": "+49 89 58 999 86 0",
 			"location": {
 				"lat": "41.075835",
 				"lng": "-73.521474",
-				"address1": "Glenbrook Shopping Center",
-				"address2": "479 Hope St, Stamford",
-				"address3": "CT 06905, USA"
+				"address1": "Headquarters",
+				"address2": "Baarerstrasse 12",
+				"address3": "6300 Zug, Schweiz"
 			},
 			"elevator": "1"
 		},
@@ -40,7 +40,7 @@
 			"elevator": "3"
 		},
 		{
-			"name": "Stark Home & Trade Showroom",
+			"name": "Stark Home and Trade Showroom",
 			"contactName": "starkcarpet.com",
 			"phone": "+1 203-899-1771",
 			"location": {
