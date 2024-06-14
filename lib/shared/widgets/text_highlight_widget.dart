@@ -13,6 +13,7 @@ class TextHighlightWidget extends StatelessWidget {
     required this.fontWeight,
     this.textColor,
     this.isSearchPage = false,
+    this.isTaskDone = false,
   });
 
   final bool isSearchPage;
@@ -23,11 +24,17 @@ class TextHighlightWidget extends StatelessWidget {
   final int maxLine;
   final double fontSize;
   final FontWeight fontWeight;
+  final bool isTaskDone;
 
   @override
   Widget build(BuildContext context) {
     int startIndexQuery = (startIndex < 0 || endIndex < 0) ? 0 : startIndex;
     int endIndexQuery = (startIndex < 0 || endIndex < 0) ? 0 : endIndex;
+    Color defaultTextColor = isTaskDone
+        ? Theme.of(context)
+            .colorScheme
+            .secondary // Change to desired color for done tasks
+        : (textColor ?? Theme.of(context).colorScheme.onSecondary);
 
     return SizedBox(
       height: (fontSize + 4.sp) * maxLine,
@@ -37,7 +44,7 @@ class TextHighlightWidget extends StatelessWidget {
         text: TextSpan(
           text: text.substring(0, startIndexQuery),
           style: GoogleFonts.inter(
-            color: Theme.of(context).colorScheme.secondary,
+            color: defaultTextColor,
             fontWeight: fontWeight,
             fontSize: fontSize,
           ),
@@ -48,7 +55,7 @@ class TextHighlightWidget extends StatelessWidget {
               style: GoogleFonts.inter(
                 color: isSearchPage
                     ? Theme.of(context).colorScheme.onSurfaceVariant
-                    : textColor,
+                    : defaultTextColor,
                 fontWeight: fontWeight,
                 fontSize: fontSize,
               ),
@@ -57,8 +64,8 @@ class TextHighlightWidget extends StatelessWidget {
               text: text.substring(startIndexQuery + endIndexQuery),
               style: GoogleFonts.inter(
                 color: isSearchPage
-                    ? Theme.of(context).colorScheme.secondary
-                    : textColor,
+                    ? Theme.of(context).colorScheme.onSecondary
+                    : defaultTextColor,
                 fontWeight: fontWeight,
                 fontSize: fontSize,
               ),

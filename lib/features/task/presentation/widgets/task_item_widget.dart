@@ -16,7 +16,7 @@ Widget getDateTimeTaskWidget(
           AppAssets.icons.iconCloudOffTaskItem.svg(
               height: 16.h,
               colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.secondary, BlendMode.srcIn)),
+                  Theme.of(context).colorScheme.onSecondary, BlendMode.srcIn)),
         2.horizontalSpace,
         !isTaskDone
             ? AppAssets.icons.chevronRight.svg(
@@ -68,14 +68,14 @@ Widget getDateTimeTaskWidget(
           AppAssets.icons.iconCloudOffTaskItem.svg(
               height: 16.h,
               colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.secondary, BlendMode.srcIn)),
+                  Theme.of(context).colorScheme.onSecondary, BlendMode.srcIn)),
         5.horizontalSpace,
         Text(
           dateTime.formatDateYearWithTwoNumber,
           style: GoogleFonts.inter(
             fontSize: 13.sp,
             fontWeight: FontWeight.w400,
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).colorScheme.onSecondary,
           ),
           overflow: TextOverflow.ellipsis,
           softWrap: true,
@@ -159,6 +159,7 @@ class TaskItemWidget extends StatelessWidget {
           ],
         ),
         title: TextHighlightWidget(
+          isTaskDone: isTaskDone,
           isSearchPage: isSearchPage,
           text: name,
           textColor: getTaskNameColor(context, query, isTaskDone),
@@ -174,8 +175,9 @@ class TaskItemWidget extends StatelessWidget {
             Flexible(
               fit: FlexFit.tight,
               child: TextHighlightWidget(
+                isTaskDone: isTaskDone,
                 isSearchPage: isSearchPage,
-                textColor: Theme.of(context).colorScheme.secondary,
+                textColor: Theme.of(context).colorScheme.onSecondary,
                 text: description.isEmptyOrNull
                     ? "tasksView.noTaskDescription".tr()
                     : description,

@@ -533,7 +533,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
             style: GoogleFonts.inter(
               fontSize: 13.sp,
               fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
           tileColor: Theme.of(context).colorScheme.onPrimaryContainer,

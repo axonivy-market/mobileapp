@@ -207,7 +207,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               color:
                                   activeSortType.contains(MainSortType.priority)
                                       ? Theme.of(context).colorScheme.primary
-                                      : Theme.of(context).colorScheme.secondary,
+                                  : Theme.of(context).colorScheme.onSecondary,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -232,7 +232,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               fontSize: 17.sp,
                               color: activeSortType.contains(MainSortType.name)
                                   ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.secondary,
+                                  : Theme.of(context).colorScheme.onSecondary,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -258,7 +258,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               color: activeSortType
                                       .contains(MainSortType.creationDate)
                                   ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.secondary,
+                                  : Theme.of(context).colorScheme.onSecondary,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -284,7 +284,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               color: activeSortType
                                       .contains(MainSortType.expiryDate)
                                   ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.secondary,
+                                  : Theme.of(context).colorScheme.onSecondary,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -310,7 +310,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               fontSize: 17.sp,
                               color: activeSortType.isSubTypeActive(0)
                                   ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.secondary,
+                                  : Theme.of(context).colorScheme.onSecondary,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -335,7 +335,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                               fontSize: 17.sp,
                               color: activeSortType.isSubTypeActive(1)
                                   ? Theme.of(context).colorScheme.primary
-                                  : Theme.of(context).colorScheme.secondary,
+                                  : Theme.of(context).colorScheme.onSecondary,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -398,6 +398,6 @@ class _FilterWidgetState extends State<FilterWidget> {
   Color getFilterTextColor(bool isCurrentFilterType) {
     return isCurrentFilterType
         ? Theme.of(context).colorScheme.onSurface
-        : Theme.of(context).colorScheme.secondary;
+        : Theme.of(context).colorScheme.onSecondary;
   }
 }

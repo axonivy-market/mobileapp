@@ -13,6 +13,12 @@
         "request" : {
           "name" : "Agile Project Delivery",
           "description" : "Agile Project Delivery is a project management approach that emphasizes flexibility, collaboration, and rapid iteration."
+        },
+        "triggerable" : true,
+        "task" : {
+          "responsible" : {
+            "activator" : "SYSTEM"
+          }
         }
       },
       "visual" : {
