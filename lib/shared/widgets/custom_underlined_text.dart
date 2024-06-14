@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -39,7 +38,7 @@ class CustomUnderlinedText extends StatelessWidget {
           left: 0,
           right: 0,
           child: Container(
-            height: 1.5, // Adjust the thickness of the underline
+            height: 0.5, // Adjust the thickness of the underline
             color: underlineColor,
           ),
         ),

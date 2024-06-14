@@ -382,7 +382,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                               height: 0.5.h,
                               color: Theme.of(context)
                                   .colorScheme
-                                  .onSecondaryContainer,
+                                  .secondaryContainer,
                             ),
                           ],
                         ),
