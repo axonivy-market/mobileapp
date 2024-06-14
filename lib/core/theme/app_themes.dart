@@ -15,7 +15,8 @@ ThemeData lightMode = ThemeData(
     surface: AppColors.eerieBlack,
     onSurface: AppColors.white,
     onSurfaceVariant: AppColors.eerieBlack,
-    error: AppColors.watermelonade,
+    error: AppColors.silkenRuby,
+    onSecondary: AppColors.shadowedSteel,
   ),
   useMaterial3: true,
   dividerTheme: const DividerThemeData(
@@ -38,7 +39,9 @@ ThemeData darkMode = ThemeData(
       surface: AppColors.white,
       onSurfaceVariant: AppColors.white,
       onSurface: AppColors.shoeWax,
-      error: AppColors.watermelonade),
+    error: AppColors.silkenRuby,
+    onSecondary: AppColors.darkSouls,
+  ),
   useMaterial3: true,
   dividerTheme: const DividerThemeData(
     color: AppColors.shadowedSteel,

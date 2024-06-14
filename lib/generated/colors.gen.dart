@@ -82,6 +82,9 @@ class AppColors {
   /// Color: #2C2C2C
   static const Color shoeWax = Color(0xFF2C2C2C);
 
+  /// Color: #E5151C
+  static const Color silkenRuby = Color(0xFFE5151C);
+
   /// Color: #BFBFBF
   static const Color silver = Color(0xFFBFBFBF);
 
@@ -96,9 +99,6 @@ class AppColors {
 
   /// Color: #007095
   static const Color tropicSea = Color(0xFF007095);
-
-  /// Color: #EE4A54
-  static const Color watermelonade = Color(0xFFEE4A54);
 
   /// Color: #6E6E6E
   static const Color weldedIron = Color(0xFF6E6E6E);

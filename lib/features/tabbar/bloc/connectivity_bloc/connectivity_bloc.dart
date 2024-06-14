@@ -15,7 +15,7 @@ part 'connectivity_state.dart';
 @injectable
 class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
   StreamSubscription? _streamSubscription;
-  var connectivityResult = ConnectivityResult.wifi;
+  var connectivityResult = ConnectivityResult.other;
 
   ConnectivityBloc() : super(const ConnectivityState.initial()) {
     on<ConnectivityEvent>((event, emit) {
@@ -27,17 +27,19 @@ class ConnectivityBloc extends Bloc<ConnectivityEvent, ConnectivityState> {
     });
     _streamSubscription = Connectivity()
         .onConnectivityChanged
-        .skip(1)
-        .listen((ConnectivityResult result) async {
+        .listen((List<ConnectivityResult> results) async {
+      var result = results.isNotEmpty ? results[0] : ConnectivityResult.none;
       if ((result == ConnectivityResult.wifi ||
               result == ConnectivityResult.mobile) &&
           result != connectivityResult) {
-        connectivityResult = result;
         if (kDebugMode) {
           // Debug mode should wait for network ready to support test on simulator
           await Future.delayed(const Duration(seconds: 5));
         }
-        add(const ConnectivityEvent.connectedEvent());
+        if (connectivityResult != ConnectivityResult.other) {
+          add(const ConnectivityEvent.connectedEvent());
+        }
+        connectivityResult = result;
       } else if (result == ConnectivityResult.none &&
           (result != connectivityResult)) {
         connectivityResult = result;

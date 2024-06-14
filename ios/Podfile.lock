@@ -1,9 +1,7 @@
 PODS:
   - connectivity_plus (0.0.1):
     - Flutter
-    - ReachabilitySwift
-  - device_info_plus (0.0.1):
-    - Flutter
+    - FlutterMacOS
   - DKImagePickerController/Core (4.3.4):
     - DKImagePickerController/ImageDataManager
     - DKImagePickerController/Resource
@@ -76,7 +74,6 @@ PODS:
   - qr_code_scanner (0.2.0):
     - Flutter
     - MTBBarcodeScanner
-  - ReachabilitySwift (5.2.1)
   - SDWebImage (5.19.1):
     - SDWebImage/Core (= 5.19.1)
   - SDWebImage/Core (5.19.1)
@@ -92,8 +89,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
-  - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
+  - connectivity_plus (from `.symlinks/plugins/connectivity_plus/darwin`)
   - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - file_picker_pro (from `.symlinks/plugins/file_picker_pro/ios`)
   - Flutter (from `Flutter`)
@@ -119,16 +115,13 @@ SPEC REPOS:
     - FMDB
     - MTBBarcodeScanner
     - OrderedSet
-    - ReachabilitySwift
     - SDWebImage
     - SwiftyGif
     - TOCropViewController
 
 EXTERNAL SOURCES:
   connectivity_plus:
-    :path: ".symlinks/plugins/connectivity_plus/ios"
-  device_info_plus:
-    :path: ".symlinks/plugins/device_info_plus/ios"
+    :path: ".symlinks/plugins/connectivity_plus/darwin"
   file_picker:
     :path: ".symlinks/plugins/file_picker/ios"
   file_picker_pro:
@@ -165,8 +158,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/url_launcher_ios/ios"
 
 SPEC CHECKSUMS:
-  connectivity_plus: bf0076dd84a130856aa636df1c71ccaff908fa1d
-  device_info_plus: c6fb39579d0f423935b0c9ce7ee2f44b71b9fce6
+  connectivity_plus: ddd7f30999e1faaef5967c23d5b6d503d10434db
   DKImagePickerController: b512c28220a2b8ac7419f21c491fc8534b7601ac
   DKPhotoGallery: fdfad5125a9fdda9cc57df834d49df790dbb4179
   file_picker: ce3938a0df3cc1ef404671531facef740d03f920
@@ -182,11 +174,10 @@ SPEC CHECKSUMS:
   open_filex: 6e26e659846ec990262224a12ef1c528bb4edbe4
   open_share_plus: e4475cd9e43ff4032d7e7429b21a614fa7d79290
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
-  package_info_plus: 115f4ad11e0698c8c1c5d8a689390df880f47e85
+  package_info_plus: 58f0028419748fad15bf008b270aaa8e54380b1c
   path_provider_foundation: 29f094ae23ebbca9d3d0cec13889cd9060c0e943
   permission_handler_apple: 9878588469a2b0d0fc1e048d9f43605f92e6cec2
   qr_code_scanner: bb67d64904c3b9658ada8c402e8b4d406d5d796e
-  ReachabilitySwift: 5ae15e16814b5f9ef568963fb2c87aeb49158c66
   SDWebImage: 40b0b4053e36c660a764958bff99eed16610acbb
   shared_preferences_foundation: 5b919d13b803cadd15ed2dc053125c68730e5126
   sqflite: 31f7eba61e3074736dff8807a9b41581e4f7f15a
@@ -196,4 +187,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 8e48b08a99bd2f9632ea9ac01c43add59692ca66
 
-COCOAPODS: 1.14.2
+COCOAPODS: 1.15.2

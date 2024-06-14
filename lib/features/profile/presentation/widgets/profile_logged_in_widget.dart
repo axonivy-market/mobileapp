@@ -118,7 +118,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
               style: GoogleFonts.inter(
                 fontWeight: FontWeight.w600,
                 fontSize: 22.sp,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.onSecondary,
               ),
             ),
           ),

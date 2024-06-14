@@ -66,7 +66,7 @@ class OfflinePopupWidget extends StatelessWidget {
                           description,
                           textAlign: TextAlign.center,
                           style: GoogleFonts.inter(
-                            color: Theme.of(context).colorScheme.secondary,
+                            color: Theme.of(context).colorScheme.onSecondary,
                             fontSize: 17.sp,
                             fontWeight: FontWeight.w400,
                           ),

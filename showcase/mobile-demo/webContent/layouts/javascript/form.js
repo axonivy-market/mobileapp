@@ -51,7 +51,7 @@ function countTime() {
 }
 function myTimer() {
 	document.getElementById("stopTimerId").value = "End";
-	document.getElementById("stopTimerId").className = "btn";
+	document.getElementById("stopTimerId").className = "btn-red";
 	isReseted = false;
 
 	if (!myVar) {

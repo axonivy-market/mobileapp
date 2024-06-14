@@ -1,0 +1,59 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "18FA8DD631BFDD75",
+  "config" : {
+    "data" : "showcase.Data"
+  },
+  "elements" : [ {
+      "id" : "f61",
+      "type" : "RequestStart",
+      "name" : "cleanAllCasesByDestroying.ivp",
+      "config" : {
+        "signature" : "cleanAllCasesByDestroying",
+        "request" : {
+          "name" : "Clean all cases by destroying and clear all business data"
+        },
+        "case" : {
+          "attachToBusinessCase" : false
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 168, "y" : 96 },
+        "labelOffset" : { "x" : 35, "y" : -19 },
+        "description" : "Detroy all tasks & cases in system & clean all business data"
+      },
+      "connect" : [
+        { "id" : "f56", "to" : "f57" }
+      ]
+    }, {
+      "id" : "f57",
+      "type" : "Script",
+      "name" : "clear all tasks & cases",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import util.BusinessDataUtils;",
+            "import util.TaskUtils;",
+            "import util.TaskConcurrencyUtils;",
+            "",
+            "",
+            "TaskConcurrencyUtils.setInProcess(true);",
+            "TaskUtils.destroyAllCase();",
+            "BusinessDataUtils.clearAllBusinessData();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 168, "y" : 200 }
+      },
+      "connect" : [
+        { "id" : "f60", "to" : "f59" }
+      ]
+    }, {
+      "id" : "f59",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 168, "y" : 288 }
+      }
+    } ]
+}

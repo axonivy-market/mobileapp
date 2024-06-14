@@ -18,7 +18,7 @@ class VersionNameWidget extends StatelessWidget {
         'splashCopyright',
         style: GoogleFonts.inter(
           fontSize: 12.sp,
-          color: Theme.of(context).colorScheme.secondary,
+          color: Theme.of(context).colorScheme.onSecondary,
           fontWeight: FontWeight.w400,
         ),
       ).tr(

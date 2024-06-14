@@ -12,6 +12,7 @@
       "config" : {
         "signature" : "start",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with Normal Priority Process",
           "customFields" : [
             { "name" : "cssIcon", "value" : "si-view-1" }
@@ -37,6 +38,7 @@
       "config" : {
         "signature" : "",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with High Priority Process",
           "description" : "Task with High Priority Process",
           "customFields" : [
@@ -81,7 +83,7 @@
         "at" : { "x" : 88, "y" : 248 }
       },
       "connect" : [
-        { "id" : "f11", "to" : "f67" }
+        { "id" : "f11", "to" : "f24" }
       ]
     }, {
       "id" : "f15",
@@ -107,7 +109,7 @@
         "at" : { "x" : 88, "y" : 336 }
       },
       "connect" : [
-        { "id" : "f12", "to" : "f80" }
+        { "id" : "f12", "to" : "f26" }
       ]
     }, {
       "id" : "f22",
@@ -201,6 +203,7 @@
       "config" : {
         "signature" : "start5",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with long name and description Task with long name and description",
           "description" : "Task with long name and description Task with long name and description",
           "customFields" : [
@@ -209,7 +212,8 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 88, "y" : 432 }
+        "at" : { "x" : 88, "y" : 432 },
+        "labelOffset" : { "x" : -17 }
       },
       "connect" : [
         { "id" : "f32", "to" : "f18" }
@@ -257,6 +261,7 @@
       "config" : {
         "signature" : "taskWithNoNameNoDescription",
         "request" : {
+          "isHttpRequestable" : false,
           "name" : "Task with no name and no description",
           "description" : "Task with no name and no description",
           "customFields" : [
@@ -307,7 +312,7 @@
         "at" : { "x" : 88, "y" : 616 }
       },
       "connect" : [
-        { "id" : "f46", "to" : "f84" }
+        { "id" : "f46", "to" : "f44" }
       ]
     }, {
       "id" : "f43",
@@ -322,7 +327,7 @@
         "task" : {
           "name" : "Task with expried time",
           "expiry" : {
-            "timeout" : "new Duration(0,0,0,0,0,1)"
+            "timeout" : "new Duration(\"12h\")"
           }
         }
       },
@@ -404,7 +409,7 @@
       "type" : "RequestStart",
       "name" : "createInvoice",
       "config" : {
-        "signature" : "start6",
+        "signature" : "createInvoice",
         "request" : {
           "name" : "Create Invoice",
           "description" : "Process to create invoice",
@@ -524,32 +529,6 @@
         { "id" : "f79", "to" : "f61" }
       ]
     }, {
-      "id" : "f67",
-      "type" : "DialogCall",
-      "name" : "Invoice",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 216, "y" : 248 }
-      },
-      "connect" : [
-        { "id" : "f68", "to" : "f24" }
-      ]
-    }, {
-      "id" : "f80",
-      "type" : "DialogCall",
-      "name" : "Invoice",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 216, "y" : 336 }
-      },
-      "connect" : [
-        { "id" : "f81", "to" : "f26" }
-      ]
-    }, {
       "id" : "f82",
       "type" : "DialogCall",
       "name" : "PayslipInfomation",
@@ -561,19 +540,6 @@
       },
       "connect" : [
         { "id" : "f83", "to" : "f65" }
-      ]
-    }, {
-      "id" : "f84",
-      "type" : "DialogCall",
-      "name" : "Invoice",
-      "config" : {
-        "dialog" : "com.axonivy.mobile.mobiledemo.Invoice:start()"
-      },
-      "visual" : {
-        "at" : { "x" : 216, "y" : 616 }
-      },
-      "connect" : [
-        { "id" : "f85", "to" : "f44", "color" : "default" }
       ]
     }, {
       "id" : "f86",

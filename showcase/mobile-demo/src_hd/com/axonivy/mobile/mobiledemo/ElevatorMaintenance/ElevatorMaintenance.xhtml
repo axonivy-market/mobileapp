@@ -5,27 +5,32 @@
 <f:view renderKitId="IVY_MOBILE_OFFLINE" />
 <h:head>
   <title>ElevatorMainatainance</title>
+  <f:attribute name="primefaces.THEME" value="#{ivyFreyaTheme.theme}" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><ui:insert name="title">Ivy Html Dialog</ui:insert></title>
+  <link rel="shortcut icon" href="#{resource['ivy-branding:favicon']}" />
+  <h:outputScript name="js/layout.js" library="#{ivyFreyaTheme.library}" />
+  <h:outputStylesheet name="#{ivyFreyaTheme.layout}" library="#{ivyFreyaTheme.library}" />
+  <h:outputStylesheet name="primeflex-2.min.css" library="primeflex" />
+  <h:outputStylesheet name="custom.css" library="ivy-branding" />
+  <!-- Optional Style or Script files: 
+  <h:outputStylesheet name="layouts/styles/style.css" /> 
+  -->
 </h:head>
 <h:body>
-  <div class="container">
+  <div class="card">
     <div class="ui-content">
       <h:form id="form">
-        <h:panelGrid columns="1">
-          <f:facet name="header">
-            <p:messages globalOnly="true" />
-          </f:facet>
           <p:outputLabel value="Building Address" for="buildingAddress" />
           <p:inputText id="buildingAddress" value="#{data.buildingAddress}" disabled="#{data.isReadOnly}" />
           <p:outputLabel value="Maintainer" for="maintainer" />
           <p:inputText id="maintainer" value="#{data.maintainer}" disabled="#{data.isReadOnly}" />
-        </h:panelGrid>
         <br />
-        <h:panelGrid columns="2">
           <p:commandButton id="save" actionListener="#{logic.save}" value="Save" ajax="false" validateClient="true"
             icon="pi pi-check" rendered="#{not data.isReadOnly}"/>
           <p:commandButton id="proceed" actionListener="#{logic.close}" value="Proceed" ajax="false"
             validateClient="true" icon="pi pi-check" />
-        </h:panelGrid>
       </h:form>
     </div>
   </div>

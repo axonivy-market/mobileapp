@@ -8,6 +8,7 @@ import 'package:axon_ivy/features/task/presentation/widgets/task_web_view_widget
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
+import 'package:axon_ivy/shared/widgets/custom_underlined_text.dart';
 import 'package:axon_ivy/shared/widgets/drop_shadow_widget.dart';
 import 'package:axon_ivy/shared/widgets/loading_widget.dart';
 import 'package:axon_ivy/shared/widgets/measure_size_widget.dart';
@@ -48,7 +49,6 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
   bool isExpanded = false;
   int documentLength = 0;
   bool shouldFetchTaskList = false;
-  var globalKey = GlobalKey();
 
   @override
   void initState() {
@@ -162,7 +162,6 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                           ? 0
                           : taskDetailPanelHeight),
                   child: TaskWebViewWidget(
-                    key: globalKey,
                     fullRequestPath: widget.fullRequestPath,
                     taskIvy: widget.taskIvy,
                     onScrollToTop: _updateScrollingChanged,
@@ -282,7 +281,8 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                                   ? "tasksView.noTaskDescription".tr()
                                   : widget.taskIvy!.description,
                               style: GoogleFonts.inter(
-                                color: Theme.of(context).colorScheme.secondary,
+                                color:
+                                    Theme.of(context).colorScheme.onSecondary,
                                 fontWeight: FontWeight.w400,
                                 fontSize: 13.sp,
                               ),
@@ -337,16 +337,54 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                             }
                           });
                         },
-                        child: TaskInfoRowWidget(
-                          isTitleHighlight: true,
-                          icon: AppAssets.icons.paperclip.svg(
-                              height: 16.h,
+                        child: Column(
+                          children: [
+                            10.verticalSpace,
+                            Row(
+                              children: [
+                                AppAssets.icons.paperclip.svg(
+                                    height: 16.h,
                               colorFilter: ColorFilter.mode(
                                   Theme.of(context).colorScheme.surface,
                                   BlendMode.srcIn)),
-                          title: "taskDetails.attachments".tr(),
-                          value: "taskDetails.documents"
-                              .plural(task?.caseTask?.documents.length ?? 0),
+                                5.horizontalSpace,
+                                Text(
+                                  "taskDetails.documents".plural(
+                                      task?.caseTask?.documents.length ?? 0),
+                                  style: GoogleFonts.inter(
+                                    fontSize: 13.sp,
+                                    fontWeight: FontWeight.w600,
+                                    color:
+                                        Theme.of(context).colorScheme.surface,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.centerRight,
+                                    child: CustomUnderlinedText(
+                                      text: "taskDetails.documents".plural(
+                                          task?.caseTask?.documents.length ??
+                                              0),
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      fontSize: 13.sp,
+                                      fontWeight: FontWeight.w500,
+                                      underlineColor:
+                                          Theme.of(context).colorScheme.primary,
+                                      gap: 0, // Set your desired gap
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            10.verticalSpace,
+                            Divider(
+                              height: 0.5.h,
+                              color: Theme.of(context)
+                                  .colorScheme
+                                  .secondaryContainer,
+                            ),
+                          ],
                         ),
                       ),
                       TaskInfoRowWidget(
@@ -410,4 +448,6 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
       ],
     );
   }
+
+  
 }

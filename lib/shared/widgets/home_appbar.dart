@@ -113,7 +113,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       "tasksView.lastUpdated",
                       style: GoogleFonts.inter(
                         fontWeight: FontWeight.w400,
-                        color: Theme.of(context).colorScheme.secondary,
+                        color: Theme.of(context).colorScheme.onSecondary,
                         fontSize: 13.sp,
                       ),
                     ).tr(
@@ -125,7 +125,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     AppAssets.icons.offline.svg(
                         height: 26.h,
                         colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.secondary,
+                            Theme.of(context).colorScheme.onSecondary,
                             BlendMode.srcIn))
                   ],
                 );

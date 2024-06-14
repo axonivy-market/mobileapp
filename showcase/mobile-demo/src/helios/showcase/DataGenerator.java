@@ -86,7 +86,7 @@ public class DataGenerator {
 
   public Company companyFromResource() {
     Random ran = new Random();
-    int companyIndex = ran.nextInt(6);
+    int companyIndex = ran.nextInt(companyList.size() - 1);
     return this.companyList.get(companyIndex);
   }
 

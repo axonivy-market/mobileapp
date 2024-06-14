@@ -447,43 +447,6 @@ class _NotificationPageState extends BasePageState<NotificationPage>
       ).r,
       child: Slidable(
         key: ValueKey(index),
-        startActionPane: ActionPane(
-          extentRatio: 0.22.w,
-          key: ValueKey(index),
-          motion: const BehindMotion(),
-          children: [
-            CustomSlidableAction(
-              borderRadius: BorderRadius.only(
-                  topLeft: const Radius.circular(10).r,
-                  bottomLeft: const Radius.circular(10).r),
-              autoClose: true,
-              padding: EdgeInsets.zero,
-              onPressed: (context) {},
-              backgroundColor: AppColors.darkSouls,
-              foregroundColor: Colors.white,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  AppAssets.icons.iconInfoNotification.svg(
-                    colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.onSurface,
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                  Text(
-                    "notificationList.infos".tr(),
-                    style: GoogleFonts.inter(
-                      textStyle: TextStyle(
-                        fontSize: 13.sp,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
         endActionPane: ActionPane(
           extentRatio: 0.22.w,
           key: ValueKey(index),
@@ -526,7 +489,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
             ),
           ],
         ),
-        child: AppListTile(
+        child: ListTile(
           shape: RoundedRectangleBorder(
             side: BorderSide(
                 color: Theme.of(context).colorScheme.outline, width: 1),
@@ -570,20 +533,8 @@ class _NotificationPageState extends BasePageState<NotificationPage>
             style: GoogleFonts.inter(
               fontSize: 13.sp,
               fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
-          ),
-          trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              AppAssets.icons.chevronRight.svg(
-                height: 21.h,
-                colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.surface,
-                  BlendMode.srcIn,
-                ),
-              ),
-            ],
           ),
           tileColor: Theme.of(context).colorScheme.onPrimaryContainer,
         ),

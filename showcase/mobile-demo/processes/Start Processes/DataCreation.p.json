@@ -1,0 +1,1117 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.3.0/process.json",
+  "id" : "18FA865CAD5E34DC",
+  "config" : {
+    "data" : "showcase.Data"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "RequestStart",
+      "name" : "CreateTask",
+      "config" : {
+        "signature" : "CreateTask",
+        "request" : {
+          "name" : "Create 10 Elevator Maintanance Task"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f5" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 840, "y" : 64 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "TriggerCall",
+      "name" : "Business Processes/ShowCaseProcesses",
+      "config" : {
+        "processCall" : "Business Processes/ShowCaseProcesses:elevatorMaintenance()",
+        "output" : {
+          "code" : "in.count = in.count + 1;"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 512, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f4", "to" : "f9" }
+      ]
+    }, {
+      "id" : "f5",
+      "type" : "Script",
+      "name" : "init",
+      "config" : {
+        "output" : {
+          "code" : "in.count = 0;"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f6", "to" : "f7", "color" : "default" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "Alternative",
+      "visual" : {
+        "at" : { "x" : 368, "y" : 64 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f3", "color" : "default" }
+      ]
+    }, {
+      "id" : "f9",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f10" : "in.count == 10",
+          "f11" : ""
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 680, "y" : 64 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
+      },
+      "connect" : [
+        { "id" : "f11", "to" : "f7", "via" : [ { "x" : 680, "y" : -32 }, { "x" : 368, "y" : -32 } ] },
+        { "id" : "f10", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f12",
+      "type" : "RequestStart",
+      "name" : "initializeData.ivp",
+      "config" : {
+        "signature" : "initializeData",
+        "input" : {
+          "params" : [
+            { "name" : "count", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.count" : "param.count"
+          }
+        },
+        "request" : {
+          "isHttpRequestable" : false,
+          "name" : " Initialize data",
+          "isVisibleOnStartList" : false
+        },
+        "triggerable" : true,
+        "task" : {
+          "responsible" : {
+            "activator" : "SYSTEM"
+          }
+        },
+        "case" : {
+          "name" : "Garage Maintenance",
+          "category" : "GarageMaintenance"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 360 }
+      },
+      "connect" : [
+        { "id" : "f19", "to" : "f14" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Customer Management System",
+          "description" : "Create a system to manage customer information and service history.",
+          "category" : "GarageMaintenance/CustomerManagement",
+          "responsible" : {
+            "activator" : "SYSTEM"
+          },
+          "customFields" : [
+            { "name" : "task", "type" : "NUMBER", "value" : "2" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 288, "y" : 360 }
+      },
+      "connect" : [
+        { "id" : "f18", "to" : "f15" }
+      ]
+    }, {
+      "id" : "f14",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Inventory Management",
+          "description" : "Develop a system to track the inventory of parts and supplies in the garage.",
+          "category" : "GarageMaintenance/InventoryManagement",
+          "responsible" : {
+            "activator" : "SYSTEM"
+          },
+          "priority" : {
+            "level" : "LOW"
+          },
+          "customFields" : [
+            { "name" : "task", "type" : "NUMBER", "value" : "1" }
+          ]
+        },
+        "output" : {
+          "map" : {
+            "out" : "in1",
+            "out.count" : "in1.count"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 192, "y" : 360 }
+      },
+      "connect" : [
+        { "id" : "f17", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f15",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Financial Tracking System",
+          "description" : "Create a system to track income and expenses for the garage business.",
+          "category" : "GarageMaintenance/FinancialTracking",
+          "responsible" : {
+            "activator" : "SYSTEM"
+          },
+          "priority" : {
+            "level" : "EXCEPTION"
+          },
+          "customFields" : [
+            { "name" : "task", "type" : "NUMBER", "value" : "3" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 392, "y" : 360 }
+      },
+      "connect" : [
+        { "id" : "f20", "to" : "f16" }
+      ]
+    }, {
+      "id" : "f16",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 480, "y" : 360 }
+      }
+    }, {
+      "id" : "f21",
+      "type" : "RequestStart",
+      "name" : "createData.ivp",
+      "config" : {
+        "signature" : "createData",
+        "input" : {
+          "map" : {
+            "out.count" : "2"
+          }
+        },
+        "request" : {
+          "name" : "Create Demo Data for Statistics"
+        },
+        "case" : {
+          "name" : "Garage Maintenance",
+          "category" : "GarageMaintenance"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f39", "to" : "f22" }
+      ]
+    }, {
+      "id" : "f22",
+      "type" : "Alternative",
+      "visual" : {
+        "at" : { "x" : 208, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f28", "to" : "f24" }
+      ]
+    }, {
+      "id" : "f23",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f37" : "in.count == 0"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 592, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f37", "to" : "f36" },
+        { "id" : "f42", "to" : "f22", "via" : [ { "x" : 592, "y" : 168 }, { "x" : 208, "y" : 168 } ] }
+      ]
+    }, {
+      "id" : "f24",
+      "type" : "TriggerCall",
+      "name" : "Start Processes/DataCreation",
+      "config" : {
+        "processCall" : "Start Processes/DataCreation:initializeData(Integer)",
+        "call" : {
+          "map" : {
+            "param.count" : "in.count"
+          },
+          "code" : "in.count --;"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 304, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f29", "to" : "f27" }
+      ]
+    }, {
+      "id" : "f25",
+      "type" : "Database",
+      "name" : [
+        "Find created",
+        "data"
+      ],
+      "config" : {
+        "query" : {
+          "dbName" : "IvySystemDatabase",
+          "sql" : {
+            "table" : "IWA_CASE",
+            "condition" : "CATEGORY = 'GarageMaintenance'"
+          }
+        },
+        "output" : {
+          "code" : [
+            "out.casesToBeUpdate = recordset.getRecords() as List;",
+            "out.count = out.casesToBeUpdate.size();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 864, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f44", "to" : "f26" }
+      ]
+    }, {
+      "id" : "f26",
+      "type" : "Alternative",
+      "visual" : {
+        "at" : { "x" : 1000, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f52", "to" : "S10" }
+      ]
+    }, {
+      "id" : "f36",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.lang.Thread;",
+            "Thread.sleep(3000);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 704, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f45", "to" : "f25" }
+      ]
+    }, {
+      "id" : "f30",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1544, "y" : 240 }
+      }
+    }, {
+      "id" : "f31",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f49" : "in.count != 0",
+          "f46" : ""
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1288, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f46", "to" : "f32" },
+        { "id" : "f49", "to" : "f26", "via" : [ { "x" : 1288, "y" : 144 }, { "x" : 1000, "y" : 144 } ] }
+      ]
+    }, {
+      "id" : "f32",
+      "type" : "Script",
+      "name" : "Reindex",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.elasticsearch.index.IndexInfo;",
+            "import ch.ivyteam.ivy.elasticsearch.client.IndexName;",
+            "import ch.ivyteam.ivy.elasticsearch.IElasticsearchManager;",
+            "// via APi change that triggers the sync, e.g. CustomField",
+            "// also applies to tasks ",
+            "",
+            "//ivy.wf.findCase(in.caseID).customFields().stringField(\"ReindexTrigger\").set(\"1\");",
+            "",
+            "//Alternativ is via api with which to trigger reindexing. ",
+            "",
+            "for (int i = 0; i < IElasticsearchManager.instance().indicesCount(); i++) {",
+            "  ",
+            "  IndexInfo indexInfo = IElasticsearchManager.instance().indices(0,10).get(i);",
+            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
+            "  IElasticsearchManager.instance().reindexSync(indexInfo.indexName());",
+            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
+            "  ",
+            "}",
+            "",
+            "",
+            "//IElasticsearchManager.instance().indices().size()",
+            "//with the indices start the reindex",
+            "// IElasticsearchManager.instance().reindex(indexName)"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1416, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f33", "to" : "f30" }
+      ]
+    }, {
+      "id" : "S10",
+      "type" : "EmbeddedProcess",
+      "name" : "Mock Data",
+      "elements" : [ {
+          "id" : "S10-f38",
+          "type" : "Database",
+          "name" : "Update task 1 data",
+          "config" : {
+            "query" : {
+              "dbName" : "IvySystemDatabase",
+              "sql" : {
+                "kind" : "ANY",
+                "stmt" : [
+                  "UPDATE IWA_TASK",
+                  "SET WORKINGTIME = <%=in.mockWorkingHourForTask1%>,",
+                  "BUSINESSRUNTIME = <%=in.mockBussinesRuntime1%>",
+                  "WHERE CASEID = <%=in.caseId%> AND CATEGORY = 'GarageMaintenance/InventoryManagement'"
+                ],
+                "quote" : true
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 520, "y" : 160 }
+          },
+          "connect" : [
+            { "id" : "S10-f41", "to" : "S10-f29" }
+          ]
+        }, {
+          "id" : "S10-f28",
+          "type" : "Database",
+          "name" : "Update case data",
+          "config" : {
+            "query" : {
+              "dbName" : "IvySystemDatabase",
+              "sql" : {
+                "kind" : "ANY",
+                "stmt" : [
+                  "UPDATE IWA_CASE",
+                  "SET STARTTIMESTAMP = DATEADD(dd,<%=in.mockStartWorkingDay%>, STARTTIMESTAMP),",
+                  "ENDTIMESTAMP = DATEADD(dd,<%=in.mockEndWorkingDay%>, STARTTIMESTAMP),",
+                  "BUSINESSRUNTIME = <%=in.mockWorkingHourForCase%>",
+                  "WHERE CASEID = <%=in.caseId%>"
+                ],
+                "quote" : true
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 368, "y" : 160 }
+          },
+          "connect" : [
+            { "id" : "S10-f40", "to" : "S10-f38" }
+          ]
+        }, {
+          "id" : "S10-f27",
+          "type" : "Script",
+          "name" : "Mock data",
+          "config" : {
+            "output" : {
+              "code" : [
+                "import Duration;",
+                "import ch.ivyteam.ivy.workflow.ICase;",
+                "import ch.ivyteam.ivy.workflow.query.CaseQuery;",
+                "import java.util.Random;",
+                "",
+                "Random rn = new Random();",
+                "in.mockStartWorkingDay = rn.nextInt(4) - 7;",
+                "in.mockEndWorkingDay =  in.mockStartWorkingDay + rn.nextInt(3) + 1;",
+                "in.caseId = in.casesToBeUpdate.get(in.count - 1).getField(\"CASEID\") as Long;",
+                "",
+                "in.mockWorkingHour= rn.nextInt(60);",
+                "in.mockWorkingHourForCase = rn.nextInt(10);",
+                "while (in.mockWorkingHourForCase < 3){",
+                "  in.mockWorkingHourForCase = rn.nextInt(10);",
+                "}",
+                "",
+                "in.mockWorkingHourForTask2 = rn.nextInt(in.mockWorkingHourForCase);",
+                "while (in.mockWorkingHourForTask2 < 20) {",
+                "  in.mockWorkingHourForTask2 = rn.nextInt(30);",
+                "}",
+                "",
+                "in.mockWorkingHourForTask1 = rn.nextInt(30);",
+                "while (in.mockWorkingHourForTask1 < 10) {",
+                "  in.mockWorkingHourForTask1 = rn.nextInt(30);",
+                "}",
+                "",
+                "in.mockWorkingHourForTask3 = in.mockWorkingHourForCase - in.mockWorkingHourForTask1 - in.mockWorkingHourForTask2;",
+                "while (in.mockWorkingHourForTask3 <= 0 || in.mockWorkingHourForTask3 < 10) {",
+                "  in.mockWorkingHourForTask3 = rn.nextInt(40);",
+                "}",
+                "",
+                "in.mockBussinesRuntime1 = 0;",
+                "",
+                "in.mockBussinesRuntime3 = 40;",
+                "",
+                "in.mockBussinesRuntime2 = 3 * (in.mockWorkingHourForCase - in. mockBussinesRuntime1 - in.mockBussinesRuntime3 );",
+                "if (in.mockBussinesRuntime2 <= 0) {",
+                "  in.mockBussinesRuntime2 = 15;",
+                "}",
+                "",
+                "in.mockWorkingHourForCase = in.mockWorkingHourForCase * 3600;",
+                "in.count--;"
+              ]
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 192, "y" : 160 },
+            "description" : "s"
+          },
+          "connect" : [
+            { "id" : "S10-f50", "to" : "S10-f28" }
+          ]
+        }, {
+          "id" : "S10-f29",
+          "type" : "Database",
+          "name" : "Update task 2 data",
+          "config" : {
+            "query" : {
+              "dbName" : "IvySystemDatabase",
+              "sql" : {
+                "kind" : "ANY",
+                "stmt" : [
+                  "UPDATE IWA_TASK",
+                  "SET WORKINGTIME = <%=in.mockWorkingHourForTask2%>,",
+                  "BUSINESSRUNTIME = <%=in.mockBussinesRuntime2%>",
+                  "WHERE CASEID = <%=in.caseId%> AND CATEGORY = 'GarageMaintenance/CustomerManagement'"
+                ],
+                "quote" : true
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 688, "y" : 160 }
+          },
+          "connect" : [
+            { "id" : "S10-f35", "to" : "S10-f34" }
+          ]
+        }, {
+          "id" : "S10-f34",
+          "type" : "Database",
+          "name" : "Update task 3 data",
+          "config" : {
+            "query" : {
+              "dbName" : "IvySystemDatabase",
+              "sql" : {
+                "kind" : "ANY",
+                "stmt" : [
+                  "UPDATE IWA_TASK",
+                  "SET WORKINGTIME = <%=in.mockWorkingHourForTask3%>,",
+                  "BUSINESSRUNTIME = <%=in.mockBussinesRuntime3%>",
+                  "WHERE CASEID = <%=in.caseId%> AND CATEGORY = 'GarageMaintenance/FinancialTracking'"
+                ]
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 840, "y" : 160 }
+          },
+          "connect" : [
+            { "id" : "S10-f1", "to" : "S10-g1" }
+          ]
+        }, {
+          "id" : "S10-g0",
+          "type" : "EmbeddedStart",
+          "name" : "in 1",
+          "visual" : {
+            "at" : { "x" : 64, "y" : 160 },
+            "labelOffset" : { "x" : 3, "y" : 23 }
+          },
+          "parentConnector" : "f52",
+          "connect" : [
+            { "id" : "S10-f0", "to" : "S10-f27" }
+          ]
+        }, {
+          "id" : "S10-g1",
+          "type" : "EmbeddedEnd",
+          "name" : "out 1",
+          "visual" : {
+            "at" : { "x" : 992, "y" : 160 },
+            "labelOffset" : { "x" : 3, "y" : 23 }
+          },
+          "parentConnector" : "f53"
+        } ],
+      "visual" : {
+        "at" : { "x" : 1144, "y" : 240 }
+      },
+      "connect" : [
+        { "id" : "f53", "to" : "f31" }
+      ]
+    }, {
+      "id" : "f27",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.lang.Thread;",
+            "Thread.sleep(600);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 496, "y" : 240 },
+        "description" : [
+          "import java.lang.Thread;",
+          "Thread.sleep(1000);"
+        ]
+      },
+      "connect" : [
+        { "id" : "f34", "to" : "f23" }
+      ]
+    }, {
+      "id" : "f35",
+      "type" : "RequestStart",
+      "name" : "initializeData.ivp",
+      "config" : {
+        "signature" : "initializeData2",
+        "input" : {
+          "params" : [
+            { "name" : "count", "type" : "Integer", "desc" : "" }
+          ],
+          "map" : {
+            "out.count" : "param.count"
+          }
+        },
+        "request" : {
+          "isHttpRequestable" : false,
+          "name" : " Initialize data",
+          "isVisibleOnStartList" : false
+        },
+        "triggerable" : true,
+        "task" : {
+          "responsible" : {
+            "activator" : "SYSTEM"
+          }
+        },
+        "case" : {
+          "name" : "System Assessment",
+          "category" : "SystemAssessment"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 464 }
+      },
+      "connect" : [
+        { "id" : "f48", "to" : "f40" }
+      ]
+    }, {
+      "id" : "f38",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Update Operating System",
+          "category" : "UpdateOperatingSystem",
+          "responsible" : {
+            "activator" : "SYSTEM"
+          },
+          "customFields" : [
+            { "name" : "task", "type" : "NUMBER", "value" : "2" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 288, "y" : 464 }
+      },
+      "connect" : [
+        { "id" : "f50", "to" : "f41" }
+      ]
+    }, {
+      "id" : "f40",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Initial System Assessment",
+          "description" : "Develop a system to track the inventory of parts and supplies in the garage.",
+          "category" : "SystemAssessment",
+          "responsible" : {
+            "activator" : "SYSTEM"
+          },
+          "priority" : {
+            "level" : "LOW"
+          },
+          "customFields" : [
+            { "name" : "task", "type" : "NUMBER", "value" : "1" }
+          ]
+        },
+        "output" : {
+          "map" : {
+            "out" : "in1",
+            "out.count" : "in1.count"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 192, "y" : 464 }
+      },
+      "connect" : [
+        { "id" : "f47", "to" : "f38" }
+      ]
+    }, {
+      "id" : "f43",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 480, "y" : 464 }
+      }
+    }, {
+      "id" : "f54",
+      "type" : "RequestStart",
+      "name" : "createData.ivp",
+      "config" : {
+        "signature" : "createData2",
+        "input" : {
+          "map" : {
+            "out.count" : "2"
+          }
+        },
+        "request" : {
+          "name" : "Create Demo Data for Statistics 2"
+        },
+        "case" : {
+          "name" : "Initial System Assessment",
+          "description" : "Conduct a comprehensive assessment of the computer system to identify current issues and performance levels.",
+          "category" : "InitialSystemAssessment"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f68", "to" : "f55" }
+      ]
+    }, {
+      "id" : "f55",
+      "type" : "Alternative",
+      "visual" : {
+        "at" : { "x" : 208, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f67", "to" : "f56" }
+      ]
+    }, {
+      "id" : "f56",
+      "type" : "TriggerCall",
+      "name" : "Start Processes/DataCreation",
+      "config" : {
+        "processCall" : "Start Processes/DataCreation:initializeData2(Integer)",
+        "call" : {
+          "map" : {
+            "param.count" : "in.count"
+          },
+          "code" : "in.count --;"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 304, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f74", "to" : "f57" }
+      ]
+    }, {
+      "id" : "f57",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.lang.Thread;",
+            "Thread.sleep(1000);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 496, "y" : 616 },
+        "description" : [
+          "import java.lang.Thread;",
+          "Thread.sleep(1000);"
+        ]
+      },
+      "connect" : [
+        { "id" : "f75", "to" : "f58" }
+      ]
+    }, {
+      "id" : "f58",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f66" : "in.count == 0"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 592, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f66", "to" : "f59" },
+        { "id" : "f69", "to" : "f55", "via" : [ { "x" : 592, "y" : 544 }, { "x" : 208, "y" : 544 } ] }
+      ]
+    }, {
+      "id" : "f59",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import java.lang.Thread;",
+            "Thread.sleep(3000);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 704, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f70", "to" : "f60" }
+      ]
+    }, {
+      "id" : "f60",
+      "type" : "Database",
+      "name" : [
+        "Find created",
+        "data"
+      ],
+      "config" : {
+        "query" : {
+          "dbName" : "IvySystemDatabase",
+          "sql" : {
+            "table" : "IWA_CASE",
+            "condition" : "CATEGORY = 'GarageMaintenance'"
+          }
+        },
+        "output" : {
+          "code" : [
+            "out.casesToBeUpdate = recordset.getRecords() as List;",
+            "out.count = out.casesToBeUpdate.size();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 864, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f65", "to" : "f61" }
+      ]
+    }, {
+      "id" : "f61",
+      "type" : "Alternative",
+      "visual" : {
+        "at" : { "x" : 1000, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f73", "to" : "S20" }
+      ]
+    }, {
+      "id" : "f62",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f76" : "in.count != 0",
+          "f72" : ""
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1288, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f72", "to" : "f63" },
+        { "id" : "f76", "to" : "f61", "via" : [ { "x" : 1288, "y" : 520 }, { "x" : 1000, "y" : 520 } ] }
+      ]
+    }, {
+      "id" : "f63",
+      "type" : "Script",
+      "name" : "Reindex",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import ch.ivyteam.ivy.elasticsearch.index.IndexInfo;",
+            "import ch.ivyteam.ivy.elasticsearch.client.IndexName;",
+            "import ch.ivyteam.ivy.elasticsearch.IElasticsearchManager;",
+            "// via APi change that triggers the sync, e.g. CustomField",
+            "// also applies to tasks ",
+            "",
+            "//ivy.wf.findCase(in.caseID).customFields().stringField(\"ReindexTrigger\").set(\"1\");",
+            "",
+            "//Alternativ is via api with which to trigger reindexing. ",
+            "",
+            "for (int i = 0; i < IElasticsearchManager.instance().indicesCount(); i++) {",
+            "  ",
+            "  IndexInfo indexInfo = IElasticsearchManager.instance().indices(0,10).get(i);",
+            "  ivy.log.info(\"Reindexing STARTED for: \" + indexInfo.indexName().toString());",
+            "  IElasticsearchManager.instance().reindexSync(indexInfo.indexName());",
+            "  ivy.log.info(\"Reindexing DONE for: \" + indexInfo.indexName().toString());",
+            "  ",
+            "}",
+            "",
+            "",
+            "//IElasticsearchManager.instance().indices().size()",
+            "//with the indices start the reindex",
+            "// IElasticsearchManager.instance().reindex(indexName)"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 1416, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f71", "to" : "f64" }
+      ]
+    }, {
+      "id" : "f64",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 1544, "y" : 616 }
+      }
+    }, {
+      "id" : "f41",
+      "type" : "TaskSwitchEvent",
+      "config" : {
+        "task" : {
+          "name" : "Optimize System Performance",
+          "description" : "Fine-tune system settings to optimize overall performance.",
+          "category" : "OptimizeSystemPerformance",
+          "responsible" : {
+            "activator" : "SYSTEM"
+          },
+          "priority" : {
+            "level" : "LOW"
+          },
+          "customFields" : [
+            { "name" : "task", "type" : "NUMBER", "value" : "3" }
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 400, "y" : 464 }
+      },
+      "connect" : [
+        { "id" : "f87", "to" : "f43" }
+      ]
+    }, {
+      "id" : "S20",
+      "type" : "EmbeddedProcess",
+      "name" : "Sub 2",
+      "elements" : [ {
+          "id" : "S20-f85",
+          "type" : "Script",
+          "name" : "Mock data",
+          "config" : {
+            "output" : {
+              "code" : [
+                "import Duration;",
+                "import ch.ivyteam.ivy.workflow.ICase;",
+                "import ch.ivyteam.ivy.workflow.query.CaseQuery;",
+                "import java.util.Random;",
+                "",
+                "Random rn = new Random();",
+                "in.mockStartWorkingDay = rn.nextInt(4) - 7;",
+                "in.mockEndWorkingDay =  in.mockStartWorkingDay + rn.nextInt(3) + 1;",
+                "in.caseId = in.casesToBeUpdate.get(in.count - 1).getField(\"CASEID\") as Long;",
+                "",
+                "in.mockWorkingHour= rn.nextInt(60);",
+                "in.mockWorkingHourForCase = rn.nextInt(10);",
+                "while (in.mockWorkingHourForCase > 7){",
+                "  in.mockWorkingHourForCase = rn.nextInt(10);",
+                "}",
+                "",
+                "in.mockWorkingHourForTask2 = rn.nextInt(in.mockWorkingHourForCase);",
+                "while (in.mockWorkingHourForTask2 < 20) {",
+                "  in.mockWorkingHourForTask2 = rn.nextInt(30);",
+                "}",
+                "",
+                "in.mockWorkingHourForTask1 = rn.nextInt(30);",
+                "while (in.mockWorkingHourForTask1 < 10) {",
+                "  in.mockWorkingHourForTask1 = rn.nextInt(30);",
+                "}",
+                "",
+                "in.mockWorkingHourForTask3 = in.mockWorkingHourForCase - in.mockWorkingHourForTask1 - in.mockWorkingHourForTask2;",
+                "while (in.mockWorkingHourForTask3 <= 0 || in.mockWorkingHourForTask3 < 10) {",
+                "  in.mockWorkingHourForTask3 = rn.nextInt(40);",
+                "}",
+                "",
+                "in.mockBussinesRuntime1 = 0;",
+                "",
+                "in.mockBussinesRuntime3 = 40;",
+                "",
+                "in.mockBussinesRuntime2 = 3 * (in.mockWorkingHourForCase - in. mockBussinesRuntime1 - in.mockBussinesRuntime3 );",
+                "if (in.mockBussinesRuntime2 <= 0) {",
+                "  in.mockBussinesRuntime2 = 15;",
+                "}",
+                "in.mockWorkingHourForCase = in.mockWorkingHourForCase * 3600;",
+                "in.count--;"
+              ]
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 192, "y" : 160 }
+          },
+          "connect" : [
+            { "id" : "S20-f79", "to" : "S20-f86" }
+          ]
+        }, {
+          "id" : "S20-f86",
+          "type" : "Database",
+          "name" : "Update case data",
+          "config" : {
+            "query" : {
+              "dbName" : "IvySystemDatabase",
+              "sql" : {
+                "kind" : "ANY",
+                "stmt" : [
+                  "UPDATE IWA_CASE",
+                  "SET STARTTIMESTAMP = DATEADD(dd,<%=in.mockStartWorkingDay%>, STARTTIMESTAMP),",
+                  "ENDTIMESTAMP = DATEADD(dd,<%=in.mockEndWorkingDay%>, STARTTIMESTAMP),",
+                  "BUSINESSRUNTIME = <%=in.mockWorkingHourForCase%>",
+                  "WHERE CASEID = <%=in.caseId%>"
+                ],
+                "quote" : true
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 368, "y" : 160 }
+          },
+          "connect" : [
+            { "id" : "S20-f83", "to" : "S20-f80" }
+          ]
+        }, {
+          "id" : "S20-f80",
+          "type" : "Database",
+          "name" : "Update task 1 data",
+          "config" : {
+            "query" : {
+              "dbName" : "IvySystemDatabase",
+              "sql" : {
+                "kind" : "ANY",
+                "stmt" : [
+                  "UPDATE IWA_TASK",
+                  "SET WORKINGTIME = <%=in.mockWorkingHourForTask1%>,",
+                  "BUSINESSRUNTIME = <%=in.mockBussinesRuntime1%>",
+                  "WHERE CASEID = <%=in.caseId%> AND CATEGORY = 'SystemAssessment'"
+                ],
+                "quote" : true
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 520, "y" : 160 }
+          },
+          "connect" : [
+            { "id" : "S20-f82", "to" : "S20-f81" }
+          ]
+        }, {
+          "id" : "S20-f81",
+          "type" : "Database",
+          "name" : "Update task 2 data",
+          "config" : {
+            "query" : {
+              "dbName" : "IvySystemDatabase",
+              "sql" : {
+                "kind" : "ANY",
+                "stmt" : [
+                  "UPDATE IWA_TASK",
+                  "SET WORKINGTIME = <%=in.mockWorkingHourForTask2%>,",
+                  "BUSINESSRUNTIME = <%=in.mockBussinesRuntime2%>",
+                  "WHERE CASEID = <%=in.caseId%> AND CATEGORY = 'UpdateOperatingSystem'"
+                ],
+                "quote" : true
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 688, "y" : 160 }
+          },
+          "connect" : [
+            { "id" : "S20-f78", "to" : "S20-f84" }
+          ]
+        }, {
+          "id" : "S20-f84",
+          "type" : "Database",
+          "name" : "Update task 3 data",
+          "config" : {
+            "query" : {
+              "dbName" : "IvySystemDatabase",
+              "sql" : {
+                "kind" : "ANY",
+                "stmt" : [
+                  "UPDATE IWA_TASK",
+                  "SET WORKINGTIME = <%=in.mockWorkingHourForTask3%>,",
+                  "BUSINESSRUNTIME = <%=in.mockBussinesRuntime3%>",
+                  "WHERE CASEID = <%=in.caseId%> AND CATEGORY = 'OptimizeSystemPerformance'"
+                ]
+              }
+            }
+          },
+          "visual" : {
+            "at" : { "x" : 840, "y" : 160 }
+          },
+          "connect" : [
+            { "id" : "S20-f1", "to" : "S20-g1" }
+          ]
+        }, {
+          "id" : "S20-g0",
+          "type" : "EmbeddedStart",
+          "name" : "in 1",
+          "visual" : {
+            "at" : { "x" : 64, "y" : 160 },
+            "labelOffset" : { "x" : 3, "y" : 23 }
+          },
+          "parentConnector" : "f73",
+          "connect" : [
+            { "id" : "S20-f0", "to" : "S20-f85" }
+          ]
+        }, {
+          "id" : "S20-g1",
+          "type" : "EmbeddedEnd",
+          "name" : "out 1",
+          "visual" : {
+            "at" : { "x" : 992, "y" : 160 },
+            "labelOffset" : { "x" : 3, "y" : 23 }
+          },
+          "parentConnector" : "f77"
+        } ],
+      "visual" : {
+        "at" : { "x" : 1144, "y" : 616 }
+      },
+      "connect" : [
+        { "id" : "f77", "to" : "f62" }
+      ]
+    } ]
+}
