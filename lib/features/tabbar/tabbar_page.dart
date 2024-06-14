@@ -286,7 +286,7 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
                         BlendMode.srcIn,
                       )
                     : ColorFilter.mode(
-                        Theme.of(context).colorScheme.secondary,
+                        Theme.of(context).colorScheme.onSecondary,
                         BlendMode.srcIn,
                       ),
               ),
@@ -295,7 +295,7 @@ class _TabBarPageState extends BasePageState<TabBarPage> {
                 style: GoogleFonts.inter(
                   color: isSelected
                       ? Theme.of(context).colorScheme.primary
-                      : Theme.of(context).colorScheme.secondary,
+                      : Theme.of(context).colorScheme.onSecondary,
                   fontSize: 13.sp,
                   fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
                 ),

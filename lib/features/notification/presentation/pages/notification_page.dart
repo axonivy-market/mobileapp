@@ -489,7 +489,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
             ),
           ],
         ),
-        child: AppListTile(
+        child: ListTile(
           shape: RoundedRectangleBorder(
             side: BorderSide(
                 color: Theme.of(context).colorScheme.outline, width: 1),
@@ -533,7 +533,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
             style: GoogleFonts.inter(
               fontSize: 13.sp,
               fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
           ),
           tileColor: Theme.of(context).colorScheme.onPrimaryContainer,

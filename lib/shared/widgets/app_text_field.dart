@@ -108,7 +108,7 @@ class _AppTextFieldState extends State<AppTextField> {
               fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
               hintText: widget.hintText,
               hintStyle: GoogleFonts.inter(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.onSecondary,
                 fontWeight: FontWeight.w400,
                 fontSize: 17.sp,
               ),

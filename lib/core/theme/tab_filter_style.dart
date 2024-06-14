@@ -60,7 +60,7 @@ class TabUnSelected extends TabFilterStyle {
       : super(
           borderRadius: radius,
           backgroundColor: Theme.of(context).colorScheme.onPrimaryContainer,
-          textColor: Theme.of(context).colorScheme.secondary,
+          textColor: Theme.of(context).colorScheme.onSecondary,
           fontWeight: FontWeight.w400,
           textButton: name,
           boxBorder: border,

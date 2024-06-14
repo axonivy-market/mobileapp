@@ -45,7 +45,7 @@ class TaskInfoRowWidget extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                       color: isTitleHighlight
                           ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.secondary),
+                          : Theme.of(context).colorScheme.onSecondary),
                 ),
               ),
             ),

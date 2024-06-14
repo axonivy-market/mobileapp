@@ -70,13 +70,11 @@ class _ProcessesPageState extends BasePageState<ProcessesPage> {
                       padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 20)
                           .r,
-                      sliver: SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                          (_, index) {
-                            return _buildProcessItem(processes, context, index);
-                          },
-                          childCount: processes.isEmpty ? 1 : processes.length,
-                        ),
+                      sliver: SliverList.separated(
+                        itemCount: processes.isEmpty ? 1 : processes.length,
+                        itemBuilder: (_, index) =>
+                            _buildProcessItem(processes, context, index),
+                        separatorBuilder: (context, index) => 10.verticalSpace,
                       ),
                     ),
                   ],
@@ -110,13 +108,11 @@ class _ProcessesPageState extends BasePageState<ProcessesPage> {
       );
     }
 
-    return GestureDetector(
+    return ProcessItemWidget(
       onTap: () {
         _navigateProcessActivity(context, processes[index]);
       },
-      child: ProcessItemWidget(
-        process: processes[index],
-      ),
+      process: processes[index],
     );
   }
 

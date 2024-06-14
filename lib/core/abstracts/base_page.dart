@@ -101,7 +101,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
                 fillColor: Theme.of(context).colorScheme.onPrimaryContainer,
                 hintStyle: GoogleFonts.inter(
                   fontSize: 17.sp,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.onSecondary,
                 ),
                 hintText: 'documentList.changeFileNameHint'.tr(),
               ),
@@ -321,7 +321,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
               message,
               textAlign: TextAlign.center,
               style: GoogleFonts.inter(
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.onSecondary,
                 fontSize: 17.sp,
                 fontWeight: FontWeight.w500,
               ),

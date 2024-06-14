@@ -164,7 +164,7 @@ class TaskDetailsWidget extends StatelessWidget {
                 style: GoogleFonts.inter(
                   fontSize: 13.sp,
                   fontWeight: FontWeight.w400,
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.onSecondary,
                 ),
               ),
             ],
