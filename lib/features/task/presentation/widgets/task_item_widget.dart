@@ -138,7 +138,7 @@ class TaskItemWidget extends StatelessWidget {
             const EdgeInsets.symmetric(horizontal: 2, vertical: 10).r,
         visualDensity: VisualDensity(
           vertical: ScreenUtil().screenHeight > 845.0
-              ? 1
+              ? 0
               : -2, // 845 is the height of the iPhone 13. Using Device Preview to check other screens
         ),
         horizontalTitleGap: 0,
