@@ -1,35 +1,40 @@
 ---
 name: Bug report
-about: Create a report to help us improve the Axon Ivy Mobile Application
-title: bug/
-labels: bug
+about: Create a report to help us improve
+title: ''
+labels: ''
 assignees: ''
 
 ---
 
-### Bug Report
+Dear @ivy-sgi, we have found the following bug: 
 
-#### Description
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-[Description of the bug]
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Go to '...'
+2. Click on '....'
+3. Scroll down to '....'
+4. See error
 
-#### Steps to Reproduce
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-1. [First step]
-2. [Second step]
-3. [Third step]
+**Screenshots**
+If applicable, add screenshots to help explain your problem.
 
-#### Expected Behavior
+**Desktop (please complete the following information):**
+ - OS: [e.g. iOS]
+ - Browser [e.g. chrome, safari]
+ - Version [e.g. 22]
 
-[What you expected to happen]
+**Smartphone (please complete the following information):**
+ - Device: [e.g. iPhone6]
+ - OS: [e.g. iOS8.1]
+ - Browser [e.g. stock browser, safari]
+ - Version [e.g. 22]
 
-#### Actual Behavior
-
-[What actually happened]
-
-#### Additional Information
-
-- **Device:** [e.g., iPhone X, Samsung Galaxy S10]
-- **OS:** [e.g., iOS 15, Android 12]
-- **App Version:** [e.g., 1.0.0]
-- **Screenshots/Video:** [If applicable, please provide screenshots or a video demonstrating the issue]
+**Additional context**
+Add any other context about the problem here.
