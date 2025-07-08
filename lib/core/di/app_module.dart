@@ -6,7 +6,7 @@ import '../app/app_dio.dart';
 @module
 abstract class AppModule {
   @preResolve
-  Future<SharedPreferences> get prefs => SharedPreferences.getInstance();
+  Future<SharedPreferences> prefs() => SharedPreferences.getInstance();
 
   @singleton
   Dio get dio => AppDio();

@@ -120,7 +120,7 @@ Future<_i1.GetIt> $initGetIt(
   );
   final appModule = _$AppModule();
   gh.factory<_i3.ConnectivityBloc>(() => _i3.ConnectivityBloc());
-  gh.singleton<_i4.Dio>(appModule.dio);
+  gh.singleton<_i4.Dio>(() => appModule.dio);
   gh.factory<_i5.DownloadFileBloc>(() => _i5.DownloadFileBloc());
   gh.factory<_i6.EngineInfoRemoteDataSource>(
       () => _i6.EngineInfoRemoteDataSource(gh<_i4.Dio>()));
@@ -157,7 +157,7 @@ Future<_i1.GetIt> $initGetIt(
   gh.factory<_i28.SearchBloc>(() => _i28.SearchBloc());
   gh.factory<_i29.SearchFilterCubit>(() => _i29.SearchFilterCubit());
   await gh.factoryAsync<_i30.SharedPreferences>(
-    () => appModule.prefs,
+    () => appModule.prefs(),
     preResolve: true,
   );
   gh.factory<_i31.SortBloc>(() => _i31.SortBloc());
@@ -193,7 +193,7 @@ Future<_i1.GetIt> $initGetIt(
   gh.factory<_i47.MarkReadNotificationUseCase>(() =>
       _i47.MarkReadNotificationUseCase(
           repository: gh<_i18.NotificationRepositoryInterface>()));
-  gh.singleton<_i48.NotificationBloc>(_i48.NotificationBloc(
+  gh.singleton<_i48.NotificationBloc>(() => _i48.NotificationBloc(
     gh<_i42.GetNotificationUseCase>(),
     gh<_i47.MarkReadNotificationUseCase>(),
     gh<_i46.MarkReadAllNotificationUseCase>(),

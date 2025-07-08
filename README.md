@@ -1,12 +1,16 @@
 # Axon Ivy Mobile Application
+
 ![Logo image for Mobile App](doc/images/overview/logo_mobile_image.png)
-[Getting Started](#getting-started) | [Feedback and Support](#feedback-and-support) | [Contributing to Axon Ivy Mobile Application](#contributing) 
+
+[Getting Started](#getting-started) | [Features](#features) | [Feedback and Support](#feedback-and-support) | [Contributing](#contributing) | [License](#license)
 
 
 ## About
 
 Welcome to the Axon Ivy Mobile Application! This app provides mobile access to your [Axon Ivy platform][axon-ivy-link], empowering process users to efficiently manage their tasks on the go. Whether you're in the office or out in the field, this app ensures that you stay connected and productive.
 
+
+## Features
 
 | Feature                           | Description                                                                                         |
 |-----------------------------------|-----------------------------------------------------------------------------------------------------|
@@ -25,7 +29,7 @@ Welcome to the Axon Ivy Mobile Application! This app provides mobile access to y
 To get started with the Axon Ivy Mobile Application, follow these steps:
 
 1. **Download the App**: Visit the App Store or Google Play Store to download the app on your mobile device.
-2. **Login**: Upon launching the app, enter your credentials and server infomation to log in to your Axon Ivy installation.
+2. **Login**: Upon launching the app, enter your credentials and server information to log in to your Axon Ivy installation.
 3. **Navigate Processes and Tasks**: Explore processes, view tasks, and start working on them as needed.
 4. **Personalize Preferences**: Access your profile to customize preferences and configure settings, including theme mode.
 

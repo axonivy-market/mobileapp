@@ -1,5 +1,3 @@
-# Security Policy
-
 ## Reporting a Vulnerability
 
 At Axon Ivy, we take security seriously. If you believe you've found a security vulnerability in our software, we encourage you to let us know right away. We investigate all reported vulnerabilities promptly.
@@ -15,7 +13,7 @@ Please refrain from publicly disclosing the vulnerability until it has been addr
 ## Response Time
 
 We strive to respond to security vulnerability reports as quickly as possible. Upon receiving your report, we will acknowledge it within 72 hours and we will release a patch as soon as possible depending on complexity, but historically within a few days.
-Please report (suspected) security vulnerabilities at https://support.axonivy.com/ . 
+Please report (suspected) security vulnerabilities at https://support.axonivy.com/.
 
 
 ## Responsible Disclosure
