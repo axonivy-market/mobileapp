@@ -2,6 +2,8 @@ name: Build & Deploy iOS Production to TestFlight
 
 on:
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   build:
     runs-on: macOS-13
