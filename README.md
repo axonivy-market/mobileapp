@@ -1,6 +1,6 @@
 # Axon Ivy Mobile Application
 
-![Logo image for Mobile App](doc/images/overview/logo_mobile_image.png)
+![Logo image for Mobile App](docs/images/overview/logo_mobile_image.png)
 
 [Getting Started](#getting-started) | [Features](#features) | [Feedback and Support](#feedback-and-support) | [Contributing](#contributing) | [License](#license)
 
@@ -33,7 +33,7 @@ To get started with the Axon Ivy Mobile Application, follow these steps:
 3. **Navigate Processes and Tasks**: Explore processes, view tasks, and start working on them as needed.
 4. **Personalize Preferences**: Access your profile to customize preferences and configure settings, including theme mode.
 
-For connection details and server link construction, see **[How to Connect Mobile App](doc/How-to-connect.md)**.
+For connection details and server link construction, see **[How to Connect Mobile App](docs/How-to-connect.md)**.
 
 ## Feedback and Support
 
