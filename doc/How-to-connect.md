@@ -27,7 +27,7 @@ No required settings or steps to activate the API on the Engine.
 
 With base url `https://mobile-demo-server.ivy-cloud.com`:
 
-| Security system | Backend API                                        | Mobile app link                             |
+| Security system | Backend API                                         | Mobile app link                             |
 |-----------------|-----------------------------------------------------|---------------------------------------------|
 | default         | https://mobile-demo-server.ivy-cloud.com/api        | https://mobile-demo-server.ivy-cloud.com    |
 | portal          | https://mobile-demo-server.ivy-cloud.com/portal/api | https://mobile-demo-server.ivy-cloud.com/portal |
@@ -35,7 +35,7 @@ With base url `https://mobile-demo-server.ivy-cloud.com`:
 With base url `http://portal01.server.ivy-cloud.com:8001`:
 
 | Security system | Backend API                                              | Mobile app link                                    |
-|-----------------|-----------------------------------------------------------|----------------------------------------------------|
+|-----------------|-----------------------------------------------------------|---------------------------------------------------|
 | default         | http://portal01.server.ivy-cloud.com:8001/api            | http://portal01.server.ivy-cloud.com:8001          |
 | portal          | http://portal01.server.ivy-cloud.com:8001/portal/api     | http://portal01.server.ivy-cloud.com:8001/portal   |
 
@@ -60,14 +60,10 @@ This is a bit tricky. You could use Cockpit for a formal check if needed.
 
 ### How to know security system in Cockpit
 
-Refer to Cockpit screenshots for security system identification.
-
 For detailed Cockpit documentation on security systems, see:
 https://developer.axonivy.com/doc/12.0/en/engine-guide/reference/engine-cockpit/security.html
 
 ### How to know Backend API in Cockpit
-
-Refer to Cockpit screenshots for Backend API discovery.
 
 For the API documentation of Axon Ivy Engine REST in Cockpit, see:
 https://developer.axonivy.com/doc/12.0/en/concepts/3rd-party-integration/restapi.html
