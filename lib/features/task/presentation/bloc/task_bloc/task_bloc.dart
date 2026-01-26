@@ -21,16 +21,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:injectable/injectable.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:http/http.dart' as http;
+import 'package:injectable/injectable.dart';
 
 import '../../../../../core/app/app.dart';
 
 part 'task_bloc.freezed.dart';
-
 part 'task_event.dart';
-
 part 'task_state.dart';
 
 @injectable
@@ -55,6 +53,7 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       this._deleteFileUseCase)
       : super(const TaskState.loading(false)) {
     on<_GetTasks>(_getTasks);
+    on<_PullToRefresh>(_pullToRefresh);
     on<_FilterTasks>(_filterTasks);
     on<_SortTasks>(_sortTasks);
     on<ShowOfflinePopupEvent>(_showOfflinePopupEvent);
@@ -142,6 +141,29 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
               tasks: _sortTasksLocal(activeSortType.getMainSortType()!,
                   activeSortType.getSubTypeActive()!)));
         }
+    }
+  }
+
+  Future _pullToRefresh(event, Emitter emit) async {
+    try {
+      final tasks = await _taskRepository.execute();
+      emit(const TaskState.loading(false));
+      tasks.fold(
+        (l) {
+          isOfflineMode = true;
+          add(const TaskEvent.showTasksOffline());
+        },
+        (r) {
+          isOfflineMode = false;
+          SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
+          this.tasks.clear();
+          this.tasks.addAll(r);
+          add(const TaskEvent.onTasksLoadedSync());
+        },
+      );
+    } catch (e) {
+      isOfflineMode = true;
+      add(const TaskEvent.showTasksOffline());
     }
   }
 
