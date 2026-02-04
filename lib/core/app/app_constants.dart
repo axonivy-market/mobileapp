@@ -12,4 +12,5 @@ class Constants {
   static const formUrlEncodedContentType = "application/x-www-form-urlencoded";
   static const taskBox = "task_box";
   static const endTaskUrlPattern = 'end?endedTaskId=';
+  static const insecureConnectionError = 'INSECURE_CONNECTION';
 }

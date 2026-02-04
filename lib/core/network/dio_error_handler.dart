@@ -1,5 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/shared/resources/string_manager.dart';
 import 'package:dio/dio.dart';
@@ -35,6 +36,9 @@ Failure _handleError(DioException error) {
         return DataSource.DEFAULT.getFailure();
       }
     case DioExceptionType.cancel:
+      if (error.error == Constants.insecureConnectionError) {
+        return DataSource.INSECURE_CONNECTION.getFailure();
+      }
       return DataSource.CANCEL.getFailure();
     case DioExceptionType.connectionError:
       return DataSource.CONNECTION_ERROR.getFailure();
@@ -60,6 +64,7 @@ enum DataSource {
   CACHE_ERROR,
   NO_INTERNET_CONNECTION,
   CONNECTION_ERROR,
+  INSECURE_CONNECTION,
   UNKNOWN,
   DEFAULT
 }
@@ -105,6 +110,9 @@ extension DataSourceExtension on DataSource {
       case DataSource.CONNECTION_ERROR:
         return Failure(ResponseCode.CONNECTION_ERROR,
             ResponseMessage.CONNECTION_ERROR.tr());
+      case DataSource.INSECURE_CONNECTION:
+        return Failure(ResponseCode.INSECURE_CONNECTION,
+            ResponseMessage.INSECURE_CONNECTION.tr());
       case DataSource.UNKNOWN:
         return Failure(ResponseCode.DEFAULT, ResponseMessage.DEFAULT.tr());
       case DataSource.DEFAULT:
@@ -130,7 +138,8 @@ class ResponseCode {
   static const int CACHE_ERROR = -5;
   static const int NO_INTERNET_CONNECTION = -6;
   static const int CONNECTION_ERROR = -7;
-  static const int DEFAULT = -8;
+  static const int INSECURE_CONNECTION = -8;
+  static const int DEFAULT = -9;
 }
 
 class ResponseMessage {
@@ -156,6 +165,7 @@ class ResponseMessage {
   static const String CACHE_ERROR = AppStrings.strCacheError;
   static const String NO_INTERNET_CONNECTION = AppStrings.strNoInternetError;
   static const String CONNECTION_ERROR = AppStrings.strConnectionError;
+  static const String INSECURE_CONNECTION = AppStrings.strInsecureConnectionError;
   static const String DEFAULT = AppStrings.strDefaultError;
 }
 

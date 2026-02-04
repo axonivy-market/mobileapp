@@ -7,8 +7,12 @@ import 'package:hive/hive.dart';
 class SecureStorage {
   static const encryptionKey = "encryptionKey";
 
+  static AndroidOptions _getAndroidOptions() => const AndroidOptions(
+        encryptedSharedPreferences: true,
+      );
+
   static Future<Uint8List> encryptionKeyUint8List() async {
-    const secureStorage = FlutterSecureStorage();
+    final secureStorage = FlutterSecureStorage(aOptions: _getAndroidOptions());
     final encryptionKeyString = await secureStorage.read(key: 'encryptionKey');
     if (encryptionKeyString == null) {
       final key = Hive.generateSecureKey();
