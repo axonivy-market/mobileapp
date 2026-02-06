@@ -2,6 +2,7 @@ import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/features/profile/domain/entities/qr/qr_model.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
+import 'package:axon_ivy/shared/storage/secure_storage.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -178,13 +179,13 @@ class _LoginPageState extends BasePageState<LoginPage> {
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             FocusScope.of(context).unfocus();
                             SharedPrefs.setBaseUrl(_urlTextController.text);
-                            SharedPrefs.setPassword(
-                                _passwordTextController.text);
-                            SharedPrefs.setUsername(
-                                _usernameTextController.text);
+                            await SecureStorage.saveCredentials(
+                              username: _usernameTextController.text,
+                              password: _passwordTextController.text,
+                            );
                             _loginBloc.add(LoginEvent.submitLogin(
                                 _urlTextController.text,
                                 _passwordTextController.text,

@@ -45,7 +45,7 @@ class _QRParentPageState extends State<QRParentPage> {
               fontSize: 17.sp,
               fontWeight: FontWeight.w500),
         ),
-        leading: BackButtonWidget(),
+        leading: const BackButtonWidget(),
       ),
       body: _buildQrView(context),
     );

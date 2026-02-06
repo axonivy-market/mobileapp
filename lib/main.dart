@@ -18,6 +18,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await AppConfig.loadEnv(Environment.prod);
   await DemoConfig.loadDemoConfig();
+  await SecureStorage.loadCredentials();
   await Hive.initHiveFlutter();
   Hive.registerAdapter(TaskIvyAdapter());
   Hive.registerAdapter(CaseTaskAdapter());

@@ -5,6 +5,7 @@ import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/shared/storage/secure_storage.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -38,10 +39,9 @@ class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
   }
 
   Future downloadFile(DownloadFileEvent event, Emitter emit) async {
-    final username = SharedPrefs.getUsername;
-    final password = SharedPrefs.getPassword;
-    String basicAuth =
-        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+    final username = SecureStorage.username ?? '';
+    final password = SecureStorage.password ?? '';
+    final basicAuth = 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
     emit(const DownloadFileState.loading());
     try {
       final response = await http.get(
