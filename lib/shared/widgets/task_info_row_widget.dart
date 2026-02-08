@@ -32,7 +32,7 @@ class TaskInfoRowWidget extends StatelessWidget {
               style: GoogleFonts.inter(
                 fontSize: 13.sp,
                 fontWeight: FontWeight.w600,
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             Expanded(

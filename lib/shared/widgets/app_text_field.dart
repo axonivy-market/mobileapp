@@ -81,7 +81,7 @@ class _AppTextFieldState extends State<AppTextField> {
           style: GoogleFonts.inter(
               fontSize: 17.sp,
               fontWeight: FontWeight.w400,
-              color: Theme.of(context).colorScheme.surface),
+              color: Theme.of(context).colorScheme.onSurface),
           validator: widget.validator,
           inputFormatters: widget.inputFormatters,
           onTap: widget.onTap,

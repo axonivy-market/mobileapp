@@ -29,9 +29,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       scrolledUnderElevation: scrolledUnderElevation,
-      backgroundColor: Theme.of(context).colorScheme.background,
-      shadowColor: Colors.black.withOpacity(0.3),
-      surfaceTintColor: Theme.of(context).colorScheme.background,
+      backgroundColor: Theme.of(context).colorScheme.surface,
+      shadowColor: Colors.black.withValues(alpha: 0.3),
+      surfaceTintColor: Theme.of(context).colorScheme.surface,
       elevation: 0,
       leadingWidth: 120.w,
       leading: Padding(
@@ -56,7 +56,7 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                     },
                     icon: AppAssets.icons.notification.svg(
                       colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.surface,
+                        Theme.of(context).colorScheme.onSurface,
                         BlendMode.srcIn,
                       ),
                     ),

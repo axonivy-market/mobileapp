@@ -43,7 +43,7 @@ SvgPicture getIconDefaultIcon(BuildContext context) {
       height: 14.0.h,
       width: 14.h,
       colorFilter: ColorFilter.mode(
-          Theme.of(context).colorScheme.surface, BlendMode.srcIn));
+          Theme.of(context).colorScheme.onSurface, BlendMode.srcIn));
 }
 
 SvgPicture getStreamLineIcon({required String name}) {

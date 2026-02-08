@@ -60,7 +60,7 @@ class _SearchTextFieldState extends State<SearchTextField> {
           child: TextField(
             controller: _textController,
             style: GoogleFonts.inter(
-                color: Theme.of(context).colorScheme.surface,
+                color: Theme.of(context).colorScheme.onSurface,
                 fontWeight: FontWeight.w400,
                 fontSize: 17.sp),
             cursorColor: Theme.of(context).colorScheme.primary,

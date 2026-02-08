@@ -36,7 +36,7 @@ class LoginWidget extends StatelessWidget {
                 style: GoogleFonts.inter(
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.surface),
+                    color: Theme.of(context).colorScheme.onSurface),
               ),
               20.verticalSpace,
               Row(
@@ -66,7 +66,7 @@ class LoginWidget extends StatelessWidget {
                           style: GoogleFonts.inter(
                               fontSize: 17.sp,
                               fontWeight: FontWeight.w500,
-                              color: Theme.of(context).colorScheme.onSurface),
+                              color: Theme.of(context).colorScheme.onPrimary),
                         ),
                       ),
                     ),
