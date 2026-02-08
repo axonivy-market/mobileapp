@@ -16,7 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:open_file_plus/open_file_plus.dart';
+import 'package:open_filex/open_filex.dart';
 
 class DocumentListPage extends BasePage {
   const DocumentListPage({super.key, required this.task});
@@ -164,7 +164,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                     message: state.error);
               } else if (state is PreviewSuccessState) {
                 hideLoading();
-                openResult = await OpenFile.open(state.filePath);
+                openResult = await OpenFilex.open(state.filePath);
                 if (openResult != null && openResult?.type != ResultType.done) {
                   showMessageDialog(
                       title: "documentList.errorTitle".tr(),
