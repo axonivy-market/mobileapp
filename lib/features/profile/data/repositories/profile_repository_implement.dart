@@ -3,7 +3,7 @@ import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/features/profile/data/datasources/profile_remote_data_source.dart';
 import 'package:axon_ivy/features/profile/domain/entities/profile/profile.dart';
 import 'package:axon_ivy/features/profile/domain/repositories/profile_repository_interface.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: ProfileRepositoryInterface)

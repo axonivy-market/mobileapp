@@ -5,7 +5,7 @@ part 'customfield.freezed.dart';
 part 'customfield.g.dart';
 
 @freezed
-class CustomField with _$CustomField {
+abstract class CustomField with _$CustomField {
   factory CustomField({
     @Default('') String name,
     @Default('') String value,

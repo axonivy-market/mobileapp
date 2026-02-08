@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,11 +9,8 @@ part of 'search_result.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
 SearchResult _$SearchResultFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType']) {
     case 'sectionHeader':
@@ -31,96 +28,295 @@ SearchResult _$SearchResultFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$SearchResult {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String title) sectionHeader,
-    required TResult Function(TaskIvy task) task,
-    required TResult Function(Process process) process,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String title)? sectionHeader,
-    TResult? Function(TaskIvy task)? task,
-    TResult? Function(Process process)? process,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String title)? sectionHeader,
-    TResult Function(TaskIvy task)? task,
-    TResult Function(Process process)? process,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SectionHeader value) sectionHeader,
-    required TResult Function(TaskItem value) task,
-    required TResult Function(ProcessItem value) process,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SectionHeader value)? sectionHeader,
-    TResult? Function(TaskItem value)? task,
-    TResult? Function(ProcessItem value)? process,
-  }) =>
-      throw _privateConstructorUsedError;
+  /// Serializes this SearchResult to a JSON map.
+  Map<String, dynamic> toJson();
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is SearchResult);
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'SearchResult()';
+  }
+}
+
+/// @nodoc
+class $SearchResultCopyWith<$Res> {
+  $SearchResultCopyWith(SearchResult _, $Res Function(SearchResult) __);
+}
+
+/// Adds pattern-matching-related methods to [SearchResult].
+extension SearchResultPatterns on SearchResult {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(SectionHeader value)? sectionHeader,
     TResult Function(TaskItem value)? task,
     TResult Function(ProcessItem value)? process,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case SectionHeader() when sectionHeader != null:
+        return sectionHeader(_that);
+      case TaskItem() when task != null:
+        return task(_that);
+      case ProcessItem() when process != null:
+        return process(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(SectionHeader value) sectionHeader,
+    required TResult Function(TaskItem value) task,
+    required TResult Function(ProcessItem value) process,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case SectionHeader():
+        return sectionHeader(_that);
+      case TaskItem():
+        return task(_that);
+      case ProcessItem():
+        return process(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(SectionHeader value)? sectionHeader,
+    TResult? Function(TaskItem value)? task,
+    TResult? Function(ProcessItem value)? process,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case SectionHeader() when sectionHeader != null:
+        return sectionHeader(_that);
+      case TaskItem() when task != null:
+        return task(_that);
+      case ProcessItem() when process != null:
+        return process(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String title)? sectionHeader,
+    TResult Function(TaskIvy task)? task,
+    TResult Function(Process process)? process,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case SectionHeader() when sectionHeader != null:
+        return sectionHeader(_that.title);
+      case TaskItem() when task != null:
+        return task(_that.task);
+      case ProcessItem() when process != null:
+        return process(_that.process);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String title) sectionHeader,
+    required TResult Function(TaskIvy task) task,
+    required TResult Function(Process process) process,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case SectionHeader():
+        return sectionHeader(_that.title);
+      case TaskItem():
+        return task(_that.task);
+      case ProcessItem():
+        return process(_that.process);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String title)? sectionHeader,
+    TResult? Function(TaskIvy task)? task,
+    TResult? Function(Process process)? process,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case SectionHeader() when sectionHeader != null:
+        return sectionHeader(_that.title);
+      case TaskItem() when task != null:
+        return task(_that.task);
+      case ProcessItem() when process != null:
+        return process(_that.process);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
-abstract class $SearchResultCopyWith<$Res> {
-  factory $SearchResultCopyWith(
-          SearchResult value, $Res Function(SearchResult) then) =
-      _$SearchResultCopyWithImpl<$Res, SearchResult>;
+@JsonSerializable()
+class SectionHeader implements SearchResult {
+  const SectionHeader(this.title, {final String? $type})
+      : $type = $type ?? 'sectionHeader';
+  factory SectionHeader.fromJson(Map<String, dynamic> json) =>
+      _$SectionHeaderFromJson(json);
+
+  final String title;
+
+  @JsonKey(name: 'runtimeType')
+  final String $type;
+
+  /// Create a copy of SearchResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $SectionHeaderCopyWith<SectionHeader> get copyWith =>
+      _$SectionHeaderCopyWithImpl<SectionHeader>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SectionHeaderToJson(
+      this,
+    );
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is SectionHeader &&
+            (identical(other.title, title) || other.title == title));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, title);
+
+  @override
+  String toString() {
+    return 'SearchResult.sectionHeader(title: $title)';
+  }
 }
 
 /// @nodoc
-class _$SearchResultCopyWithImpl<$Res, $Val extends SearchResult>
+abstract mixin class $SectionHeaderCopyWith<$Res>
     implements $SearchResultCopyWith<$Res> {
-  _$SearchResultCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$SectionHeaderImplCopyWith<$Res> {
-  factory _$$SectionHeaderImplCopyWith(
-          _$SectionHeaderImpl value, $Res Function(_$SectionHeaderImpl) then) =
-      __$$SectionHeaderImplCopyWithImpl<$Res>;
+  factory $SectionHeaderCopyWith(
+          SectionHeader value, $Res Function(SectionHeader) _then) =
+      _$SectionHeaderCopyWithImpl;
   @useResult
   $Res call({String title});
 }
 
 /// @nodoc
-class __$$SectionHeaderImplCopyWithImpl<$Res>
-    extends _$SearchResultCopyWithImpl<$Res, _$SectionHeaderImpl>
-    implements _$$SectionHeaderImplCopyWith<$Res> {
-  __$$SectionHeaderImplCopyWithImpl(
-      _$SectionHeaderImpl _value, $Res Function(_$SectionHeaderImpl) _then)
-      : super(_value, _then);
+class _$SectionHeaderCopyWithImpl<$Res>
+    implements $SectionHeaderCopyWith<$Res> {
+  _$SectionHeaderCopyWithImpl(this._self, this._then);
 
+  final SectionHeader _self;
+  final $Res Function(SectionHeader) _then;
+
+  /// Create a copy of SearchResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? title = null,
   }) {
-    return _then(_$SectionHeaderImpl(
+    return _then(SectionHeader(
       null == title
-          ? _value.title
+          ? _self.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -129,135 +325,53 @@ class __$$SectionHeaderImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$SectionHeaderImpl implements SectionHeader {
-  const _$SectionHeaderImpl(this.title, {final String? $type})
-      : $type = $type ?? 'sectionHeader';
+class TaskItem implements SearchResult {
+  const TaskItem(this.task, {final String? $type}) : $type = $type ?? 'task';
+  factory TaskItem.fromJson(Map<String, dynamic> json) =>
+      _$TaskItemFromJson(json);
 
-  factory _$SectionHeaderImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SectionHeaderImplFromJson(json);
-
-  @override
-  final String title;
+  final TaskIvy task;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
-  @override
-  String toString() {
-    return 'SearchResult.sectionHeader(title: $title)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SectionHeaderImpl &&
-            (identical(other.title, title) || other.title == title));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, title);
-
-  @JsonKey(ignore: true)
-  @override
+  /// Create a copy of SearchResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$$SectionHeaderImplCopyWith<_$SectionHeaderImpl> get copyWith =>
-      __$$SectionHeaderImplCopyWithImpl<_$SectionHeaderImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String title) sectionHeader,
-    required TResult Function(TaskIvy task) task,
-    required TResult Function(Process process) process,
-  }) {
-    return sectionHeader(title);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String title)? sectionHeader,
-    TResult? Function(TaskIvy task)? task,
-    TResult? Function(Process process)? process,
-  }) {
-    return sectionHeader?.call(title);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String title)? sectionHeader,
-    TResult Function(TaskIvy task)? task,
-    TResult Function(Process process)? process,
-    required TResult orElse(),
-  }) {
-    if (sectionHeader != null) {
-      return sectionHeader(title);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SectionHeader value) sectionHeader,
-    required TResult Function(TaskItem value) task,
-    required TResult Function(ProcessItem value) process,
-  }) {
-    return sectionHeader(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SectionHeader value)? sectionHeader,
-    TResult? Function(TaskItem value)? task,
-    TResult? Function(ProcessItem value)? process,
-  }) {
-    return sectionHeader?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SectionHeader value)? sectionHeader,
-    TResult Function(TaskItem value)? task,
-    TResult Function(ProcessItem value)? process,
-    required TResult orElse(),
-  }) {
-    if (sectionHeader != null) {
-      return sectionHeader(this);
-    }
-    return orElse();
-  }
+  $TaskItemCopyWith<TaskItem> get copyWith =>
+      _$TaskItemCopyWithImpl<TaskItem>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$SectionHeaderImplToJson(
+    return _$TaskItemToJson(
       this,
     );
   }
-}
 
-abstract class SectionHeader implements SearchResult {
-  const factory SectionHeader(final String title) = _$SectionHeaderImpl;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TaskItem &&
+            (identical(other.task, task) || other.task == task));
+  }
 
-  factory SectionHeader.fromJson(Map<String, dynamic> json) =
-      _$SectionHeaderImpl.fromJson;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, task);
 
-  String get title;
-  @JsonKey(ignore: true)
-  _$$SectionHeaderImplCopyWith<_$SectionHeaderImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @override
+  String toString() {
+    return 'SearchResult.task(task: $task)';
+  }
 }
 
 /// @nodoc
-abstract class _$$TaskItemImplCopyWith<$Res> {
-  factory _$$TaskItemImplCopyWith(
-          _$TaskItemImpl value, $Res Function(_$TaskItemImpl) then) =
-      __$$TaskItemImplCopyWithImpl<$Res>;
+abstract mixin class $TaskItemCopyWith<$Res>
+    implements $SearchResultCopyWith<$Res> {
+  factory $TaskItemCopyWith(TaskItem value, $Res Function(TaskItem) _then) =
+      _$TaskItemCopyWithImpl;
   @useResult
   $Res call({TaskIvy task});
 
@@ -265,166 +379,87 @@ abstract class _$$TaskItemImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TaskItemImplCopyWithImpl<$Res>
-    extends _$SearchResultCopyWithImpl<$Res, _$TaskItemImpl>
-    implements _$$TaskItemImplCopyWith<$Res> {
-  __$$TaskItemImplCopyWithImpl(
-      _$TaskItemImpl _value, $Res Function(_$TaskItemImpl) _then)
-      : super(_value, _then);
+class _$TaskItemCopyWithImpl<$Res> implements $TaskItemCopyWith<$Res> {
+  _$TaskItemCopyWithImpl(this._self, this._then);
 
+  final TaskItem _self;
+  final $Res Function(TaskItem) _then;
+
+  /// Create a copy of SearchResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? task = null,
   }) {
-    return _then(_$TaskItemImpl(
+    return _then(TaskItem(
       null == task
-          ? _value.task
+          ? _self.task
           : task // ignore: cast_nullable_to_non_nullable
               as TaskIvy,
     ));
   }
 
+  /// Create a copy of SearchResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TaskIvyCopyWith<$Res> get task {
-    return $TaskIvyCopyWith<$Res>(_value.task, (value) {
-      return _then(_value.copyWith(task: value));
+    return $TaskIvyCopyWith<$Res>(_self.task, (value) {
+      return _then(_self.copyWith(task: value));
     });
   }
 }
 
 /// @nodoc
 @JsonSerializable()
-class _$TaskItemImpl implements TaskItem {
-  const _$TaskItemImpl(this.task, {final String? $type})
-      : $type = $type ?? 'task';
+class ProcessItem implements SearchResult {
+  ProcessItem(this.process, {final String? $type}) : $type = $type ?? 'process';
+  factory ProcessItem.fromJson(Map<String, dynamic> json) =>
+      _$ProcessItemFromJson(json);
 
-  factory _$TaskItemImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TaskItemImplFromJson(json);
-
-  @override
-  final TaskIvy task;
+  final Process process;
 
   @JsonKey(name: 'runtimeType')
   final String $type;
 
-  @override
-  String toString() {
-    return 'SearchResult.task(task: $task)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TaskItemImpl &&
-            (identical(other.task, task) || other.task == task));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, task);
-
-  @JsonKey(ignore: true)
-  @override
+  /// Create a copy of SearchResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$$TaskItemImplCopyWith<_$TaskItemImpl> get copyWith =>
-      __$$TaskItemImplCopyWithImpl<_$TaskItemImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String title) sectionHeader,
-    required TResult Function(TaskIvy task) task,
-    required TResult Function(Process process) process,
-  }) {
-    return task(this.task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String title)? sectionHeader,
-    TResult? Function(TaskIvy task)? task,
-    TResult? Function(Process process)? process,
-  }) {
-    return task?.call(this.task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String title)? sectionHeader,
-    TResult Function(TaskIvy task)? task,
-    TResult Function(Process process)? process,
-    required TResult orElse(),
-  }) {
-    if (task != null) {
-      return task(this.task);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SectionHeader value) sectionHeader,
-    required TResult Function(TaskItem value) task,
-    required TResult Function(ProcessItem value) process,
-  }) {
-    return task(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SectionHeader value)? sectionHeader,
-    TResult? Function(TaskItem value)? task,
-    TResult? Function(ProcessItem value)? process,
-  }) {
-    return task?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SectionHeader value)? sectionHeader,
-    TResult Function(TaskItem value)? task,
-    TResult Function(ProcessItem value)? process,
-    required TResult orElse(),
-  }) {
-    if (task != null) {
-      return task(this);
-    }
-    return orElse();
-  }
+  $ProcessItemCopyWith<ProcessItem> get copyWith =>
+      _$ProcessItemCopyWithImpl<ProcessItem>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$TaskItemImplToJson(
+    return _$ProcessItemToJson(
       this,
     );
   }
-}
 
-abstract class TaskItem implements SearchResult {
-  const factory TaskItem(final TaskIvy task) = _$TaskItemImpl;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ProcessItem &&
+            (identical(other.process, process) || other.process == process));
+  }
 
-  factory TaskItem.fromJson(Map<String, dynamic> json) =
-      _$TaskItemImpl.fromJson;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, process);
 
-  TaskIvy get task;
-  @JsonKey(ignore: true)
-  _$$TaskItemImplCopyWith<_$TaskItemImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @override
+  String toString() {
+    return 'SearchResult.process(process: $process)';
+  }
 }
 
 /// @nodoc
-abstract class _$$ProcessItemImplCopyWith<$Res> {
-  factory _$$ProcessItemImplCopyWith(
-          _$ProcessItemImpl value, $Res Function(_$ProcessItemImpl) then) =
-      __$$ProcessItemImplCopyWithImpl<$Res>;
+abstract mixin class $ProcessItemCopyWith<$Res>
+    implements $SearchResultCopyWith<$Res> {
+  factory $ProcessItemCopyWith(
+          ProcessItem value, $Res Function(ProcessItem) _then) =
+      _$ProcessItemCopyWithImpl;
   @useResult
   $Res call({Process process});
 
@@ -432,157 +467,35 @@ abstract class _$$ProcessItemImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ProcessItemImplCopyWithImpl<$Res>
-    extends _$SearchResultCopyWithImpl<$Res, _$ProcessItemImpl>
-    implements _$$ProcessItemImplCopyWith<$Res> {
-  __$$ProcessItemImplCopyWithImpl(
-      _$ProcessItemImpl _value, $Res Function(_$ProcessItemImpl) _then)
-      : super(_value, _then);
+class _$ProcessItemCopyWithImpl<$Res> implements $ProcessItemCopyWith<$Res> {
+  _$ProcessItemCopyWithImpl(this._self, this._then);
 
+  final ProcessItem _self;
+  final $Res Function(ProcessItem) _then;
+
+  /// Create a copy of SearchResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? process = null,
   }) {
-    return _then(_$ProcessItemImpl(
+    return _then(ProcessItem(
       null == process
-          ? _value.process
+          ? _self.process
           : process // ignore: cast_nullable_to_non_nullable
               as Process,
     ));
   }
 
+  /// Create a copy of SearchResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProcessCopyWith<$Res> get process {
-    return $ProcessCopyWith<$Res>(_value.process, (value) {
-      return _then(_value.copyWith(process: value));
+    return $ProcessCopyWith<$Res>(_self.process, (value) {
+      return _then(_self.copyWith(process: value));
     });
   }
 }
 
-/// @nodoc
-@JsonSerializable()
-class _$ProcessItemImpl implements ProcessItem {
-  _$ProcessItemImpl(this.process, {final String? $type})
-      : $type = $type ?? 'process';
-
-  factory _$ProcessItemImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProcessItemImplFromJson(json);
-
-  @override
-  final Process process;
-
-  @JsonKey(name: 'runtimeType')
-  final String $type;
-
-  @override
-  String toString() {
-    return 'SearchResult.process(process: $process)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ProcessItemImpl &&
-            (identical(other.process, process) || other.process == process));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, process);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ProcessItemImplCopyWith<_$ProcessItemImpl> get copyWith =>
-      __$$ProcessItemImplCopyWithImpl<_$ProcessItemImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String title) sectionHeader,
-    required TResult Function(TaskIvy task) task,
-    required TResult Function(Process process) process,
-  }) {
-    return process(this.process);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String title)? sectionHeader,
-    TResult? Function(TaskIvy task)? task,
-    TResult? Function(Process process)? process,
-  }) {
-    return process?.call(this.process);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String title)? sectionHeader,
-    TResult Function(TaskIvy task)? task,
-    TResult Function(Process process)? process,
-    required TResult orElse(),
-  }) {
-    if (process != null) {
-      return process(this.process);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(SectionHeader value) sectionHeader,
-    required TResult Function(TaskItem value) task,
-    required TResult Function(ProcessItem value) process,
-  }) {
-    return process(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(SectionHeader value)? sectionHeader,
-    TResult? Function(TaskItem value)? task,
-    TResult? Function(ProcessItem value)? process,
-  }) {
-    return process?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(SectionHeader value)? sectionHeader,
-    TResult Function(TaskItem value)? task,
-    TResult Function(ProcessItem value)? process,
-    required TResult orElse(),
-  }) {
-    if (process != null) {
-      return process(this);
-    }
-    return orElse();
-  }
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ProcessItemImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class ProcessItem implements SearchResult {
-  factory ProcessItem(final Process process) = _$ProcessItemImpl;
-
-  factory ProcessItem.fromJson(Map<String, dynamic> json) =
-      _$ProcessItemImpl.fromJson;
-
-  Process get process;
-  @JsonKey(ignore: true)
-  _$$ProcessItemImplCopyWith<_$ProcessItemImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

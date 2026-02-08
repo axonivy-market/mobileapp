@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,98 +9,66 @@ part of 'process.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-Process _$ProcessFromJson(Map<String, dynamic> json) {
-  return _Process.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Process {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get description => throw _privateConstructorUsedError;
-  String get activatorName => throw _privateConstructorUsedError;
-  String get fullRequestPath => throw _privateConstructorUsedError;
-  List<CustomField> get customFields => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  String get description;
+  String get activatorName;
+  String get fullRequestPath;
+  List<CustomField> get customFields;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ProcessCopyWith<Process> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ProcessCopyWith<$Res> {
-  factory $ProcessCopyWith(Process value, $Res Function(Process) then) =
-      _$ProcessCopyWithImpl<$Res, Process>;
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      String description,
-      String activatorName,
-      String fullRequestPath,
-      List<CustomField> customFields});
-}
-
-/// @nodoc
-class _$ProcessCopyWithImpl<$Res, $Val extends Process>
-    implements $ProcessCopyWith<$Res> {
-  _$ProcessCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Process
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $ProcessCopyWith<Process> get copyWith =>
+      _$ProcessCopyWithImpl<Process>(this as Process, _$identity);
+
+  /// Serializes this Process to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? description = null,
-    Object? activatorName = null,
-    Object? fullRequestPath = null,
-    Object? customFields = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      description: null == description
-          ? _value.description
-          : description // ignore: cast_nullable_to_non_nullable
-              as String,
-      activatorName: null == activatorName
-          ? _value.activatorName
-          : activatorName // ignore: cast_nullable_to_non_nullable
-              as String,
-      fullRequestPath: null == fullRequestPath
-          ? _value.fullRequestPath
-          : fullRequestPath // ignore: cast_nullable_to_non_nullable
-              as String,
-      customFields: null == customFields
-          ? _value.customFields
-          : customFields // ignore: cast_nullable_to_non_nullable
-              as List<CustomField>,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Process &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.description, description) ||
+                other.description == description) &&
+            (identical(other.activatorName, activatorName) ||
+                other.activatorName == activatorName) &&
+            (identical(other.fullRequestPath, fullRequestPath) ||
+                other.fullRequestPath == fullRequestPath) &&
+            const DeepCollectionEquality()
+                .equals(other.customFields, customFields));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      name,
+      description,
+      activatorName,
+      fullRequestPath,
+      const DeepCollectionEquality().hash(customFields));
+
+  @override
+  String toString() {
+    return 'Process(id: $id, name: $name, description: $description, activatorName: $activatorName, fullRequestPath: $fullRequestPath, customFields: $customFields)';
   }
 }
 
 /// @nodoc
-abstract class _$$ProcessImplCopyWith<$Res> implements $ProcessCopyWith<$Res> {
-  factory _$$ProcessImplCopyWith(
-          _$ProcessImpl value, $Res Function(_$ProcessImpl) then) =
-      __$$ProcessImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ProcessCopyWith<$Res> {
+  factory $ProcessCopyWith(Process value, $Res Function(Process) _then) =
+      _$ProcessCopyWithImpl;
   @useResult
   $Res call(
       {String id,
@@ -112,13 +80,14 @@ abstract class _$$ProcessImplCopyWith<$Res> implements $ProcessCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ProcessImplCopyWithImpl<$Res>
-    extends _$ProcessCopyWithImpl<$Res, _$ProcessImpl>
-    implements _$$ProcessImplCopyWith<$Res> {
-  __$$ProcessImplCopyWithImpl(
-      _$ProcessImpl _value, $Res Function(_$ProcessImpl) _then)
-      : super(_value, _then);
+class _$ProcessCopyWithImpl<$Res> implements $ProcessCopyWith<$Res> {
+  _$ProcessCopyWithImpl(this._self, this._then);
 
+  final Process _self;
+  final $Res Function(Process) _then;
+
+  /// Create a copy of Process
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,39 +98,220 @@ class __$$ProcessImplCopyWithImpl<$Res>
     Object? fullRequestPath = null,
     Object? customFields = null,
   }) {
-    return _then(_$ProcessImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       description: null == description
-          ? _value.description
+          ? _self.description
           : description // ignore: cast_nullable_to_non_nullable
               as String,
       activatorName: null == activatorName
-          ? _value.activatorName
+          ? _self.activatorName
           : activatorName // ignore: cast_nullable_to_non_nullable
               as String,
       fullRequestPath: null == fullRequestPath
-          ? _value.fullRequestPath
+          ? _self.fullRequestPath
           : fullRequestPath // ignore: cast_nullable_to_non_nullable
               as String,
       customFields: null == customFields
-          ? _value._customFields
+          ? _self.customFields
           : customFields // ignore: cast_nullable_to_non_nullable
               as List<CustomField>,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [Process].
+extension ProcessPatterns on Process {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Process value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Process() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Process value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Process():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Process value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Process() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            String description,
+            String activatorName,
+            String fullRequestPath,
+            List<CustomField> customFields)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Process() when $default != null:
+        return $default(_that.id, _that.name, _that.description,
+            _that.activatorName, _that.fullRequestPath, _that.customFields);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            String description,
+            String activatorName,
+            String fullRequestPath,
+            List<CustomField> customFields)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Process():
+        return $default(_that.id, _that.name, _that.description,
+            _that.activatorName, _that.fullRequestPath, _that.customFields);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            String name,
+            String description,
+            String activatorName,
+            String fullRequestPath,
+            List<CustomField> customFields)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Process() when $default != null:
+        return $default(_that.id, _that.name, _that.description,
+            _that.activatorName, _that.fullRequestPath, _that.customFields);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$ProcessImpl implements _Process {
-  const _$ProcessImpl(
+class _Process implements Process {
+  const _Process(
       {this.id = '',
       this.name = "",
       this.description = "",
@@ -169,9 +319,8 @@ class _$ProcessImpl implements _Process {
       this.fullRequestPath = "",
       final List<CustomField> customFields = const []})
       : _customFields = customFields;
-
-  factory _$ProcessImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProcessImplFromJson(json);
+  factory _Process.fromJson(Map<String, dynamic> json) =>
+      _$ProcessFromJson(json);
 
   @override
   @JsonKey()
@@ -197,16 +346,26 @@ class _$ProcessImpl implements _Process {
     return EqualUnmodifiableListView(_customFields);
   }
 
+  /// Create a copy of Process
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Process(id: $id, name: $name, description: $description, activatorName: $activatorName, fullRequestPath: $fullRequestPath, customFields: $customFields)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ProcessCopyWith<_Process> get copyWith =>
+      __$ProcessCopyWithImpl<_Process>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ProcessToJson(
+      this,
+    );
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProcessImpl &&
+            other is _Process &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -219,7 +378,7 @@ class _$ProcessImpl implements _Process {
                 .equals(other._customFields, _customFields));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -230,45 +389,73 @@ class _$ProcessImpl implements _Process {
       fullRequestPath,
       const DeepCollectionEquality().hash(_customFields));
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ProcessImplCopyWith<_$ProcessImpl> get copyWith =>
-      __$$ProcessImplCopyWithImpl<_$ProcessImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ProcessImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Process(id: $id, name: $name, description: $description, activatorName: $activatorName, fullRequestPath: $fullRequestPath, customFields: $customFields)';
   }
 }
 
-abstract class _Process implements Process {
-  const factory _Process(
-      {final String id,
-      final String name,
-      final String description,
-      final String activatorName,
-      final String fullRequestPath,
-      final List<CustomField> customFields}) = _$ProcessImpl;
-
-  factory _Process.fromJson(Map<String, dynamic> json) = _$ProcessImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$ProcessCopyWith<$Res> implements $ProcessCopyWith<$Res> {
+  factory _$ProcessCopyWith(_Process value, $Res Function(_Process) _then) =
+      __$ProcessCopyWithImpl;
   @override
-  String get id;
-  @override
-  String get name;
-  @override
-  String get description;
-  @override
-  String get activatorName;
-  @override
-  String get fullRequestPath;
-  @override
-  List<CustomField> get customFields;
-  @override
-  @JsonKey(ignore: true)
-  _$$ProcessImplCopyWith<_$ProcessImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      String description,
+      String activatorName,
+      String fullRequestPath,
+      List<CustomField> customFields});
 }
+
+/// @nodoc
+class __$ProcessCopyWithImpl<$Res> implements _$ProcessCopyWith<$Res> {
+  __$ProcessCopyWithImpl(this._self, this._then);
+
+  final _Process _self;
+  final $Res Function(_Process) _then;
+
+  /// Create a copy of Process
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? description = null,
+    Object? activatorName = null,
+    Object? fullRequestPath = null,
+    Object? customFields = null,
+  }) {
+    return _then(_Process(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      description: null == description
+          ? _self.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
+      activatorName: null == activatorName
+          ? _self.activatorName
+          : activatorName // ignore: cast_nullable_to_non_nullable
+              as String,
+      fullRequestPath: null == fullRequestPath
+          ? _self.fullRequestPath
+          : fullRequestPath // ignore: cast_nullable_to_non_nullable
+              as String,
+      customFields: null == customFields
+          ? _self._customFields
+          : customFields // ignore: cast_nullable_to_non_nullable
+              as List<CustomField>,
+    ));
+  }
+}
+
+// dart format on

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,109 +9,243 @@ part of 'customfield.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-CustomField _$CustomFieldFromJson(Map<String, dynamic> json) {
-  return _CustomField.fromJson(json);
-}
 
 /// @nodoc
 mixin _$CustomField {
-  String get name => throw _privateConstructorUsedError;
-  String get value => throw _privateConstructorUsedError;
+  String get name;
+  String get value;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $CustomFieldCopyWith<CustomField> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $CustomFieldCopyWith<$Res> {
-  factory $CustomFieldCopyWith(
-          CustomField value, $Res Function(CustomField) then) =
-      _$CustomFieldCopyWithImpl<$Res, CustomField>;
-  @useResult
-  $Res call({String name, String value});
-}
-
-/// @nodoc
-class _$CustomFieldCopyWithImpl<$Res, $Val extends CustomField>
-    implements $CustomFieldCopyWith<$Res> {
-  _$CustomFieldCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of CustomField
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $CustomFieldCopyWith<CustomField> get copyWith =>
+      _$CustomFieldCopyWithImpl<CustomField>(this as CustomField, _$identity);
+
+  /// Serializes this CustomField to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? name = null,
-    Object? value = null,
-  }) {
-    return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      value: null == value
-          ? _value.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is CustomField &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.value, value) || other.value == value));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, name, value);
+
+  @override
+  String toString() {
+    return 'CustomField(name: $name, value: $value)';
   }
 }
 
 /// @nodoc
-abstract class _$$CustomFieldImplCopyWith<$Res>
-    implements $CustomFieldCopyWith<$Res> {
-  factory _$$CustomFieldImplCopyWith(
-          _$CustomFieldImpl value, $Res Function(_$CustomFieldImpl) then) =
-      __$$CustomFieldImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $CustomFieldCopyWith<$Res> {
+  factory $CustomFieldCopyWith(
+          CustomField value, $Res Function(CustomField) _then) =
+      _$CustomFieldCopyWithImpl;
   @useResult
   $Res call({String name, String value});
 }
 
 /// @nodoc
-class __$$CustomFieldImplCopyWithImpl<$Res>
-    extends _$CustomFieldCopyWithImpl<$Res, _$CustomFieldImpl>
-    implements _$$CustomFieldImplCopyWith<$Res> {
-  __$$CustomFieldImplCopyWithImpl(
-      _$CustomFieldImpl _value, $Res Function(_$CustomFieldImpl) _then)
-      : super(_value, _then);
+class _$CustomFieldCopyWithImpl<$Res> implements $CustomFieldCopyWith<$Res> {
+  _$CustomFieldCopyWithImpl(this._self, this._then);
 
+  final CustomField _self;
+  final $Res Function(CustomField) _then;
+
+  /// Create a copy of CustomField
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? name = null,
     Object? value = null,
   }) {
-    return _then(_$CustomFieldImpl(
+    return _then(_self.copyWith(
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       value: null == value
-          ? _value.value
+          ? _self.value
           : value // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [CustomField].
+extension CustomFieldPatterns on CustomField {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_CustomField value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CustomField() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_CustomField value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CustomField():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_CustomField value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CustomField() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(String name, String value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _CustomField() when $default != null:
+        return $default(_that.name, _that.value);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(String name, String value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CustomField():
+        return $default(_that.name, _that.value);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(String name, String value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _CustomField() when $default != null:
+        return $default(_that.name, _that.value);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$CustomFieldImpl implements _CustomField {
-  _$CustomFieldImpl({this.name = '', this.value = ''});
-
-  factory _$CustomFieldImpl.fromJson(Map<String, dynamic> json) =>
-      _$$CustomFieldImplFromJson(json);
+class _CustomField implements CustomField {
+  _CustomField({this.name = '', this.value = ''});
+  factory _CustomField.fromJson(Map<String, dynamic> json) =>
+      _$CustomFieldFromJson(json);
 
   @override
   @JsonKey()
@@ -120,51 +254,77 @@ class _$CustomFieldImpl implements _CustomField {
   @JsonKey()
   final String value;
 
+  /// Create a copy of CustomField
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'CustomField(name: $name, value: $value)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$CustomFieldCopyWith<_CustomField> get copyWith =>
+      __$CustomFieldCopyWithImpl<_CustomField>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$CustomFieldToJson(
+      this,
+    );
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CustomFieldImpl &&
+            other is _CustomField &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.value, value) || other.value == value));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, value);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$CustomFieldImplCopyWith<_$CustomFieldImpl> get copyWith =>
-      __$$CustomFieldImplCopyWithImpl<_$CustomFieldImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$CustomFieldImplToJson(
-      this,
-    );
+  String toString() {
+    return 'CustomField(name: $name, value: $value)';
   }
 }
 
-abstract class _CustomField implements CustomField {
-  factory _CustomField({final String name, final String value}) =
-      _$CustomFieldImpl;
-
-  factory _CustomField.fromJson(Map<String, dynamic> json) =
-      _$CustomFieldImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$CustomFieldCopyWith<$Res>
+    implements $CustomFieldCopyWith<$Res> {
+  factory _$CustomFieldCopyWith(
+          _CustomField value, $Res Function(_CustomField) _then) =
+      __$CustomFieldCopyWithImpl;
   @override
-  String get name;
-  @override
-  String get value;
-  @override
-  @JsonKey(ignore: true)
-  _$$CustomFieldImplCopyWith<_$CustomFieldImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({String name, String value});
 }
+
+/// @nodoc
+class __$CustomFieldCopyWithImpl<$Res> implements _$CustomFieldCopyWith<$Res> {
+  __$CustomFieldCopyWithImpl(this._self, this._then);
+
+  final _CustomField _self;
+  final $Res Function(_CustomField) _then;
+
+  /// Create a copy of CustomField
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? name = null,
+    Object? value = null,
+  }) {
+    return _then(_CustomField(
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      value: null == value
+          ? _self.value
+          : value // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

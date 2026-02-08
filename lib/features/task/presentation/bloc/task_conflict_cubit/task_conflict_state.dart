@@ -1,7 +1,7 @@
 part of 'task_conflict_cubit.dart';
 
 @freezed
-class TaskConflictState with _$TaskConflictState {
+abstract class TaskConflictState with _$TaskConflictState {
   const factory TaskConflictState.initial() = Initial;
 
   const factory TaskConflictState.loading() = LoadingState;

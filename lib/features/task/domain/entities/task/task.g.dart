@@ -8,7 +8,7 @@ part of 'task.dart';
 
 class TaskIvyAdapter extends TypeAdapter<TaskIvy> {
   @override
-  final int typeId = 0;
+  final typeId = 0;
 
   @override
   TaskIvy read(BinaryReader reader) {
@@ -17,15 +17,15 @@ class TaskIvyAdapter extends TypeAdapter<TaskIvy> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return TaskIvy(
-      id: fields[0] as int,
+      id: (fields[0] as num).toInt(),
       name: fields[1] as String,
       description: fields[2] as String,
       fullRequestPath: fields[3] as String,
       offline: fields[4] as bool,
       startTimeStamp: fields[5] as DateTime,
       expiryTimeStamp: fields[6] as DateTime?,
-      priority: fields[7] as int,
-      state: fields[8] as int,
+      priority: (fields[7] as num).toInt(),
+      state: (fields[8] as num).toInt(),
       activatorName: fields[9] as String,
       category: fields[10] as String,
       caseTask: fields[11] as CaseTask?,
@@ -87,9 +87,8 @@ class TaskIvyAdapter extends TypeAdapter<TaskIvy> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TaskIvyImpl _$$TaskIvyImplFromJson(Map<String, dynamic> json) =>
-    _$TaskIvyImpl(
-      id: json['id'] as int,
+_TaskIvy _$TaskIvyFromJson(Map<String, dynamic> json) => _TaskIvy(
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       description: json['description'] as String,
       fullRequestPath: json['fullRequestPath'] as String,
@@ -98,8 +97,8 @@ _$TaskIvyImpl _$$TaskIvyImplFromJson(Map<String, dynamic> json) =>
       expiryTimeStamp: json['expiryTimeStamp'] == null
           ? null
           : DateTime.parse(json['expiryTimeStamp'] as String),
-      priority: json['priority'] as int,
-      state: json['state'] as int,
+      priority: (json['priority'] as num).toInt(),
+      state: (json['state'] as num).toInt(),
       activatorName: json['activatorName'] as String,
       category: json['category'] as String,
       caseTask: json['caseTask'] == null
@@ -111,8 +110,7 @@ _$TaskIvyImpl _$$TaskIvyImplFromJson(Map<String, dynamic> json) =>
       formHTMLPageOffline: json['formHTMLPageOffline'] as String?,
     );
 
-Map<String, dynamic> _$$TaskIvyImplToJson(_$TaskIvyImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$TaskIvyToJson(_TaskIvy instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,

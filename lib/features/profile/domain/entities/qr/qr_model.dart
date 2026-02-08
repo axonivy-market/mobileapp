@@ -4,7 +4,7 @@ part 'qr_model.freezed.dart';
 part 'qr_model.g.dart';
 
 @freezed
-class QRModel with _$QRModel {
+abstract class QRModel with _$QRModel {
   const factory QRModel({
     @Default("") String loginUrl,
     @Default("") String username,

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,29 +9,147 @@ part of 'upload_file_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+/// @nodoc
+mixin _$UploadFileEvent implements DiagnosticableTreeMixin {
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'UploadFileEvent'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is UploadFileEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UploadFileEvent()';
+  }
+}
 
 /// @nodoc
-mixin _$UploadFileEvent {
+class $UploadFileEventCopyWith<$Res> {
+  $UploadFileEventCopyWith(
+      UploadFileEvent _, $Res Function(UploadFileEvent) __);
+}
+
+/// Adds pattern-matching-related methods to [UploadFileEvent].
+extension UploadFileEventPatterns on UploadFileEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(TaskIvy taskIvy, UploadFileType type) uploadFiles,
-    required TResult Function(String fileName) changeFileName,
-    required TResult Function(Uint8List bytes, String fileName, int fileState)
-        cacheFileOfflineEvent,
-  }) =>
-      throw _privateConstructorUsedError;
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_UploadFiles value)? uploadFiles,
+    TResult Function(_ChangeFileName value)? changeFileName,
+    TResult Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _UploadFiles() when uploadFiles != null:
+        return uploadFiles(_that);
+      case _ChangeFileName() when changeFileName != null:
+        return changeFileName(_that);
+      case CacheFileOfflineEvent() when cacheFileOfflineEvent != null:
+        return cacheFileOfflineEvent(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
-    TResult? Function(String fileName)? changeFileName,
-    TResult? Function(Uint8List bytes, String fileName, int fileState)?
+  TResult map<TResult extends Object?>({
+    required TResult Function(_UploadFiles value) uploadFiles,
+    required TResult Function(_ChangeFileName value) changeFileName,
+    required TResult Function(CacheFileOfflineEvent value)
         cacheFileOfflineEvent,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _UploadFiles():
+        return uploadFiles(_that);
+      case _ChangeFileName():
+        return changeFileName(_that);
+      case CacheFileOfflineEvent():
+        return cacheFileOfflineEvent(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_UploadFiles value)? uploadFiles,
+    TResult? Function(_ChangeFileName value)? changeFileName,
+    TResult? Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _UploadFiles() when uploadFiles != null:
+        return uploadFiles(_that);
+      case _ChangeFileName() when changeFileName != null:
+        return changeFileName(_that);
+      case CacheFileOfflineEvent() when cacheFileOfflineEvent != null:
+        return cacheFileOfflineEvent(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
@@ -39,115 +157,106 @@ mixin _$UploadFileEvent {
     TResult Function(Uint8List bytes, String fileName, int fileState)?
         cacheFileOfflineEvent,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_UploadFiles value) uploadFiles,
-    required TResult Function(_ChangeFileName value) changeFileName,
-    required TResult Function(CacheFileOfflineEvent value)
-        cacheFileOfflineEvent,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UploadFiles value)? uploadFiles,
-    TResult? Function(_ChangeFileName value)? changeFileName,
-    TResult? Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_UploadFiles value)? uploadFiles,
-    TResult Function(_ChangeFileName value)? changeFileName,
-    TResult Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $UploadFileEventCopyWith<$Res> {
-  factory $UploadFileEventCopyWith(
-          UploadFileEvent value, $Res Function(UploadFileEvent) then) =
-      _$UploadFileEventCopyWithImpl<$Res, UploadFileEvent>;
-}
-
-/// @nodoc
-class _$UploadFileEventCopyWithImpl<$Res, $Val extends UploadFileEvent>
-    implements $UploadFileEventCopyWith<$Res> {
-  _$UploadFileEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$UploadFilesImplCopyWith<$Res> {
-  factory _$$UploadFilesImplCopyWith(
-          _$UploadFilesImpl value, $Res Function(_$UploadFilesImpl) then) =
-      __$$UploadFilesImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({TaskIvy taskIvy, UploadFileType type});
-
-  $TaskIvyCopyWith<$Res> get taskIvy;
-}
-
-/// @nodoc
-class __$$UploadFilesImplCopyWithImpl<$Res>
-    extends _$UploadFileEventCopyWithImpl<$Res, _$UploadFilesImpl>
-    implements _$$UploadFilesImplCopyWith<$Res> {
-  __$$UploadFilesImplCopyWithImpl(
-      _$UploadFilesImpl _value, $Res Function(_$UploadFilesImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? taskIvy = null,
-    Object? type = null,
   }) {
-    return _then(_$UploadFilesImpl(
-      null == taskIvy
-          ? _value.taskIvy
-          : taskIvy // ignore: cast_nullable_to_non_nullable
-              as TaskIvy,
-      null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as UploadFileType,
-    ));
+    final _that = this;
+    switch (_that) {
+      case _UploadFiles() when uploadFiles != null:
+        return uploadFiles(_that.taskIvy, _that.type);
+      case _ChangeFileName() when changeFileName != null:
+        return changeFileName(_that.fileName);
+      case CacheFileOfflineEvent() when cacheFileOfflineEvent != null:
+        return cacheFileOfflineEvent(
+            _that.bytes, _that.fileName, _that.fileState);
+      case _:
+        return orElse();
+    }
   }
 
-  @override
-  @pragma('vm:prefer-inline')
-  $TaskIvyCopyWith<$Res> get taskIvy {
-    return $TaskIvyCopyWith<$Res>(_value.taskIvy, (value) {
-      return _then(_value.copyWith(taskIvy: value));
-    });
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(TaskIvy taskIvy, UploadFileType type) uploadFiles,
+    required TResult Function(String fileName) changeFileName,
+    required TResult Function(Uint8List bytes, String fileName, int fileState)
+        cacheFileOfflineEvent,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _UploadFiles():
+        return uploadFiles(_that.taskIvy, _that.type);
+      case _ChangeFileName():
+        return changeFileName(_that.fileName);
+      case CacheFileOfflineEvent():
+        return cacheFileOfflineEvent(
+            _that.bytes, _that.fileName, _that.fileState);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
+    TResult? Function(String fileName)? changeFileName,
+    TResult? Function(Uint8List bytes, String fileName, int fileState)?
+        cacheFileOfflineEvent,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _UploadFiles() when uploadFiles != null:
+        return uploadFiles(_that.taskIvy, _that.type);
+      case _ChangeFileName() when changeFileName != null:
+        return changeFileName(_that.fileName);
+      case CacheFileOfflineEvent() when cacheFileOfflineEvent != null:
+        return cacheFileOfflineEvent(
+            _that.bytes, _that.fileName, _that.fileState);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
-  const _$UploadFilesImpl(this.taskIvy, this.type);
+class _UploadFiles with DiagnosticableTreeMixin implements UploadFileEvent {
+  const _UploadFiles(this.taskIvy, this.type);
 
-  @override
   final TaskIvy taskIvy;
-  @override
   final UploadFileType type;
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadFileEvent.uploadFiles(taskIvy: $taskIvy, type: $type)';
-  }
+  /// Create a copy of UploadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$UploadFilesCopyWith<_UploadFiles> get copyWith =>
+      __$UploadFilesCopyWithImpl<_UploadFiles>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UploadFileEvent.uploadFiles'))
       ..add(DiagnosticsProperty('taskIvy', taskIvy))
@@ -155,10 +264,10 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UploadFilesImpl &&
+            other is _UploadFiles &&
             (identical(other.taskIvy, taskIvy) || other.taskIvy == taskIvy) &&
             (identical(other.type, type) || other.type == type));
   }
@@ -166,155 +275,87 @@ class _$UploadFilesImpl with DiagnosticableTreeMixin implements _UploadFiles {
   @override
   int get hashCode => Object.hash(runtimeType, taskIvy, type);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UploadFilesImplCopyWith<_$UploadFilesImpl> get copyWith =>
-      __$$UploadFilesImplCopyWithImpl<_$UploadFilesImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(TaskIvy taskIvy, UploadFileType type) uploadFiles,
-    required TResult Function(String fileName) changeFileName,
-    required TResult Function(Uint8List bytes, String fileName, int fileState)
-        cacheFileOfflineEvent,
-  }) {
-    return uploadFiles(taskIvy, type);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
-    TResult? Function(String fileName)? changeFileName,
-    TResult? Function(Uint8List bytes, String fileName, int fileState)?
-        cacheFileOfflineEvent,
-  }) {
-    return uploadFiles?.call(taskIvy, type);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
-    TResult Function(String fileName)? changeFileName,
-    TResult Function(Uint8List bytes, String fileName, int fileState)?
-        cacheFileOfflineEvent,
-    required TResult orElse(),
-  }) {
-    if (uploadFiles != null) {
-      return uploadFiles(taskIvy, type);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_UploadFiles value) uploadFiles,
-    required TResult Function(_ChangeFileName value) changeFileName,
-    required TResult Function(CacheFileOfflineEvent value)
-        cacheFileOfflineEvent,
-  }) {
-    return uploadFiles(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UploadFiles value)? uploadFiles,
-    TResult? Function(_ChangeFileName value)? changeFileName,
-    TResult? Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
-  }) {
-    return uploadFiles?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_UploadFiles value)? uploadFiles,
-    TResult Function(_ChangeFileName value)? changeFileName,
-    TResult Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
-    required TResult orElse(),
-  }) {
-    if (uploadFiles != null) {
-      return uploadFiles(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UploadFiles implements UploadFileEvent {
-  const factory _UploadFiles(final TaskIvy taskIvy, final UploadFileType type) =
-      _$UploadFilesImpl;
-
-  TaskIvy get taskIvy;
-  UploadFileType get type;
-  @JsonKey(ignore: true)
-  _$$UploadFilesImplCopyWith<_$UploadFilesImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$ChangeFileNameImplCopyWith<$Res> {
-  factory _$$ChangeFileNameImplCopyWith(_$ChangeFileNameImpl value,
-          $Res Function(_$ChangeFileNameImpl) then) =
-      __$$ChangeFileNameImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String fileName});
-}
-
-/// @nodoc
-class __$$ChangeFileNameImplCopyWithImpl<$Res>
-    extends _$UploadFileEventCopyWithImpl<$Res, _$ChangeFileNameImpl>
-    implements _$$ChangeFileNameImplCopyWith<$Res> {
-  __$$ChangeFileNameImplCopyWithImpl(
-      _$ChangeFileNameImpl _value, $Res Function(_$ChangeFileNameImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fileName = null,
-  }) {
-    return _then(_$ChangeFileNameImpl(
-      null == fileName
-          ? _value.fileName
-          : fileName // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ChangeFileNameImpl
-    with DiagnosticableTreeMixin
-    implements _ChangeFileName {
-  const _$ChangeFileNameImpl(this.fileName);
-
-  @override
-  final String fileName;
-
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadFileEvent.changeFileName(fileName: $fileName)';
+    return 'UploadFileEvent.uploadFiles(taskIvy: $taskIvy, type: $type)';
   }
+}
+
+/// @nodoc
+abstract mixin class _$UploadFilesCopyWith<$Res>
+    implements $UploadFileEventCopyWith<$Res> {
+  factory _$UploadFilesCopyWith(
+          _UploadFiles value, $Res Function(_UploadFiles) _then) =
+      __$UploadFilesCopyWithImpl;
+  @useResult
+  $Res call({TaskIvy taskIvy, UploadFileType type});
+
+  $TaskIvyCopyWith<$Res> get taskIvy;
+}
+
+/// @nodoc
+class __$UploadFilesCopyWithImpl<$Res> implements _$UploadFilesCopyWith<$Res> {
+  __$UploadFilesCopyWithImpl(this._self, this._then);
+
+  final _UploadFiles _self;
+  final $Res Function(_UploadFiles) _then;
+
+  /// Create a copy of UploadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? taskIvy = null,
+    Object? type = null,
+  }) {
+    return _then(_UploadFiles(
+      null == taskIvy
+          ? _self.taskIvy
+          : taskIvy // ignore: cast_nullable_to_non_nullable
+              as TaskIvy,
+      null == type
+          ? _self.type
+          : type // ignore: cast_nullable_to_non_nullable
+              as UploadFileType,
+    ));
+  }
+
+  /// Create a copy of UploadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskIvyCopyWith<$Res> get taskIvy {
+    return $TaskIvyCopyWith<$Res>(_self.taskIvy, (value) {
+      return _then(_self.copyWith(taskIvy: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _ChangeFileName with DiagnosticableTreeMixin implements UploadFileEvent {
+  const _ChangeFileName(this.fileName);
+
+  final String fileName;
+
+  /// Create a copy of UploadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ChangeFileNameCopyWith<_ChangeFileName> get copyWith =>
+      __$ChangeFileNameCopyWithImpl<_ChangeFileName>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UploadFileEvent.changeFileName'))
       ..add(DiagnosticsProperty('fileName', fileName));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChangeFileNameImpl &&
+            other is _ChangeFileName &&
             (identical(other.fileName, fileName) ||
                 other.fileName == fileName));
   }
@@ -322,159 +363,66 @@ class _$ChangeFileNameImpl
   @override
   int get hashCode => Object.hash(runtimeType, fileName);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ChangeFileNameImplCopyWith<_$ChangeFileNameImpl> get copyWith =>
-      __$$ChangeFileNameImplCopyWithImpl<_$ChangeFileNameImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(TaskIvy taskIvy, UploadFileType type) uploadFiles,
-    required TResult Function(String fileName) changeFileName,
-    required TResult Function(Uint8List bytes, String fileName, int fileState)
-        cacheFileOfflineEvent,
-  }) {
-    return changeFileName(fileName);
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UploadFileEvent.changeFileName(fileName: $fileName)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
-    TResult? Function(String fileName)? changeFileName,
-    TResult? Function(Uint8List bytes, String fileName, int fileState)?
-        cacheFileOfflineEvent,
-  }) {
-    return changeFileName?.call(fileName);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
-    TResult Function(String fileName)? changeFileName,
-    TResult Function(Uint8List bytes, String fileName, int fileState)?
-        cacheFileOfflineEvent,
-    required TResult orElse(),
-  }) {
-    if (changeFileName != null) {
-      return changeFileName(fileName);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_UploadFiles value) uploadFiles,
-    required TResult Function(_ChangeFileName value) changeFileName,
-    required TResult Function(CacheFileOfflineEvent value)
-        cacheFileOfflineEvent,
-  }) {
-    return changeFileName(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UploadFiles value)? uploadFiles,
-    TResult? Function(_ChangeFileName value)? changeFileName,
-    TResult? Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
-  }) {
-    return changeFileName?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_UploadFiles value)? uploadFiles,
-    TResult Function(_ChangeFileName value)? changeFileName,
-    TResult Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
-    required TResult orElse(),
-  }) {
-    if (changeFileName != null) {
-      return changeFileName(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _ChangeFileName implements UploadFileEvent {
-  const factory _ChangeFileName(final String fileName) = _$ChangeFileNameImpl;
-
-  String get fileName;
-  @JsonKey(ignore: true)
-  _$$ChangeFileNameImplCopyWith<_$ChangeFileNameImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$CacheFileOfflineEventImplCopyWith<$Res> {
-  factory _$$CacheFileOfflineEventImplCopyWith(
-          _$CacheFileOfflineEventImpl value,
-          $Res Function(_$CacheFileOfflineEventImpl) then) =
-      __$$CacheFileOfflineEventImplCopyWithImpl<$Res>;
+abstract mixin class _$ChangeFileNameCopyWith<$Res>
+    implements $UploadFileEventCopyWith<$Res> {
+  factory _$ChangeFileNameCopyWith(
+          _ChangeFileName value, $Res Function(_ChangeFileName) _then) =
+      __$ChangeFileNameCopyWithImpl;
   @useResult
-  $Res call({Uint8List bytes, String fileName, int fileState});
+  $Res call({String fileName});
 }
 
 /// @nodoc
-class __$$CacheFileOfflineEventImplCopyWithImpl<$Res>
-    extends _$UploadFileEventCopyWithImpl<$Res, _$CacheFileOfflineEventImpl>
-    implements _$$CacheFileOfflineEventImplCopyWith<$Res> {
-  __$$CacheFileOfflineEventImplCopyWithImpl(_$CacheFileOfflineEventImpl _value,
-      $Res Function(_$CacheFileOfflineEventImpl) _then)
-      : super(_value, _then);
+class __$ChangeFileNameCopyWithImpl<$Res>
+    implements _$ChangeFileNameCopyWith<$Res> {
+  __$ChangeFileNameCopyWithImpl(this._self, this._then);
 
+  final _ChangeFileName _self;
+  final $Res Function(_ChangeFileName) _then;
+
+  /// Create a copy of UploadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? bytes = null,
     Object? fileName = null,
-    Object? fileState = null,
   }) {
-    return _then(_$CacheFileOfflineEventImpl(
-      null == bytes
-          ? _value.bytes
-          : bytes // ignore: cast_nullable_to_non_nullable
-              as Uint8List,
+    return _then(_ChangeFileName(
       null == fileName
-          ? _value.fileName
+          ? _self.fileName
           : fileName // ignore: cast_nullable_to_non_nullable
               as String,
-      null == fileState
-          ? _value.fileState
-          : fileState // ignore: cast_nullable_to_non_nullable
-              as int,
     ));
   }
 }
 
 /// @nodoc
 
-class _$CacheFileOfflineEventImpl
+class CacheFileOfflineEvent
     with DiagnosticableTreeMixin
-    implements CacheFileOfflineEvent {
-  const _$CacheFileOfflineEventImpl(this.bytes, this.fileName, this.fileState);
+    implements UploadFileEvent {
+  const CacheFileOfflineEvent(this.bytes, this.fileName, this.fileState);
 
-  @override
   final Uint8List bytes;
-  @override
   final String fileName;
-  @override
   final int fileState;
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadFileEvent.cacheFileOfflineEvent(bytes: $bytes, fileName: $fileName, fileState: $fileState)';
-  }
+  /// Create a copy of UploadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $CacheFileOfflineEventCopyWith<CacheFileOfflineEvent> get copyWith =>
+      _$CacheFileOfflineEventCopyWithImpl<CacheFileOfflineEvent>(
+          this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(
           DiagnosticsProperty('type', 'UploadFileEvent.cacheFileOfflineEvent'))
@@ -484,10 +432,10 @@ class _$CacheFileOfflineEventImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$CacheFileOfflineEventImpl &&
+            other is CacheFileOfflineEvent &&
             const DeepCollectionEquality().equals(other.bytes, bytes) &&
             (identical(other.fileName, fileName) ||
                 other.fileName == fileName) &&
@@ -499,274 +447,97 @@ class _$CacheFileOfflineEventImpl
   int get hashCode => Object.hash(runtimeType,
       const DeepCollectionEquality().hash(bytes), fileName, fileState);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$CacheFileOfflineEventImplCopyWith<_$CacheFileOfflineEventImpl>
-      get copyWith => __$$CacheFileOfflineEventImplCopyWithImpl<
-          _$CacheFileOfflineEventImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(TaskIvy taskIvy, UploadFileType type) uploadFiles,
-    required TResult Function(String fileName) changeFileName,
-    required TResult Function(Uint8List bytes, String fileName, int fileState)
-        cacheFileOfflineEvent,
-  }) {
-    return cacheFileOfflineEvent(bytes, fileName, fileState);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
-    TResult? Function(String fileName)? changeFileName,
-    TResult? Function(Uint8List bytes, String fileName, int fileState)?
-        cacheFileOfflineEvent,
-  }) {
-    return cacheFileOfflineEvent?.call(bytes, fileName, fileState);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskIvy taskIvy, UploadFileType type)? uploadFiles,
-    TResult Function(String fileName)? changeFileName,
-    TResult Function(Uint8List bytes, String fileName, int fileState)?
-        cacheFileOfflineEvent,
-    required TResult orElse(),
-  }) {
-    if (cacheFileOfflineEvent != null) {
-      return cacheFileOfflineEvent(bytes, fileName, fileState);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_UploadFiles value) uploadFiles,
-    required TResult Function(_ChangeFileName value) changeFileName,
-    required TResult Function(CacheFileOfflineEvent value)
-        cacheFileOfflineEvent,
-  }) {
-    return cacheFileOfflineEvent(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_UploadFiles value)? uploadFiles,
-    TResult? Function(_ChangeFileName value)? changeFileName,
-    TResult? Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
-  }) {
-    return cacheFileOfflineEvent?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_UploadFiles value)? uploadFiles,
-    TResult Function(_ChangeFileName value)? changeFileName,
-    TResult Function(CacheFileOfflineEvent value)? cacheFileOfflineEvent,
-    required TResult orElse(),
-  }) {
-    if (cacheFileOfflineEvent != null) {
-      return cacheFileOfflineEvent(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class CacheFileOfflineEvent implements UploadFileEvent {
-  const factory CacheFileOfflineEvent(
-          final Uint8List bytes, final String fileName, final int fileState) =
-      _$CacheFileOfflineEventImpl;
-
-  Uint8List get bytes;
-  String get fileName;
-  int get fileState;
-  @JsonKey(ignore: true)
-  _$$CacheFileOfflineEventImplCopyWith<_$CacheFileOfflineEventImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$UploadFileState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message, String fileNames) success,
-    required TResult Function(String fileName) changeFileName,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message, String fileNames)? success,
-    TResult? Function(String fileName)? changeFileName,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message, String fileNames)? success,
-    TResult Function(String fileName)? changeFileName,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UploadLoadingState value) loading,
-    required TResult Function(UploadErrorState value) error,
-    required TResult Function(UploadSuccessState value) success,
-    required TResult Function(UploadChangeFileNameState value) changeFileName,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadLoadingState value)? loading,
-    TResult? Function(UploadErrorState value)? error,
-    TResult? Function(UploadSuccessState value)? success,
-    TResult? Function(UploadChangeFileNameState value)? changeFileName,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadLoadingState value)? loading,
-    TResult Function(UploadErrorState value)? error,
-    TResult Function(UploadSuccessState value)? success,
-    TResult Function(UploadChangeFileNameState value)? changeFileName,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $UploadFileStateCopyWith<$Res> {
-  factory $UploadFileStateCopyWith(
-          UploadFileState value, $Res Function(UploadFileState) then) =
-      _$UploadFileStateCopyWithImpl<$Res, UploadFileState>;
-}
-
-/// @nodoc
-class _$UploadFileStateCopyWithImpl<$Res, $Val extends UploadFileState>
-    implements $UploadFileStateCopyWith<$Res> {
-  _$UploadFileStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$UploadLoadingStateImplCopyWith<$Res> {
-  factory _$$UploadLoadingStateImplCopyWith(_$UploadLoadingStateImpl value,
-          $Res Function(_$UploadLoadingStateImpl) then) =
-      __$$UploadLoadingStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$UploadLoadingStateImplCopyWithImpl<$Res>
-    extends _$UploadFileStateCopyWithImpl<$Res, _$UploadLoadingStateImpl>
-    implements _$$UploadLoadingStateImplCopyWith<$Res> {
-  __$$UploadLoadingStateImplCopyWithImpl(_$UploadLoadingStateImpl _value,
-      $Res Function(_$UploadLoadingStateImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$UploadLoadingStateImpl
-    with DiagnosticableTreeMixin
-    implements UploadLoadingState {
-  const _$UploadLoadingStateImpl();
-
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadFileState.loading()';
+    return 'UploadFileEvent.cacheFileOfflineEvent(bytes: $bytes, fileName: $fileName, fileState: $fileState)';
   }
+}
 
+/// @nodoc
+abstract mixin class $CacheFileOfflineEventCopyWith<$Res>
+    implements $UploadFileEventCopyWith<$Res> {
+  factory $CacheFileOfflineEventCopyWith(CacheFileOfflineEvent value,
+          $Res Function(CacheFileOfflineEvent) _then) =
+      _$CacheFileOfflineEventCopyWithImpl;
+  @useResult
+  $Res call({Uint8List bytes, String fileName, int fileState});
+}
+
+/// @nodoc
+class _$CacheFileOfflineEventCopyWithImpl<$Res>
+    implements $CacheFileOfflineEventCopyWith<$Res> {
+  _$CacheFileOfflineEventCopyWithImpl(this._self, this._then);
+
+  final CacheFileOfflineEvent _self;
+  final $Res Function(CacheFileOfflineEvent) _then;
+
+  /// Create a copy of UploadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? bytes = null,
+    Object? fileName = null,
+    Object? fileState = null,
+  }) {
+    return _then(CacheFileOfflineEvent(
+      null == bytes
+          ? _self.bytes
+          : bytes // ignore: cast_nullable_to_non_nullable
+              as Uint8List,
+      null == fileName
+          ? _self.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == fileState
+          ? _self.fileState
+          : fileState // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$UploadFileState implements DiagnosticableTreeMixin {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'UploadFileState.loading'));
+    properties..add(DiagnosticsProperty('type', 'UploadFileState'));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UploadLoadingStateImpl);
+        (other.runtimeType == runtimeType && other is UploadFileState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message, String fileNames) success,
-    required TResult Function(String fileName) changeFileName,
-  }) {
-    return loading();
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UploadFileState()';
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message, String fileNames)? success,
-    TResult? Function(String fileName)? changeFileName,
-  }) {
-    return loading?.call();
-  }
+/// @nodoc
+class $UploadFileStateCopyWith<$Res> {
+  $UploadFileStateCopyWith(
+      UploadFileState _, $Res Function(UploadFileState) __);
+}
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message, String fileNames)? success,
-    TResult Function(String fileName)? changeFileName,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
+/// Adds pattern-matching-related methods to [UploadFileState].
+extension UploadFileStatePatterns on UploadFileState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UploadLoadingState value) loading,
-    required TResult Function(UploadErrorState value) error,
-    required TResult Function(UploadSuccessState value) success,
-    required TResult Function(UploadChangeFileNameState value) changeFileName,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadLoadingState value)? loading,
-    TResult? Function(UploadErrorState value)? error,
-    TResult? Function(UploadSuccessState value)? success,
-    TResult? Function(UploadChangeFileNameState value)? changeFileName,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(UploadLoadingState value)? loading,
@@ -775,42 +546,287 @@ class _$UploadLoadingStateImpl
     TResult Function(UploadChangeFileNameState value)? changeFileName,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    final _that = this;
+    switch (_that) {
+      case UploadLoadingState() when loading != null:
+        return loading(_that);
+      case UploadErrorState() when error != null:
+        return error(_that);
+      case UploadSuccessState() when success != null:
+        return success(_that);
+      case UploadChangeFileNameState() when changeFileName != null:
+        return changeFileName(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(UploadLoadingState value) loading,
+    required TResult Function(UploadErrorState value) error,
+    required TResult Function(UploadSuccessState value) success,
+    required TResult Function(UploadChangeFileNameState value) changeFileName,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UploadLoadingState():
+        return loading(_that);
+      case UploadErrorState():
+        return error(_that);
+      case UploadSuccessState():
+        return success(_that);
+      case UploadChangeFileNameState():
+        return changeFileName(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(UploadLoadingState value)? loading,
+    TResult? Function(UploadErrorState value)? error,
+    TResult? Function(UploadSuccessState value)? success,
+    TResult? Function(UploadChangeFileNameState value)? changeFileName,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UploadLoadingState() when loading != null:
+        return loading(_that);
+      case UploadErrorState() when error != null:
+        return error(_that);
+      case UploadSuccessState() when success != null:
+        return success(_that);
+      case UploadChangeFileNameState() when changeFileName != null:
+        return changeFileName(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String error)? error,
+    TResult Function(String message, String fileNames)? success,
+    TResult Function(String fileName)? changeFileName,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UploadLoadingState() when loading != null:
+        return loading();
+      case UploadErrorState() when error != null:
+        return error(_that.error);
+      case UploadSuccessState() when success != null:
+        return success(_that.message, _that.fileNames);
+      case UploadChangeFileNameState() when changeFileName != null:
+        return changeFileName(_that.fileName);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String error) error,
+    required TResult Function(String message, String fileNames) success,
+    required TResult Function(String fileName) changeFileName,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UploadLoadingState():
+        return loading();
+      case UploadErrorState():
+        return error(_that.error);
+      case UploadSuccessState():
+        return success(_that.message, _that.fileNames);
+      case UploadChangeFileNameState():
+        return changeFileName(_that.fileName);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(String message, String fileNames)? success,
+    TResult? Function(String fileName)? changeFileName,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case UploadLoadingState() when loading != null:
+        return loading();
+      case UploadErrorState() when error != null:
+        return error(_that.error);
+      case UploadSuccessState() when success != null:
+        return success(_that.message, _that.fileNames);
+      case UploadChangeFileNameState() when changeFileName != null:
+        return changeFileName(_that.fileName);
+      case _:
+        return null;
+    }
   }
 }
 
-abstract class UploadLoadingState implements UploadFileState {
-  const factory UploadLoadingState() = _$UploadLoadingStateImpl;
+/// @nodoc
+
+class UploadLoadingState
+    with DiagnosticableTreeMixin
+    implements UploadFileState {
+  const UploadLoadingState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'UploadFileState.loading'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is UploadLoadingState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UploadFileState.loading()';
+  }
 }
 
 /// @nodoc
-abstract class _$$UploadErrorStateImplCopyWith<$Res> {
-  factory _$$UploadErrorStateImplCopyWith(_$UploadErrorStateImpl value,
-          $Res Function(_$UploadErrorStateImpl) then) =
-      __$$UploadErrorStateImplCopyWithImpl<$Res>;
+
+class UploadErrorState with DiagnosticableTreeMixin implements UploadFileState {
+  const UploadErrorState(this.error);
+
+  final String error;
+
+  /// Create a copy of UploadFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $UploadErrorStateCopyWith<UploadErrorState> get copyWith =>
+      _$UploadErrorStateCopyWithImpl<UploadErrorState>(this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'UploadFileState.error'))
+      ..add(DiagnosticsProperty('error', error));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is UploadErrorState &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UploadFileState.error(error: $error)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $UploadErrorStateCopyWith<$Res>
+    implements $UploadFileStateCopyWith<$Res> {
+  factory $UploadErrorStateCopyWith(
+          UploadErrorState value, $Res Function(UploadErrorState) _then) =
+      _$UploadErrorStateCopyWithImpl;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$UploadErrorStateImplCopyWithImpl<$Res>
-    extends _$UploadFileStateCopyWithImpl<$Res, _$UploadErrorStateImpl>
-    implements _$$UploadErrorStateImplCopyWith<$Res> {
-  __$$UploadErrorStateImplCopyWithImpl(_$UploadErrorStateImpl _value,
-      $Res Function(_$UploadErrorStateImpl) _then)
-      : super(_value, _then);
+class _$UploadErrorStateCopyWithImpl<$Res>
+    implements $UploadErrorStateCopyWith<$Res> {
+  _$UploadErrorStateCopyWithImpl(this._self, this._then);
 
+  final UploadErrorState _self;
+  final $Res Function(UploadErrorState) _then;
+
+  /// Create a copy of UploadFileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$UploadErrorStateImpl(
+    return _then(UploadErrorState(
       null == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -819,185 +835,23 @@ class __$$UploadErrorStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UploadErrorStateImpl
+class UploadSuccessState
     with DiagnosticableTreeMixin
-    implements UploadErrorState {
-  const _$UploadErrorStateImpl(this.error);
+    implements UploadFileState {
+  const UploadSuccessState(this.message, this.fileNames);
 
-  @override
-  final String error;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadFileState.error(error: $error)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'UploadFileState.error'))
-      ..add(DiagnosticsProperty('error', error));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$UploadErrorStateImpl &&
-            (identical(other.error, error) || other.error == error));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, error);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$UploadErrorStateImplCopyWith<_$UploadErrorStateImpl> get copyWith =>
-      __$$UploadErrorStateImplCopyWithImpl<_$UploadErrorStateImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message, String fileNames) success,
-    required TResult Function(String fileName) changeFileName,
-  }) {
-    return error(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message, String fileNames)? success,
-    TResult? Function(String fileName)? changeFileName,
-  }) {
-    return error?.call(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message, String fileNames)? success,
-    TResult Function(String fileName)? changeFileName,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this.error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UploadLoadingState value) loading,
-    required TResult Function(UploadErrorState value) error,
-    required TResult Function(UploadSuccessState value) success,
-    required TResult Function(UploadChangeFileNameState value) changeFileName,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadLoadingState value)? loading,
-    TResult? Function(UploadErrorState value)? error,
-    TResult? Function(UploadSuccessState value)? success,
-    TResult? Function(UploadChangeFileNameState value)? changeFileName,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadLoadingState value)? loading,
-    TResult Function(UploadErrorState value)? error,
-    TResult Function(UploadSuccessState value)? success,
-    TResult Function(UploadChangeFileNameState value)? changeFileName,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UploadErrorState implements UploadFileState {
-  const factory UploadErrorState(final String error) = _$UploadErrorStateImpl;
-
-  String get error;
-  @JsonKey(ignore: true)
-  _$$UploadErrorStateImplCopyWith<_$UploadErrorStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$UploadSuccessStateImplCopyWith<$Res> {
-  factory _$$UploadSuccessStateImplCopyWith(_$UploadSuccessStateImpl value,
-          $Res Function(_$UploadSuccessStateImpl) then) =
-      __$$UploadSuccessStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message, String fileNames});
-}
-
-/// @nodoc
-class __$$UploadSuccessStateImplCopyWithImpl<$Res>
-    extends _$UploadFileStateCopyWithImpl<$Res, _$UploadSuccessStateImpl>
-    implements _$$UploadSuccessStateImplCopyWith<$Res> {
-  __$$UploadSuccessStateImplCopyWithImpl(_$UploadSuccessStateImpl _value,
-      $Res Function(_$UploadSuccessStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-    Object? fileNames = null,
-  }) {
-    return _then(_$UploadSuccessStateImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == fileNames
-          ? _value.fileNames
-          : fileNames // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$UploadSuccessStateImpl
-    with DiagnosticableTreeMixin
-    implements UploadSuccessState {
-  const _$UploadSuccessStateImpl(this.message, this.fileNames);
-
-  @override
   final String message;
-  @override
   final String fileNames;
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadFileState.success(message: $message, fileNames: $fileNames)';
-  }
+  /// Create a copy of UploadFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $UploadSuccessStateCopyWith<UploadSuccessState> get copyWith =>
+      _$UploadSuccessStateCopyWithImpl<UploadSuccessState>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UploadFileState.success'))
       ..add(DiagnosticsProperty('message', message))
@@ -1005,10 +859,10 @@ class _$UploadSuccessStateImpl
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UploadSuccessStateImpl &&
+            other is UploadSuccessState &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.fileNames, fileNames) ||
                 other.fileNames == fileNames));
@@ -1017,127 +871,45 @@ class _$UploadSuccessStateImpl
   @override
   int get hashCode => Object.hash(runtimeType, message, fileNames);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$UploadSuccessStateImplCopyWith<_$UploadSuccessStateImpl> get copyWith =>
-      __$$UploadSuccessStateImplCopyWithImpl<_$UploadSuccessStateImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message, String fileNames) success,
-    required TResult Function(String fileName) changeFileName,
-  }) {
-    return success(message, fileNames);
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UploadFileState.success(message: $message, fileNames: $fileNames)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message, String fileNames)? success,
-    TResult? Function(String fileName)? changeFileName,
-  }) {
-    return success?.call(message, fileNames);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message, String fileNames)? success,
-    TResult Function(String fileName)? changeFileName,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(message, fileNames);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UploadLoadingState value) loading,
-    required TResult Function(UploadErrorState value) error,
-    required TResult Function(UploadSuccessState value) success,
-    required TResult Function(UploadChangeFileNameState value) changeFileName,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadLoadingState value)? loading,
-    TResult? Function(UploadErrorState value)? error,
-    TResult? Function(UploadSuccessState value)? success,
-    TResult? Function(UploadChangeFileNameState value)? changeFileName,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadLoadingState value)? loading,
-    TResult Function(UploadErrorState value)? error,
-    TResult Function(UploadSuccessState value)? success,
-    TResult Function(UploadChangeFileNameState value)? changeFileName,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class UploadSuccessState implements UploadFileState {
-  const factory UploadSuccessState(
-      final String message, final String fileNames) = _$UploadSuccessStateImpl;
-
-  String get message;
-  String get fileNames;
-  @JsonKey(ignore: true)
-  _$$UploadSuccessStateImplCopyWith<_$UploadSuccessStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UploadChangeFileNameStateImplCopyWith<$Res> {
-  factory _$$UploadChangeFileNameStateImplCopyWith(
-          _$UploadChangeFileNameStateImpl value,
-          $Res Function(_$UploadChangeFileNameStateImpl) then) =
-      __$$UploadChangeFileNameStateImplCopyWithImpl<$Res>;
+abstract mixin class $UploadSuccessStateCopyWith<$Res>
+    implements $UploadFileStateCopyWith<$Res> {
+  factory $UploadSuccessStateCopyWith(
+          UploadSuccessState value, $Res Function(UploadSuccessState) _then) =
+      _$UploadSuccessStateCopyWithImpl;
   @useResult
-  $Res call({String fileName});
+  $Res call({String message, String fileNames});
 }
 
 /// @nodoc
-class __$$UploadChangeFileNameStateImplCopyWithImpl<$Res>
-    extends _$UploadFileStateCopyWithImpl<$Res, _$UploadChangeFileNameStateImpl>
-    implements _$$UploadChangeFileNameStateImplCopyWith<$Res> {
-  __$$UploadChangeFileNameStateImplCopyWithImpl(
-      _$UploadChangeFileNameStateImpl _value,
-      $Res Function(_$UploadChangeFileNameStateImpl) _then)
-      : super(_value, _then);
+class _$UploadSuccessStateCopyWithImpl<$Res>
+    implements $UploadSuccessStateCopyWith<$Res> {
+  _$UploadSuccessStateCopyWithImpl(this._self, this._then);
 
+  final UploadSuccessState _self;
+  final $Res Function(UploadSuccessState) _then;
+
+  /// Create a copy of UploadFileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
-    Object? fileName = null,
+    Object? message = null,
+    Object? fileNames = null,
   }) {
-    return _then(_$UploadChangeFileNameStateImpl(
-      null == fileName
-          ? _value.fileName
-          : fileName // ignore: cast_nullable_to_non_nullable
+    return _then(UploadSuccessState(
+      null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == fileNames
+          ? _self.fileNames
+          : fileNames // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -1145,32 +917,33 @@ class __$$UploadChangeFileNameStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$UploadChangeFileNameStateImpl
+class UploadChangeFileNameState
     with DiagnosticableTreeMixin
-    implements UploadChangeFileNameState {
-  const _$UploadChangeFileNameStateImpl(this.fileName);
+    implements UploadFileState {
+  const UploadChangeFileNameState(this.fileName);
 
-  @override
   final String fileName;
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UploadFileState.changeFileName(fileName: $fileName)';
-  }
+  /// Create a copy of UploadFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $UploadChangeFileNameStateCopyWith<UploadChangeFileNameState> get copyWith =>
+      _$UploadChangeFileNameStateCopyWithImpl<UploadChangeFileNameState>(
+          this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UploadFileState.changeFileName'))
       ..add(DiagnosticsProperty('fileName', fileName));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UploadChangeFileNameStateImpl &&
+            other is UploadChangeFileNameState &&
             (identical(other.fileName, fileName) ||
                 other.fileName == fileName));
   }
@@ -1178,94 +951,43 @@ class _$UploadChangeFileNameStateImpl
   @override
   int get hashCode => Object.hash(runtimeType, fileName);
 
-  @JsonKey(ignore: true)
   @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'UploadFileState.changeFileName(fileName: $fileName)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $UploadChangeFileNameStateCopyWith<$Res>
+    implements $UploadFileStateCopyWith<$Res> {
+  factory $UploadChangeFileNameStateCopyWith(UploadChangeFileNameState value,
+          $Res Function(UploadChangeFileNameState) _then) =
+      _$UploadChangeFileNameStateCopyWithImpl;
+  @useResult
+  $Res call({String fileName});
+}
+
+/// @nodoc
+class _$UploadChangeFileNameStateCopyWithImpl<$Res>
+    implements $UploadChangeFileNameStateCopyWith<$Res> {
+  _$UploadChangeFileNameStateCopyWithImpl(this._self, this._then);
+
+  final UploadChangeFileNameState _self;
+  final $Res Function(UploadChangeFileNameState) _then;
+
+  /// Create a copy of UploadFileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  _$$UploadChangeFileNameStateImplCopyWith<_$UploadChangeFileNameStateImpl>
-      get copyWith => __$$UploadChangeFileNameStateImplCopyWithImpl<
-          _$UploadChangeFileNameStateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message, String fileNames) success,
-    required TResult Function(String fileName) changeFileName,
+  $Res call({
+    Object? fileName = null,
   }) {
-    return changeFileName(fileName);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message, String fileNames)? success,
-    TResult? Function(String fileName)? changeFileName,
-  }) {
-    return changeFileName?.call(fileName);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message, String fileNames)? success,
-    TResult Function(String fileName)? changeFileName,
-    required TResult orElse(),
-  }) {
-    if (changeFileName != null) {
-      return changeFileName(fileName);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(UploadLoadingState value) loading,
-    required TResult Function(UploadErrorState value) error,
-    required TResult Function(UploadSuccessState value) success,
-    required TResult Function(UploadChangeFileNameState value) changeFileName,
-  }) {
-    return changeFileName(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(UploadLoadingState value)? loading,
-    TResult? Function(UploadErrorState value)? error,
-    TResult? Function(UploadSuccessState value)? success,
-    TResult? Function(UploadChangeFileNameState value)? changeFileName,
-  }) {
-    return changeFileName?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(UploadLoadingState value)? loading,
-    TResult Function(UploadErrorState value)? error,
-    TResult Function(UploadSuccessState value)? success,
-    TResult Function(UploadChangeFileNameState value)? changeFileName,
-    required TResult orElse(),
-  }) {
-    if (changeFileName != null) {
-      return changeFileName(this);
-    }
-    return orElse();
+    return _then(UploadChangeFileNameState(
+      null == fileName
+          ? _self.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
-abstract class UploadChangeFileNameState implements UploadFileState {
-  const factory UploadChangeFileNameState(final String fileName) =
-      _$UploadChangeFileNameStateImpl;
-
-  String get fileName;
-  @JsonKey(ignore: true)
-  _$$UploadChangeFileNameStateImplCopyWith<_$UploadChangeFileNameStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

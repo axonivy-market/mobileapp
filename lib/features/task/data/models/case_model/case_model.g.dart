@@ -8,7 +8,7 @@ part of 'case_model.dart';
 
 CaseTaskModel _$CaseTaskModelFromJson(Map<String, dynamic> json) =>
     CaseTaskModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String?,
       description: json['description'] as String?,
       documents: (json['documents'] as List<dynamic>?)

@@ -6,37 +6,34 @@ part of 'search_result.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$SectionHeaderImpl _$$SectionHeaderImplFromJson(Map<String, dynamic> json) =>
-    _$SectionHeaderImpl(
+SectionHeader _$SectionHeaderFromJson(Map<String, dynamic> json) =>
+    SectionHeader(
       json['title'] as String,
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$SectionHeaderImplToJson(_$SectionHeaderImpl instance) =>
+Map<String, dynamic> _$SectionHeaderToJson(SectionHeader instance) =>
     <String, dynamic>{
       'title': instance.title,
       'runtimeType': instance.$type,
     };
 
-_$TaskItemImpl _$$TaskItemImplFromJson(Map<String, dynamic> json) =>
-    _$TaskItemImpl(
+TaskItem _$TaskItemFromJson(Map<String, dynamic> json) => TaskItem(
       TaskIvy.fromJson(json['task'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$TaskItemImplToJson(_$TaskItemImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$TaskItemToJson(TaskItem instance) => <String, dynamic>{
       'task': instance.task,
       'runtimeType': instance.$type,
     };
 
-_$ProcessItemImpl _$$ProcessItemImplFromJson(Map<String, dynamic> json) =>
-    _$ProcessItemImpl(
+ProcessItem _$ProcessItemFromJson(Map<String, dynamic> json) => ProcessItem(
       Process.fromJson(json['process'] as Map<String, dynamic>),
       $type: json['runtimeType'] as String?,
     );
 
-Map<String, dynamic> _$$ProcessItemImplToJson(_$ProcessItemImpl instance) =>
+Map<String, dynamic> _$ProcessItemToJson(ProcessItem instance) =>
     <String, dynamic>{
       'process': instance.process,
       'runtimeType': instance.$type,

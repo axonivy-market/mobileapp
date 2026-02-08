@@ -3,7 +3,7 @@ import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/features/task/data/datasources/task_remote_data_source/task_remote_data_source.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/features/task/domain/repositories/task_repository_interface.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: TaskRepositoryInterface)

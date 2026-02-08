@@ -1717,7 +1717,6 @@ const Map<String, IconData> fontAwesomeIconsMap = {
   'utensilSpoon': FontAwesomeIcons.utensilSpoon,
   'utensils': FontAwesomeIcons.utensils,
   'vaadin': FontAwesomeIcons.vaadin,
-  'vectorSquare': FontAwesomeIcons.vectorSquare,
   'venus': FontAwesomeIcons.venus,
   'venusDouble': FontAwesomeIcons.venusDouble,
   'venusMars': FontAwesomeIcons.venusMars,

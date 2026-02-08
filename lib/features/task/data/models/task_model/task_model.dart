@@ -2,7 +2,7 @@ import 'package:axon_ivy/core/abstracts/data_mapper.dart';
 import 'package:axon_ivy/features/task/data/models/case_model/case_model.dart';
 import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive_ce.dart';
 
 part 'task_model.g.dart';
 

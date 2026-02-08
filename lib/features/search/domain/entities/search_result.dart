@@ -6,7 +6,7 @@ part 'search_result.freezed.dart';
 part 'search_result.g.dart';
 
 @freezed
-class SearchResult with _$SearchResult {
+abstract class SearchResult with _$SearchResult {
   const factory SearchResult.sectionHeader(String title) = SectionHeader;
 
   const factory SearchResult.task(TaskIvy task) = TaskItem;
