@@ -17,4 +17,5 @@ class AppStrings {
   static const String strCacheError = "cacheError";
   static const String strNoInternetError = "noInternetError";
   static const String strConnectionError = "connectionError";
+  static const String strInsecureConnectionError = "insecureConnectionError";
 }

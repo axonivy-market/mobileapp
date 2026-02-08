@@ -86,6 +86,7 @@
   "cacheError": "Cache error, try again later",
   "noInternetError": "Please check your internet connection",
   "connectionError": "Please check your base url",
+  "insecureConnectionError": "HTTPS required. Use a secure URL.",
   "errorCanNotAccessScreen": "Error - You cannot access this screen.",
   "generalSearch": "Search",
   "generalAll": "All",

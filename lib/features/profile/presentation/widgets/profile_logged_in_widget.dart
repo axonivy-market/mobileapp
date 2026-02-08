@@ -9,6 +9,7 @@ import 'package:axon_ivy/features/theme/bloc/theme_event.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_state.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/shared/storage/secure_storage.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -67,6 +68,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
   ElevatedButton _buildSignOutButton() {
     return ElevatedButton(
       onPressed: () {
+        SecureStorage.clearCredentials();
         SharedPrefs.clear();
         context.read<LoggedInCubit>().loggedIn(false);
       },
@@ -234,7 +236,8 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                           ? AppConfig.baseUrl
                           : SharedPrefs.getBaseUrl!;
                 } else {
-                  SharedPrefs.clear(); // Clear shared preferences
+                  SecureStorage.clearCredentials();
+                  SharedPrefs.clear();
                   context.read<LoggedInCubit>().loggedIn(false);
                 }
               } else {
