@@ -80,8 +80,12 @@ jobs:
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
         run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+          if [ -f "$RUNNER_TEMP/app-signing.keychain-db" ]; then
+            security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
+          fi
+          if [ -f ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision ]; then
+            rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+          fi
 
       - name: 'Upload app to TestFlight'
         uses: apple-actions/upload-testflight-build@v1
