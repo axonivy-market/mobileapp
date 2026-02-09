@@ -30,6 +30,7 @@ jobs:
         run: |
           cd ios
           pod repo update
+          pod update OrderedSet
           pod install
 
       - name: Install the Apple certificate and provisioning profile
