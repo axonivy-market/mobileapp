@@ -1,12 +1,11 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/shared/extensions/string_ext.dart';
-import 'package:axon_ivy/shared/storage/secure_storage.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
+import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -54,14 +53,11 @@ class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
         return;
       }
     }
-    final username = SecureStorage.username ?? '';
-    final password = SecureStorage.password ?? '';
-    final basicAuth = 'Basic ${base64Encode(utf8.encode('$username:$password'))}';
     emit(const DownloadFileState.loading());
     try {
       final response = await http.get(
         uri,
-        headers: {"Authorization": basicAuth},
+        headers: {"Authorization": AuthorizationUtils.authorizationHeader},
       );
       if (response.statusCode == 200) {
         String path = "";
