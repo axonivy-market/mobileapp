@@ -1,0 +1,83 @@
+name: Development Helper for iOS
+
+# This is a placeholder workflow that can be customized on feature branches
+# for temporary development tasks without affecting master.
+#
+# Usage:
+# 1. This minimal workflow is committed to master
+# 2. On your feature branch, modify this file to perform specific tasks
+# 3. Run the workflow from your branch
+# 4. Tasks can include: updating Podfile.lock, testing builds, etc.
+
+on:
+  workflow_dispatch:
+    inputs:
+      task_description:
+        description: 'What task are you performing? (for documentation)'
+        required: false
+        type: string
+        default: 'Development task'
+
+permissions:
+  contents: read
+
+jobs:
+  helper:
+    runs-on: macos-26
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.38.9'
+          channel: 'stable'
+          cache: true
+
+      - name: Placeholder Step
+        run: |
+          echo "================================================"
+          echo "iOS Development Helper Workflow"
+          echo "================================================"
+          echo ""
+          echo "Task: ${{ inputs.task_description }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Triggered by: ${{ github.actor }}"
+          echo ""
+          echo "✅ This is a placeholder workflow."
+          echo ""
+          echo "To use this workflow:"
+          echo "1. Modify this file on your feature branch"
+          echo "2. Add your custom steps here"
+          echo "3. Run the workflow from GitHub Actions"
+          echo ""
+          echo "Example use cases:"
+          echo "- Update Podfile.lock"
+          echo "- Test iOS build configuration"
+          echo "- Validate dependencies"
+          echo "- Any other development task"
+          echo ""
+          echo "================================================"
+
+      - name: Environment Info
+        run: |
+          echo "## Environment Information" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Runner:** macos-26" >> $GITHUB_STEP_SUMMARY
+          echo "- **Branch:** ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Task:** ${{ inputs.task_description }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Xcode Version" >> $GITHUB_STEP_SUMMARY
+          xcodebuild -version >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Flutter Version" >> $GITHUB_STEP_SUMMARY
+          flutter --version >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### CocoaPods Version" >> $GITHUB_STEP_SUMMARY
+          pod --version >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Workflow completed successfully" >> $GITHUB_STEP_SUMMARY
