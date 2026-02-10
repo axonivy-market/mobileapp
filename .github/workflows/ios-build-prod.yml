@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   build:
-    runs-on: macos-latest
+    runs-on: macos-15
 
     steps:
 
@@ -25,13 +25,6 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-
-      - name: Update CocoaPods repo and install pods
-        run: |
-          cd ios
-          pod repo update
-          pod update OrderedSet
-          pod install
 
       - name: Install the Apple certificate and provisioning profile
         env:
