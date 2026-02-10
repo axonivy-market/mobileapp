@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:axon_ivy/features/profile/domain/entities/qr/qr_model.dart';
 import 'package:axon_ivy/shared/widgets/back_button_widget.dart';
@@ -58,7 +57,6 @@ class _QRParentPageState extends State<QRParentPage> {
           result = barcode.rawValue;
         });
 
-        debugPrint("$result");
         if (result != null) {
           if (result!.contains("loginUrl") &&
               result!.contains("username")) {

@@ -1,10 +1,10 @@
 import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/theme/app_themes.dart'; // Import your theme data
+import 'package:axon_ivy/core/theme/app_themes.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/logged_cubit/logged_in_cubit.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/profile_bloc/profile_bloc.dart';
-import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart'; // Import the ThemeBloc
+import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_event.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_state.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
@@ -28,11 +28,6 @@ class ProfileLoggedInWidget extends BasePage {
 }
 
 class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   bool isDemoMode = SharedPrefs.demoSetting ?? false;
   bool isDemoLogin = SharedPrefs.isDemoLogin ?? false;
 
@@ -67,9 +62,10 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
 
   ElevatedButton _buildSignOutButton() {
     return ElevatedButton(
-      onPressed: () {
-        SecureStorage.clearCredentials();
+      onPressed: () async {
+        await SecureStorage.clearCredentials();
         SharedPrefs.clear();
+        if (!mounted) return;
         context.read<LoggedInCubit>().loggedIn(false);
       },
       style: ElevatedButton.styleFrom(
@@ -224,7 +220,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
           ),
           SwitchWidget(
             isActive: isDemoMode,
-            onChanged: (value) {
+            onChanged: (value) async {
               setState(() {
                 isDemoMode = value;
               });
@@ -236,8 +232,9 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                           ? AppConfig.baseUrl
                           : SharedPrefs.getBaseUrl!;
                 } else {
-                  SecureStorage.clearCredentials();
+                  await SecureStorage.clearCredentials();
                   SharedPrefs.clear();
+                  if (!mounted) return;
                   context.read<LoggedInCubit>().loggedIn(false);
                 }
               } else {

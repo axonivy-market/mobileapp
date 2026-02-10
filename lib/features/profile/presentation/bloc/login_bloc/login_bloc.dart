@@ -65,8 +65,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           ? AppConfig.baseUrl
           : SharedPrefs.getBaseUrl!;
     }
-    Uri? uri = Uri.tryParse(getIt<Dio>().options.baseUrl);
-    if (uri!.host.isEmptyOrNull) {
+    final uri = Uri.tryParse(getIt<Dio>().options.baseUrl);
+    if (uri == null || uri.host.isEmptyOrNull) {
       emit(LoginState(
           status: LoginStatus.error,
           error: Failure(400, "notFoundError".tr())));
@@ -92,7 +92,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (engineInfo.isLeft()) {
           await SecureStorage.clearCredentials();
           SharedPrefs.clear();
-          final failure = engineInfo.fold((l) => l, (r) => null)!;
+          final failure = engineInfo.fold((l) => l, (r) => null);
           emit(LoginState(status: LoginStatus.error, error: failure));
         } else {
           SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);

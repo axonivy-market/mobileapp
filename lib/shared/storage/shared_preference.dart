@@ -23,7 +23,6 @@ class SharedPrefs {
   static Future setBaseUrl(String value) =>
       _pref.setString(SharedPreferencesItem.baseUrl.name, value);
 
-
   static bool? get isLogin => _pref.getBool(SharedPreferencesItem.isLogin.name);
 
   static Future setIsLogin(bool value) =>
@@ -60,8 +59,8 @@ class SharedPrefs {
   static bool? get themeSetting =>
       _pref.getBool(SharedPreferencesItem.isDarkMode.name);
 
-  static Future setDemoSetting(bool isDarkMode) =>
-      _pref.setBool(SharedPreferencesItem.isDemoMode.name, isDarkMode);
+  static Future setDemoSetting(bool isDemoMode) =>
+      _pref.setBool(SharedPreferencesItem.isDemoMode.name, isDemoMode);
 
   static bool? get demoSetting =>
       _pref.getBool(SharedPreferencesItem.isDemoMode.name);
@@ -74,5 +73,4 @@ class SharedPrefs {
     _pref.remove(SharedPreferencesItem.isDemoMode.name);
     _pref.remove(SharedPreferencesItem.isDemoLogin.name);
   }
-
 }

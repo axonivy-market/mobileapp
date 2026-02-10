@@ -38,7 +38,6 @@ class AppDio with DioMixin implements Dio {
           }
           options.headers['Authorization'] =
               AuthorizationUtils.authorizationHeader;
-          debugPrint('Headers: ${options.headers}');
           return handler.next(options);
         },
         onError: (DioException e, ErrorInterceptorHandler handler) {

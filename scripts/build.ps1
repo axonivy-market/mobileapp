@@ -6,7 +6,7 @@ $ErrorActionPreference = "Stop"
 # ---- Configuration ----
 $FLUTTER_VERSION = "3.38.9"
 $FLAVOR          = "dev"
-$ENTRY_POINT     = if ($FLAVOR -eq "dev") { "lib/main_dev.dart" } else { "lib/main.dart" }
+$ENTRY_POINT     = $(if ($FLAVOR -eq "dev") { "lib/main_dev.dart" } else { "lib/main.dart" })
 $APK_PATH        = "build\app\outputs\flutter-apk\app-$FLAVOR-release.apk"
 
 # Navigate to project root
