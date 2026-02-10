@@ -9,6 +9,7 @@ import 'package:axon_ivy/features/theme/bloc/theme_event.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_state.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/shared/storage/secure_storage.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -67,6 +68,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
   ElevatedButton _buildSignOutButton() {
     return ElevatedButton(
       onPressed: () {
+        SecureStorage.clearCredentials();
         SharedPrefs.clear();
         context.read<LoggedInCubit>().loggedIn(false);
       },
@@ -133,7 +135,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400,
                   fontSize: 17.sp,
-                  color: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -147,7 +149,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
                     fontSize: 13.sp,
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
             ],
@@ -174,7 +176,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.w400,
                 fontSize: 17.sp,
-                color: Theme.of(context).colorScheme.surface),
+                color: Theme.of(context).colorScheme.onSurface),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -183,7 +185,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 "English",
                 style: GoogleFonts.inter(
                     fontSize: 13.sp,
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w400),
               ),
               AppAssets.icons.chevronRight.svg(
@@ -218,7 +220,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.w400,
                 fontSize: 17.sp,
-                color: Theme.of(context).colorScheme.surface),
+                color: Theme.of(context).colorScheme.onSurface),
           ),
           SwitchWidget(
             isActive: isDemoMode,
@@ -234,7 +236,8 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                           ? AppConfig.baseUrl
                           : SharedPrefs.getBaseUrl!;
                 } else {
-                  SharedPrefs.clear(); // Clear shared preferences
+                  SecureStorage.clearCredentials();
+                  SharedPrefs.clear();
                   context.read<LoggedInCubit>().loggedIn(false);
                 }
               } else {
@@ -269,7 +272,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400,
                   fontSize: 17.sp,
-                  color: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               SwitchWidget(

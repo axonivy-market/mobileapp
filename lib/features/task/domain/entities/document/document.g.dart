@@ -8,7 +8,7 @@ part of 'document.dart';
 
 class DocumentAdapter extends TypeAdapter<Document> {
   @override
-  final int typeId = 2;
+  final typeId = 2;
 
   @override
   Document read(BinaryReader reader) {
@@ -17,12 +17,12 @@ class DocumentAdapter extends TypeAdapter<Document> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Document(
-      id: fields[0] as int,
-      name: fields[1] as String,
-      url: fields[2] as String,
-      path: fields[3] as String,
-      fileLocalState: fields[4] as int,
-      fileUploadPath: fields[5] as String,
+      id: (fields[0] as num).toInt(),
+      name: fields[1] == null ? '' : fields[1] as String,
+      url: fields[2] == null ? '' : fields[2] as String,
+      path: fields[3] == null ? '' : fields[3] as String,
+      fileLocalState: fields[4] == null ? 0 : (fields[4] as num).toInt(),
+      fileUploadPath: fields[5] == null ? '' : fields[5] as String,
     );
   }
 
@@ -59,18 +59,16 @@ class DocumentAdapter extends TypeAdapter<Document> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$DocumentImpl _$$DocumentImplFromJson(Map<String, dynamic> json) =>
-    _$DocumentImpl(
-      id: json['id'] as int,
+_Document _$DocumentFromJson(Map<String, dynamic> json) => _Document(
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String? ?? "",
       url: json['url'] as String? ?? "",
       path: json['path'] as String? ?? "",
-      fileLocalState: json['fileLocalState'] as int? ?? 0,
+      fileLocalState: (json['fileLocalState'] as num?)?.toInt() ?? 0,
       fileUploadPath: json['fileUploadPath'] as String? ?? "",
     );
 
-Map<String, dynamic> _$$DocumentImplToJson(_$DocumentImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$DocumentToJson(_Document instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'url': instance.url,

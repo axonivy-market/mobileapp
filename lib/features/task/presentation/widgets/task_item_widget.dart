@@ -22,7 +22,7 @@ Widget getDateTimeTaskWidget(
             ? AppAssets.icons.chevronRight.svg(
                 height: 21.h,
                 colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.surface, BlendMode.srcIn))
+                    Theme.of(context).colorScheme.onSurface, BlendMode.srcIn))
             : 5.horizontalSpace,
       ],
     );
@@ -84,7 +84,7 @@ Widget getDateTimeTaskWidget(
             ? AppAssets.icons.chevronRight.svg(
                 height: 21.h,
                 colorFilter: ColorFilter.mode(
-                    Theme.of(context).colorScheme.surface, BlendMode.srcIn))
+                    Theme.of(context).colorScheme.onSurface, BlendMode.srcIn))
             : 5.horizontalSpace,
       ],
     );
@@ -94,7 +94,7 @@ Widget getDateTimeTaskWidget(
 Color getTaskNameColor(BuildContext context, String query, bool isTaskDone) {
   var secondaryColor = Theme.of(context).colorScheme.secondary;
   return query.isEmptyOrNull
-      ? (isTaskDone ? secondaryColor : Theme.of(context).colorScheme.surface)
+      ? (isTaskDone ? secondaryColor : Theme.of(context).colorScheme.onSurface)
       : secondaryColor;
 }
 

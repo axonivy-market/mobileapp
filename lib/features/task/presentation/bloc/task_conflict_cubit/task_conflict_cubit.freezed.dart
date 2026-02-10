@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,54 +9,46 @@ part of 'task_conflict_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$TaskConflictState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(int currentTime, String message) taskUnstartable,
-    required TResult Function(int currentTime, TaskIvy task) taskStartable,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(int currentTime, String message)? taskUnstartable,
-    TResult? Function(int currentTime, TaskIvy task)? taskStartable,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(int currentTime, String message)? taskUnstartable,
-    TResult Function(int currentTime, TaskIvy task)? taskStartable,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoadingState value) loading,
-    required TResult Function(TaskUnstartableState value) taskUnstartable,
-    required TResult Function(TaskStartableState value) taskStartable,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(LoadingState value)? loading,
-    TResult? Function(TaskUnstartableState value)? taskUnstartable,
-    TResult? Function(TaskStartableState value)? taskStartable,
-  }) =>
-      throw _privateConstructorUsedError;
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is TaskConflictState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString() {
+    return 'TaskConflictState()';
+  }
+}
+
+/// @nodoc
+class $TaskConflictStateCopyWith<$Res> {
+  $TaskConflictStateCopyWith(
+      TaskConflictState _, $Res Function(TaskConflictState) __);
+}
+
+/// Adds pattern-matching-related methods to [TaskConflictState].
+extension TaskConflictStatePatterns on TaskConflictState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -64,312 +56,257 @@ mixin _$TaskConflictState {
     TResult Function(TaskUnstartableState value)? taskUnstartable,
     TResult Function(TaskStartableState value)? taskStartable,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial(_that);
+      case LoadingState() when loading != null:
+        return loading(_that);
+      case TaskUnstartableState() when taskUnstartable != null:
+        return taskUnstartable(_that);
+      case TaskStartableState() when taskStartable != null:
+        return taskStartable(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(LoadingState value) loading,
+    required TResult Function(TaskUnstartableState value) taskUnstartable,
+    required TResult Function(TaskStartableState value) taskStartable,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial():
+        return initial(_that);
+      case LoadingState():
+        return loading(_that);
+      case TaskUnstartableState():
+        return taskUnstartable(_that);
+      case TaskStartableState():
+        return taskStartable(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(LoadingState value)? loading,
+    TResult? Function(TaskUnstartableState value)? taskUnstartable,
+    TResult? Function(TaskStartableState value)? taskStartable,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial(_that);
+      case LoadingState() when loading != null:
+        return loading(_that);
+      case TaskUnstartableState() when taskUnstartable != null:
+        return taskUnstartable(_that);
+      case TaskStartableState() when taskStartable != null:
+        return taskStartable(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(int currentTime, String message)? taskUnstartable,
+    TResult Function(int currentTime, TaskIvy task)? taskStartable,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial();
+      case LoadingState() when loading != null:
+        return loading();
+      case TaskUnstartableState() when taskUnstartable != null:
+        return taskUnstartable(_that.currentTime, _that.message);
+      case TaskStartableState() when taskStartable != null:
+        return taskStartable(_that.currentTime, _that.task);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(int currentTime, String message) taskUnstartable,
+    required TResult Function(int currentTime, TaskIvy task) taskStartable,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial():
+        return initial();
+      case LoadingState():
+        return loading();
+      case TaskUnstartableState():
+        return taskUnstartable(_that.currentTime, _that.message);
+      case TaskStartableState():
+        return taskStartable(_that.currentTime, _that.task);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(int currentTime, String message)? taskUnstartable,
+    TResult? Function(int currentTime, TaskIvy task)? taskStartable,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial();
+      case LoadingState() when loading != null:
+        return loading();
+      case TaskUnstartableState() when taskUnstartable != null:
+        return taskUnstartable(_that.currentTime, _that.message);
+      case TaskStartableState() when taskStartable != null:
+        return taskStartable(_that.currentTime, _that.task);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
-abstract class $TaskConflictStateCopyWith<$Res> {
-  factory $TaskConflictStateCopyWith(
-          TaskConflictState value, $Res Function(TaskConflictState) then) =
-      _$TaskConflictStateCopyWithImpl<$Res, TaskConflictState>;
-}
 
-/// @nodoc
-class _$TaskConflictStateCopyWithImpl<$Res, $Val extends TaskConflictState>
-    implements $TaskConflictStateCopyWith<$Res> {
-  _$TaskConflictStateCopyWithImpl(this._value, this._then);
+class Initial implements TaskConflictState {
+  const Initial();
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is Initial);
+  }
 
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$TaskConflictStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$InitialImpl implements Initial {
-  const _$InitialImpl();
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
     return 'TaskConflictState.initial()';
   }
+}
+
+/// @nodoc
+
+class LoadingState implements TaskConflictState {
+  const LoadingState();
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType && other is LoadingState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(int currentTime, String message) taskUnstartable,
-    required TResult Function(int currentTime, TaskIvy task) taskStartable,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(int currentTime, String message)? taskUnstartable,
-    TResult? Function(int currentTime, TaskIvy task)? taskStartable,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(int currentTime, String message)? taskUnstartable,
-    TResult Function(int currentTime, TaskIvy task)? taskStartable,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoadingState value) loading,
-    required TResult Function(TaskUnstartableState value) taskUnstartable,
-    required TResult Function(TaskStartableState value) taskStartable,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(LoadingState value)? loading,
-    TResult? Function(TaskUnstartableState value)? taskUnstartable,
-    TResult? Function(TaskStartableState value)? taskStartable,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadingState value)? loading,
-    TResult Function(TaskUnstartableState value)? taskUnstartable,
-    TResult Function(TaskStartableState value)? taskStartable,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Initial implements TaskConflictState {
-  const factory Initial() = _$InitialImpl;
-}
-
-/// @nodoc
-abstract class _$$LoadingStateImplCopyWith<$Res> {
-  factory _$$LoadingStateImplCopyWith(
-          _$LoadingStateImpl value, $Res Function(_$LoadingStateImpl) then) =
-      __$$LoadingStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$LoadingStateImplCopyWithImpl<$Res>
-    extends _$TaskConflictStateCopyWithImpl<$Res, _$LoadingStateImpl>
-    implements _$$LoadingStateImplCopyWith<$Res> {
-  __$$LoadingStateImplCopyWithImpl(
-      _$LoadingStateImpl _value, $Res Function(_$LoadingStateImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$LoadingStateImpl implements LoadingState {
-  const _$LoadingStateImpl();
 
   @override
   String toString() {
     return 'TaskConflictState.loading()';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$LoadingStateImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(int currentTime, String message) taskUnstartable,
-    required TResult Function(int currentTime, TaskIvy task) taskStartable,
-  }) {
-    return loading();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(int currentTime, String message)? taskUnstartable,
-    TResult? Function(int currentTime, TaskIvy task)? taskStartable,
-  }) {
-    return loading?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(int currentTime, String message)? taskUnstartable,
-    TResult Function(int currentTime, TaskIvy task)? taskStartable,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoadingState value) loading,
-    required TResult Function(TaskUnstartableState value) taskUnstartable,
-    required TResult Function(TaskStartableState value) taskStartable,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(LoadingState value)? loading,
-    TResult? Function(TaskUnstartableState value)? taskUnstartable,
-    TResult? Function(TaskStartableState value)? taskStartable,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadingState value)? loading,
-    TResult Function(TaskUnstartableState value)? taskUnstartable,
-    TResult Function(TaskStartableState value)? taskStartable,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class LoadingState implements TaskConflictState {
-  const factory LoadingState() = _$LoadingStateImpl;
-}
-
-/// @nodoc
-abstract class _$$TaskUnstartableStateImplCopyWith<$Res> {
-  factory _$$TaskUnstartableStateImplCopyWith(_$TaskUnstartableStateImpl value,
-          $Res Function(_$TaskUnstartableStateImpl) then) =
-      __$$TaskUnstartableStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int currentTime, String message});
-}
-
-/// @nodoc
-class __$$TaskUnstartableStateImplCopyWithImpl<$Res>
-    extends _$TaskConflictStateCopyWithImpl<$Res, _$TaskUnstartableStateImpl>
-    implements _$$TaskUnstartableStateImplCopyWith<$Res> {
-  __$$TaskUnstartableStateImplCopyWithImpl(_$TaskUnstartableStateImpl _value,
-      $Res Function(_$TaskUnstartableStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? currentTime = null,
-    Object? message = null,
-  }) {
-    return _then(_$TaskUnstartableStateImpl(
-      null == currentTime
-          ? _value.currentTime
-          : currentTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
 }
 
 /// @nodoc
 
-class _$TaskUnstartableStateImpl implements TaskUnstartableState {
-  const _$TaskUnstartableStateImpl(this.currentTime, this.message);
+class TaskUnstartableState implements TaskConflictState {
+  const TaskUnstartableState(this.currentTime, this.message);
 
-  @override
   final int currentTime;
-  @override
   final String message;
 
-  @override
-  String toString() {
-    return 'TaskConflictState.taskUnstartable(currentTime: $currentTime, message: $message)';
-  }
+  /// Create a copy of TaskConflictState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TaskUnstartableStateCopyWith<TaskUnstartableState> get copyWith =>
+      _$TaskUnstartableStateCopyWithImpl<TaskUnstartableState>(
+          this, _$identity);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskUnstartableStateImpl &&
+            other is TaskUnstartableState &&
             (identical(other.currentTime, currentTime) ||
                 other.currentTime == currentTime) &&
             (identical(other.message, message) || other.message == message));
@@ -378,166 +315,70 @@ class _$TaskUnstartableStateImpl implements TaskUnstartableState {
   @override
   int get hashCode => Object.hash(runtimeType, currentTime, message);
 
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TaskUnstartableStateImplCopyWith<_$TaskUnstartableStateImpl>
-      get copyWith =>
-          __$$TaskUnstartableStateImplCopyWithImpl<_$TaskUnstartableStateImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(int currentTime, String message) taskUnstartable,
-    required TResult Function(int currentTime, TaskIvy task) taskStartable,
-  }) {
-    return taskUnstartable(currentTime, message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(int currentTime, String message)? taskUnstartable,
-    TResult? Function(int currentTime, TaskIvy task)? taskStartable,
-  }) {
-    return taskUnstartable?.call(currentTime, message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(int currentTime, String message)? taskUnstartable,
-    TResult Function(int currentTime, TaskIvy task)? taskStartable,
-    required TResult orElse(),
-  }) {
-    if (taskUnstartable != null) {
-      return taskUnstartable(currentTime, message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoadingState value) loading,
-    required TResult Function(TaskUnstartableState value) taskUnstartable,
-    required TResult Function(TaskStartableState value) taskStartable,
-  }) {
-    return taskUnstartable(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(LoadingState value)? loading,
-    TResult? Function(TaskUnstartableState value)? taskUnstartable,
-    TResult? Function(TaskStartableState value)? taskStartable,
-  }) {
-    return taskUnstartable?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadingState value)? loading,
-    TResult Function(TaskUnstartableState value)? taskUnstartable,
-    TResult Function(TaskStartableState value)? taskStartable,
-    required TResult orElse(),
-  }) {
-    if (taskUnstartable != null) {
-      return taskUnstartable(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TaskUnstartableState implements TaskConflictState {
-  const factory TaskUnstartableState(
-      final int currentTime, final String message) = _$TaskUnstartableStateImpl;
-
-  int get currentTime;
-  String get message;
-  @JsonKey(ignore: true)
-  _$$TaskUnstartableStateImplCopyWith<_$TaskUnstartableStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$TaskStartableStateImplCopyWith<$Res> {
-  factory _$$TaskStartableStateImplCopyWith(_$TaskStartableStateImpl value,
-          $Res Function(_$TaskStartableStateImpl) then) =
-      __$$TaskStartableStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({int currentTime, TaskIvy task});
-
-  $TaskIvyCopyWith<$Res> get task;
-}
-
-/// @nodoc
-class __$$TaskStartableStateImplCopyWithImpl<$Res>
-    extends _$TaskConflictStateCopyWithImpl<$Res, _$TaskStartableStateImpl>
-    implements _$$TaskStartableStateImplCopyWith<$Res> {
-  __$$TaskStartableStateImplCopyWithImpl(_$TaskStartableStateImpl _value,
-      $Res Function(_$TaskStartableStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? currentTime = null,
-    Object? task = null,
-  }) {
-    return _then(_$TaskStartableStateImpl(
-      null == currentTime
-          ? _value.currentTime
-          : currentTime // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == task
-          ? _value.task
-          : task // ignore: cast_nullable_to_non_nullable
-              as TaskIvy,
-    ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TaskIvyCopyWith<$Res> get task {
-    return $TaskIvyCopyWith<$Res>(_value.task, (value) {
-      return _then(_value.copyWith(task: value));
-    });
-  }
-}
-
-/// @nodoc
-
-class _$TaskStartableStateImpl implements TaskStartableState {
-  const _$TaskStartableStateImpl(this.currentTime, this.task);
-
-  @override
-  final int currentTime;
-  @override
-  final TaskIvy task;
-
   @override
   String toString() {
-    return 'TaskConflictState.taskStartable(currentTime: $currentTime, task: $task)';
+    return 'TaskConflictState.taskUnstartable(currentTime: $currentTime, message: $message)';
   }
+}
+
+/// @nodoc
+abstract mixin class $TaskUnstartableStateCopyWith<$Res>
+    implements $TaskConflictStateCopyWith<$Res> {
+  factory $TaskUnstartableStateCopyWith(TaskUnstartableState value,
+          $Res Function(TaskUnstartableState) _then) =
+      _$TaskUnstartableStateCopyWithImpl;
+  @useResult
+  $Res call({int currentTime, String message});
+}
+
+/// @nodoc
+class _$TaskUnstartableStateCopyWithImpl<$Res>
+    implements $TaskUnstartableStateCopyWith<$Res> {
+  _$TaskUnstartableStateCopyWithImpl(this._self, this._then);
+
+  final TaskUnstartableState _self;
+  final $Res Function(TaskUnstartableState) _then;
+
+  /// Create a copy of TaskConflictState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? currentTime = null,
+    Object? message = null,
+  }) {
+    return _then(TaskUnstartableState(
+      null == currentTime
+          ? _self.currentTime
+          : currentTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class TaskStartableState implements TaskConflictState {
+  const TaskStartableState(this.currentTime, this.task);
+
+  final int currentTime;
+  final TaskIvy task;
+
+  /// Create a copy of TaskConflictState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TaskStartableStateCopyWith<TaskStartableState> get copyWith =>
+      _$TaskStartableStateCopyWithImpl<TaskStartableState>(this, _$identity);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskStartableStateImpl &&
+            other is TaskStartableState &&
             (identical(other.currentTime, currentTime) ||
                 other.currentTime == currentTime) &&
             (identical(other.task, task) || other.task == task));
@@ -546,95 +387,60 @@ class _$TaskStartableStateImpl implements TaskStartableState {
   @override
   int get hashCode => Object.hash(runtimeType, currentTime, task);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'TaskConflictState.taskStartable(currentTime: $currentTime, task: $task)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $TaskStartableStateCopyWith<$Res>
+    implements $TaskConflictStateCopyWith<$Res> {
+  factory $TaskStartableStateCopyWith(
+          TaskStartableState value, $Res Function(TaskStartableState) _then) =
+      _$TaskStartableStateCopyWithImpl;
+  @useResult
+  $Res call({int currentTime, TaskIvy task});
+
+  $TaskIvyCopyWith<$Res> get task;
+}
+
+/// @nodoc
+class _$TaskStartableStateCopyWithImpl<$Res>
+    implements $TaskStartableStateCopyWith<$Res> {
+  _$TaskStartableStateCopyWithImpl(this._self, this._then);
+
+  final TaskStartableState _self;
+  final $Res Function(TaskStartableState) _then;
+
+  /// Create a copy of TaskConflictState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? currentTime = null,
+    Object? task = null,
+  }) {
+    return _then(TaskStartableState(
+      null == currentTime
+          ? _self.currentTime
+          : currentTime // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == task
+          ? _self.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskIvy,
+    ));
+  }
+
+  /// Create a copy of TaskConflictState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$TaskStartableStateImplCopyWith<_$TaskStartableStateImpl> get copyWith =>
-      __$$TaskStartableStateImplCopyWithImpl<_$TaskStartableStateImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function() loading,
-    required TResult Function(int currentTime, String message) taskUnstartable,
-    required TResult Function(int currentTime, TaskIvy task) taskStartable,
-  }) {
-    return taskStartable(currentTime, task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function()? loading,
-    TResult? Function(int currentTime, String message)? taskUnstartable,
-    TResult? Function(int currentTime, TaskIvy task)? taskStartable,
-  }) {
-    return taskStartable?.call(currentTime, task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function()? loading,
-    TResult Function(int currentTime, String message)? taskUnstartable,
-    TResult Function(int currentTime, TaskIvy task)? taskStartable,
-    required TResult orElse(),
-  }) {
-    if (taskStartable != null) {
-      return taskStartable(currentTime, task);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoadingState value) loading,
-    required TResult Function(TaskUnstartableState value) taskUnstartable,
-    required TResult Function(TaskStartableState value) taskStartable,
-  }) {
-    return taskStartable(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(LoadingState value)? loading,
-    TResult? Function(TaskUnstartableState value)? taskUnstartable,
-    TResult? Function(TaskStartableState value)? taskStartable,
-  }) {
-    return taskStartable?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoadingState value)? loading,
-    TResult Function(TaskUnstartableState value)? taskUnstartable,
-    TResult Function(TaskStartableState value)? taskStartable,
-    required TResult orElse(),
-  }) {
-    if (taskStartable != null) {
-      return taskStartable(this);
-    }
-    return orElse();
+  $TaskIvyCopyWith<$Res> get task {
+    return $TaskIvyCopyWith<$Res>(_self.task, (value) {
+      return _then(_self.copyWith(task: value));
+    });
   }
 }
 
-abstract class TaskStartableState implements TaskConflictState {
-  const factory TaskStartableState(final int currentTime, final TaskIvy task) =
-      _$TaskStartableStateImpl;
-
-  int get currentTime;
-  TaskIvy get task;
-  @JsonKey(ignore: true)
-  _$$TaskStartableStateImplCopyWith<_$TaskStartableStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

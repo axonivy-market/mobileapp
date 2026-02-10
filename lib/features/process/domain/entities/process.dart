@@ -5,7 +5,7 @@ part 'process.freezed.dart';
 part 'process.g.dart';
 
 @freezed
-class Process with _$Process {
+abstract class Process with _$Process {
   const factory Process({
     @Default('') String id,
     @Default("") String name,

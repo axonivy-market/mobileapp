@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,136 +9,25 @@ part of 'theme_event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$ThemeEvent {
-  ThemeData get themeData => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(ThemeData themeData) changeTheme,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ThemeData themeData)? changeTheme,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ThemeData themeData)? changeTheme,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ChangeTheme value) changeTheme,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ChangeTheme value)? changeTheme,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(ChangeTheme value)? changeTheme,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  ThemeData get themeData;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ThemeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $ThemeEventCopyWith<ThemeEvent> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ThemeEventCopyWith<$Res> {
-  factory $ThemeEventCopyWith(
-          ThemeEvent value, $Res Function(ThemeEvent) then) =
-      _$ThemeEventCopyWithImpl<$Res, ThemeEvent>;
-  @useResult
-  $Res call({ThemeData themeData});
-}
-
-/// @nodoc
-class _$ThemeEventCopyWithImpl<$Res, $Val extends ThemeEvent>
-    implements $ThemeEventCopyWith<$Res> {
-  _$ThemeEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? themeData = null,
-  }) {
-    return _then(_value.copyWith(
-      themeData: null == themeData
-          ? _value.themeData
-          : themeData // ignore: cast_nullable_to_non_nullable
-              as ThemeData,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$ChangeThemeImplCopyWith<$Res>
-    implements $ThemeEventCopyWith<$Res> {
-  factory _$$ChangeThemeImplCopyWith(
-          _$ChangeThemeImpl value, $Res Function(_$ChangeThemeImpl) then) =
-      __$$ChangeThemeImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({ThemeData themeData});
-}
-
-/// @nodoc
-class __$$ChangeThemeImplCopyWithImpl<$Res>
-    extends _$ThemeEventCopyWithImpl<$Res, _$ChangeThemeImpl>
-    implements _$$ChangeThemeImplCopyWith<$Res> {
-  __$$ChangeThemeImplCopyWithImpl(
-      _$ChangeThemeImpl _value, $Res Function(_$ChangeThemeImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? themeData = null,
-  }) {
-    return _then(_$ChangeThemeImpl(
-      null == themeData
-          ? _value.themeData
-          : themeData // ignore: cast_nullable_to_non_nullable
-              as ThemeData,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$ChangeThemeImpl implements ChangeTheme {
-  const _$ChangeThemeImpl(this.themeData);
+      _$ThemeEventCopyWithImpl<ThemeEvent>(this as ThemeEvent, _$identity);
 
   @override
-  final ThemeData themeData;
-
-  @override
-  String toString() {
-    return 'ThemeEvent.changeTheme(themeData: $themeData)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ChangeThemeImpl &&
+            other is ThemeEvent &&
             (identical(other.themeData, themeData) ||
                 other.themeData == themeData));
   }
@@ -146,76 +35,267 @@ class _$ChangeThemeImpl implements ChangeTheme {
   @override
   int get hashCode => Object.hash(runtimeType, themeData);
 
-  @JsonKey(ignore: true)
   @override
+  String toString() {
+    return 'ThemeEvent(themeData: $themeData)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ThemeEventCopyWith<$Res> {
+  factory $ThemeEventCopyWith(
+          ThemeEvent value, $Res Function(ThemeEvent) _then) =
+      _$ThemeEventCopyWithImpl;
+  @useResult
+  $Res call({ThemeData themeData});
+}
+
+/// @nodoc
+class _$ThemeEventCopyWithImpl<$Res> implements $ThemeEventCopyWith<$Res> {
+  _$ThemeEventCopyWithImpl(this._self, this._then);
+
+  final ThemeEvent _self;
+  final $Res Function(ThemeEvent) _then;
+
+  /// Create a copy of ThemeEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  _$$ChangeThemeImplCopyWith<_$ChangeThemeImpl> get copyWith =>
-      __$$ChangeThemeImplCopyWithImpl<_$ChangeThemeImpl>(this, _$identity);
-
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(ThemeData themeData) changeTheme,
+  $Res call({
+    Object? themeData = null,
   }) {
-    return changeTheme(themeData);
+    return _then(_self.copyWith(
+      themeData: null == themeData
+          ? _self.themeData
+          : themeData // ignore: cast_nullable_to_non_nullable
+              as ThemeData,
+    ));
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(ThemeData themeData)? changeTheme,
-  }) {
-    return changeTheme?.call(themeData);
-  }
+/// Adds pattern-matching-related methods to [ThemeEvent].
+extension ThemeEventPatterns on ThemeEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(ThemeData themeData)? changeTheme,
-    required TResult orElse(),
-  }) {
-    if (changeTheme != null) {
-      return changeTheme(themeData);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(ChangeTheme value) changeTheme,
-  }) {
-    return changeTheme(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(ChangeTheme value)? changeTheme,
-  }) {
-    return changeTheme?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(ChangeTheme value)? changeTheme,
     required TResult orElse(),
   }) {
-    if (changeTheme != null) {
-      return changeTheme(this);
+    final _that = this;
+    switch (_that) {
+      case ChangeTheme() when changeTheme != null:
+        return changeTheme(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ChangeTheme value) changeTheme,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ChangeTheme():
+        return changeTheme(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ChangeTheme value)? changeTheme,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ChangeTheme() when changeTheme != null:
+        return changeTheme(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ThemeData themeData)? changeTheme,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ChangeTheme() when changeTheme != null:
+        return changeTheme(_that.themeData);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ThemeData themeData) changeTheme,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ChangeTheme():
+        return changeTheme(_that.themeData);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ThemeData themeData)? changeTheme,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case ChangeTheme() when changeTheme != null:
+        return changeTheme(_that.themeData);
+      case _:
+        return null;
+    }
   }
 }
 
-abstract class ChangeTheme implements ThemeEvent {
-  const factory ChangeTheme(final ThemeData themeData) = _$ChangeThemeImpl;
+/// @nodoc
+
+class ChangeTheme implements ThemeEvent {
+  const ChangeTheme(this.themeData);
 
   @override
-  ThemeData get themeData;
+  final ThemeData themeData;
+
+  /// Create a copy of ThemeEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
-  _$$ChangeThemeImplCopyWith<_$ChangeThemeImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ChangeThemeCopyWith<ChangeTheme> get copyWith =>
+      _$ChangeThemeCopyWithImpl<ChangeTheme>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ChangeTheme &&
+            (identical(other.themeData, themeData) ||
+                other.themeData == themeData));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, themeData);
+
+  @override
+  String toString() {
+    return 'ThemeEvent.changeTheme(themeData: $themeData)';
+  }
 }
+
+/// @nodoc
+abstract mixin class $ChangeThemeCopyWith<$Res>
+    implements $ThemeEventCopyWith<$Res> {
+  factory $ChangeThemeCopyWith(
+          ChangeTheme value, $Res Function(ChangeTheme) _then) =
+      _$ChangeThemeCopyWithImpl;
+  @override
+  @useResult
+  $Res call({ThemeData themeData});
+}
+
+/// @nodoc
+class _$ChangeThemeCopyWithImpl<$Res> implements $ChangeThemeCopyWith<$Res> {
+  _$ChangeThemeCopyWithImpl(this._self, this._then);
+
+  final ChangeTheme _self;
+  final $Res Function(ChangeTheme) _then;
+
+  /// Create a copy of ThemeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? themeData = null,
+  }) {
+    return _then(ChangeTheme(
+      null == themeData
+          ? _self.themeData
+          : themeData // ignore: cast_nullable_to_non_nullable
+              as ThemeData,
+    ));
+  }
+}
+
+// dart format on

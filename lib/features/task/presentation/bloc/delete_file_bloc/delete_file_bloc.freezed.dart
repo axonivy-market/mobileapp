@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,192 +9,28 @@ part of 'delete_file_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
 /// @nodoc
-mixin _$DeleteFileEvent {
-  int get caseId => throw _privateConstructorUsedError;
-  Document get document => throw _privateConstructorUsedError;
-  int get taskId => throw _privateConstructorUsedError;
-  bool get offline => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            int caseId, Document document, int taskId, bool offline)
-        deleteFile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int caseId, Document document, int taskId, bool offline)?
-        deleteFile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(int caseId, Document document, int taskId, bool offline)?
-        deleteFile,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_DeleteFile value) deleteFile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_DeleteFile value)? deleteFile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_DeleteFile value)? deleteFile,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+mixin _$DeleteFileEvent implements DiagnosticableTreeMixin {
+  int get caseId;
+  Document get document;
+  int get taskId;
+  bool get offline;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DeleteFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DeleteFileEventCopyWith<DeleteFileEvent> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DeleteFileEventCopyWith<$Res> {
-  factory $DeleteFileEventCopyWith(
-          DeleteFileEvent value, $Res Function(DeleteFileEvent) then) =
-      _$DeleteFileEventCopyWithImpl<$Res, DeleteFileEvent>;
-  @useResult
-  $Res call({int caseId, Document document, int taskId, bool offline});
-
-  $DocumentCopyWith<$Res> get document;
-}
-
-/// @nodoc
-class _$DeleteFileEventCopyWithImpl<$Res, $Val extends DeleteFileEvent>
-    implements $DeleteFileEventCopyWith<$Res> {
-  _$DeleteFileEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? caseId = null,
-    Object? document = null,
-    Object? taskId = null,
-    Object? offline = null,
-  }) {
-    return _then(_value.copyWith(
-      caseId: null == caseId
-          ? _value.caseId
-          : caseId // ignore: cast_nullable_to_non_nullable
-              as int,
-      document: null == document
-          ? _value.document
-          : document // ignore: cast_nullable_to_non_nullable
-              as Document,
-      taskId: null == taskId
-          ? _value.taskId
-          : taskId // ignore: cast_nullable_to_non_nullable
-              as int,
-      offline: null == offline
-          ? _value.offline
-          : offline // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $DocumentCopyWith<$Res> get document {
-    return $DocumentCopyWith<$Res>(_value.document, (value) {
-      return _then(_value.copyWith(document: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$DeleteFileImplCopyWith<$Res>
-    implements $DeleteFileEventCopyWith<$Res> {
-  factory _$$DeleteFileImplCopyWith(
-          _$DeleteFileImpl value, $Res Function(_$DeleteFileImpl) then) =
-      __$$DeleteFileImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({int caseId, Document document, int taskId, bool offline});
-
-  @override
-  $DocumentCopyWith<$Res> get document;
-}
-
-/// @nodoc
-class __$$DeleteFileImplCopyWithImpl<$Res>
-    extends _$DeleteFileEventCopyWithImpl<$Res, _$DeleteFileImpl>
-    implements _$$DeleteFileImplCopyWith<$Res> {
-  __$$DeleteFileImplCopyWithImpl(
-      _$DeleteFileImpl _value, $Res Function(_$DeleteFileImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? caseId = null,
-    Object? document = null,
-    Object? taskId = null,
-    Object? offline = null,
-  }) {
-    return _then(_$DeleteFileImpl(
-      null == caseId
-          ? _value.caseId
-          : caseId // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == document
-          ? _value.document
-          : document // ignore: cast_nullable_to_non_nullable
-              as Document,
-      null == taskId
-          ? _value.taskId
-          : taskId // ignore: cast_nullable_to_non_nullable
-              as int,
-      null == offline
-          ? _value.offline
-          : offline // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DeleteFileImpl with DiagnosticableTreeMixin implements _DeleteFile {
-  const _$DeleteFileImpl(this.caseId, this.document, this.taskId, this.offline);
-
-  @override
-  final int caseId;
-  @override
-  final Document document;
-  @override
-  final int taskId;
-  @override
-  final bool offline;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DeleteFileEvent.deleteFile(caseId: $caseId, document: $document, taskId: $taskId, offline: $offline)';
-  }
+      _$DeleteFileEventCopyWithImpl<DeleteFileEvent>(
+          this as DeleteFileEvent, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'DeleteFileEvent.deleteFile'))
+      ..add(DiagnosticsProperty('type', 'DeleteFileEvent'))
       ..add(DiagnosticsProperty('caseId', caseId))
       ..add(DiagnosticsProperty('document', document))
       ..add(DiagnosticsProperty('taskId', taskId))
@@ -202,10 +38,10 @@ class _$DeleteFileImpl with DiagnosticableTreeMixin implements _DeleteFile {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DeleteFileImpl &&
+            other is DeleteFileEvent &&
             (identical(other.caseId, caseId) || other.caseId == caseId) &&
             (identical(other.document, document) ||
                 other.document == document) &&
@@ -217,255 +53,394 @@ class _$DeleteFileImpl with DiagnosticableTreeMixin implements _DeleteFile {
   int get hashCode =>
       Object.hash(runtimeType, caseId, document, taskId, offline);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DeleteFileEvent(caseId: $caseId, document: $document, taskId: $taskId, offline: $offline)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DeleteFileEventCopyWith<$Res> {
+  factory $DeleteFileEventCopyWith(
+          DeleteFileEvent value, $Res Function(DeleteFileEvent) _then) =
+      _$DeleteFileEventCopyWithImpl;
+  @useResult
+  $Res call({int caseId, Document document, int taskId, bool offline});
+
+  $DocumentCopyWith<$Res> get document;
+}
+
+/// @nodoc
+class _$DeleteFileEventCopyWithImpl<$Res>
+    implements $DeleteFileEventCopyWith<$Res> {
+  _$DeleteFileEventCopyWithImpl(this._self, this._then);
+
+  final DeleteFileEvent _self;
+  final $Res Function(DeleteFileEvent) _then;
+
+  /// Create a copy of DeleteFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? caseId = null,
+    Object? document = null,
+    Object? taskId = null,
+    Object? offline = null,
+  }) {
+    return _then(_self.copyWith(
+      caseId: null == caseId
+          ? _self.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int,
+      document: null == document
+          ? _self.document
+          : document // ignore: cast_nullable_to_non_nullable
+              as Document,
+      taskId: null == taskId
+          ? _self.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as int,
+      offline: null == offline
+          ? _self.offline
+          : offline // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  /// Create a copy of DeleteFileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$DeleteFileImplCopyWith<_$DeleteFileImpl> get copyWith =>
-      __$$DeleteFileImplCopyWithImpl<_$DeleteFileImpl>(this, _$identity);
+  $DocumentCopyWith<$Res> get document {
+    return $DocumentCopyWith<$Res>(_self.document, (value) {
+      return _then(_self.copyWith(document: value));
+    });
+  }
+}
 
-  @override
+/// Adds pattern-matching-related methods to [DeleteFileEvent].
+extension DeleteFileEventPatterns on DeleteFileEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            int caseId, Document document, int taskId, bool offline)
-        deleteFile,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_DeleteFile value)? deleteFile,
+    required TResult orElse(),
   }) {
-    return deleteFile(caseId, document, taskId, offline);
+    final _that = this;
+    switch (_that) {
+      case _DeleteFile() when deleteFile != null:
+        return deleteFile(_that);
+      case _:
+        return orElse();
+    }
   }
 
-  @override
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(int caseId, Document document, int taskId, bool offline)?
-        deleteFile,
+  TResult map<TResult extends Object?>({
+    required TResult Function(_DeleteFile value) deleteFile,
   }) {
-    return deleteFile?.call(caseId, document, taskId, offline);
+    final _that = this;
+    switch (_that) {
+      case _DeleteFile():
+        return deleteFile(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
   }
 
-  @override
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_DeleteFile value)? deleteFile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DeleteFile() when deleteFile != null:
+        return deleteFile(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int caseId, Document document, int taskId, bool offline)?
         deleteFile,
     required TResult orElse(),
   }) {
-    if (deleteFile != null) {
-      return deleteFile(caseId, document, taskId, offline);
+    final _that = this;
+    switch (_that) {
+      case _DeleteFile() when deleteFile != null:
+        return deleteFile(
+            _that.caseId, _that.document, _that.taskId, _that.offline);
+      case _:
+        return orElse();
     }
-    return orElse();
   }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_DeleteFile value) deleteFile,
-  }) {
-    return deleteFile(this);
-  }
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_DeleteFile value)? deleteFile,
-  }) {
-    return deleteFile?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_DeleteFile value)? deleteFile,
-    required TResult orElse(),
-  }) {
-    if (deleteFile != null) {
-      return deleteFile(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _DeleteFile implements DeleteFileEvent {
-  const factory _DeleteFile(final int caseId, final Document document,
-      final int taskId, final bool offline) = _$DeleteFileImpl;
-
-  @override
-  int get caseId;
-  @override
-  Document get document;
-  @override
-  int get taskId;
-  @override
-  bool get offline;
-  @override
-  @JsonKey(ignore: true)
-  _$$DeleteFileImplCopyWith<_$DeleteFileImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$DeleteFileState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message) success,
-  }) =>
-      throw _privateConstructorUsedError;
+    required TResult Function(
+            int caseId, Document document, int taskId, bool offline)
+        deleteFile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DeleteFile():
+        return deleteFile(
+            _that.caseId, _that.document, _that.taskId, _that.offline);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message)? success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message)? success,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DeleteLoadingState value) loading,
-    required TResult Function(DeleteErrorState value) error,
-    required TResult Function(DeleteSuccessState value) success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DeleteLoadingState value)? loading,
-    TResult? Function(DeleteErrorState value)? error,
-    TResult? Function(DeleteSuccessState value)? success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DeleteLoadingState value)? loading,
-    TResult Function(DeleteErrorState value)? error,
-    TResult Function(DeleteSuccessState value)? success,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DeleteFileStateCopyWith<$Res> {
-  factory $DeleteFileStateCopyWith(
-          DeleteFileState value, $Res Function(DeleteFileState) then) =
-      _$DeleteFileStateCopyWithImpl<$Res, DeleteFileState>;
-}
-
-/// @nodoc
-class _$DeleteFileStateCopyWithImpl<$Res, $Val extends DeleteFileState>
-    implements $DeleteFileStateCopyWith<$Res> {
-  _$DeleteFileStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$DeleteLoadingStateImplCopyWith<$Res> {
-  factory _$$DeleteLoadingStateImplCopyWith(_$DeleteLoadingStateImpl value,
-          $Res Function(_$DeleteLoadingStateImpl) then) =
-      __$$DeleteLoadingStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$DeleteLoadingStateImplCopyWithImpl<$Res>
-    extends _$DeleteFileStateCopyWithImpl<$Res, _$DeleteLoadingStateImpl>
-    implements _$$DeleteLoadingStateImplCopyWith<$Res> {
-  __$$DeleteLoadingStateImplCopyWithImpl(_$DeleteLoadingStateImpl _value,
-      $Res Function(_$DeleteLoadingStateImpl) _then)
-      : super(_value, _then);
+    TResult? Function(int caseId, Document document, int taskId, bool offline)?
+        deleteFile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DeleteFile() when deleteFile != null:
+        return deleteFile(
+            _that.caseId, _that.document, _that.taskId, _that.offline);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
 
-class _$DeleteLoadingStateImpl
-    with DiagnosticableTreeMixin
-    implements DeleteLoadingState {
-  const _$DeleteLoadingStateImpl();
+class _DeleteFile with DiagnosticableTreeMixin implements DeleteFileEvent {
+  const _DeleteFile(this.caseId, this.document, this.taskId, this.offline);
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DeleteFileState.loading()';
-  }
+  final int caseId;
+  @override
+  final Document document;
+  @override
+  final int taskId;
+  @override
+  final bool offline;
+
+  /// Create a copy of DeleteFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DeleteFileCopyWith<_DeleteFile> get copyWith =>
+      __$DeleteFileCopyWithImpl<_DeleteFile>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'DeleteFileState.loading'));
+    properties
+      ..add(DiagnosticsProperty('type', 'DeleteFileEvent.deleteFile'))
+      ..add(DiagnosticsProperty('caseId', caseId))
+      ..add(DiagnosticsProperty('document', document))
+      ..add(DiagnosticsProperty('taskId', taskId))
+      ..add(DiagnosticsProperty('offline', offline));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$DeleteLoadingStateImpl);
+        (other.runtimeType == runtimeType &&
+            other is _DeleteFile &&
+            (identical(other.caseId, caseId) || other.caseId == caseId) &&
+            (identical(other.document, document) ||
+                other.document == document) &&
+            (identical(other.taskId, taskId) || other.taskId == taskId) &&
+            (identical(other.offline, offline) || other.offline == offline));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, caseId, document, taskId, offline);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DeleteFileEvent.deleteFile(caseId: $caseId, document: $document, taskId: $taskId, offline: $offline)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DeleteFileCopyWith<$Res>
+    implements $DeleteFileEventCopyWith<$Res> {
+  factory _$DeleteFileCopyWith(
+          _DeleteFile value, $Res Function(_DeleteFile) _then) =
+      __$DeleteFileCopyWithImpl;
+  @override
+  @useResult
+  $Res call({int caseId, Document document, int taskId, bool offline});
+
+  @override
+  $DocumentCopyWith<$Res> get document;
+}
+
+/// @nodoc
+class __$DeleteFileCopyWithImpl<$Res> implements _$DeleteFileCopyWith<$Res> {
+  __$DeleteFileCopyWithImpl(this._self, this._then);
+
+  final _DeleteFile _self;
+  final $Res Function(_DeleteFile) _then;
+
+  /// Create a copy of DeleteFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? caseId = null,
+    Object? document = null,
+    Object? taskId = null,
+    Object? offline = null,
+  }) {
+    return _then(_DeleteFile(
+      null == caseId
+          ? _self.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == document
+          ? _self.document
+          : document // ignore: cast_nullable_to_non_nullable
+              as Document,
+      null == taskId
+          ? _self.taskId
+          : taskId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == offline
+          ? _self.offline
+          : offline // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+
+  /// Create a copy of DeleteFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $DocumentCopyWith<$Res> get document {
+    return $DocumentCopyWith<$Res>(_self.document, (value) {
+      return _then(_self.copyWith(document: value));
+    });
+  }
+}
+
+/// @nodoc
+mixin _$DeleteFileState implements DiagnosticableTreeMixin {
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'DeleteFileState'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is DeleteFileState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message) success,
-  }) {
-    return loading();
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DeleteFileState()';
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message)? success,
-  }) {
-    return loading?.call();
-  }
+/// @nodoc
+class $DeleteFileStateCopyWith<$Res> {
+  $DeleteFileStateCopyWith(
+      DeleteFileState _, $Res Function(DeleteFileState) __);
+}
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message)? success,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
+/// Adds pattern-matching-related methods to [DeleteFileState].
+extension DeleteFileStatePatterns on DeleteFileState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DeleteLoadingState value) loading,
-    required TResult Function(DeleteErrorState value) error,
-    required TResult Function(DeleteSuccessState value) success,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DeleteLoadingState value)? loading,
-    TResult? Function(DeleteErrorState value)? error,
-    TResult? Function(DeleteSuccessState value)? success,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DeleteLoadingState value)? loading,
@@ -473,42 +448,270 @@ class _$DeleteLoadingStateImpl
     TResult Function(DeleteSuccessState value)? success,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    final _that = this;
+    switch (_that) {
+      case DeleteLoadingState() when loading != null:
+        return loading(_that);
+      case DeleteErrorState() when error != null:
+        return error(_that);
+      case DeleteSuccessState() when success != null:
+        return success(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeleteLoadingState value) loading,
+    required TResult Function(DeleteErrorState value) error,
+    required TResult Function(DeleteSuccessState value) success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DeleteLoadingState():
+        return loading(_that);
+      case DeleteErrorState():
+        return error(_that);
+      case DeleteSuccessState():
+        return success(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DeleteLoadingState value)? loading,
+    TResult? Function(DeleteErrorState value)? error,
+    TResult? Function(DeleteSuccessState value)? success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DeleteLoadingState() when loading != null:
+        return loading(_that);
+      case DeleteErrorState() when error != null:
+        return error(_that);
+      case DeleteSuccessState() when success != null:
+        return success(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String error)? error,
+    TResult Function(String message)? success,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DeleteLoadingState() when loading != null:
+        return loading();
+      case DeleteErrorState() when error != null:
+        return error(_that.error);
+      case DeleteSuccessState() when success != null:
+        return success(_that.message);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String error) error,
+    required TResult Function(String message) success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DeleteLoadingState():
+        return loading();
+      case DeleteErrorState():
+        return error(_that.error);
+      case DeleteSuccessState():
+        return success(_that.message);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(String message)? success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DeleteLoadingState() when loading != null:
+        return loading();
+      case DeleteErrorState() when error != null:
+        return error(_that.error);
+      case DeleteSuccessState() when success != null:
+        return success(_that.message);
+      case _:
+        return null;
+    }
   }
 }
 
-abstract class DeleteLoadingState implements DeleteFileState {
-  const factory DeleteLoadingState() = _$DeleteLoadingStateImpl;
+/// @nodoc
+
+class DeleteLoadingState
+    with DiagnosticableTreeMixin
+    implements DeleteFileState {
+  const DeleteLoadingState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'DeleteFileState.loading'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is DeleteLoadingState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DeleteFileState.loading()';
+  }
 }
 
 /// @nodoc
-abstract class _$$DeleteErrorStateImplCopyWith<$Res> {
-  factory _$$DeleteErrorStateImplCopyWith(_$DeleteErrorStateImpl value,
-          $Res Function(_$DeleteErrorStateImpl) then) =
-      __$$DeleteErrorStateImplCopyWithImpl<$Res>;
+
+class DeleteErrorState with DiagnosticableTreeMixin implements DeleteFileState {
+  const DeleteErrorState(this.error);
+
+  final String error;
+
+  /// Create a copy of DeleteFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DeleteErrorStateCopyWith<DeleteErrorState> get copyWith =>
+      _$DeleteErrorStateCopyWithImpl<DeleteErrorState>(this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'DeleteFileState.error'))
+      ..add(DiagnosticsProperty('error', error));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DeleteErrorState &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DeleteFileState.error(error: $error)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DeleteErrorStateCopyWith<$Res>
+    implements $DeleteFileStateCopyWith<$Res> {
+  factory $DeleteErrorStateCopyWith(
+          DeleteErrorState value, $Res Function(DeleteErrorState) _then) =
+      _$DeleteErrorStateCopyWithImpl;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$DeleteErrorStateImplCopyWithImpl<$Res>
-    extends _$DeleteFileStateCopyWithImpl<$Res, _$DeleteErrorStateImpl>
-    implements _$$DeleteErrorStateImplCopyWith<$Res> {
-  __$$DeleteErrorStateImplCopyWithImpl(_$DeleteErrorStateImpl _value,
-      $Res Function(_$DeleteErrorStateImpl) _then)
-      : super(_value, _then);
+class _$DeleteErrorStateCopyWithImpl<$Res>
+    implements $DeleteErrorStateCopyWith<$Res> {
+  _$DeleteErrorStateCopyWithImpl(this._self, this._then);
 
+  final DeleteErrorState _self;
+  final $Res Function(DeleteErrorState) _then;
+
+  /// Create a copy of DeleteFileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$DeleteErrorStateImpl(
+    return _then(DeleteErrorState(
       null == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -517,270 +720,75 @@ class __$$DeleteErrorStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DeleteErrorStateImpl
+class DeleteSuccessState
     with DiagnosticableTreeMixin
-    implements DeleteErrorState {
-  const _$DeleteErrorStateImpl(this.error);
+    implements DeleteFileState {
+  const DeleteSuccessState(this.message);
 
-  @override
-  final String error;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DeleteFileState.error(error: $error)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'DeleteFileState.error'))
-      ..add(DiagnosticsProperty('error', error));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DeleteErrorStateImpl &&
-            (identical(other.error, error) || other.error == error));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, error);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$DeleteErrorStateImplCopyWith<_$DeleteErrorStateImpl> get copyWith =>
-      __$$DeleteErrorStateImplCopyWithImpl<_$DeleteErrorStateImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message) success,
-  }) {
-    return error(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message)? success,
-  }) {
-    return error?.call(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message)? success,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this.error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DeleteLoadingState value) loading,
-    required TResult Function(DeleteErrorState value) error,
-    required TResult Function(DeleteSuccessState value) success,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DeleteLoadingState value)? loading,
-    TResult? Function(DeleteErrorState value)? error,
-    TResult? Function(DeleteSuccessState value)? success,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DeleteLoadingState value)? loading,
-    TResult Function(DeleteErrorState value)? error,
-    TResult Function(DeleteSuccessState value)? success,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DeleteErrorState implements DeleteFileState {
-  const factory DeleteErrorState(final String error) = _$DeleteErrorStateImpl;
-
-  String get error;
-  @JsonKey(ignore: true)
-  _$$DeleteErrorStateImplCopyWith<_$DeleteErrorStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DeleteSuccessStateImplCopyWith<$Res> {
-  factory _$$DeleteSuccessStateImplCopyWith(_$DeleteSuccessStateImpl value,
-          $Res Function(_$DeleteSuccessStateImpl) then) =
-      __$$DeleteSuccessStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$DeleteSuccessStateImplCopyWithImpl<$Res>
-    extends _$DeleteFileStateCopyWithImpl<$Res, _$DeleteSuccessStateImpl>
-    implements _$$DeleteSuccessStateImplCopyWith<$Res> {
-  __$$DeleteSuccessStateImplCopyWithImpl(_$DeleteSuccessStateImpl _value,
-      $Res Function(_$DeleteSuccessStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$DeleteSuccessStateImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DeleteSuccessStateImpl
-    with DiagnosticableTreeMixin
-    implements DeleteSuccessState {
-  const _$DeleteSuccessStateImpl(this.message);
-
-  @override
   final String message;
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DeleteFileState.success(message: $message)';
-  }
+  /// Create a copy of DeleteFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DeleteSuccessStateCopyWith<DeleteSuccessState> get copyWith =>
+      _$DeleteSuccessStateCopyWithImpl<DeleteSuccessState>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'DeleteFileState.success'))
       ..add(DiagnosticsProperty('message', message));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DeleteSuccessStateImpl &&
+            other is DeleteSuccessState &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
   @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DeleteFileState.success(message: $message)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DeleteSuccessStateCopyWith<$Res>
+    implements $DeleteFileStateCopyWith<$Res> {
+  factory $DeleteSuccessStateCopyWith(
+          DeleteSuccessState value, $Res Function(DeleteSuccessState) _then) =
+      _$DeleteSuccessStateCopyWithImpl;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class _$DeleteSuccessStateCopyWithImpl<$Res>
+    implements $DeleteSuccessStateCopyWith<$Res> {
+  _$DeleteSuccessStateCopyWithImpl(this._self, this._then);
+
+  final DeleteSuccessState _self;
+  final $Res Function(DeleteSuccessState) _then;
+
+  /// Create a copy of DeleteFileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  _$$DeleteSuccessStateImplCopyWith<_$DeleteSuccessStateImpl> get copyWith =>
-      __$$DeleteSuccessStateImplCopyWithImpl<_$DeleteSuccessStateImpl>(
-          this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message) success,
+  $Res call({
+    Object? message = null,
   }) {
-    return success(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message)? success,
-  }) {
-    return success?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message)? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DeleteLoadingState value) loading,
-    required TResult Function(DeleteErrorState value) error,
-    required TResult Function(DeleteSuccessState value) success,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DeleteLoadingState value)? loading,
-    TResult? Function(DeleteErrorState value)? error,
-    TResult? Function(DeleteSuccessState value)? success,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DeleteLoadingState value)? loading,
-    TResult Function(DeleteErrorState value)? error,
-    TResult Function(DeleteSuccessState value)? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
+    return _then(DeleteSuccessState(
+      null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
-abstract class DeleteSuccessState implements DeleteFileState {
-  const factory DeleteSuccessState(final String message) =
-      _$DeleteSuccessStateImpl;
-
-  String get message;
-  @JsonKey(ignore: true)
-  _$$DeleteSuccessStateImplCopyWith<_$DeleteSuccessStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

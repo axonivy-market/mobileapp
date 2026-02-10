@@ -24,7 +24,7 @@ class OfflinePopupWidget extends StatelessWidget {
 
   Widget _buildOfflineDialog(BuildContext context) {
     return Container(
-      color: Colors.black.withOpacity(0.5),
+      color: Colors.black.withValues(alpha: 0.5),
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
@@ -44,7 +44,7 @@ class OfflinePopupWidget extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10).r,
-                        color: Theme.of(context).colorScheme.background),
+                        color: Theme.of(context).colorScheme.surface),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -56,7 +56,7 @@ class OfflinePopupWidget extends StatelessWidget {
                         Text(
                           "offline.popup_title".tr(),
                           style: GoogleFonts.inter(
-                            color: Theme.of(context).colorScheme.surface,
+                            color: Theme.of(context).colorScheme.onSurface,
                             fontSize: 17.sp,
                             fontWeight: FontWeight.w600,
                           ),

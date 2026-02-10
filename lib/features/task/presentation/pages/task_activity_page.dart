@@ -115,12 +115,12 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
           }),
         ],
         child: Scaffold(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           appBar: AppBar(
             key: _appBarKey,
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             automaticallyImplyLeading: false,
-            surfaceTintColor: Theme.of(context).colorScheme.background,
+            surfaceTintColor: Theme.of(context).colorScheme.surface,
             leadingWidth: 100.w,
             leading: BackButtonWidget(shouldFetch: shouldFetchTaskList),
             actions: [
@@ -135,7 +135,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                       child: IconButton(
                         icon: AppAssets.icons.paperclip.svg(
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
+                                Theme.of(context).colorScheme.onSurface,
                                 BlendMode.srcIn)),
                         onPressed: () {
                           context
@@ -246,7 +246,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                 },
                 child: AnimatedContainer(
                   width: MediaQuery.of(context).size.width,
-                  color: Theme.of(context).colorScheme.background,
+                  color: Theme.of(context).colorScheme.surface,
                   padding: const EdgeInsets.fromLTRB(16, 15, 16, 15).r,
                   duration: const Duration(milliseconds: 300),
                   child: Stack(
@@ -268,7 +268,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                                   ? "tasksView.noTaskName".tr()
                                   : widget.taskIvy!.name,
                               style: GoogleFonts.inter(
-                                color: Theme.of(context).colorScheme.surface,
+                                color: Theme.of(context).colorScheme.onSurface,
                                 fontWeight: FontWeight.w600,
                                 fontSize: 17.sp,
                               ),
@@ -309,7 +309,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                                 height: 20.h,
                                 width: 20.w,
                                 colorFilter: ColorFilter.mode(
-                                    Theme.of(context).colorScheme.surface,
+                                    Theme.of(context).colorScheme.onSurface,
                                     BlendMode.srcIn)),
                           ),
                         ),
@@ -320,7 +320,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
               ),
               if (isExpanded)
                 AnimatedContainer(
-                  color: Theme.of(context).colorScheme.background,
+                  color: Theme.of(context).colorScheme.surface,
                   duration: const Duration(milliseconds: 300),
                   padding:
                       const EdgeInsets.only(left: 18, right: 18, bottom: 15).r,
@@ -345,7 +345,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                                 AppAssets.icons.paperclip.svg(
                                     height: 16.h,
                               colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
+                                  Theme.of(context).colorScheme.onSurface,
                                   BlendMode.srcIn)),
                                 5.horizontalSpace,
                                 Text(
@@ -355,7 +355,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                                     fontSize: 13.sp,
                                     fontWeight: FontWeight.w600,
                                     color:
-                                        Theme.of(context).colorScheme.surface,
+                                        Theme.of(context).colorScheme.onSurface,
                                   ),
                                 ),
                                 Expanded(
@@ -391,7 +391,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                         icon: AppAssets.icons.clock.svg(
                             height: 16.h,
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
+                                Theme.of(context).colorScheme.onSurface,
                                 BlendMode.srcIn)),
                         title: "taskDetails.expiryDate".tr(),
                         value: widget.taskIvy!.expiryTimeStamp == null
@@ -403,7 +403,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                         icon: AppAssets.icons.calendar.svg(
                             height: 16.h,
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
+                                Theme.of(context).colorScheme.onSurface,
                                 BlendMode.srcIn)),
                         title: "taskDetails.creationDate".tr(),
                         value: widget.taskIvy!.startTimeStamp
@@ -413,7 +413,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                         icon: AppAssets.icons.category2.svg(
                             height: 16.h,
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
+                                Theme.of(context).colorScheme.onSurface,
                                 BlendMode.srcIn)),
                         title: "taskDetails.category".tr(),
                         value: widget.taskIvy!.category.isNotEmptyOrNull
@@ -424,7 +424,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                         icon: AppAssets.icons.priorityHighBlack.svg(
                             height: 16.h,
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
+                                Theme.of(context).colorScheme.onSurface,
                                 BlendMode.srcIn)),
                         title: "taskDetails.priority".tr(),
                         value: widget.taskIvy!.priority.priorityName,
@@ -433,7 +433,7 @@ class _TaskActivityPageState extends BasePageState<TaskActivityPage>
                         icon: AppAssets.icons.users.svg(
                             height: 16.h,
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
+                                Theme.of(context).colorScheme.onSurface,
                                 BlendMode.srcIn)),
                         title: "taskDetails.responsible".tr(),
                         value: widget.taskIvy!.activatorName,

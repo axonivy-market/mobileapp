@@ -5,7 +5,7 @@ part 'response_document.freezed.dart';
 part 'response_document.g.dart';
 
 @freezed
-class ResponseDocument with _$ResponseDocument {
+abstract class ResponseDocument with _$ResponseDocument {
   const factory ResponseDocument({
     @Default('') String message,
     @Default(0) int statusCode,

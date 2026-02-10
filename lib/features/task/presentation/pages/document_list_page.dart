@@ -179,22 +179,22 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
         ],
         child: PopScope(
           canPop: false,
-          onPopInvoked: (didPop) async {
+          onPopInvokedWithResult: (didPop, result) async {
             if (didPop && loading != null) {
               return;
             }
             Navigator.of(context).pop(shouldFetchTaskList);
           },
           child: Scaffold(
-            backgroundColor: Theme.of(context).colorScheme.background,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             appBar: AppBar(
               scrolledUnderElevation: 0,
-              backgroundColor: Theme.of(context).colorScheme.background,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               centerTitle: true,
               title: Text(
                 "documentList.title".tr(),
                 style: GoogleFonts.inter(
-                    color: Theme.of(context).colorScheme.onBackground,
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w500),
               ),
@@ -207,7 +207,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                   padding: const EdgeInsets.only(right: 5).r,
                   child: PopupMenuButton<UploadFileType>(
                     elevation: 10,
-                    shadowColor: Colors.black.withOpacity(0.3),
+                    shadowColor: Colors.black.withValues(alpha: 0.3),
                     color: Theme.of(context).colorScheme.onPrimaryContainer,
                     position: PopupMenuPosition.under,
                     surfaceTintColor:
@@ -238,7 +238,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                               AppAssets.icons.iconFile.svg(
                                 height: 21.h,
                                 colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
+                                  Theme.of(context).colorScheme.onSurface,
                                   BlendMode.srcIn,
                                 ),
                               ),
@@ -249,7 +249,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                   style: GoogleFonts.inter(
                                     fontSize: 17.sp,
                                     color:
-                                        Theme.of(context).colorScheme.surface,
+                                        Theme.of(context).colorScheme.onSurface,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -265,7 +265,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                               AppAssets.icons.iconImage.svg(
                                 height: 21.h,
                                 colorFilter: ColorFilter.mode(
-                                    Theme.of(context).colorScheme.surface,
+                                    Theme.of(context).colorScheme.onSurface,
                                     BlendMode.srcIn),
                               ),
                               5.horizontalSpace,
@@ -275,7 +275,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                   style: GoogleFonts.inter(
                                     fontSize: 17.sp,
                                     color:
-                                        Theme.of(context).colorScheme.surface,
+                                        Theme.of(context).colorScheme.onSurface,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -291,7 +291,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                               AppAssets.icons.iconCamera.svg(
                                 height: 21.h,
                                 colorFilter: ColorFilter.mode(
-                                    Theme.of(context).colorScheme.surface,
+                                    Theme.of(context).colorScheme.onSurface,
                                     BlendMode.srcIn),
                               ),
                               5.horizontalSpace,
@@ -301,7 +301,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                   style: GoogleFonts.inter(
                                     fontSize: 17.sp,
                                     color:
-                                        Theme.of(context).colorScheme.surface,
+                                        Theme.of(context).colorScheme.onSurface,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -313,7 +313,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                     },
                     icon: AppAssets.icons.iconAddAttachment.svg(
                       colorFilter: ColorFilter.mode(
-                        Theme.of(context).colorScheme.surface,
+                        Theme.of(context).colorScheme.onSurface,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -358,7 +358,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                             colorFilter: ColorFilter.mode(
                                               Theme.of(context)
                                                   .colorScheme
-                                                  .background,
+                                                  .onPrimary,
                                               BlendMode.srcIn,
                                             ),
                                           ),
@@ -369,7 +369,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                                 fontSize: 13.sp,
                                                 color: Theme.of(context)
                                                     .colorScheme
-                                                    .background,
+                                                    .onPrimary,
                                               ),
                                             ),
                                           )
@@ -419,7 +419,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                               ),
                               child: AppListTile(
                                 textColor:
-                                    Theme.of(context).colorScheme.surface,
+                                    Theme.of(context).colorScheme.onSurface,
                                 contentPadding: const EdgeInsets.symmetric(
                                         horizontal: 15, vertical: 0)
                                     .r,
@@ -434,14 +434,14 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                         colorFilter: ColorFilter.mode(
                                             Theme.of(context)
                                                 .colorScheme
-                                                .onBackground,
+                                                .onSurface,
                                             BlendMode.srcIn),
                                       )
                                     : AppAssets.icons.iconFile.svg(
                                         colorFilter: ColorFilter.mode(
                                             Theme.of(context)
                                                 .colorScheme
-                                                .surface,
+                                                .onSurface,
                                             BlendMode.srcIn),
                                       ),
                                 title: Text(
@@ -450,7 +450,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                 ),
                                 trailing: AppAssets.icons.chevronRight.svg(
                                   colorFilter: ColorFilter.mode(
-                                      Theme.of(context).colorScheme.surface,
+                                      Theme.of(context).colorScheme.onSurface,
                                       BlendMode.srcIn),
                                 ),
                               ),

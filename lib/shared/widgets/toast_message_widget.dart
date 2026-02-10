@@ -29,7 +29,7 @@ class ToastMessageWidget extends StatelessWidget {
           ),
           surfaceTintColor: Theme.of(context).colorScheme.onPrimaryContainer,
           elevation: 15,
-          shadowColor: Colors.black.withOpacity(0.3),
+          shadowColor: Colors.black.withValues(alpha: 0.3),
           child: Padding(
             padding: const EdgeInsets.all(15).r,
             child: Row(
@@ -43,7 +43,7 @@ class ToastMessageWidget extends StatelessWidget {
                     style: GoogleFonts.inter(
                       textStyle: TextStyle(
                           fontSize: 17.sp,
-                          color: Theme.of(context).colorScheme.surface,
+                          color: Theme.of(context).colorScheme.onSurface,
                           fontWeight: FontWeight.w400),
                     ),
                   ),

@@ -2,6 +2,7 @@ import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/features/profile/domain/entities/qr/qr_model.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/login_bloc/login_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
+import 'package:axon_ivy/shared/storage/secure_storage.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -48,13 +49,13 @@ class _LoginPageState extends BasePageState<LoginPage> {
         centerTitle: true,
         scrolledUnderElevation: 15,
         elevation: 0,
-        shadowColor: Colors.black.withOpacity(0.3),
-        backgroundColor: Theme.of(context).colorScheme.background,
-        surfaceTintColor: Theme.of(context).colorScheme.background,
+        shadowColor: Colors.black.withValues(alpha: 0.3),
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        surfaceTintColor: Theme.of(context).colorScheme.surface,
         title: Text(
           "profile.signIn".tr(),
           style: GoogleFonts.inter(
-            color: Theme.of(context).colorScheme.surface,
+            color: Theme.of(context).colorScheme.onSurface,
             fontSize: 17.sp,
             fontWeight: FontWeight.w500,
           ),
@@ -82,7 +83,7 @@ class _LoginPageState extends BasePageState<LoginPage> {
                   Text(
                     "profile.serverLink".tr(),
                     style: GoogleFonts.inter(
-                        color: Theme.of(context).colorScheme.surface,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 17.sp,
                         fontWeight: FontWeight.w500),
                   ),
@@ -100,7 +101,7 @@ class _LoginPageState extends BasePageState<LoginPage> {
                           autovalidateMode: AutovalidateMode.always,
                           prefix: AppAssets.icons.iconUrl.svg(
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
+                                Theme.of(context).colorScheme.onSurface,
                                 BlendMode.srcIn),
                           ),
                           hintText: "profile.url".tr(),
@@ -114,7 +115,7 @@ class _LoginPageState extends BasePageState<LoginPage> {
                   Text(
                     "profile.userType".tr(),
                     style: GoogleFonts.inter(
-                        color: Theme.of(context).colorScheme.surface,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 17.sp,
                         fontWeight: FontWeight.w500),
                   ),
@@ -131,7 +132,7 @@ class _LoginPageState extends BasePageState<LoginPage> {
                           validator: (_) => state.invalidUsernameMessage,
                           prefix: AppAssets.icons.iconUsername.svg(
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
+                                Theme.of(context).colorScheme.onSurface,
                                 BlendMode.srcIn),
                           ),
                           hintText: "profile.username".tr(),
@@ -145,7 +146,7 @@ class _LoginPageState extends BasePageState<LoginPage> {
                   Text(
                     "profile.password".tr(),
                     style: GoogleFonts.inter(
-                        color: Theme.of(context).colorScheme.surface,
+                        color: Theme.of(context).colorScheme.onSurface,
                         fontSize: 17.sp,
                         fontWeight: FontWeight.w500),
                   ),
@@ -165,7 +166,7 @@ class _LoginPageState extends BasePageState<LoginPage> {
                           focusNode: _passwordFocusNode,
                           prefix: AppAssets.icons.iconLock.svg(
                             colorFilter: ColorFilter.mode(
-                                Theme.of(context).colorScheme.surface,
+                                Theme.of(context).colorScheme.onSurface,
                                 BlendMode.srcIn),
                           ),
                           onChanged: (value) => context
@@ -178,13 +179,13 @@ class _LoginPageState extends BasePageState<LoginPage> {
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             FocusScope.of(context).unfocus();
                             SharedPrefs.setBaseUrl(_urlTextController.text);
-                            SharedPrefs.setPassword(
-                                _passwordTextController.text);
-                            SharedPrefs.setUsername(
-                                _usernameTextController.text);
+                            await SecureStorage.saveCredentials(
+                              username: _usernameTextController.text,
+                              password: _passwordTextController.text,
+                            );
                             _loginBloc.add(LoginEvent.submitLogin(
                                 _urlTextController.text,
                                 _passwordTextController.text,

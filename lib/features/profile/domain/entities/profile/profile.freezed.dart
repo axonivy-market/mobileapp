@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,92 +9,67 @@ part of 'profile.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-Profile _$ProfileFromJson(Map<String, dynamic> json) {
-  return _Profile.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Profile {
-  String get uuid => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get fullName => throw _privateConstructorUsedError;
-  String get emailAddress => throw _privateConstructorUsedError;
+  String get uuid;
+  String get name;
+  String get fullName;
+  String get emailAddress;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ProfileCopyWith<Profile> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ProfileCopyWith<$Res> {
-  factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
-      _$ProfileCopyWithImpl<$Res, Profile>;
-  @useResult
-  $Res call({String uuid, String name, String fullName, String emailAddress});
-}
-
-/// @nodoc
-class _$ProfileCopyWithImpl<$Res, $Val extends Profile>
-    implements $ProfileCopyWith<$Res> {
-  _$ProfileCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
+  $ProfileCopyWith<Profile> get copyWith =>
+      _$ProfileCopyWithImpl<Profile>(this as Profile, _$identity);
+
+  /// Serializes this Profile to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? uuid = null,
-    Object? name = null,
-    Object? fullName = null,
-    Object? emailAddress = null,
-  }) {
-    return _then(_value.copyWith(
-      uuid: null == uuid
-          ? _value.uuid
-          : uuid // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      fullName: null == fullName
-          ? _value.fullName
-          : fullName // ignore: cast_nullable_to_non_nullable
-              as String,
-      emailAddress: null == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Profile &&
+            (identical(other.uuid, uuid) || other.uuid == uuid) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.fullName, fullName) ||
+                other.fullName == fullName) &&
+            (identical(other.emailAddress, emailAddress) ||
+                other.emailAddress == emailAddress));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, uuid, name, fullName, emailAddress);
+
+  @override
+  String toString() {
+    return 'Profile(uuid: $uuid, name: $name, fullName: $fullName, emailAddress: $emailAddress)';
   }
 }
 
 /// @nodoc
-abstract class _$$ProfileImplCopyWith<$Res> implements $ProfileCopyWith<$Res> {
-  factory _$$ProfileImplCopyWith(
-          _$ProfileImpl value, $Res Function(_$ProfileImpl) then) =
-      __$$ProfileImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $ProfileCopyWith<$Res> {
+  factory $ProfileCopyWith(Profile value, $Res Function(Profile) _then) =
+      _$ProfileCopyWithImpl;
   @useResult
   $Res call({String uuid, String name, String fullName, String emailAddress});
 }
 
 /// @nodoc
-class __$$ProfileImplCopyWithImpl<$Res>
-    extends _$ProfileCopyWithImpl<$Res, _$ProfileImpl>
-    implements _$$ProfileImplCopyWith<$Res> {
-  __$$ProfileImplCopyWithImpl(
-      _$ProfileImpl _value, $Res Function(_$ProfileImpl) _then)
-      : super(_value, _then);
+class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
+  _$ProfileCopyWithImpl(this._self, this._then);
 
+  final Profile _self;
+  final $Res Function(Profile) _then;
+
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -103,38 +78,203 @@ class __$$ProfileImplCopyWithImpl<$Res>
     Object? fullName = null,
     Object? emailAddress = null,
   }) {
-    return _then(_$ProfileImpl(
+    return _then(_self.copyWith(
       uuid: null == uuid
-          ? _value.uuid
+          ? _self.uuid
           : uuid // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       fullName: null == fullName
-          ? _value.fullName
+          ? _self.fullName
           : fullName // ignore: cast_nullable_to_non_nullable
               as String,
       emailAddress: null == emailAddress
-          ? _value.emailAddress
+          ? _self.emailAddress
           : emailAddress // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [Profile].
+extension ProfilePatterns on Profile {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Profile value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Profile() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Profile value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Profile():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Profile value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Profile() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String uuid, String name, String fullName, String emailAddress)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Profile() when $default != null:
+        return $default(
+            _that.uuid, _that.name, _that.fullName, _that.emailAddress);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String uuid, String name, String fullName, String emailAddress)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Profile():
+        return $default(
+            _that.uuid, _that.name, _that.fullName, _that.emailAddress);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String uuid, String name, String fullName, String emailAddress)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Profile() when $default != null:
+        return $default(
+            _that.uuid, _that.name, _that.fullName, _that.emailAddress);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$ProfileImpl implements _Profile {
-  const _$ProfileImpl(
+class _Profile implements Profile {
+  const _Profile(
       {this.uuid = "",
       this.name = "",
       this.fullName = "",
       this.emailAddress = ""});
-
-  factory _$ProfileImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ProfileImplFromJson(json);
+  factory _Profile.fromJson(Map<String, dynamic> json) =>
+      _$ProfileFromJson(json);
 
   @override
   @JsonKey()
@@ -149,16 +289,26 @@ class _$ProfileImpl implements _Profile {
   @JsonKey()
   final String emailAddress;
 
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Profile(uuid: $uuid, name: $name, fullName: $fullName, emailAddress: $emailAddress)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$ProfileCopyWith<_Profile> get copyWith =>
+      __$ProfileCopyWithImpl<_Profile>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$ProfileToJson(
+      this,
+    );
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ProfileImpl &&
+            other is _Profile &&
             (identical(other.uuid, uuid) || other.uuid == uuid) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.fullName, fullName) ||
@@ -167,44 +317,62 @@ class _$ProfileImpl implements _Profile {
                 other.emailAddress == emailAddress));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, uuid, name, fullName, emailAddress);
 
-  @JsonKey(ignore: true)
   @override
-  @pragma('vm:prefer-inline')
-  _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
-      __$$ProfileImplCopyWithImpl<_$ProfileImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ProfileImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Profile(uuid: $uuid, name: $name, fullName: $fullName, emailAddress: $emailAddress)';
   }
 }
 
-abstract class _Profile implements Profile {
-  const factory _Profile(
-      {final String uuid,
-      final String name,
-      final String fullName,
-      final String emailAddress}) = _$ProfileImpl;
-
-  factory _Profile.fromJson(Map<String, dynamic> json) = _$ProfileImpl.fromJson;
-
+/// @nodoc
+abstract mixin class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
+  factory _$ProfileCopyWith(_Profile value, $Res Function(_Profile) _then) =
+      __$ProfileCopyWithImpl;
   @override
-  String get uuid;
-  @override
-  String get name;
-  @override
-  String get fullName;
-  @override
-  String get emailAddress;
-  @override
-  @JsonKey(ignore: true)
-  _$$ProfileImplCopyWith<_$ProfileImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @useResult
+  $Res call({String uuid, String name, String fullName, String emailAddress});
 }
+
+/// @nodoc
+class __$ProfileCopyWithImpl<$Res> implements _$ProfileCopyWith<$Res> {
+  __$ProfileCopyWithImpl(this._self, this._then);
+
+  final _Profile _self;
+  final $Res Function(_Profile) _then;
+
+  /// Create a copy of Profile
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? uuid = null,
+    Object? name = null,
+    Object? fullName = null,
+    Object? emailAddress = null,
+  }) {
+    return _then(_Profile(
+      uuid: null == uuid
+          ? _self.uuid
+          : uuid // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      fullName: null == fullName
+          ? _self.fullName
+          : fullName // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailAddress: null == emailAddress
+          ? _self.emailAddress
+          : emailAddress // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+// dart format on

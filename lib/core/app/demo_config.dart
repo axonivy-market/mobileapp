@@ -9,7 +9,7 @@ class DemoConfig {
 
   static Future<void> loadDemoConfig() async {
     if (kReleaseMode) {
-      await dotenv.load(fileName: AppAssets.env.envDemo);
+      await dotenv.load(fileName: AppAssets.env.aEnvDemo);
       demoServerUrl = dotenv.env['demoServerUrl'] ?? '';
       demoUserName = dotenv.env['demoUserName'] ?? '';
       demoPassword = dotenv.env['demoPassword'] ?? '';

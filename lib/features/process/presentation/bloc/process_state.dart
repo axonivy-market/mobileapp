@@ -1,7 +1,7 @@
 part of 'process_bloc.dart';
 
 @freezed
-class ProcessState with _$ProcessState {
+abstract class ProcessState with _$ProcessState {
   const factory ProcessState.initial() = InitialState;
 
   const factory ProcessState.loading(bool isShowLoading) = ProcessLoadingState;

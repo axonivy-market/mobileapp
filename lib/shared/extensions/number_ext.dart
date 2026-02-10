@@ -31,7 +31,7 @@ extension PriorityIconExtension on int {
         return AppAssets.icons.priorityLow.svg(
           height: 21.h,
           colorFilter: ColorFilter.mode(
-              Theme.of(context).colorScheme.surface, BlendMode.srcIn),
+              Theme.of(context).colorScheme.onSurface, BlendMode.srcIn),
         );
     }
   }
