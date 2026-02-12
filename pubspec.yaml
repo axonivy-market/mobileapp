@@ -1,6 +1,6 @@
 name: axon_ivy
 description: A new Flutter project.
-version: 2.0.0+1
+version: 3.0.0+1
 
 environment:
   sdk: '>=3.8.0 <4.0.0'

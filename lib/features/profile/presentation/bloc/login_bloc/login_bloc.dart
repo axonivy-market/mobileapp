@@ -92,7 +92,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         if (engineInfo.isLeft()) {
           await SecureStorage.clearCredentials();
           SharedPrefs.clear();
-          final failure = engineInfo.fold((l) => l, (r) => null);
+          final failure = engineInfo.getLeft().toNullable();
           emit(LoginState(status: LoginStatus.error, error: failure));
         } else {
           SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
