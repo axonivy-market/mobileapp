@@ -72,6 +72,9 @@ android {
             } else {
                 signingConfig signingConfigs.debug
             }
+            ndk {
+                debugSymbolLevel 'FULL'
+            }
         }
     }
 

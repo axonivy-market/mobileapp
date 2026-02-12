@@ -54,8 +54,8 @@ jobs:
           DEMO_USER_NAME: ${{ secrets.KEY_DEMO_USER_NAME }}
           DEMO_PASSWORD: ${{ secrets.KEY_DEMO_PASSWORD }}
 
-      - name: Build abb release file
-        run: flutter build appbundle --flavor prod --target lib/main.dart --build-name ${{ env.VersionName }} --build-number ${{github.run_number}}
+      - name: Build app bundle
+        run: flutter build appbundle --flavor prod --target lib/main.dart --build-name ${{ env.VersionName }} --build-number ${{ github.run_number }}
 
       - name: Upload to Play Store (Internal Testing)
         uses: r0adkll/upload-google-play@v1.1.3
@@ -63,6 +63,7 @@ jobs:
           serviceAccountJsonPlainText: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
           packageName: com.axonivy
           releaseFiles: build/app/outputs/bundle/prodRelease/app-prod-release.aab
-          mappingFile: ./build/app/outputs/mapping/prodRelease/mapping.txt
+          mappingFile: build/app/outputs/mapping/prodRelease/mapping.txt
+          debugSymbols: build/app/outputs/native-debug-symbols/prodRelease/native-debug-symbols.zip
           track: internal
           changesNotSentForReview: true
