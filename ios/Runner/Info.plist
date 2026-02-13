@@ -41,7 +41,7 @@
 		<key>io.flutter.embedded_views_preview</key>
 		<true/>
 		<key>NSCameraUsageDescription</key>
-		<string>This app needs camera access to scan QR codes</string>
+		<string>This app needs camera access to scan QR codes and take pictures for task attachments</string>
 		<key>UIMainStoryboardFile</key>
 		<string>Main</string>
 		<key>UISupportedInterfaceOrientations</key>
@@ -62,8 +62,6 @@
 		<key>LSSupportsOpeningDocumentsInPlace</key>
 		<true/>
 		<key>UISupportsDocumentBrowser</key>
-		<true/>
-		<key>LSSupportsOpeningDocumentsInPlace</key>
 		<true/>
 		<key>UIFileSharingEnabled</key>
 		<true/>
