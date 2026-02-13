@@ -75,3 +75,4 @@ jobs:
           mappingFile: build/app/outputs/mapping/prodRelease/mapping.txt
           debugSymbols: build/app/outputs/native-debug-symbols/prodRelease/native-debug-symbols.zip
           track: internal
+          changesNotSentForReview: true
