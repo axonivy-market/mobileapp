@@ -6,7 +6,7 @@ permissions:
   contents: read
 jobs:
   build:
-    runs-on: macOS-13
+    runs-on: macos-15
 
     steps:
       - uses: actions/checkout@v4
@@ -18,7 +18,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.19.6'
+          flutter-version: '3.38.9'
           channel: 'stable'
           cache: true
 
@@ -73,8 +73,12 @@ jobs:
       - name: Clean up keychain and provisioning profile
         if: ${{ always() }}
         run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db
-          rm ~/Library/MobileDevice/Provisioning\ Profiles/build_pp.mobileprovision
+          if [ -f "$RUNNER_TEMP/app-signing.keychain-db" ]; then
+            security delete-keychain "$RUNNER_TEMP/app-signing.keychain-db"
+          fi
+          if [ -f "$HOME/Library/MobileDevice/Provisioning Profiles/build_pp.mobileprovision" ]; then
+            rm "$HOME/Library/MobileDevice/Provisioning Profiles/build_pp.mobileprovision"
+          fi
 
       - name: 'Upload app to TestFlight'
         uses: apple-actions/upload-testflight-build@v1

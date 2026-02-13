@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:axon_ivy/core/app/app_config.dart';
@@ -6,6 +5,7 @@ import 'package:axon_ivy/core/app/demo_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
 import 'package:axon_ivy/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
+import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
@@ -38,15 +38,26 @@ class DownloadFileBloc extends Bloc<DownloadFileEvent, DownloadFileState> {
   }
 
   Future downloadFile(DownloadFileEvent event, Emitter emit) async {
-    final username = SharedPrefs.getUsername;
-    final password = SharedPrefs.getPassword;
-    String basicAuth =
-        'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+    final uri = Uri.parse(event.url);
+    // Enforce HTTPS for download requests (allow localhost in debug mode)
+    if (uri.scheme != 'https') {
+      if (!kDebugMode ||
+          !['localhost', '127.0.0.1', '10.0.2.2'].contains(uri.host)) {
+        emit(
+          DownloadFileState.error(
+            "downloadFile.failToDownload".tr(
+              namedArgs: {'fileName': event.fileName},
+            ),
+          ),
+        );
+        return;
+      }
+    }
     emit(const DownloadFileState.loading());
     try {
       final response = await http.get(
-        Uri.parse(event.url),
-        headers: {"Authorization": basicAuth},
+        uri,
+        headers: {"Authorization": AuthorizationUtils.authorizationHeader},
       );
       if (response.statusCode == 200) {
         String path = "";

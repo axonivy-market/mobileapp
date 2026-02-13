@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,222 +9,246 @@ part of 'logged_in_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$LoggedInState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(bool isLoggedIn) loggedIn,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(bool isLoggedIn)? loggedIn,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(bool isLoggedIn)? loggedIn,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoggedInSuccessState value) loggedIn,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(LoggedInSuccessState value)? loggedIn,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoggedInSuccessState value)? loggedIn,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $LoggedInStateCopyWith<$Res> {
-  factory $LoggedInStateCopyWith(
-          LoggedInState value, $Res Function(LoggedInState) then) =
-      _$LoggedInStateCopyWithImpl<$Res, LoggedInState>;
-}
-
-/// @nodoc
-class _$LoggedInStateCopyWithImpl<$Res, $Val extends LoggedInState>
-    implements $LoggedInStateCopyWith<$Res> {
-  _$LoggedInStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$LoggedInStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$InitialImpl implements Initial {
-  const _$InitialImpl();
-
   @override
-  String toString() {
-    return 'LoggedInState.initial()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
+        (other.runtimeType == runtimeType && other is LoggedInState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(bool isLoggedIn) loggedIn,
-  }) {
-    return initial();
+  String toString() {
+    return 'LoggedInState()';
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(bool isLoggedIn)? loggedIn,
-  }) {
-    return initial?.call();
-  }
+/// @nodoc
+class $LoggedInStateCopyWith<$Res> {
+  $LoggedInStateCopyWith(LoggedInState _, $Res Function(LoggedInState) __);
+}
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(bool isLoggedIn)? loggedIn,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
+/// Adds pattern-matching-related methods to [LoggedInState].
+extension LoggedInStatePatterns on LoggedInState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoggedInSuccessState value) loggedIn,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(LoggedInSuccessState value)? loggedIn,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(LoggedInSuccessState value)? loggedIn,
     required TResult orElse(),
   }) {
-    if (initial != null) {
-      return initial(this);
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial(_that);
+      case LoggedInSuccessState() when loggedIn != null:
+        return loggedIn(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
   }
-}
 
-abstract class Initial implements LoggedInState {
-  const factory Initial() = _$InitialImpl;
-}
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
 
-/// @nodoc
-abstract class _$$LoggedInSuccessStateImplCopyWith<$Res> {
-  factory _$$LoggedInSuccessStateImplCopyWith(_$LoggedInSuccessStateImpl value,
-          $Res Function(_$LoggedInSuccessStateImpl) then) =
-      __$$LoggedInSuccessStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({bool isLoggedIn});
-}
-
-/// @nodoc
-class __$$LoggedInSuccessStateImplCopyWithImpl<$Res>
-    extends _$LoggedInStateCopyWithImpl<$Res, _$LoggedInSuccessStateImpl>
-    implements _$$LoggedInSuccessStateImplCopyWith<$Res> {
-  __$$LoggedInSuccessStateImplCopyWithImpl(_$LoggedInSuccessStateImpl _value,
-      $Res Function(_$LoggedInSuccessStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? isLoggedIn = null,
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(LoggedInSuccessState value) loggedIn,
   }) {
-    return _then(_$LoggedInSuccessStateImpl(
-      null == isLoggedIn
-          ? _value.isLoggedIn
-          : isLoggedIn // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    final _that = this;
+    switch (_that) {
+      case Initial():
+        return initial(_that);
+      case LoggedInSuccessState():
+        return loggedIn(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(LoggedInSuccessState value)? loggedIn,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial(_that);
+      case LoggedInSuccessState() when loggedIn != null:
+        return loggedIn(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(bool isLoggedIn)? loggedIn,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial();
+      case LoggedInSuccessState() when loggedIn != null:
+        return loggedIn(_that.isLoggedIn);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(bool isLoggedIn) loggedIn,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial():
+        return initial();
+      case LoggedInSuccessState():
+        return loggedIn(_that.isLoggedIn);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(bool isLoggedIn)? loggedIn,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial();
+      case LoggedInSuccessState() when loggedIn != null:
+        return loggedIn(_that.isLoggedIn);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$LoggedInSuccessStateImpl implements LoggedInSuccessState {
-  const _$LoggedInSuccessStateImpl(this.isLoggedIn);
+class Initial implements LoggedInState {
+  const Initial();
 
   @override
-  final bool isLoggedIn;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is Initial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'LoggedInState.loggedIn(isLoggedIn: $isLoggedIn)';
+    return 'LoggedInState.initial()';
   }
+}
+
+/// @nodoc
+
+class LoggedInSuccessState implements LoggedInState {
+  const LoggedInSuccessState(this.isLoggedIn);
+
+  final bool isLoggedIn;
+
+  /// Create a copy of LoggedInState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $LoggedInSuccessStateCopyWith<LoggedInSuccessState> get copyWith =>
+      _$LoggedInSuccessStateCopyWithImpl<LoggedInSuccessState>(
+          this, _$identity);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$LoggedInSuccessStateImpl &&
+            other is LoggedInSuccessState &&
             (identical(other.isLoggedIn, isLoggedIn) ||
                 other.isLoggedIn == isLoggedIn));
   }
@@ -232,83 +256,43 @@ class _$LoggedInSuccessStateImpl implements LoggedInSuccessState {
   @override
   int get hashCode => Object.hash(runtimeType, isLoggedIn);
 
-  @JsonKey(ignore: true)
   @override
+  String toString() {
+    return 'LoggedInState.loggedIn(isLoggedIn: $isLoggedIn)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $LoggedInSuccessStateCopyWith<$Res>
+    implements $LoggedInStateCopyWith<$Res> {
+  factory $LoggedInSuccessStateCopyWith(LoggedInSuccessState value,
+          $Res Function(LoggedInSuccessState) _then) =
+      _$LoggedInSuccessStateCopyWithImpl;
+  @useResult
+  $Res call({bool isLoggedIn});
+}
+
+/// @nodoc
+class _$LoggedInSuccessStateCopyWithImpl<$Res>
+    implements $LoggedInSuccessStateCopyWith<$Res> {
+  _$LoggedInSuccessStateCopyWithImpl(this._self, this._then);
+
+  final LoggedInSuccessState _self;
+  final $Res Function(LoggedInSuccessState) _then;
+
+  /// Create a copy of LoggedInState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  _$$LoggedInSuccessStateImplCopyWith<_$LoggedInSuccessStateImpl>
-      get copyWith =>
-          __$$LoggedInSuccessStateImplCopyWithImpl<_$LoggedInSuccessStateImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(bool isLoggedIn) loggedIn,
+  $Res call({
+    Object? isLoggedIn = null,
   }) {
-    return loggedIn(isLoggedIn);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(bool isLoggedIn)? loggedIn,
-  }) {
-    return loggedIn?.call(isLoggedIn);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(bool isLoggedIn)? loggedIn,
-    required TResult orElse(),
-  }) {
-    if (loggedIn != null) {
-      return loggedIn(isLoggedIn);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(LoggedInSuccessState value) loggedIn,
-  }) {
-    return loggedIn(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(LoggedInSuccessState value)? loggedIn,
-  }) {
-    return loggedIn?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(LoggedInSuccessState value)? loggedIn,
-    required TResult orElse(),
-  }) {
-    if (loggedIn != null) {
-      return loggedIn(this);
-    }
-    return orElse();
+    return _then(LoggedInSuccessState(
+      null == isLoggedIn
+          ? _self.isLoggedIn
+          : isLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
-abstract class LoggedInSuccessState implements LoggedInState {
-  const factory LoggedInSuccessState(final bool isLoggedIn) =
-      _$LoggedInSuccessStateImpl;
-
-  bool get isLoggedIn;
-  @JsonKey(ignore: true)
-  _$$LoggedInSuccessStateImplCopyWith<_$LoggedInSuccessStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

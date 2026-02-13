@@ -63,7 +63,7 @@ class ProcessItemWidget extends StatelessWidget {
           text: process.name.isEmptyOrNull
               ? process.fullRequestPath.split('/').last
               : process.name,
-          textColor: Theme.of(context).colorScheme.surface,
+          textColor: Theme.of(context).colorScheme.onSurface,
           startIndex: startNameIndex,
           endIndex: query.length,
           maxLine: 1,
@@ -91,7 +91,7 @@ class ProcessItemWidget extends StatelessWidget {
               width: 21.h,
               height: 21.h,
               colorFilter: ColorFilter.mode(
-                  Theme.of(context).colorScheme.surface, BlendMode.srcIn),
+                  Theme.of(context).colorScheme.onSurface, BlendMode.srcIn),
             ),
           ],
         ),
@@ -114,7 +114,7 @@ class ProcessItemWidget extends StatelessWidget {
     if (icon is SvgPicture) {
       return ColorFiltered(
         colorFilter: ColorFilter.mode(
-          Theme.of(context).colorScheme.surface,
+          Theme.of(context).colorScheme.onSurface,
           BlendMode.srcIn,
         ),
         child: icon,

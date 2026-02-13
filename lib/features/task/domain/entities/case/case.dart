@@ -1,6 +1,6 @@
 import 'package:axon_ivy/features/task/domain/entities/document/document.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 part 'case.freezed.dart';
 
@@ -8,7 +8,7 @@ part 'case.g.dart';
 
 @freezed
 @HiveType(typeId: 1)
-class CaseTask with _$CaseTask {
+abstract class CaseTask with _$CaseTask {
   const CaseTask._();
 
   factory CaseTask({

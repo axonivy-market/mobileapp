@@ -4,7 +4,7 @@ part 'engine_info.freezed.dart';
 part 'engine_info.g.dart';
 
 @freezed
-class EngineInfo with _$EngineInfo {
+abstract class EngineInfo with _$EngineInfo {
   const factory EngineInfo({
     @Default('') String version,
     @Default('') String engineName,

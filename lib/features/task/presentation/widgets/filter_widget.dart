@@ -43,10 +43,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                     filterBloc.add(FilterEvent(FilterType.all));
                   },
                   style: ButtonStyle(
-                    minimumSize: MaterialStatePropertyAll(Size(86.w, 40.h)),
-                    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-                    elevation: const MaterialStatePropertyAll(0.0),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    minimumSize: WidgetStatePropertyAll(Size(86.w, 40.h)),
+                    padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+                    elevation: const WidgetStatePropertyAll(0.0),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.horizontal(
                           left: const Radius.circular(10.0).r,
@@ -56,7 +56,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         ),
                       ),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: WidgetStatePropertyAll(
                       getFilterBackgroundColor(
                         state.activeFilter == FilterType.all,
                       ),
@@ -82,10 +82,10 @@ class _FilterWidgetState extends State<FilterWidget> {
                     filterBloc.add(FilterEvent(FilterType.expired));
                   },
                   style: ButtonStyle(
-                    minimumSize: MaterialStatePropertyAll(Size(86.w, 40.h)),
-                    padding: const MaterialStatePropertyAll(EdgeInsets.zero),
-                    elevation: const MaterialStatePropertyAll(0.0),
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    minimumSize: WidgetStatePropertyAll(Size(86.w, 40.h)),
+                    padding: const WidgetStatePropertyAll(EdgeInsets.zero),
+                    elevation: const WidgetStatePropertyAll(0.0),
+                    shape: WidgetStateProperty.all<RoundedRectangleBorder>(
                       RoundedRectangleBorder(
                         borderRadius: BorderRadius.horizontal(
                           right: const Radius.circular(10.0).r,
@@ -95,7 +95,7 @@ class _FilterWidgetState extends State<FilterWidget> {
                         ),
                       ),
                     ),
-                    backgroundColor: MaterialStatePropertyAll(
+                    backgroundColor: WidgetStatePropertyAll(
                       getFilterBackgroundColor(
                         state.activeFilter == FilterType.expired,
                       ),
@@ -128,7 +128,7 @@ class _FilterWidgetState extends State<FilterWidget> {
             child: PopupMenuButton<SortType>(
               elevation: 10,
               clipBehavior: Clip.antiAlias,
-              shadowColor: Colors.black.withOpacity(0.3),
+              shadowColor: Colors.black.withValues(alpha: 0.3),
               color: Theme.of(context).colorScheme.onPrimaryContainer,
               position: PopupMenuPosition.under,
               surfaceTintColor:
@@ -367,8 +367,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                     AppAssets.icons.filter.svg(
                         colorFilter: ColorFilter.mode(
                             isSortButtonTapped
-                                ? Theme.of(context).colorScheme.background
-                                : Theme.of(context).colorScheme.surface,
+                                ? Theme.of(context).colorScheme.onPrimary
+                                : Theme.of(context).colorScheme.onSurface,
                             BlendMode.srcIn)),
                     Text(
                       "tasksView.sort".tr(),
@@ -376,8 +376,8 @@ class _FilterWidgetState extends State<FilterWidget> {
                           fontWeight: FontWeight.w400,
                           fontSize: 17.sp,
                           color: isSortButtonTapped
-                              ? Theme.of(context).colorScheme.background
-                              : Theme.of(context).colorScheme.surface),
+                              ? Theme.of(context).colorScheme.onPrimary
+                              : Theme.of(context).colorScheme.onSurface),
                     )
                   ],
                 ),
@@ -397,7 +397,7 @@ class _FilterWidgetState extends State<FilterWidget> {
 
   Color getFilterTextColor(bool isCurrentFilterType) {
     return isCurrentFilterType
-        ? Theme.of(context).colorScheme.onSurface
+        ? Theme.of(context).colorScheme.onPrimary
         : Theme.of(context).colorScheme.onSecondary;
   }
 }

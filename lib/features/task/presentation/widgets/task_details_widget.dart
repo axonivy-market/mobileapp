@@ -53,7 +53,7 @@ class TaskDetailsWidget extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 15).r,
         padding: const EdgeInsets.fromLTRB(5, 15, 5, 15).r,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(10).r,
         ),
         child: Column(
@@ -68,7 +68,7 @@ class TaskDetailsWidget extends StatelessWidget {
                   TaskInfoRowWidget(
                     icon: AppAssets.icons.paperclip.svg(
                         colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.surface,
+                            Theme.of(context).colorScheme.onSurface,
                             BlendMode.srcIn),
                         height: 16.r),
                     title: "taskDetails.attachments".tr(),
@@ -78,7 +78,7 @@ class TaskDetailsWidget extends StatelessWidget {
                   TaskInfoRowWidget(
                     icon: AppAssets.icons.clock.svg(
                         colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.surface,
+                            Theme.of(context).colorScheme.onSurface,
                             BlendMode.srcIn),
                         height: 16.r),
                     title: "taskDetails.expiryDate".tr(),
@@ -89,7 +89,7 @@ class TaskDetailsWidget extends StatelessWidget {
                   TaskInfoRowWidget(
                     icon: AppAssets.icons.calendar.svg(
                         colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.surface,
+                            Theme.of(context).colorScheme.onSurface,
                             BlendMode.srcIn),
                         height: 16.r),
                     title: "taskDetails.creationDate".tr(),
@@ -98,7 +98,7 @@ class TaskDetailsWidget extends StatelessWidget {
                   TaskInfoRowWidget(
                     icon: AppAssets.icons.category2.svg(
                         colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.surface,
+                            Theme.of(context).colorScheme.onSurface,
                             BlendMode.srcIn),
                         height: 16.r),
                     title: "taskDetails.category".tr(),
@@ -109,7 +109,7 @@ class TaskDetailsWidget extends StatelessWidget {
                   TaskInfoRowWidget(
                     icon: AppAssets.icons.priorityHighBlack.svg(
                         colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.surface,
+                            Theme.of(context).colorScheme.onSurface,
                             BlendMode.srcIn),
                         height: 16.r),
                     title: "taskDetails.priority".tr(),
@@ -118,7 +118,7 @@ class TaskDetailsWidget extends StatelessWidget {
                   TaskInfoRowWidget(
                     icon: AppAssets.icons.users.svg(
                         colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.surface,
+                            Theme.of(context).colorScheme.onSurface,
                             BlendMode.srcIn),
                         height: 16.r),
                     title: "taskDetails.responsible".tr(),
@@ -154,7 +154,7 @@ class TaskDetailsWidget extends StatelessWidget {
                 style: GoogleFonts.inter(
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.surface),
+                    color: Theme.of(context).colorScheme.onSurface),
               ),
               2.verticalSpace,
               Text(
@@ -183,7 +183,7 @@ class TaskDetailsWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 12).r,
         decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.background,
+          color: Theme.of(context).colorScheme.surface,
           borderRadius: BorderRadius.circular(8).r,
         ),
         child: Row(

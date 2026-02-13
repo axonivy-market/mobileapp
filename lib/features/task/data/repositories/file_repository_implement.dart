@@ -2,7 +2,7 @@ import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/features/task/data/datasources/file_remote_data_source/file_remote_data_source.dart';
 import 'package:axon_ivy/features/task/domain/entities/response_document/response_document.dart';
 import 'package:axon_ivy/features/task/domain/repositories/file_repository_interface.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 

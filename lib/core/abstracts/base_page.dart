@@ -38,7 +38,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
   }) async {
     final uploadFileBloc = context.read<UploadFileBloc>();
     return showDialog(
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       barrierDismissible: false,
       context: context,
       builder: (context) {
@@ -46,12 +46,12 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0.r))),
           elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: Text(
             "uploadFile.changeFileName".tr(),
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.onSurface,
               fontSize: 17.sp,
               fontWeight: FontWeight.w500,
             ),
@@ -69,7 +69,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
               style: GoogleFonts.inter(
                   fontSize: 17.sp,
                   fontWeight: FontWeight.w400,
-                  color: Theme.of(context).colorScheme.surface),
+                  color: Theme.of(context).colorScheme.onSurface),
               onChanged: (value) {
                 valueText = value;
               },
@@ -116,17 +116,17 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
                   Expanded(
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        elevation: const MaterialStatePropertyAll(0.0),
+                        elevation: const WidgetStatePropertyAll(0.0),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        foregroundColor: MaterialStatePropertyAll(
+                        foregroundColor: WidgetStatePropertyAll(
                           Theme.of(context).colorScheme.primary,
                         ),
-                        backgroundColor: MaterialStatePropertyAll(
+                        backgroundColor: WidgetStatePropertyAll(
                           Theme.of(context).colorScheme.primaryContainer,
                         ),
                       ),
@@ -146,16 +146,16 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
                   Expanded(
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        elevation: const MaterialStatePropertyAll(0.0),
+                        elevation: const WidgetStatePropertyAll(0.0),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        foregroundColor: MaterialStatePropertyAll(
-                            Theme.of(context).colorScheme.background),
-                        backgroundColor: MaterialStatePropertyAll(
+                        foregroundColor: WidgetStatePropertyAll(
+                            Theme.of(context).colorScheme.surface),
+                        backgroundColor: WidgetStatePropertyAll(
                           Theme.of(context).colorScheme.primary,
                         ),
                       ),
@@ -170,7 +170,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
                       child: Text(
                         'Save',
                         style: GoogleFonts.inter(
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).colorScheme.surface,
                           fontSize: 17.sp,
                           fontWeight: FontWeight.w500,
                         ),
@@ -195,7 +195,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
     bool needShowCancel = false,
   }) {
     showDialog(
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
@@ -203,12 +203,12 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0.r))),
           elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: Text(
             title ?? "",
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.onSurface,
               fontSize: 17.sp,
               fontWeight: FontWeight.w500,
             ),
@@ -222,17 +222,17 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
                   Expanded(
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        elevation: const MaterialStatePropertyAll(0.0),
+                        elevation: const WidgetStatePropertyAll(0.0),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        foregroundColor: MaterialStatePropertyAll(
+                        foregroundColor: WidgetStatePropertyAll(
                           Theme.of(context).colorScheme.primary,
                         ),
-                        backgroundColor: MaterialStatePropertyAll(
+                        backgroundColor: WidgetStatePropertyAll(
                           Theme.of(context).colorScheme.primaryContainer,
                         ),
                       ),
@@ -252,17 +252,17 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
                   Expanded(
                     child: ElevatedButton(
                       style: ButtonStyle(
-                        elevation: const MaterialStatePropertyAll(0.0),
+                        elevation: const WidgetStatePropertyAll(0.0),
                         shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                            WidgetStateProperty.all<RoundedRectangleBorder>(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                         ),
-                        foregroundColor: MaterialStatePropertyAll(
-                            Theme.of(context).colorScheme.background),
+                        foregroundColor: WidgetStatePropertyAll(
+                            Theme.of(context).colorScheme.surface),
                         backgroundColor:
-                            const MaterialStatePropertyAll(Color(0xFFEE4A52)),
+                            const WidgetStatePropertyAll(Color(0xFFEE4A52)),
                       ),
                       onPressed: () {
                         Navigator.pop(context);
@@ -271,7 +271,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
                       child: Text(
                         'Delete',
                         style: GoogleFonts.inter(
-                          color: Theme.of(context).colorScheme.background,
+                          color: Theme.of(context).colorScheme.surface,
                           fontSize: 17.sp,
                           fontWeight: FontWeight.w500,
                         ),
@@ -297,7 +297,7 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
     bool needShowCancel = false,
   }) {
     showDialog(
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       context: context,
       barrierDismissible: barrierDismissible,
       builder: (BuildContext context) {
@@ -305,12 +305,12 @@ abstract class BasePageState<Page extends BasePage> extends State<Page> {
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0.r))),
           elevation: 0,
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           title: Text(
             title ?? "",
             textAlign: TextAlign.center,
             style: GoogleFonts.inter(
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.onSurface,
               fontSize: 17.sp,
               fontWeight: FontWeight.w500,
             ),

@@ -8,7 +8,7 @@ part of 'case.dart';
 
 class CaseTaskAdapter extends TypeAdapter<CaseTask> {
   @override
-  final int typeId = 1;
+  final typeId = 1;
 
   @override
   CaseTask read(BinaryReader reader) {
@@ -17,10 +17,10 @@ class CaseTaskAdapter extends TypeAdapter<CaseTask> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return CaseTask(
-      id: fields[0] as int,
-      name: fields[1] as String,
-      description: fields[2] as String,
-      documents: (fields[3] as List).cast<Document>(),
+      id: (fields[0] as num).toInt(),
+      name: fields[1] == null ? '' : fields[1] as String,
+      description: fields[2] == null ? '' : fields[2] as String,
+      documents: fields[3] == null ? [] : (fields[3] as List).cast<Document>(),
     );
   }
 
@@ -53,9 +53,8 @@ class CaseTaskAdapter extends TypeAdapter<CaseTask> {
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CaseTaskImpl _$$CaseTaskImplFromJson(Map<String, dynamic> json) =>
-    _$CaseTaskImpl(
-      id: json['id'] as int,
+_CaseTask _$CaseTaskFromJson(Map<String, dynamic> json) => _CaseTask(
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
       documents: (json['documents'] as List<dynamic>?)
@@ -64,8 +63,7 @@ _$CaseTaskImpl _$$CaseTaskImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$CaseTaskImplToJson(_$CaseTaskImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CaseTaskToJson(_CaseTask instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,

@@ -8,7 +8,7 @@ part of 'document_model.dart';
 
 DocumentModel _$DocumentModelFromJson(Map<String, dynamic> json) =>
     DocumentModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String?,
       url: json['url'] as String?,
       path: json['path'] as String?,

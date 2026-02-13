@@ -7,7 +7,7 @@ import 'package:axon_ivy/features/task/domain/entities/task/task.dart';
 import 'package:axon_ivy/shared/enums/file_local_state_enum.dart';
 import 'package:axon_ivy/shared/extensions/extensions.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive_ce.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable

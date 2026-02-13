@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,158 +9,35 @@ part of 'download_file_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
 /// @nodoc
-mixin _$DownloadFileEvent {
-  String get fileName => throw _privateConstructorUsedError;
-  String get url => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String fileName, String url) downloadFile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String fileName, String url)? downloadFile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String fileName, String url)? downloadFile,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_DownloadFile value) downloadFile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_DownloadFile value)? downloadFile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_DownloadFile value)? downloadFile,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+mixin _$DownloadFileEvent implements DiagnosticableTreeMixin {
+  String get fileName;
+  String get url;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DownloadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $DownloadFileEventCopyWith<DownloadFileEvent> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $DownloadFileEventCopyWith<$Res> {
-  factory $DownloadFileEventCopyWith(
-          DownloadFileEvent value, $Res Function(DownloadFileEvent) then) =
-      _$DownloadFileEventCopyWithImpl<$Res, DownloadFileEvent>;
-  @useResult
-  $Res call({String fileName, String url});
-}
-
-/// @nodoc
-class _$DownloadFileEventCopyWithImpl<$Res, $Val extends DownloadFileEvent>
-    implements $DownloadFileEventCopyWith<$Res> {
-  _$DownloadFileEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fileName = null,
-    Object? url = null,
-  }) {
-    return _then(_value.copyWith(
-      fileName: null == fileName
-          ? _value.fileName
-          : fileName // ignore: cast_nullable_to_non_nullable
-              as String,
-      url: null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$DownloadFileImplCopyWith<$Res>
-    implements $DownloadFileEventCopyWith<$Res> {
-  factory _$$DownloadFileImplCopyWith(
-          _$DownloadFileImpl value, $Res Function(_$DownloadFileImpl) then) =
-      __$$DownloadFileImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String fileName, String url});
-}
-
-/// @nodoc
-class __$$DownloadFileImplCopyWithImpl<$Res>
-    extends _$DownloadFileEventCopyWithImpl<$Res, _$DownloadFileImpl>
-    implements _$$DownloadFileImplCopyWith<$Res> {
-  __$$DownloadFileImplCopyWithImpl(
-      _$DownloadFileImpl _value, $Res Function(_$DownloadFileImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? fileName = null,
-    Object? url = null,
-  }) {
-    return _then(_$DownloadFileImpl(
-      null == fileName
-          ? _value.fileName
-          : fileName // ignore: cast_nullable_to_non_nullable
-              as String,
-      null == url
-          ? _value.url
-          : url // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DownloadFileImpl with DiagnosticableTreeMixin implements _DownloadFile {
-  const _$DownloadFileImpl(this.fileName, this.url);
-
-  @override
-  final String fileName;
-  @override
-  final String url;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DownloadFileEvent.downloadFile(fileName: $fileName, url: $url)';
-  }
+      _$DownloadFileEventCopyWithImpl<DownloadFileEvent>(
+          this as DownloadFileEvent, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'DownloadFileEvent.downloadFile'))
+      ..add(DiagnosticsProperty('type', 'DownloadFileEvent'))
       ..add(DiagnosticsProperty('fileName', fileName))
       ..add(DiagnosticsProperty('url', url));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DownloadFileImpl &&
+            other is DownloadFileEvent &&
             (identical(other.fileName, fileName) ||
                 other.fileName == fileName) &&
             (identical(other.url, url) || other.url == url));
@@ -169,248 +46,334 @@ class _$DownloadFileImpl with DiagnosticableTreeMixin implements _DownloadFile {
   @override
   int get hashCode => Object.hash(runtimeType, fileName, url);
 
-  @JsonKey(ignore: true)
   @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DownloadFileEvent(fileName: $fileName, url: $url)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DownloadFileEventCopyWith<$Res> {
+  factory $DownloadFileEventCopyWith(
+          DownloadFileEvent value, $Res Function(DownloadFileEvent) _then) =
+      _$DownloadFileEventCopyWithImpl;
+  @useResult
+  $Res call({String fileName, String url});
+}
+
+/// @nodoc
+class _$DownloadFileEventCopyWithImpl<$Res>
+    implements $DownloadFileEventCopyWith<$Res> {
+  _$DownloadFileEventCopyWithImpl(this._self, this._then);
+
+  final DownloadFileEvent _self;
+  final $Res Function(DownloadFileEvent) _then;
+
+  /// Create a copy of DownloadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
-      __$$DownloadFileImplCopyWithImpl<_$DownloadFileImpl>(this, _$identity);
-
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String fileName, String url) downloadFile,
+  $Res call({
+    Object? fileName = null,
+    Object? url = null,
   }) {
-    return downloadFile(fileName, url);
+    return _then(_self.copyWith(
+      fileName: null == fileName
+          ? _self.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: null == url
+          ? _self.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String fileName, String url)? downloadFile,
-  }) {
-    return downloadFile?.call(fileName, url);
-  }
+/// Adds pattern-matching-related methods to [DownloadFileEvent].
+extension DownloadFileEventPatterns on DownloadFileEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String fileName, String url)? downloadFile,
-    required TResult orElse(),
-  }) {
-    if (downloadFile != null) {
-      return downloadFile(fileName, url);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_DownloadFile value) downloadFile,
-  }) {
-    return downloadFile(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_DownloadFile value)? downloadFile,
-  }) {
-    return downloadFile?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_DownloadFile value)? downloadFile,
     required TResult orElse(),
   }) {
-    if (downloadFile != null) {
-      return downloadFile(this);
+    final _that = this;
+    switch (_that) {
+      case _DownloadFile() when downloadFile != null:
+        return downloadFile(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
   }
-}
 
-abstract class _DownloadFile implements DownloadFileEvent {
-  const factory _DownloadFile(final String fileName, final String url) =
-      _$DownloadFileImpl;
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
 
-  @override
-  String get fileName;
-  @override
-  String get url;
-  @override
-  @JsonKey(ignore: true)
-  _$$DownloadFileImplCopyWith<_$DownloadFileImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$DownloadFileState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message) success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message)? success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message)? success,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(DownloadLoadingState value) loading,
-    required TResult Function(DownloadErrorState value) error,
-    required TResult Function(DownloadSuccessState value) success,
-  }) =>
-      throw _privateConstructorUsedError;
+    required TResult Function(_DownloadFile value) downloadFile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadFile():
+        return downloadFile(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DownloadLoadingState value)? loading,
-    TResult? Function(DownloadErrorState value)? error,
-    TResult? Function(DownloadSuccessState value)? success,
-  }) =>
-      throw _privateConstructorUsedError;
+    TResult? Function(_DownloadFile value)? downloadFile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadFile() when downloadFile != null:
+        return downloadFile(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DownloadLoadingState value)? loading,
-    TResult Function(DownloadErrorState value)? error,
-    TResult Function(DownloadSuccessState value)? success,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String fileName, String url)? downloadFile,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadFile() when downloadFile != null:
+        return downloadFile(_that.fileName, _that.url);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String fileName, String url) downloadFile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadFile():
+        return downloadFile(_that.fileName, _that.url);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String fileName, String url)? downloadFile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _DownloadFile() when downloadFile != null:
+        return downloadFile(_that.fileName, _that.url);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
-abstract class $DownloadFileStateCopyWith<$Res> {
-  factory $DownloadFileStateCopyWith(
-          DownloadFileState value, $Res Function(DownloadFileState) then) =
-      _$DownloadFileStateCopyWithImpl<$Res, DownloadFileState>;
-}
 
-/// @nodoc
-class _$DownloadFileStateCopyWithImpl<$Res, $Val extends DownloadFileState>
-    implements $DownloadFileStateCopyWith<$Res> {
-  _$DownloadFileStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$DownloadLoadingStateImplCopyWith<$Res> {
-  factory _$$DownloadLoadingStateImplCopyWith(_$DownloadLoadingStateImpl value,
-          $Res Function(_$DownloadLoadingStateImpl) then) =
-      __$$DownloadLoadingStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$DownloadLoadingStateImplCopyWithImpl<$Res>
-    extends _$DownloadFileStateCopyWithImpl<$Res, _$DownloadLoadingStateImpl>
-    implements _$$DownloadLoadingStateImplCopyWith<$Res> {
-  __$$DownloadLoadingStateImplCopyWithImpl(_$DownloadLoadingStateImpl _value,
-      $Res Function(_$DownloadLoadingStateImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$DownloadLoadingStateImpl
-    with DiagnosticableTreeMixin
-    implements DownloadLoadingState {
-  const _$DownloadLoadingStateImpl();
+class _DownloadFile with DiagnosticableTreeMixin implements DownloadFileEvent {
+  const _DownloadFile(this.fileName, this.url);
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DownloadFileState.loading()';
-  }
+  final String fileName;
+  @override
+  final String url;
+
+  /// Create a copy of DownloadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$DownloadFileCopyWith<_DownloadFile> get copyWith =>
+      __$DownloadFileCopyWithImpl<_DownloadFile>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'DownloadFileState.loading'));
+    properties
+      ..add(DiagnosticsProperty('type', 'DownloadFileEvent.downloadFile'))
+      ..add(DiagnosticsProperty('fileName', fileName))
+      ..add(DiagnosticsProperty('url', url));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DownloadLoadingStateImpl);
+            other is _DownloadFile &&
+            (identical(other.fileName, fileName) ||
+                other.fileName == fileName) &&
+            (identical(other.url, url) || other.url == url));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fileName, url);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DownloadFileEvent.downloadFile(fileName: $fileName, url: $url)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$DownloadFileCopyWith<$Res>
+    implements $DownloadFileEventCopyWith<$Res> {
+  factory _$DownloadFileCopyWith(
+          _DownloadFile value, $Res Function(_DownloadFile) _then) =
+      __$DownloadFileCopyWithImpl;
+  @override
+  @useResult
+  $Res call({String fileName, String url});
+}
+
+/// @nodoc
+class __$DownloadFileCopyWithImpl<$Res>
+    implements _$DownloadFileCopyWith<$Res> {
+  __$DownloadFileCopyWithImpl(this._self, this._then);
+
+  final _DownloadFile _self;
+  final $Res Function(_DownloadFile) _then;
+
+  /// Create a copy of DownloadFileEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? fileName = null,
+    Object? url = null,
+  }) {
+    return _then(_DownloadFile(
+      null == fileName
+          ? _self.fileName
+          : fileName // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == url
+          ? _self.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+mixin _$DownloadFileState implements DiagnosticableTreeMixin {
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'DownloadFileState'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is DownloadFileState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message) success,
-  }) {
-    return loading();
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DownloadFileState()';
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message)? success,
-  }) {
-    return loading?.call();
-  }
+/// @nodoc
+class $DownloadFileStateCopyWith<$Res> {
+  $DownloadFileStateCopyWith(
+      DownloadFileState _, $Res Function(DownloadFileState) __);
+}
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message)? success,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
+/// Adds pattern-matching-related methods to [DownloadFileState].
+extension DownloadFileStatePatterns on DownloadFileState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DownloadLoadingState value) loading,
-    required TResult Function(DownloadErrorState value) error,
-    required TResult Function(DownloadSuccessState value) success,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DownloadLoadingState value)? loading,
-    TResult? Function(DownloadErrorState value)? error,
-    TResult? Function(DownloadSuccessState value)? success,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(DownloadLoadingState value)? loading,
@@ -418,42 +381,272 @@ class _$DownloadLoadingStateImpl
     TResult Function(DownloadSuccessState value)? success,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    final _that = this;
+    switch (_that) {
+      case DownloadLoadingState() when loading != null:
+        return loading(_that);
+      case DownloadErrorState() when error != null:
+        return error(_that);
+      case DownloadSuccessState() when success != null:
+        return success(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(DownloadLoadingState value) loading,
+    required TResult Function(DownloadErrorState value) error,
+    required TResult Function(DownloadSuccessState value) success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DownloadLoadingState():
+        return loading(_that);
+      case DownloadErrorState():
+        return error(_that);
+      case DownloadSuccessState():
+        return success(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(DownloadLoadingState value)? loading,
+    TResult? Function(DownloadErrorState value)? error,
+    TResult? Function(DownloadSuccessState value)? success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DownloadLoadingState() when loading != null:
+        return loading(_that);
+      case DownloadErrorState() when error != null:
+        return error(_that);
+      case DownloadSuccessState() when success != null:
+        return success(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String error)? error,
+    TResult Function(String message)? success,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DownloadLoadingState() when loading != null:
+        return loading();
+      case DownloadErrorState() when error != null:
+        return error(_that.error);
+      case DownloadSuccessState() when success != null:
+        return success(_that.message);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String error) error,
+    required TResult Function(String message) success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DownloadLoadingState():
+        return loading();
+      case DownloadErrorState():
+        return error(_that.error);
+      case DownloadSuccessState():
+        return success(_that.message);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(String message)? success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case DownloadLoadingState() when loading != null:
+        return loading();
+      case DownloadErrorState() when error != null:
+        return error(_that.error);
+      case DownloadSuccessState() when success != null:
+        return success(_that.message);
+      case _:
+        return null;
+    }
   }
 }
 
-abstract class DownloadLoadingState implements DownloadFileState {
-  const factory DownloadLoadingState() = _$DownloadLoadingStateImpl;
+/// @nodoc
+
+class DownloadLoadingState
+    with DiagnosticableTreeMixin
+    implements DownloadFileState {
+  const DownloadLoadingState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'DownloadFileState.loading'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is DownloadLoadingState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DownloadFileState.loading()';
+  }
 }
 
 /// @nodoc
-abstract class _$$DownloadErrorStateImplCopyWith<$Res> {
-  factory _$$DownloadErrorStateImplCopyWith(_$DownloadErrorStateImpl value,
-          $Res Function(_$DownloadErrorStateImpl) then) =
-      __$$DownloadErrorStateImplCopyWithImpl<$Res>;
+
+class DownloadErrorState
+    with DiagnosticableTreeMixin
+    implements DownloadFileState {
+  const DownloadErrorState(this.error);
+
+  final String error;
+
+  /// Create a copy of DownloadFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $DownloadErrorStateCopyWith<DownloadErrorState> get copyWith =>
+      _$DownloadErrorStateCopyWithImpl<DownloadErrorState>(this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'DownloadFileState.error'))
+      ..add(DiagnosticsProperty('error', error));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is DownloadErrorState &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DownloadFileState.error(error: $error)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DownloadErrorStateCopyWith<$Res>
+    implements $DownloadFileStateCopyWith<$Res> {
+  factory $DownloadErrorStateCopyWith(
+          DownloadErrorState value, $Res Function(DownloadErrorState) _then) =
+      _$DownloadErrorStateCopyWithImpl;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$DownloadErrorStateImplCopyWithImpl<$Res>
-    extends _$DownloadFileStateCopyWithImpl<$Res, _$DownloadErrorStateImpl>
-    implements _$$DownloadErrorStateImplCopyWith<$Res> {
-  __$$DownloadErrorStateImplCopyWithImpl(_$DownloadErrorStateImpl _value,
-      $Res Function(_$DownloadErrorStateImpl) _then)
-      : super(_value, _then);
+class _$DownloadErrorStateCopyWithImpl<$Res>
+    implements $DownloadErrorStateCopyWith<$Res> {
+  _$DownloadErrorStateCopyWithImpl(this._self, this._then);
 
+  final DownloadErrorState _self;
+  final $Res Function(DownloadErrorState) _then;
+
+  /// Create a copy of DownloadFileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$DownloadErrorStateImpl(
+    return _then(DownloadErrorState(
       null == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -462,272 +655,76 @@ class __$$DownloadErrorStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DownloadErrorStateImpl
+class DownloadSuccessState
     with DiagnosticableTreeMixin
-    implements DownloadErrorState {
-  const _$DownloadErrorStateImpl(this.error);
+    implements DownloadFileState {
+  const DownloadSuccessState(this.message);
 
-  @override
-  final String error;
+  final String message;
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DownloadFileState.error(error: $error)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'DownloadFileState.error'))
-      ..add(DiagnosticsProperty('error', error));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$DownloadErrorStateImpl &&
-            (identical(other.error, error) || other.error == error));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, error);
-
-  @JsonKey(ignore: true)
-  @override
+  /// Create a copy of DownloadFileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$$DownloadErrorStateImplCopyWith<_$DownloadErrorStateImpl> get copyWith =>
-      __$$DownloadErrorStateImplCopyWithImpl<_$DownloadErrorStateImpl>(
+  $DownloadSuccessStateCopyWith<DownloadSuccessState> get copyWith =>
+      _$DownloadSuccessStateCopyWithImpl<DownloadSuccessState>(
           this, _$identity);
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message) success,
-  }) {
-    return error(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message)? success,
-  }) {
-    return error?.call(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message)? success,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this.error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DownloadLoadingState value) loading,
-    required TResult Function(DownloadErrorState value) error,
-    required TResult Function(DownloadSuccessState value) success,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DownloadLoadingState value)? loading,
-    TResult? Function(DownloadErrorState value)? error,
-    TResult? Function(DownloadSuccessState value)? success,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DownloadLoadingState value)? loading,
-    TResult Function(DownloadErrorState value)? error,
-    TResult Function(DownloadSuccessState value)? success,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class DownloadErrorState implements DownloadFileState {
-  const factory DownloadErrorState(final String error) =
-      _$DownloadErrorStateImpl;
-
-  String get error;
-  @JsonKey(ignore: true)
-  _$$DownloadErrorStateImplCopyWith<_$DownloadErrorStateImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$DownloadSuccessStateImplCopyWith<$Res> {
-  factory _$$DownloadSuccessStateImplCopyWith(_$DownloadSuccessStateImpl value,
-          $Res Function(_$DownloadSuccessStateImpl) then) =
-      __$$DownloadSuccessStateImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String message});
-}
-
-/// @nodoc
-class __$$DownloadSuccessStateImplCopyWithImpl<$Res>
-    extends _$DownloadFileStateCopyWithImpl<$Res, _$DownloadSuccessStateImpl>
-    implements _$$DownloadSuccessStateImplCopyWith<$Res> {
-  __$$DownloadSuccessStateImplCopyWithImpl(_$DownloadSuccessStateImpl _value,
-      $Res Function(_$DownloadSuccessStateImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$DownloadSuccessStateImpl(
-      null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$DownloadSuccessStateImpl
-    with DiagnosticableTreeMixin
-    implements DownloadSuccessState {
-  const _$DownloadSuccessStateImpl(this.message);
-
-  @override
-  final String message;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'DownloadFileState.success(message: $message)';
-  }
-
-  @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'DownloadFileState.success'))
       ..add(DiagnosticsProperty('message', message));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DownloadSuccessStateImpl &&
+            other is DownloadSuccessState &&
             (identical(other.message, message) || other.message == message));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, message);
 
-  @JsonKey(ignore: true)
   @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'DownloadFileState.success(message: $message)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $DownloadSuccessStateCopyWith<$Res>
+    implements $DownloadFileStateCopyWith<$Res> {
+  factory $DownloadSuccessStateCopyWith(DownloadSuccessState value,
+          $Res Function(DownloadSuccessState) _then) =
+      _$DownloadSuccessStateCopyWithImpl;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class _$DownloadSuccessStateCopyWithImpl<$Res>
+    implements $DownloadSuccessStateCopyWith<$Res> {
+  _$DownloadSuccessStateCopyWithImpl(this._self, this._then);
+
+  final DownloadSuccessState _self;
+  final $Res Function(DownloadSuccessState) _then;
+
+  /// Create a copy of DownloadFileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  _$$DownloadSuccessStateImplCopyWith<_$DownloadSuccessStateImpl>
-      get copyWith =>
-          __$$DownloadSuccessStateImplCopyWithImpl<_$DownloadSuccessStateImpl>(
-              this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(String message) success,
+  $Res call({
+    Object? message = null,
   }) {
-    return success(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(String message)? success,
-  }) {
-    return success?.call(message);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(String message)? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(message);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(DownloadLoadingState value) loading,
-    required TResult Function(DownloadErrorState value) error,
-    required TResult Function(DownloadSuccessState value) success,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(DownloadLoadingState value)? loading,
-    TResult? Function(DownloadErrorState value)? error,
-    TResult? Function(DownloadSuccessState value)? success,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(DownloadLoadingState value)? loading,
-    TResult Function(DownloadErrorState value)? error,
-    TResult Function(DownloadSuccessState value)? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
+    return _then(DownloadSuccessState(
+      null == message
+          ? _self.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
-abstract class DownloadSuccessState implements DownloadFileState {
-  const factory DownloadSuccessState(final String message) =
-      _$DownloadSuccessStateImpl;
-
-  String get message;
-  @JsonKey(ignore: true)
-  _$$DownloadSuccessStateImplCopyWith<_$DownloadSuccessStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

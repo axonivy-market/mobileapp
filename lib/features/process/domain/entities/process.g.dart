@@ -6,8 +6,7 @@ part of 'process.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ProcessImpl _$$ProcessImplFromJson(Map<String, dynamic> json) =>
-    _$ProcessImpl(
+_Process _$ProcessFromJson(Map<String, dynamic> json) => _Process(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? "",
       description: json['description'] as String? ?? "",
@@ -19,8 +18,7 @@ _$ProcessImpl _$$ProcessImplFromJson(Map<String, dynamic> json) =>
           const [],
     );
 
-Map<String, dynamic> _$$ProcessImplToJson(_$ProcessImpl instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$ProcessToJson(_Process instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'description': instance.description,

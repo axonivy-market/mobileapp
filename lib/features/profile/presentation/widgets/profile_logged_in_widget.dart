@@ -1,14 +1,15 @@
 import 'package:axon_ivy/core/abstracts/base_page.dart';
 import 'package:axon_ivy/core/app/app_config.dart';
 import 'package:axon_ivy/core/di/di_setup.dart';
-import 'package:axon_ivy/core/theme/app_themes.dart'; // Import your theme data
+import 'package:axon_ivy/core/theme/app_themes.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/logged_cubit/logged_in_cubit.dart';
 import 'package:axon_ivy/features/profile/presentation/bloc/profile_bloc/profile_bloc.dart';
-import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart'; // Import the ThemeBloc
+import 'package:axon_ivy/features/theme/bloc/theme_bloc.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_event.dart';
 import 'package:axon_ivy/features/theme/bloc/theme_state.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
 import 'package:axon_ivy/shared/extensions/string_ext.dart';
+import 'package:axon_ivy/shared/storage/secure_storage.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -27,11 +28,6 @@ class ProfileLoggedInWidget extends BasePage {
 }
 
 class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   bool isDemoMode = SharedPrefs.demoSetting ?? false;
   bool isDemoLogin = SharedPrefs.isDemoLogin ?? false;
 
@@ -66,8 +62,10 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
 
   ElevatedButton _buildSignOutButton() {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: () async {
+        await SecureStorage.clearCredentials();
         SharedPrefs.clear();
+        if (!mounted) return;
         context.read<LoggedInCubit>().loggedIn(false);
       },
       style: ElevatedButton.styleFrom(
@@ -133,7 +131,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400,
                   fontSize: 17.sp,
-                  color: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -147,7 +145,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                   style: GoogleFonts.inter(
                     fontWeight: FontWeight.w400,
                     fontSize: 13.sp,
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 ),
             ],
@@ -174,7 +172,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.w400,
                 fontSize: 17.sp,
-                color: Theme.of(context).colorScheme.surface),
+                color: Theme.of(context).colorScheme.onSurface),
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
@@ -183,7 +181,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 "English",
                 style: GoogleFonts.inter(
                     fontSize: 13.sp,
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontWeight: FontWeight.w400),
               ),
               AppAssets.icons.chevronRight.svg(
@@ -218,11 +216,11 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.w400,
                 fontSize: 17.sp,
-                color: Theme.of(context).colorScheme.surface),
+                color: Theme.of(context).colorScheme.onSurface),
           ),
           SwitchWidget(
             isActive: isDemoMode,
-            onChanged: (value) {
+            onChanged: (value) async {
               setState(() {
                 isDemoMode = value;
               });
@@ -234,7 +232,9 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                           ? AppConfig.baseUrl
                           : SharedPrefs.getBaseUrl!;
                 } else {
-                  SharedPrefs.clear(); // Clear shared preferences
+                  await SecureStorage.clearCredentials();
+                  SharedPrefs.clear();
+                  if (!mounted) return;
                   context.read<LoggedInCubit>().loggedIn(false);
                 }
               } else {
@@ -269,7 +269,7 @@ class _ProfileLoggedInWidgetState extends State<ProfileLoggedInWidget> {
                 style: GoogleFonts.inter(
                   fontWeight: FontWeight.w400,
                   fontSize: 17.sp,
-                  color: Theme.of(context).colorScheme.surface,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
               SwitchWidget(
