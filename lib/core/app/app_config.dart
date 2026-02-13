@@ -51,10 +51,10 @@ class AppConfig {
     var fileName = '';
     switch (environment) {
       case Environment.dev:
-        fileName = AppAssets.env.envDev;
+        fileName = AppAssets.env.aEnvDev;
         break;
       case Environment.prod:
-        fileName = AppAssets.env.envProd;
+        fileName = AppAssets.env.aEnvProd;
         break;
     }
     await dotenv.load(fileName: fileName);

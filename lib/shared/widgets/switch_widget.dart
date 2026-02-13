@@ -26,7 +26,7 @@ class SwitchWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(142.0).r,
           color: isActive
               ? Theme.of(context).colorScheme.tertiaryContainer
-              : Theme.of(context).colorScheme.background,
+              : Theme.of(context).colorScheme.surface,
         ),
         padding: const EdgeInsets.symmetric(horizontal: 3).h,
         alignment: isActive ? Alignment.centerRight : Alignment.centerLeft,

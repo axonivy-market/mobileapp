@@ -137,6 +137,8 @@ app.*.symbols
 !/dev/ci/**/Gemfile.lock
 !.vscode/settings.json
 
-.fvm
+.fvm/
+!.fvm/fvm_config.json
+
 #Assets
 /assets/env/.env_demo

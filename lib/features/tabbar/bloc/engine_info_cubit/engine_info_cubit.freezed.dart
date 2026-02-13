@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,237 +9,247 @@ part of 'engine_info_cubit.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$EngineInfoState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(EngineInfo? engineInfo) getEngineInfo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(EngineInfo? engineInfo)? getEngineInfo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(EngineInfo? engineInfo)? getEngineInfo,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
-    required TResult Function(GetEngineInfo value) getEngineInfo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
-    TResult? Function(GetEngineInfo value)? getEngineInfo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
-    TResult Function(GetEngineInfo value)? getEngineInfo,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $EngineInfoStateCopyWith<$Res> {
-  factory $EngineInfoStateCopyWith(
-          EngineInfoState value, $Res Function(EngineInfoState) then) =
-      _$EngineInfoStateCopyWithImpl<$Res, EngineInfoState>;
-}
-
-/// @nodoc
-class _$EngineInfoStateCopyWithImpl<$Res, $Val extends EngineInfoState>
-    implements $EngineInfoStateCopyWith<$Res> {
-  _$EngineInfoStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$InitializeImplCopyWith<$Res> {
-  factory _$$InitializeImplCopyWith(
-          _$InitializeImpl value, $Res Function(_$InitializeImpl) then) =
-      __$$InitializeImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$InitializeImplCopyWithImpl<$Res>
-    extends _$EngineInfoStateCopyWithImpl<$Res, _$InitializeImpl>
-    implements _$$InitializeImplCopyWith<$Res> {
-  __$$InitializeImplCopyWithImpl(
-      _$InitializeImpl _value, $Res Function(_$InitializeImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$InitializeImpl implements Initialize {
-  const _$InitializeImpl();
-
   @override
-  String toString() {
-    return 'EngineInfoState.initialize()';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitializeImpl);
+        (other.runtimeType == runtimeType && other is EngineInfoState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(EngineInfo? engineInfo) getEngineInfo,
-  }) {
-    return initialize();
+  String toString() {
+    return 'EngineInfoState()';
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(EngineInfo? engineInfo)? getEngineInfo,
-  }) {
-    return initialize?.call();
-  }
+/// @nodoc
+class $EngineInfoStateCopyWith<$Res> {
+  $EngineInfoStateCopyWith(
+      EngineInfoState _, $Res Function(EngineInfoState) __);
+}
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(EngineInfo? engineInfo)? getEngineInfo,
-    required TResult orElse(),
-  }) {
-    if (initialize != null) {
-      return initialize();
-    }
-    return orElse();
-  }
+/// Adds pattern-matching-related methods to [EngineInfoState].
+extension EngineInfoStatePatterns on EngineInfoState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
-    required TResult Function(GetEngineInfo value) getEngineInfo,
-  }) {
-    return initialize(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
-    TResult? Function(GetEngineInfo value)? getEngineInfo,
-  }) {
-    return initialize?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initialize value)? initialize,
     TResult Function(GetEngineInfo value)? getEngineInfo,
     required TResult orElse(),
   }) {
-    if (initialize != null) {
-      return initialize(this);
+    final _that = this;
+    switch (_that) {
+      case Initialize() when initialize != null:
+        return initialize(_that);
+      case GetEngineInfo() when getEngineInfo != null:
+        return getEngineInfo(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
   }
-}
 
-abstract class Initialize implements EngineInfoState {
-  const factory Initialize() = _$InitializeImpl;
-}
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
 
-/// @nodoc
-abstract class _$$GetEngineInfoImplCopyWith<$Res> {
-  factory _$$GetEngineInfoImplCopyWith(
-          _$GetEngineInfoImpl value, $Res Function(_$GetEngineInfoImpl) then) =
-      __$$GetEngineInfoImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({EngineInfo? engineInfo});
-
-  $EngineInfoCopyWith<$Res>? get engineInfo;
-}
-
-/// @nodoc
-class __$$GetEngineInfoImplCopyWithImpl<$Res>
-    extends _$EngineInfoStateCopyWithImpl<$Res, _$GetEngineInfoImpl>
-    implements _$$GetEngineInfoImplCopyWith<$Res> {
-  __$$GetEngineInfoImplCopyWithImpl(
-      _$GetEngineInfoImpl _value, $Res Function(_$GetEngineInfoImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? engineInfo = freezed,
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initialize value) initialize,
+    required TResult Function(GetEngineInfo value) getEngineInfo,
   }) {
-    return _then(_$GetEngineInfoImpl(
-      engineInfo: freezed == engineInfo
-          ? _value.engineInfo
-          : engineInfo // ignore: cast_nullable_to_non_nullable
-              as EngineInfo?,
-    ));
+    final _that = this;
+    switch (_that) {
+      case Initialize():
+        return initialize(_that);
+      case GetEngineInfo():
+        return getEngineInfo(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
   }
 
-  @override
-  @pragma('vm:prefer-inline')
-  $EngineInfoCopyWith<$Res>? get engineInfo {
-    if (_value.engineInfo == null) {
-      return null;
-    }
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
 
-    return $EngineInfoCopyWith<$Res>(_value.engineInfo!, (value) {
-      return _then(_value.copyWith(engineInfo: value));
-    });
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initialize value)? initialize,
+    TResult? Function(GetEngineInfo value)? getEngineInfo,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initialize() when initialize != null:
+        return initialize(_that);
+      case GetEngineInfo() when getEngineInfo != null:
+        return getEngineInfo(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initialize,
+    TResult Function(EngineInfo? engineInfo)? getEngineInfo,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initialize() when initialize != null:
+        return initialize();
+      case GetEngineInfo() when getEngineInfo != null:
+        return getEngineInfo(_that.engineInfo);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initialize,
+    required TResult Function(EngineInfo? engineInfo) getEngineInfo,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initialize():
+        return initialize();
+      case GetEngineInfo():
+        return getEngineInfo(_that.engineInfo);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initialize,
+    TResult? Function(EngineInfo? engineInfo)? getEngineInfo,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initialize() when initialize != null:
+        return initialize();
+      case GetEngineInfo() when getEngineInfo != null:
+        return getEngineInfo(_that.engineInfo);
+      case _:
+        return null;
+    }
   }
 }
 
 /// @nodoc
 
-class _$GetEngineInfoImpl implements GetEngineInfo {
-  const _$GetEngineInfoImpl({this.engineInfo = null});
+class Initialize implements EngineInfoState {
+  const Initialize();
 
   @override
-  @JsonKey()
-  final EngineInfo? engineInfo;
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is Initialize);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString() {
-    return 'EngineInfoState.getEngineInfo(engineInfo: $engineInfo)';
+    return 'EngineInfoState.initialize()';
   }
+}
+
+/// @nodoc
+
+class GetEngineInfo implements EngineInfoState {
+  const GetEngineInfo({this.engineInfo = null});
+
+  @JsonKey()
+  final EngineInfo? engineInfo;
+
+  /// Create a copy of EngineInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $GetEngineInfoCopyWith<GetEngineInfo> get copyWith =>
+      _$GetEngineInfoCopyWithImpl<GetEngineInfo>(this, _$identity);
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetEngineInfoImpl &&
+            other is GetEngineInfo &&
             (identical(other.engineInfo, engineInfo) ||
                 other.engineInfo == engineInfo));
   }
@@ -247,81 +257,59 @@ class _$GetEngineInfoImpl implements GetEngineInfo {
   @override
   int get hashCode => Object.hash(runtimeType, engineInfo);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString() {
+    return 'EngineInfoState.getEngineInfo(engineInfo: $engineInfo)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $GetEngineInfoCopyWith<$Res>
+    implements $EngineInfoStateCopyWith<$Res> {
+  factory $GetEngineInfoCopyWith(
+          GetEngineInfo value, $Res Function(GetEngineInfo) _then) =
+      _$GetEngineInfoCopyWithImpl;
+  @useResult
+  $Res call({EngineInfo? engineInfo});
+
+  $EngineInfoCopyWith<$Res>? get engineInfo;
+}
+
+/// @nodoc
+class _$GetEngineInfoCopyWithImpl<$Res>
+    implements $GetEngineInfoCopyWith<$Res> {
+  _$GetEngineInfoCopyWithImpl(this._self, this._then);
+
+  final GetEngineInfo _self;
+  final $Res Function(GetEngineInfo) _then;
+
+  /// Create a copy of EngineInfoState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? engineInfo = freezed,
+  }) {
+    return _then(GetEngineInfo(
+      engineInfo: freezed == engineInfo
+          ? _self.engineInfo
+          : engineInfo // ignore: cast_nullable_to_non_nullable
+              as EngineInfo?,
+    ));
+  }
+
+  /// Create a copy of EngineInfoState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$GetEngineInfoImplCopyWith<_$GetEngineInfoImpl> get copyWith =>
-      __$$GetEngineInfoImplCopyWithImpl<_$GetEngineInfoImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initialize,
-    required TResult Function(EngineInfo? engineInfo) getEngineInfo,
-  }) {
-    return getEngineInfo(engineInfo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initialize,
-    TResult? Function(EngineInfo? engineInfo)? getEngineInfo,
-  }) {
-    return getEngineInfo?.call(engineInfo);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initialize,
-    TResult Function(EngineInfo? engineInfo)? getEngineInfo,
-    required TResult orElse(),
-  }) {
-    if (getEngineInfo != null) {
-      return getEngineInfo(engineInfo);
+  $EngineInfoCopyWith<$Res>? get engineInfo {
+    if (_self.engineInfo == null) {
+      return null;
     }
-    return orElse();
-  }
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initialize value) initialize,
-    required TResult Function(GetEngineInfo value) getEngineInfo,
-  }) {
-    return getEngineInfo(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initialize value)? initialize,
-    TResult? Function(GetEngineInfo value)? getEngineInfo,
-  }) {
-    return getEngineInfo?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initialize value)? initialize,
-    TResult Function(GetEngineInfo value)? getEngineInfo,
-    required TResult orElse(),
-  }) {
-    if (getEngineInfo != null) {
-      return getEngineInfo(this);
-    }
-    return orElse();
+    return $EngineInfoCopyWith<$Res>(_self.engineInfo!, (value) {
+      return _then(_self.copyWith(engineInfo: value));
+    });
   }
 }
 
-abstract class GetEngineInfo implements EngineInfoState {
-  const factory GetEngineInfo({final EngineInfo? engineInfo}) =
-      _$GetEngineInfoImpl;
-
-  EngineInfo? get engineInfo;
-  @JsonKey(ignore: true)
-  _$$GetEngineInfoImplCopyWith<_$GetEngineInfoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

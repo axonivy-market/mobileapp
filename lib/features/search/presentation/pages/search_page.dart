@@ -84,7 +84,7 @@ class _SearchPageState extends State<SearchPage> {
                             Padding(
                               padding: EdgeInsets.only(top: 62.h),
                               child: Container(
-                                color: Theme.of(context).colorScheme.background,
+                                color: Theme.of(context).colorScheme.surface,
                                 child: DataEmptyWidget(
                                   message: state.emptyMessage!.tr(),
                                   icon: AppAssets.icons.icSearchNotFound.svg(
@@ -127,12 +127,12 @@ class _SearchPageState extends State<SearchPage> {
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       slivers: [
         SliverAppBar(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           toolbarHeight: 62.h,
           pinned: true,
           scrolledUnderElevation: 15,
-          shadowColor: Colors.black.withOpacity(0.3),
-          surfaceTintColor: Theme.of(context).colorScheme.background,
+          shadowColor: Colors.black.withValues(alpha: 0.3),
+          surfaceTintColor: Theme.of(context).colorScheme.surface,
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(0.0),
@@ -158,7 +158,7 @@ class _SearchPageState extends State<SearchPage> {
                   style: GoogleFonts.inter(
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w600,
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onSurface,
                   ),
                 );
               } else if (item is TaskItem) {

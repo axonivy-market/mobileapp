@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,342 +9,489 @@ part of 'profile_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+/// @nodoc
+mixin _$ProfileEvent implements DiagnosticableTreeMixin {
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'ProfileEvent'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is ProfileEvent);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileEvent()';
+  }
+}
 
 /// @nodoc
-mixin _$ProfileEvent {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() fetchProfile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchProfile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchProfile,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(fetchProfileEvent value) fetchProfile,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(fetchProfileEvent value)? fetchProfile,
-  }) =>
-      throw _privateConstructorUsedError;
+class $ProfileEventCopyWith<$Res> {
+  $ProfileEventCopyWith(ProfileEvent _, $Res Function(ProfileEvent) __);
+}
+
+/// Adds pattern-matching-related methods to [ProfileEvent].
+extension ProfileEventPatterns on ProfileEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(fetchProfileEvent value)? fetchProfile,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case fetchProfileEvent() when fetchProfile != null:
+        return fetchProfile(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(fetchProfileEvent value) fetchProfile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case fetchProfileEvent():
+        return fetchProfile(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(fetchProfileEvent value)? fetchProfile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case fetchProfileEvent() when fetchProfile != null:
+        return fetchProfile(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? fetchProfile,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case fetchProfileEvent() when fetchProfile != null:
+        return fetchProfile();
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() fetchProfile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case fetchProfileEvent():
+        return fetchProfile();
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? fetchProfile,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case fetchProfileEvent() when fetchProfile != null:
+        return fetchProfile();
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
-abstract class $ProfileEventCopyWith<$Res> {
-  factory $ProfileEventCopyWith(
-          ProfileEvent value, $Res Function(ProfileEvent) then) =
-      _$ProfileEventCopyWithImpl<$Res, ProfileEvent>;
-}
 
-/// @nodoc
-class _$ProfileEventCopyWithImpl<$Res, $Val extends ProfileEvent>
-    implements $ProfileEventCopyWith<$Res> {
-  _$ProfileEventCopyWithImpl(this._value, this._then);
+class fetchProfileEvent with DiagnosticableTreeMixin implements ProfileEvent {
+  const fetchProfileEvent();
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'ProfileEvent.fetchProfile'));
+  }
 
-/// @nodoc
-abstract class _$$fetchProfileEventImplCopyWith<$Res> {
-  factory _$$fetchProfileEventImplCopyWith(_$fetchProfileEventImpl value,
-          $Res Function(_$fetchProfileEventImpl) then) =
-      __$$fetchProfileEventImplCopyWithImpl<$Res>;
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is fetchProfileEvent);
+  }
 
-/// @nodoc
-class __$$fetchProfileEventImplCopyWithImpl<$Res>
-    extends _$ProfileEventCopyWithImpl<$Res, _$fetchProfileEventImpl>
-    implements _$$fetchProfileEventImplCopyWith<$Res> {
-  __$$fetchProfileEventImplCopyWithImpl(_$fetchProfileEventImpl _value,
-      $Res Function(_$fetchProfileEventImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$fetchProfileEventImpl
-    with DiagnosticableTreeMixin
-    implements fetchProfileEvent {
-  const _$fetchProfileEventImpl();
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileEvent.fetchProfile()';
   }
+}
 
+/// @nodoc
+mixin _$ProfileState implements DiagnosticableTreeMixin {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'ProfileEvent.fetchProfile'));
+    properties..add(DiagnosticsProperty('type', 'ProfileState'));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$fetchProfileEventImpl);
+        (other.runtimeType == runtimeType && other is ProfileState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() fetchProfile,
-  }) {
-    return fetchProfile();
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState()';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? fetchProfile,
-  }) {
-    return fetchProfile?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? fetchProfile,
-    required TResult orElse(),
-  }) {
-    if (fetchProfile != null) {
-      return fetchProfile();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(fetchProfileEvent value) fetchProfile,
-  }) {
-    return fetchProfile(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(fetchProfileEvent value)? fetchProfile,
-  }) {
-    return fetchProfile?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(fetchProfileEvent value)? fetchProfile,
-    required TResult orElse(),
-  }) {
-    if (fetchProfile != null) {
-      return fetchProfile(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class fetchProfileEvent implements ProfileEvent {
-  const factory fetchProfileEvent() = _$fetchProfileEventImpl;
 }
 
 /// @nodoc
-mixin _$ProfileState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Profile profile) profileInfo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(Profile profile)? profileInfo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Profile profile)? profileInfo,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(ProfileInfo value) profileInfo,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(ProfileInfo value)? profileInfo,
-  }) =>
-      throw _privateConstructorUsedError;
+class $ProfileStateCopyWith<$Res> {
+  $ProfileStateCopyWith(ProfileState _, $Res Function(ProfileState) __);
+}
+
+/// Adds pattern-matching-related methods to [ProfileState].
+extension ProfileStatePatterns on ProfileState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
     TResult Function(ProfileInfo value)? profileInfo,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial(_that);
+      case ProfileInfo() when profileInfo != null:
+        return profileInfo(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(ProfileInfo value) profileInfo,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial():
+        return initial(_that);
+      case ProfileInfo():
+        return profileInfo(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Initial value)? initial,
+    TResult? Function(ProfileInfo value)? profileInfo,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial(_that);
+      case ProfileInfo() when profileInfo != null:
+        return profileInfo(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(Profile profile)? profileInfo,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial();
+      case ProfileInfo() when profileInfo != null:
+        return profileInfo(_that.profile);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(Profile profile) profileInfo,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial():
+        return initial();
+      case ProfileInfo():
+        return profileInfo(_that.profile);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(Profile profile)? profileInfo,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case Initial() when initial != null:
+        return initial();
+      case ProfileInfo() when profileInfo != null:
+        return profileInfo(_that.profile);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
-abstract class $ProfileStateCopyWith<$Res> {
-  factory $ProfileStateCopyWith(
-          ProfileState value, $Res Function(ProfileState) then) =
-      _$ProfileStateCopyWithImpl<$Res, ProfileState>;
-}
 
-/// @nodoc
-class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
-    implements $ProfileStateCopyWith<$Res> {
-  _$ProfileStateCopyWithImpl(this._value, this._then);
+class Initial with DiagnosticableTreeMixin implements ProfileState {
+  const Initial();
 
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'ProfileState.initial'));
+  }
 
-/// @nodoc
-abstract class _$$InitialImplCopyWith<$Res> {
-  factory _$$InitialImplCopyWith(
-          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
-      __$$InitialImplCopyWithImpl<$Res>;
-}
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is Initial);
+  }
 
-/// @nodoc
-class __$$InitialImplCopyWithImpl<$Res>
-    extends _$ProfileStateCopyWithImpl<$Res, _$InitialImpl>
-    implements _$$InitialImplCopyWith<$Res> {
-  __$$InitialImplCopyWithImpl(
-      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$InitialImpl with DiagnosticableTreeMixin implements Initial {
-  const _$InitialImpl();
+  @override
+  int get hashCode => runtimeType.hashCode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'ProfileState.initial()';
   }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'ProfileState.initial'));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InitialImpl);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Profile profile) profileInfo,
-  }) {
-    return initial();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(Profile profile)? profileInfo,
-  }) {
-    return initial?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Profile profile)? profileInfo,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(ProfileInfo value) profileInfo,
-  }) {
-    return initial(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(ProfileInfo value)? profileInfo,
-  }) {
-    return initial?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(ProfileInfo value)? profileInfo,
-    required TResult orElse(),
-  }) {
-    if (initial != null) {
-      return initial(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class Initial implements ProfileState {
-  const factory Initial() = _$InitialImpl;
 }
 
 /// @nodoc
-abstract class _$$ProfileInfoImplCopyWith<$Res> {
-  factory _$$ProfileInfoImplCopyWith(
-          _$ProfileInfoImpl value, $Res Function(_$ProfileInfoImpl) then) =
-      __$$ProfileInfoImplCopyWithImpl<$Res>;
+
+class ProfileInfo with DiagnosticableTreeMixin implements ProfileState {
+  const ProfileInfo(this.profile);
+
+  final Profile profile;
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $ProfileInfoCopyWith<ProfileInfo> get copyWith =>
+      _$ProfileInfoCopyWithImpl<ProfileInfo>(this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'ProfileState.profileInfo'))
+      ..add(DiagnosticsProperty('profile', profile));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is ProfileInfo &&
+            (identical(other.profile, profile) || other.profile == profile));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, profile);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProfileState.profileInfo(profile: $profile)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $ProfileInfoCopyWith<$Res>
+    implements $ProfileStateCopyWith<$Res> {
+  factory $ProfileInfoCopyWith(
+          ProfileInfo value, $Res Function(ProfileInfo) _then) =
+      _$ProfileInfoCopyWithImpl;
   @useResult
   $Res call({Profile profile});
 
@@ -352,141 +499,35 @@ abstract class _$$ProfileInfoImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$ProfileInfoImplCopyWithImpl<$Res>
-    extends _$ProfileStateCopyWithImpl<$Res, _$ProfileInfoImpl>
-    implements _$$ProfileInfoImplCopyWith<$Res> {
-  __$$ProfileInfoImplCopyWithImpl(
-      _$ProfileInfoImpl _value, $Res Function(_$ProfileInfoImpl) _then)
-      : super(_value, _then);
+class _$ProfileInfoCopyWithImpl<$Res> implements $ProfileInfoCopyWith<$Res> {
+  _$ProfileInfoCopyWithImpl(this._self, this._then);
 
+  final ProfileInfo _self;
+  final $Res Function(ProfileInfo) _then;
+
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? profile = null,
   }) {
-    return _then(_$ProfileInfoImpl(
+    return _then(ProfileInfo(
       null == profile
-          ? _value.profile
+          ? _self.profile
           : profile // ignore: cast_nullable_to_non_nullable
               as Profile,
     ));
   }
 
+  /// Create a copy of ProfileState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ProfileCopyWith<$Res> get profile {
-    return $ProfileCopyWith<$Res>(_value.profile, (value) {
-      return _then(_value.copyWith(profile: value));
+    return $ProfileCopyWith<$Res>(_self.profile, (value) {
+      return _then(_self.copyWith(profile: value));
     });
   }
 }
 
-/// @nodoc
-
-class _$ProfileInfoImpl with DiagnosticableTreeMixin implements ProfileInfo {
-  const _$ProfileInfoImpl(this.profile);
-
-  @override
-  final Profile profile;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProfileState.profileInfo(profile: $profile)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ProfileState.profileInfo'))
-      ..add(DiagnosticsProperty('profile', profile));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ProfileInfoImpl &&
-            (identical(other.profile, profile) || other.profile == profile));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, profile);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ProfileInfoImplCopyWith<_$ProfileInfoImpl> get copyWith =>
-      __$$ProfileInfoImplCopyWithImpl<_$ProfileInfoImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(Profile profile) profileInfo,
-  }) {
-    return profileInfo(profile);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(Profile profile)? profileInfo,
-  }) {
-    return profileInfo?.call(profile);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(Profile profile)? profileInfo,
-    required TResult orElse(),
-  }) {
-    if (profileInfo != null) {
-      return profileInfo(profile);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Initial value) initial,
-    required TResult Function(ProfileInfo value) profileInfo,
-  }) {
-    return profileInfo(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Initial value)? initial,
-    TResult? Function(ProfileInfo value)? profileInfo,
-  }) {
-    return profileInfo?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Initial value)? initial,
-    TResult Function(ProfileInfo value)? profileInfo,
-    required TResult orElse(),
-  }) {
-    if (profileInfo != null) {
-      return profileInfo(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class ProfileInfo implements ProfileState {
-  const factory ProfileInfo(final Profile profile) = _$ProfileInfoImpl;
-
-  Profile get profile;
-  @JsonKey(ignore: true)
-  _$$ProfileInfoImplCopyWith<_$ProfileInfoImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

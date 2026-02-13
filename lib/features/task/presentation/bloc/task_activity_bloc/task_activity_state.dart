@@ -1,7 +1,7 @@
 part of 'task_activity_bloc.dart';
 
 @freezed
-class TaskActivityState with _$TaskActivityState {
+abstract class TaskActivityState with _$TaskActivityState {
   const factory TaskActivityState.initial() = _Initial;
 
   const factory TaskActivityState.loading(bool isShowLoading) =

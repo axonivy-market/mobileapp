@@ -180,12 +180,12 @@ class TasksViewContent extends StatelessWidget {
           const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
       slivers: [
         SliverAppBar(
-          backgroundColor: Theme.of(context).colorScheme.background,
+          backgroundColor: Theme.of(context).colorScheme.surface,
           toolbarHeight: 62.h,
           pinned: true,
           scrolledUnderElevation: 15,
-          shadowColor: Colors.black.withOpacity(0.3),
-          surfaceTintColor: Theme.of(context).colorScheme.background,
+          shadowColor: Colors.black.withValues(alpha: 0.3),
+          surfaceTintColor: Theme.of(context).colorScheme.surface,
           elevation: 0,
           title: tasks.isNotEmpty || activeFilter == FilterType.expired
               ? PreferredSize(
@@ -250,7 +250,7 @@ class TasksViewContent extends StatelessWidget {
       context: context,
       barrierDismissible: true,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
-      barrierColor: Colors.black.withOpacity(0.5),
+      barrierColor: Colors.black.withValues(alpha: 0.5),
       transitionDuration: const Duration(milliseconds: 200),
       pageBuilder: (BuildContext buildContext, Animation animation,
           Animation secondaryAnimation) {

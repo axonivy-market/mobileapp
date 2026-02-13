@@ -17,7 +17,7 @@ class BackButtonWidget extends StatelessWidget {
         context.pop(shouldFetch);
       },
       child: Container(
-        color: Theme.of(context).colorScheme.background,
+        color: Theme.of(context).colorScheme.surface,
         child: Row(
           children: [
             12.horizontalSpace,

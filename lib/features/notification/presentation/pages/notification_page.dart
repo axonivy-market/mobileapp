@@ -7,7 +7,6 @@ import 'package:axon_ivy/features/notification/domain/entities/notification.dart
 import 'package:axon_ivy/features/notification/presentation/bloc/notification_bloc.dart';
 import 'package:axon_ivy/features/tabbar/bloc/connectivity_bloc/connectivity_bloc.dart';
 import 'package:axon_ivy/generated/assets.gen.dart';
-import 'package:axon_ivy/generated/colors.gen.dart';
 import 'package:axon_ivy/shared/extensions/date_time_ext.dart';
 import 'package:axon_ivy/shared/widgets/widgets.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -136,7 +135,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                 title: Text(
                   "notificationList.title".tr(),
                   style: GoogleFonts.inter(
-                    color: Theme.of(context).colorScheme.surface,
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontSize: 17.sp,
                     fontWeight: FontWeight.w500,
                   ),
@@ -147,7 +146,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                     padding: EdgeInsets.zero,
                     clipBehavior: Clip.hardEdge,
                     elevation: 10,
-                    shadowColor: Colors.black.withOpacity(0.3),
+                    shadowColor: Colors.black.withValues(alpha: 0.3),
                     color: Theme.of(context).colorScheme.onPrimaryContainer,
                     position: PopupMenuPosition.under,
                     surfaceTintColor:
@@ -170,7 +169,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                             children: [
                               AppAssets.icons.iconMarkAsRead.svg(
                                 colorFilter: ColorFilter.mode(
-                                  Theme.of(context).colorScheme.surface,
+                                  Theme.of(context).colorScheme.onSurface,
                                   BlendMode.srcIn,
                                 ),
                               ),
@@ -181,7 +180,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                   textStyle: TextStyle(
                                     fontSize: 17.sp,
                                     color:
-                                        Theme.of(context).colorScheme.surface,
+                                        Theme.of(context).colorScheme.onSurface,
                                     fontWeight: FontWeight.w400,
                                   ),
                                 ),
@@ -213,9 +212,9 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                   Theme.of(context).scaffoldBackgroundColor,
                               pinned: true,
                               surfaceTintColor:
-                                  Theme.of(context).colorScheme.background,
+                                  Theme.of(context).colorScheme.surface,
                               scrolledUnderElevation: 15,
-                              shadowColor: Colors.black.withOpacity(0.3),
+                              shadowColor: Colors.black.withValues(alpha: 0.3),
                               forceElevated: innerBoxIsScrolled,
                               titleSpacing: 0,
                               title: PreferredSize(
@@ -244,7 +243,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                       },
                                       labelPadding: EdgeInsets.zero,
                                       overlayColor:
-                                          const MaterialStatePropertyAll(
+                                          const WidgetStatePropertyAll(
                                         Colors.transparent,
                                       ),
                                       indicatorColor: Colors.transparent,
@@ -254,7 +253,7 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                                           .secondary,
                                       labelColor: Theme.of(context)
                                           .colorScheme
-                                          .onSurface,
+                                          .onPrimary,
                                       controller: _tabController,
                                       indicatorSize: TabBarIndicatorSize.tab,
                                       indicator: _tabController.index == 0
@@ -466,13 +465,13 @@ class _NotificationPageState extends BasePageState<NotificationPage>
                 );
               },
               backgroundColor: Theme.of(context).colorScheme.primary,
-              foregroundColor: Theme.of(context).colorScheme.onSurface,
+              foregroundColor: Theme.of(context).colorScheme.onPrimary,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   AppAssets.icons.iconMarkRead.svg(
                     colorFilter: ColorFilter.mode(
-                      Theme.of(context).colorScheme.onSurface,
+                      Theme.of(context).colorScheme.onPrimary,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -516,14 +515,14 @@ class _NotificationPageState extends BasePageState<NotificationPage>
               ),
             ],
           ),
-          textColor: Theme.of(context).colorScheme.surface,
+          textColor: Theme.of(context).colorScheme.onSurface,
           contentPadding: const EdgeInsets.symmetric(horizontal: 10).r,
           title: Text(
             notifications[index].message,
             style: GoogleFonts.inter(
               fontSize: 15.sp,
               fontWeight: FontWeight.w500,
-              color: Theme.of(context).colorScheme.surface,
+              color: Theme.of(context).colorScheme.onSurface,
             ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

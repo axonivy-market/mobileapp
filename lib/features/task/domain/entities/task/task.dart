@@ -1,7 +1,7 @@
 import 'package:axon_ivy/features/task/domain/entities/case/case.dart';
 import 'package:axon_ivy/shared/enums/task_state_enum.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_ce/hive_ce.dart';
 
 part 'task.freezed.dart';
 
@@ -9,7 +9,7 @@ part 'task.g.dart';
 
 @freezed
 @HiveType(typeId: 0)
-class TaskIvy with _$TaskIvy {
+abstract class TaskIvy with _$TaskIvy {
   const TaskIvy._();
 
   const factory TaskIvy({

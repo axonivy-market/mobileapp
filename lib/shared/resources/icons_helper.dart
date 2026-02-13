@@ -43,7 +43,7 @@ SvgPicture getIconDefaultIcon(BuildContext context) {
       height: 14.0.h,
       width: 14.h,
       colorFilter: ColorFilter.mode(
-          Theme.of(context).colorScheme.surface, BlendMode.srcIn));
+          Theme.of(context).colorScheme.onSurface, BlendMode.srcIn));
 }
 
 SvgPicture getStreamLineIcon({required String name}) {
@@ -1717,7 +1717,6 @@ const Map<String, IconData> fontAwesomeIconsMap = {
   'utensilSpoon': FontAwesomeIcons.utensilSpoon,
   'utensils': FontAwesomeIcons.utensils,
   'vaadin': FontAwesomeIcons.vaadin,
-  'vectorSquare': FontAwesomeIcons.vectorSquare,
   'venus': FontAwesomeIcons.venus,
   'venusDouble': FontAwesomeIcons.venusDouble,
   'venusMars': FontAwesomeIcons.venusMars,

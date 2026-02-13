@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:axon_ivy/core/app/app_constants.dart';
 import 'package:axon_ivy/shared/utils/authorization_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
@@ -28,9 +29,15 @@ class AppDio with DioMixin implements Dio {
     interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
+          if (!_isSecureRequest(options.uri)) {
+            return handler.reject(DioException(
+              requestOptions: options,
+              type: DioExceptionType.cancel,
+              error: Constants.insecureConnectionError,
+            ));
+          }
           options.headers['Authorization'] =
               AuthorizationUtils.authorizationHeader;
-          debugPrint('Headers: ${options.headers}');
           return handler.next(options);
         },
         onError: (DioException e, ErrorInterceptorHandler handler) {
@@ -40,5 +47,15 @@ class AppDio with DioMixin implements Dio {
     );
 
     httpClientAdapter = HttpClientAdapter();
+  }
+
+  bool _isSecureRequest(Uri uri) {
+    if (uri.scheme == 'https') return true;
+    // Allow localhost/emulator for development
+    if (kDebugMode) {
+      const devHosts = ['localhost', '127.0.0.1', '10.0.2.2'];
+      if (devHosts.contains(uri.host)) return true;
+    }
+    return false;
   }
 }

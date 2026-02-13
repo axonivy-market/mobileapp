@@ -66,9 +66,7 @@ class _AppTextFieldState extends State<AppTextField> {
         isFocus = value;
         setState(() {});
       },
-      child: SizedBox(
-        height: 44.h,
-        child: TextFormField(
+      child: TextFormField(
           autovalidateMode: widget.autovalidateMode,
           textAlignVertical: TextAlignVertical.center,
           textInputAction: widget.textInputAction,
@@ -81,7 +79,7 @@ class _AppTextFieldState extends State<AppTextField> {
           style: GoogleFonts.inter(
               fontSize: 17.sp,
               fontWeight: FontWeight.w400,
-              color: Theme.of(context).colorScheme.surface),
+              color: Theme.of(context).colorScheme.onSurface),
           validator: widget.validator,
           inputFormatters: widget.inputFormatters,
           onTap: widget.onTap,
@@ -124,9 +122,12 @@ class _AppTextFieldState extends State<AppTextField> {
                 borderSide:
                     BorderSide(color: Theme.of(context).colorScheme.outline),
                 borderRadius: BorderRadius.all(const Radius.circular(8).r),
+              ),
+              focusedErrorBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: const BorderSide(color: Colors.red, width: 1.2),
               )),
         ),
-      ),
     );
   }
 

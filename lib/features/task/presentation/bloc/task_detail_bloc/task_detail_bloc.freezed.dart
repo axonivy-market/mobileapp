@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,406 +9,377 @@ part of 'task_detail_bloc.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
 
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
 /// @nodoc
-mixin _$TaskDetailEvent {
-  TaskIvy get task => throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(TaskIvy task) getTaskDetail,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskIvy task)? getTaskDetail,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskIvy task)? getTaskDetail,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetTaskDetail value) getTaskDetail,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetTaskDetail value)? getTaskDetail,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_GetTaskDetail value)? getTaskDetail,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+mixin _$TaskDetailEvent implements DiagnosticableTreeMixin {
+  TaskIvy get task;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TaskDetailEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
   $TaskDetailEventCopyWith<TaskDetailEvent> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $TaskDetailEventCopyWith<$Res> {
-  factory $TaskDetailEventCopyWith(
-          TaskDetailEvent value, $Res Function(TaskDetailEvent) then) =
-      _$TaskDetailEventCopyWithImpl<$Res, TaskDetailEvent>;
-  @useResult
-  $Res call({TaskIvy task});
-
-  $TaskIvyCopyWith<$Res> get task;
-}
-
-/// @nodoc
-class _$TaskDetailEventCopyWithImpl<$Res, $Val extends TaskDetailEvent>
-    implements $TaskDetailEventCopyWith<$Res> {
-  _$TaskDetailEventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? task = null,
-  }) {
-    return _then(_value.copyWith(
-      task: null == task
-          ? _value.task
-          : task // ignore: cast_nullable_to_non_nullable
-              as TaskIvy,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TaskIvyCopyWith<$Res> get task {
-    return $TaskIvyCopyWith<$Res>(_value.task, (value) {
-      return _then(_value.copyWith(task: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$GetTaskDetailImplCopyWith<$Res>
-    implements $TaskDetailEventCopyWith<$Res> {
-  factory _$$GetTaskDetailImplCopyWith(
-          _$GetTaskDetailImpl value, $Res Function(_$GetTaskDetailImpl) then) =
-      __$$GetTaskDetailImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({TaskIvy task});
-
-  @override
-  $TaskIvyCopyWith<$Res> get task;
-}
-
-/// @nodoc
-class __$$GetTaskDetailImplCopyWithImpl<$Res>
-    extends _$TaskDetailEventCopyWithImpl<$Res, _$GetTaskDetailImpl>
-    implements _$$GetTaskDetailImplCopyWith<$Res> {
-  __$$GetTaskDetailImplCopyWithImpl(
-      _$GetTaskDetailImpl _value, $Res Function(_$GetTaskDetailImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? task = null,
-  }) {
-    return _then(_$GetTaskDetailImpl(
-      null == task
-          ? _value.task
-          : task // ignore: cast_nullable_to_non_nullable
-              as TaskIvy,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$GetTaskDetailImpl
-    with DiagnosticableTreeMixin
-    implements _GetTaskDetail {
-  const _$GetTaskDetailImpl(this.task);
-
-  @override
-  final TaskIvy task;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TaskDetailEvent.getTaskDetail(task: $task)';
-  }
+      _$TaskDetailEventCopyWithImpl<TaskDetailEvent>(
+          this as TaskDetailEvent, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'TaskDetailEvent.getTaskDetail'))
+      ..add(DiagnosticsProperty('type', 'TaskDetailEvent'))
       ..add(DiagnosticsProperty('task', task));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$GetTaskDetailImpl &&
+            other is TaskDetailEvent &&
             (identical(other.task, task) || other.task == task));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, task);
 
-  @JsonKey(ignore: true)
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TaskDetailEvent(task: $task)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $TaskDetailEventCopyWith<$Res> {
+  factory $TaskDetailEventCopyWith(
+          TaskDetailEvent value, $Res Function(TaskDetailEvent) _then) =
+      _$TaskDetailEventCopyWithImpl;
+  @useResult
+  $Res call({TaskIvy task});
+
+  $TaskIvyCopyWith<$Res> get task;
+}
+
+/// @nodoc
+class _$TaskDetailEventCopyWithImpl<$Res>
+    implements $TaskDetailEventCopyWith<$Res> {
+  _$TaskDetailEventCopyWithImpl(this._self, this._then);
+
+  final TaskDetailEvent _self;
+  final $Res Function(TaskDetailEvent) _then;
+
+  /// Create a copy of TaskDetailEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? task = null,
+  }) {
+    return _then(_self.copyWith(
+      task: null == task
+          ? _self.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskIvy,
+    ));
+  }
+
+  /// Create a copy of TaskDetailEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  _$$GetTaskDetailImplCopyWith<_$GetTaskDetailImpl> get copyWith =>
-      __$$GetTaskDetailImplCopyWithImpl<_$GetTaskDetailImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(TaskIvy task) getTaskDetail,
-  }) {
-    return getTaskDetail(task);
+  $TaskIvyCopyWith<$Res> get task {
+    return $TaskIvyCopyWith<$Res>(_self.task, (value) {
+      return _then(_self.copyWith(task: value));
+    });
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(TaskIvy task)? getTaskDetail,
-  }) {
-    return getTaskDetail?.call(task);
-  }
+/// Adds pattern-matching-related methods to [TaskDetailEvent].
+extension TaskDetailEventPatterns on TaskDetailEvent {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(TaskIvy task)? getTaskDetail,
-    required TResult orElse(),
-  }) {
-    if (getTaskDetail != null) {
-      return getTaskDetail(task);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_GetTaskDetail value) getTaskDetail,
-  }) {
-    return getTaskDetail(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_GetTaskDetail value)? getTaskDetail,
-  }) {
-    return getTaskDetail?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_GetTaskDetail value)? getTaskDetail,
     required TResult orElse(),
   }) {
-    if (getTaskDetail != null) {
-      return getTaskDetail(this);
+    final _that = this;
+    switch (_that) {
+      case _GetTaskDetail() when getTaskDetail != null:
+        return getTaskDetail(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
   }
-}
 
-abstract class _GetTaskDetail implements TaskDetailEvent {
-  const factory _GetTaskDetail(final TaskIvy task) = _$GetTaskDetailImpl;
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
 
-  @override
-  TaskIvy get task;
-  @override
-  @JsonKey(ignore: true)
-  _$$GetTaskDetailImplCopyWith<_$GetTaskDetailImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-mixin _$TaskDetailState {
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(TaskIvy task) success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(TaskIvy task)? success,
-  }) =>
-      throw _privateConstructorUsedError;
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(TaskIvy task)? success,
-    required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(TaskDetailLoadingState value) loading,
-    required TResult Function(TaskDetailErrorState value) error,
-    required TResult Function(TaskDetailSuccessState value) success,
-  }) =>
-      throw _privateConstructorUsedError;
+    required TResult Function(_GetTaskDetail value) getTaskDetail,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _GetTaskDetail():
+        return getTaskDetail(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskDetailLoadingState value)? loading,
-    TResult? Function(TaskDetailErrorState value)? error,
-    TResult? Function(TaskDetailSuccessState value)? success,
-  }) =>
-      throw _privateConstructorUsedError;
+    TResult? Function(_GetTaskDetail value)? getTaskDetail,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _GetTaskDetail() when getTaskDetail != null:
+        return getTaskDetail(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TaskDetailLoadingState value)? loading,
-    TResult Function(TaskDetailErrorState value)? error,
-    TResult Function(TaskDetailSuccessState value)? success,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(TaskIvy task)? getTaskDetail,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _GetTaskDetail() when getTaskDetail != null:
+        return getTaskDetail(_that.task);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(TaskIvy task) getTaskDetail,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _GetTaskDetail():
+        return getTaskDetail(_that.task);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(TaskIvy task)? getTaskDetail,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _GetTaskDetail() when getTaskDetail != null:
+        return getTaskDetail(_that.task);
+      case _:
+        return null;
+    }
+  }
 }
 
 /// @nodoc
-abstract class $TaskDetailStateCopyWith<$Res> {
-  factory $TaskDetailStateCopyWith(
-          TaskDetailState value, $Res Function(TaskDetailState) then) =
-      _$TaskDetailStateCopyWithImpl<$Res, TaskDetailState>;
-}
 
-/// @nodoc
-class _$TaskDetailStateCopyWithImpl<$Res, $Val extends TaskDetailState>
-    implements $TaskDetailStateCopyWith<$Res> {
-  _$TaskDetailStateCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-}
-
-/// @nodoc
-abstract class _$$TaskDetailLoadingStateImplCopyWith<$Res> {
-  factory _$$TaskDetailLoadingStateImplCopyWith(
-          _$TaskDetailLoadingStateImpl value,
-          $Res Function(_$TaskDetailLoadingStateImpl) then) =
-      __$$TaskDetailLoadingStateImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$TaskDetailLoadingStateImplCopyWithImpl<$Res>
-    extends _$TaskDetailStateCopyWithImpl<$Res, _$TaskDetailLoadingStateImpl>
-    implements _$$TaskDetailLoadingStateImplCopyWith<$Res> {
-  __$$TaskDetailLoadingStateImplCopyWithImpl(
-      _$TaskDetailLoadingStateImpl _value,
-      $Res Function(_$TaskDetailLoadingStateImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$TaskDetailLoadingStateImpl
-    with DiagnosticableTreeMixin
-    implements TaskDetailLoadingState {
-  const _$TaskDetailLoadingStateImpl();
+class _GetTaskDetail with DiagnosticableTreeMixin implements TaskDetailEvent {
+  const _GetTaskDetail(this.task);
 
   @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TaskDetailState.loading()';
-  }
+  final TaskIvy task;
+
+  /// Create a copy of TaskDetailEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$GetTaskDetailCopyWith<_GetTaskDetail> get copyWith =>
+      __$GetTaskDetailCopyWithImpl<_GetTaskDetail>(this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('type', 'TaskDetailState.loading'));
+    properties
+      ..add(DiagnosticsProperty('type', 'TaskDetailEvent.getTaskDetail'))
+      ..add(DiagnosticsProperty('task', task));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskDetailLoadingStateImpl);
+            other is _GetTaskDetail &&
+            (identical(other.task, task) || other.task == task));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, task);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TaskDetailEvent.getTaskDetail(task: $task)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$GetTaskDetailCopyWith<$Res>
+    implements $TaskDetailEventCopyWith<$Res> {
+  factory _$GetTaskDetailCopyWith(
+          _GetTaskDetail value, $Res Function(_GetTaskDetail) _then) =
+      __$GetTaskDetailCopyWithImpl;
+  @override
+  @useResult
+  $Res call({TaskIvy task});
+
+  @override
+  $TaskIvyCopyWith<$Res> get task;
+}
+
+/// @nodoc
+class __$GetTaskDetailCopyWithImpl<$Res>
+    implements _$GetTaskDetailCopyWith<$Res> {
+  __$GetTaskDetailCopyWithImpl(this._self, this._then);
+
+  final _GetTaskDetail _self;
+  final $Res Function(_GetTaskDetail) _then;
+
+  /// Create a copy of TaskDetailEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? task = null,
+  }) {
+    return _then(_GetTaskDetail(
+      null == task
+          ? _self.task
+          : task // ignore: cast_nullable_to_non_nullable
+              as TaskIvy,
+    ));
+  }
+
+  /// Create a copy of TaskDetailEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TaskIvyCopyWith<$Res> get task {
+    return $TaskIvyCopyWith<$Res>(_self.task, (value) {
+      return _then(_self.copyWith(task: value));
+    });
+  }
+}
+
+/// @nodoc
+mixin _$TaskDetailState implements DiagnosticableTreeMixin {
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'TaskDetailState'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is TaskDetailState);
   }
 
   @override
   int get hashCode => runtimeType.hashCode;
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(TaskIvy task) success,
-  }) {
-    return loading();
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TaskDetailState()';
   }
+}
 
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(TaskIvy task)? success,
-  }) {
-    return loading?.call();
-  }
+/// @nodoc
+class $TaskDetailStateCopyWith<$Res> {
+  $TaskDetailStateCopyWith(
+      TaskDetailState _, $Res Function(TaskDetailState) __);
+}
 
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(TaskIvy task)? success,
-    required TResult orElse(),
-  }) {
-    if (loading != null) {
-      return loading();
-    }
-    return orElse();
-  }
+/// Adds pattern-matching-related methods to [TaskDetailState].
+extension TaskDetailStatePatterns on TaskDetailState {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TaskDetailLoadingState value) loading,
-    required TResult Function(TaskDetailErrorState value) error,
-    required TResult Function(TaskDetailSuccessState value) success,
-  }) {
-    return loading(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskDetailLoadingState value)? loading,
-    TResult? Function(TaskDetailErrorState value)? error,
-    TResult? Function(TaskDetailSuccessState value)? success,
-  }) {
-    return loading?.call(this);
-  }
-
-  @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TaskDetailLoadingState value)? loading,
@@ -416,42 +387,273 @@ class _$TaskDetailLoadingStateImpl
     TResult Function(TaskDetailSuccessState value)? success,
     required TResult orElse(),
   }) {
-    if (loading != null) {
-      return loading(this);
+    final _that = this;
+    switch (_that) {
+      case TaskDetailLoadingState() when loading != null:
+        return loading(_that);
+      case TaskDetailErrorState() when error != null:
+        return error(_that);
+      case TaskDetailSuccessState() when success != null:
+        return success(_that);
+      case _:
+        return orElse();
     }
-    return orElse();
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TaskDetailLoadingState value) loading,
+    required TResult Function(TaskDetailErrorState value) error,
+    required TResult Function(TaskDetailSuccessState value) success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TaskDetailLoadingState():
+        return loading(_that);
+      case TaskDetailErrorState():
+        return error(_that);
+      case TaskDetailSuccessState():
+        return success(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TaskDetailLoadingState value)? loading,
+    TResult? Function(TaskDetailErrorState value)? error,
+    TResult? Function(TaskDetailSuccessState value)? success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TaskDetailLoadingState() when loading != null:
+        return loading(_that);
+      case TaskDetailErrorState() when error != null:
+        return error(_that);
+      case TaskDetailSuccessState() when success != null:
+        return success(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loading,
+    TResult Function(String error)? error,
+    TResult Function(TaskIvy task)? success,
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TaskDetailLoadingState() when loading != null:
+        return loading();
+      case TaskDetailErrorState() when error != null:
+        return error(_that.error);
+      case TaskDetailSuccessState() when success != null:
+        return success(_that.task);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loading,
+    required TResult Function(String error) error,
+    required TResult Function(TaskIvy task) success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TaskDetailLoadingState():
+        return loading();
+      case TaskDetailErrorState():
+        return error(_that.error);
+      case TaskDetailSuccessState():
+        return success(_that.task);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loading,
+    TResult? Function(String error)? error,
+    TResult? Function(TaskIvy task)? success,
+  }) {
+    final _that = this;
+    switch (_that) {
+      case TaskDetailLoadingState() when loading != null:
+        return loading();
+      case TaskDetailErrorState() when error != null:
+        return error(_that.error);
+      case TaskDetailSuccessState() when success != null:
+        return success(_that.task);
+      case _:
+        return null;
+    }
   }
 }
 
-abstract class TaskDetailLoadingState implements TaskDetailState {
-  const factory TaskDetailLoadingState() = _$TaskDetailLoadingStateImpl;
+/// @nodoc
+
+class TaskDetailLoadingState
+    with DiagnosticableTreeMixin
+    implements TaskDetailState {
+  const TaskDetailLoadingState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties..add(DiagnosticsProperty('type', 'TaskDetailState.loading'));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is TaskDetailLoadingState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TaskDetailState.loading()';
+  }
 }
 
 /// @nodoc
-abstract class _$$TaskDetailErrorStateImplCopyWith<$Res> {
-  factory _$$TaskDetailErrorStateImplCopyWith(_$TaskDetailErrorStateImpl value,
-          $Res Function(_$TaskDetailErrorStateImpl) then) =
-      __$$TaskDetailErrorStateImplCopyWithImpl<$Res>;
+
+class TaskDetailErrorState
+    with DiagnosticableTreeMixin
+    implements TaskDetailState {
+  const TaskDetailErrorState(this.error);
+
+  final String error;
+
+  /// Create a copy of TaskDetailState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TaskDetailErrorStateCopyWith<TaskDetailErrorState> get copyWith =>
+      _$TaskDetailErrorStateCopyWithImpl<TaskDetailErrorState>(
+          this, _$identity);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    properties
+      ..add(DiagnosticsProperty('type', 'TaskDetailState.error'))
+      ..add(DiagnosticsProperty('error', error));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is TaskDetailErrorState &&
+            (identical(other.error, error) || other.error == error));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, error);
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TaskDetailState.error(error: $error)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $TaskDetailErrorStateCopyWith<$Res>
+    implements $TaskDetailStateCopyWith<$Res> {
+  factory $TaskDetailErrorStateCopyWith(TaskDetailErrorState value,
+          $Res Function(TaskDetailErrorState) _then) =
+      _$TaskDetailErrorStateCopyWithImpl;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$TaskDetailErrorStateImplCopyWithImpl<$Res>
-    extends _$TaskDetailStateCopyWithImpl<$Res, _$TaskDetailErrorStateImpl>
-    implements _$$TaskDetailErrorStateImplCopyWith<$Res> {
-  __$$TaskDetailErrorStateImplCopyWithImpl(_$TaskDetailErrorStateImpl _value,
-      $Res Function(_$TaskDetailErrorStateImpl) _then)
-      : super(_value, _then);
+class _$TaskDetailErrorStateCopyWithImpl<$Res>
+    implements $TaskDetailErrorStateCopyWith<$Res> {
+  _$TaskDetailErrorStateCopyWithImpl(this._self, this._then);
 
+  final TaskDetailErrorState _self;
+  final $Res Function(TaskDetailErrorState) _then;
+
+  /// Create a copy of TaskDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$TaskDetailErrorStateImpl(
+    return _then(TaskDetailErrorState(
       null == error
-          ? _value.error
+          ? _self.error
           : error // ignore: cast_nullable_to_non_nullable
               as String,
     ));
@@ -460,131 +662,51 @@ class __$$TaskDetailErrorStateImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$TaskDetailErrorStateImpl
+class TaskDetailSuccessState
     with DiagnosticableTreeMixin
-    implements TaskDetailErrorState {
-  const _$TaskDetailErrorStateImpl(this.error);
+    implements TaskDetailState {
+  const TaskDetailSuccessState(this.task);
 
-  @override
-  final String error;
+  final TaskIvy task;
 
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TaskDetailState.error(error: $error)';
-  }
+  /// Create a copy of TaskDetailState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $TaskDetailSuccessStateCopyWith<TaskDetailSuccessState> get copyWith =>
+      _$TaskDetailSuccessStateCopyWithImpl<TaskDetailSuccessState>(
+          this, _$identity);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'TaskDetailState.error'))
-      ..add(DiagnosticsProperty('error', error));
+      ..add(DiagnosticsProperty('type', 'TaskDetailState.success'))
+      ..add(DiagnosticsProperty('task', task));
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$TaskDetailErrorStateImpl &&
-            (identical(other.error, error) || other.error == error));
+            other is TaskDetailSuccessState &&
+            (identical(other.task, task) || other.task == task));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, error);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TaskDetailErrorStateImplCopyWith<_$TaskDetailErrorStateImpl>
-      get copyWith =>
-          __$$TaskDetailErrorStateImplCopyWithImpl<_$TaskDetailErrorStateImpl>(
-              this, _$identity);
+  int get hashCode => Object.hash(runtimeType, task);
 
   @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(TaskIvy task) success,
-  }) {
-    return error(this.error);
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'TaskDetailState.success(task: $task)';
   }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(TaskIvy task)? success,
-  }) {
-    return error?.call(this.error);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(TaskIvy task)? success,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this.error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TaskDetailLoadingState value) loading,
-    required TResult Function(TaskDetailErrorState value) error,
-    required TResult Function(TaskDetailSuccessState value) success,
-  }) {
-    return error(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskDetailLoadingState value)? loading,
-    TResult? Function(TaskDetailErrorState value)? error,
-    TResult? Function(TaskDetailSuccessState value)? success,
-  }) {
-    return error?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TaskDetailLoadingState value)? loading,
-    TResult Function(TaskDetailErrorState value)? error,
-    TResult Function(TaskDetailSuccessState value)? success,
-    required TResult orElse(),
-  }) {
-    if (error != null) {
-      return error(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TaskDetailErrorState implements TaskDetailState {
-  const factory TaskDetailErrorState(final String error) =
-      _$TaskDetailErrorStateImpl;
-
-  String get error;
-  @JsonKey(ignore: true)
-  _$$TaskDetailErrorStateImplCopyWith<_$TaskDetailErrorStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$TaskDetailSuccessStateImplCopyWith<$Res> {
-  factory _$$TaskDetailSuccessStateImplCopyWith(
-          _$TaskDetailSuccessStateImpl value,
-          $Res Function(_$TaskDetailSuccessStateImpl) then) =
-      __$$TaskDetailSuccessStateImplCopyWithImpl<$Res>;
+abstract mixin class $TaskDetailSuccessStateCopyWith<$Res>
+    implements $TaskDetailStateCopyWith<$Res> {
+  factory $TaskDetailSuccessStateCopyWith(TaskDetailSuccessState value,
+          $Res Function(TaskDetailSuccessState) _then) =
+      _$TaskDetailSuccessStateCopyWithImpl;
   @useResult
   $Res call({TaskIvy task});
 
@@ -592,152 +714,36 @@ abstract class _$$TaskDetailSuccessStateImplCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$TaskDetailSuccessStateImplCopyWithImpl<$Res>
-    extends _$TaskDetailStateCopyWithImpl<$Res, _$TaskDetailSuccessStateImpl>
-    implements _$$TaskDetailSuccessStateImplCopyWith<$Res> {
-  __$$TaskDetailSuccessStateImplCopyWithImpl(
-      _$TaskDetailSuccessStateImpl _value,
-      $Res Function(_$TaskDetailSuccessStateImpl) _then)
-      : super(_value, _then);
+class _$TaskDetailSuccessStateCopyWithImpl<$Res>
+    implements $TaskDetailSuccessStateCopyWith<$Res> {
+  _$TaskDetailSuccessStateCopyWithImpl(this._self, this._then);
 
+  final TaskDetailSuccessState _self;
+  final $Res Function(TaskDetailSuccessState) _then;
+
+  /// Create a copy of TaskDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
-  @override
   $Res call({
     Object? task = null,
   }) {
-    return _then(_$TaskDetailSuccessStateImpl(
+    return _then(TaskDetailSuccessState(
       null == task
-          ? _value.task
+          ? _self.task
           : task // ignore: cast_nullable_to_non_nullable
               as TaskIvy,
     ));
   }
 
+  /// Create a copy of TaskDetailState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TaskIvyCopyWith<$Res> get task {
-    return $TaskIvyCopyWith<$Res>(_value.task, (value) {
-      return _then(_value.copyWith(task: value));
+    return $TaskIvyCopyWith<$Res>(_self.task, (value) {
+      return _then(_self.copyWith(task: value));
     });
   }
 }
 
-/// @nodoc
-
-class _$TaskDetailSuccessStateImpl
-    with DiagnosticableTreeMixin
-    implements TaskDetailSuccessState {
-  const _$TaskDetailSuccessStateImpl(this.task);
-
-  @override
-  final TaskIvy task;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'TaskDetailState.success(task: $task)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'TaskDetailState.success'))
-      ..add(DiagnosticsProperty('task', task));
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$TaskDetailSuccessStateImpl &&
-            (identical(other.task, task) || other.task == task));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, task);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$TaskDetailSuccessStateImplCopyWith<_$TaskDetailSuccessStateImpl>
-      get copyWith => __$$TaskDetailSuccessStateImplCopyWithImpl<
-          _$TaskDetailSuccessStateImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function() loading,
-    required TResult Function(String error) error,
-    required TResult Function(TaskIvy task) success,
-  }) {
-    return success(task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? loading,
-    TResult? Function(String error)? error,
-    TResult? Function(TaskIvy task)? success,
-  }) {
-    return success?.call(task);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? loading,
-    TResult Function(String error)? error,
-    TResult Function(TaskIvy task)? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(task);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(TaskDetailLoadingState value) loading,
-    required TResult Function(TaskDetailErrorState value) error,
-    required TResult Function(TaskDetailSuccessState value) success,
-  }) {
-    return success(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(TaskDetailLoadingState value)? loading,
-    TResult? Function(TaskDetailErrorState value)? error,
-    TResult? Function(TaskDetailSuccessState value)? success,
-  }) {
-    return success?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(TaskDetailLoadingState value)? loading,
-    TResult Function(TaskDetailErrorState value)? error,
-    TResult Function(TaskDetailSuccessState value)? success,
-    required TResult orElse(),
-  }) {
-    if (success != null) {
-      return success(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class TaskDetailSuccessState implements TaskDetailState {
-  const factory TaskDetailSuccessState(final TaskIvy task) =
-      _$TaskDetailSuccessStateImpl;
-
-  TaskIvy get task;
-  @JsonKey(ignore: true)
-  _$$TaskDetailSuccessStateImplCopyWith<_$TaskDetailSuccessStateImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
+// dart format on

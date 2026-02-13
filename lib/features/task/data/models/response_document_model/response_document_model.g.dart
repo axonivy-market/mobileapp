@@ -10,7 +10,7 @@ ResponseDocumentModel _$ResponseDocumentModelFromJson(
         Map<String, dynamic> json) =>
     ResponseDocumentModel(
       message: json['message'] as String?,
-      statusCode: json['statusCode'] as int?,
+      statusCode: (json['statusCode'] as num?)?.toInt(),
       document: json['document'] == null
           ? null
           : Document.fromJson(json['document'] as Map<String, dynamic>),

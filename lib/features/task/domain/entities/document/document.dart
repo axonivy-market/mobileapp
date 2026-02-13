@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 part 'document.freezed.dart';
 
@@ -7,7 +7,7 @@ part 'document.g.dart';
 
 @freezed
 @HiveType(typeId: 2)
-class Document with _$Document {
+abstract class Document with _$Document {
   const factory Document({
     @HiveField(0) required int id,
     @HiveField(1) @Default("") String name,

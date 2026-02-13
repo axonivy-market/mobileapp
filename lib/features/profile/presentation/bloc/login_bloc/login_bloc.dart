@@ -7,6 +7,7 @@ import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/features/search/domain/usecases/get_engine_info_use_case.dart';
 import 'package:axon_ivy/shared/extensions/string_ext.dart';
 import 'package:axon_ivy/shared/resources/validators.dart';
+import 'package:axon_ivy/shared/storage/secure_storage.dart';
 import 'package:axon_ivy/shared/storage/shared_preference.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -64,8 +65,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           ? AppConfig.baseUrl
           : SharedPrefs.getBaseUrl!;
     }
-    Uri? uri = Uri.tryParse(getIt<Dio>().options.baseUrl);
-    if (uri!.host.isEmptyOrNull) {
+    final uri = Uri.tryParse(getIt<Dio>().options.baseUrl);
+    if (uri == null || uri.host.isEmptyOrNull) {
       emit(LoginState(
           status: LoginStatus.error,
           error: Failure(400, "notFoundError".tr())));
@@ -88,19 +89,19 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       try {
         final engineInfo = await _engineInfoRepository.execute();
 
-        engineInfo.fold(
-          (l) {
-            SharedPrefs.clear();
-            emit(LoginState(status: LoginStatus.error, error: l));
-          },
-          (r) {
-            SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
-            SharedPrefs.setIsLogin(true);
-            SharedPrefs.setDemoSetting(false);
-            emit(const LoginState(status: LoginStatus.success));
-          },
-        );
+        if (engineInfo.isLeft()) {
+          await SecureStorage.clearCredentials();
+          SharedPrefs.clear();
+          final failure = engineInfo.getLeft().toNullable();
+          emit(LoginState(status: LoginStatus.error, error: failure));
+        } else {
+          SharedPrefs.setLastUpdated(DateTime.now().millisecondsSinceEpoch);
+          SharedPrefs.setIsLogin(true);
+          SharedPrefs.setDemoSetting(false);
+          emit(const LoginState(status: LoginStatus.success));
+        }
       } catch (e) {
+        await SecureStorage.clearCredentials();
         SharedPrefs.clear();
         emit(LoginState(
             status: LoginStatus.error, error: AppError.handle(e).failure));

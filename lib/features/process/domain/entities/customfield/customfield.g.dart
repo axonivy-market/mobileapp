@@ -6,13 +6,12 @@ part of 'customfield.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$CustomFieldImpl _$$CustomFieldImplFromJson(Map<String, dynamic> json) =>
-    _$CustomFieldImpl(
+_CustomField _$CustomFieldFromJson(Map<String, dynamic> json) => _CustomField(
       name: json['name'] as String? ?? '',
       value: json['value'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$CustomFieldImplToJson(_$CustomFieldImpl instance) =>
+Map<String, dynamic> _$CustomFieldToJson(_CustomField instance) =>
     <String, dynamic>{
       'name': instance.name,
       'value': instance.value,

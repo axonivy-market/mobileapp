@@ -1,6 +1,6 @@
 import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/features/task/domain/entities/response_document/response_document.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:dio/dio.dart';
 
 abstract class FileRepositoryInterface {

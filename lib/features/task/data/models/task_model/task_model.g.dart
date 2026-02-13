@@ -7,7 +7,7 @@ part of 'task_model.dart';
 // **************************************************************************
 
 TaskIvyModel _$TaskIvyModelFromJson(Map<String, dynamic> json) => TaskIvyModel(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String?,
       description: json['description'] as String?,
       fullRequestPath: json['fullRequestPath'] as String?,
@@ -18,8 +18,8 @@ TaskIvyModel _$TaskIvyModelFromJson(Map<String, dynamic> json) => TaskIvyModel(
       expiryTimeStamp: json['expiryTimeStamp'] == null
           ? null
           : DateTime.parse(json['expiryTimeStamp'] as String),
-      priority: json['priority'] as int?,
-      state: json['state'] as int?,
+      priority: (json['priority'] as num?)?.toInt(),
+      state: (json['state'] as num?)?.toInt(),
       activatorName: json['activatorName'] as String?,
       category: json['category'] as String?,
       caseTask: json['case'] == null

@@ -3,7 +3,7 @@ import 'package:axon_ivy/core/network/failure.dart';
 import 'package:axon_ivy/features/search/data/datasources/engine_info_remote_data_source.dart';
 import 'package:axon_ivy/features/search/domain/entities/engine_info.dart';
 import 'package:axon_ivy/features/search/domain/repositories/engine_info_repository_interface.dart';
-import 'package:dartz/dartz.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:injectable/injectable.dart';
 
 @Injectable(as: EngineInfoRepositoryInterface)

@@ -34,7 +34,7 @@ class TabSelected extends TabFilterStyle {
       : super(
           borderRadius: radius,
           backgroundColor: Theme.of(context).colorScheme.primary,
-          textColor: Theme.of(context).colorScheme.onSurface,
+          textColor: Theme.of(context).colorScheme.onPrimary,
           fontWeight: FontWeight.w500,
           textButton: name,
           boxBorder: border,

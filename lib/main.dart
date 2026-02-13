@@ -9,7 +9,7 @@ import 'package:axon_ivy/shared/extensions/hive_ext.dart';
 import 'package:axon_ivy/shared/storage/secure_storage.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_ce_flutter/hive_ce_flutter.dart';
 
 import 'core/app/demo_config.dart';
 
@@ -18,6 +18,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await AppConfig.loadEnv(Environment.prod);
   await DemoConfig.loadDemoConfig();
+  await SecureStorage.loadCredentials();
   await Hive.initHiveFlutter();
   Hive.registerAdapter(TaskIvyAdapter());
   Hive.registerAdapter(CaseTaskAdapter());
