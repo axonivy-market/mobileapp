@@ -348,17 +348,15 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                         );
                                       },
                                       backgroundColor:
-                                          Theme.of(context).primaryColor,
-                                      foregroundColor: Colors.white,
+                                          Theme.of(context).colorScheme.primary,
+                                      foregroundColor: Theme.of(context).colorScheme.onPrimary,
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
                                           AppAssets.icons.iconDownload.svg(
                                             colorFilter: ColorFilter.mode(
-                                              Theme.of(context)
-                                                  .colorScheme
-                                                  .onPrimary,
+                                              Theme.of(context).colorScheme.onPrimary,
                                               BlendMode.srcIn,
                                             ),
                                           ),
@@ -367,9 +365,7 @@ class _DocumentListPageState extends BasePageState<DocumentListPage>
                                             style: GoogleFonts.inter(
                                               textStyle: TextStyle(
                                                 fontSize: 13.sp,
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .onPrimary,
+                                                color: Theme.of(context).colorScheme.onPrimary,
                                               ),
                                             ),
                                           )

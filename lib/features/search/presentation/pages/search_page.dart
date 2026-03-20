@@ -38,83 +38,89 @@ class _SearchPageState extends State<SearchPage> {
         appBar: const HomeAppBar(
           scrolledUnderElevation: 0,
         ),
-        body: MultiBlocListener(
-          listeners: [
-            BlocListener<EngineInfoCubit, EngineInfoState>(
-                listener: (context, state) {
-              if (state is GetEngineInfo) {
-                if (state.engineInfo != null) {
-                  context
-                      .read<ConnectivityBloc>()
-                      .add(const ConnectivityEvent.connectedEvent());
-                } else {
-                  context
-                      .read<ConnectivityBloc>()
-                      .add(const ConnectivityEvent.notConnectedEvent());
+        body: GestureDetector(
+          behavior: HitTestBehavior.translucent,
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: MultiBlocListener(
+            listeners: [
+              BlocListener<EngineInfoCubit, EngineInfoState>(
+                  listener: (context, state) {
+                if (state is GetEngineInfo) {
+                  if (state.engineInfo != null) {
+                    context
+                        .read<ConnectivityBloc>()
+                        .add(const ConnectivityEvent.connectedEvent());
+                  } else {
+                    context
+                        .read<ConnectivityBloc>()
+                        .add(const ConnectivityEvent.notConnectedEvent());
+                  }
                 }
-              }
-            }),
-            BlocListener<ConnectivityBloc, ConnectivityState>(
-                listener: (context, state) {
-              context.read<SearchBloc>().isOfflineMode =
-                  state is NotConnectedState;
-              context.read<SearchBloc>().add(
-                    SearchEvent.searchItem(
-                        context.read<SearchBloc>().query, SearchType.tasks),
-                  );
-            }),
-          ],
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              16.verticalSpace,
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16).r,
-                child: const SearchTextField(),
-              ),
-              Flexible(
-                flex: 1,
-                child: BlocBuilder<SearchBloc, SearchState>(
-                  builder: (context, state) {
-                    if (state is SearchResultState) {
-                      return Stack(
-                        children: [
-                          searchItemList(context, state),
-                          if (state.items.isEmptyOrNull)
-                            Padding(
-                              padding: EdgeInsets.only(top: 62.h),
-                              child: Container(
-                                color: Theme.of(context).colorScheme.surface,
-                                child: DataEmptyWidget(
-                                  message: state.emptyMessage!.tr(),
-                                  icon: AppAssets.icons.icSearchNotFound.svg(
-                                    colorFilter: ColorFilter.mode(
-                                      Theme.of(context)
-                                          .colorScheme
-                                          .tertiaryContainer,
-                                      BlendMode.srcIn,
+              }),
+              BlocListener<ConnectivityBloc, ConnectivityState>(
+                  listener: (context, state) {
+                context.read<SearchBloc>().isOfflineMode =
+                    state is NotConnectedState;
+                context.read<SearchBloc>().add(
+                      SearchEvent.searchItem(
+                          context.read<SearchBloc>().query, SearchType.tasks),
+                    );
+              }),
+            ],
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                16.verticalSpace,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 16).r,
+                  child: const SearchTextField(),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: BlocBuilder<SearchBloc, SearchState>(
+                    builder: (context, state) {
+                      if (state is SearchResultState) {
+                        return Stack(
+                          children: [
+                            searchItemList(context, state),
+                            if (state.items.isEmptyOrNull)
+                              Padding(
+                                padding: EdgeInsets.only(top: 62.h),
+                                child: Container(
+                                  color:
+                                      Theme.of(context).colorScheme.surface,
+                                  child: DataEmptyWidget(
+                                    message: state.emptyMessage!.tr(),
+                                    icon:
+                                        AppAssets.icons.icSearchNotFound.svg(
+                                      colorFilter: ColorFilter.mode(
+                                        Theme.of(context)
+                                            .colorScheme
+                                            .tertiaryContainer,
+                                        BlendMode.srcIn,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
+                          ],
+                        );
+                      } else {
+                        return DataEmptyWidget(
+                          message: 'search.nothingThereYet'.tr(),
+                          icon: AppAssets.icons.icSearchInitial.svg(
+                            colorFilter: ColorFilter.mode(
+                              Theme.of(context).colorScheme.tertiaryContainer,
+                              BlendMode.srcIn,
                             ),
-                        ],
-                      );
-                    } else {
-                      return DataEmptyWidget(
-                        message: 'search.nothingThereYet'.tr(),
-                        icon: AppAssets.icons.icSearchInitial.svg(
-                          colorFilter: ColorFilter.mode(
-                            Theme.of(context).colorScheme.tertiaryContainer,
-                            BlendMode.srcIn,
                           ),
-                        ),
-                      );
-                    }
-                  },
+                        );
+                      }
+                    },
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
